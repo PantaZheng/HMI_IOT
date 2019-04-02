@@ -3,6 +3,7 @@
   <component name="ChangeListManager">
     <list default="true" id="bd4df609-9129-4c8b-81be-8d271a0ee1b4" name="Default Changelist" comment="修改路径">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/controller/WechatCtrl.go" beforeDir="false" afterPath="$PROJECT_DIR$/controller/anon/WechatCtrl.go" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/main.go" beforeDir="false" afterPath="$PROJECT_DIR$/main.go" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../rjwl-2.1test.war" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/../需求分析.pdf" beforeDir="false" />
@@ -25,6 +26,18 @@
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/controller/anon/WechatCtrl.go">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="26">
+              <caret line="1" selection-start-line="1" selection-end-line="1" />
+              <folding>
+                <element signature="e#13#129#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/service/WeChatCoreService.go">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="130">
@@ -36,8 +49,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/main.go">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="335">
-              <caret line="27" selection-start-line="27" selection-end-line="27" />
+            <state relative-caret-position="400">
+              <caret line="17" column="45" lean-forward="true" selection-start-line="17" selection-start-column="45" selection-end-line="17" selection-end-column="45" />
               <folding>
                 <element signature="e#17#140#0" expanded="true" />
               </folding>
@@ -69,17 +82,17 @@
     <option name="CHANGED_PATHS">
       <list>
         <option value="$PROJECT_DIR$/service/main.go" />
-        <option value="$PROJECT_DIR$/controller/anon/WechatCtrl.go" />
         <option value="$PROJECT_DIR$/service/WeChatCoreService.go" />
+        <option value="$PROJECT_DIR$/controller/WechatCtrl.go" />
+        <option value="$PROJECT_DIR$/controller/anon/WechatCtrl.go" />
         <option value="$PROJECT_DIR$/main.go" />
       </list>
     </option>
   </component>
   <component name="ProjectFrameBounds" extendedState="6">
-    <option name="x" value="2425" />
-    <option name="y" value="297" />
-    <option name="width" value="2334" />
-    <option name="height" value="1326" />
+    <option name="x" value="2549" />
+    <option name="width" value="1301" />
+    <option name="height" value="1451" />
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectView">
@@ -99,6 +112,12 @@
               <item name="HMI-IoT" type="b2602c69:ProjectViewProjectNode" />
               <item name="HMI-IoT" type="462c0819:PsiDirectoryNode" />
               <item name="controller" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="HMI-IoT" type="b2602c69:ProjectViewProjectNode" />
+              <item name="HMI-IoT" type="462c0819:PsiDirectoryNode" />
+              <item name="controller" type="462c0819:PsiDirectoryNode" />
+              <item name="anon" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="HMI-IoT" type="b2602c69:ProjectViewProjectNode" />
@@ -138,6 +157,7 @@
   </component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="D:\505WechatAccount\505WechatAccount\HMI-IoT\controller\anon" />
       <recent name="D:\505WechatAccount\505WechatAccount\HMI-IoT\controller" />
       <recent name="D:\505WechatAccount\505WechatAccount\HMI-IoT" />
     </key>
@@ -158,7 +178,7 @@
     <frame x="2553" y="-7" width="1721" height="975" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" sideWeight="0.49893844" visible="true" weight="0.21804966" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" sideWeight="0.49893844" visible="true" weight="0.21804966" />
       <window_info id="Favorites" order="1" side_tool="true" />
       <window_info anchor="bottom" id="Messages" weight="0.32957393" />
       <window_info anchor="bottom" id="Message" order="0" />
@@ -171,13 +191,13 @@
       <window_info anchor="bottom" id="Docker" order="7" show_stripe_button="false" />
       <window_info anchor="bottom" id="Database Changes" order="8" />
       <window_info anchor="bottom" id="Version Control" order="9" />
-      <window_info active="true" anchor="bottom" id="Terminal" order="10" visible="true" weight="0.3283208" />
+      <window_info anchor="bottom" id="Terminal" order="10" visible="true" weight="0.3283208" />
       <window_info anchor="bottom" id="Event Log" order="11" side_tool="true" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
       <window_info anchor="right" id="Database" order="3" />
-      <window_info anchor="right" id="Structure" order="4" sideWeight="0.50106156" visible="true" weight="0.15748031" />
+      <window_info anchor="right" id="Structure" order="4" sideWeight="0.50106156" weight="0.32622334" />
     </layout>
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -191,7 +211,7 @@
     <breakpoint-manager>
       <breakpoints>
         <line-breakpoint enabled="true" type="DlvLineBreakpoint">
-          <url>file://$PROJECT_DIR$/controller/WechatCtrl.go</url>
+          <url>file://$PROJECT_DIR$/controller/anon/WechatCtrl.go</url>
           <line>2</line>
           <properties />
           <option name="timeStamp" value="1" />
@@ -436,24 +456,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/controller/WechatCtrl.go">
-      <provider selected="true" editor-type-id="text-editor">
-        <state>
-          <caret column="18" lean-forward="true" selection-start-column="8" selection-end-column="18" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://D:/GoEnvironment/src/github.com/silenceper/wechat/js/js.go">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="342">
           <caret line="24" column="1" lean-forward="true" selection-start-line="24" selection-start-column="1" selection-end-line="24" selection-end-column="1" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://D:/GoEnvironment/src/github.com/silenceper/wechat/util/signature.go">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="130">
-          <caret line="10" column="6" lean-forward="true" selection-start-line="10" selection-start-column="10" selection-end-line="10" selection-end-column="11" />
         </state>
       </provider>
     </entry>
@@ -464,10 +470,27 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://D:/GoEnvironment/src/github.com/silenceper/wechat/util/signature.go">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="130">
+          <caret line="10" column="6" lean-forward="true" selection-start-line="10" selection-start-column="10" selection-end-line="10" selection-end-column="11" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/controller/anon/WechatCtrl.go">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="26">
+          <caret line="1" selection-start-line="1" selection-end-line="1" />
+          <folding>
+            <element signature="e#13#129#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/main.go">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="335">
-          <caret line="27" selection-start-line="27" selection-end-line="27" />
+        <state relative-caret-position="400">
+          <caret line="17" column="45" lean-forward="true" selection-start-line="17" selection-start-column="45" selection-end-line="17" selection-end-column="45" />
           <folding>
             <element signature="e#17#140#0" expanded="true" />
           </folding>
