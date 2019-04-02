@@ -1,6 +1,7 @@
-package HMI_IoT
+package main
 
 import (
+	"fmt"
 	"github.com/kataras/iris"
 	"github.com/kataras/iris/core/router"
 	"github.com/kataras/iris/middleware/logger"
@@ -17,11 +18,12 @@ func newApp() (api *iris.Application){
 			//wechat.Post("/",control)
 		})
 	})
-
-
 	return
 }
+
 func main() {
 	app := newApp()
-	addr := 
+	_ = app.Run(iris.Addr(":8080"))
+	fmt.Printf("Hello 8080")
 }
+
