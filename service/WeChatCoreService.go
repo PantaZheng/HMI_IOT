@@ -1,5 +1,5 @@
 package service
 
-func main() {
-
+func justsoso() {
+	return
 }

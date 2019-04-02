@@ -4,7 +4,7 @@ import (
 	"github.com/kataras/iris"
 	"github.com/kataras/iris/core/router"
 	"github.com/kataras/iris/middleware/logger"
-	"HMI_IoT/controller"
+	"./controller"
 )
 
 func newApp() (api *iris.Application){
