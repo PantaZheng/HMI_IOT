@@ -12,7 +12,7 @@ func newApp() (api *iris.Application){
 	api = iris.New()
 	api.Use(logger.New())
 
-	api.PartyFunc("/wechat", func(wechat router.Party) {
+	api.PartyFunc("/", func(wechat router.Party) {
 			wechat.Get("/",controller.Login)
 			wechat.Post("/",controller.Login)
 		})
