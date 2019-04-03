@@ -2,6 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="bd4df609-9129-4c8b-81be-8d271a0ee1b4" name="Default Changelist" comment="修改路径">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/controller/anon/WechatCtrl.go" beforeDir="false" afterPath="$PROJECT_DIR$/controller/anon/WechatCtrl.go" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../rjwl-2.1test.war" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/../需求分析.pdf" beforeDir="false" />
     </list>
@@ -16,8 +18,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://D:/GoEnvironment/src/github.com/silenceper/wechat/wechat.go">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="155">
-              <caret line="83" column="18" selection-start-line="83" selection-start-column="18" selection-end-line="83" selection-end-column="18" />
+            <state relative-caret-position="65">
+              <caret line="81" lean-forward="true" selection-start-line="81" selection-end-line="81" />
             </state>
           </provider>
         </entry>
@@ -46,10 +48,22 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/controller/anon/WechatCtrl.go">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="77">
-              <caret line="52" column="42" lean-forward="true" selection-start-line="52" selection-start-column="42" selection-end-line="52" selection-end-column="42" />
+            <state relative-caret-position="159">
+              <caret line="74" column="56" selection-start-line="74" selection-start-column="56" selection-end-line="74" selection-end-column="56" />
               <folding>
                 <element signature="e#20#175#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://D:/GoEnvironment/src/github.com/silenceper/wechat/menu/menu.go">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="-925">
+              <caret line="124" column="18" lean-forward="true" selection-start-line="124" selection-start-column="18" selection-end-line="124" selection-end-column="18" />
+              <folding>
+                <element signature="e#14#126#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -105,7 +119,7 @@
       </list>
     </option>
   </component>
-  <component name="ProjectFrameBounds" extendedState="6">
+  <component name="ProjectFrameBounds" extendedState="7">
     <option name="x" value="-11" />
     <option name="y" value="-11" />
     <option name="width" value="2582" />
@@ -240,7 +254,7 @@
     <frame x="-7" y="-7" width="1295" height="735" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" sideWeight="0.49893844" visible="true" weight="0.29877552" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" sideWeight="0.49893844" visible="true" weight="0.29877552" />
       <window_info id="Favorites" order="1" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" weight="0.32957393" />
@@ -252,7 +266,7 @@
       <window_info anchor="bottom" id="Docker" order="7" show_stripe_button="false" />
       <window_info anchor="bottom" id="Database Changes" order="8" />
       <window_info anchor="bottom" id="Version Control" order="9" />
-      <window_info active="true" anchor="bottom" id="Terminal" order="10" visible="true" weight="0.2437276" />
+      <window_info anchor="bottom" id="Terminal" order="10" visible="true" weight="0.2437276" />
       <window_info anchor="bottom" id="Event Log" order="11" side_tool="true" />
       <window_info anchor="bottom" id="Messages" order="12" weight="0.32957393" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
@@ -467,13 +481,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://D:/GoEnvironment/src/github.com/silenceper/wechat/server/server.go">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="988">
-          <caret line="50" column="19" selection-start-line="50" selection-start-column="19" selection-end-line="50" selection-end-column="19" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://D:/GoEnvironment/src/github.com/silenceper/wechat/cache/memory.go">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-506">
@@ -569,17 +576,24 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://D:/GoEnvironment/src/github.com/silenceper/wechat/server/server.go">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-349">
+          <caret line="168" column="37" lean-forward="true" selection-start-line="168" selection-start-column="37" selection-end-line="168" selection-end-column="37" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://D:/GoEnvironment/src/github.com/silenceper/wechat/wechat.go">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="155">
-          <caret line="83" column="18" selection-start-line="83" selection-start-column="18" selection-end-line="83" selection-end-column="18" />
+        <state relative-caret-position="65">
+          <caret line="81" lean-forward="true" selection-start-line="81" selection-end-line="81" />
         </state>
       </provider>
     </entry>
     <entry file="file://D:/GoEnvironment/src/github.com/silenceper/wechat/menu/menu.go">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-84">
-          <caret line="121" column="18" selection-start-line="121" selection-start-column="18" selection-end-line="121" selection-end-column="18" />
+        <state relative-caret-position="-925">
+          <caret line="124" column="18" lean-forward="true" selection-start-line="124" selection-start-column="18" selection-end-line="124" selection-end-column="18" />
           <folding>
             <element signature="e#14#126#0" expanded="true" />
           </folding>
@@ -598,8 +612,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/controller/anon/WechatCtrl.go">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="77">
-          <caret line="52" column="42" lean-forward="true" selection-start-line="52" selection-start-column="42" selection-end-line="52" selection-end-column="42" />
+        <state relative-caret-position="159">
+          <caret line="74" column="56" selection-start-line="74" selection-start-column="56" selection-end-line="74" selection-end-column="56" />
           <folding>
             <element signature="e#20#175#0" expanded="true" />
           </folding>

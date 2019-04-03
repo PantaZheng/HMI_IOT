@@ -73,7 +73,6 @@ func Port(ctx iris.Context){
 
 	if flag {
 		wechatMenu := wc.GetMenu()
-
 		btnPlaceholder := new (menu.Button)
 		btnPlaceholder.SetViewButton("项目/任务","")
 		btnCreate := new (menu.Button)
@@ -90,7 +89,7 @@ func Port(ctx iris.Context){
 		defaultButtons[0]=btnPlaceholder
 		defaultButtons[1]=btnPerson
 
-		err := wechatMenu.SetMenu(buttonsSub)
+		err := wechatMenu.SetMenu(defaultButtons)
 		if err != nil {
 			fmt.Printf("err= %v", err)
 		}
