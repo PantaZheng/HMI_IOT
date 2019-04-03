@@ -36,7 +36,7 @@ func Login(ctx iris.Context) {
 }
 
 func Port(ctx iris.Context){
-
+	flag := false
 	wc := wechat.NewWechat(config)
 	wechatServer := wc.GetServer(ctx.Request(),ctx.ResponseWriter())
 
@@ -45,30 +45,7 @@ func Port(ctx iris.Context){
 		switch v.MsgType {
 		//文本消息
 		case message.MsgTypeText:
-
-			wechatMenu := wc.GetMenu()
-
-			btnPlaceholder := new (menu.Button)
-			btnPlaceholder.SetViewButton("项目/任务","")
-			btnCreate := new (menu.Button)
-			btnCreate.SetViewButton("创建用户","")
-			btnWeekly := new (menu.Button)
-			btnWeekly.SetViewButton("周报","")
-			buttonsSub := make([]* menu.Button,2)
-			buttonsSub[0]=btnCreate
-			buttonsSub[1]=btnWeekly
-			btnPerson := new (menu.Button)
-			btnPerson.SetClickButton("个人","person")
-			btnPerson.SetSubButton("subButton",buttonsSub)
-			defaultButtons := make ([]* menu.Button, 2)
-			defaultButtons[0]=btnPlaceholder
-			defaultButtons[1]=btnPerson
-
-			err := wechatMenu.SetMenu(buttonsSub)
-			if err != nil {
-				fmt.Printf("err= %v", err)
-			}
-
+			flag=true
 		case message.MsgTypeEvent:
 			switch v.Event {
 				//EventSubscribe 订阅
@@ -93,6 +70,32 @@ func Port(ctx iris.Context){
 	}
 	//发送回复的消息
 	_=wechatServer.Send()
+
+	if flag {
+		wechatMenu := wc.GetMenu()
+
+		btnPlaceholder := new (menu.Button)
+		btnPlaceholder.SetViewButton("项目/任务","")
+		btnCreate := new (menu.Button)
+		btnCreate.SetViewButton("创建用户","")
+		btnWeekly := new (menu.Button)
+		btnWeekly.SetViewButton("周报","")
+		buttonsSub := make([]* menu.Button,2)
+		buttonsSub[0]=btnCreate
+		buttonsSub[1]=btnWeekly
+		btnPerson := new (menu.Button)
+		btnPerson.SetClickButton("个人","person")
+		btnPerson.SetSubButton("subButton",buttonsSub)
+		defaultButtons := make ([]* menu.Button, 2)
+		defaultButtons[0]=btnPlaceholder
+		defaultButtons[1]=btnPerson
+
+		err := wechatMenu.SetMenu(buttonsSub)
+		if err != nil {
+			fmt.Printf("err= %v", err)
+		}
+	}
+
 }
 
 
