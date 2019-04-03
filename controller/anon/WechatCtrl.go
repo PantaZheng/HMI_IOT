@@ -45,6 +45,7 @@ func Port(ctx iris.Context){
 		switch v.MsgType {
 		//文本消息
 		case message.MsgTypeText:
+
 			wechatMenu := wc.GetMenu()
 
 			btnPlaceholder := new (menu.Button)
@@ -63,10 +64,11 @@ func Port(ctx iris.Context){
 			defaultButtons[0]=btnPlaceholder
 			defaultButtons[1]=btnPerson
 
-			err := wechatMenu.SetMenu(defaultButtons)
+			err := wechatMenu.SetMenu(buttonsSub)
 			if err != nil {
 				fmt.Printf("err= %v", err)
 			}
+
 		case message.MsgTypeEvent:
 			switch v.Event {
 				//EventSubscribe 订阅
