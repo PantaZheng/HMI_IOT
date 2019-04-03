@@ -89,11 +89,13 @@ func Port(ctx iris.Context){
 		defaultButtons[0]=btnPlaceholder
 		defaultButtons[1]=btnPerson
 
-		accessToken, _ := wechatMenu.GetAccessTokenFromServer()
-		fmt.Printf("%v",accessToken)
+		_, err := wechatMenu.GetAccessTokenFromServer()
+		if err != nil {
+			fmt.Printf("---err= %v", err)
+		}
 		err2 := wechatMenu.SetMenu(defaultButtons)
 		if err2 != nil {
-			fmt.Printf("err= %v", err)
+			fmt.Printf("***err= %v", err2)
 		}
 	}
 
