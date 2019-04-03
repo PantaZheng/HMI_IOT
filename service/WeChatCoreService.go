@@ -1,5 +1,5 @@
 package service
 
-func justsoso() {
+func click() {
 	return
 }
