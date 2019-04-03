@@ -65,6 +65,14 @@ func Port(ctx iris.Context){
 		return &message.Reply{MsgType: message.MsgTypeText, MsgData: textResp}
 	})
 
+	//处理消息接收以及回复
+	err := wechatServer.Serve()
+	if err != nil {
+		fmt.Println(err)
+		return
+	}
+	//发送回复的消息
+	_=wechatServer.Send()
 }
 
 
