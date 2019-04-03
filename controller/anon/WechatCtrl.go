@@ -17,8 +17,8 @@ var config = &wechat.Config{
 	AppID: "wx6bb6950cf39d79ee",
 	AppSecret: "25e017d8ab0f6711b5080be1ae317421",
 	Token: "HMIIoT",
-	EncodingAESKey:"iesxoHBsnaKVry5E8xd8gavmJLTVVNcd8aS7w3KYOaU",\
-	Cache: memory
+	EncodingAESKey:"iesxoHBsnaKVry5E8xd8gavmJLTVVNcd8aS7w3KYOaU",
+	Cache: cache.NewMemory(),
 }
 
 func Login(ctx iris.Context) {
