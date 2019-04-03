@@ -93,10 +93,10 @@ func Port(ctx iris.Context){
 		if err != nil {
 			fmt.Printf("---err= %v", err)
 		}
-		err2 := wechatMenu.SetMenu(defaultButtons)
+		/*err2 := wechatMenu.SetMenu(defaultButtons)
 		if err2 != nil {
 			fmt.Printf("***err= %v", err2)
-		}
+		}*/
 	}
 
 }
