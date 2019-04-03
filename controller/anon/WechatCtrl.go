@@ -4,17 +4,21 @@ import (
 	"fmt"
 	"github.com/kataras/iris"
 	"github.com/silenceper/wechat"
+	"github.com/silenceper/wechat/cache"
 	"github.com/silenceper/wechat/menu"
 	"github.com/silenceper/wechat/message"
 )
 
 const weburl="101.132.125.102"
 
+var memcache = cache.NewMemcache("127.0.0.1:11211")
+
 var config = &wechat.Config{
 	AppID: "wx6bb6950cf39d79ee",
 	AppSecret: "25e017d8ab0f6711b5080be1ae317421",
 	Token: "HMIIoT",
 	EncodingAESKey:"iesxoHBsnaKVry5E8xd8gavmJLTVVNcd8aS7w3KYOaU",
+	Cache: memcache,
 }
 
 func Login(ctx iris.Context) {
