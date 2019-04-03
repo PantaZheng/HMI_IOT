@@ -77,24 +77,36 @@ func Port(ctx iris.Context){
 
 	if flag {
 		wechatMenu := wc.GetMenu()
-		btnPlaceholder := new (menu.Button)
-		btnPlaceholder.SetViewButton("项目/任务","")
-		btnCreate := new (menu.Button)
-		btnCreate.SetViewButton("创建用户","")
-		btnWeekly := new (menu.Button)
-		btnWeekly.SetViewButton("周报","")
-		buttonsSub := make([]* menu.Button,2)
-		buttonsSub[0]=btnCreate
-		buttonsSub[1]=btnWeekly
-		btnPerson := new (menu.Button)
-		btnPerson.SetClickButton("个人","person")
-		btnPerson.SetSubButton("subButton",buttonsSub)
-		buttonsDefault := make ([]* menu.Button, 2)
-		buttonsDefault[0]=btnPlaceholder
-		buttonsDefault[1]=btnPerson
+		//btnPlaceholder := new (menu.Button)
+		//btnPlaceholder.SetViewButton("项目/任务","www.baidu.com")
+		//btnCreate := new (menu.Button)
+		//btnCreate.SetViewButton("创建用户","www.github.com")
+		//btnWeekly := new (menu.Button)
+		//btnWeekly.SetViewButton("周报","www.sohu.com")
+		//buttonsSub := make([]* menu.Button,2)
+		//buttonsSub[0]=btnCreate
+		//buttonsSub[1]=btnWeekly
+		//btnPerson := new (menu.Button)
+		//btnPerson.SetClickButton("个人","person")
+		//btnPerson.SetSubButton("subButton",buttonsSub)
+		//buttonsDefault := make ([]* menu.Button, 2)
+		//buttonsDefault[0]=btnPlaceholder
+		//buttonsDefault[1]=btnPerson
+		buttons := make([]*menu.Button, 1)
+		btn := new(menu.Button)
 
+		//创建click类型菜单
+		btn.SetClickButton("name", "key123")
+		buttons[0] = btn
 
-		err2 := wechatMenu.SetMenu(buttonsSub)
+		//设置btn为二级菜单
+		btn2 := new(menu.Button)
+		btn2.SetSubButton("subButton", buttons)
+
+		buttons2 := make([]*menu.Button, 1)
+		buttons2[0] = btn2
+
+		err2 := wechatMenu.SetMenu(buttons2)
 		if err2 != nil {
 			fmt.Printf("***err= %v", err2)
 		}
