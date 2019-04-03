@@ -1,0 +1,12 @@
+.table_left_sfy{width: 22%;}
+.table_right_sfy{width: 72%;}
+.weight-sfy{font-weight: bold;}
+.list-sfy>span{padding-right: 5px;}
+.weui_cells{margin-bottom: 10px;}
+.clear{clear: both;}
+
+/*对话框的css*/
+.dialog-sfy{border: 1px solid #ECECEC; width: 80%; margin: 5px 10px; border-radius: 5px;}
+.dialog-content-sfy{padding: 0 15px 10px 15px;}
+.f-r-sfy{float: right; text-align: right;}
+.f-l-sfy{float: left; text-align: left;}

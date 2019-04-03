@@ -1,0 +1,148 @@
+<html ng-app>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width,initial-scale=1,user-scalable=0">
+    <title>周报</title>
+    <link rel="stylesheet" href="../css/sfy.css"/>
+    <link rel="stylesheet"
+          href="https://res.wx.qq.com/open/libs/weui/0.4.0/weui.css"/>
+    <link rel="stylesheet"
+          href="//cdn.bootcss.com/bootstrap/3.3.5/css/bootstrap.min.css">
+    <link rel="stylesheet" href="../css/background.css"/>
+    <link
+            href="//netdna.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css"
+            rel="stylesheet">
+</head>
+<nav class="navbar navbar-default ">
+    <a href="javascript:history.back()" class="navbar-brand"><i class="fa fa-chevron-left"></i></a>
+    <a ng-click="delete(weekly.weeklyId)" class=" navbar-btn pull-right"
+       style="margin-right: 0.8em;margin-top: 1em;" id="show-action"
+       href="javascript:void(0)"><i class="fa fa-list">&nbsp删除</i> </a>
+</nav>
+<body ng-controller="detailCtrl">
+<div class="bd">
+    <div class="weui_panel">
+        <div class="weui_panel_hd">
+            <h4>{{weekly.date}} 周报</h4>
+        </div>
+        <div class="weui_panel_bd">
+            <div class="weui_cell">
+                <div class="table_left_sfy">
+                    <p>提交时间</p>
+                </div>
+                <div class=" table_right_sfy">
+                    <p>{{weekly.date}}</p>
+                </div>
+            </div>
+            <div class="weui_cell">
+                <div class="table_left_sfy">
+                    <p>主要内容</p>
+                </div>
+                <div class=" table_right_sfy">
+                    <p>{{weekly.content}}</p>
+                </div>
+            </div>
+            <div class="weui_cell">
+                <div class="table_left_sfy">
+                    <p>其它</p>
+                </div>
+                <div class="table_right_sfy">
+                    <p>{{weekly.others}}</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--<div class="weui_panel">
+        <div class="weui_cells_title">评论</div>
+
+
+        <s:iterator var="comment" value="#weekly.comments" status="stat">
+            <s:if test="#comment.userRole=='teacher'">
+                <div class="dialog-sfy  f-r-sfy">
+                    <div class="weui_cells_title">
+                        <s:property value="#comment.time"/>
+                        <s:property value="#comment.userName"/>
+                        :
+                    </div>
+                    <div class="dialog-content-sfy f-r-sfy">
+                        <p>
+                            <s:property value="#comment.content"/>
+                        </p>
+                    </div>
+                </div>
+            </s:if>
+
+            <s:else>
+                <div class="dialog-sfy f-l-sfy">
+                    <div class="weui_cells_title">
+                        <s:property value="#comment.time"/>
+                        <s:property value="#comment.userName"/>
+                        :
+                    </div>
+                    <div class="dialog-content-sfy">
+                        <p>
+                            <s:property value="#comment.content"/>
+                        </p>
+                    </div>
+                </div>
+            </s:else>
+        </s:iterator>-->
+
+    <!--
+        <div class="dialog-sfy f-r-sfy">
+            <div class="weui_cells_title">张桦 2016-03-04</div>
+            <div class="dialog-content-sfy">
+                <p>周报评论内容</p>
+            </div>
+        </div>
+        <div class="dialog-sfy f-r-sfy">
+            <div class="weui_cells_title">张桦 2016-03-04</div>
+            <div class="dialog-content-sfy">
+                <p>周报评论内容</p>
+            </div>
+        </div>
+        <div class="dialog-sfy f-r-sfy">
+            <div class="weui_cells_title">张桦 2016-03-04</div>
+            <div class="dialog-content-sfy">
+                <p>周报评论内容</p>
+            </div>
+        </div>
+        <div class="dialog-sfy f-l-sfy">
+            <div class="weui_cells_title">沈方瑶 2016-03-04</div>
+            <div class="dialog-content-sfy">
+                <p>周报评论内容周报评论内容</p>
+            </div>
+        </div>
+        -->
+    <!--<form action="../lab/addCommentAction" method="post">
+        <s:token></s:token>
+        <div class="weui_cells weui_cells_form clear">
+            <div class="weui_cell">
+                <div class="weui_cell_bd weui_cell_primary">
+                        <textarea name="content" class="weui_textarea"
+                                  placeholder="请输入评论" rows="5"></textarea>
+                    <div class="weui_textarea_counter"></div>
+                </div>
+            </div>
+        </div>
+        <div class="weui_btn_area clear">
+            <input type="hidden" name="user_id"
+                   value="<s:property value=" #user_id" />" /> <input type="hidden"
+                                                                      name="weekly_id" value="<s:property value="
+                                                                      #weekly.id" />" /> <input
+                type="hidden" name="fromProject" value="1"/><input type="hidden"
+                                                                   name="project_id" value="<s:property value="
+                                                                   #project_id"/>" /> <input
+                type="hidden" name="pid" value="<s:property value=" #pid"/>" /> <input
+                class="weui_btn weui_btn_primary" type="submit" value="提交">
+        </div>
+    </form>-->
+</div>
+</div>
+<script src="//cdn.bootcss.com/angular.js/1.2.28/angular.min.js"></script>
+<script src="../js/jquery-2.1.1.min.js"></script>
+<script src="../js/jquery-weui.js"></script>
+<script src="index.js"></script>
+</body>
+</html>

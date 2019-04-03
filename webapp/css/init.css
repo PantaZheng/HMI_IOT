@@ -1,0 +1,8 @@
+body,header,section,div,a,nav,h2,h3,li,ul,footer,p,table,form,figure,figcaption，img{margin:0;padding:0;}
+body{font-family:"microsoft yahei";	font-size:14px;}
+li{	list-style:none;}
+a{text-decoration:none;}
+#body{max-width:640px;height:100%;margin:0 auto;padding-bottom:20px;}
+@media screen and (min-width:1000px){#body{max-width:640px;}}
+@media screen and (min-width:640px) and (max-width:1000px){#body{max-width:960px;}}
+@media screen and (max-width:639px){#body{max-width:640px;}}

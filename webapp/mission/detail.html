@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html ng-app>
+<head>
+    <title>任务详情</title>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1, user-scalable=no">
+    <link rel="stylesheet"
+          href="//cdn.bootcss.com/bootstrap/3.3.5/css/bootstrap.min.css">
+    <link rel="stylesheet"
+          href="https://res.wx.qq.com/open/libs/weui/0.4.0/weui.css">
+    <link rel="stylesheet" href="../css/jquery-weui.css">
+    <link rel="stylesheet" href="../css/background.css"/>
+    <link
+            href="//netdna.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css"
+            rel="stylesheet">
+</head>
+<body ng-controller="detailCtrl">
+<nav class="navbar navbar-default ">
+    <a href="javascript:void(0)" ng-click="back()"
+       class="navbar-brand"><i class="fa fa-chevron-left"></i> </a>
+    <a ng-show="user.role=='teacher'" class=" navbar-btn pull-right"
+       style="margin-right: 0.8em;margin-top: 1em;" id="show-action"
+       href="javascript:;" ng-click="m(mission.status)"><i class="fa fa-list">&nbsp菜单</i> </a>
+</nav>
+<div class="weui_cells">
+    <div class="weui_cell">
+        <div class="weui_cell_bd weui_cell_primary">
+            {{mission.title}}
+        </div>
+
+    </div>
+    <div class="weui_cell">
+
+        <div class="weui_cell_hd weui_cell_primary">负责人</div>
+        <div class="weui_cell_ft">
+            {{mission.principal.name}}
+        </div>
+    </div>
+
+
+    <div class="weui_cell">
+
+        <div class="weui_cell_hd weui_cell_primary">指导老师</div>
+        <div class="weui_cell_ft">
+            {{mission.instructor.name}}
+        </div>
+    </div>
+
+    <div class="weui_cell">
+
+        <div class="weui_cell_hd weui_cell_primary">开始时间</div>
+        <div class="weui_cell_ft">
+            {{mission.startTime}}
+        </div>
+    </div>
+
+    <div class="weui_cell">
+
+        <div class="weui_cell_hd weui_cell_primary">结束时间</div>
+        <div class="weui_cell_ft">
+            {{mission.endTime}}
+        </div>
+    </div>
+
+</div>
+
+
+<div class="weui_cells weui_cells_form">
+    <div class="weui_cells_title">
+        <div class="weui_cell_hd">
+            <i class="fa fa-wrench"></i>&nbsp&nbsp主要内容
+        </div>
+    </div>
+    <div class="weui_cell">
+        <div class="weui_cell_bd weui_cell_primary">
+            {{mission.detail}}
+        </div>
+    </div>
+</div>
+<div class="weui_cells weui_cells_form">
+
+    <div class="weui_cells_title">
+        <div class="weui_cell_hd">
+            <i class="fa fa-flag"></i>&nbsp&nbsp验收目标
+        </div>
+    </div>
+    <div class="weui_cell">
+        <div class="weui_cell_bd weui_cell_primary">
+            {{mission.acceptance}}
+        </div>
+    </div>
+</div>
+
+
+<div class="weui_cells_title">
+    <div class="weui_cell_hd">周报</div>
+</div>
+<div class="weui_cells weui_cells_access">
+    <a class="weui_cell"
+       href="weeklyDetail.html#?weeklyId={{x.weeklyId}}" ng-repeat="x in mission.weeklies">
+        <div class="weui_cell_bd weui_cell_primary">
+            <p>
+                {{x.date}}
+            </p>
+        </div>
+    </a>
+</div>
+
+<script src="//cdn.bootcss.com/angular.js/1.2.28/angular.min.js"></script>
+<script src="../js/jquery-2.1.4.js"></script>
+<script src="../js/jquery-weui.js"></script>
+<script src="index.js"></script>
+</body>
+
+</html>

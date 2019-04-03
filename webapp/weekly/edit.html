@@ -1,0 +1,69 @@
+<html ng-app>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width,initial-scale=1,user-scalable=0">
+    <title>周报</title>
+    <link rel="stylesheet" href="../css/sfy.css"/>
+    <link rel="stylesheet"
+          href="https://res.wx.qq.com/open/libs/weui/0.4.0/weui.css"/>
+    <link rel="stylesheet"
+          href="//cdn.bootcss.com/bootstrap/3.3.5/css/bootstrap.min.css">
+    <link rel="stylesheet" href="../css/background.css"/>
+    <link
+            href="//netdna.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css"
+            rel="stylesheet">
+</head>
+<nav class="navbar navbar-default ">
+    <a href="javascript:window.location.href='studentIndex.html'" class="navbar-brand"><i
+            class="fa fa-chevron-left"></i></a>
+</nav>
+<body ng-controller="editCtrl">
+<div class="weui_cells_title">所属项目</div>
+<div class="weui_cells weui_cells_form">
+    <div class="weui_cell weui_cell_select">
+        <div class="weui_cell_bd weui_cell_primary">
+            <select class="weui_select" ng-model="w.mission.missionId"
+                    ng-options="x.missionId as x.title for x in wm">
+                <option value="">请选择所属任务</option>
+            </select>
+        </div>
+    </div>
+</div>
+<div class="weui_cells_title">主要内容</div>
+<div class="weui_cells weui_cells_form">
+    <div class="weui_cell">
+        <div class="weui_cell_bd weui_cell_primary">
+           <textarea ng-model="w.content" class="weui_textarea"
+                     placeholder="请输入主要内容" rows="3"></textarea>
+            <div class="weui_textarea_counter">
+                <span>0</span>/200
+            </div>
+        </div>
+    </div>
+</div>
+<div class="weui_cells_title">其它</div>
+<div class="weui_cells weui_cells_form">
+    <div class="weui_cell">
+        <div class="weui_cell_bd weui_cell_primary">
+            <textarea ng-model="w.others" class="weui_textarea"
+                      placeholder="请输入其它内容" rows="3"></textarea>
+            <div class="weui_textarea_counter">
+                <span>0</span>/200
+            </div>
+        </div>
+    </div>
+</div>
+<div class="weui_cell">
+    <div class="weui_cell_bd weui_cell_primary">
+        <input class="weui_btn weui_btn_abled weui_btn_primary"
+               ng-click="submit()" value="提交"/>
+    </div>
+</div>
+
+<script src="//cdn.bootcss.com/angular.js/1.2.28/angular.min.js"></script>
+<script src="../js/jquery-2.1.1.min.js"></script>
+<script src="../js/jquery-weui.js"></script>
+<script src="index.js"></script>
+</body>
+</html>

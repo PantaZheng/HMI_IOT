@@ -1,0 +1,62 @@
+<html ng-app>
+
+<head lang="en">
+    <title>修改</title>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1, user-scalable=no">
+    <link rel="stylesheet"
+          href="//cdn.bootcss.com/bootstrap/3.3.5/css/bootstrap.min.css">
+    <link rel="stylesheet" href="../css/weui.min.css">
+    <link rel="stylesheet" href="../css/jquery-weui.css">
+
+    <link rel="stylesheet" href="../css/background.css"/>
+    <link
+            href="//netdna.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css"
+            rel="stylesheet">
+</head>
+
+<body ng-controller="updateCtrl">
+<nav class="navbar navbar-default ">
+    <a
+            href="javascript:history.back()"
+            class="navbar-brand"><i class="fa fa-chevron-left"></i> </a>
+
+</nav>
+
+
+<div class="weui_cells weui_cells_form">
+    <div class="weui_cell">
+        <div class="weui_cell_bd weui_cell_primary">
+								<textarea required="required" ng-model="c.userName"
+                                          class="weui_textarea" placeholder="请输入参会人员" rows="2"></textarea>
+
+        </div>
+    </div>
+</div>
+
+
+<div class="weui_cells weui_cells_form">
+    <div class="weui_cell">
+        <div class="weui_cell_bd weui_cell_primary">
+            <textarea ng-model="c.content" class="weui_textarea" placeholder="内容" rows="15"></textarea>
+        </div>
+    </div>
+</div>
+<div class="weui_cells" style="background-color:#EFEFEF">
+    <div class="weui_cell weui_cell_primary">
+        <input type="submit"
+               class="weui_btn weui_btn_abled weui_btn_primary"
+               ng-click="submit()" value="提交">
+    </div>
+</div>
+
+
+<script src="//cdn.bootcss.com/angular.js/1.2.28/angular.min.js"></script>
+<script src="../js/jquery-2.1.4.js"></script>
+<script src="../js/jquery-weui.js"></script>
+<script src="index.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html ng-app>
+<head>
+    <title>任务</title>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1, user-scalable=no">
+    <link rel="stylesheet"
+          href="//cdn.bootcss.com/bootstrap/3.3.5/css/bootstrap.min.css">
+    <link rel="stylesheet"
+          href="https://res.wx.qq.com/open/libs/weui/0.4.0/weui.css">
+    <link rel="stylesheet" href="../css/jquery-weui.css">
+    <link rel="stylesheet" href="../css/background.css"/>
+    <link
+            href="//netdna.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css"
+            rel="stylesheet">
+
+</head>
+<body ng-controller="indexCtrl">
+<div class="weui_tab">
+    <div class="weui_navbar">
+
+        <a href="#tab1" class="weui_navbar_item weui_bar_item_on"> 正在进行 </a>
+        <a href="#tab2" class="weui_navbar_item "> 已完成 </a>
+
+    </div>
+    <div class="weui_tab_bd">
+
+        <div id="tab1" class="weui_tab_bd_item weui_tab_bd_item_active">
+
+            <div class="weui_cells weui_cells_access" ng-repeat="x in w">
+                <a class="weui_cell"
+                   href="../mission/detail.html#?id={{x.missionId}}">
+                    <div class="weui_cell_bd weui_cell_primary">
+                        <p>
+                            {{x.title}}
+                        </p>
+                    </div>
+                    <div class="weui_cell_ft">
+                        {{x.startTime}}
+                    </div>
+                </a>
+
+            </div>
+        </div>
+
+        <div id="tab2" class="weui_tab_bd_item ">
+            <div class="weui_cells weui_cells_access" ng-repeat="x in c">
+                <a class="weui_cell"
+                   href="../mission/detail.html#?id={{x.missionId}}">
+                    <div class="weui_cell_bd weui_cell_primary">
+                        <p>
+                            {{x.title}}
+                        </p>
+                    </div>
+                    <div class="weui_cell_ft">
+                        {{x.startTime}}
+                    </div>
+                </a>
+
+            </div>
+        </div>
+
+    </div>
+
+</div>
+<script src="//cdn.bootcss.com/angular.js/1.2.28/angular.min.js"></script>
+<script src="../js/jquery-2.1.4.js"></script>
+<script src="../js/jquery-weui.js"></script>
+<script src="index.js"></script>
+</body>
+
+</html>
+</html>

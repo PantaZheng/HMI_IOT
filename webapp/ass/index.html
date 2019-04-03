@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html ng-app>
+
+<head lang="en">
+    <title>考核</title>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
+
+    <link rel="stylesheet"
+          href="//g.alicdn.com/msui/sm/0.6.2/css/sm.min.css">
+    <link
+            href="//netdna.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css"
+            rel="stylesheet">
+
+</head>
+
+<body ng-controller="indexCtrl">
+<header class="bar bar-nav">
+    <!--<a href="export.html"-->
+       <!--class="button pull-left">导出</i> </a>-->
+    <a href="javascript:void(0)" ng-click="next()" class="button pull-left">导出</a>
+    <a href="month.html" class="button pull-left">年月选择</a>
+    <h1 class='title'>考核名单</h1>
+</header>
+<div class="content">
+    <!--<a href="month.html#?studentId={{x.userId}}" ng-repeat="x in students">-->
+    <a href="javascript:void(0)" ng-click="assess(x.userId)" ng-repeat="x in students">
+        <div class="card">
+            <div class="card-content">
+                <div class="list-block media-list">
+                    <ul>
+                        <li class="item-content">
+                            <div class="item-media">
+                                <img src="" width="44">
+                            </div>
+                            <div class="item-inner">
+                                <div class="item-title-row">
+                                    <div class="item-title">
+                                        {{x.name}}
+                                    </div>
+                                </div>
+
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+
+            </div>
+        </div>
+    </a>
+
+
+</div>
+
+<script type='text/javascript'
+        src='//g.alicdn.com/sj/lib/zepto/zepto.min.js' charset='utf-8'></script>
+<script type='text/javascript'
+        src='//g.alicdn.com/msui/sm/0.6.2/js/sm.min.js' charset='utf-8'></script>
+</body>
+<script src="//cdn.bootcss.com/angular.js/1.2.28/angular.min.js"></script>
+<script src="../js/FileSaver.min.js"></script>
+<script src="index.js"></script>
+
+</html>

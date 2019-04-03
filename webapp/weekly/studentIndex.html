@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html ng-app>
+<head>
+    <title>周报</title>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1, user-scalable=no">
+    <link rel="stylesheet"
+          href="//cdn.bootcss.com/bootstrap/3.3.5/css/bootstrap.min.css">
+    <link rel="stylesheet"
+          href="https://res.wx.qq.com/open/libs/weui/0.4.0/weui.css">
+    <link rel="stylesheet" href="../css/jquery-weui.css">
+    <link rel="stylesheet" href="../css/background.css"/>
+    <link
+            href="//netdna.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css"
+            rel="stylesheet">
+</head>
+<body ng-controller="studentIndexCtrl">
+<nav class="navbar navbar-default ">
+    <a ng-show="!showMenu" href="javascript:history.back()"
+       class="navbar-brand"><i class="fa fa-chevron-left"></i> </a>
+    <a ng-show="showMenu" class=" navbar-btn pull-right"
+       style="margin-right: 0.8em;margin-top: 1em;" id="show-action"
+       href="edit.html"><i class="fa fa-list">&nbsp新建</i> </a>
+</nav>
+
+<div class="weui_cells weui_cells_access">
+    <a class="weui_cell"
+       href="detail.html#?weeklyId={{x.weeklyId}}" ng-repeat="x in weeklies">
+        <div class="weui_cell_bd weui_cell_primary">
+            <p>
+                {{x.date}}
+            </p>
+        </div>
+    </a>
+</div>
+
+<script src="//cdn.bootcss.com/angular.js/1.2.28/angular.min.js"></script>
+<script src="../js/jquery-2.1.4.js"></script>
+<script src="../js/jquery-weui.js"></script>
+<script src="index.js"></script>
+</body>
+
+</html>

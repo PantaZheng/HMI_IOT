@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html ng-app>
+
+<head lang="en">
+    <title>项目总览</title>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
+
+    <link rel="stylesheet" href="../css/weui.min.css">
+    <link rel="stylesheet" href="../css/jquery-weui.css">
+
+    <link rel="stylesheet" href="../css/background.css"/>
+    <link
+            href="//netdna.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css"
+            rel="stylesheet">
+
+</head>
+
+<body ng-controller="projectCtrl">
+<div class="weui_tab">
+    <div class="weui_navbar">
+
+        <a href="#tab1" class="weui_navbar_item weui_bar_item_on"> 正在进行 </a>
+        <a href="#tab2" class="weui_navbar_item"> 已完成 </a> <a href="#tab3"
+                                                              class="weui_navbar_item"> 新建项目/任务 </a>
+    </div>
+    <div class="weui_tab_bd">
+
+        <div id="tab1" class="weui_tab_bd_item weui_tab_bd_item_active">
+
+            <div class="weui_cells_title">
+                <div class="weui_cell_hd">
+                    <i class="fa fa-arrows-v"></i>&nbsp&nbsp纵向项目
+                </div>
+            </div>
+            <div class="weui_cells weui_cells_access">
+
+
+                <a class="weui_cell" ng-repeat="x in zp1"
+                   href="detail.html#?id={{x.projectId}}">
+                    <div class="weui_cell_bd weui_cell_primary">
+                        <p>
+                            {{x.title}}
+                        </p>
+                    </div>
+                    <div class="weui_cell_ft">
+                        {{x.startTime}}
+                    </div>
+                </a>
+
+
+            </div>
+            <div class="weui_cells_title">
+                <div class="weui_cell_hd">
+                    <i class="fa fa-arrows-h"></i>&nbsp&nbsp横向项目
+                </div>
+            </div>
+            <div class="weui_cells weui_cells_access">
+
+                <a class="weui_cell"
+                   href="detail.html#?id={{x.projectId}}" ng-repeat="x in hp1">
+                    <div class="weui_cell_bd weui_cell_primary">
+                        <p>
+                            {{x.title}}
+                        </p>
+                    </div>
+                    <div class="weui_cell_ft">
+                        {{x.startTime}}
+                    </div>
+                </a>
+            </div>
+            <div class="weui_cells_title">
+                <div class="weui_cell_hd">
+                    <i class="fa fa-arrows-alt"></i>&nbsp&nbsp实验室项目
+                </div>
+            </div>
+            <div class="weui_cells weui_cells_access">
+
+                <a class="weui_cell"
+                   href="detail.html#?id={{x.projectId}}" ng-repeat="x in sp1">
+                    <div class="weui_cell_bd weui_cell_primary">
+                        <p>
+                            {{x.title}}
+                        </p>
+                    </div>
+                    <div class="weui_cell_ft">
+                        {{x.startTime}}
+                    </div>
+                </a>
+            </div>
+        </div>
+
+        <div id="tab2" class="weui_tab_bd_item ">
+
+            <div class="weui_cells_title">
+                <div class="weui_cell_hd">
+                    <i class="fa fa-arrows-v"></i>&nbsp&nbsp纵向项目
+                </div>
+            </div>
+            <div class="weui_cells weui_cells_access">
+
+                <a class="weui_cell"
+                   href="detail.html#?id={{p.projectId}}" ng-repeat="p in zp0">
+                    <div class="weui_cell_bd weui_cell_primary">
+                        <p>
+                            {{p.title}}
+                        </p>
+                    </div>
+                    <div class="weui_cell_ft">
+                        {{p.startTime}}
+                    </div>
+                </a>
+            </div>
+            <div class="weui_cells_title">
+                <div class="weui_cell_hd">
+                    <i class="fa fa-arrows-h"></i>&nbsp&nbsp横向项目
+                </div>
+            </div>
+            <div class="weui_cells weui_cells_access">
+
+                <a class="weui_cell"
+                   href="detail.html#?id={{p.projectId}}" ng-repeat="p in hp0">
+                    <div class="weui_cell_bd weui_cell_primary">
+                        <p>
+                            {{p.title}}
+                        </p>
+                    </div>
+                    <div class="weui_cell_ft">
+                        {{p.startTime}}
+                    </div>
+                </a>
+            </div>
+            <div class="weui_cells_title">
+                <div class="weui_cell_hd">
+                    <i class="fa fa-arrows-alt"></i>&nbsp&nbsp实验室项目
+                </div>
+            </div>
+            <div class="weui_cells weui_cells_access">
+
+                <a class="weui_cell"
+                   href="detail.html#?id={{p.projectId}}" ng-repeat="p in sp0">
+                    <div class="weui_cell_bd weui_cell_primary">
+                        <p>
+                            {{p.title}}
+                        </p>
+                    </div>
+                    <div class="weui_cell_ft">
+                        {{p.startTime}}
+                    </div>
+                </a>
+            </div>
+        </div>
+        <div id="tab3" class="weui_tab_bd_item">
+
+            <form>
+                <div class="weui_cells">
+
+
+                    <div class="weui_cell weui">
+
+                        <div class="weui_cell_hd ">
+
+                            <label class="weui_label weui_cell_primary">名称</label>
+                        </div>
+                        <div class="weui_cell_bd weui_cell_primary ">
+                            <input ng-model="project.title" class="weui_input" type="text"
+                                   placeholder="请输入项目或任务名称">
+                        </div>
+                    </div>
+
+                    <div class="weui_cell">
+                        <div class="weui_cell_hd">
+                            <label class="weui_label">开始</label>
+                        </div>
+                        <div class="weui_cell_bd weui_cell_primary">
+                            <input ng-model="project.startTime" class="weui_input" type="date" value="">
+                        </div>
+                    </div>
+                    <div class="weui_cell">
+                        <div class="weui_cell_hd">
+                            <label class="weui_label">结束</label>
+                        </div>
+                        <div class="weui_cell_bd weui_cell_primary">
+                            <input ng-model="project.endTime" class="weui_input" type="date" value="">
+                        </div>
+                    </div>
+                </div>
+                <div class="weui_cells">
+
+                    <div class="weui_cell weui_cell_select">
+                        <div class="weui_cell_bd weui_cell_primary">
+                            <select class="weui_select" ng-model="project.principal.userId"
+                                    ng-options="x.userId as x.name for x in principal">
+                                <option value="">请选择负责人</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="weui_cell weui_cell_select">
+                        <div class="weui_cell_bd weui_cell_primary">
+                            <select class="weui_select" ng-model="project.instructor.userId"
+                                    ng-options="x.userId as x.name for x in teacher">
+                                <option value="">请选择指导老师</option>
+                            </select>
+                        </div>
+                    </div>
+
+
+                    <div class="weui_cell weui_cell_select">
+                        <div class="weui_cell_bd weui_cell_primary">
+                            <select class="weui_select" ng-model="project.project.projectId"
+                                    ng-options="x.projectId as x.title for x in projects">
+                                <option value="">请选择所属项目</option>
+                            </select>
+                        </div>
+                    </div>
+
+
+                    <div class="weui_cell weui_cell_select">
+                        <div class="weui_cell_bd weui_cell_primary">
+                            <select class="weui_select" ng-model="project.type" ng-options="x for x in types">
+                                <option value="">选择项目类型</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                <div class="weui_cells">
+                    <div class="weui_cell">
+                        <div class="weui_cell_bd weui_cell_primary">
+								<textarea ng-model="project.acceptance" class="weui_textarea"
+                                          placeholder="请输入验收目标" rows="3"></textarea>
+                            <div class="weui_textarea_counter">
+                                <span>0</span>/200
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="weui_cells">
+                    <div class="weui_cell">
+                        <div class="weui_cell_bd weui_cell_primary">
+								<textarea ng-model="project.detail" class="weui_textarea"
+                                          placeholder="请输入主要内容" rows="3"></textarea>
+                            <div class="weui_textarea_counter">
+                                <span>0</span>/200
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
+                <div class="weui_cells" style="background-color:#EFEFEF">
+                    <div class="weui_cell weui_cell_primary">
+                        <input class="weui_btn weui_btn_abled weui_btn_primary"
+                               ng-click="submit()" value="提交">
+                    </div>
+                </div>
+            </form>
+        </div>
+
+    </div>
+
+</div>
+<script src="../js/jquery-2.1.1.min.js"></script>
+<script src="../js/jquery-weui.js"></script>
+<script src="//cdn.bootcss.com/angular.js/1.2.28/angular.min.js"></script>
+<script src="index.js"></script>
+</body>
+
+</html>

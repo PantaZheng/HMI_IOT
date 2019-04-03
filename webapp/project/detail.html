@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en" ng-app>
+<head>
+    <title>项目详情</title>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1, user-scalable=no">
+    <link rel="stylesheet"
+          href="//cdn.bootcss.com/bootstrap/3.3.5/css/bootstrap.min.css">
+    <link rel="stylesheet" href="../css/weui.min.css">
+    <link rel="stylesheet" href="../css/jquery-weui.css">
+
+    <link rel="stylesheet" href="../css/background.css"/>
+    <link
+            href="//netdna.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css"
+            rel="stylesheet">
+
+</head>
+
+<body ng-controller="detailCtrl">
+
+
+<nav class="navbar navbar-default ">
+    <a href="javascript:window.location.href='../project/index.html'" class="navbar-brand"><i
+            class="fa fa-chevron-left"></i> </a>
+    <a class="navbar-btn  pull-right"
+       style="margin-right: 0.8em;margin-top: 1em;" id="show-action"
+       href="javascript:;" ng-click="m(p.status)"><i class="fa fa-list">&nbsp菜单</i> </a></nav>
+<div class="weui_cells">
+    <div class="weui_cell">
+
+        <div class="weui_cell_bd weui_cell_primary">
+            {{p.title}}
+        </div>
+
+    </div>
+    <div class="weui_cell">
+
+        <div class="weui_cell_hd weui_cell_primary">负责人</div>
+        <div class="weui_cell_ft">
+
+            {{p.principal.name}}
+
+        </div>
+
+    </div>
+    <div class="weui_cell">
+
+        <div class="weui_cell_hd weui_cell_primary">参与人员</div>
+        <div class="weui_cell_ft" ng-repeat="name in ps">
+            {{name}}&nbsp
+        </div>
+    </div>
+
+    <div class="weui_cell">
+
+        <div class="weui_cell_hd weui_cell_primary">指导老师</div>
+        <div class="weui_cell_ft">
+            {{p.instructor.name}}
+        </div>
+    </div>
+
+    <div class="weui_cell">
+
+        <div class="weui_cell_hd weui_cell_primary">项目类型</div>
+        <div class="weui_cell_ft">
+            {{p.type}}
+        </div>
+    </div>
+
+    <div class="weui_cell">
+
+        <div class="weui_cell_hd weui_cell_primary">开始时间</div>
+        <div class="weui_cell_ft">
+            {{p.startTime}}
+        </div>
+    </div>
+
+    <div class="weui_cell">
+
+        <div class="weui_cell_hd weui_cell_primary">结束时间</div>
+        <div class="weui_cell_ft">
+            {{p.endTime}}
+        </div>
+    </div>
+
+</div>
+
+
+<div class="weui_cells weui_cells_form">
+    <div class="weui_cells_title">
+        <div class="weui_cell_hd">
+            <i class="fa fa-wrench"></i>&nbsp&nbsp主要内容
+        </div>
+    </div>
+    <div class="weui_cell">
+        <div class="weui_cell_bd weui_cell_primary">
+            {{p.detail}}
+        </div>
+    </div>
+</div>
+<div class="weui_cells weui_cells_form">
+
+    <div class="weui_cells_title">
+        <div class="weui_cell_hd">
+            <i class="fa fa-flag"></i>&nbsp&nbsp验收目标
+        </div>
+    </div>
+    <div class="weui_cell">
+        <div class="weui_cell_bd weui_cell_primary">
+            {{p.acceptance}}
+        </div>
+    </div>
+</div>
+
+
+<div class="weui_panel">
+    <div class="weui_panel_hd">
+        <div class="weui_cell_hd">
+            <i class="fa fa-user-plus"></i>&nbsp&nbsp子任务
+        </div>
+    </div>
+    <div class="weui_panel_bd">
+        <div class="weui_media_box weui_media_text" ng-repeat="y in p.missions">
+            <h4 class="weui_media_title">
+                {{y.title}}
+            </h4>
+            <p class="weui_media_desc">
+
+                {{y.detail}}
+            </p>
+            <ul class="weui_media_info">
+                <li class="weui_media_info_meta">
+                    {{y.principal.name}}
+                </li>
+
+
+                <li class="weui_media_info_meta" ng-if="y.status==1">正在进行</li>
+
+                <li class="weui_media_info_meta" ng-if="y.status==0">已完成</li>
+
+                <a
+                        href="../mission/detail.html#?id={{y.missionId}}&pid={{p.projectId}}">
+                    <li
+                            class="weui_media_info_meta weui_media_info_meta_extra">详情
+                    </li>
+                </a>
+            </ul>
+        </div>
+    </div>
+</div>
+
+
+<script src="//cdn.bootcss.com/angular.js/1.2.28/angular.min.js"></script>
+<script src="../js/jquery-2.1.1.min.js"></script>
+<script src="../js/jquery-weui.js"></script>
+<script src="index.js"></script>
+</body>
+
+</html>
