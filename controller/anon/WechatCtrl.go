@@ -104,9 +104,9 @@ func Port(ctx iris.Context){
 		btn2.SetSubButton("subButton", buttons)
 
 		buttons2 := make([]*menu.Button, 1)
-		buttons2[0] = btn2
+		buttons2[0] = btn
 
-		err2 := wechatMenu.SetMenu(buttons2)
+		err2 := wechatMenu.SetMenu(buttons)
 		if err2 != nil {
 			fmt.Printf("***err= %v", err2)
 		}
