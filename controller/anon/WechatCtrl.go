@@ -48,11 +48,11 @@ func Port(ctx iris.Context){
 			wechatMenu := wc.GetMenu()
 
 			btnPlaceholder := new (menu.Button)
-			btnPlaceholder.SetViewButton("项目/任务","www.baidu.com")
+			btnPlaceholder.SetViewButton("项目/任务","")
 			btnCreate := new (menu.Button)
-			btnCreate.SetViewButton("创建用户","www.qq.com")
+			btnCreate.SetViewButton("创建用户","")
 			btnWeekly := new (menu.Button)
-			btnWeekly.SetViewButton("周报","www.github.com")
+			btnWeekly.SetViewButton("周报","")
 			buttonsSub := make([]* menu.Button,2)
 			buttonsSub[0]=btnCreate
 			buttonsSub[1]=btnWeekly
