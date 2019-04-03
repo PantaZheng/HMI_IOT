@@ -89,12 +89,12 @@ func Port(ctx iris.Context){
 		btnPerson := new (menu.Button)
 		btnPerson.SetClickButton("个人","person")
 		btnPerson.SetSubButton("subButton",buttonsSub)
-		defaultButtons := make ([]* menu.Button, 2)
-		defaultButtons[0]=btnPlaceholder
-		defaultButtons[1]=btnPerson
+		buttonsDefault := make ([]* menu.Button, 2)
+		buttonsDefault[0]=btnPlaceholder
+		buttonsDefault[1]=btnPerson
 
 
-		err2 := wechatMenu.SetMenu(defaultButtons)
+		err2 := wechatMenu.SetMenu(buttonsSub)
 		if err2 != nil {
 			fmt.Printf("***err= %v", err2)
 		}
