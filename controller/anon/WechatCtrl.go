@@ -33,29 +33,6 @@ func Login(ctx iris.Context) {
 	//发送回复的消息
 	_=wechatServer.Send()
 
-	wechatMenu := wc.GetMenu()
-
-	btnPlaceholder := new (menu.Button)
-	btnPlaceholder.SetViewButton("项目/任务","www.baidu.com")
-	btnCreate := new (menu.Button)
-	btnCreate.SetViewButton("创建用户","www.qq.com")
-	btnWeekly := new (menu.Button)
-	btnWeekly.SetViewButton("周报","www.github.com")
-	buttonsSub := make([]* menu.Button,2)
-	buttonsSub[0]=btnCreate
-	buttonsSub[1]=btnWeekly
-	btnPerson := new (menu.Button)
-	btnPerson.SetClickButton("个人","person")
-	btnPerson.SetSubButton("subButton",buttonsSub)
-	defaultButtons := make ([]* menu.Button, 2)
-	defaultButtons[0]=btnPlaceholder
-	defaultButtons[1]=btnPerson
-
-	err = wechatMenu.SetMenu(defaultButtons)
-	if err != nil {
-		fmt.Printf("err= %v", err)
-		return
-	}
 }
 
 func Port(ctx iris.Context){
@@ -68,7 +45,28 @@ func Port(ctx iris.Context){
 		switch v.MsgType {
 		//文本消息
 		case message.MsgTypeText:
-			textResp = "HMI-IoT"
+			wechatMenu := wc.GetMenu()
+
+			btnPlaceholder := new (menu.Button)
+			btnPlaceholder.SetViewButton("项目/任务","www.baidu.com")
+			btnCreate := new (menu.Button)
+			btnCreate.SetViewButton("创建用户","www.qq.com")
+			btnWeekly := new (menu.Button)
+			btnWeekly.SetViewButton("周报","www.github.com")
+			buttonsSub := make([]* menu.Button,2)
+			buttonsSub[0]=btnCreate
+			buttonsSub[1]=btnWeekly
+			btnPerson := new (menu.Button)
+			btnPerson.SetClickButton("个人","person")
+			btnPerson.SetSubButton("subButton",buttonsSub)
+			defaultButtons := make ([]* menu.Button, 2)
+			defaultButtons[0]=btnPlaceholder
+			defaultButtons[1]=btnPerson
+
+			err := wechatMenu.SetMenu(defaultButtons)
+			if err != nil {
+				fmt.Printf("err= %v", err)
+			}
 		case message.MsgTypeEvent:
 			switch v.Event {
 				//EventSubscribe 订阅
