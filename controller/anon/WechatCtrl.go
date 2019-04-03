@@ -58,11 +58,11 @@ func Port(ctx iris.Context){
 			case message.EventView:
 				//do something
 
-
 			}
 		}
 
-		return &message.Reply{MsgType: message.MsgTypeText, MsgData: textResp}
+		text := message.NewText(textResp)
+		return &message.Reply{MsgType: message.MsgTypeText, MsgData: text}
 	})
 
 	//处理消息接收以及回复
