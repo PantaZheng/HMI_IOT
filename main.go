@@ -1,11 +1,10 @@
 package main
 
 import (
-	"fmt"
+	"./controller/anon"
 	"github.com/kataras/iris"
 	"github.com/kataras/iris/core/router"
 	"github.com/kataras/iris/middleware/logger"
-	"./controller/anon"
 )
 
 func newApp() (api *iris.Application){
@@ -14,8 +13,7 @@ func newApp() (api *iris.Application){
 
 	api.PartyFunc("/anon",func (anon router.Party){
 		anon.PartyFunc("/wechat", func(wechat router.Party) {
-			wechat.Get("/",controller.Login)
-			wechat.Post("/",controller.Port)
+			wechat.Any("/", controller.Wechat)
 		})
 	})
 
@@ -25,6 +23,5 @@ func newApp() (api *iris.Application){
 func main() {
 	app := newApp()
 	_ = app.Run(iris.Addr(":80"))
-	fmt.Printf("Hello 8080")
 }
 
