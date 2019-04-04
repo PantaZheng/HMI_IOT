@@ -18,6 +18,7 @@ func Wechat(ctx iris.Context) {
 	wxOriId      := "gh_7f0d5fc2116f"
 	wxToken         := "HMIIoT"
 	wxEncodedAESKey := "iesxoHBsnaKVry5E8xd8gavmJLTVVNcd8aS7w3KYOaU"
+
 	mux := core.NewServeMux()
 	mux.DefaultMsgHandleFunc(service.DefaultEventHandler)
 	mux.DefaultEventHandleFunc(service.DefaultEventHandler)
@@ -27,6 +28,10 @@ func Wechat(ctx iris.Context) {
 	msgHandler := mux
 	msgServer := core.NewServer(wxOriId, wxAppId, wxToken, wxEncodedAESKey, msgHandler, nil)
 	msgServer.ServeHTTP(ctx.ResponseWriter(), ctx.Request(), nil)
+
+
+
+
 }
 
 
