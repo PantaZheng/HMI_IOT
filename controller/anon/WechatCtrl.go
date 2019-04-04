@@ -13,8 +13,8 @@ import (
 //  1. 不同的 web 框架有不同的实现
 //  2. 一般一个 handler 处理一个公众号的回调请求(当然也可以处理多个, 这里我只处理一个)
 func Wechat(ctx iris.Context) {
-	wxAppId := "wx6bb6950cf39d79ee"
-	//wxAppSecret := "25e017d8ab0f6711b5080be1ae317421"
+	wxAppId := "wx2203c68c9311ea43"
+	//wxAppSecret := "40c40547e174ed99d1281b2890f7eeb3"
 	wxOriId      := "gh_7f0d5fc2116f"
 	wxToken         := "HMIIoT"
 	wxEncodedAESKey := "iesxoHBsnaKVry5E8xd8gavmJLTVVNcd8aS7w3KYOaU"
