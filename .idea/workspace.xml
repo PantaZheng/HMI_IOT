@@ -21,8 +21,17 @@
           <file pinned="false" current-in-tab="true">
             <entry file="file://$PROJECT_DIR$/controller/anon/WechatCtrl.go">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="149">
-                  <caret line="16" column="4" lean-forward="true" selection-start-line="16" selection-start-column="4" selection-end-line="16" selection-end-column="4" />
+                <state relative-caret-position="33">
+                  <caret line="18" column="31" lean-forward="true" selection-start-line="18" selection-start-column="31" selection-end-line="18" selection-end-column="31" />
+                </state>
+              </provider>
+            </entry>
+          </file>
+          <file pinned="false" current-in-tab="false">
+            <entry file="file://$PROJECT_DIR$/.gitignore">
+              <provider selected="true" editor-type-id="text-editor">
+                <state>
+                  <caret column="6" selection-start-column="6" selection-end-column="6" />
                 </state>
               </provider>
             </entry>
@@ -153,6 +162,7 @@
         <option value="$PROJECT_DIR$/controller/anon/UserCtrl.go" />
         <option value="$PROJECT_DIR$/main.go" />
         <option value="$PROJECT_DIR$/service/WeChatCoreService.go" />
+        <option value="$PROJECT_DIR$/.gitignore" />
         <option value="$PROJECT_DIR$/controller/anon/WechatCtrl.go" />
       </list>
     </option>
@@ -175,17 +185,6 @@
             <path>
               <item name="HMI-IoT" type="b2602c69:ProjectViewProjectNode" />
               <item name="HMI-IoT" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="HMI-IoT" type="b2602c69:ProjectViewProjectNode" />
-              <item name="HMI-IoT" type="462c0819:PsiDirectoryNode" />
-              <item name="controller" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="HMI-IoT" type="b2602c69:ProjectViewProjectNode" />
-              <item name="HMI-IoT" type="462c0819:PsiDirectoryNode" />
-              <item name="controller" type="462c0819:PsiDirectoryNode" />
-              <item name="anon" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="HMI-IoT" type="b2602c69:ProjectViewProjectNode" />
@@ -318,6 +317,7 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="-7" y="-7" width="2062" height="878" extended-state="6" />
+    <editor active="true" />
     <layout>
       <window_info content_ui="combo" id="Project" order="0" sideWeight="0.49893844" visible="true" weight="0.18806419" />
       <window_info id="Favorites" order="1" side_tool="true" />
@@ -349,7 +349,6 @@
     <option name="LAST_COMMIT_MESSAGE" value="修改路径" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://D:/GoEnvironment/src/github.com/silenceper/wechat/context/component_access_token.go" />
     <entry file="file://D:/GoEnvironment/src/github.com/silenceper/wechat/util/signature_test.go" />
     <entry file="file://D:/GoEnvironment/src/github.com/silenceper/wechat/message/reply.go" />
     <entry file="file://$PROJECT_DIR$/webapp/mission/index.html">
@@ -551,10 +550,17 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/.gitignore">
+      <provider selected="true" editor-type-id="text-editor">
+        <state>
+          <caret column="6" selection-start-column="6" selection-end-column="6" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/controller/anon/WechatCtrl.go">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="149">
-          <caret line="16" column="4" lean-forward="true" selection-start-line="16" selection-start-column="4" selection-end-line="16" selection-end-column="4" />
+        <state relative-caret-position="33">
+          <caret line="18" column="31" lean-forward="true" selection-start-line="18" selection-start-column="31" selection-end-line="18" selection-end-column="31" />
         </state>
       </provider>
     </entry>

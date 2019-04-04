@@ -15,7 +15,7 @@ import (
 func Wechat(ctx iris.Context) {
 	wxAppId := "wx2203c68c9311ea43"
 	//wxAppSecret := "40c40547e174ed99d1281b2890f7eeb3"
-	wxOriId      := "gh_7f0d5fc2116f"
+	wxOriId      := " gh_b4421d95f839"
 	wxToken         := "HMIIoT"
 	wxEncodedAESKey := "iesxoHBsnaKVry5E8xd8gavmJLTVVNcd8aS7w3KYOaU"
 
