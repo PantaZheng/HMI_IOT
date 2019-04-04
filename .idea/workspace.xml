@@ -5,10 +5,6 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="bd4df609-9129-4c8b-81be-8d271a0ee1b4" name="Default Changelist" comment="修改路径">
-      <change afterPath="$PROJECT_DIR$/.idea/dictionaries/panta.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/main.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/controller/anon/WechatCtrl.go" beforeDir="false" afterPath="$PROJECT_DIR$/controller/anon/WechatCtrl.go" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/service/WeChatCoreService.go" beforeDir="false" afterPath="$PROJECT_DIR$/service/WeChatCoreService.go" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../rjwl-2.1test.war" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/../需求分析.pdf" beforeDir="false" />
@@ -53,8 +49,8 @@
           <file pinned="false" current-in-tab="true">
             <entry file="file://$PROJECT_DIR$/service/WeChatCoreService.go">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="429">
-                  <caret line="21" column="5" lean-forward="true" selection-start-line="21" selection-start-column="5" selection-end-line="21" selection-end-column="5" />
+                <state relative-caret-position="158">
+                  <caret line="47" column="1" lean-forward="true" selection-start-line="47" selection-start-column="1" selection-end-line="47" selection-end-column="1" />
                   <folding>
                     <element signature="e#17#239#0" expanded="true" />
                   </folding>
@@ -337,14 +333,14 @@
       <window_info anchor="bottom" id="Docker" order="7" show_stripe_button="false" />
       <window_info anchor="bottom" id="Database Changes" order="8" />
       <window_info anchor="bottom" id="Version Control" order="9" sideWeight="0.49969715" weight="0.32957393" />
-      <window_info anchor="bottom" id="Terminal" order="10" sideWeight="0.49969715" weight="0.4116809" />
+      <window_info active="true" anchor="bottom" id="Terminal" order="10" sideWeight="0.49969715" visible="true" weight="0.4116809" />
       <window_info anchor="bottom" id="Event Log" order="11" sideWeight="0.50030285" side_tool="true" weight="0.36215538" />
       <window_info anchor="bottom" id="Messages" order="12" weight="0.32957393" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
       <window_info anchor="right" id="Database" order="3" />
-      <window_info active="true" anchor="right" id="Structure" order="4" sideWeight="0.50106156" visible="true" weight="0.19608827" />
+      <window_info anchor="right" id="Structure" order="4" sideWeight="0.50106156" visible="true" weight="0.19608827" />
     </layout>
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -556,8 +552,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/service/WeChatCoreService.go">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="429">
-          <caret line="21" column="5" lean-forward="true" selection-start-line="21" selection-start-column="5" selection-end-line="21" selection-end-column="5" />
+        <state relative-caret-position="158">
+          <caret line="47" column="1" lean-forward="true" selection-start-line="47" selection-start-column="1" selection-end-line="47" selection-end-column="1" />
           <folding>
             <element signature="e#17#239#0" expanded="true" />
           </folding>

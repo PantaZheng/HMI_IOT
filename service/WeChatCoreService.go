@@ -43,7 +43,7 @@ func DefaultEventHandler(ctx *core.Context) {
 }
 
 func wechatClient() *core.Client{
-	accessTokenTokenServer :=core.NewDefaultAccessTokenServer("wx6bb6950cf39d79ee","25e017d8ab0f6711b5080be1ae317421",nil)
+	accessTokenTokenServer :=core.NewDefaultAccessTokenServer("wx2203c68c9311ea43","40c40547e174ed99d1281b2890f7eeb3",nil)
 	return core.NewClient(accessTokenTokenServer,nil)
 }
 
