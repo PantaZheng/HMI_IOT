@@ -2,6 +2,7 @@ package service
 
 import (
 	"fmt"
+	"../config"
 	"github.com/chanxuehong/wechat/mp/core"
 	"github.com/chanxuehong/wechat/mp/menu"
 	"github.com/chanxuehong/wechat/mp/message/callback/request"
@@ -43,13 +44,15 @@ func DefaultEventHandler(ctx *core.Context) {
 }
 
 func wechatClient() *core.Client{
-	accessTokenTokenServer :=core.NewDefaultAccessTokenServer("wx2203c68c9311ea43","40c40547e174ed99d1281b2890f7eeb3",nil)
+	wechatAppId := config.Conf.Get("wechat.AppId").(string)
+	wechatAppSecret := config.Conf.Get("wechat.AppSecret").(string)
+	accessTokenTokenServer :=core.NewDefaultAccessTokenServer(wechatAppId,wechatAppSecret,nil)
 	return core.NewClient(accessTokenTokenServer,nil)
 }
 
 func defaultMenu(clt *core.Client){
 	btnProjectMission:=menu.Button{}
-	btnProjectMission.SetAsClickButton("ProjectMission","www.baidu.com")
+	btnProjectMission.SetAsClickButton("Project/Mission","www.baidu.com")
 	buttonsDefault:=make([]menu.Button,1)
 	buttonsDefault[0]=btnProjectMission
 	defaultMenu:=menu.Menu{}
