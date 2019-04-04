@@ -5,7 +5,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="bd4df609-9129-4c8b-81be-8d271a0ee1b4" name="Default Changelist" comment="修改路径">
-      <change beforePath="$PROJECT_DIR$/service/WeChatCoreService.go" beforeDir="false" afterPath="$PROJECT_DIR$/service/WeChatCoreService.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../rjwl-2.1test.war" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/../需求分析.pdf" beforeDir="false" />
     </list>
@@ -19,11 +19,11 @@
     <splitter split-orientation="horizontal" split-proportion="0.57235247">
       <split-first>
         <leaf SIDE_TABS_SIZE_LIMIT_KEY="375">
-          <file pinned="false" current-in-tab="false">
+          <file pinned="false" current-in-tab="true">
             <entry file="file://$PROJECT_DIR$/controller/anon/WechatCtrl.go">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="208">
-                  <caret line="14" column="31" selection-start-line="14" selection-start-column="31" selection-end-line="14" selection-end-column="31" />
+                <state relative-caret-position="149">
+                  <caret line="16" column="54" selection-start-line="16" selection-start-column="54" selection-end-line="16" selection-end-column="54" />
                 </state>
               </provider>
             </entry>
@@ -40,16 +40,16 @@
           <file pinned="false" current-in-tab="false">
             <entry file="file://$PROJECT_DIR$/main.go">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="338">
+                <state relative-caret-position="442">
                   <caret line="18" selection-start-line="18" selection-end-line="18" />
                 </state>
               </provider>
             </entry>
           </file>
-          <file pinned="false" current-in-tab="true">
+          <file pinned="false" current-in-tab="false">
             <entry file="file://$PROJECT_DIR$/service/WeChatCoreService.go">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="158">
+                <state relative-caret-position="326">
                   <caret line="47" column="1" lean-forward="true" selection-start-line="47" selection-start-column="1" selection-end-line="47" selection-end-column="1" />
                   <folding>
                     <element signature="e#17#239#0" expanded="true" />
@@ -153,16 +153,16 @@
         <option value="$PROJECT_DIR$/controller/WechatCtrl.go" />
         <option value="$PROJECT_DIR$/controller/anon/UserCtrl.go" />
         <option value="$PROJECT_DIR$/main.go" />
-        <option value="$PROJECT_DIR$/controller/anon/WechatCtrl.go" />
         <option value="$PROJECT_DIR$/service/WeChatCoreService.go" />
+        <option value="$PROJECT_DIR$/controller/anon/WechatCtrl.go" />
       </list>
     </option>
   </component>
   <component name="ProjectFrameBounds" extendedState="6">
-    <option name="x" value="2186" />
-    <option name="y" value="145" />
-    <option name="width" value="2814" />
-    <option name="height" value="1463" />
+    <option name="x" value="-100" />
+    <option name="y" value="60" />
+    <option name="width" value="2345" />
+    <option name="height" value="1218" />
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectView">
@@ -319,7 +319,6 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="-7" y="-7" width="2062" height="878" extended-state="6" />
-    <editor active="true" />
     <layout>
       <window_info content_ui="combo" id="Project" order="0" sideWeight="0.49893844" visible="true" weight="0.18806419" />
       <window_info id="Favorites" order="1" side_tool="true" />
@@ -489,24 +488,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/controller/anon/WechatCtrl.go">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="208">
-          <caret line="14" column="31" selection-start-line="14" selection-start-column="31" selection-end-line="14" selection-end-column="31" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/controller/anon/UserCtrl.go">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="78">
           <caret line="3" column="4" selection-start-line="3" selection-start-column="4" selection-end-line="3" selection-end-column="4" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/main.go">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="338">
-          <caret line="18" selection-start-line="18" selection-end-line="18" />
         </state>
       </provider>
     </entry>
@@ -552,11 +537,25 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/service/WeChatCoreService.go">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="158">
+        <state relative-caret-position="326">
           <caret line="47" column="1" lean-forward="true" selection-start-line="47" selection-start-column="1" selection-end-line="47" selection-end-column="1" />
           <folding>
             <element signature="e#17#239#0" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/main.go">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="442">
+          <caret line="18" selection-start-line="18" selection-end-line="18" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/controller/anon/WechatCtrl.go">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="149">
+          <caret line="16" column="54" selection-start-line="16" selection-start-column="54" selection-end-line="16" selection-end-column="54" />
         </state>
       </provider>
     </entry>
