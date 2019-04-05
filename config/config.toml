@@ -11,7 +11,7 @@
 
 #数据库驱动
 [database]
-    driver = "mysql"
+    driver = "mysql
 
 [mysql]
    databaseName ="BCI"
