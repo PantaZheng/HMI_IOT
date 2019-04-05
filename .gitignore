@@ -2,3 +2,5 @@
 .iml
 create
 main
+*/.idea/
+.idea/
