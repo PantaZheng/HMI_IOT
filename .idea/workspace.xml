@@ -5,464 +5,6 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="bd4df609-9129-4c8b-81be-8d271a0ee1b4" name="Default Changelist" comment="修改路径">
-      <change afterPath="$PROJECT_DIR$/service/UserService.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/dictionaries/panta.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dictionaries/panta.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/config/config.toml" beforeDir="false" afterPath="$PROJECT_DIR$/config/config.toml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/controller/anon/WechatCtrl.go" beforeDir="false" afterPath="$PROJECT_DIR$/controller/anon/WechatCtrl.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/database/database.go" beforeDir="false" afterPath="$PROJECT_DIR$/database/database.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/model/permission.go" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/model/roles.go" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/service/WeChatCoreService.go" beforeDir="false" afterPath="$PROJECT_DIR$/service/WeChatCoreService.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/webapp/WEB-INF/web.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/webapp/ass/ass.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/webapp/ass/export.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/webapp/ass/flag.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/webapp/ass/index.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/webapp/ass/index.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/webapp/ass/month.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/webapp/conference/detail.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/webapp/conference/index.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/webapp/conference/index.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/webapp/conference/update.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/webapp/css/background.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/webapp/css/bootstrap.min.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/webapp/css/home.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/webapp/css/init.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/webapp/css/jquery-weui.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/webapp/css/login.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/webapp/css/sfy.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/webapp/css/weui.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/webapp/css/weui.min.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/webapp/excel/assessment.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/webapp/fonts/glyphicons-halflings-regular.eot" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/webapp/fonts/glyphicons-halflings-regular.svg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/webapp/fonts/glyphicons-halflings-regular.ttf" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/webapp/fonts/glyphicons-halflings-regular.woff" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/webapp/fonts/glyphicons-halflings-regular.woff2" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/webapp/image/assessment.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/webapp/image/family.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/webapp/image/feedback.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/webapp/image/information.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/webapp/image/meeting.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/webapp/image/notice.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/webapp/image/paper.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/webapp/image/project.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/webapp/image/register.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/webapp/image/weekly.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/webapp/images/ads/tf_125x125_v1.gif" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/webapp/images/blog/001.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/webapp/images/blog/1.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/webapp/images/blog/cat.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/webapp/images/blog/cat_402x.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/webapp/images/blog/more.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/webapp/images/blog/more_402x.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/webapp/images/blog/tag.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/webapp/images/blog/tag_402x.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/webapp/images/blog/time.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/webapp/images/blog/time_402x.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/webapp/images/blog/user.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/webapp/images/blog/user_402x.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/webapp/images/bx_loader.gif" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/webapp/images/colorbox/controls.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/webapp/images/controls.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/webapp/images/detector/droid.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/webapp/images/detector/ipad.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/webapp/images/detector/iphone.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/webapp/images/director.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/webapp/images/gallery/icon3.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/webapp/images/gallery/loader.gif" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/webapp/images/gallery/thumb/1t.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/webapp/images/gallery/thumb/2t.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/webapp/images/gallery/thumb/3t.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/webapp/images/gallery/thumb/4t.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/webapp/images/gallery/thumb/5t.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/webapp/images/hdu1.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/webapp/images/hdu2.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/webapp/images/hdu3.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/webapp/images/icon/arrows/bendeddown.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/webapp/images/icon/arrows/bendedleft.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/webapp/images/icon/arrows/bendedright.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/webapp/images/icon/arrows/bendedup.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/webapp/images/icon/arrows/gobackfromfull.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/webapp/images/icon/arrows/gobackfromfull2.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/webapp/images/icon/arrows/gofull.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/webapp/images/icon/arrows/recycle.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/webapp/images/icon/arrows/refresh.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/webapp/images/icon/arrows/refresh2.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/webapp/images/icon/arrows/refresh3.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/webapp/images/icon/arrows/refresh4.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/webapp/images/icon/arrows/repeat.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/webapp/images/icon/arrows/shuffle.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/webapp/images/icon/communication/inbox.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/webapp/images/icon/communication/incoming.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/webapp/images/icon/communication/incoming2.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/webapp/images/icon/communication/oldphone.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/webapp/images/icon/communication/outgoing.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/webapp/images/icon/communication/outgoing2.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/webapp/images/icon/communication/phone.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/webapp/images/icon/communication/phone2.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/webapp/images/icon/communication/phone3.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/webapp/images/icon/communication/phone4.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/webapp/images/icon/communication/phonehook.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/webapp/images/icon/communication/speechbubble.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/webapp/images/icon/communication/speechbubble2.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/webapp/images/icon/communication/speechbubble3.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/webapp/images/icon/communication/speechbubble4.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/webapp/images/icon/files/document.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/webapp/images/icon/files/documentexcel.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/webapp/images/icon/files/documentpdf.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/webapp/images/icon/files/documentpowerpoint.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/webapp/images/icon/files/documents.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/webapp/images/icon/files/documentsexcel.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/webapp/images/icon/files/documentspdf.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/webapp/images/icon/files/documentspowerpoint.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/webapp/images/icon/files/documentstext.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/webapp/images/icon/files/documentsword.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/webapp/images/icon/files/documentszip.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/webapp/images/icon/files/documenttext.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/webapp/images/icon/files/documentword.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/webapp/images/icon/files/documentzip.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/webapp/images/icon/media/bluray.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/webapp/images/icon/media/cassette.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/webapp/images/icon/media/cd.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/webapp/images/icon/media/clapboard.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/webapp/images/icon/media/dvd.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/webapp/images/icon/media/film.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/webapp/images/icon/media/film2.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/webapp/images/icon/media/gkey.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/webapp/images/icon/media/headphones.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/webapp/images/icon/media/image.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/webapp/images/icon/media/image2.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/webapp/images/icon/media/image3.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/webapp/images/icon/media/image4.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/webapp/images/icon/media/megaphone.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/webapp/images/icon/media/microphone.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/webapp/images/icon/media/quicktime.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/webapp/images/icon/media/quicktime2.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/webapp/images/icon/media/record.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/webapp/images/icon/media/sound.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/webapp/images/icon/misc/accessdenied.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/webapp/images/icon/misc/airplane.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/webapp/images/icon/misc/alarmbell.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/webapp/images/icon/misc/alarmbell2.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/webapp/images/icon/misc/alert.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/webapp/images/icon/misc/alert2.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/webapp/images/icon/misc/apartment.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/webapp/images/icon/misc/applications.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/webapp/images/icon/misc/archive.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/webapp/images/icon/misc/balloons.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/webapp/images/icon/misc/bandaid.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/webapp/images/icon/misc/book.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/webapp/images/icon/misc/booklarge.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/webapp/images/icon/misc/books.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/webapp/images/icon/misc/books2.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/webapp/images/icon/misc/bullseye.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/webapp/images/icon/misc/candycane.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/webapp/images/icon/misc/car.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/webapp/images/icon/misc/cat.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/webapp/images/icon/misc/chair.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/webapp/images/icon/misc/chemical.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/webapp/images/icon/misc/chrome.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/webapp/images/icon/misc/clipboard.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/webapp/images/icon/misc/cloadupload.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/webapp/images/icon/misc/cloud.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/webapp/images/icon/misc/clouddownload.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/webapp/images/icon/misc/companies.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/webapp/images/icon/misc/creatwrite.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/webapp/images/icon/misc/cup.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/webapp/images/icon/misc/dinnerplate.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/webapp/images/icon/misc/dogtag.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/webapp/images/icon/misc/dogtags.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/webapp/images/icon/misc/download.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/webapp/images/icon/misc/download2.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/webapp/images/icon/misc/expose.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/webapp/images/icon/misc/filecabinet.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/webapp/images/icon/misc/finishbanner.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/webapp/images/icon/misc/finishflag.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/webapp/images/icon/misc/firefox.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/webapp/images/icon/misc/flag.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/webapp/images/icon/misc/flag2.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/webapp/images/icon/misc/folder.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/webapp/images/icon/misc/folderlocked.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/webapp/images/icon/misc/foldermusic.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/webapp/images/icon/misc/folderpersonal.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/webapp/images/icon/misc/footprint.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/webapp/images/icon/misc/footprints.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/webapp/images/icon/misc/glass.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/webapp/images/icon/misc/globe.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/webapp/images/icon/misc/globe2.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/webapp/images/icon/misc/help.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/webapp/images/icon/misc/home.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/webapp/images/icon/misc/home2.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/webapp/images/icon/misc/icecream.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/webapp/images/icon/misc/icecream2.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/webapp/images/icon/misc/infoabout.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/webapp/images/icon/misc/key.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/webapp/images/icon/misc/key2.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/webapp/images/icon/misc/lamp.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/webapp/images/icon/misc/leaf.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/webapp/images/icon/misc/lightbulb.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/webapp/images/icon/misc/lightnining.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/webapp/images/icon/misc/lightnining2.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/webapp/images/icon/misc/link.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/webapp/images/icon/misc/link2.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/webapp/images/icon/misc/linux.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/webapp/images/icon/misc/loadingbar.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/webapp/images/icon/misc/locked.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/webapp/images/icon/misc/locked2.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/webapp/images/icon/misc/macos.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/webapp/images/icon/misc/magnifier.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/webapp/images/icon/misc/magnifier2.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/webapp/images/icon/misc/mail.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/webapp/images/icon/misc/mail2.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/webapp/images/icon/misc/mickey.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/webapp/images/icon/misc/notebook.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/webapp/images/icon/misc/pacman.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/webapp/images/icon/misc/pacmanghost.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/webapp/images/icon/misc/paperclip.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/webapp/images/icon/misc/postcard.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/webapp/images/icon/misc/presentation.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/webapp/images/icon/misc/preview.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/webapp/images/icon/misc/pumpkin.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/webapp/images/icon/misc/rainsun.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/webapp/images/icon/misc/rainsun2.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/webapp/images/icon/misc/robot.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/webapp/images/icon/misc/rss.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/webapp/images/icon/misc/safari.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/webapp/images/icon/misc/shades.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/webapp/images/icon/misc/stickynote.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/webapp/images/icon/misc/strategy.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/webapp/images/icon/misc/strategy2.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/webapp/images/icon/misc/table.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/webapp/images/icon/misc/tag.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/webapp/images/icon/misc/tag2.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/webapp/images/icon/misc/textstyle.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/webapp/images/icon/misc/textstyle2.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/webapp/images/icon/misc/textstyle3.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/webapp/images/icon/misc/trashcan.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/webapp/images/icon/misc/trashcan2.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/webapp/images/icon/misc/tree.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/webapp/images/icon/misc/truck.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/webapp/images/icon/misc/truck2.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/webapp/images/icon/misc/umbrella.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/webapp/images/icon/misc/underconstruction.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/webapp/images/icon/misc/universalaccess.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/webapp/images/icon/misc/unlocked.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/webapp/images/icon/misc/upload.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/webapp/images/icon/misc/vault.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/webapp/images/icon/misc/windows.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/webapp/images/icon/misc/wineglass.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/webapp/images/icon/misc/winner.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/webapp/images/icon/settings/cog.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/webapp/images/icon/settings/cog2.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/webapp/images/icon/settings/cog3.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/webapp/images/icon/settings/cog4.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/webapp/images/icon/settings/cog5.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/webapp/images/icon/settings/settings.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/webapp/images/icon/settings/settings2.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/webapp/images/icon/social/delicious.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/webapp/images/icon/social/digg.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/webapp/images/icon/social/digg2.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/webapp/images/icon/social/digg3.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/webapp/images/icon/social/digg4.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/webapp/images/icon/social/dribbble.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/webapp/images/icon/social/dribbble2.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/webapp/images/icon/social/dribbble3.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/webapp/images/icon/social/dribbble4.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/webapp/images/icon/social/dropbox.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/webapp/images/icon/social/facebook.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/webapp/images/icon/social/facebooklike.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/webapp/images/icon/social/googlebuzz.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/webapp/images/icon/social/ichat.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/webapp/images/icon/social/lastfm.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/webapp/images/icon/social/lastfm2.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/webapp/images/icon/social/mobypicture.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/webapp/images/icon/social/myspace.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/webapp/images/icon/social/myspace2.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/webapp/images/icon/social/plixi.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/webapp/images/icon/social/skype.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/webapp/images/icon/social/skype2.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/webapp/images/icon/social/stumbleupon.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/webapp/images/icon/social/tumbler.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/webapp/images/icon/social/twitter.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/webapp/images/icon/social/twitter2.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/webapp/images/icon/social/vimeo.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/webapp/images/icon/social/vimeo2.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/webapp/images/icon/social/vimeo3.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/webapp/images/icon/social/vimeo4.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/webapp/images/icon/social/vimeo5.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/webapp/images/icon/social/youtube.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/webapp/images/icon/social/youtube2.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/webapp/images/icon/social/youtube3.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/webapp/images/icon/social/youtube4.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/webapp/images/icon/tools/abacus.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/webapp/images/icon/tools/bigbrush.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/webapp/images/icon/tools/cutscissors.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/webapp/images/icon/tools/eyedropper.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/webapp/images/icon/tools/fountainpen.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/webapp/images/icon/tools/paintbrush.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/webapp/images/icon/tools/pencil.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/webapp/images/icon/tools/rakescoop.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/webapp/images/icon/tools/ruller.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/webapp/images/icon/tools/ruller2.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/webapp/images/icon/tools/smallbrush.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/webapp/images/icon/tools/tools.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/webapp/images/icon/user/adminuser.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/webapp/images/icon/user/adminuser2.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/webapp/images/icon/user/exit.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/webapp/images/icon/user/femalecontour.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/webapp/images/icon/user/femalesymbol.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/webapp/images/icon/user/group.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/webapp/images/icon/user/group2.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/webapp/images/icon/user/malecontour.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/webapp/images/icon/user/malesymbol.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/webapp/images/icon/user/runningman.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/webapp/images/icon/user/user.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/webapp/images/icon/user/user2.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/webapp/images/icon/user/user3.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/webapp/images/icon/user/usercomment.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/webapp/images/icon/user/users.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/webapp/images/icon/user/walkingman.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/webapp/images/icons-large/icon1_402x.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/webapp/images/icons-large/icon2_402x.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/webapp/images/icons-large/icon3_402x.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/webapp/images/icons-large/icon4_402x.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/webapp/images/lists/address_32.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/webapp/images/lists/block_32.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/webapp/images/lists/bookmark_32.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/webapp/images/lists/briefcase_32.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/webapp/images/lists/bubble_32.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/webapp/images/lists/buy_32.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/webapp/images/lists/calendar_16.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/webapp/images/lists/calendar_32.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/webapp/images/lists/clipboard_32.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/webapp/images/lists/clock_32.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/webapp/images/lists/diagram_32.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/webapp/images/lists/document_32.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/webapp/images/lists/down_32.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/webapp/images/lists/flag_32.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/webapp/images/lists/folder_32.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/webapp/images/lists/gear_32.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/webapp/images/lists/globe_32.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/webapp/images/lists/heart_16.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/webapp/images/lists/heart_32.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/webapp/images/lists/help_32.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/webapp/images/lists/home_32.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/webapp/images/lists/info_16.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/webapp/images/lists/info_32.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/webapp/images/lists/key_32.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/webapp/images/lists/label_32.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/webapp/images/lists/left_32.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/webapp/images/lists/letter_32.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/webapp/images/lists/monitor_32.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/webapp/images/lists/pencil_32.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/webapp/images/lists/plus_16.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/webapp/images/lists/plus_32.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/webapp/images/lists/present_32.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/webapp/images/lists/print_32.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/webapp/images/lists/right_32.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/webapp/images/lists/save_32.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/webapp/images/lists/shield_32.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/webapp/images/lists/statistics_32.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/webapp/images/lists/stop_32.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/webapp/images/lists/tick_16.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/webapp/images/lists/tick_32.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/webapp/images/lists/trash_32.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/webapp/images/lists/up_32.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/webapp/images/lists/user_32.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/webapp/images/lists/wallet_32.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/webapp/images/lists/warning_16.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/webapp/images/lists/warning_32.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/webapp/images/logo.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/webapp/images/logob.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/webapp/images/notification/disable.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/webapp/images/notification/info.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/webapp/images/notification/tip.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/webapp/images/notification/warning.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/webapp/images/status.gif" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/webapp/images/student.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/webapp/images/teacher.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/webapp/images/ui/arrow-down.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/webapp/images/ui/arrow-up.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/webapp/images/ui/checkbox-selected.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/webapp/images/ui/checkbox-selected_402x.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/webapp/images/ui/checkbox.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/webapp/images/ui/checkbox2-selected.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/webapp/images/ui/checkbox2-selected_402x.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/webapp/images/ui/checkbox2.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/webapp/images/ui/checkbox2_402x.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/webapp/images/ui/checkbox_402x.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/webapp/images/ui/cross.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/webapp/images/ui/cross_402x.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/webapp/images/ui/empty.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/webapp/images/ui/empty_402x.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/webapp/images/ui/minus.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/webapp/images/ui/minus_402x.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/webapp/images/ui/plus.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/webapp/images/ui/plus_402x.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/webapp/images/ui/radio-selected.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/webapp/images/ui/radio-selected_402x.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/webapp/images/ui/radio.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/webapp/images/ui/radio2-selected.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/webapp/images/ui/radio2-selected_402x.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/webapp/images/ui/radio2.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/webapp/images/ui/radio2_402x.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/webapp/images/ui/radio_402x.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/webapp/images/ui/switch-off.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/webapp/images/ui/switch-off_402x.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/webapp/images/ui/switch-on.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/webapp/images/ui/switch-on_402x.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/webapp/images/ui/tick.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/webapp/images/ui/tick_402x.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/webapp/js/FileSaver.min.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/webapp/js/MicroMessenger.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/webapp/js/ass.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/webapp/js/bootstrap.min.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/webapp/js/conference.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/webapp/js/jquery-2.1.1.min.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/webapp/js/jquery-2.1.4.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/webapp/js/jquery-weui.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/webapp/js/mustache.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/webapp/js/notice.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/webapp/js/posttest.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/webapp/js/project.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/webapp/js/swiper.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/webapp/mission/detail.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/webapp/mission/index.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/webapp/mission/index.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/webapp/mission/update.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/webapp/mission/weeklyDetail.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/webapp/notice/edit.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/webapp/notice/index.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/webapp/notice/index.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/webapp/project/detail.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/webapp/project/index.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/webapp/project/index.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/webapp/project/update.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/webapp/scripts/bxslider.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/webapp/scripts/colorbox.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/webapp/scripts/contact-yuan.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/webapp/scripts/contact.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/webapp/scripts/content.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/webapp/scripts/custom.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/webapp/scripts/date.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/webapp/scripts/framework.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/webapp/scripts/hammer.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/webapp/scripts/initnotice.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/webapp/scripts/iscroll.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/webapp/scripts/jquery-ui-min.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/webapp/scripts/jquery.min.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/webapp/scripts/jquery.swipebox.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/webapp/scripts/mustache.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/webapp/scripts/notice.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/webapp/scripts/retina.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/webapp/scripts/subscribe.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/webapp/weekly/detail.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/webapp/weekly/edit.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/webapp/weekly/index.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/webapp/weekly/studentIndex.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/webapp/weekly/teacherIndex.html" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/../rjwl-2.1test.war" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/../需求分析.pdf" beforeDir="false" />
     </list>
@@ -500,8 +42,8 @@
           <file pinned="false" current-in-tab="false">
             <entry file="file://$PROJECT_DIR$/models/UserModel.go">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="649">
-                  <caret line="77" column="45" lean-forward="true" selection-start-line="77" selection-start-column="45" selection-end-line="77" selection-end-column="45" />
+                <state relative-caret-position="850">
+                  <caret line="65" column="28" lean-forward="true" selection-start-line="65" selection-start-column="28" selection-end-line="65" selection-end-column="28" />
                 </state>
               </provider>
             </entry>
@@ -515,10 +57,10 @@
               </provider>
             </entry>
           </file>
-          <file pinned="false" current-in-tab="true">
+          <file pinned="false" current-in-tab="false">
             <entry file="file://$PROJECT_DIR$/service/WeChatCoreService.go">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="579">
+                <state relative-caret-position="789">
                   <caret line="62" column="1" lean-forward="true" selection-start-line="62" selection-start-column="1" selection-end-line="62" selection-end-column="1" />
                 </state>
               </provider>
@@ -529,6 +71,15 @@
               <provider selected="true" editor-type-id="text-editor">
                 <state relative-caret-position="286">
                   <caret line="10" column="4" selection-start-line="10" selection-start-column="4" selection-end-line="10" selection-end-column="4" />
+                </state>
+              </provider>
+            </entry>
+          </file>
+          <file pinned="false" current-in-tab="true">
+            <entry file="file://$PROJECT_DIR$/config/config.toml">
+              <provider selected="true" editor-type-id="text-editor">
+                <state relative-caret-position="292">
+                  <caret line="15" column="7" lean-forward="true" selection-start-line="15" selection-start-column="7" selection-end-line="15" selection-end-column="7" />
                 </state>
               </provider>
             </entry>
@@ -590,10 +141,22 @@
             </entry>
           </file>
           <file pinned="false" current-in-tab="false">
-            <entry file="file://D:/GoEnvironment/src/github.com/chanxuehong/wechat/mp/core/access_token_server.go">
+            <entry file="file://$PROJECT_DIR$/config/config.go">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="369">
-                  <caret line="49" column="57" lean-forward="true" selection-start-line="49" selection-start-column="57" selection-end-line="49" selection-end-column="57" />
+                <state relative-caret-position="234">
+                  <caret line="9" column="1" lean-forward="true" selection-start-line="9" selection-start-column="1" selection-end-line="9" selection-end-column="1" />
+                  <folding>
+                    <element signature="e#16#65#0" expanded="true" />
+                  </folding>
+                </state>
+              </provider>
+            </entry>
+          </file>
+          <file pinned="false" current-in-tab="true">
+            <entry file="file://$PROJECT_DIR$/database/database.go">
+              <provider selected="true" editor-type-id="text-editor">
+                <state relative-caret-position="192">
+                  <caret line="20" column="53" selection-start-line="20" selection-start-column="53" selection-end-line="20" selection-end-column="53" />
                 </state>
               </provider>
             </entry>
@@ -616,7 +179,7 @@
               </provider>
             </entry>
           </file>
-          <file pinned="false" current-in-tab="true">
+          <file pinned="false" current-in-tab="false">
             <entry file="file://D:/GoEnvironment/src/github.com/chanxuehong/wechat/mp/user/user.go">
               <provider selected="true" editor-type-id="text-editor">
                 <state relative-caret-position="210">
@@ -668,8 +231,6 @@
         <option value="$PROJECT_DIR$/config/config.go" />
         <option value="$PROJECT_DIR$/service/README.md" />
         <option value="$PROJECT_DIR$/model/permission.go" />
-        <option value="$PROJECT_DIR$/config/config.toml" />
-        <option value="$PROJECT_DIR$/database/database.go" />
         <option value="$PROJECT_DIR$/controller/anon/WechatCtrl.go" />
         <option value="$PROJECT_DIR$/model/users.go" />
         <option value="$PROJECT_DIR$/model/roles.go" />
@@ -679,6 +240,8 @@
         <option value="$PROJECT_DIR$/models/UserModel.go" />
         <option value="$PROJECT_DIR$/service/UserService.go" />
         <option value="$PROJECT_DIR$/service/WeChatCoreService.go" />
+        <option value="$PROJECT_DIR$/database/database.go" />
+        <option value="$PROJECT_DIR$/config/config.toml" />
       </list>
     </option>
   </component>
@@ -717,6 +280,11 @@
               <item name="HMI-IoT" type="462c0819:PsiDirectoryNode" />
               <item name="controller" type="462c0819:PsiDirectoryNode" />
               <item name="anon" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="HMI-IoT" type="b2602c69:ProjectViewProjectNode" />
+              <item name="HMI-IoT" type="462c0819:PsiDirectoryNode" />
+              <item name="database" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="HMI-IoT" type="b2602c69:ProjectViewProjectNode" />
@@ -872,7 +440,7 @@
     <frame x="-7" y="-7" width="2062" height="878" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" sideWeight="0.49893844" visible="true" weight="0.19057171" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" sideWeight="0.49893844" visible="true" weight="0.19057171" />
       <window_info id="Favorites" order="1" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" weight="0.32905984" />
@@ -884,14 +452,14 @@
       <window_info anchor="bottom" id="Docker" order="7" show_stripe_button="false" />
       <window_info anchor="bottom" id="Database Changes" order="8" />
       <window_info anchor="bottom" id="Version Control" order="9" sideWeight="0.49969715" weight="0.32957393" />
-      <window_info anchor="bottom" id="Terminal" order="10" sideWeight="0.49969715" weight="0.4116809" />
+      <window_info anchor="bottom" id="Terminal" order="10" sideWeight="0.49969715" visible="true" weight="0.4116809" />
       <window_info anchor="bottom" id="Event Log" order="11" sideWeight="0.50030285" side_tool="true" weight="0.36215538" />
       <window_info anchor="bottom" id="Messages" order="12" weight="0.32957393" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
       <window_info anchor="right" id="Database" order="3" />
-      <window_info active="true" anchor="right" id="Structure" order="4" sideWeight="0.50106156" visible="true" weight="0.19608827" />
+      <window_info anchor="right" id="Structure" order="4" sideWeight="0.50106156" visible="true" weight="0.19608827" />
     </layout>
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -1120,13 +688,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/config/config.toml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="130">
-          <caret line="5" column="32" selection-start-line="5" selection-start-column="32" selection-end-line="5" selection-end-column="32" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/database/base.go">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="133">
@@ -1137,27 +698,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/database/database.go">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="361">
-          <caret line="29" column="21" selection-start-line="29" selection-start-column="21" selection-end-line="29" selection-end-column="21" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://D:/GoEnvironment/src/github.com/jinzhu/gorm/main.go">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="1134">
           <caret line="413" column="97" lean-forward="true" selection-start-line="413" selection-start-column="51" selection-end-line="413" selection-end-column="97" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/config/config.go">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="156">
-          <caret line="9" column="1" lean-forward="true" selection-start-line="9" selection-start-column="1" selection-end-line="9" selection-end-column="1" />
-          <folding>
-            <element signature="e#16#65#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -1221,24 +765,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/controller/anon/WechatCtrl.go">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="338">
-          <caret line="15" selection-start-line="15" selection-end-line="15" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://D:/GoEnvironment/src/github.com/chanxuehong/wechat/mp/core/mixed_msg.go">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="286">
           <caret line="10" column="4" selection-start-line="10" selection-start-column="4" selection-end-line="10" selection-end-column="4" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/models/UserModel.go">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="649">
-          <caret line="77" column="45" lean-forward="true" selection-start-line="77" selection-start-column="45" selection-end-line="77" selection-end-column="45" />
         </state>
       </provider>
     </entry>
@@ -1262,10 +792,48 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/models/UserModel.go">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="850">
+          <caret line="65" column="28" lean-forward="true" selection-start-line="65" selection-start-column="28" selection-end-line="65" selection-end-column="28" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/config/config.go">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="234">
+          <caret line="9" column="1" lean-forward="true" selection-start-line="9" selection-start-column="1" selection-end-line="9" selection-end-column="1" />
+          <folding>
+            <element signature="e#16#65#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/controller/anon/WechatCtrl.go">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="338">
+          <caret line="15" selection-start-line="15" selection-end-line="15" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/database/database.go">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="192">
+          <caret line="20" column="53" selection-start-line="20" selection-start-column="53" selection-end-line="20" selection-end-column="53" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/service/WeChatCoreService.go">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="579">
+        <state relative-caret-position="789">
           <caret line="62" column="1" lean-forward="true" selection-start-line="62" selection-start-column="1" selection-end-line="62" selection-end-column="1" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/config/config.toml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="292">
+          <caret line="15" column="7" lean-forward="true" selection-start-line="15" selection-start-column="7" selection-end-line="15" selection-end-column="7" />
         </state>
       </provider>
     </entry>
