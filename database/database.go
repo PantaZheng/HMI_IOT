@@ -5,7 +5,6 @@ import (
 	"fmt"
 	"github.com/jinzhu/gorm"
 	_ "github.com/jinzhu/gorm/dialects/mysql"
-	_ "github.com/jinzhu/gorm/dialects/sqlite"
 	"github.com/pelletier/go-toml"
 )
 
@@ -13,6 +12,11 @@ import (
 *设置数据库连接
 *@param diver string
  */
+
+var (
+	DB = New()
+)
+
 func New() *gorm.DB {
 	driver := config.Conf.Get("database.driver").(string)
 	configTree := config.Conf.Get(driver).(*toml.Tree)
