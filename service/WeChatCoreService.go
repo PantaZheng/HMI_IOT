@@ -60,6 +60,7 @@ func SubscribeEventHandler(ctx *core.Context){
 	if err:=ctx.RawResponse(resp);err!=nil{
 		fmt.Printf("%v",err)
 	}
+
 }
 
 
@@ -74,7 +75,7 @@ func WechatServer(ctx iris.Context) {
 	mux.DefaultEventHandleFunc(DefaultEventHandler)
 	mux.MsgHandleFunc(request.MsgTypeText, TextMsgHandler)
 	mux.EventHandleFunc(menu.EventTypeClick, MenuClickEventHandler)
-
+	mux.EventHandleFunc(request.EventTypeSubscribe,SubscribeEventHandler)
 	msgHandler := mux
 
 	msgServer := core.NewServer(wechatOriId, wechatAppId, wechatToken, wechatEncodedAESKey,msgHandler, nil)
