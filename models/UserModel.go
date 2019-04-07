@@ -45,8 +45,11 @@ type StudentInfo struct{
 }
 
 func CheckTableUser() {
-	if errCreate := database.DB.Create(User{});errCreate!=nil{
-			fmt.Printf("createTable:%v", errCreate)
+	if !database.DB.HasTable(User{}){
+		database.DB.CreateTable(User{})
+		fmt.Printf("新建用户表")
+	}else{
+		fmt.Printf("用户表已存在")
 	}
 }
 
