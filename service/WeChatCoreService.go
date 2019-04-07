@@ -89,11 +89,21 @@ func wechatClient() *core.Client{
 
 func defaultMenu(clt *core.Client){
 	btnProjectMission:=menu.Button{}
-	btnProjectMission.SetAsClickButton("Project/Mission","www.baidu.com")
-	buttonsDefault:=make([]menu.Button,1)
-	buttonsDefault[0]=btnProjectMission
+	btnProjectMission.SetAsClickButton("项目/任务","ProjectMission")
+	btnEnroll:=menu.Button{}
+	btnEnroll.SetAsViewButton("登记","101.132.125.102:")
+	btnWeekly:=menu.Button{}
+	btnWeekly.SetAsClickButton("周报","Weekly")
+	buttonsSub :=make([]menu.Button,2)
+	buttonsSub[0]=btnEnroll
+	buttonsSub[1]=btnWeekly
+	btnPerson:=menu.Button{}
+	btnPerson.SetAsSubMenuButton("个人信息", buttonsSub)
+	defaultButtons:= make([]menu.Button,2)
+	defaultButtons[0]=btnProjectMission
+	defaultButtons[1]=btnPerson
 	defaultMenu:=menu.Menu{}
-	defaultMenu.Buttons=buttonsDefault
+	defaultMenu.Buttons= defaultButtons
 	err:=menu.Create(clt,&defaultMenu)
 	if err!=nil{
 		fmt.Printf("%v",err)

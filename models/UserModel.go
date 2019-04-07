@@ -44,6 +44,14 @@ type StudentInfo struct{
 	Telephone string `json:"tel"`
 }
 
+func CheckTableUser() {
+	if err:= database.DB.HasTable(User{});err{
+		if errCreate := database.DB.Create(User{});errCreate!=nil{
+			fmt.Printf("createTable:%v", errCreate)
+		}
+	}
+}
+
 //检查是否已经存在用户
 func CheckUserByWeChatID(weChatOpenID string) bool {
 	usr := new(User)

@@ -7,6 +7,7 @@ import (
 
 //用户关注事件
 func SubscribeInit(weChatinfo *user.UserInfo) string {
+	models.CheckTableUser()
 	if models.CheckUserByWeChatID(weChatinfo.OpenId)==false {
 		return "欢迎老用户重新关注"
 	}else{

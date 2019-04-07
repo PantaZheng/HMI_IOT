@@ -2,6 +2,6 @@ package controller
 
 import "github.com/kataras/iris"
 
-func register(ctx iris.Context) {
+func Register(ctx iris.Context) {
 	
 }

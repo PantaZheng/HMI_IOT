@@ -11,10 +11,12 @@ func newApp() (api *iris.Application){
 	api = iris.New()
 	api.Use(logger.New())
 
+	api.RegisterView(iris.HTML("./view","html"))
 	api.PartyFunc("/anon",func (anon router.Party){
-		anon.PartyFunc("/wechat", func(wechat router.Party) {
-			wechat.Any("/", controller.Wechat)
+		anon.PartyFunc("/wechat", func(weChat router.Party) {
+			weChat.Any("/", controller.WeChat)
 		})
+		anon.Get("/notice",controller.Enroll)
 		//anon.PartyFunc("/user",func(user router.Party){
 		//	user.Post("/",)
 		//})
