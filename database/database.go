@@ -2,6 +2,7 @@ package database
 
 import (
 	"../config"
+	"../models"
 	"fmt"
 	"github.com/jinzhu/gorm"
 	_ "github.com/jinzhu/gorm/dialects/mysql"
@@ -32,7 +33,11 @@ func New() *gorm.DB {
 	if err != nil {
 		panic(fmt.Sprintf("No error should happen when connecting to  database, but got err=%+v", err))
 	}
-
+	if !DB.HasTable(models.User{}){
+		if errCreate:=DB.CreateTable(models.User{});errCreate!=nil{
+			panic(fmt.Sprintf("DB createTable err=%+v", errCreate))
+		}
+	}
 	return DB
 }
 
