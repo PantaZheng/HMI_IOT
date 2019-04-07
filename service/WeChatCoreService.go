@@ -20,6 +20,7 @@ var (
 	wechatAppSecret = wechatConfigTree.Get("AppSecret").(string)
 	wechatToken = wechatConfigTree.Get("Token").(string)
 	wechatEncodedAESKey = wechatConfigTree.Get("EncodedAESKey").(string)
+	defaultClt = wechatClient()
 )
 
 func TextMsgHandler(ctx *core.Context) {
@@ -29,10 +30,6 @@ func TextMsgHandler(ctx *core.Context) {
 	resp := response.NewText(msg.FromUserName, msg.ToUserName, msg.CreateTime, msg.Content)
 	ctx.RawResponse(resp) // 明文回复
 
-	clt := wechatClient()
-	if msg.Content =="menu create"{
-		defaultMenu(clt)
-	}
 	//ctx.AESResponse(resp, 0, "", nil) // aes密文回复
 }
 
@@ -87,7 +84,7 @@ func wechatClient() *core.Client{
 	return core.NewClient(accessTokenTokenServer,nil)
 }
 
-func defaultMenu(clt *core.Client){
+func DefaultMenu(){
 	btnProjectMission:=menu.Button{}
 	btnProjectMission.SetAsClickButton("项目/任务","ProjectMission")
 	btnEnroll:=menu.Button{}
@@ -104,8 +101,9 @@ func defaultMenu(clt *core.Client){
 	defaultButtons[1]=btnPerson
 	defaultMenu:=menu.Menu{}
 	defaultMenu.Buttons= defaultButtons
-	err:=menu.Create(clt,&defaultMenu)
+	err:=menu.Create(defaultClt,&defaultMenu)
 	if err!=nil{
 		fmt.Printf("%v",err)
 	}
 }
+

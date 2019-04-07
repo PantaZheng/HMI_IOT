@@ -9,8 +9,8 @@ import (
 
 func init(){
 	controller.Check()
+	controller.DefauleMenu()
 }
-
 
 func newApp() (api *iris.Application){
 	api = iris.New()
