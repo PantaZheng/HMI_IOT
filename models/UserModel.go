@@ -45,17 +45,14 @@ type StudentInfo struct{
 }
 
 func CheckTableUser() {
-	if err:= database.DB.HasTable(User{});err{
-		if errCreate := database.DB.Create(User{});errCreate!=nil{
+	if errCreate := database.DB.Create(User{});errCreate!=nil{
 			fmt.Printf("createTable:%v", errCreate)
-		}
 	}
 }
 
 //检查是否已经存在用户
 func CheckUserByWeChatID(weChatOpenID string) bool {
 	usr := new(User)
-	CheckTableUser()
 	usr.WechatOpenID=weChatOpenID
 	return database.DB.First(usr).RecordNotFound()
 }
@@ -81,11 +78,11 @@ func GetUserRoleByWechatID(weChatOpenID string) string{
 }
 
 //新关注用户创建
-func CreateUser(weChatinfo *user.UserInfo){
+func CreateUser(weChatInfo *user.UserInfo){
 	anonUser := new(User)
 	anonUser.Role = "unEnrolled"
-	anonUser.WechatOpenID = weChatinfo.OpenId
-	anonUser.WechatNickname = weChatinfo.Nickname
+	anonUser.WechatOpenID = weChatInfo.OpenId
+	anonUser.WechatNickname = weChatInfo.Nickname
 
 	if err := database.DB.Create(anonUser).Error; err != nil {
 		fmt.Printf("CreateUserErr:%s", err)
