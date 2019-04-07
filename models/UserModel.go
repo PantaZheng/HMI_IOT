@@ -19,7 +19,7 @@ type User struct {
 	Level string `gorm:"VARCHAR(191)"`
 
 	WechatAccount string `gorm:"unique;VARCHAR(191)"`
-	WechatNickname string `gorm:"not null VARCHAR(255)"`
+	//WechatNickname string `gorm:"not null VARCHAR(255)"`
 
 	QQ string `gorm:"unique;VARCHAR(191)"`
 	Telephone string `gorm:"unique;VARCHAR(191)"`
@@ -85,7 +85,7 @@ func CreateUser(weChatInfo *user.UserInfo){
 	anonUser := new(User)
 	anonUser.Role = "unEnrolled"
 	anonUser.WechatOpenID = weChatInfo.OpenId
-	anonUser.WechatNickname = weChatInfo.Nickname
+	//anonUser.WechatNickname = weChatInfo.Nickname
 
 	if err := database.DB.Create(anonUser).Error; err != nil {
 		fmt.Printf("CreateUserErr:%s", err)
