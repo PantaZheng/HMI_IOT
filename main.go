@@ -1,11 +1,16 @@
 package main
 
 import (
-	"./controller/anon"
+	"./controller"
 	"github.com/kataras/iris"
 	"github.com/kataras/iris/core/router"
 	"github.com/kataras/iris/middleware/logger"
 )
+
+func init(){
+	controller.Check()
+}
+
 
 func newApp() (api *iris.Application){
 	api = iris.New()

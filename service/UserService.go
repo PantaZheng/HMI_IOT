@@ -5,10 +5,13 @@ import (
 	"github.com/chanxuehong/wechat/mp/user"
 )
 
+func CheckTableUser(){
+	models.CheckTableUser()
+}
+
 //用户关注事件
 func SubscribeInit(weChatinfo *user.UserInfo) string {
-	models.CheckTableUser()
-	if models.CheckUserByWeChatID(weChatinfo.OpenId)==false {
+	if models.CheckUserByWeChatID(weChatinfo.OpenId) {
 		return "欢迎老用户重新关注"
 	}else{
 		models.CreateUser(weChatinfo)

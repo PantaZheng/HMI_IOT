@@ -57,7 +57,7 @@ func CheckTableUser() {
 func CheckUserByWeChatID(weChatOpenID string) bool {
 	usr := new(User)
 	usr.WechatOpenID=weChatOpenID
-	return database.DB.First(usr).RecordNotFound()
+	return !database.DB.First(usr).RecordNotFound()
 }
 
 //根据WeChatID获取用户

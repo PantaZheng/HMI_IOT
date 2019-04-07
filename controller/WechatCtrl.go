@@ -1,7 +1,7 @@
 package controller
 
 import (
-	"../../service"
+	"../service"
 	"github.com/kataras/iris"
 )
 
