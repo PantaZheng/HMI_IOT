@@ -53,12 +53,7 @@ func CheckTableUser() {
 	}
 }
 
-//检查是否已经存在用户
-func CheckUserByWeChatID(weChatOpenID string) bool {
-	usr := new(User)
-	usr.WechatOpenID=weChatOpenID
-	return !database.DB.First(usr).RecordNotFound()
-}
+
 
 //根据WeChatID获取用户
 func GetUserByWechatID(weChatOpenID string) (existedUser *User) {
@@ -68,6 +63,13 @@ func GetUserByWechatID(weChatOpenID string) (existedUser *User) {
 		fmt.Printf("GetUserByIdErr:%s", err)
 	}
 	return
+}
+
+//检查是否已经存在用户
+func CheckUserByWeChatID(weChatOpenID string) bool {
+	usr := new(User)
+	usr.WechatOpenID=weChatOpenID
+	return !database.DB.First(usr).RecordNotFound()
 }
 
 //根据WeChatID获取用户身份

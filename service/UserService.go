@@ -12,11 +12,13 @@ func CheckTableUser(){
 //用户关注事件
 func SubscribeInit(weChatinfo *user.UserInfo) string {
 	if models.CheckUserByWeChatID(weChatinfo.OpenId) {
-		return "欢迎老用户重新关注"
+		if models.GetUserRoleByWechatID(weChatinfo.OpenId)!="unEnrolled"{
+			return "欢迎已登记用户"
+		}
 	}else{
 		models.CreateUser(weChatinfo)
-		return "欢迎新用户关注，请先注册个人信息，由于微信刷新机制，请先取消关注再重新关注以获得专属菜单"
 	}
+	return "欢迎关注，请先登记个人信息"
 }
 
 //教师信息注册

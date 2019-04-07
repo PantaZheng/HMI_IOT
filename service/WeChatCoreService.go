@@ -35,16 +35,17 @@ func TextMsgHandler(ctx *core.Context) {
 
 func DefaultMsgHandler(ctx *core.Context) {
 	log.Printf("收到消息:\n%s\n", ctx.MsgPlaintext)
-	ctx.NoneResponse()
+	_=ctx.NoneResponse()
 }
 
 func MenuClickEventHandler(ctx *core.Context) {
 	log.Printf("收到菜单 click 事件:\n%s\n", ctx.MsgPlaintext)
 
 	event := menu.GetClickEvent(ctx.MixedMsg)
-	resp := response.NewText(event.FromUserName, event.ToUserName, event.CreateTime, "收到 click 类型的事件")
-	//ctx.RawResponse(resp) // 明文回复
-	ctx.AESResponse(resp, 0, "", nil) // aes密文回复
+	resp := response.NewText(event.FromUserName, event.ToUserName, event.CreateTime, "请先登记个人信息")
+	if err:=ctx.RawResponse(resp);err!=nil{
+		fmt.Printf("MenuClickEventHandlerERR:%v", err)
+	}
 }
 
 func SubscribeEventHandler(ctx *core.Context){
@@ -55,7 +56,7 @@ func SubscribeEventHandler(ctx *core.Context){
 	info,_:=user.Get(clt,event.FromUserName,"")
 	resp := response.NewText(event.FromUserName,event.ToUserName,event.CreateTime,SubscribeInit(info))
 	if err:=ctx.RawResponse(resp);err!=nil{
-		fmt.Printf("%v",err)
+		fmt.Printf("SubscribeEventHandlerERR:%v",err)
 	}
 
 }
@@ -88,7 +89,7 @@ func DefaultMenu(){
 	btnProjectMission:=menu.Button{}
 	btnProjectMission.SetAsClickButton("项目/任务","ProjectMission")
 	btnEnroll:=menu.Button{}
-	btnEnroll.SetAsClickButton("登记","101.132.125.102:")
+	btnEnroll.SetAsClickButton("登记","Enroll")
 	btnWeekly:=menu.Button{}
 	btnWeekly.SetAsClickButton("周报","Weekly")
 	buttonsSub :=make([]menu.Button,2)
