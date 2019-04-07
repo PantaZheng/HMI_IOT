@@ -19,7 +19,7 @@ type User struct {
 	Level string `gorm:"VARCHAR(191)"`
 
 	WechatAccount string `gorm:"unique;VARCHAR(191)"`
-	WechatNickname string `gorm:"not null VARCHAR(191)"`
+	WechatNickname string `gorm:"not null VARCHAR(255)"`
 
 	QQ string `gorm:"unique;VARCHAR(191)"`
 	Telephone string `gorm:"unique;VARCHAR(191)"`
