@@ -10,6 +10,7 @@ import (
 type User struct {
 	gorm.Model
 
+	Id uint `gorm:"primary_key"`
 	WeChatOpenID string `gorm:"unique;VARCHAR(191)"`
 	Name         string `gorm:"not null VARCHAR(191)"`
 	Sex          string `gorm:"not null VARCHAR"`
@@ -46,6 +47,11 @@ type StudentInfo struct{
 	Supervisor string `json:"supervisor"`
 	School string `json:"school"`
 	Telephone string `json:"telephone"`
+}
+
+type MemberInfo struct {
+	ID uint `json:"id"`
+	Name string `json:"name"`
 }
 
 func CheckTableUser() {
@@ -92,12 +98,13 @@ func GetUserRoleByWeChatID(weChatOpenID string) string{
 }
 
 //根据Role获得成员信息
-func GetAllMembers(role string) ( memberList [] string) {
+func GetAllMembers(role string) ( memberList [] MemberInfo) {
 	var users []User
 	database.DB.Model(&User{}).Where(&User{Role:role}).Find(&users)
-	memberList=make([]string,len(users))
+	memberList=make([] MemberInfo,len(users))
 	for i,v := range users{
-		memberList[i]= v.Name
+		memberList[i].ID= v.ID
+		memberList[i].Name= v.Name
 	}
 	return memberList
 }

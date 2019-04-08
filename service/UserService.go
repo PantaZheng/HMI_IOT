@@ -13,12 +13,17 @@ func CheckTableUser(){
 }
 
 func GetStudents(ctx iris.Context) {
-	memberList=models.GetAllMembers("student")
-	ctx.JSON()
+	memberList:=models.GetAllMembers("student")
+	if _, err :=ctx.JSON(&memberList);err!=nil {
+		fmt.Printf("GetStudents:%v",err)
+	}
 }
 
-func GetTeachers(ctx iris.Context)
-	memberList=models.GetAllMembers("teacher")
+func GetTeachers(ctx iris.Context){
+	memberList:=models.GetAllMembers("teacher")
+	if _, err :=ctx.JSON(&memberList);err!=nil {
+		fmt.Printf("GetTeachers:%v",err)
+	}
 }
 
 //用户初始化
