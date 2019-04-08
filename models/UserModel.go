@@ -10,7 +10,6 @@ import (
 type User struct {
 	gorm.Model
 
-	Id uint `gorm:"primary_key"`
 	WeChatOpenID string `gorm:"unique;VARCHAR(191)"`
 	Name         string `gorm:"not null VARCHAR(191)"`
 	Sex          string `gorm:"not null VARCHAR"`
@@ -50,7 +49,7 @@ type StudentInfo struct{
 }
 
 type MemberInfo struct {
-	ID uint `json:"id"`
+	Id uint `json:"id"`
 	Name string `json:"name"`
 }
 
@@ -103,7 +102,7 @@ func GetAllMembers(role string) ( memberList [] MemberInfo) {
 	database.DB.Model(&User{}).Where(&User{Role:role}).Find(&users)
 	memberList=make([] MemberInfo,len(users))
 	for i,v := range users{
-		memberList[i].ID= v.ID
+		memberList[i].Id= v.ID
 		memberList[i].Name= v.Name
 	}
 	return memberList
