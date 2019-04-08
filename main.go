@@ -16,7 +16,7 @@ func newApp() (api *iris.Application){
 	api = iris.New()
 	api.Use(logger.New())
 
-	api.RegisterView(iris.HTML("./view","html"))
+	api.RegisterView(iris.HTML("./view",".html"))
 	api.PartyFunc("/anon",func (anon router.Party){
 		anon.PartyFunc("/wechat", func(weChat router.Party) {
 			weChat.Any("/", controller.WeChat)

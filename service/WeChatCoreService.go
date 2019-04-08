@@ -39,8 +39,6 @@ func DefaultMsgHandler(ctx *core.Context) {
 }
 
 func MenuClickEventHandler(ctx *core.Context) {
-	log.Printf("收到菜单 click 事件:\n%s\n", ctx.MsgPlaintext)
-
 	event := menu.GetClickEvent(ctx.MixedMsg)
 	resp := response.NewText(event.FromUserName, event.ToUserName, event.CreateTime, "请先登记个人信息")
 	if err:=ctx.RawResponse(resp);err!=nil{
@@ -49,8 +47,6 @@ func MenuClickEventHandler(ctx *core.Context) {
 }
 
 func SubscribeEventHandler(ctx *core.Context){
-	log.Printf("收到订阅:\n%s\n", ctx.MsgPlaintext)
-
 	event := request.GetSubscribeEvent(ctx.MixedMsg)
 	clt := wechatClient()
 	info,_:=user.Get(clt,event.FromUserName,"")
