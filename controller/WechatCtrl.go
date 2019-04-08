@@ -13,7 +13,7 @@ func WeChat(ctx iris.Context) {
 	service.WechatServer(ctx)
 }
 
-func DefauleMenu(){
+func DefaultMenu(){
 	service.DefaultMenu()
 }
 

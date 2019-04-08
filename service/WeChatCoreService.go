@@ -54,7 +54,7 @@ func SubscribeEventHandler(ctx *core.Context){
 	event := request.GetSubscribeEvent(ctx.MixedMsg)
 	clt := wechatClient()
 	info,_:=user.Get(clt,event.FromUserName,"")
-	resp := response.NewText(event.FromUserName,event.ToUserName,event.CreateTime,SubscribeInit(info))
+	resp := response.NewText(event.FromUserName,event.ToUserName,event.CreateTime, UserInit(info))
 	if err:=ctx.RawResponse(resp);err!=nil{
 		fmt.Printf("SubscribeEventHandlerERR:%v",err)
 	}
@@ -108,3 +108,6 @@ func DefaultMenu(){
 	}
 }
 
+func EnrollTeacher(){
+	
+}

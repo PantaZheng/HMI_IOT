@@ -9,7 +9,7 @@ import (
 
 func init(){
 	controller.Check()
-	controller.DefauleMenu()
+	controller.DefaultMenu()
 }
 
 func newApp() (api *iris.Application){
@@ -21,10 +21,14 @@ func newApp() (api *iris.Application){
 		anon.PartyFunc("/wechat", func(weChat router.Party) {
 			weChat.Any("/", controller.WeChat)
 		})
-		anon.Get("/notice",controller.Enroll)
-		//anon.PartyFunc("/user",func(user router.Party){
-		//	user.Post("/",)
-		//})
+	})
+	api.PartyFunc("/teacher",func(teacher router.Party){
+		teacher.Post("/enroll",controller.EnrollTeacher)
+		teacher.Get("/list",controller.ListTeacher)
+	})
+	api.PartyFunc("/student",func(student router.Party){
+		student.Post("/enroll",controller.EnrollStudent)
+		student.Get("/list",controller.ListStudent)
 	})
 
 	return

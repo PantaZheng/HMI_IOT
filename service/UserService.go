@@ -2,33 +2,49 @@ package service
 
 import (
 	"../models"
+	"fmt"
 	"github.com/chanxuehong/wechat/mp/user"
+	"github.com/kataras/iris"
 )
 
 func CheckTableUser(){
 	models.CheckTableUser()
+	models.MakeTestData()
 }
 
-//用户关注事件
-func SubscribeInit(weChatinfo *user.UserInfo) string {
-	if models.CheckUserByWeChatID(weChatinfo.OpenId) {
-		if models.GetUserRoleByWechatID(weChatinfo.OpenId)!="unEnrolled"{
-			return "欢迎已登记用户"
-		}
-	}else{
-		models.CreateUser(weChatinfo)
+func GetStudents(ctx iris.Context) {
+	memberList=models.GetAllMembers("student")
+	ctx.JSON()
+}
+
+func GetTeachers(ctx iris.Context)
+	memberList=models.GetAllMembers("teacher")
+}
+
+//用户初始化
+func UserInit(weChatInfo *user.UserInfo) string {
+		models.CreateUser(weChatInfo)
+	fmt.Printf(weChatInfo.OpenId+"用户关注")
+	return "欢迎关注,新用户请进行登记"
+}
+
+//教师信息更新
+func UpdateTeacher(ctx iris.Context) {
+	teacherInfo:=&models.TeacherInfo{}
+	if err:=ctx.ReadJSON(teacherInfo);err!=nil{
+		panic(err.Error())
 	}
-	return "欢迎关注，请先登记个人信息"
+	models.EnrollTeacher(teacherInfo)
+	fmt.Printf(teacherInfo.Name+"教师信息更新")
 }
 
-//教师信息注册
-func UpdateTeacher(weChatOpenID string, teacherInfo *models.TeacherInfo) (msg string){
-	models.EnrollTeacher(weChatOpenID,teacherInfo)
-	return "欢迎教师"+teacherInfo.Name
+//学生信息更新
+func UpdateStudent(ctx iris.Context) {
+	studentInfo:=&models.StudentInfo{}
+	if err:=ctx.ReadJSON(studentInfo);err!=nil{
+		panic(err.Error())
+	}
+	models.EnrollStudent(studentInfo)
+	fmt.Printf(studentInfo.Name+"同学信息更新")
 }
 
-//学生信息注册
-func UpdateStudent(weChatOpenID string, studentInfo *models.StudentInfo) (msg string){
-	models.EnrollStudent(weChatOpenID,studentInfo)
-	return "欢迎同学"+studentInfo.Name
-}
