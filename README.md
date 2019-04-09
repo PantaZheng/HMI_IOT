@@ -16,6 +16,14 @@
 
 ### 拉取名单
 
+- 默认测试数据
+    1. `WeChatOpenID:"student1",Name:"student1",Role:"student",Supervisor:"teacher1"`
+    1. `WeChatOpenID:"student2",Name:"student2",Role:"student",Supervisor:"teacher1"`
+    1. `WeChatOpenID:"student3",Name:"student3",Role:"student",Supervisor:"teacher2"`
+    1. `WeChatOpenID:"teacher1",Name:"戴国骏",Role:"teacher"`
+    1. `WeChatOpenID:"teacher2",Name:"张桦",Role:"teacher"`
+    1. `WeChatOpenID:"teacher_unknown",Name:"其他导师",Role:"teacher"`
+
 - 教师名单
     - get `/teacher/list`
 
