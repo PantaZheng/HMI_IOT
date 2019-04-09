@@ -70,6 +70,9 @@ func DropTableUsers(){
 
 func MakeTestData(){
 	fmt.Printf("测试数据")
+	CreateUser(&user.UserInfo{OpenId:"test1"})
+	CreateUser(&user.UserInfo{OpenId:"test2"})
+	CreateUser(&user.UserInfo{OpenId:"test3"})
 	database.DB.Model(&User{}).Create(
 		&User{WeChatOpenID:"student1",Name:"student1",Role:"student",Supervisor:"teacher1"})
 	database.DB.Model(&User{}).Create(
