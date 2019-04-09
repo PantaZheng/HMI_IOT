@@ -126,7 +126,7 @@ func TeacherMenu(){
 	teacherMenu.Buttons= teacherButtons
 	teacherRule :=menu.MatchRule{}
 	teacherRule.TagId=strconv.Itoa(tagTeacher)
-	err:=menu.Create(defaultClt,&teacherMenu)
+	_,err:=menu.AddConditionalMenu(defaultClt,&teacherMenu)
 	if err!=nil{
 		fmt.Printf("%v",err)
 	}
@@ -144,7 +144,7 @@ func StudentMenu(){
 	studentMenu.Buttons= studentButtons
 	studentRule := menu.MatchRule{}
 	studentRule.TagId=strconv.Itoa(tagStudent)
-	err:=menu.Create(defaultClt,&studentMenu)
+	_,err:=menu.AddConditionalMenu(defaultClt,&studentMenu)
 	if err!=nil{
 		fmt.Printf("%v",err)
 	}
