@@ -160,5 +160,4 @@ func TestMenu(){
 	for _,va:= range u.TagIdList{
 		fmt.Printf("\n"+strconv.Itoa(va))
 	}
-
 }
