@@ -17,6 +17,9 @@
 ### 拉取名单
 
 - 默认测试数据
+    1. `WeChatOpenID:"test1",Role:"unEnrolled"`
+    1. `WeChatOpenID:"test2",Role:"unEnrolled"`
+    1. `WeChatOpenID:"test3",Role:"unEnrolled"`
     1. `WeChatOpenID:"student1",Name:"student1",Role:"student",Supervisor:"teacher1"`
     1. `WeChatOpenID:"student2",Name:"student2",Role:"student",Supervisor:"teacher1"`
     1. `WeChatOpenID:"student3",Name:"student3",Role:"student",Supervisor:"teacher2"`
