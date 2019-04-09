@@ -16,6 +16,17 @@
     - get `/teacher/list`
 
         ```json
+        {
+            {
+                id: uint
+                name: string
+            },
+            {
+                ..
+                ..
+            },
+            ...
+        }
         ```
 
 ### 信息登记
