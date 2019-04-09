@@ -63,6 +63,7 @@ func CheckTableUser() {
 }
 
 func MakeTestData(){
+	fmt.Printf("测试数据")
 	database.DB.Model(&User{}).FirstOrCreate(
 		&User{WeChatOpenID:"student1",Name:"student1",Role:"student",Supervisor:"teacher1"})
 	database.DB.Model(&User{}).FirstOrCreate(
