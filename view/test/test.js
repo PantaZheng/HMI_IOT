@@ -1,11 +1,13 @@
 function Ctrl($scope, $http, $location, $window) {
-    $.showLoading();
-    if ($window.sessionStorage.weChatId == null) {
-        var weChatId = $location.search().weChatId;
-        $window.sessionStorage.weChatId = weChatId;
-    }
+    // $.showLoading();
+    
 	$scope.getId=function(){
-	$.alert($window.sessionStorage.weChatId);
+		if ($window.sessionStorage.weChatId == null) {
+		    var weChatId = $location.search().weChatId;
+		    $window.sessionStorage.weChatId = weChatId;
+		}
+		// alert("jjj")
+		alert($window.sessionStorage.weChatId);	
 	}
 	
 	
