@@ -20,12 +20,12 @@ type User struct {
 	Level        string `gorm:"VARCHAR(191)"`
 	TagID        string `gorm:"VARCHAR(191)"`
 
-	WeChatAccount string `gorm:"unique;VARCHAR(191)"`
+	WeChatAccount string `gorm:"VARCHAR(191)"`
 	//WechatNickname string `gorm:"not null VARCHAR(255)"`
 
-	QQ string `gorm:"unique;VARCHAR(191)"`
-	Telephone string `gorm:"unique;VARCHAR(191)"`
-	Email string `gorm:"unique;VARCHAR(191)"`
+	QQ string `gorm:"VARCHAR(191)"`
+	Telephone string `gorm:"VARCHAR(191)"`
+	Email string `gorm:"VARCHAR(191)"`
 
 	EduStartDate string `gorm:"VARCHAR(191)"`
 	Graduate string `gorm:"VARCHAR(191)"`
