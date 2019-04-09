@@ -54,9 +54,10 @@ type MemberInfo struct {
 }
 
 func CheckTableUser() {
-	if !database.DB.HasTable(User{}){
-		database.DB.CreateTable(User{})
+	if !database.DB.HasTable(&User{}){
+		database.DB.Set("gorm:table_options", "ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=1;").CreateTable(&User{})
 		fmt.Printf("新建用户表\n")
+
 	}else{
 		fmt.Printf("用户表已存在\n")
 	}
