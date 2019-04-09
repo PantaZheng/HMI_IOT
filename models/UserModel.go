@@ -56,23 +56,23 @@ type MemberInfo struct {
 func CheckTableUser() {
 	if !database.DB.HasTable(User{}){
 		database.DB.CreateTable(User{})
-		fmt.Printf("新建用户表")
+		fmt.Printf("新建用户表\n")
 	}else{
-		fmt.Printf("用户表已存在")
+		fmt.Printf("用户表已存在\n")
 	}
 }
 
 func MakeTestData(){
 	fmt.Printf("测试数据")
-	database.DB.Model(&User{}).FirstOrCreate(
+	database.DB.Model(&User{}).Create(
 		&User{WeChatOpenID:"student1",Name:"student1",Role:"student",Supervisor:"teacher1"})
-	database.DB.Model(&User{}).FirstOrCreate(
+	database.DB.Model(&User{}).Create(
 		&User{WeChatOpenID:"student2",Name:"student2",Role:"student",Supervisor:"teacher1"})
-	database.DB.Model(&User{}).FirstOrCreate(
+	database.DB.Model(&User{}).Create(
 		&User{WeChatOpenID:"student3",Name:"student3",Role:"student",Supervisor:"teacher2"})
-	database.DB.Model(&User{}).FirstOrCreate(
+	database.DB.Model(&User{}).Create(
 		&User{WeChatOpenID:"teacher1",Name:"teacher1",Role:"teacher"})
-	database.DB.Model(&User{}).FirstOrCreate(
+	database.DB.Model(&User{}).Create(
 		&User{WeChatOpenID:"teacher2",Name:"teacher2",Role:"teacher"})
 }
 
