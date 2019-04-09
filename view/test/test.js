@@ -5,7 +5,7 @@ function Ctrl($scope, $http, $location, $window) {
         $window.sessionStorage.weChatId = weChatId;
     }
 	$scope.getId=function(){
-	alert($window.sessionStorage.weChatId);
+	$.alert($window.sessionStorage.weChatId);
 	}
 	
 	
