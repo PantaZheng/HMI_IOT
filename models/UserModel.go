@@ -76,9 +76,11 @@ func MakeTestData(){
 	database.DB.Model(&User{}).Create(
 		&User{WeChatOpenID:"student3",Name:"student3",Role:"student",Supervisor:"teacher2"})
 	database.DB.Model(&User{}).Create(
-		&User{WeChatOpenID:"teacher1",Name:"teacher1",Role:"teacher"})
+		&User{WeChatOpenID:"teacher1",Name:"戴国骏",Role:"teacher"})
 	database.DB.Model(&User{}).Create(
-		&User{WeChatOpenID:"teacher2",Name:"teacher2",Role:"teacher"})
+		&User{WeChatOpenID:"teacher2",Name:"张桦",Role:"teacher"})
+	database.DB.Model(&User{}).Create(
+		&User{WeChatOpenID:"teacher_unknown",Name:"其他导师",Role:"teacher"})
 }
 
 //根据WeChatID获取用户
