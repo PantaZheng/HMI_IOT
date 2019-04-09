@@ -94,7 +94,7 @@ func GetTag(){
 		if v.Name == "teacher"{
 			tagTeacher=v.Id
 		}
-		fmt.Printf("id:"+v.Name+"num"+strconv.Itoa(v.UserCount)+"\n")
+		fmt.Printf("\nid:"+strconv.Itoa(v.Id)+"\tname:"+v.Name+"\tnum:"+strconv.Itoa(v.UserCount)+"\n")
 	}
 }
 
@@ -144,6 +144,7 @@ func StudentMenu(){
 	studentMenu.Buttons= studentButtons
 	studentRule := menu.MatchRule{}
 	studentRule.TagId=strconv.Itoa(tagStudent)
+	fmt.Printf("\nstudentRule.TagId:"+studentRule.TagId)
 	err:=menu.Create(defaultClt,&studentMenu)
 	if err!=nil{
 		fmt.Printf("%v",err)
