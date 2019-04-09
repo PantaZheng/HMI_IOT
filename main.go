@@ -32,7 +32,7 @@ func newApp() (api *iris.Application){
 	})
 	api.PartyFunc("/project",func (project router.Party){
 		project.Get("/",func(ctx iris.Context){
-			_ = ctx.View("project/detail.html")
+			_ = ctx.View("project/index.html")
 		})
 	})
 
