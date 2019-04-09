@@ -2,6 +2,10 @@
 
 ## 脑机协同微信公众号
 
+## 域名
+
+`http://bci.renjiwulian.com`
+
 ### API
 
 #### anon匿名
