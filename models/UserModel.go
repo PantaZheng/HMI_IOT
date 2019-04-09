@@ -127,7 +127,7 @@ func CreateUser(weChatInfo *user.UserInfo){
 	anonUser.WeChatOpenID = weChatInfo.OpenId
 	//anonUser.WechatNickname = weChatInfo.Nickname
 
-	database.DB.FirstOrCreate(anonUser)
+	database.DB.Create(anonUser)
 }
 
 //教师登记
