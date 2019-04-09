@@ -11,10 +11,10 @@ type User struct {
 	gorm.Model
 
 	WeChatOpenID string `gorm:"unique;VARCHAR(191)"`
-	Name         string `gorm:"not null VARCHAR(191)"`
+	Name         string `gorm:"not null VARCHAR(255)"`
 	Sex          string `gorm:"not null VARCHAR"`
 	Role         string `gorm:"not null VARCHAR(191)"`
-	School       string `gorm:"not null VARCHAR(191)"`
+	School       string `gorm:"not null VARCHAR(255)"`
 	Supervisor	string `gorm:"not null VARCHAR(191)"`
 	HduId        string `gorm:"VARCHAR(191)"`
 	Level        string `gorm:"VARCHAR(191)"`
