@@ -2,6 +2,7 @@ package main
 
 import (
 	"./controller"
+	"fmt"
 	"github.com/kataras/iris"
 	"github.com/kataras/iris/core/router"
 	"github.com/kataras/iris/middleware/logger"
@@ -16,7 +17,13 @@ func newApp() (api *iris.Application){
 	api = iris.New()
 	api.Use(logger.New())
 
+	api.OnErrorCode(404,func(ctx iris.Context){
+		if _,err:=ctx.Writef("404 not found");err!=nil{
+			fmt.Printf("%v",err)
+		}
+	})
 	api.RegisterView(iris.HTML("./view",".html").Delims("[[","]]"))
+	api.StaticWeb("/","./view")
 	api.PartyFunc("/anon",func (anon router.Party){
 		anon.PartyFunc("/wechat", func(weChat router.Party) {
 			weChat.Any("/", controller.WeChat)
