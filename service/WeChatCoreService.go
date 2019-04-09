@@ -155,4 +155,9 @@ func TestMenu(){
 	for _,v:= range testMenu.Buttons{
 		fmt.Printf("panta测试:"+v.Name+"\n")
 	}
+	u,_:=user.Get(defaultClt,"oPKFh5lM9MA6_Svd39Km-84no7c8","")
+	for _,va:= range u.TagIdList{
+		fmt.Printf("\n"+strconv.Itoa(va))
+	}
+
 }
