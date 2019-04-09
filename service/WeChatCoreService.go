@@ -8,6 +8,7 @@ import (
 	"github.com/chanxuehong/wechat/mp/message/callback/request"
 	"github.com/chanxuehong/wechat/mp/message/callback/response"
 	"github.com/chanxuehong/wechat/mp/user"
+	"github.com/chanxuehong/wechat/mp/user/tag"
 	"github.com/kataras/iris"
 	"github.com/pelletier/go-toml"
 	"log"
@@ -28,15 +29,10 @@ func TextMsgHandler(ctx *core.Context) {
 
 	msg := request.GetText(ctx.MixedMsg)
 	resp := response.NewText(msg.FromUserName, msg.ToUserName, msg.CreateTime, msg.Content)
-	ctx.RawResponse(resp) // 明文回复
-
-	//ctx.AESResponse(resp, 0, "", nil) // aes密文回复
+	_=ctx.RawResponse(resp)
 }
 
-func DefaultMsgHandler(ctx *core.Context) {
-	log.Printf("收到消息:\n%s\n", ctx.MsgPlaintext)
-	_=ctx.NoneResponse()
-}
+
 
 func MenuClickEventHandler(ctx *core.Context) {
 	event := menu.GetClickEvent(ctx.MixedMsg)
@@ -60,7 +56,7 @@ func SubscribeEventHandler(ctx *core.Context){
 
 func DefaultEventHandler(ctx *core.Context) {
 	log.Printf("收到事件:\n%s\n", ctx.MsgPlaintext)
-	ctx.NoneResponse()
+	_=ctx.NoneResponse()
 }
 
 func WechatServer(ctx iris.Context) {
@@ -81,21 +77,23 @@ func wechatClient() *core.Client{
 	return core.NewClient(accessTokenTokenServer,nil)
 }
 
+func CreateTag(){
+	_,_=tag.Create(defaultClt,"student")
+	_,_=tag.Create(defaultClt,"teacher")
+}
+
+//func UpdateTag(){
+//	tag
+//}
+
 func DefaultMenu(){
+	btnRelationShip:=menu.Button{}
+	btnRelationShip.SetAsClickButton("架构","RelationShip")
 	btnProjectMission:=menu.Button{}
 	btnProjectMission.SetAsClickButton("项目/任务","ProjectMission")
 	btnEnroll:=menu.Button{}
-	btnEnroll.SetAsViewButton("登记","http://bci.renjiwulian.com/test")
-	btnWeekly:=menu.Button{}
-	btnWeekly.SetAsClickButton("周报","Weekly")
-	buttonsSub :=make([]menu.Button,2)
-	buttonsSub[0]=btnEnroll
-	buttonsSub[1]=btnWeekly
-	btnPerson:=menu.Button{}
-	btnPerson.SetAsSubMenuButton("个人信息", buttonsSub)
-	defaultButtons:= make([]menu.Button,2)
-	defaultButtons[0]=btnProjectMission
-	defaultButtons[1]=btnPerson
+	btnEnroll.SetAsViewButton("登记","https://open.weixin.qq.com/connect/oauth2/authorize?appid=wx2203c68c9311ea43&redirect_uri=http://bci.renjiwulian.com/test&response_type=code&scope=snsapi_base&state=12#wechat_redirect")
+	defaultButtons:= []menu.Button{btnRelationShip,btnProjectMission,btnEnroll}
 	defaultMenu:=menu.Menu{}
 	defaultMenu.Buttons= defaultButtons
 	err:=menu.Create(defaultClt,&defaultMenu)
@@ -104,6 +102,36 @@ func DefaultMenu(){
 	}
 }
 
-func EnrollTeacher(){
-	
+func TeacherMenu(){
+	btnRelationShip:=menu.Button{}
+	btnRelationShip.SetAsClickButton("架构","RelationShip")
+	btnProject:=menu.Button{}
+	btnProject.SetAsClickButton("项目","Project")
+	btnPersonal:=menu.Button{}
+	btnPersonal.SetAsClickButton("个人","Personal")
+	teacherButtons := []menu.Button{btnRelationShip, btnProject,btnPersonal}
+	teacherMenu :=menu.Menu{}
+	teacherMenu.Buttons= teacherButtons
+	teacherMenu.MatchRule.TagId="teacher"
+	err:=menu.Create(defaultClt,&teacherMenu)
+	if err!=nil{
+		fmt.Printf("%v",err)
+	}
+}
+
+func StudentMenu(){
+	btnRelationShip:=menu.Button{}
+	btnRelationShip.SetAsClickButton("架构","RelationShip")
+	btnMission :=menu.Button{}
+	btnMission.SetAsClickButton("任务","Project")
+	btnPersonal:=menu.Button{}
+	btnPersonal.SetAsClickButton("个人","Personal")
+	studentButtons := []menu.Button{btnRelationShip, btnMission,btnPersonal}
+	studentMenu :=menu.Menu{}
+	studentMenu.Buttons= studentButtons
+	studentMenu.MatchRule.TagId="student"
+	err:=menu.Create(defaultClt,&studentMenu)
+	if err!=nil{
+		fmt.Printf("%v",err)
+	}
 }

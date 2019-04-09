@@ -18,7 +18,7 @@ type User struct {
 	Supervisor	string `gorm:"not null VARCHAR(191)"`
 	HduId        string `gorm:"VARCHAR(191)"`
 	Level        string `gorm:"VARCHAR(191)"`
-	TagID        string `gorm:"VARCHAR(191)"`
+	TagId        string `gorm:"VARCHAR(191)"`
 
 	WeChatAccount string `gorm:"VARCHAR(191)"`
 	//WechatNickname string `gorm:"not null VARCHAR(255)"`
@@ -139,6 +139,7 @@ func EnrollTeacher(teacherInfo *TeacherInfo) {
 	teacher.School=teacherInfo.School
 	teacher.Sex=teacherInfo.Sex
 	teacher.Telephone= teacherInfo.Telephone
+	teacher.TagId=teacher.Role
 
 	oldUser := GetUserByWeChatID(teacher.WeChatOpenID)
 
@@ -157,6 +158,7 @@ func EnrollStudent(studentInfo *StudentInfo) {
 	student.Sex= studentInfo.Sex
 	student.Telephone= studentInfo.Telephone
 	student.Supervisor=studentInfo.Supervisor
+	student.TagId = student.Role
 
 	oldUser := GetUserByWeChatID(student.WeChatOpenID)
 

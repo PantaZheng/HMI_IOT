@@ -10,7 +10,7 @@ import (
 
 func init(){
 	controller.Check()
-	controller.DefaultMenu()
+	controller.Menu()
 }
 
 func newApp() (api *iris.Application){
