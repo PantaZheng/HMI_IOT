@@ -132,13 +132,14 @@ func TeacherMenu(){
 	btnPersonal:=menu.Button{}
 	btnPersonal.SetAsClickButton("个人","Personal")
 	teacherButtons := []menu.Button{btnRelationShip, btnProject,btnPersonal}
-	teacherMenu :=menu.Menu{}
-	teacherMenu.Buttons= teacherButtons
 	teacherRule :=menu.MatchRule{}
 	teacherRule.TagId=strconv.Itoa(tagTeacher)
+	teacherMenu :=menu.Menu{}
+	teacherMenu.Buttons= teacherButtons
+	teacherMenu.MatchRule=&teacherRule
 	_,err:=menu.AddConditionalMenu(defaultClt,&teacherMenu)
 	if err!=nil{
-		fmt.Printf("TeacherMenu:%v\n",err)
+		fmt.Printf("\nTeacherMenu:%v\n",err)
 	}
 }
 
@@ -150,13 +151,14 @@ func StudentMenu(){
 	btnPersonal:=menu.Button{}
 	btnPersonal.SetAsClickButton("个人","Personal")
 	studentButtons := []menu.Button{btnRelationShip, btnMission,btnPersonal}
-	studentMenu := menu.Menu{}
-	studentMenu.Buttons= studentButtons
 	studentRule := menu.MatchRule{}
 	studentRule.TagId=strconv.Itoa(tagStudent)
+	studentMenu := menu.Menu{}
+	studentMenu.Buttons= studentButtons
+	studentMenu.MatchRule = &studentRule
 	_,err:=menu.AddConditionalMenu(defaultClt,&studentMenu)
 	if err!=nil{
-		fmt.Printf("StudentMenu%v\n",err)
+		fmt.Printf("\nStudentMenu%v\n",err)
 	}
 }
 
