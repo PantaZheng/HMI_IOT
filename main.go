@@ -42,6 +42,11 @@ func newApp() (api *iris.Application){
 			_ = ctx.View("project/index.html")
 		})
 	})
+	api.PartyFunc("/test",func (test router.Party){
+		test.Get("/",func(ctx iris.Context){
+			_ = ctx.View("test/test.html")
+		})
+	})
 
 	return
 }

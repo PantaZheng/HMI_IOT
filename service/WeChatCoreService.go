@@ -85,7 +85,7 @@ func DefaultMenu(){
 	btnProjectMission:=menu.Button{}
 	btnProjectMission.SetAsClickButton("项目/任务","ProjectMission")
 	btnEnroll:=menu.Button{}
-	btnEnroll.SetAsClickButton("登记","Enroll")
+	btnEnroll.SetAsViewButton("登记","http://bci.renjiwulian.com/test")
 	btnWeekly:=menu.Button{}
 	btnWeekly.SetAsClickButton("周报","Weekly")
 	buttonsSub :=make([]menu.Button,2)
