@@ -22,6 +22,8 @@ var (
 	wechatToken = wechatConfigTree.Get("Token").(string)
 	wechatEncodedAESKey = wechatConfigTree.Get("EncodedAESKey").(string)
 	defaultClt = wechatClient()
+	tagTeacher = 0
+	tagStudent = 0
 )
 
 func TextMsgHandler(ctx *core.Context) {
@@ -82,9 +84,17 @@ func CreateTag(){
 	_,_=tag.Create(defaultClt,"teacher")
 }
 
-//func UpdateTag(){
-//	tag
-//}
+func GetTag(){
+	tagList,_:=tag.List(defaultClt)
+	for _,v :=range tagList{
+		if v.Name == "student"{
+			tagStudent=v.Id
+		}
+		if v.Name == "teacher"{
+			tagTeacher=v.Id
+		}
+	}
+}
 
 func DefaultMenu(){
 	btnRelationShip:=menu.Button{}
@@ -112,7 +122,7 @@ func TeacherMenu(){
 	teacherButtons := []menu.Button{btnRelationShip, btnProject,btnPersonal}
 	teacherMenu :=menu.Menu{}
 	teacherMenu.Buttons= teacherButtons
-	teacherMenu.MatchRule.TagId="teacher"
+	teacherMenu.MatchRule.TagId=string(tagTeacher)
 	err:=menu.Create(defaultClt,&teacherMenu)
 	if err!=nil{
 		fmt.Printf("%v",err)
@@ -129,7 +139,7 @@ func StudentMenu(){
 	studentButtons := []menu.Button{btnRelationShip, btnMission,btnPersonal}
 	studentMenu :=menu.Menu{}
 	studentMenu.Buttons= studentButtons
-	studentMenu.MatchRule.TagId="student"
+	studentMenu.MatchRule.TagId=string(tagStudent)
 	err:=menu.Create(defaultClt,&studentMenu)
 	if err!=nil{
 		fmt.Printf("%v",err)
