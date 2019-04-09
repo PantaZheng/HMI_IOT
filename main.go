@@ -30,6 +30,11 @@ func newApp() (api *iris.Application){
 		student.Post("/enroll",controller.EnrollStudent)
 		student.Get("/list",controller.ListStudent)
 	})
+	api.PartyFunc("/project",func (project router.Party){
+		project.Get("/",func(ctx iris.Context){
+			_ = ctx.View("detail.html")
+		})
+	})
 
 	return
 }
