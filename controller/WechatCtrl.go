@@ -17,8 +17,8 @@ func Menu(){
 	service.CreateTag()
 	service.GetTag()
 	service.DefaultMenu()
-	service.TeacherMenu()
 	service.StudentMenu()
+	service.TeacherMenu()
 	service.TestMenu()
 }
 
