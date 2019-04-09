@@ -103,7 +103,9 @@ func GetTag(){
 		if v.Name == "teacher"{
 			tagTeacher=v.Id
 		}
+		fmt.Printf("\nid:"+strconv.Itoa(v.Id)+"\tname:"+v.Name+""+"\tcounr:"+strconv.Itoa(v.UserCount))
 	}
+
 }
 
 func DefaultMenu(){
