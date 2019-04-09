@@ -62,6 +62,11 @@ func CheckTableUser() {
 	}
 }
 
+func DropTableUsers(){
+	database.DB.DropTable("users")
+	fmt.Printf("删除表\n")
+}
+
 func MakeTestData(){
 	fmt.Printf("测试数据")
 	database.DB.Model(&User{}).Create(

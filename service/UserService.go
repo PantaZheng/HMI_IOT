@@ -8,6 +8,7 @@ import (
 )
 
 func CheckTableUser(){
+	models.DropTableUsers()
 	models.CheckTableUser()
 	models.MakeTestData()
 }
