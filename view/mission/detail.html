@@ -27,7 +27,7 @@
 <div class="weui_cells">
     <div class="weui_cell">
         <div class="weui_cell_bd weui_cell_primary">
-            [[mission.title]]
+            {{mission.title}}
         </div>
 
     </div>
@@ -35,7 +35,7 @@
 
         <div class="weui_cell_hd weui_cell_primary">负责人</div>
         <div class="weui_cell_ft">
-            [[mission.principal.name]]
+            {{mission.principal.name}}
         </div>
     </div>
 
@@ -44,7 +44,7 @@
 
         <div class="weui_cell_hd weui_cell_primary">指导老师</div>
         <div class="weui_cell_ft">
-            [[mission.instructor.name]]
+            {{mission.instructor.name}}
         </div>
     </div>
 
@@ -52,7 +52,7 @@
 
         <div class="weui_cell_hd weui_cell_primary">开始时间</div>
         <div class="weui_cell_ft">
-            [[mission.startTime]]
+            {{mission.startTime}}
         </div>
     </div>
 
@@ -60,7 +60,7 @@
 
         <div class="weui_cell_hd weui_cell_primary">结束时间</div>
         <div class="weui_cell_ft">
-            [[mission.endTime]]
+            {{mission.endTime}}
         </div>
     </div>
 
@@ -75,7 +75,7 @@
     </div>
     <div class="weui_cell">
         <div class="weui_cell_bd weui_cell_primary">
-            [[mission.detail]]
+            {{mission.detail}}
         </div>
     </div>
 </div>
@@ -88,7 +88,7 @@
     </div>
     <div class="weui_cell">
         <div class="weui_cell_bd weui_cell_primary">
-            [[mission.acceptance]]
+            {{mission.acceptance}}
         </div>
     </div>
 </div>
@@ -102,7 +102,7 @@
        href="weeklyDetail.html#?weeklyId={{x.weeklyId}}" ng-repeat="x in mission.weeklies">
         <div class="weui_cell_bd weui_cell_primary">
             <p>
-                [[x.date]]
+                {{x.date}}
             </p>
         </div>
     </a>
