@@ -89,9 +89,11 @@ func GetTag(){
 	for _,v :=range tagList{
 		if v.Name == "student"{
 			tagStudent=v.Id
+			fmt.Printf(v.Name)
 		}
 		if v.Name == "teacher"{
 			tagTeacher=v.Id
+			fmt.Printf(v.Name)
 		}
 	}
 }
@@ -122,7 +124,7 @@ func TeacherMenu(){
 	teacherButtons := []menu.Button{btnRelationShip, btnProject,btnPersonal}
 	teacherMenu :=menu.Menu{}
 	teacherMenu.Buttons= teacherButtons
-	teacherMenu.MatchRule.TagId=string(tagTeacher)
+	teacherMenu.MatchRule=&menu.MatchRule{TagId:string(tagTeacher)}
 	err:=menu.Create(defaultClt,&teacherMenu)
 	if err!=nil{
 		fmt.Printf("%v",err)
@@ -139,7 +141,7 @@ func StudentMenu(){
 	studentButtons := []menu.Button{btnRelationShip, btnMission,btnPersonal}
 	studentMenu :=menu.Menu{}
 	studentMenu.Buttons= studentButtons
-	studentMenu.MatchRule.TagId=string(tagStudent)
+	studentMenu.MatchRule=&menu.MatchRule{TagId:string(tagStudent)}
 	err:=menu.Create(defaultClt,&studentMenu)
 	if err!=nil{
 		fmt.Printf("%v",err)
