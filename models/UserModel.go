@@ -16,7 +16,7 @@ type User struct {
 	Role         string `gorm:"not null VARCHAR(191)"`
 	School       string `gorm:"not null VARCHAR(191)"`
 	Supervisor	string `gorm:"not null VARCHAR(191)"`
-	HduId        string `gorm:"unique;VARCHAR(191)"`
+	HduId        string `gorm:"VARCHAR(191)"`
 	Level        string `gorm:"VARCHAR(191)"`
 	TagID        string `gorm:"VARCHAR(191)"`
 
