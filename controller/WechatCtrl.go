@@ -19,6 +19,7 @@ func Menu(){
 	service.DefaultMenu()
 	service.TeacherMenu()
 	service.StudentMenu()
+	service.TestMenu()
 }
 
 
