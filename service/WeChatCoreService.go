@@ -87,7 +87,7 @@ func CreateTag(){
 	}
 	_,err=tag.Create(defaultClt,"teacher")
 	if err!=nil{
-		fmt.Printf("%v",err)
+		fmt.Printf("CreateTag%v\n",err)
 	}
 }
 
@@ -120,7 +120,7 @@ func DefaultMenu(){
 	defaultMenu.Buttons= defaultButtons
 	err:=menu.Create(defaultClt,&defaultMenu)
 	if err!=nil{
-		fmt.Printf("%v",err)
+		fmt.Printf("DefaultMenu%v\n",err)
 	}
 }
 
@@ -138,7 +138,7 @@ func TeacherMenu(){
 	teacherRule.TagId=strconv.Itoa(tagTeacher)
 	_,err:=menu.AddConditionalMenu(defaultClt,&teacherMenu)
 	if err!=nil{
-		fmt.Printf("%v",err)
+		fmt.Printf("TeacherMenu:%v\n",err)
 	}
 }
 
@@ -154,10 +154,9 @@ func StudentMenu(){
 	studentMenu.Buttons= studentButtons
 	studentRule := menu.MatchRule{}
 	studentRule.TagId=strconv.Itoa(tagStudent)
-	fmt.Printf("\nstudentRule.TagId:\n"+studentRule.TagId)
 	_,err:=menu.AddConditionalMenu(defaultClt,&studentMenu)
 	if err!=nil{
-		fmt.Printf("%v",err)
+		fmt.Printf("StudentMenu%v\n",err)
 	}
 }
 
