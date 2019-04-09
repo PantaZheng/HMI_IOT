@@ -21,6 +21,7 @@ func GetStudents(ctx iris.Context) {
 
 func GetTeachers(ctx iris.Context){
 	memberList:=models.GetAllMembers("teacher")
+	fmt.Printf("%s",memberList[0].Name)
 	if _, err :=ctx.JSON(&memberList);err!=nil {
 		fmt.Printf("GetTeachers:%v",err)
 	}
