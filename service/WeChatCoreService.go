@@ -90,12 +90,11 @@ func GetTag(){
 	for _,v :=range tagList{
 		if v.Name == "student"{
 			tagStudent=v.Id
-			fmt.Printf(v.Name)
 		}
 		if v.Name == "teacher"{
 			tagTeacher=v.Id
-			fmt.Printf(v.Name)
 		}
+		fmt.Printf("id:"+v.Name+"num"+strconv.Itoa(v.UserCount)+"\n")
 	}
 }
 
