@@ -81,12 +81,21 @@ func wechatClient() *core.Client{
 }
 
 func CreateTag(){
-	_,_=tag.Create(defaultClt,"student")
-	_,_=tag.Create(defaultClt,"teacher")
+	_,err:=tag.Create(defaultClt,"student")
+	if err!=nil{
+		fmt.Printf("%v",err)
+	}
+	_,err=tag.Create(defaultClt,"teacher")
+	if err!=nil{
+		fmt.Printf("%v",err)
+	}
 }
 
 func GetTag(){
-	tagList,_:=tag.List(defaultClt)
+	tagList,err:=tag.List(defaultClt)
+	if err!=nil{
+		fmt.Printf("%v",err)
+	}
 	for _,v :=range tagList{
 		if v.Name == "student"{
 			tagStudent=v.Id
@@ -94,7 +103,6 @@ func GetTag(){
 		if v.Name == "teacher"{
 			tagTeacher=v.Id
 		}
-		fmt.Printf("\nid:"+strconv.Itoa(v.Id)+"\tname:"+v.Name+"\tnum:"+strconv.Itoa(v.UserCount)+"\n")
 	}
 }
 
