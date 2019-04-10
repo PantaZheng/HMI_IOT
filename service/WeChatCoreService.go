@@ -142,7 +142,7 @@ func TeacherMenu(){
 	btnRelationShip:=menu.Button{}
 	btnRelationShip.SetAsClickButton("架构","RelationShip")
 	btnProject:=menu.Button{}
-	btnProject.SetAsClickButton("项目","Project")
+	btnProject.SetAsViewButton("项目","http://bci.renjiwulian.com/project")
 	btnPersonal:=menu.Button{}
 	btnPersonal.SetAsClickButton("个人","Personal")
 	teacherButtons := []menu.Button{btnRelationShip, btnProject,btnPersonal}
@@ -161,7 +161,7 @@ func StudentMenu(){
 	btnRelationShip:=menu.Button{}
 	btnRelationShip.SetAsClickButton("架构","RelationShip")
 	btnMission :=menu.Button{}
-	btnMission.SetAsClickButton("任务","Project")
+	btnMission.SetAsViewButton("任务","http://bci.renjiwulian.com/project")
 	btnPersonal:=menu.Button{}
 	btnPersonal.SetAsClickButton("个人","Personal")
 	studentButtons := []menu.Button{btnRelationShip, btnMission,btnPersonal}
