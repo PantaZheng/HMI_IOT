@@ -144,8 +144,8 @@ func CreateUser(weChatInfo *user.UserInfo){
 //数据库更新用户信息
 func dbUpdateUser(newUser *User) (oldUser *User){
 	oldUser = getUserByWeChatID(newUser.WeChatOpenID)
-	newUser.ID=oldUser.ID
-	if err := database.DB.Model(&User{}).Where("we_chat_open_id=?",oldUser.WeChatOpenID).Updates(newUser).Error; err != nil {
+	//newUser.ID=oldUser.ID
+	if err := database.DB.Model(&oldUser).Updates(newUser).Error; err != nil {
 		fmt.Printf("CreateUserErr:%s", err)
 	}
 	return
