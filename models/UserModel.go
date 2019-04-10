@@ -10,7 +10,7 @@ import (
 type User struct {
 	gorm.Model
 
-	WeChatOpenID string `gorm:"unique;VARCHAR(191)"`
+	WeChatOpenID string `gorm:"primary_key;unique;VARCHAR(191)"`
 	Name         string `gorm:"not null VARCHAR(255)"`
 	Sex          string `gorm:"not null VARCHAR"`
 	Role         string `gorm:"not null VARCHAR(191)"`
