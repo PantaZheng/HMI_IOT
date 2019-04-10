@@ -146,7 +146,7 @@ func dbUpdateUser(newUser *User) (oldUser *User){
 	oldUser = getUserByWeChatID(newUser.WeChatOpenID)
 	fmt.Printf("oldUser:"+oldUser.WeChatOpenID)
 	//newUser.ID=oldUser.ID
-	if err := database.DB.Model(&oldUser).Updates(newUser).Error; err != nil {
+	if err := database.DB.Model(&User{}).Where(&User{WeChatOpenID:oldUser.WeChatOpenID}).Updates(newUser).Error; err != nil {
 		fmt.Printf("CreateUserErr:%s", err)
 	}
 	return
