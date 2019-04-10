@@ -45,7 +45,7 @@ func UpdateTeacher(ctx iris.Context) {
 	if err:=ctx.ReadJSON(teacherInfo);err!=nil{
 		panic(err.Error())
 	}
-	models.EnrollTeacher(teacherInfo,tagStudent)
+	models.EnrollTeacher(teacherInfo,tagTeacher)
 	AddRoleTag([]string{teacherInfo.WeChatOpenID},tagTeacher)
 	fmt.Printf(teacherInfo.Name+"教师信息更新tag"+strconv.Itoa(tagTeacher))
 }
