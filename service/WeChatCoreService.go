@@ -104,7 +104,7 @@ func GetTagList(){
 		if v.Name == "teacher"{
 			tagTeacher=v.Id
 		}
-		fmt.Printf("\nid:"+strconv.Itoa(v.Id)+"\tname:"+v.Name+""+"\tcounr:"+strconv.Itoa(v.UserCount))
+		fmt.Printf("\nTagList\nid: "+strconv.Itoa(v.Id)+"\tname: "+v.Name+""+"\tcount: "+strconv.Itoa(v.UserCount))
 	}
 }
 
@@ -112,12 +112,14 @@ func AddRoleTag(openIdList []string, tagId int){
 	if err:=tag.BatchTag(defaultClt,openIdList,tagId);err!=nil{
 		fmt.Printf("AddRoleTagError:%v\n",err)
 	}
+	GetTagList()
 }
 
 func DelRoleTag(openIdList []string, tagId int){
 	if err:=tag.BatchUntag(defaultClt,openIdList,tagId);err!=nil{
 		fmt.Printf("AddRoleTagError:%v\n",err)
 	}
+	GetTagList()
 }
 
 func DefaultMenu(){
