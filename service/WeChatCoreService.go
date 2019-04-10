@@ -104,7 +104,7 @@ func GetTagList(){
 		if v.Name == "teacher"{
 			tagTeacher=v.Id
 		}
-		fmt.Printf("\nTagList\nid: "+strconv.Itoa(v.Id)+"\tname: "+v.Name+""+"\tcount: "+strconv.Itoa(v.UserCount)+"\n")
+		fmt.Printf("\nid: "+strconv.Itoa(v.Id)+"\tname: "+v.Name+""+"\tcount: "+strconv.Itoa(v.UserCount)+"\n")
 	}
 }
 

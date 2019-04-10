@@ -32,11 +32,11 @@ func GetTeachers(ctx iris.Context){
 func UserInit(weChatInfo *user.UserInfo) string {
 	if models.RecordUserNotFound(weChatInfo) {
 		models.CreateUser(weChatInfo)
-		fmt.Printf(weChatInfo.OpenId+"用户关注")
+		fmt.Printf(weChatInfo.OpenId+"新用户关注")
 		return "欢迎关注,新用户请进行登记"
 	}
+	fmt.Printf(weChatInfo.OpenId+"老用户关注")
 	return "欢迎关注,感谢再次关注"
-
 }
 
 //教师信息更新
