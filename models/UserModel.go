@@ -123,6 +123,13 @@ func GetAllMembers(role string) ( memberList [] MemberInfo) {
 	return memberList
 }
 
+func RecordUserNotFound(weChatInfo *user.UserInfo) bool{
+	if database.DB.Find(&User{WeChatOpenID:weChatInfo.OpenId}).RecordNotFound(){
+		return true
+	}
+	return false
+}
+
 //新关注用户创建
 func CreateUser(weChatInfo *user.UserInfo){
 	anonUser := new(User)

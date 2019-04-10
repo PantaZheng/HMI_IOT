@@ -5,6 +5,7 @@ import (
 	"fmt"
 	"github.com/chanxuehong/wechat/mp/user"
 	"github.com/kataras/iris"
+	"strconv"
 )
 
 func CheckTableUser(){
@@ -29,9 +30,13 @@ func GetTeachers(ctx iris.Context){
 
 //用户初始化
 func UserInit(weChatInfo *user.UserInfo) string {
+	if models.RecordUserNotFound(weChatInfo) {
 		models.CreateUser(weChatInfo)
-	fmt.Printf(weChatInfo.OpenId+"用户关注")
-	return "欢迎关注,新用户请进行登记"
+		fmt.Printf(weChatInfo.OpenId+"用户关注")
+		return "欢迎关注,新用户请进行登记"
+	}
+	return "欢迎关注,感谢再次关注"
+
 }
 
 //教师信息更新
@@ -56,7 +61,7 @@ func UpdateStudent(ctx iris.Context) {
 	fmt.Printf(studentInfo.Name+"同学信息更新")
 }
 
-
+//去除Tag
 func Purify(ctx iris.Context){
 	pureInfo:=&models.PureInfo{}
 	if err:=ctx.ReadJSON(pureInfo);err!=nil{
@@ -64,4 +69,5 @@ func Purify(ctx iris.Context){
 	}
 	tagId:=models.PurifyUser(pureInfo.WeChatOpenID)
 	DelRoleTag([]string{pureInfo.WeChatOpenID},tagId)
+	fmt.Printf("去除用户"+pureInfo.WeChatOpenID+"的TagId:"+strconv.Itoa(tagId)+"\n")
 }
