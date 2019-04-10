@@ -176,3 +176,10 @@ func StudentMenu(){
 	}
 }
 
+func TestMenu(){
+	M,_:=menu.TryMatch(defaultClt,"oPKFh5lM9MA6_Svd39Km-84no7c")
+	for _, v:=range M.Buttons{
+		fmt.Printf( v.Name+"\t")
+	}
+	fmt.Printf("\n")
+}

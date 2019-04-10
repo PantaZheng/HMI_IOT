@@ -179,6 +179,7 @@ func EnrollStudent(studentInfo *StudentInfo, tagId int) {
 	dbUpdateUser(student)
 }
 
+//role变更
 func PurifyUser(weChatOpenId string)(tagId int){
 	Pure := new(User)
 	Pure.WeChatOpenID=weChatOpenId
