@@ -15,11 +15,10 @@ func WeChat(ctx iris.Context) {
 
 func Menu(){
 	service.CreateTag()
-	service.GetTag()
+	service.GetTagList()
 	service.DefaultMenu()
 	service.StudentMenu()
 	service.TeacherMenu()
-	//service.TestMenu()
 }
 
 

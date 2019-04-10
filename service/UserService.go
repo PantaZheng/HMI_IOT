@@ -40,7 +40,8 @@ func UpdateTeacher(ctx iris.Context) {
 	if err:=ctx.ReadJSON(teacherInfo);err!=nil{
 		panic(err.Error())
 	}
-	models.EnrollTeacher(teacherInfo)
+	models.EnrollTeacher(teacherInfo,tagStudent)
+	AddRoleTag([]string{teacherInfo.WeChatOpenID},tagTeacher)
 	fmt.Printf(teacherInfo.Name+"教师信息更新")
 }
 
@@ -50,7 +51,17 @@ func UpdateStudent(ctx iris.Context) {
 	if err:=ctx.ReadJSON(studentInfo);err!=nil{
 		panic(err.Error())
 	}
-	models.EnrollStudent(studentInfo)
+	models.EnrollStudent(studentInfo,tagStudent)
+	AddRoleTag([]string{studentInfo.WeChatOpenID},tagStudent)
 	fmt.Printf(studentInfo.Name+"同学信息更新")
 }
 
+
+func Purify(ctx iris.Context){
+	pureInfo:=&models.PureInfo{}
+	if err:=ctx.ReadJSON(pureInfo);err!=nil{
+		panic(err.Error())
+	}
+	tagId:=models.PurifyUser(pureInfo.WeChatOpenID)
+	DelRoleTag([]string{pureInfo.WeChatOpenID},tagId)
+}

@@ -56,7 +56,6 @@ func SubscribeEventHandler(ctx *core.Context){
 
 }
 
-
 func DefaultEventHandler(ctx *core.Context) {
 	log.Printf("收到事件:\n%s\n", ctx.MsgPlaintext)
 	_=ctx.NoneResponse()
@@ -80,18 +79,20 @@ func wechatClient() *core.Client{
 	return core.NewClient(accessTokenTokenServer,nil)
 }
 
+//向微信服务器创建Tag
 func CreateTag(){
 	_,err:=tag.Create(defaultClt,"student")
 	if err!=nil{
-		fmt.Printf("%v",err)
+		fmt.Printf("\nCreateTag%v\n",err)
 	}
 	_,err=tag.Create(defaultClt,"teacher")
 	if err!=nil{
-		fmt.Printf("CreateTag%v\n",err)
+		fmt.Printf("\nCreateTag%v\n",err)
 	}
 }
 
-func GetTag(){
+//获得Tag的ID
+func GetTagList(){
 	tagList,err:=tag.List(defaultClt)
 	if err!=nil{
 		fmt.Printf("%v",err)
@@ -105,7 +106,18 @@ func GetTag(){
 		}
 		fmt.Printf("\nid:"+strconv.Itoa(v.Id)+"\tname:"+v.Name+""+"\tcounr:"+strconv.Itoa(v.UserCount))
 	}
+}
 
+func AddRoleTag(openIdList []string, tagId int){
+	if err:=tag.BatchTag(defaultClt,openIdList,tagId);err!=nil{
+		fmt.Printf("AddRoleTagError:%v\n",err)
+	}
+}
+
+func DelRoleTag(openIdList []string, tagId int){
+	if err:=tag.BatchUntag(defaultClt,openIdList,tagId);err!=nil{
+		fmt.Printf("AddRoleTagError:%v\n",err)
+	}
 }
 
 func DefaultMenu(){
@@ -162,14 +174,3 @@ func StudentMenu(){
 	}
 }
 
-func TestMenu(){
-	testMenu,_:=menu.TryMatch(defaultClt,"oPKFh5lM9MA6_Svd39Km-84no7c8")
-	for _,v:= range testMenu.Buttons{
-		fmt.Printf("panta测试:"+v.Name+"\n")
-	}
-	fmt.Printf("Tagid:\n")
-	u,_:=user.Get(defaultClt,"oPKFh5lM9MA6_Svd39Km-84no7c8","")
-	for _,va:= range u.TagIdList{
-		fmt.Printf("\n"+strconv.Itoa(va))
-	}
-}

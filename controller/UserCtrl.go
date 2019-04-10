@@ -13,6 +13,10 @@ func EnrollStudent(ctx iris.Context){
 	service.UpdateStudent(ctx)
 }
 
+func Purify(ctx iris.Context){
+	service.Purify(ctx)
+}
+
 func ListStudent(ctx iris.Context){
 	service.GetStudents(ctx)
 }
