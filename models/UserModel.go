@@ -124,7 +124,7 @@ func GetAllMembers(role string) ( memberList [] MemberInfo) {
 }
 
 func RecordUserNotFound(weChatInfo *user.UserInfo) bool{
-	if database.DB.Where("we_chat_open_id=?",weChatInfo.OpenId).Find(&User{}).RecordNotFound(){
+	if database.DB.Model(&User{}).Where(&User{WeChatOpenID:weChatInfo.OpenId}).RecordNotFound(){
 		fmt.Printf(weChatInfo.OpenId+"RecordUserNotFound\n")
 		return true
 	}
@@ -145,7 +145,7 @@ func CreateUser(weChatInfo *user.UserInfo){
 func dbUpdateUser(newUser *User) (oldUser *User){
 	oldUser = getUserByWeChatID(newUser.WeChatOpenID)
 	newUser.ID=oldUser.ID
-	if err := database.DB.Model(&oldUser).Update(newUser).Error; err != nil {
+	if err := database.DB.Model(&User{}).Where(&User{WeChatOpenID:oldUser.WeChatOpenID}).Updates(newUser).Error; err != nil {
 		fmt.Printf("CreateUserErr:%s", err)
 	}
 	return
