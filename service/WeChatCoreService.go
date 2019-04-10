@@ -180,9 +180,10 @@ func TestMenu(){
 	M,err:=menu.TryMatch(defaultClt,"oPKFh5lM9MA6_Svd39Km-84no7c")
 	if err!=nil{
 		fmt.Printf("%v\n",err)
-	}
-	for _, v:=range M.Buttons{
-		fmt.Printf( v.Name+"\t")
+	}else{
+		for _, v:=range M.Buttons{
+			fmt.Printf( v.Name+"\t")
+		}
 	}
 	fmt.Printf("\n")
 }
