@@ -95,7 +95,7 @@ func MakeTestData(){
 func getUserByWeChatID(weChatOpenID string) (existedUser *User) {
 	existedUser = new(User)
 	existedUser.WeChatOpenID =weChatOpenID
-	if err := database.DB.Model((&User{})).First (existedUser).Error; err != nil {
+	if err := database.DB.Where(&User{WeChatOpenID:weChatOpenID}).First (existedUser).Error; err != nil {
 		fmt.Printf("GetUserByIdErr:%s", err)
 	}
 	return
@@ -105,7 +105,7 @@ func getUserByWeChatID(weChatOpenID string) (existedUser *User) {
 func GetUserRoleByWeChatID(weChatOpenID string) string{
 	existedUser := new(User)
 	existedUser.WeChatOpenID =weChatOpenID
-	if err := database.DB.Model((&User{})).First(existedUser).Error; err != nil {
+	if err := database.DB.Where(&User{WeChatOpenID:weChatOpenID}).First(existedUser).Error; err != nil {
 		fmt.Printf("GetUserByIdErr:%s", err)
 	}
 	return existedUser.Role
