@@ -47,7 +47,7 @@ func UpdateTeacher(ctx iris.Context) {
 	}
 	models.EnrollTeacher(teacherInfo,tagStudent)
 	AddRoleTag([]string{teacherInfo.WeChatOpenID},tagTeacher)
-	fmt.Printf(teacherInfo.Name+"教师信息更新")
+	fmt.Printf(teacherInfo.Name+"教师信息更新tag"+strconv.Itoa(tagTeacher))
 }
 
 //学生信息更新
@@ -58,7 +58,7 @@ func UpdateStudent(ctx iris.Context) {
 	}
 	models.EnrollStudent(studentInfo,tagStudent)
 	AddRoleTag([]string{studentInfo.WeChatOpenID},tagStudent)
-	fmt.Printf(studentInfo.Name+"同学信息更新")
+	fmt.Printf(studentInfo.Name+"同学信息更新tag"+strconv.Itoa(tagStudent))
 }
 
 //去除Tag
