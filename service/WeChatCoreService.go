@@ -140,11 +140,11 @@ func DefaultMenu(){
 
 func TeacherMenu(){
 	btnRelationShip:=menu.Button{}
-	btnRelationShip.SetAsClickButton("架构","RelationShip")
+	btnRelationShip.SetAsViewButton("架构","http://bci.renjiwulian.com/project")
 	btnProject:=menu.Button{}
 	btnProject.SetAsViewButton("项目","http://bci.renjiwulian.com/project")
 	btnPersonal:=menu.Button{}
-	btnPersonal.SetAsClickButton("个人","Personal")
+	btnPersonal.SetAsViewButton("个人","http://bci.renjiwulian.com/project")
 	teacherButtons := []menu.Button{btnRelationShip, btnProject,btnPersonal}
 	teacherRule :=menu.MatchRule{}
 	teacherRule.TagId=strconv.Itoa(tagTeacher)
@@ -159,11 +159,11 @@ func TeacherMenu(){
 
 func StudentMenu(){
 	btnRelationShip:=menu.Button{}
-	btnRelationShip.SetAsClickButton("架构","RelationShip")
+	btnRelationShip.SetAsViewButton("架构","http://bci.renjiwulian.com/project")
 	btnMission :=menu.Button{}
 	btnMission.SetAsViewButton("任务","http://bci.renjiwulian.com/project")
 	btnPersonal:=menu.Button{}
-	btnPersonal.SetAsClickButton("个人","Personal")
+	btnPersonal.SetAsViewButton("个人","http://bci.renjiwulian.com/project")
 	studentButtons := []menu.Button{btnRelationShip, btnMission,btnPersonal}
 	studentRule := menu.MatchRule{}
 	studentRule.TagId=strconv.Itoa(tagStudent)
