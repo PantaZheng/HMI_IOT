@@ -187,3 +187,24 @@ func TestMenu(){
 	}
 	fmt.Printf("\n")
 }
+
+func GetAllMenu(){
+	m1,m2,err:=menu.Get(defaultClt)
+	if err!=nil{
+		fmt.Printf("%v\n",err)
+	}else{
+		fmt.Printf("defaultMenus----\n")
+		for _, v:=range m1.Buttons{
+			fmt.Printf( v.Name+"\t")
+		}
+		fmt.Printf("\n")
+		fmt.Printf("conditionalMenus----\n")
+		for _,v1:=range  m2{
+			for _,v3:=range v1.Buttons{
+				fmt.Printf( v3.Name+"\t")
+			}
+			fmt.Printf("\n")
+		}
+	}
+	fmt.Printf("\n")
+}
