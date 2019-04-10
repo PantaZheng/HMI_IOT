@@ -136,7 +136,7 @@ func CreateUser(weChatInfo *user.UserInfo){
 	anonUser.Role = "unEnrolled"
 	anonUser.WeChatOpenID = weChatInfo.OpenId
 	//anonUser.WechatNickname = weChatInfo.Nickname
-	database.DB.Create(anonUser)
+	database.DB.Model(&User{}).Create(anonUser)
 }
 
 //数据库更新用户信息
