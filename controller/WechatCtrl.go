@@ -18,7 +18,7 @@ func Menu(){
 	service.GetTagList()
 	service.GetAllMenu()
 	service.DefaultMenu()
-	service.DelAllConditinalMenu()
+	service.DelAllConditionalMenu()
 	service.StudentMenu()
 	service.TeacherMenu()
 	service.GetAllMenu()

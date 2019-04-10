@@ -188,14 +188,13 @@ func TestMenu(){
 	fmt.Printf("\n")
 }
 
-func DelAllConditinalMenu(){
+func DelAllConditionalMenu(){
 	_,m2,err:=menu.Get(defaultClt)
 	if err!=nil{
 		fmt.Printf("%v\n",err)
 	}else {
 		for _,v1:=range  m2 {
-				_=menu.DeleteConditionalMenu(defaultClt,v1.MenuId)
-			}
+			_=menu.DeleteConditionalMenu(defaultClt,v1.MenuId)
 		}
 	}
 }
