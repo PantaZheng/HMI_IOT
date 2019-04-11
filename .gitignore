@@ -6,3 +6,4 @@ main
 .idea/
 .idea/workspace.xml
 .sql
+/config/config.toml
