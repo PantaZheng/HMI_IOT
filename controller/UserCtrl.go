@@ -5,6 +5,10 @@ import (
 	"github.com/kataras/iris"
 )
 
+func Check() {
+	service.CheckTableUser()
+}
+
 func EnrollTeacher(ctx iris.Context) {
 	service.UpdateTeacher(ctx)
 	service.TestMenu()

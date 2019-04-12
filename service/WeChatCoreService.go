@@ -28,16 +28,16 @@ var (
 )
 
 func TextMsgHandler(ctx *core.Context) {
-	log.Printf("收到文本消息:\n%s\n", ctx.MsgPlaintext)
-
 	msg := request.GetText(ctx.MixedMsg)
 	resp := response.NewText(msg.FromUserName, msg.ToUserName, msg.CreateTime, msg.Content)
+	log.Printf("收到文本消息:\n%s\n", ctx.MsgPlaintext)
 	_=ctx.RawResponse(resp)
 }
 
 
 
 func MenuClickEventHandler(ctx *core.Context) {
+	log.Printf("收到按钮点击消息:\n%s\n", ctx.MsgPlaintext)
 	event := menu.GetClickEvent(ctx.MixedMsg)
 	resp := response.NewText(event.FromUserName, event.ToUserName, event.CreateTime, "请先登记个人信息")
 	if err:=ctx.RawResponse(resp);err!=nil{

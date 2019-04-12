@@ -5,6 +5,7 @@ import (
 	"fmt"
 	"github.com/chanxuehong/wechat/mp/user"
 	"github.com/jinzhu/gorm"
+	"log"
 )
 
 type User struct {
@@ -60,20 +61,19 @@ type PureInfo struct{
 func CheckTableUser() {
 	if !database.DB.HasTable(&User{}){
 		database.DB.Set("gorm:table_options", "DEFAULT CHARSET=utf8 AUTO_INCREMENT=1;").CreateTable(&User{})
-		fmt.Printf("新建用户表\n")
+		log.Printf("新建用户表\n")
 
 	}else{
-		fmt.Printf("用户表已存在\n")
+		log.Printf("用户表已存在\n")
 	}
 }
 
 func DropTableUsers(){
 	database.DB.DropTable("users")
-	fmt.Printf("删除表\n")
+	log.Printf("删除用户表\n")
 }
 
 func MakeTestData(){
-	fmt.Printf("测试数据")
 	CreateUser(&user.UserInfo{OpenId:"test1"})
 	CreateUser(&user.UserInfo{OpenId:"test2"})
 	CreateUser(&user.UserInfo{OpenId:"test3"})
@@ -89,6 +89,7 @@ func MakeTestData(){
 		&User{WeChatOpenID:"teacher2",Name:"张桦",Role:"teacher"})
 	database.DB.Model(&User{}).Create(
 		&User{WeChatOpenID:"teacher_unknown",Name:"其他导师",Role:"teacher"})
+	log.Printf("创建测试用户数据")
 }
 
 //根据WeChatID获取用户
@@ -101,16 +102,6 @@ func getUserByWeChatID(weChatOpenID string) (existedUser *User) {
 	return
 }
 
-//根据WeChatID获取用户身份
-func GetUserRoleByWeChatID(weChatOpenID string) string{
-	existedUser := new(User)
-	existedUser.WeChatOpenID =weChatOpenID
-	if err := database.DB.Where(&User{WeChatOpenID:weChatOpenID}).First(existedUser).Error; err != nil {
-		fmt.Printf("GetUserByIdErr:%s", err)
-	}
-	return existedUser.Role
-}
-
 //根据Role获得成员信息
 func GetAllMembers(role string) ( memberList [] MemberInfo) {
 	var users []User
@@ -120,6 +111,7 @@ func GetAllMembers(role string) ( memberList [] MemberInfo) {
 		memberList[i].Id= v.ID
 		memberList[i].Name= v.Name
 	}
+	log.Printf("GetAllMembers,role:"+role+"\n")
 	return memberList
 }
 
@@ -128,7 +120,7 @@ func RecordUserNotFound(weChatInfo *user.UserInfo) bool{
 		fmt.Printf(weChatInfo.OpenId+"RecordUserNotFound\n")
 		return true
 	}
-	fmt.Printf(weChatInfo.OpenId+"RecordUserFound\n")
+	log.Printf(weChatInfo.OpenId+"RecordUserFound\n")
 	return false
 }
 
@@ -139,16 +131,16 @@ func CreateUser(weChatInfo *user.UserInfo){
 	anonUser.WeChatOpenID = weChatInfo.OpenId
 	//anonUser.WechatNickname = weChatInfo.Nickname
 	database.DB.Model(&User{}).Create(anonUser)
+	log.Printf("CreateUser"+weChatInfo.OpenId)
 }
 
 //数据库更新用户信息
 func dbUpdateUser(newUser *User) (oldUser *User){
 	oldUser = getUserByWeChatID(newUser.WeChatOpenID)
-	fmt.Printf("oldUser:"+oldUser.WeChatOpenID)
-	//newUser.ID=oldUser.ID
 	if err := database.DB.Model(&User{}).Where(&User{WeChatOpenID:oldUser.WeChatOpenID}).Updates(newUser).Error; err != nil {
-		fmt.Printf("CreateUserErr:%s", err)
+		log.Printf("CreateUserErr:%s", err)
 	}
+	log.Printf("dbUpdateUser:"+oldUser.WeChatOpenID)
 	return
 }
 
@@ -163,6 +155,7 @@ func EnrollTeacher(teacherInfo *TeacherInfo, tagId int) {
 	teacher.Telephone= teacherInfo.Telephone
 	teacher.TagId=tagId
 	dbUpdateUser(teacher)
+	log.Printf("EnrollTeacher"+teacherInfo.WeChatOpenID)
 }
 
 //学生登记
@@ -177,6 +170,7 @@ func EnrollStudent(studentInfo *StudentInfo, tagId int) {
 	student.Supervisor=studentInfo.Supervisor
 	student.TagId = tagId
 	dbUpdateUser(student)
+	log.Printf("EnrollStudent"+studentInfo.WeChatOpenID)
 }
 
 //role变更
@@ -184,5 +178,6 @@ func PurifyUser(weChatOpenId string)(tagId int){
 	Pure := new(User)
 	Pure.WeChatOpenID=weChatOpenId
 	Pure.Role = "unEnrolled"
+	log.Printf("Purify"+weChatOpenId+"\n")
 	return dbUpdateUser(Pure).TagId
 }
