@@ -105,23 +105,23 @@ func GetAllMembers(role string) ( memberList [] MemberInfo) {
 		memberList[i].Id= v.ID
 		memberList[i].Name= v.Name
 	}
-	log.Printf("GetAllMembers,role:"+role+"\n")
+	log.Printf("GetAllMembers,role:\t"+role+"\n")
 	return memberList
 }
 
 func RecordUserNotFound(weChatInfo *user.UserInfo) bool{
 	if database.DB.Where("we_chat_open_id=?",weChatInfo.OpenId).Find(&User{}).RecordNotFound(){
-		fmt.Printf(weChatInfo.OpenId+"RecordUserNotFound\n")
+		fmt.Printf(weChatInfo.OpenId+"\tRecordUserNotFound\n")
 		return true
 	}
-	log.Printf(weChatInfo.OpenId+"RecordUserFound\n")
+	log.Printf(weChatInfo.OpenId+"\tRecordUserFound\n")
 	return false
 }
 
 //数据库创建用户
 func createUser(userInfo *User){
 	database.DB.Model(&User{}).Create(userInfo)
-	log.Printf("CreateUser"+ userInfo.WeChatOpenID)
+	log.Printf("dbCreateUser:\t"+ userInfo.WeChatOpenID)
 }
 
 //新关注用户创建
@@ -131,7 +131,7 @@ func CreateUserByWeChatInfo(weChatInfo *user.UserInfo){
 	anonUser.WeChatOpenID = weChatInfo.OpenId
 	//anonUser.WechatNickname = weChatInfo.Nickname
 	createUser(anonUser)
-	log.Printf("CreateUserByWeChatInfo"+weChatInfo.OpenId)
+	log.Printf("CreateUserByWeChatInfo:\t"+weChatInfo.OpenId)
 }
 
 //数据库更新用户信息
@@ -140,7 +140,7 @@ func dbUpdateUser(newUser *User) (oldUser *User){
 	if err := database.DB.Model(&User{}).Where(&User{WeChatOpenID:oldUser.WeChatOpenID}).Updates(newUser).Error; err != nil {
 		log.Printf("CreateUserErr:%s", err)
 	}
-	log.Printf("dbUpdateUser:"+oldUser.WeChatOpenID)
+	log.Printf("dbUpdateUser:\t"+oldUser.WeChatOpenID)
 	return
 }
 
@@ -155,7 +155,7 @@ func EnrollTeacher(teacherInfo *TeacherInfo, tagId int) {
 	teacher.Telephone= teacherInfo.Telephone
 	teacher.TagId=tagId
 	dbUpdateUser(teacher)
-	log.Printf("EnrollTeacher"+teacherInfo.WeChatOpenID)
+	log.Printf("EnrollTeacher\t"+teacherInfo.WeChatOpenID)
 }
 
 //学生登记
@@ -170,7 +170,7 @@ func EnrollStudent(studentInfo *StudentInfo, tagId int) {
 	student.Supervisor=studentInfo.Supervisor
 	student.TagId = tagId
 	dbUpdateUser(student)
-	log.Printf("EnrollStudent"+studentInfo.WeChatOpenID)
+	log.Printf("EnrollStudent\t"+studentInfo.WeChatOpenID)
 }
 
 //role变更
@@ -178,6 +178,6 @@ func PurifyUser(weChatOpenId string)(tagId int){
 	Pure := new(User)
 	Pure.WeChatOpenID=weChatOpenId
 	Pure.Role = "unEnrolled"
-	log.Printf("Purify"+weChatOpenId+"\n")
+	log.Printf("PurifyUser\t"+weChatOpenId+"\n")
 	return dbUpdateUser(Pure).TagId
 }

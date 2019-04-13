@@ -18,14 +18,14 @@ func CheckTableUser(){
 func GetStudents(ctx iris.Context) {
 	memberList:=models.GetAllMembers("student")
 	if _, err :=ctx.JSON(&memberList);err!=nil {
-		log.Printf("GetStudents:%v",err)
+		log.Printf("GetStudents:\t%v",err)
 	}
 }
 
 func GetTeachers(ctx iris.Context){
 	memberList:=models.GetAllMembers("teacher")
 	if _, err :=ctx.JSON(&memberList);err!=nil {
-		log.Printf("GetTeachers:%v",err)
+		log.Printf("GetTeachers:\t%v",err)
 	}
 }
 
