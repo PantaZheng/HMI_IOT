@@ -26,7 +26,7 @@ func newApp() (api *iris.Application){
 
 	api.StaticWeb("/static","./view")
 	api.RegisterView(iris.HTML("./view", ".html").Delims("[[","]]"))
-	api.Get("/project/", func(ctx iris.Context) {
+	api.Get("/project", func(ctx iris.Context) {
 		_=ctx.View("index.html")
 	})
 
