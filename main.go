@@ -30,7 +30,7 @@ func newApp() (api *iris.Application){
 	})
 	api.Get("/mission", func(ctx iris.Context){
 		_=ctx.View("./view/mission/index.html")
-	}
+	})
 	api.Get("/test", func(ctx iris.Context) {
 		_=ctx.View("./view/test/test.html")
 	})
