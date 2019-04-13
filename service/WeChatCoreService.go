@@ -16,7 +16,7 @@ import (
 )
 
 var (
-	serverAddress       = config.Conf.Get("serverAddress").(string)
+	serverAddress       = config.Conf.Get("server.serverAddress").(string)
 	wechatConfigTree    =config.Conf.Get("wechat").(*toml.Tree)
 	wechatOriId         = wechatConfigTree.Get("OriId").(string)
 	wechatAppId         = wechatConfigTree.Get("AppId").(string)
