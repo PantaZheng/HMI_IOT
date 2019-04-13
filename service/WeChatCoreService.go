@@ -16,15 +16,16 @@ import (
 )
 
 var (
-	wechatConfigTree =config.Conf.Get("wechat").(*toml.Tree)
-	wechatOriId = wechatConfigTree.Get("OriId").(string)
-	wechatAppId = wechatConfigTree.Get("AppId").(string)
-	wechatAppSecret = wechatConfigTree.Get("AppSecret").(string)
-	wechatToken = wechatConfigTree.Get("Token").(string)
+	serverAddress       = config.Conf.Get("serverAddress").(string)
+	wechatConfigTree    =config.Conf.Get("wechat").(*toml.Tree)
+	wechatOriId         = wechatConfigTree.Get("OriId").(string)
+	wechatAppId         = wechatConfigTree.Get("AppId").(string)
+	wechatAppSecret     = wechatConfigTree.Get("AppSecret").(string)
+	wechatToken         = wechatConfigTree.Get("Token").(string)
 	wechatEncodedAESKey = wechatConfigTree.Get("EncodedAESKey").(string)
-	defaultClt = wechatClient()
-	tagTeacher = 0
-	tagStudent = 0
+	defaultClt          = wechatClient()
+	tagTeacher          = 0
+	tagStudent          = 0
 )
 
 func TextMsgHandler(ctx *core.Context) {
@@ -128,11 +129,11 @@ func DelRoleTag(weChatOpenId string, tagId int){
 
 func DefaultMenu(){
 	btnRelationShip:=menu.Button{}
-	btnRelationShip.SetAsViewButton("架构","http://bci.renjiwulian.com/project")
+	btnRelationShip.SetAsViewButton("架构", serverAddress+"/project")
 	btnProjectMission:=menu.Button{}
-	btnProjectMission.SetAsViewButton("项目/任务","http://bci.renjiwulian.com/project")
+	btnProjectMission.SetAsViewButton("项目/任务", serverAddress)
 	btnEnroll:=menu.Button{}
-	btnEnroll.SetAsViewButton("登记","https://open.weixin.qq.com/connect/oauth2/authorize?appid="+wechatAppId+"&redirect_uri=http://bci.renjiwulian.com/test&response_type=code&scope=snsapi_base&state=12#wechat_redirect")
+	btnEnroll.SetAsViewButton("登记","https://open.weixin.qq.com/connect/oauth2/authorize?appid="+wechatAppId+"&redirect_uri="+serverAddress+"/test&response_type=code&scope=snsapi_base&state=12#wechat_redirect")
 	defaultButtons:= []menu.Button{btnRelationShip,btnProjectMission,btnEnroll}
 	defaultMenu:=menu.Menu{}
 	defaultMenu.Buttons= defaultButtons
@@ -145,11 +146,11 @@ func DefaultMenu(){
 
 func TeacherMenu(){
 	btnRelationShip:=menu.Button{}
-	btnRelationShip.SetAsViewButton("架构","http://bci.renjiwulian.com/project")
+	btnRelationShip.SetAsViewButton("架构",serverAddress+"/project")
 	btnProject:=menu.Button{}
-	btnProject.SetAsViewButton("项目","http://bci.renjiwulian.com/project")
+	btnProject.SetAsViewButton("项目",serverAddress+"/view/weekly/detail.html")
 	btnPersonal:=menu.Button{}
-	btnPersonal.SetAsViewButton("个人","http://bci.renjiwulian.com/project")
+	btnPersonal.SetAsViewButton("个人",serverAddress+"/project")
 	teacherButtons := []menu.Button{btnRelationShip, btnProject,btnPersonal}
 	teacherRule :=menu.MatchRule{}
 	teacherRule.TagId=strconv.Itoa(tagTeacher)
@@ -165,11 +166,11 @@ func TeacherMenu(){
 
 func StudentMenu(){
 	btnRelationShip:=menu.Button{}
-	btnRelationShip.SetAsViewButton("架构","http://bci.renjiwulian.com/project")
+	btnRelationShip.SetAsViewButton("架构",serverAddress+"/project")
 	btnMission :=menu.Button{}
-	btnMission.SetAsViewButton("任务","http://bci.renjiwulian.com/project")
+	btnMission.SetAsViewButton("任务",serverAddress+"/project")
 	btnPersonal:=menu.Button{}
-	btnPersonal.SetAsViewButton("个人","http://bci.renjiwulian.com/project")
+	btnPersonal.SetAsViewButton("个人",serverAddress+"/project")
 	studentButtons := []menu.Button{btnRelationShip, btnMission,btnPersonal}
 	studentRule := menu.MatchRule{}
 	studentRule.TagId=strconv.Itoa(tagStudent)
