@@ -184,17 +184,17 @@ func StudentMenu(){
 	log.Printf("建立个性化学生菜单")
 }
 
-func TestMenu(){
-	M,err:=menu.TryMatch(defaultClt,"oPKFh5lM9MA6_Svd39Km-84no7c8")
-	if err!=nil{
-		fmt.Printf("%v\n",err)
-	}else{
-		for _, v:=range M.Buttons{
-			fmt.Printf( v.Name+"\t")
-		}
-	}
-	fmt.Printf("\n")
-}
+//func TestMenu(){
+//	M,err:=menu.TryMatch(defaultClt,"oPKFh5lM9MA6_Svd39Km-84no7c8")
+//	if err!=nil{
+//		fmt.Printf("%v\n",err)
+//	}else{
+//		for _, v:=range M.Buttons{
+//			fmt.Printf( v.Name+"\t")
+//		}
+//	}
+//	fmt.Printf("\n")
+//}
 
 func DelAllConditionalMenu(){
 	_,m2,err:=menu.Get(defaultClt)
