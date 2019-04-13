@@ -128,9 +128,9 @@ func DelRoleTag(weChatOpenId string, tagId int){
 
 func DefaultMenu(){
 	btnRelationShip:=menu.Button{}
-	btnRelationShip.SetAsClickButton("架构","RelationShip")
+	btnRelationShip.SetAsViewButton("架构","http://bci.renjiwulian.com/project")
 	btnProjectMission:=menu.Button{}
-	btnProjectMission.SetAsClickButton("项目/任务","ProjectMission")
+	btnProjectMission.SetAsViewButton("项目/任务","http://bci.renjiwulian.com/project")
 	btnEnroll:=menu.Button{}
 	btnEnroll.SetAsViewButton("登记","https://open.weixin.qq.com/connect/oauth2/authorize?appid="+wechatAppId+"&redirect_uri=http://bci.renjiwulian.com/test&response_type=code&scope=snsapi_base&state=12#wechat_redirect")
 	defaultButtons:= []menu.Button{btnRelationShip,btnProjectMission,btnEnroll}
@@ -140,6 +140,7 @@ func DefaultMenu(){
 	if err!=nil{
 		fmt.Printf("DefaultMenu%v\n",err)
 	}
+	log.Printf("建立默认菜单\n")
 }
 
 func TeacherMenu(){
@@ -159,6 +160,7 @@ func TeacherMenu(){
 	if err!=nil{
 		fmt.Printf("\nTeacherMenu:%v\n",err)
 	}
+	log.Printf("建立个性化教师菜单")
 }
 
 func StudentMenu(){
@@ -178,6 +180,7 @@ func StudentMenu(){
 	if err!=nil{
 		fmt.Printf("\nStudentMenu%v\n",err)
 	}
+	log.Printf("建立个性化学生菜单")
 }
 
 func TestMenu(){
