@@ -74,21 +74,15 @@ func DropTableUsers(){
 }
 
 func MakeTestData(){
-	CreateUser(&user.UserInfo{OpenId:"test1"})
-	CreateUser(&user.UserInfo{OpenId:"test2"})
-	CreateUser(&user.UserInfo{OpenId:"test3"})
-	database.DB.Model(&User{}).Create(
-		&User{WeChatOpenID:"student1",Name:"student1",Role:"student",Supervisor:"teacher1"})
-	database.DB.Model(&User{}).Create(
-		&User{WeChatOpenID:"student2",Name:"student2",Role:"student",Supervisor:"teacher1"})
-	database.DB.Model(&User{}).Create(
-		&User{WeChatOpenID:"student3",Name:"student3",Role:"student",Supervisor:"teacher2"})
-	database.DB.Model(&User{}).Create(
-		&User{WeChatOpenID:"teacher1",Name:"戴国骏",Role:"teacher"})
-	database.DB.Model(&User{}).Create(
-		&User{WeChatOpenID:"teacher2",Name:"张桦",Role:"teacher"})
-	database.DB.Model(&User{}).Create(
-		&User{WeChatOpenID:"teacher_unknown",Name:"其他导师",Role:"teacher"})
+	CreateUserByWeChatInfo(&user.UserInfo{OpenId: "test1"})
+	CreateUserByWeChatInfo(&user.UserInfo{OpenId: "test2"})
+	CreateUserByWeChatInfo(&user.UserInfo{OpenId: "test3"})
+	createUser(&User{WeChatOpenID:"student1",Name:"student1",Role:"student",Supervisor:"teacher1"})
+	createUser(&User{WeChatOpenID:"student2",Name:"student2",Role:"student",Supervisor:"teacher1"})
+	createUser(&User{WeChatOpenID:"student3",Name:"student3",Role:"student",Supervisor:"teacher2"})
+	createUser(&User{WeChatOpenID:"teacher1",Name:"戴国骏",Role:"teacher"})
+	createUser(&User{WeChatOpenID:"teacher2",Name:"张桦",Role:"teacher"})
+	createUser(&User{WeChatOpenID:"teacher_unknown",Name:"其他导师",Role:"teacher"})
 	log.Printf("创建测试用户数据")
 }
 
@@ -124,14 +118,20 @@ func RecordUserNotFound(weChatInfo *user.UserInfo) bool{
 	return false
 }
 
+//数据库创建用户
+func createUser(userInfo *User){
+	database.DB.Model(&User{}).Create(userInfo)
+	log.Printf("CreateUser"+ userInfo.WeChatOpenID)
+}
+
 //新关注用户创建
-func CreateUser(weChatInfo *user.UserInfo){
+func CreateUserByWeChatInfo(weChatInfo *user.UserInfo){
 	anonUser := new(User)
 	anonUser.Role = "unEnrolled"
 	anonUser.WeChatOpenID = weChatInfo.OpenId
 	//anonUser.WechatNickname = weChatInfo.Nickname
-	database.DB.Model(&User{}).Create(anonUser)
-	log.Printf("CreateUser"+weChatInfo.OpenId)
+	createUser(anonUser)
+	log.Printf("CreateUserByWeChatInfo"+weChatInfo.OpenId)
 }
 
 //数据库更新用户信息

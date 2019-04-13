@@ -6,6 +6,7 @@ import (
 	"github.com/jinzhu/gorm"
 	_ "github.com/jinzhu/gorm/dialects/mysql"
 	"github.com/pelletier/go-toml"
+	"log"
 )
 
 /**
@@ -24,14 +25,12 @@ func New() *gorm.DB {
 	password := configTree.Get("databasePassword").(string)
 	databaseName := configTree.Get("databaseName").(string)
 	connect := userName + ":" + password + "@/" + databaseName + "?charset=utf8&parseTime=True&loc=Local"
-
-	fmt.Println(connect)
-
 	DB, err := gorm.Open(driver, connect)
 
 	if err != nil {
 		panic(fmt.Sprintf("No error should happen when connecting to  database, but got err=%+v", err))
 	}
+	log.Printf("建立数据库连接\n")
 	return DB
 }
 

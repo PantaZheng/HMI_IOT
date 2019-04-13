@@ -81,6 +81,7 @@ func wechatClient() *core.Client{
 
 //向微信服务器创建Tag
 func CreateTag(){
+	log.Printf("CreateTag\n")
 	_,err:=tag.Create(defaultClt,"student")
 	if err!=nil{
 		fmt.Printf("\nCreateTag%v\n",err)
@@ -93,6 +94,7 @@ func CreateTag(){
 
 //获得Tag的ID
 func GetTagList(){
+	log.Printf("GetTagList\n")
 	tagList,err:=tag.List(defaultClt)
 	if err!=nil{
 		fmt.Printf("%v",err)
@@ -108,17 +110,19 @@ func GetTagList(){
 	}
 }
 
-func AddRoleTag(openIdList []string, tagId int){
-	if err:=tag.BatchTag(defaultClt,openIdList,tagId);err!=nil{
+func AddRoleTag(weChatOpenId string, tagId int){
+	if err:=tag.BatchTag(defaultClt,[]string{weChatOpenId},tagId);err!=nil{
 		fmt.Printf("AddRoleTagError:%v\n",err)
 	}
+	log.Printf("AddRoleTag\t"+weChatOpenId+"\ttagId"+strconv.Itoa(tagId)+"\n")
 	GetTagList()
 }
 
-func DelRoleTag(openIdList []string, tagId int){
-	if err:=tag.BatchUntag(defaultClt,openIdList,tagId);err!=nil{
+func DelRoleTag(weChatOpenId string, tagId int){
+	if err:=tag.BatchUntag(defaultClt,[]string{weChatOpenId},tagId);err!=nil{
 		fmt.Printf("AddRoleTagError:%v\n",err)
 	}
+	log.Printf("DelRoleTag+\t"+weChatOpenId+"\ttagID:"+strconv.Itoa(tagId)+"\n")
 	GetTagList()
 }
 

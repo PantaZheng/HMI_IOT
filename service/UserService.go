@@ -32,7 +32,7 @@ func GetTeachers(ctx iris.Context){
 //用户初始化
 func UserInit(weChatInfo *user.UserInfo) string {
 	if models.RecordUserNotFound(weChatInfo) {
-		models.CreateUser(weChatInfo)
+		models.CreateUserByWeChatInfo(weChatInfo)
 		fmt.Printf(weChatInfo.OpenId+"新用户关注")
 		return "欢迎关注,新用户请进行登记"
 	}
