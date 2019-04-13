@@ -42,6 +42,8 @@ func newApp() (api *iris.Application){
 		student.Post("/purify",controller.Purify)
 		student.Get("/list",controller.ListStudent)
 	})
+
+
 	return
 }
 
