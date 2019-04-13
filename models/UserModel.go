@@ -11,7 +11,7 @@ import (
 type User struct {
 	gorm.Model
 
-	WeChatOpenID string `gorm:"primary_key;unique;VARCHAR(191)"`
+	OpenId string `gorm:"primary_key;unique;VARCHAR(191)"`
 	Name         string `gorm:"not null VARCHAR(255)"`
 	Sex          string `gorm:"not null VARCHAR"`
 	Role         string `gorm:"not null VARCHAR(191)"`
@@ -33,20 +33,20 @@ type User struct {
 }
 
 type TeacherInfo struct{
-	WeChatOpenID string `json:"weChatOpenID"`
-	Name string `json:"name"`
-	Sex string `json:"sex"`
-	School string `json:"school"`
+	OpenId    string `json:"openid"`
+	Name      string `json:"name"`
+	Sex       string `json:"sex"`
+	School    string `json:"school"`
 	Telephone string `json:"telephone"`
 }
 
 type StudentInfo struct{
-	WeChatOpenID string `json:"weChatOpenID"`
-	Name string `json:"name"`
-	Sex string `json:"sex"`
+	OpenId     string `json:"openid"`
+	Name       string `json:"name"`
+	Sex        string `json:"sex"`
 	Supervisor string `json:"supervisor"`
-	School string `json:"school"`
-	Telephone string `json:"telephone"`
+	School     string `json:"school"`
+	Telephone  string `json:"telephone"`
 }
 
 type MemberInfo struct {
@@ -55,14 +55,14 @@ type MemberInfo struct {
 }
 
 type PureInfo struct{
-	WeChatOpenID string `json:"weChatOpenID"`
+	OpenId string `json:"openid"`
 }
 
 func CheckTableUser() {
 	if !database.DB.HasTable(&User{}){
 		database.DB.Set("gorm:table_options", "DEFAULT CHARSET=utf8 AUTO_INCREMENT=1;").CreateTable(&User{})
 		log.Printf("新建用户表\n")
-
+		MakeTestData()
 	}else{
 		log.Printf("用户表已存在\n")
 	}
@@ -77,20 +77,20 @@ func MakeTestData(){
 	CreateUserByWeChatInfo(&user.UserInfo{OpenId: "test1"})
 	CreateUserByWeChatInfo(&user.UserInfo{OpenId: "test2"})
 	CreateUserByWeChatInfo(&user.UserInfo{OpenId: "test3"})
-	createUser(&User{WeChatOpenID:"student1",Name:"student1",Role:"student",Supervisor:"teacher1"})
-	createUser(&User{WeChatOpenID:"student2",Name:"student2",Role:"student",Supervisor:"teacher1"})
-	createUser(&User{WeChatOpenID:"student3",Name:"student3",Role:"student",Supervisor:"teacher2"})
-	createUser(&User{WeChatOpenID:"teacher1",Name:"戴国骏",Role:"teacher"})
-	createUser(&User{WeChatOpenID:"teacher2",Name:"张桦",Role:"teacher"})
-	createUser(&User{WeChatOpenID:"teacher_unknown",Name:"其他导师",Role:"teacher"})
+	createUser(&User{OpenId:"student1",Name:"student1",Role:"student",Supervisor:"teacher1"})
+	createUser(&User{OpenId:"student2",Name:"student2",Role:"student",Supervisor:"teacher1"})
+	createUser(&User{OpenId:"student3",Name:"student3",Role:"student",Supervisor:"teacher2"})
+	createUser(&User{OpenId:"teacher1",Name:"戴国骏",Role:"teacher"})
+	createUser(&User{OpenId:"teacher2",Name:"张桦",Role:"teacher"})
+	createUser(&User{OpenId:"teacher_unknown",Name:"其他导师",Role:"teacher"})
 	log.Printf("创建测试用户数据")
 }
 
 //根据WeChatID获取用户
 func getUserByWeChatID(weChatOpenID string) (existedUser *User) {
 	existedUser = new(User)
-	existedUser.WeChatOpenID =weChatOpenID
-	if err := database.DB.Where(&User{WeChatOpenID:weChatOpenID}).First (existedUser).Error; err != nil {
+	existedUser.OpenId =weChatOpenID
+	if err := database.DB.Where(&User{OpenId:weChatOpenID}).First (existedUser).Error; err != nil {
 		fmt.Printf("GetUserByIdErr:%s", err)
 	}
 	return
@@ -121,14 +121,14 @@ func RecordUserNotFound(weChatInfo *user.UserInfo) bool{
 //数据库创建用户
 func createUser(userInfo *User){
 	database.DB.Model(&User{}).Create(userInfo)
-	log.Printf("dbCreateUser:\t"+ userInfo.WeChatOpenID)
+	log.Printf("dbCreateUser:\t"+ userInfo.OpenId)
 }
 
 //新关注用户创建
 func CreateUserByWeChatInfo(weChatInfo *user.UserInfo){
 	anonUser := new(User)
 	anonUser.Role = "unEnrolled"
-	anonUser.WeChatOpenID = weChatInfo.OpenId
+	anonUser.OpenId= weChatInfo.OpenId
 	//anonUser.WechatNickname = weChatInfo.Nickname
 	createUser(anonUser)
 	log.Printf("CreateUserByWeChatInfo:\t"+weChatInfo.OpenId)
@@ -136,18 +136,18 @@ func CreateUserByWeChatInfo(weChatInfo *user.UserInfo){
 
 //数据库更新用户信息
 func dbUpdateUser(newUser *User) (oldUser *User){
-	oldUser = getUserByWeChatID(newUser.WeChatOpenID)
-	if err := database.DB.Model(&User{}).Where(&User{WeChatOpenID:oldUser.WeChatOpenID}).Updates(newUser).Error; err != nil {
+	oldUser = getUserByWeChatID(newUser.OpenId)
+	if err := database.DB.Model(&User{}).Where(&User{OpenId:oldUser.OpenId}).Updates(newUser).Error; err != nil {
 		log.Printf("CreateUserErr:%s", err)
 	}
-	log.Printf("dbUpdateUser:\t"+oldUser.WeChatOpenID)
+	log.Printf("dbUpdateUser:\t"+oldUser.OpenId)
 	return
 }
 
 //教师登记
 func EnrollTeacher(teacherInfo *TeacherInfo, tagId int) {
 	teacher := new(User)
-	teacher.WeChatOpenID =teacherInfo.WeChatOpenID
+	teacher.OpenId =teacherInfo.OpenId
 	teacher.Role = "teacher"
 	teacher.Name = teacherInfo.Name
 	teacher.School=teacherInfo.School
@@ -155,13 +155,13 @@ func EnrollTeacher(teacherInfo *TeacherInfo, tagId int) {
 	teacher.Telephone= teacherInfo.Telephone
 	teacher.TagId=tagId
 	dbUpdateUser(teacher)
-	log.Printf("EnrollTeacher\t"+teacherInfo.WeChatOpenID)
+	log.Printf("EnrollTeacher\t"+teacherInfo.OpenId)
 }
 
 //学生登记
 func EnrollStudent(studentInfo *StudentInfo, tagId int) {
 	student := new(User)
-	student.WeChatOpenID=studentInfo.WeChatOpenID
+	student.OpenId=studentInfo.OpenId
 	student.Role = "student"
 	student.Name = studentInfo.Name
 	student.School= studentInfo.School
@@ -170,14 +170,14 @@ func EnrollStudent(studentInfo *StudentInfo, tagId int) {
 	student.Supervisor=studentInfo.Supervisor
 	student.TagId = tagId
 	dbUpdateUser(student)
-	log.Printf("EnrollStudent\t"+studentInfo.WeChatOpenID)
+	log.Printf("EnrollStudent\t"+studentInfo.OpenId)
 }
 
 //role变更
-func PurifyUser(weChatOpenId string)(tagId int){
+func PurifyUser(openId string)(tagId int){
 	Pure := new(User)
-	Pure.WeChatOpenID=weChatOpenId
+	Pure.OpenId= openId
 	Pure.Role = "unEnrolled"
-	log.Printf("PurifyUser\t"+weChatOpenId+"\n")
+	log.Printf("PurifyUser\t"+ openId +"\n")
 	return dbUpdateUser(Pure).TagId
 }

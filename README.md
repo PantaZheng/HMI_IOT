@@ -13,29 +13,30 @@
 1. 退出一下刷新菜单
 1. 再进入，个性化菜单
 
-### API
+## 默认测试数据
 
-#### anon匿名
+- 用户测试数据
+    1. `OpenId:"test1",Role:"unEnrolled"`
+    1. `OpenId:"test2",Role:"unEnrolled"`
+    1. `OpenId:"test3",Role:"unEnrolled"`
+    1. `OpenId:"student1",Name:"student1",Role:"student",Supervisor:"teacher1"`
+    1. `OpenId:"student2",Name:"student2",Role:"student",Supervisor:"teacher1"`
+    1. `OpenId:"student3",Name:"student3",Role:"student",Supervisor:"teacher2"`
+    1. `OpenId:"teacher1",Name:"戴国骏",Role:"teacher"`
+    1. `OpenId:"teacher2",Name:"张桦",Role:"teacher"`
+    1. `OpenId:"teacher_unknown",Name:"其他导师",Role:"teacher"`
 
-- url: `/anon/project`
+## API
 
-## 需求
+### anon
 
-### 拉取名单
+- 微信接口
+    - Any `/anon/project`
 
-- 默认测试数据
-    1. `WeChatOpenID:"test1",Role:"unEnrolled"`
-    1. `WeChatOpenID:"test2",Role:"unEnrolled"`
-    1. `WeChatOpenID:"test3",Role:"unEnrolled"`
-    1. `WeChatOpenID:"student1",Name:"student1",Role:"student",Supervisor:"teacher1"`
-    1. `WeChatOpenID:"student2",Name:"student2",Role:"student",Supervisor:"teacher1"`
-    1. `WeChatOpenID:"student3",Name:"student3",Role:"student",Supervisor:"teacher2"`
-    1. `WeChatOpenID:"teacher1",Name:"戴国骏",Role:"teacher"`
-    1. `WeChatOpenID:"teacher2",Name:"张桦",Role:"teacher"`
-    1. `WeChatOpenID:"teacher_unknown",Name:"其他导师",Role:"teacher"`
+### teacher
 
-- 教师名单
-    - get `/teacher/list`
+- 拉取教师名单
+    - Get `/teacher/list`
 
         ```json
         {
@@ -51,18 +52,44 @@
         }
         ```
 
-### 信息登记
-
 - 教师信息登记
-    - post `/teacher/enroll`
+    - Post `/teacher/enroll`
 
         ```json
         {
-            weChatOpenID: string//微信的识别ID
+            openid: string
             name: string
-            sex: string 男/女
+            sex: string
             school: string
             telephone: string
+        }
+        ```
+
+- 取消教师身份
+    - Post `/teacher/purify`
+
+        ```json
+        {
+            openid: string
+        }
+        ```
+
+### student
+
+- 拉取学生名单
+    - Get `/student/list`
+
+        ```json
+        {
+            {
+                id: uint
+                name: string
+            },
+            {
+                ..
+                ..
+            },
+            ...
         }
         ```
 
@@ -71,12 +98,21 @@
 
         ```json
         {
-            weChatOpenID: string//微信的识别ID
+            openid: string
             name: string
-            sex: string 男/女
+            sex: string
             telephone: string
             school: string
-            supervisor: string 导师
+            supervisor: string
+        }
+        ```
+
+- 取消学生身份
+    - Post `/teacher/purify`
+
+        ```json
+        {
+            openid: string
         }
         ```
 

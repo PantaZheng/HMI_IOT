@@ -42,17 +42,6 @@ func newApp() (api *iris.Application){
 		student.Post("/purify",controller.Purify)
 		student.Get("/list",controller.ListStudent)
 	})
-	api.PartyFunc("/project",func (project router.Party){
-		project.Get("/",func(ctx iris.Context){
-			_ = ctx.View("project/index.html")
-		})
-	})
-	api.PartyFunc("/test",func (test router.Party){
-		test.Get("/",func(ctx iris.Context){
-			_ = ctx.View("test/test.html")
-		})
-	})
-
 	return
 }
 

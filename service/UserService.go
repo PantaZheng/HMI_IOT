@@ -10,9 +10,7 @@ import (
 )
 
 func CheckTableUser(){
-	models.DropTableUsers()
 	models.CheckTableUser()
-	models.MakeTestData()
 }
 
 func GetStudents(ctx iris.Context) {
@@ -47,7 +45,7 @@ func UpdateTeacher(ctx iris.Context) {
 		panic(err.Error())
 	}
 	models.EnrollTeacher(teacherInfo,tagTeacher)
-	AddRoleTag(teacherInfo.WeChatOpenID,tagTeacher)
+	AddRoleTag(teacherInfo.OpenId,tagTeacher)
 	log.Printf(teacherInfo.Name+"教师信息更新tag"+strconv.Itoa(tagTeacher)+"\n")
 }
 
@@ -59,7 +57,7 @@ func UpdateStudent(ctx iris.Context) {
 	}
 	models.EnrollStudent(studentInfo,tagStudent)
 
-	AddRoleTag(studentInfo.WeChatOpenID,tagStudent)
+	AddRoleTag(studentInfo.OpenId,tagStudent)
 	log.Printf(studentInfo.Name+"同学信息更新tag"+strconv.Itoa(tagStudent)+"\n")
 }
 
@@ -69,7 +67,7 @@ func Purify(ctx iris.Context){
 	if err:=ctx.ReadJSON(pureInfo);err!=nil{
 		panic(err.Error())
 	}
-	tagId:=models.PurifyUser(pureInfo.WeChatOpenID)
-	DelRoleTag(pureInfo.WeChatOpenID,tagId)
-	log.Printf("去除用户"+pureInfo.WeChatOpenID+"的TagId:"+strconv.Itoa(tagId)+"\n")
+	tagId:=models.PurifyUser(pureInfo.OpenId)
+	DelRoleTag(pureInfo.OpenId,tagId)
+	log.Printf("去除用户"+pureInfo.OpenId+"的TagId:"+strconv.Itoa(tagId)+"\n")
 }
