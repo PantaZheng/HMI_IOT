@@ -47,7 +47,7 @@ func UpdateTeacher(ctx iris.Context) {
 		panic(err.Error())
 	}
 	models.EnrollTeacher(teacherInfo,tagTeacher)
-	AddRoleTag([]string{teacherInfo.WeChatOpenID},tagTeacher)
+	AddRoleTag(teacherInfo.WeChatOpenID,tagTeacher)
 	log.Printf(teacherInfo.Name+"教师信息更新tag"+strconv.Itoa(tagTeacher)+"\n")
 }
 
@@ -58,7 +58,8 @@ func UpdateStudent(ctx iris.Context) {
 		panic(err.Error())
 	}
 	models.EnrollStudent(studentInfo,tagStudent)
-	AddRoleTag([]string{studentInfo.WeChatOpenID},tagStudent)
+
+	AddRoleTag(studentInfo.WeChatOpenID,tagStudent)
 	log.Printf(studentInfo.Name+"同学信息更新tag"+strconv.Itoa(tagStudent)+"\n")
 }
 
@@ -69,6 +70,6 @@ func Purify(ctx iris.Context){
 		panic(err.Error())
 	}
 	tagId:=models.PurifyUser(pureInfo.WeChatOpenID)
-	DelRoleTag([]string{pureInfo.WeChatOpenID},tagId)
+	DelRoleTag(pureInfo.WeChatOpenID,tagId)
 	log.Printf("去除用户"+pureInfo.WeChatOpenID+"的TagId:"+strconv.Itoa(tagId)+"\n")
 }
