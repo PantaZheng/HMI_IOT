@@ -129,7 +129,7 @@ func DelRoleTag(weChatOpenId string, tagId int){
 
 func DefaultMenu(){
 	btnRelationShip:=menu.Button{}
-	btnRelationShip.SetAsViewButton("架构", serverAddress+"/project.index.html")
+	btnRelationShip.SetAsViewButton("架构", serverAddress+"/project/index.html")
 	btnProjectMission:=menu.Button{}
 	btnProjectMission.SetAsViewButton("项目/任务", serverAddress+"/project/index.html")
 	btnEnroll:=menu.Button{}
