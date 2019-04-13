@@ -25,8 +25,9 @@ func newApp() (api *iris.Application){
 
 
 	api.StaticWeb("/static","./view")
-	api.Get("/project", func(ctx iris.Context) {
-		_=ctx.ServeFile("./view/project/index.html", false)
+	api.RegisterView(iris.HTML("./view", ".html"))
+	api.Get("/project/", func(ctx iris.Context) {
+		_=ctx.View("index.html")
 	})
 
 	api.PartyFunc("/anon",func (anon router.Party){
