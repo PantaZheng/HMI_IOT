@@ -133,7 +133,7 @@ func DefaultMenu(){
 	btnProjectMission:=menu.Button{}
 	btnProjectMission.SetAsViewButton("项目/任务", serverAddress+"/project/index.html")
 	btnEnroll:=menu.Button{}
-	btnEnroll.SetAsViewButton("登记","https://open.weixin.qq.com/connect/oauth2/authorize?appid="+wechatAppId+"&redirect_uri="+serverAddress+"/test&response_type=code&scope=snsapi_base&state=12#wechat_redirect")
+	btnEnroll.SetAsViewButton("登记","https://open.weixin.qq.com/connect/oauth2/authorize?appid="+wechatAppId+"&redirect_uri="+serverAddress+"/test/test.html&response_type=code&scope=snsapi_base&state=12#wechat_redirect")
 	defaultButtons:= []menu.Button{btnRelationShip,btnProjectMission,btnEnroll}
 	defaultMenu:=menu.Menu{}
 	defaultMenu.Buttons= defaultButtons
