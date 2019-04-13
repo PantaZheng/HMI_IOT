@@ -129,9 +129,9 @@ func DelRoleTag(weChatOpenId string, tagId int){
 
 func DefaultMenu(){
 	btnRelationShip:=menu.Button{}
-	btnRelationShip.SetAsViewButton("架构", serverAddress+"/project/index.html")
+	btnRelationShip.SetAsViewButton("架构", serverAddress+"/project")
 	btnProjectMission:=menu.Button{}
-	btnProjectMission.SetAsViewButton("项目/任务", serverAddress+"/project/index.html")
+	btnProjectMission.SetAsViewButton("项目/任务", serverAddress+"/project")
 	btnEnroll:=menu.Button{}
 	btnEnroll.SetAsViewButton("登记","https://open.weixin.qq.com/connect/oauth2/authorize?appid="+wechatAppId+"&redirect_uri="+serverAddress+"/test/test.html&response_type=code&scope=snsapi_base&state=12#wechat_redirect")
 	defaultButtons:= []menu.Button{btnRelationShip,btnProjectMission,btnEnroll}
@@ -148,7 +148,7 @@ func TeacherMenu(){
 	btnRelationShip:=menu.Button{}
 	btnRelationShip.SetAsViewButton("架构",serverAddress+"/project")
 	btnProject:=menu.Button{}
-	btnProject.SetAsViewButton("项目",serverAddress+"/view/weekly/detail.html")
+	btnProject.SetAsViewButton("项目",serverAddress+"/weekly")
 	btnPersonal:=menu.Button{}
 	btnPersonal.SetAsViewButton("个人",serverAddress+"/project")
 	teacherButtons := []menu.Button{btnRelationShip, btnProject,btnPersonal}
