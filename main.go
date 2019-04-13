@@ -23,11 +23,10 @@ func newApp() (api *iris.Application){
 		}
 	})
 
-
 	api.StaticWeb("/static","./view")
 	api.RegisterView(iris.HTML("./view", ".html").Delims("[[","]]"))
 	api.Get("/project", func(ctx iris.Context) {
-		_=ctx.View("index.html")
+		_=ctx.View("./view/project/index.html")
 	})
 
 	api.PartyFunc("/anon",func (anon router.Party){
