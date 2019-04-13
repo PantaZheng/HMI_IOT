@@ -17,15 +17,26 @@ func newApp() (api *iris.Application){
 	api = iris.New()
 	api.Use(logger.New())
 
+	api.Favicon("./view/favicon.ico")
 	api.OnErrorCode(404,func(ctx iris.Context){
 		if _,err:=ctx.Writef("404 not found");err!=nil{
 			fmt.Printf("%v",err)
 		}
 	})
 
-	api.RegisterView(iris.HTML("./view",".html").Delims("[[","]]"))
-	api.StaticWeb("/","./view")
 
+	api.StaticWeb("/css","./view/css")
+	api.StaticWeb("/excel","./view/css")
+	api.StaticWeb("/fonts","./view/fonts")
+	api.StaticWeb("/image","./view/image")
+	api.StaticWeb("/images","./view/images")
+	api.StaticWeb("/js","./view/js")
+	api.StaticWeb("/mission","./view/mission")
+	api.StaticWeb("/project","./view/project")
+	api.StaticWeb("/scripts","./view/scripts")
+	api.StaticWeb("/test","./view/test")
+	api.StaticWeb("/weekly","./view/weekly")
+	
 	api.PartyFunc("/anon",func (anon router.Party){
 		anon.PartyFunc("/wechat", func(weChat router.Party) {
 			weChat.Any("/", controller.WeChat)
