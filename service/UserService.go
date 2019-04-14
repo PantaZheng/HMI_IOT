@@ -50,5 +50,5 @@ func Enroll(userEnroll  *models.User)(openid string){
 		panic(err.Error())
 	}
 	log.Printf(userEnroll.OpenId+"\tEnrollRole\t"+userEnroll.Role+"\n")
-	return openid
+	return userEnroll.OpenId
 }
