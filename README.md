@@ -40,6 +40,29 @@
 
 - 微信接口
     - Any `/anon/project`
+- 登记
+    - Post `/anon/enroll`
+    - send
+
+        ```golang
+        OpenId       string `gorm:"primary_key;unique;VARCHAR(191)" json:"openid"`
+        Code         string `gorm:"not null VARCHAR(255)" json:"code"`
+        Name         string `gorm:"not null VARCHAR(255)" json:"name"`
+        Sex          string `gorm:"not null VARCHAR" json:"sex"`
+        Role         string `gorm:"not null VARCHAR(191)" json:"role"`
+        School       string `gorm:"not null VARCHAR(255)" json:"school"`
+        Supervisor   string `gorm:"not null VARCHAR(191)" json:"supervisor"`
+        ```
+
+        - code不为空,其他都可为空
+    - resp
+
+        ```golang
+        OpenId       string `gorm:"primary_key;unique;VARCHAR(191)" json:"openid"`
+        ```
+
+- 拉取名单
+    - Get `/anon/enroll/list/{role:string}`
 
 ### teacher
 

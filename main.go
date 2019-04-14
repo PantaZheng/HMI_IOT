@@ -35,21 +35,20 @@ func newApp() (api *iris.Application){
 		_=ctx.View("/test/test.html")
 	})
 
+
 	api.PartyFunc("/anon",func (anon router.Party){
 		anon.PartyFunc("/wechat", func(weChat router.Party) {
 			weChat.Any("/", controller.WeChat)
 		})
+		api.Post("enroll",controller.Enroll)
+		api.Get("/list/{role:string}",controller.List)
 	})
 
 	api.PartyFunc("/teacher",func(teacher router.Party){
-		teacher.Post("/enroll",controller.EnrollTeacher)
-		teacher.Post("/purify",controller.Purify)
-		teacher.Get("/list",controller.ListTeacher)
+		//teacher.Get("/list",controller.GetTeachers)
 	})
 	api.PartyFunc("/student",func(student router.Party){
-		student.Post("/enroll",controller.EnrollStudent)
-		student.Post("/purify",controller.Purify)
-		student.Get("/list",controller.ListStudent)
+		//student.Get("/list",controller.GetStudents)
 	})
 
 

@@ -86,52 +86,6 @@ func wechatClient() *core.Client{
 	return core.NewClient(accessTokenTokenServer,nil)
 }
 
-//向微信服务器创建Tag
-func CreateTag(){
-	log.Printf("CreateTag\n")
-	_,err:=tag.Create(defaultClt,"student")
-	if err!=nil{
-		fmt.Printf("\nCreateTag%v\n",err)
-	}
-	_,err=tag.Create(defaultClt,"teacher")
-	if err!=nil{
-		fmt.Printf("\nCreateTag%v\n",err)
-	}
-}
-
-//获得Tag的ID
-func GetTagList(){
-	log.Printf("GetTagList\n")
-	tagList,err:=tag.List(defaultClt)
-	if err!=nil{
-		fmt.Printf("%v",err)
-	}
-	for _,v :=range tagList{
-		if v.Name == "student"{
-			tagStudent=v.Id
-		}
-		if v.Name == "teacher"{
-			tagTeacher=v.Id
-		}
-		fmt.Printf("\nid: "+strconv.Itoa(v.Id)+"\tname: "+v.Name+""+"\tcount: "+strconv.Itoa(v.UserCount)+"\n")
-	}
-}
-
-func AddRoleTag(weChatOpenId string, tagId int){
-	if err:=tag.BatchTag(defaultClt,[]string{weChatOpenId},tagId);err!=nil{
-		fmt.Printf("AddRoleTagError:%v\n",err)
-	}
-	log.Printf("AddRoleTag\t"+weChatOpenId+"\ttagId"+strconv.Itoa(tagId)+"\n")
-	GetTagList()
-}
-
-func DelRoleTag(weChatOpenId string, tagId int){
-	if err:=tag.BatchUntag(defaultClt,[]string{weChatOpenId},tagId);err!=nil{
-		fmt.Printf("AddRoleTagError:%v\n",err)
-	}
-	log.Printf("DelRoleTag+\t"+weChatOpenId+"\ttagID:"+strconv.Itoa(tagId)+"\n")
-	GetTagList()
-}
 
 func DefaultMenu(){
 	btnRelationShip:=menu.Button{}
@@ -148,46 +102,6 @@ func DefaultMenu(){
 		fmt.Printf("DefaultMenu%v\n",err)
 	}
 	log.Printf("建立默认菜单\n")
-}
-
-func TeacherMenu(){
-	btnRelationShip:=menu.Button{}
-	btnRelationShip.SetAsViewButton("架构",serverAddress+"/project")
-	btnProject:=menu.Button{}
-	btnProject.SetAsViewButton("项目",serverAddress+"/weekly")
-	btnPersonal:=menu.Button{}
-	btnPersonal.SetAsViewButton("个人",serverAddress+"/project")
-	teacherButtons := []menu.Button{btnRelationShip, btnProject,btnPersonal}
-	teacherRule :=menu.MatchRule{}
-	teacherRule.TagId=strconv.Itoa(tagTeacher)
-	teacherMenu :=menu.Menu{}
-	teacherMenu.Buttons= teacherButtons
-	teacherMenu.MatchRule=&teacherRule
-	_,err:=menu.AddConditionalMenu(defaultClt,&teacherMenu)
-	if err!=nil{
-		fmt.Printf("\nTeacherMenu:%v\n",err)
-	}
-	log.Printf("建立个性化教师菜单")
-}
-
-func StudentMenu(){
-	btnRelationShip:=menu.Button{}
-	btnRelationShip.SetAsViewButton("架构",serverAddress+"/project")
-	btnMission :=menu.Button{}
-	btnMission.SetAsViewButton("任务",serverAddress+"/project")
-	btnPersonal:=menu.Button{}
-	btnPersonal.SetAsViewButton("个人",serverAddress+"/project")
-	studentButtons := []menu.Button{btnRelationShip, btnMission,btnPersonal}
-	studentRule := menu.MatchRule{}
-	studentRule.TagId=strconv.Itoa(tagStudent)
-	studentMenu := menu.Menu{}
-	studentMenu.Buttons= studentButtons
-	studentMenu.MatchRule = &studentRule
-	_,err:=menu.AddConditionalMenu(defaultClt,&studentMenu)
-	if err!=nil{
-		fmt.Printf("\nStudentMenu%v\n",err)
-	}
-	log.Printf("建立个性化学生菜单")
 }
 
 //func TestMenu(){
