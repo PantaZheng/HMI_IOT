@@ -112,7 +112,7 @@ func GetAllMembers(role string) ( memberList [] MemberInfo) {
 }
 
 func RecordUserNotFound(weChatInfo *user.UserInfo) bool{
-	if database.DB.Where("we_chat_open_id=?",weChatInfo.OpenId).Find(&User{}).RecordNotFound(){
+	if database.DB.Where("open_id=?",weChatInfo.OpenId).Find(&User{}).RecordNotFound(){
 		fmt.Printf(weChatInfo.OpenId+"\tRecordUserNotFound\n")
 		return true
 	}
