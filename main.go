@@ -35,7 +35,8 @@ func newApp() (api *iris.Application){
 		_=ctx.View("/test/test.html")
 	})
 
-	api.Any("/anon/wechat",controller.WeChat)
+	api.Get("/anon/wechat",controller.WeChat)
+	api.Post("/anon/wechat",controller.WeChat)
 
 	api.PartyFunc("/teacher",func(teacher router.Party){
 		teacher.Post("/enroll",controller.EnrollTeacher)
