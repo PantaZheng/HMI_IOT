@@ -35,10 +35,11 @@ func GetMembers(role string) (memberList []models.MemberInfo){
 func UserInit(weChatInfo *user.UserInfo) string {
 	userInit:=&models.User{}
 	userInit.OpenId=weChatInfo.OpenId
+	userInit.role="unEnrolled"
 	if err:=models.EnrollUser(userInit);err!=nil{
 		panic(err.Error())
 	}
-	log.Printf(weChatInfo.OpenId+"用户关注")
+	log.Printf("UserInit:\t"+weChatInfo.OpenId)
 	return "欢迎关注"
 }
 
