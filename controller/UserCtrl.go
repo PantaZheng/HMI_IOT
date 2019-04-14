@@ -4,7 +4,6 @@ import (
 	"../models"
 	"../service"
 	"github.com/kataras/iris"
-	"log"
 )
 
 func Check() {
