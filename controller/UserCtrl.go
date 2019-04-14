@@ -6,6 +6,10 @@ import (
 	"github.com/kataras/iris"
 )
 
+type returnId struct {
+	OpenId string `json:"openid"`
+}
+
 func Check() {
 	service.CheckTableUser()
 }
@@ -15,9 +19,10 @@ func Enroll(ctx iris.Context) {
 	if err:=ctx.ReadJSON(userEnroll);err!=nil{
 		panic(err.Error())
 	}
-	user:=&models.User{}
-	user.OpenId=service.Enroll(userEnroll)
-	if _,err:=ctx.JSON(user.OpenId);err!=nil{
+	returnId:=&returnId{}
+	returnId.OpenId=service.Enroll(userEnroll)
+	ctx.StatusCode(iris.StatusOK)
+	if _,err:=ctx.JSON(returnId);err!=nil{
 		panic(err.Error())
 	}
 }
