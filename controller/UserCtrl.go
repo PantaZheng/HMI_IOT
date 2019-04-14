@@ -4,6 +4,7 @@ import (
 	"../models"
 	"../service"
 	"github.com/kataras/iris"
+	"log"
 )
 
 func Check() {
@@ -11,6 +12,7 @@ func Check() {
 }
 
 func Enroll(ctx iris.Context) {
+	log.Printf("CtrlEnroll\n")
 	userEnroll :=&models.User{}
 	if err:=ctx.ReadJSON(userEnroll);err!=nil{
 		panic(err.Error())
