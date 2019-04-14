@@ -12,6 +12,7 @@ import (
 )
 
 func CheckTableUser(){
+	models.DropTableUsers()
 	models.CheckTableUser()
 }
 
