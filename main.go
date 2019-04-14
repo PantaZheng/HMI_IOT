@@ -37,10 +37,10 @@ func newApp() (api *iris.Application){
 
 	api.PartyFunc("/anon",func (anon router.Party){
 		anon.PartyFunc("/wechat", func(weChat router.Party) {
-			weChat.Any("", controller.WeChat)
+			weChat.Any("/", controller.WeChat)
 		})
 	})
-	
+
 	api.PartyFunc("/teacher",func(teacher router.Party){
 		teacher.Post("/enroll",controller.EnrollTeacher)
 		teacher.Post("/purify",controller.Purify)
