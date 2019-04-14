@@ -40,8 +40,8 @@ func newApp() (api *iris.Application){
 		anon.PartyFunc("/wechat", func(weChat router.Party) {
 			weChat.Any("/", controller.WeChat)
 		})
-		api.Post("/enroll",controller.Enroll)
-		api.Get("/list/{role:string}",controller.List)
+		anon.Post("/enroll",controller.Enroll)
+		anon.Get("/list/{role:string}",controller.List)
 	})
 
 	api.PartyFunc("/teacher",func(teacher router.Party){

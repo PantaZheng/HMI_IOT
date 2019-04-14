@@ -12,7 +12,6 @@ func Check() {
 }
 
 func Enroll(ctx iris.Context) {
-	log.Printf("CtrlEnroll\n")
 	userEnroll :=&models.User{}
 	if err:=ctx.ReadJSON(userEnroll);err!=nil{
 		panic(err.Error())
