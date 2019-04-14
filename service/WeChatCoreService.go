@@ -38,13 +38,12 @@ func TextMsgHandler(ctx *core.Context) {
 }
 
 
-
 func MenuClickEventHandler(ctx *core.Context) {
 	log.Printf("收到按钮点击消息:\n%s\n", ctx.MsgPlaintext)
 	event := menu.GetClickEvent(ctx.MixedMsg)
 	resp := response.NewText(event.FromUserName, event.ToUserName, event.CreateTime, "请先登记个人信息")
 	if err:=ctx.RawResponse(resp);err!=nil{
-		fmt.Printf("MenuClickEventHandlerERR:%v", err)
+		panic(err.Error())
 	}
 }
 
@@ -54,7 +53,7 @@ func SubscribeEventHandler(ctx *core.Context){
 	info,_:=user.Get(clt,event.FromUserName,"")
 	resp := response.NewText(event.FromUserName,event.ToUserName,event.CreateTime, UserInit(info))
 	if err:=ctx.RawResponse(resp);err!=nil{
-		fmt.Printf("SubscribeEventHandlerERR:%v",err)
+		err.Error()
 	}
 
 }

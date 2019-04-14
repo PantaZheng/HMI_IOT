@@ -86,7 +86,7 @@ func GetMembersByRole(role string) ( memberList [] MemberInfo) {
 
 func recordNotFound(openid string) bool{
 	if database.DB.Where("open_id=?",openid).Find(&User{}).RecordNotFound(){
-		fmt.Printf(openid+"\tRecordUserNotFound\n")
+		log.Printf(openid+"\tRecordUserNotFound\n")
 		return true
 	}
 	log.Printf(openid+"\tRecordUserFound\n")
