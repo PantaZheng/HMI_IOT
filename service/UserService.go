@@ -35,7 +35,7 @@ func GetMembers(role string) (memberList []models.MemberInfo){
 func UserInit(weChatInfo *user.UserInfo) string {
 	userInit:=&models.User{}
 	userInit.OpenId=weChatInfo.OpenId
-	userInit.role="unEnrolled"
+	userInit.Role="unEnrolled"
 	if err:=models.EnrollUser(userInit);err!=nil{
 		panic(err.Error())
 	}
