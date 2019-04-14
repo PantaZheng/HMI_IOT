@@ -8,13 +8,11 @@ import (
 	"github.com/chanxuehong/wechat/mp/message/callback/request"
 	"github.com/chanxuehong/wechat/mp/message/callback/response"
 	"github.com/chanxuehong/wechat/mp/oauth2"
-	oa2 "github.com/chanxuehong/wechat/oauth2"
 	"github.com/chanxuehong/wechat/mp/user"
-	"github.com/chanxuehong/wechat/mp/user/tag"
+	oa2 "github.com/chanxuehong/wechat/oauth2"
 	"github.com/kataras/iris"
 	"github.com/pelletier/go-toml"
 	"log"
-	"strconv"
 )
 
 var (
@@ -26,9 +24,7 @@ var (
 	wechatToken         = wechatConfigTree.Get("Token").(string)
 	wechatEncodedAESKey = wechatConfigTree.Get("EncodedAESKey").(string)
 	defaultClt          = wechatClient()
-	tokenEndpoint =oauth2.Endpoint{wechatAppId,wechatAppSecret}
-	tagTeacher          = 0
-	tagStudent          = 0
+	tokenEndpoint =oauth2.Endpoint{AppId: wechatAppId, AppSecret: wechatAppSecret}
 )
 
 func TextMsgHandler(ctx *core.Context) {
