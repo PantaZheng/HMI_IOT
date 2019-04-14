@@ -3,7 +3,9 @@ package service
 import (
 	"../models"
 	"fmt"
+	oauth22 "github.com/chanxuehong/wechat/mp/oauth2"
 	"github.com/chanxuehong/wechat/mp/user"
+	_ "github.com/chanxuehong/wechat/oauth2"
 	"github.com/kataras/iris"
 	"log"
 	"strconv"
@@ -38,11 +40,22 @@ func UserInit(weChatInfo *user.UserInfo) string {
 	return "欢迎关注,感谢再次关注"
 }
 
+func exchangeToken(code string) (openid string){
+	session := &oauth22.Session{}
+	if err:=ExchangeToken(session,code);err!=nil{
+		log.Printf("ExchangeTokenError: %v",err)
+	}
+	return session.OpenId
+}
+
 //教师信息更新
 func UpdateTeacher(ctx iris.Context) {
 	teacherInfo:=&models.TeacherInfo{}
 	if err:=ctx.ReadJSON(teacherInfo);err!=nil{
 		panic(err.Error())
+	}
+	if teacherInfo.OpenId==""{
+		teacherInfo.OpenId=exchangeToken(teacherInfo.Code)
 	}
 	models.EnrollTeacher(teacherInfo,tagTeacher)
 	AddRoleTag(teacherInfo.OpenId,tagTeacher)
@@ -55,8 +68,11 @@ func UpdateStudent(ctx iris.Context) {
 	if err:=ctx.ReadJSON(studentInfo);err!=nil{
 		panic(err.Error())
 	}
+	if studentInfo.OpenId==""{
+		studentInfo.OpenId=exchangeToken(studentInfo.Code)
+	}
+	studentInfo.OpenId=exchangeToken(studentInfo.Code)
 	models.EnrollStudent(studentInfo,tagStudent)
-
 	AddRoleTag(studentInfo.OpenId,tagStudent)
 	log.Printf(studentInfo.Name+"同学信息更新tag"+strconv.Itoa(tagStudent)+"\n")
 }

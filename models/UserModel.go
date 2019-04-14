@@ -33,6 +33,7 @@ type User struct {
 }
 
 type TeacherInfo struct{
+	Code string `json:"code"`
 	OpenId    string `json:"openid"`
 	Name      string `json:"name"`
 	Sex       string `json:"sex"`
@@ -41,6 +42,7 @@ type TeacherInfo struct{
 }
 
 type StudentInfo struct{
+	Code string `json:"code"`
 	OpenId     string `json:"openid"`
 	Name       string `json:"name"`
 	Sex        string `json:"sex"`

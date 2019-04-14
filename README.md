@@ -65,7 +65,7 @@
 
         ```json
         {
-            openid: string
+            code: string
             name: string
             sex: string
             school: string
@@ -106,7 +106,7 @@
 
         ```json
         {
-            openid: string
+            code: string
             name: string
             sex: string
             telephone: string
