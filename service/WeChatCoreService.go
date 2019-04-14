@@ -31,10 +31,13 @@ var (
 )
 
 func TextMsgHandler(ctx *core.Context) {
+	log.Printf("进入文本消息处理")
 	msg := request.GetText(ctx.MixedMsg)
 	resp := response.NewText(msg.FromUserName, msg.ToUserName, msg.CreateTime, msg.Content)
 	log.Printf("收到文本消息:\n%s\n", ctx.MsgPlaintext)
-	_=ctx.RawResponse(resp)
+	if err:=ctx.RawResponse(resp);err!=nil{
+		log.Printf("文本消息处理出错：%v",err)
+	}
 }
 
 
