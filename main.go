@@ -36,7 +36,7 @@ func newApp() (api *iris.Application){
 	})
 
 	api.PartyFunc("/anon",func (anon router.Party){
-		anon.PartyFunc("/wechat.index", func(weChat router.Party) {
+		anon.PartyFunc("/wechat/index.html", func(weChat router.Party) {
 			weChat.Any("/", controller.WeChat)
 		})
 	})
