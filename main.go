@@ -22,7 +22,7 @@ func newApp() (api *iris.Application){
 			fmt.Printf("%v",err)
 		}
 	})
-
+	
 	api.StaticWeb("/","./view")
 	api.RegisterView(iris.HTML("./view", ".html").Delims("[[","]]"))
 	api.Get("/project", func(ctx iris.Context) {
@@ -35,8 +35,11 @@ func newApp() (api *iris.Application){
 		_=ctx.View("/test/test.html")
 	})
 
-	api.Get("/anon/wechat",controller.WeChat)
-	api.Post("/anon/wechat",controller.WeChat)
+	api.PartyFunc("/anon",func (anon router.Party){
+		anon.PartyFunc("/wechat", func(weChat router.Party) {
+			weChat.Any("/", controller.WeChat)
+		})
+	})
 
 	api.PartyFunc("/teacher",func(teacher router.Party){
 		teacher.Post("/enroll",controller.EnrollTeacher)

@@ -38,6 +38,7 @@ func TextMsgHandler(ctx *core.Context) {
 	if err:=ctx.RawResponse(resp);err!=nil{
 		log.Printf("文本消息处理出错：%v",err)
 	}
+
 }
 
 
@@ -69,6 +70,8 @@ func DefaultEventHandler(ctx *core.Context) {
 
 func WechatServer(ctx iris.Context) {
 	mux := core.NewServeMux()
+	mux.DefaultMsgHandleFunc(DefaultEventHandler)
+	mux.DefaultEventHandleFunc(DefaultEventHandler)
 	mux.MsgHandleFunc(request.MsgTypeText, TextMsgHandler)
 	mux.EventHandleFunc(menu.EventTypeClick, MenuClickEventHandler)
 	mux.EventHandleFunc(request.EventTypeSubscribe,SubscribeEventHandler)
