@@ -2,6 +2,7 @@ package service
 
 import (
 	"../models"
+	"encoding/json"
 	"fmt"
 	oauth22 "github.com/chanxuehong/wechat/mp/oauth2"
 	"github.com/chanxuehong/wechat/mp/user"
@@ -69,10 +70,12 @@ func UpdateStudent(ctx iris.Context) {
 	if err:=ctx.ReadJSON(studentInfo);err!=nil{
 		panic(err.Error())
 	}
+	mes,_:=json.Marshal(studentInfo)
+	log.Printf("UpdateStudentJSON:",string(mes)+"\n")
 	if studentInfo.OpenId==""{
+		log.Printf("OpenId不存在")
 		studentInfo.OpenId=exchangeToken(studentInfo.Code)
 	}
-	studentInfo.OpenId=exchangeToken(studentInfo.Code)
 	models.EnrollStudent(studentInfo,tagStudent)
 	AddRoleTag(studentInfo.OpenId,tagStudent)
 	log.Printf(studentInfo.Name+"同学信息更新tag"+strconv.Itoa(tagStudent)+"\n")

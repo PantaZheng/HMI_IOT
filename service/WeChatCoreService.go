@@ -38,7 +38,6 @@ func TextMsgHandler(ctx *core.Context) {
 	if err:=ctx.RawResponse(resp);err!=nil{
 		log.Printf("文本消息处理出错：%v",err)
 	}
-
 }
 
 
