@@ -69,8 +69,6 @@ func DefaultEventHandler(ctx *core.Context) {
 
 func WechatServer(ctx iris.Context) {
 	mux := core.NewServeMux()
-	mux.DefaultMsgHandleFunc(DefaultEventHandler)
-	mux.DefaultEventHandleFunc(DefaultEventHandler)
 	mux.MsgHandleFunc(request.MsgTypeText, TextMsgHandler)
 	mux.EventHandleFunc(menu.EventTypeClick, MenuClickEventHandler)
 	mux.EventHandleFunc(request.EventTypeSubscribe,SubscribeEventHandler)
