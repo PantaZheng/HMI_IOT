@@ -13,7 +13,7 @@ import (
 )
 
 func CheckTableUser(){
-	models.DropTableUsers()
+	//models.DropTableUsers()
 	models.CheckTableUser()
 }
 
