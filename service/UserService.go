@@ -4,8 +4,8 @@ import (
 	"../models"
 	"encoding/json"
 	"fmt"
-	oauth22 "github.com/chanxuehong/wechat/mp/oauth2"
 	"github.com/chanxuehong/wechat/mp/user"
+	"github.com/chanxuehong/wechat/oauth2"
 	_ "github.com/chanxuehong/wechat/oauth2"
 	"github.com/kataras/iris"
 	"log"
@@ -43,11 +43,11 @@ func UserInit(weChatInfo *user.UserInfo) string {
 }
 
 func exchangeToken(code string) (openid string){
-	session := &oauth22.Session{}
-	if err:=ExchangeToken(session,code);err!=nil{
+	token := &oauth2.Token{}
+	if err:=ExchangeToken(token,code);err!=nil{
 		log.Printf("ExchangeTokenError: %v",err)
 	}
-	return session.OpenId
+	return token.OpenId
 }
 
 //教师信息更新

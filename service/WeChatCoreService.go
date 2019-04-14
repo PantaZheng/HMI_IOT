@@ -8,6 +8,7 @@ import (
 	"github.com/chanxuehong/wechat/mp/message/callback/request"
 	"github.com/chanxuehong/wechat/mp/message/callback/response"
 	"github.com/chanxuehong/wechat/mp/oauth2"
+	oa2 "github.com/chanxuehong/wechat/oauth2"
 	"github.com/chanxuehong/wechat/mp/user"
 	"github.com/chanxuehong/wechat/mp/user/tag"
 	"github.com/kataras/iris"
@@ -25,7 +26,7 @@ var (
 	wechatToken         = wechatConfigTree.Get("Token").(string)
 	wechatEncodedAESKey = wechatConfigTree.Get("EncodedAESKey").(string)
 	defaultClt          = wechatClient()
-	oauth2Endpoint  = oauth2.NewEndpoint(wechatAppId,wechatAppSecret)
+	tokenEndpoint =oauth2.Endpoint{wechatAppId,wechatAppSecret}
 	tagTeacher          = 0
 	tagStudent          = 0
 )
@@ -233,10 +234,10 @@ func GetAllMenu(){
 	fmt.Printf("\n")
 }
 
-func ExchangeToken(session *oauth2.Session,code string)(err error){
-	session =&oauth2.Session{}
-	if session,err=oauth2.GetSession(oauth2Endpoint,code);err!=nil {
-		return
-	}
+func ExchangeToken(token *oa2.Token,code string)(err error){
+	exchangeClient:=&oa2.Client{}
+	exchangeClient.Endpoint=&tokenEndpoint
+	exchangeClient.Token=token
+	token,_=exchangeClient.ExchangeToken(code)
 	return
 }
