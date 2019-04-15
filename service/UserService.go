@@ -21,8 +21,8 @@ func checkOpenId(openid string,code string) (checkOpenId string){
 }
 
 func CheckTableUser(){
-	//models.DropTableUsers()
-	models.CheckTableUser()
+	models.DropTableUsers()
+	//models.CheckTableUser()
 }
 
 func GetMembers(role string) (memberList []models.MemberInfo){

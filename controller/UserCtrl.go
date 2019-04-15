@@ -6,9 +6,12 @@ import (
 	"github.com/kataras/iris"
 )
 
+
 type returnId struct {
 	OpenId string `json:"openid"`
 }
+
+
 
 func Check() {
 	service.CheckTableUser()

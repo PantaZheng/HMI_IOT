@@ -33,6 +33,10 @@ type MemberInfo struct {
 	Name string `json:"name"`
 }
 
+func init(){
+	database.DB.AutoMigrate(&User{})
+}
+
 func CheckTableUser() {
 	if !database.DB.HasTable(&User{}){
 		database.DB.Set("gorm:table_options", "DEFAULT CHARSET=utf8 AUTO_INCREMENT=1;").CreateTable(&User{})
