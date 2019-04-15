@@ -3,6 +3,7 @@ package models
 import (
 	"../database"
 	"github.com/jinzhu/gorm"
+	"log"
 )
 
 type Project struct {
@@ -18,6 +19,12 @@ type Project struct {
 	Missions    []Mission `json:"missions"`
 }
 
+func init(){
+	database.DB.DropTable("projects")
+	log.Printf("删除用户表")
+	database.DB.Set("gorm:table_options", "DEFAULT CHARSET=utf8 AUTO_INCREMENT=1;").AutoMigrate(&Project{})
+}
+
 func GetLeaders(id uint)(leaders []User){
 	database.DB.Find(&leaders,id).Select("leaders")
 	return
@@ -28,4 +35,8 @@ func GetInstructors(id uint)(instructors []User){
 	return
 }
 
-//func EnrollProject(project *Project)
+func EnrollProject(project *Project){
+	recordProject:=Project{}
+	database.DB.FirstOrCreate(&recordProject,&Project{Title:recordProject.Title})
+
+}

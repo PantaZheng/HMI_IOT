@@ -71,7 +71,7 @@ func GetMembersByRole(role string) ( memberList [] MemberInfo) {
 }
 
 //登记信息
-func EnrollUser( user *User){
+func EnrollUser(user *User){
 	recordUser:=User{}
 	database.DB.FirstOrCreate(&recordUser,&User{OpenId:user.OpenId})
 	database.DB.Model(&recordUser).Updates(user)
