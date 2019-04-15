@@ -25,13 +25,13 @@ func newApp() (api *iris.Application){
 	
 	api.StaticWeb("/","./view")
 	api.RegisterView(iris.HTML("./view", ".html").Delims("[[","]]"))
-	api.Get("/project/", func(ctx iris.Context) {
+	api.Get("/project", func(ctx iris.Context) {
 		_=ctx.View("/project/index.html")
 	})
-	api.Get("/mission/", func(ctx iris.Context){
+	api.Get("/mission", func(ctx iris.Context){
 		_=ctx.View("/mission/index.html")
 	})
-	api.Get("/createUser/", func(ctx iris.Context) {
+	api.Get("/createUser", func(ctx iris.Context) {
 		_=ctx.View("/createUser/index.html")
 	})
 
