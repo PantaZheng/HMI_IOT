@@ -37,8 +37,6 @@ func UserInit(weChatInfo *user.UserInfo) string {
 	return "欢迎关注"
 }
 
-
-
 func GetMembers(role string) (memberList []models.MemberInfo){
 	memberList=models.GetMembersByRole(role)
 	return

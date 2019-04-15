@@ -8,13 +8,13 @@ import (
 
 type User struct {
 	gorm.Model
-	OpenId string `gorm:"unique" json:"openid"`
-	Code string `gorm:"not null" json:"code"`
-	Name         string `gorm:"not null" json:"name"`
-	Sex          string `gorm:"not null" json:"sex"`
-	Role         string `gorm:"not null " json:"role"`
-	School       string `gorm:"not null" json:"school"`
-	Supervisor	string `gorm:"not null" json:"supervisor"`
+	OpenId	string	`gorm:"unique" json:"openid"`
+	Code 	string	`gorm:"unique" json:"code"`
+	Name	string	`json:"name"`
+	Sex		string	`json:"sex"`
+	Role	string	`json:"role"`
+	School	string	`json:"school"`
+	Supervisor	string	`json:"supervisor"`
 	//HduId        string `gorm:"VARCHAR(191)"`
 	//Level        string `gorm:"VARCHAR(191)"`
 	//TagId        int `gorm:"VARCHAR(191)"`

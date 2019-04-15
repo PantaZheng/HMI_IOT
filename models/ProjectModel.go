@@ -10,5 +10,6 @@ type Project struct {
 	StartTime string `gorm:"not null" json:"startTime"`
  	EndTime string 	`gorm:"not null" json:"endTime"`
 	Status int `gorm:"not null" json:"endTime"`
-	//Leader []User `gorm:`
+	Leader []User
+
 }
