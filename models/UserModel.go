@@ -96,7 +96,7 @@ func recordNotFound(openid string) bool{
 //数据库创建用户
 func dbCreateUser(newUser *User)(){
 	database.DB.Model(&User{}).Create(newUser)
-	log.Printf("dbCreateUser:\t"+ newUser.OpenId)
+	//log.Printf("dbCreateUser:\t"+ newUser.OpenId)
 }
 
 //数据库更新用户信息
