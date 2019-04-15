@@ -49,9 +49,9 @@ func DropTableUsers(){
 }
 
 func MakeTestData(){
-	_= EnrollUser(&User{OpenId: "test1"})
-	_= EnrollUser(&User{OpenId: "test2"})
-	_= EnrollUser(&User{OpenId: "test3"})
+	_= EnrollUser(&User{OpenId: "test1",Role:"unEnrolled"})
+	_= EnrollUser(&User{OpenId: "test2",Role:"unEnrolled"})
+	_= EnrollUser(&User{OpenId: "test3",Role:"unEnrolled"})
 	_= EnrollUser(&User{OpenId: "student1",Name:"student1",Role:"student",Supervisor:"teacher1"})
 	_= EnrollUser(&User{OpenId: "student2",Name:"student2",Role:"student",Supervisor:"teacher1"})
 	_= EnrollUser(&User{OpenId: "student3",Name:"student3",Role:"student",Supervisor:"teacher2"})
