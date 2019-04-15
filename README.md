@@ -62,7 +62,7 @@
         ```
 
 - 拉取名单
-    - Get `/anon/enroll/list/{role:string}`
+    - Get `/anon/list/{role:string}`
 
 ### teacher
 

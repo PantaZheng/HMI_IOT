@@ -10,21 +10,20 @@ import (
 	"github.com/chanxuehong/wechat/mp/oauth2"
 	"github.com/chanxuehong/wechat/mp/user"
 	oa2 "github.com/chanxuehong/wechat/oauth2"
-	"github.com/kataras/iris"
 	"github.com/pelletier/go-toml"
 	"log"
 )
 
 var (
-	serverAddress       = config.Conf.Get("server.serverAddress").(string)
-	wechatConfigTree    =config.Conf.Get("wechat").(*toml.Tree)
-	wechatOriId         = wechatConfigTree.Get("OriId").(string)
-	wechatAppId         = wechatConfigTree.Get("AppId").(string)
-	wechatAppSecret     = wechatConfigTree.Get("AppSecret").(string)
-	wechatToken         = wechatConfigTree.Get("Token").(string)
-	wechatEncodedAESKey = wechatConfigTree.Get("EncodedAESKey").(string)
+	ServerAddress       = config.Conf.Get("server.ServerAddress").(string)
+	WeChatConfigTree    =config.Conf.Get("wechat").(*toml.Tree)
+	WeChatOriId         = WeChatConfigTree.Get("OriId").(string)
+	WeChatAppId         = WeChatConfigTree.Get("AppId").(string)
+	WeChatAppSecret     = WeChatConfigTree.Get("AppSecret").(string)
+	WeChatToken         = WeChatConfigTree.Get("Token").(string)
+	WeChatEncodedAESKey = WeChatConfigTree.Get("EncodedAESKey").(string)
 	defaultClt          = wechatClient()
-	tokenEndpoint =oauth2.Endpoint{AppId: wechatAppId, AppSecret: wechatAppSecret}
+	tokenEndpoint       =oauth2.Endpoint{AppId: WeChatAppId, AppSecret: WeChatAppSecret}
 )
 
 func TextMsgHandler(ctx *core.Context) {
@@ -63,36 +62,14 @@ func DefaultEventHandler(ctx *core.Context) {
 	_=ctx.NoneResponse()
 }
 
-func WechatServer(ctx iris.Context) {
-	mux := core.NewServeMux()
-	mux.DefaultMsgHandleFunc(DefaultEventHandler)
-	mux.DefaultEventHandleFunc(DefaultEventHandler)
-	mux.MsgHandleFunc(request.MsgTypeText, TextMsgHandler)
-	mux.EventHandleFunc(menu.EventTypeClick, MenuClickEventHandler)
-	mux.EventHandleFunc(request.EventTypeSubscribe,SubscribeEventHandler)
-	msgHandler := mux
-
-	msgServer := core.NewServer(wechatOriId, wechatAppId, wechatToken, wechatEncodedAESKey,msgHandler, nil)
-	msgServer.ServeHTTP(ctx.ResponseWriter(), ctx.Request(), nil)
-}
-
 func wechatClient() *core.Client{
-	accessTokenTokenServer :=core.NewDefaultAccessTokenServer(wechatAppId,wechatAppSecret,nil)
+	accessTokenTokenServer :=core.NewDefaultAccessTokenServer(WeChatAppId, WeChatAppSecret,nil)
 	return core.NewClient(accessTokenTokenServer,nil)
 }
 
 
-func DefaultMenu(){
-	btnRelationShip:=menu.Button{}
-	btnRelationShip.SetAsViewButton("架构", serverAddress+"/project/index.html")
-	btnProjectMission:=menu.Button{}
-	btnProjectMission.SetAsViewButton("项目/任务", serverAddress+"/project/index.html")
-	btnEnroll:=menu.Button{}
-	btnEnroll.SetAsViewButton("登记","https://open.weixin.qq.com/connect/oauth2/authorize?appid="+wechatAppId+"&redirect_uri="+serverAddress+"/test/test.html&response_type=code&scope=snsapi_base&state=12#wechat_redirect")
-	defaultButtons:= []menu.Button{btnRelationShip,btnProjectMission,btnEnroll}
-	defaultMenu:=menu.Menu{}
-	defaultMenu.Buttons= defaultButtons
-	err:=menu.Create(defaultClt,&defaultMenu)
+func DefaultMenu(defaultMenu *menu.Menu){
+	err:=menu.Create(defaultClt,defaultMenu)
 	if err!=nil{
 		fmt.Printf("DefaultMenu%v\n",err)
 	}
