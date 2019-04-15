@@ -6,6 +6,7 @@ import (
 	"log"
 )
 
+//TODO:导师和学生关系
 type User struct {
 	gorm.Model
 	OpenId	string	`gorm:"unique;" json:"openid"`
@@ -15,6 +16,9 @@ type User struct {
 	Role	string	`json:"role"`
 	School	string	`json:"school"`
 	Supervisor	string	`json:"supervisor"`
+	LeadingProjects []Project `json:"leading"`
+	InstructingProjects []Project `json:"instructing"`
+
 	//HduId        string `gorm:"VARCHAR(191)"`
 	//Level        string `gorm:"VARCHAR(191)"`
 	//TagId        int `gorm:"VARCHAR(191)"`
@@ -32,7 +36,7 @@ type MemberInfo struct {
 	Name string `json:"name"`
 }
 
-func CheckTableUser() {
+func init() {
 	database.DB.Set("gorm:table_options", "DEFAULT CHARSET=utf8 AUTO_INCREMENT=1;").AutoMigrate(&User{})
 	MakeTestData()
 }
@@ -65,7 +69,7 @@ func GetMembersByRole(role string) ( memberList [] MemberInfo) {
 		memberList[i].Id=v.ID
 		memberList[i].Name=v.Name
 	}
-	log.Printf("GetAllMembers,role:\t"+role+"\n")
+	log.Printf("Get:\t"+role+"s\n")
 	return memberList
 }
 
