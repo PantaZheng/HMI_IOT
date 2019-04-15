@@ -27,11 +27,11 @@ func WeChat(ctx iris.Context) {
 
 func Menu(){
 	btnRelationShip:=menu.Button{}
-	btnRelationShip.SetAsViewButton("架构aa", service.ServerAddress+"/project/index.html")
+	btnRelationShip.SetAsViewButton("架构", service.ServerAddress+"/project/index.html")
 	btnProjectMission:=menu.Button{}
 	btnProjectMission.SetAsViewButton("项目/任务", service.ServerAddress+"/project/index.html")
 	btnEnroll:=menu.Button{}
-	btnEnroll.SetAsViewButton("个人信息","https://open.weixin.qq.com/connect/oauth2/authorize?appid="+service.WeChatAppId+"&redirect_uri="+service.ServerAddress+"/createUser/index.html&response_type=code&scope=snsapi_base&state=12#wechat_redirect")
+	btnEnroll.SetAsViewButton("个人信息","https://open.weixin.qq.com/connect/oauth2/authorize?appid="+service.WeChatAppId+"&redirect_uri="+service.ServerAddress+"/createUser&response_type=code&scope=snsapi_base&state=12#wechat_redirect")
 	defaultButtons:= []menu.Button{btnRelationShip,btnProjectMission,btnEnroll}
 	service.DefaultMenu(&menu.Menu{Buttons:defaultButtons})
 }
