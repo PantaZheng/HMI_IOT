@@ -99,6 +99,14 @@ func DefaultMenu(){
 	log.Printf("建立默认菜单\n")
 }
 
+func ExchangeToken(token *oa2.Token,code string)(err error){
+	exchangeClient:=&oa2.Client{}
+	exchangeClient.Endpoint=&tokenEndpoint
+	exchangeClient.Token=token
+	token,_=exchangeClient.ExchangeToken(code)
+	return
+}
+
 //func TestMenu(){
 //	M,err:=menu.TryMatch(defaultClt,"oPKFh5lM9MA6_Svd39Km-84no7c8")
 //	if err!=nil{
@@ -122,31 +130,24 @@ func DefaultMenu(){
 //	}
 //}
 
-func GetAllMenu(){
-	m1,m2,err:=menu.Get(defaultClt)
-	if err!=nil{
-		fmt.Printf("%v\n",err)
-	}else{
-		fmt.Printf("defaultMenus----\n")
-		for _, v:=range m1.Buttons{
-			fmt.Printf( v.Name+"\t")
-		}
-		fmt.Printf("\n")
-		fmt.Printf("conditionalMenus----\n")
-		for _,v1:=range  m2{
-			for _,v3:=range v1.Buttons{
-				fmt.Printf( v3.Name+"\t")
-			}
-			fmt.Printf("\n")
-		}
-	}
-	fmt.Printf("\n")
-}
+//func GetAllMenu(){
+//	m1,m2,err:=menu.Get(defaultClt)
+//	if err!=nil{
+//		fmt.Printf("%v\n",err)
+//	}else{
+//		fmt.Printf("defaultMenus----\n")
+//		for _, v:=range m1.Buttons{
+//			fmt.Printf( v.Name+"\t")
+//		}
+//		fmt.Printf("\n")
+//		fmt.Printf("conditionalMenus----\n")
+//		for _,v1:=range  m2{
+//			for _,v3:=range v1.Buttons{
+//				fmt.Printf( v3.Name+"\t")
+//			}
+//			fmt.Printf("\n")
+//		}
+//	}
+//	fmt.Printf("\n")
+//}
 
-func ExchangeToken(token *oa2.Token,code string)(err error){
-	exchangeClient:=&oa2.Client{}
-	exchangeClient.Endpoint=&tokenEndpoint
-	exchangeClient.Token=token
-	token,_=exchangeClient.ExchangeToken(code)
-	return
-}
