@@ -27,7 +27,7 @@ func WeChat(ctx iris.Context) {
 
 func Menu(){
 	btnRelationShip:=menu.Button{}
-	btnRelationShip.SetAsViewButton("架构", service.ServerAddress+"/project/index.html")
+	btnRelationShip.SetAsViewButton("架构", service.ServerAddress+"/framework/frame.html")
 	btnProjectMission:=menu.Button{}
 	btnProjectMission.SetAsViewButton("项目/任务", service.ServerAddress+"/project/index.html")
 	btnEnroll:=menu.Button{}

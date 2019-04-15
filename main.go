@@ -27,11 +27,14 @@ func newApp() (api *iris.Application){
 	api.Get("/project/", func(ctx iris.Context) {
 		_=ctx.View("/project/index.html")
 	})
-	api.Get("/mission/", func(ctx iris.Context){
+	api.Get("/mission", func(ctx iris.Context){
 		_=ctx.View("/mission/index.html")
 	})
-	api.Get("/createUser", func(ctx iris.Context) {
+	api.Get("/createUser/", func(ctx iris.Context) {
 		_=ctx.View("/createUser/index.html")
+	})
+	api.Get("/framework/", func(ctx iris.Context) {
+		_=ctx.View("/framework/index.html")
 	})
 
 	api.PartyFunc("/anon",func (anon router.Party){
