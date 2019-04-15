@@ -26,9 +26,7 @@ func UserInit(weChatInfo *user.UserInfo) string {
 	userInit:=&models.User{}
 	userInit.OpenId=weChatInfo.OpenId
 	userInit.Role="unEnrolled"
-	if err:=models.EnrollUser(userInit);err!=nil{
-		panic(err.Error())
-	}
+	models.EnrollUser(userInit)
 	log.Printf("UserInit:\t"+weChatInfo.OpenId)
 	return "欢迎关注"
 }
@@ -40,9 +38,7 @@ func GetMembers(role string) (memberList []models.MemberInfo){
 
 func Enroll(userEnroll  *models.User)(openid string){
 	userEnroll.OpenId=checkOpenId(userEnroll.OpenId, userEnroll.Code)
-	if err:=models.EnrollUser(userEnroll);err!=nil{
-		panic(err.Error())
-	}
+	models.EnrollUser(userEnroll)
 	log.Printf(userEnroll.OpenId+"\tEnrollRole\t"+userEnroll.Role+"\n")
 	return userEnroll.OpenId
 }

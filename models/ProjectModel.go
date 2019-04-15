@@ -1,6 +1,7 @@
 package models
 
 import (
+	"../database"
 	"github.com/jinzhu/gorm"
 )
 
@@ -17,6 +18,14 @@ type Project struct {
 	Missions    []Mission `json:"missions"`
 }
 
-//func GetLeaders(uint id)(leaders []User){
-//	data
-//}
+func GetLeaders(id uint)(leaders []User){
+	database.DB.Find(&leaders,id).Select("leaders")
+	return
+}
+
+func GetInstructors(id uint)(instructors []User){
+	database.DB.Find(&instructors,id).Select("instructors")
+	return
+}
+
+//func EnrollProject(project *Project)

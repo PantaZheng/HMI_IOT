@@ -44,38 +44,37 @@ func init() {
 }
 
 func MakeTestData(){
-	_= EnrollUser(&User{OpenId: "test1",Role:"unEnrolled"})
-	_= EnrollUser(&User{OpenId: "test2",Role:"unEnrolled"})
-	_= EnrollUser(&User{OpenId: "test3",Role:"unEnrolled"})
-	_= EnrollUser(&User{OpenId: "student1",Name:"student1",Role:"student",Supervisor:"teacher1"})
-	_= EnrollUser(&User{OpenId: "student2",Name:"student2",Role:"student",Supervisor:"teacher1"})
-	_= EnrollUser(&User{OpenId: "student3",Name:"student3",Role:"student",Supervisor:"teacher2"})
-	_= EnrollUser(&User{OpenId: "teacher1",Name:"戴国骏",Role:"teacher"})
-	_= EnrollUser(&User{OpenId: "teacher2",Name:"张桦",Role:"teacher"})
-	_= EnrollUser(&User{OpenId: "teacher_unknown",Name:"其他导师",Role:"teacher"})
+	EnrollUser(&User{OpenId: "test1",Role:"unEnrolled"})
+	EnrollUser(&User{OpenId: "test2",Role:"unEnrolled"})
+	EnrollUser(&User{OpenId: "test3",Role:"unEnrolled"})
+	EnrollUser(&User{OpenId: "student1",Name:"student1",Role:"student",Supervisor:"teacher1"})
+	EnrollUser(&User{OpenId: "student2",Name:"student2",Role:"student",Supervisor:"teacher1"})
+	EnrollUser(&User{OpenId: "student3",Name:"student3",Role:"student",Supervisor:"teacher2"})
+	EnrollUser(&User{OpenId: "teacher1",Name:"戴国骏",Role:"teacher"})
+	EnrollUser(&User{OpenId: "teacher2",Name:"张桦",Role:"teacher"})
+	EnrollUser(&User{OpenId: "teacher_unknown",Name:"其他导师",Role:"teacher"})
 	log.Printf("创建测试用户数据")
 }
 
 
 //根据Role获得成员信息
 func GetMembersByRole(role string) ( memberList [] MemberInfo) {
-	var userList [] User
-	database.DB.Find(&userList,&User{Role:role}).Select("id","name")
-	memberList=make([]MemberInfo,len(userList))
-	for i,v := range userList{
+	var users [] User
+	database.DB.Find(&users,&User{Role: role}).Select("id","name")
+	memberList=make([]MemberInfo,len(users))
+	for i,v := range users {
 		memberList[i].Id=v.ID
 		memberList[i].Name=v.Name
 	}
 	log.Printf("Get:\t"+role+"s\n")
-	return memberList
+	return
 }
 
 //登记信息
-func EnrollUser( user *User) (err error){
+func EnrollUser( user *User){
 	recordUser:=User{}
 	database.DB.FirstOrCreate(&recordUser,&User{OpenId:user.OpenId})
 	database.DB.Model(&recordUser).Updates(user)
 	log.Printf("EnrollUser\trole:"+user.Role+"\topenid:"+user.OpenId)
-	return
 }
 
