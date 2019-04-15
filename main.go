@@ -32,7 +32,7 @@ func newApp() (api *iris.Application){
 		_=ctx.View("/mission/index.html")
 	})
 	api.Get("/create", func(ctx iris.Context) {
-		_=ctx.View("/createUser/index.html")
+		_=ctx.View("/create/index.html")
 	})
 
 	api.PartyFunc("/anon",func (anon router.Party){
