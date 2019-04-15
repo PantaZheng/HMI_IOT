@@ -2,7 +2,6 @@ package service
 
 import (
 	"../config"
-	"fmt"
 	"github.com/chanxuehong/wechat/mp/core"
 	"github.com/chanxuehong/wechat/mp/menu"
 	"github.com/chanxuehong/wechat/mp/message/callback/request"
@@ -32,7 +31,7 @@ func TextMsgHandler(ctx *core.Context) {
 	resp := response.NewText(msg.FromUserName, msg.ToUserName, msg.CreateTime, msg.Content)
 	log.Printf("收到文本消息:\n%s\n", ctx.MsgPlaintext)
 	if err:=ctx.RawResponse(resp);err!=nil{
-		log.Printf("文本消息处理出错：%v",err)
+		err.Error()
 	}
 }
 
@@ -42,7 +41,7 @@ func MenuClickEventHandler(ctx *core.Context) {
 	event := menu.GetClickEvent(ctx.MixedMsg)
 	resp := response.NewText(event.FromUserName, event.ToUserName, event.CreateTime, "请先登记个人信息")
 	if err:=ctx.RawResponse(resp);err!=nil{
-		panic(err.Error())
+		err.Error()
 	}
 }
 
@@ -54,7 +53,6 @@ func SubscribeEventHandler(ctx *core.Context){
 	if err:=ctx.RawResponse(resp);err!=nil{
 		err.Error()
 	}
-
 }
 
 func DefaultEventHandler(ctx *core.Context) {
@@ -71,7 +69,7 @@ func wechatClient() *core.Client{
 func DefaultMenu(defaultMenu *menu.Menu){
 	err:=menu.Create(defaultClt,defaultMenu)
 	if err!=nil{
-		fmt.Printf("DefaultMenu%v\n",err)
+		err.Error()
 	}
 	log.Printf("建立默认菜单\n")
 }

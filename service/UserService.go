@@ -22,7 +22,7 @@ func checkOpenId(openid string,code string) (checkOpenId string){
 
 func CheckTableUser(){
 	models.DropTableUsers()
-	models.CheckTableUser()
+	//models.CheckTableUser()
 }
 
 //用户初始化

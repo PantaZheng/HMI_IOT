@@ -9,7 +9,7 @@ import (
 )
 
 func init(){
-	controller.Check()
+	//controller.Check()
 	controller.Menu()
 }
 
