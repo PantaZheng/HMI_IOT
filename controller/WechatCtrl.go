@@ -15,7 +15,6 @@ func WeChat(ctx iris.Context) {
 
 func Menu(){
 	service.DefaultMenu()
-	service.GetAllMenu()
 }
 
 
