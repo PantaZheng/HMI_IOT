@@ -34,7 +34,7 @@ type MemberInfo struct {
 }
 
 func init(){
-	database.DB.AutoMigrate(&User{})
+	database.DB.Set("gorm:table_options", "DEFAULT CHARSET=utf8 AUTO_INCREMENT=1;").AutoMigrate(&User{})
 }
 
 func CheckTableUser() {
