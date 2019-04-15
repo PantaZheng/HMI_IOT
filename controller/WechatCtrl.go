@@ -15,7 +15,7 @@ import (
 func WeChat(ctx iris.Context) {
 	mux := core.NewServeMux()
 	mux.DefaultMsgHandleFunc(service.DefaultEventHandler)
-	//mux.DefaultEventHandleFunc(service.DefaultEventHandler)
+	mux.DefaultEventHandleFunc(service.DefaultEventHandler)
 	mux.MsgHandleFunc(request.MsgTypeText, service.TextMsgHandler)
 	mux.EventHandleFunc(menu.EventTypeClick, service.MenuClickEventHandler)
 	mux.EventHandleFunc(request.EventTypeSubscribe,service.SubscribeEventHandler)
