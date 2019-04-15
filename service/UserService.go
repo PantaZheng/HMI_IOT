@@ -25,12 +25,6 @@ func CheckTableUser(){
 	models.CheckTableUser()
 }
 
-func GetMembers(role string) (memberList []models.MemberInfo){
-	memberList=models.GetMembersByRole(role)
-	return
-}
-
-
 //用户初始化
 func UserInit(weChatInfo *user.UserInfo) string {
 	userInit:=&models.User{}
@@ -43,6 +37,12 @@ func UserInit(weChatInfo *user.UserInfo) string {
 	return "欢迎关注"
 }
 
+
+
+func GetMembers(role string) (memberList []models.MemberInfo){
+	memberList=models.GetMembersByRole(role)
+	return
+}
 
 func Enroll(userEnroll  *models.User)(openid string){
 	userEnroll.OpenId=checkOpenId(userEnroll.OpenId, userEnroll.Code)
