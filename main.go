@@ -31,8 +31,8 @@ func newApp() (api *iris.Application){
 	api.Get("/mission", func(ctx iris.Context){
 		_=ctx.View("/mission/index.html")
 	})
-	api.Get("/test", func(ctx iris.Context) {
-		_=ctx.View("/test/test.html")
+	api.Get("/createUser", func(ctx iris.Context) {
+		_=ctx.View("/createUser/index.html")
 	})
 
 
