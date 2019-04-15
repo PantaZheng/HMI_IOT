@@ -22,7 +22,6 @@ func checkOpenId(openid string,code string) (checkOpenId string){
 
 func CheckTableUser(){
 	models.DropTableUsers()
-	models.MakeTestData()
 	//models.CheckTableUser()
 }
 

@@ -33,18 +33,16 @@ type MemberInfo struct {
 	Name string `json:"name"`
 }
 
-func init(){
-	database.DB.Set("gorm:table_options", "DEFAULT CHARSET=utf8 AUTO_INCREMENT=1;").AutoMigrate(&User{})
-}
-
 func CheckTableUser() {
-	if !database.DB.HasTable(&User{}){
-		database.DB.Set("gorm:table_options", "DEFAULT CHARSET=utf8 AUTO_INCREMENT=1;").CreateTable(&User{})
-		log.Printf("新建用户表\n")
-		MakeTestData()
-	}else{
-		log.Printf("用户表已存在\n")
-	}
+	//if !database.DB.HasTable(&User{}){
+	//	database.DB.Set("gorm:table_options", "DEFAULT CHARSET=utf8 AUTO_INCREMENT=1;").CreateTable(&User{})
+	//	log.Printf("新建用户表\n")
+	//	MakeTestData()
+	//}else{
+	//	log.Printf("用户表已存在\n")
+	//}
+	database.DB.Set("gorm:table_options", "DEFAULT CHARSET=utf8 AUTO_INCREMENT=1;").AutoMigrate(&User{})
+	MakeTestData()
 }
 
 func DropTableUsers(){
