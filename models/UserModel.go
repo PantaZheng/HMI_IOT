@@ -108,7 +108,7 @@ func dbUpdateUser(newUser *User) (err error){
 	if err = database.DB.Model(&User{}).Where(&User{OpenId:oldUser.OpenId}).Updates(newUser).Error; err != nil {
 		return err
 	}
-	log.Printf("dbUpdateUser:\t"+oldUser.OpenId)
+	//log.Printf("dbUpdateUser:\t"+oldUser.OpenId)
 	return
 }
 
