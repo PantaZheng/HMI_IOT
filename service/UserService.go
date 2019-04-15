@@ -20,10 +20,6 @@ func checkOpenId(openid string,code string) (checkOpenId string){
 	}
 }
 
-func CheckTableUser(){
-	models.DropTableUsers()
-	//models.CheckTableUser()
-}
 
 //用户初始化
 func UserInit(weChatInfo *user.UserInfo) string {

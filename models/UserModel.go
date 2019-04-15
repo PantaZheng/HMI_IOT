@@ -37,14 +37,10 @@ type MemberInfo struct {
 }
 
 func init() {
-	DropTableUsers()
-	database.DB.Set("gorm:table_options", "DEFAULT CHARSET=utf8 AUTO_INCREMENT=1;").AutoMigrate(&User{})
-	MakeTestData()
-}
-
-func DropTableUsers(){
 	database.DB.DropTable("users")
 	log.Printf("删除用户表\n")
+	database.DB.Set("gorm:table_options", "DEFAULT CHARSET=utf8 AUTO_INCREMENT=1;").AutoMigrate(&User{})
+	MakeTestData()
 }
 
 func MakeTestData(){

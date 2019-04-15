@@ -11,10 +11,6 @@ type returnId struct {
 	OpenId string `json:"openid"`
 }
 
-func Check() {
-	service.CheckTableUser()
-}
-
 func Enroll(ctx iris.Context) {
 	userEnroll :=&models.User{}
 	if err:=ctx.ReadJSON(userEnroll);err!=nil{
