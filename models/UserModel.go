@@ -55,69 +55,16 @@ func MakeTestData(){
 	log.Printf("创建测试用户数据")
 }
 
-//根据WeChatID获取用户
-func GetUser(openid string) (user *User) {
-	user = new(User)
-	user.OpenId =openid
-	//if err = database.DB.Where(&User{OpenId:openid}).First (user).Error; err != nil {
-	//	fmt.Printf("GetUserByIdErr:%s", err)
-	//}
-	database.DB.First(&user,&User{OpenId:openid})
-	return
-}
 
 //根据Role获得成员信息
 func GetMembersByRole(role string) ( memberList [] MemberInfo) {
-	var users []User
-	//database.DB.Model(&User{}).Where(&User{Role:role}).Find(&users)
-	database.DB.Find(&users,&User{Role:role})
-	memberList=make([] MemberInfo,len(users))
-	for i,v := range users{
-		memberList[i].Id= v.ID
-		memberList[i].Name= v.Name
-	}
+	database.DB.Find(&memberList,&User{Role:role}).Select("id","name")
 	log.Printf("GetAllMembers,role:\t"+role+"\n")
 	return memberList
 }
 
-func recordNotFound(openid string) bool{
-	//if database.DB.Where("open_id=?",openid).Find(&User{}).RecordNotFound(){
-	//	log.Printf("RecordUserNotFound\t"+openid+"\n")
-	//	return true
-	//}
-	if database.DB.First(&User{},&User{OpenId:openid}).RecordNotFound(){
-		log.Printf("RecordUserNotFound\t"+openid+"\n")
-		return true
-	}
-	log.Printf("RecordUserFound:\t"+openid+"\n")
-	return false
-}
-
-//数据库创建用户
-func dbCreateUser(newUser *User)(){
-	database.DB.Model(&User{}).Create(newUser)
-	//log.Printf("dbCreateUser:\t"+ newUser.OpenId)
-}
-
-//数据库更新用户信息
-func dbUpdateUser(newUser *User) (err error){
-	oldUser:= GetUser(newUser.OpenId)
-	if err = database.DB.Model(&User{}).Where(&User{OpenId:oldUser.OpenId}).Updates(newUser).Error; err != nil {
-		return err
-	}
-	//log.Printf("dbUpdateUser:\t"+oldUser.OpenId)
-	return
-}
-
 //登记信息
 func EnrollUser( user *User) (err error){
-	//if recordNotFound(user.OpenId){
-	//	//	dbCreateUser(user)
-	//	//}else{
-	//	//	if err=dbUpdateUser(user);err!=nil{
-	//	//		return
-	//	//	}
-	//	//}
 	recordUser:=User{}
 	database.DB.FirstOrCreate(&recordUser,&User{OpenId:user.OpenId})
 	database.DB.Model(&recordUser).Updates(user)
