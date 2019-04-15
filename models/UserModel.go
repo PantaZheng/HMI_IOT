@@ -2,7 +2,6 @@ package models
 
 import (
 	"../database"
-	"fmt"
 	"github.com/jinzhu/gorm"
 	"log"
 )
@@ -57,19 +56,21 @@ func MakeTestData(){
 }
 
 //根据WeChatID获取用户
-func GetUser(openid string) (user *User,err error) {
+func GetUser(openid string) (user *User) {
 	user = new(User)
 	user.OpenId =openid
-	if err = database.DB.Where(&User{OpenId:openid}).First (user).Error; err != nil {
-		fmt.Printf("GetUserByIdErr:%s", err)
-	}
+	//if err = database.DB.Where(&User{OpenId:openid}).First (user).Error; err != nil {
+	//	fmt.Printf("GetUserByIdErr:%s", err)
+	//}
+	database.DB.First(&user,&User{OpenId:openid})
 	return
 }
 
 //根据Role获得成员信息
 func GetMembersByRole(role string) ( memberList [] MemberInfo) {
 	var users []User
-	database.DB.Model(&User{}).Where(&User{Role:role}).Find(&users)
+	//database.DB.Model(&User{}).Where(&User{Role:role}).Find(&users)
+	database.DB.Find(&users,&User{Role:role})
 	memberList=make([] MemberInfo,len(users))
 	for i,v := range users{
 		memberList[i].Id= v.ID
@@ -80,7 +81,11 @@ func GetMembersByRole(role string) ( memberList [] MemberInfo) {
 }
 
 func recordNotFound(openid string) bool{
-	if database.DB.Where("open_id=?",openid).Find(&User{}).RecordNotFound(){
+	//if database.DB.Where("open_id=?",openid).Find(&User{}).RecordNotFound(){
+	//	log.Printf("RecordUserNotFound\t"+openid+"\n")
+	//	return true
+	//}
+	if database.DB.First(&User{},&User{OpenId:openid}).RecordNotFound(){
 		log.Printf("RecordUserNotFound\t"+openid+"\n")
 		return true
 	}
@@ -96,10 +101,7 @@ func dbCreateUser(newUser *User)(){
 
 //数据库更新用户信息
 func dbUpdateUser(newUser *User) (err error){
-	oldUser:=&User{}
-	if oldUser,err = GetUser(newUser.OpenId);err!=nil{
-		return err
-	}
+	oldUser:= GetUser(newUser.OpenId)
 	if err = database.DB.Model(&User{}).Where(&User{OpenId:oldUser.OpenId}).Updates(newUser).Error; err != nil {
 		return err
 	}
@@ -109,13 +111,16 @@ func dbUpdateUser(newUser *User) (err error){
 
 //登记信息
 func EnrollUser( user *User) (err error){
-	if recordNotFound(user.OpenId){
-		dbCreateUser(user)
-	}else{
-		if err=dbUpdateUser(user);err!=nil{
-			return
-		}
-	}
+	//if recordNotFound(user.OpenId){
+	//	//	dbCreateUser(user)
+	//	//}else{
+	//	//	if err=dbUpdateUser(user);err!=nil{
+	//	//		return
+	//	//	}
+	//	//}
+	recordUser:=User{}
+	database.DB.FirstOrCreate(&recordUser,&User{OpenId:user.OpenId})
+	database.DB.Model(&recordUser).Updates(user)
 	log.Printf("EnrollUser\trole:"+user.Role+"\topenid:"+user.OpenId)
 	return
 }

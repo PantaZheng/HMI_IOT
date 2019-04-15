@@ -11,8 +11,6 @@ type returnId struct {
 	OpenId string `json:"openid"`
 }
 
-
-
 func Check() {
 	service.CheckTableUser()
 }
