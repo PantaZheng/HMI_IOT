@@ -58,7 +58,13 @@ func MakeTestData(){
 
 //根据Role获得成员信息
 func GetMembersByRole(role string) ( memberList [] MemberInfo) {
-	database.DB.Find(&memberList,&User{Role:role}).Select("id","name")
+	var userList [] User
+	database.DB.Find(&userList,&User{Role:role}).Select("id","name")
+	memberList=make([]MemberInfo,len(userList))
+	for i,v := range userList{
+		memberList[i].Id=v.ID
+		memberList[i].Name=v.Name
+	}
 	log.Printf("GetAllMembers,role:\t"+role+"\n")
 	return memberList
 }
