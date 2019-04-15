@@ -12,5 +12,4 @@ type Project struct {
 	StartTime string `gorm:"not null VARCHAR(255)" json:"startTime"`
  	EndTime string 	`gorm:"not null VARCHAR(255)" json:"endTime"`
 	Status int `gorm:"not null" json:"endTime"`
-
 }
