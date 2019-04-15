@@ -35,7 +35,6 @@ func newApp() (api *iris.Application){
 		_=ctx.View("/createUser/index.html")
 	})
 
-
 	api.PartyFunc("/anon",func (anon router.Party){
 		anon.PartyFunc("/wechat", func(weChat router.Party) {
 			weChat.Any("/", controller.WeChat)
