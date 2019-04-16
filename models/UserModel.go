@@ -2,7 +2,7 @@ package models
 
 import (
 	"github.com/jinzhu/gorm"
-	"github.com/pantazheng/HMI-IOT/database"
+	"github.com/pantazheng/HMI_IOT/database"
 	"log"
 )
 

@@ -5,7 +5,7 @@ import (
 	"github.com/kataras/iris"
 	"github.com/kataras/iris/core/router"
 	"github.com/kataras/iris/middleware/logger"
-	"github.com/pantazheng/HMI-IoT/controller"
+	"github.com/pantazheng/HMI_IOT/controller"
 )
 
 func init(){

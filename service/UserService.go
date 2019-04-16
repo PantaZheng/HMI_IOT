@@ -3,7 +3,7 @@ package service
 import (
 	"github.com/chanxuehong/wechat/mp/user"
 	"github.com/chanxuehong/wechat/oauth2"
-	"github.com/pantazheng/HMI-IOT/models"
+	"github.com/pantazheng/HMI_IOT/models"
 	"log"
 )
 
