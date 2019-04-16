@@ -3,7 +3,5 @@
 create
 main
 */.idea/
-.idea/
-.idea/workspace.xml
 .sql
 /config/config.toml
