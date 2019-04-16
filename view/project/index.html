@@ -1,17 +1,17 @@
-<!DOCTYPE html>
-<html ng-app>
+﻿<!DOCTYPE html>
+<html ng-app="app">
 
 <head lang="en">
     <title>项目总览</title>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
-    <meta name="viewport"
-          content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
 
     <link rel="stylesheet" href="../css/weui.min.css">
     <link rel="stylesheet" href="../css/jquery-weui.css">
-
+    <link rel="stylesheet" href="../css/weui.css"/>
+    <link rel="stylesheet" href="../css/weuix.css"/>
     <link rel="stylesheet" href="../css/background.css"/>
     <link
             href="//netdna.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css"
@@ -22,136 +22,53 @@
 <body ng-controller="projectCtrl">
 <div class="weui_tab">
     <div class="weui_navbar">
-
         <a href="#tab1" class="weui_navbar_item weui_bar_item_on"> 正在进行 </a>
-        <a href="#tab2" class="weui_navbar_item"> 已完成 </a> <a href="#tab3"
-                                                              class="weui_navbar_item"> 新建项目/任务 </a>
+        <a href="#tab2" class="weui_navbar_item"> 已完成 </a> 
+		<a href="#tab3" class="weui_navbar_item"> 新建项目/任务 </a>
     </div>
     <div class="weui_tab_bd">
-
         <div id="tab1" class="weui_tab_bd_item weui_tab_bd_item_active">
-
-            <div class="weui_cells_title">
-                <div class="weui_cell_hd">
-                    <i class="fa fa-arrows-v"></i>&nbsp&nbsp纵向项目
-                </div>
-            </div>
-            <div class="weui_cells weui_cells_access">
-
-
-                <a class="weui_cell" ng-repeat="x in zp1"
-                   href="detail.html#?id={{x.projectId}}">
-                    <div class="weui_cell_bd weui_cell_primary">
-                        <p>
-                            {{x.title}}
-                        </p>
-                    </div>
-                    <div class="weui_cell_ft">
-                        {{x.startTime}}
-                    </div>
-                </a>
-
-
-            </div>
-            <div class="weui_cells_title">
-                <div class="weui_cell_hd">
-                    <i class="fa fa-arrows-h"></i>&nbsp&nbsp横向项目
-                </div>
-            </div>
-            <div class="weui_cells weui_cells_access">
-
-                <a class="weui_cell"
-                   href="detail.html#?id={{x.projectId}}" ng-repeat="x in hp1">
-                    <div class="weui_cell_bd weui_cell_primary">
-                        <p>
-                            {{x.title}}
-                        </p>
-                    </div>
-                    <div class="weui_cell_ft">
-                        {{x.startTime}}
-                    </div>
-                </a>
-            </div>
-            <div class="weui_cells_title">
-                <div class="weui_cell_hd">
-                    <i class="fa fa-arrows-alt"></i>&nbsp&nbsp实验室项目
-                </div>
-            </div>
-            <div class="weui_cells weui_cells_access">
-
-                <a class="weui_cell"
-                   href="detail.html#?id={{x.projectId}}" ng-repeat="x in sp1">
-                    <div class="weui_cell_bd weui_cell_primary">
-                        <p>
-                            {{x.title}}
-                        </p>
-                    </div>
-                    <div class="weui_cell_ft">
-                        {{x.startTime}}
-                    </div>
-                </a>
-            </div>
+			<div class="weui-news" onclick="window.location='../project/detail.html'">
+				<ul class="weui-news-list">
+					<li class="weui-news-item" ng-repeat="data in project" ng-if="data.tag==0">
+						<div class="weui-news-inners">
+								<div class="weui-news-title">{{data.title}}<span style="float: right;">{{data.time}}</span></div>
+								<div class="weui-news-text">
+									<p class="weui-news-p">{{data.content}}</p>
+								</div>
+							<div class="weui-news-info">
+								<div class="weui-news-infoitem">
+									<!-- <img src="../images/user.png"  class="weui-news-round"> -->
+									<span>{{data.charge}}</span>
+								</div>
+								<!-- <div class="weui-news-infoitem">1条评论</div> -->
+							</div>
+						</div>
+					</li>
+				</ul>
+			</div>					
         </div>
 
         <div id="tab2" class="weui_tab_bd_item ">
-
-            <div class="weui_cells_title">
-                <div class="weui_cell_hd">
-                    <i class="fa fa-arrows-v"></i>&nbsp&nbsp纵向项目
-                </div>
-            </div>
-            <div class="weui_cells weui_cells_access">
-
-                <a class="weui_cell"
-                   href="detail.html#?id={{p.projectId}}" ng-repeat="p in zp0">
-                    <div class="weui_cell_bd weui_cell_primary">
-                        <p>
-                            {{p.title}}
-                        </p>
-                    </div>
-                    <div class="weui_cell_ft">
-                        {{p.startTime}}
-                    </div>
-                </a>
-            </div>
-            <div class="weui_cells_title">
-                <div class="weui_cell_hd">
-                    <i class="fa fa-arrows-h"></i>&nbsp&nbsp横向项目
-                </div>
-            </div>
-            <div class="weui_cells weui_cells_access">
-
-                <a class="weui_cell"
-                   href="detail.html#?id={{p.projectId}}" ng-repeat="p in hp0">
-                    <div class="weui_cell_bd weui_cell_primary">
-                        <p>
-                            {{p.title}}
-                        </p>
-                    </div>
-                    <div class="weui_cell_ft">
-                        {{p.startTime}}
-                    </div>
-                </a>
-            </div>
-            <div class="weui_cells_title">
-                <div class="weui_cell_hd">
-                    <i class="fa fa-arrows-alt"></i>&nbsp&nbsp实验室项目
-                </div>
-            </div>
-            <div class="weui_cells weui_cells_access">
-
-                <a class="weui_cell"
-                   href="detail.html#?id={{p.projectId}}" ng-repeat="p in sp0">
-                    <div class="weui_cell_bd weui_cell_primary">
-                        <p>
-                            {{p.title}}
-                        </p>
-                    </div>
-                    <div class="weui_cell_ft">
-                        {{p.startTime}}
-                    </div>
-                </a>
-            </div>
+			<div class="weui-news"onclick="window.location='../project/detail.html'">
+				<ul class="weui-news-list">
+					<li class="weui-news-item" ng-repeat="data in project" ng-if="data.tag==1">
+						<div class="weui-news-inners">
+								<div class="weui-news-title">{{data.title}}<span style="float: right;">{{data.time}}</span></div>
+								<div class="weui-news-text">
+									<p class="weui-news-p">{{data.content}}</p>
+								</div>
+							<div class="weui-news-info">
+								<div class="weui-news-infoitem">
+									<!-- <img src="../images/user.png"  class="weui-news-round"> -->
+									<span>{{data.charge}}</span>
+								</div>
+								<!-- <div class="weui-news-infoitem">1条评论</div> -->
+							</div>
+						</div>
+					</li>
+				</ul>
+			</div>	
         </div>
         <div id="tab3" class="weui_tab_bd_item">
 
@@ -266,7 +183,8 @@
 <script src="../js/jquery-2.1.1.min.js"></script>
 <script src="../js/jquery-weui.js"></script>
 <script src="//cdn.bootcss.com/angular.js/1.2.28/angular.min.js"></script>
-<script src="index.js"></script>
+<script src="../js/app.js"></script>
+<script src="../project/index.js"></script>
 </body>
 
 </html>

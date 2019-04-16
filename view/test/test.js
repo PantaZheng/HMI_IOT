@@ -1,4 +1,4 @@
-var app=angular.module("testapp",[]);
+var app=angular.module("app",[]);
 app.config(['$locationProvider',function($locationProvider){
 	$locationProvider.html5Mode({
 		enabled:true,
@@ -7,32 +7,36 @@ app.config(['$locationProvider',function($locationProvider){
 }])
 
 function Ctrl($scope, $http, $location, $window) {
-	var code=$location.search().code;
-	$scope.code2=JSON.stringify($location.search().code);		
-    $http({
-        url: " https://api.weixin.qq.com/sns/oauth2/access_token?appid=wx2203c68c9311ea43&secret=40c40547e174ed99d1281b2890f7eeb3&code="+$scope.code+"&grant_type=authorization_code",
-        method: 'get',
-        // headers: {token: $window.sessionStorage.weChatId}
-    }).success(function (res) {
-        // console.log(res);
-        $scope.infor = JSON.stringify(res);
-		alert($scope.infor);
-        // $window.sessionStorage.user = JSON.stringify(res);
-        // $scope.getProject(res.role, res.level);
-    }).error(function (err) {
-        $.hideLoading();
-        $.alert(err);
-    })
-    $http({
-        url: " https://api.weixin.qq.com/sns/oauth2/access_token?appid=wx2203c68c9311ea43&secret=40c40547e174ed99d1281b2890f7eeb3&code="+code+"&grant_type=authorization_code",
-        method: 'get',
-        // headers: {token: $window.sessionStorage.weChatId}
-    }).success(function (res) {
-        // console.log(res);
-        $scope.code = JSON.stringify(res);
-		// alert($scope.infor);
-    }).error(function (err) {
-        $.hideLoading();
-        $.alert(err);
-    })		
+	// var code=$location.search().code;
+	$window.sessionStorage.code = $location.search().code;
+
+    $http.get("http://bci.renjiwulian.com/teacher/list"
+    ).then(function(results){
+    	$scope.teacherList=results; 
+		console.log($scope.teacherList);
+    }); 
+
+    $scope.submit = function () {
+		$scope.stuInfor=JSON.stringify({
+			openid:"",
+			code:$location.search().code,
+			name:$scope.name,
+			sex:$scope.sex,
+			telephone:$scope.tel,
+			school:$scope.school,
+			supervisor:$scope.teacher
+		})
+        $http({
+            url:"http://bci.renjiwulian.com/student/enroll",
+            method: 'post',
+            data: $scope.stuInfor,
+            // headers: {token: $window.sessionStorage.weChatId}
+        }).success(function (data) {
+            alert("提交成功！");
+            $window.location.reload(true); 
+        }).error(function (err) {
+            alert("552");
+        })
+    }
+			
 }

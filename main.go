@@ -9,7 +9,6 @@ import (
 )
 
 func init(){
-	controller.Check()
 	controller.Menu()
 }
 
@@ -22,36 +21,37 @@ func newApp() (api *iris.Application){
 			fmt.Printf("%v",err)
 		}
 	})
-
-	api.RegisterView(iris.HTML("./view",".html").Delims("[[","]]"))
+	
 	api.StaticWeb("/","./view")
+	api.RegisterView(iris.HTML("./view", ".html").Delims("[[","]]"))
+	api.Get("/project/", func(ctx iris.Context) {
+		_=ctx.View("/project/index.html")
+	})
+	api.Get("/mission", func(ctx iris.Context){
+		_=ctx.View("/mission/index.html")
+	})
+	api.Get("/createUser/", func(ctx iris.Context) {
+		_=ctx.View("/createUser/index.html")
+	})
+	api.Get("/framework/", func(ctx iris.Context) {
+		_=ctx.View("/framework/index.html")
+	})
 
 	api.PartyFunc("/anon",func (anon router.Party){
 		anon.PartyFunc("/wechat", func(weChat router.Party) {
 			weChat.Any("/", controller.WeChat)
 		})
+		anon.Post("/enroll",controller.Enroll)
+		anon.Get("/list/{role:string}",controller.List)
 	})
 
 	api.PartyFunc("/teacher",func(teacher router.Party){
-		teacher.Post("/enroll",controller.EnrollTeacher)
-		teacher.Post("/purify",controller.Purify)
-		teacher.Get("/list",controller.ListTeacher)
+		//teacher.Get("/list",controller.GetTeachers)
 	})
 	api.PartyFunc("/student",func(student router.Party){
-		student.Post("/enroll",controller.EnrollStudent)
-		student.Post("/purify",controller.Purify)
-		student.Get("/list",controller.ListStudent)
+		//student.Get("/list",controller.GetStudents)
 	})
-	api.PartyFunc("/project",func (project router.Party){
-		project.Get("/",func(ctx iris.Context){
-			_ = ctx.View("project/index.html")
-		})
-	})
-	api.PartyFunc("/test",func (test router.Party){
-		test.Get("/",func(ctx iris.Context){
-			_ = ctx.View("test/test.html")
-		})
-	})
+
 
 	return
 }

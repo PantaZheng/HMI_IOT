@@ -1,0 +1,488 @@
+root:Daiguojun123456@/BCI?charset=utf8&parseTime=True&loc=Local
+删除表
+新建用户表
+测试数据
+CreateTagerrcode: 45157, errmsg: invalid tag name hint: [cOpAya0516hc16]
+
+CreateTagerrcode: 45157, errmsg: invalid tag name hint: [6grJNA05164587]
+
+id: 2	name: 星标组	count: 0
+
+id: 100	name: student	count: 0
+
+id: 101	name: teacher	count: 0
+defaultMenus----
+架构	项目/任务	登记	
+conditionalMenus----
+架构	项目	个人	
+架构	任务	个人	
+
+defaultMenus----
+架构	项目/任务	登记	
+conditionalMenus----
+架构	项目	个人	
+架构	任务	个人	
+
+Now listening on: http://localhost:80
+Application started. Press CTRL+C to shut down.
+2019/04/10 17:12:29 收到事件:
+<xml><ToUserName><![CDATA[gh_b4421d95f839]]></ToUserName>
+<FromUserName><![CDATA[oPKFh5lM9MA6_Svd39Km-84no7c8]]></FromUserName>
+<CreateTime>1554887549</CreateTime>
+<MsgType><![CDATA[event]]></MsgType>
+<Event><![CDATA[VIEW]]></Event>
+<EventKey><![CDATA[https://open.weixin.qq.com/connect/oauth2/authorize?appid=wx2203c68c9311ea43&redirect_uri=http://bci.renjiwulian.com/test&response_type=code&scope=snsapi_base&state=12#wechat_redirect]]></EventKey>
+<MenuId>529500406</MenuId>
+</xml>
+[36m[INFO][0m 2019/04/10 17:12 200 391.687µs 223.166.222.110 POST /anon/wechat
+2019/04/10 17:12:31 收到事件:
+<xml><ToUserName><![CDATA[gh_b4421d95f839]]></ToUserName>
+<FromUserName><![CDATA[oPKFh5lM9MA6_Svd39Km-84no7c8]]></FromUserName>
+<CreateTime>1554887551</CreateTime>
+<MsgType><![CDATA[event]]></MsgType>
+<Event><![CDATA[VIEW]]></Event>
+<EventKey><![CDATA[https://open.weixin.qq.com/connect/oauth2/authorize?appid=wx2203c68c9311ea43&redirect_uri=http://bci.renjiwulian.com/test&response_type=code&scope=snsapi_base&state=12#wechat_redirect]]></EventKey>
+<MenuId>529500406</MenuId>
+</xml>
+[36m[INFO][0m 2019/04/10 17:12 200 268.851µs 223.166.222.110 POST /anon/wechat
+2019/04/10 17:12:32 收到事件:
+<xml><ToUserName><![CDATA[gh_b4421d95f839]]></ToUserName>
+<FromUserName><![CDATA[oPKFh5lM9MA6_Svd39Km-84no7c8]]></FromUserName>
+<CreateTime>1554887552</CreateTime>
+<MsgType><![CDATA[event]]></MsgType>
+<Event><![CDATA[VIEW]]></Event>
+<EventKey><![CDATA[https://open.weixin.qq.com/connect/oauth2/authorize?appid=wx2203c68c9311ea43&redirect_uri=http://bci.renjiwulian.com/test&response_type=code&scope=snsapi_base&state=12#wechat_redirect]]></EventKey>
+<MenuId>529500406</MenuId>
+</xml>
+[36m[INFO][0m 2019/04/10 17:12 200 216.364µs 223.166.222.110 POST /anon/wechat
+[36m[INFO][0m 2019/04/10 17:12 200 153.95µs 61.151.178.169 GET /test
+[36m[INFO][0m 2019/04/10 17:12 200 61.699µs 61.151.178.169 GET /test
+[36m[INFO][0m 2019/04/10 17:12 200 31.221µs 61.151.178.169 GET /test
+[36m[INFO][0m 2019/04/10 17:12 200 126.795µs 61.151.178.169 GET /test/test.js
+[36m[INFO][0m 2019/04/10 17:12 404 62.197µs 124.160.217.157 GET /favicon.ico
+[36m[INFO][0m 2019/04/10 17:12 404 38.299µs 124.160.217.157 GET /favicon.ico
+[36m[INFO][0m 2019/04/10 17:12 404 23.481µs 124.160.217.157 GET /favicon.ico
+[36m[INFO][0m 2019/04/10 17:15 403 74.959µs 114.108.160.107 HEAD /
+2019/04/10 18:02:51 收到事件:
+<xml><ToUserName><![CDATA[gh_b4421d95f839]]></ToUserName>
+<FromUserName><![CDATA[oPKFh5lM9MA6_Svd39Km-84no7c8]]></FromUserName>
+<CreateTime>1554890571</CreateTime>
+<MsgType><![CDATA[event]]></MsgType>
+<Event><![CDATA[VIEW]]></Event>
+<EventKey><![CDATA[https://open.weixin.qq.com/connect/oauth2/authorize?appid=wx2203c68c9311ea43&redirect_uri=http://bci.renjiwulian.com/test&response_type=code&scope=snsapi_base&state=12#wechat_redirect]]></EventKey>
+<MenuId>529500406</MenuId>
+</xml>
+[36m[INFO][0m 2019/04/10 18:02 200 196.756µs 223.166.222.110 POST /anon/wechat
+[36m[INFO][0m 2019/04/10 18:02 200 41.711µs 61.151.178.169 GET /test
+[36m[INFO][0m 2019/04/10 18:02 304 90.756µs 61.151.178.169 GET /test/test.js
+[36m[INFO][0m 2019/04/10 18:02 404 70.616µs 124.160.217.157 GET /favicon.ico
+[36m[INFO][0m 2019/04/10 18:13 404 68.867µs 47.102.132.207 GET /TP/public/index.php
+[36m[INFO][0m 2019/04/10 18:13 404 42.23µs 47.102.132.207 GET /TP/index.php
+[36m[INFO][0m 2019/04/10 18:13 404 103.455µs 47.102.132.207 GET /thinkphp/html/public/index.php
+[36m[INFO][0m 2019/04/10 18:13 404 59.199µs 47.102.132.207 GET /html/public/index.php
+[36m[INFO][0m 2019/04/10 18:13 404 56.947µs 47.102.132.207 GET /public/index.php
+[36m[INFO][0m 2019/04/10 18:13 404 51.486µs 47.102.132.207 GET /TP/html/public/index.php
+[36m[INFO][0m 2019/04/10 18:13 404 54.154µs 47.102.132.207 GET /elrekt.php
+[36m[INFO][0m 2019/04/10 18:13 404 57.724µs 47.102.132.207 GET /index.php
+[36m[INFO][0m 2019/04/10 18:13 403 71.999µs 47.102.132.207 GET /
+[36m[INFO][0m 2019/04/10 18:32 403 80.969µs 52.53.201.78 GET /
+[36m[INFO][0m 2019/04/10 19:16 200 42.067µs 61.151.178.169 GET /test
+[36m[INFO][0m 2019/04/10 19:16 304 84.896µs 61.151.178.169 GET /test/test.js
+[36m[INFO][0m 2019/04/10 19:16 404 66.019µs 124.160.217.157 GET /favicon.ico
+GetUserByIdErr:record not foundoldUser:oPKFh5lM9MA6_Svd39Km-84no7c8
+id: 2	name: 星标组	count: 0
+
+id: 100	name: student	count: 0
+
+id: 101	name: teacher	count: 1
+郑鹏达教师信息更新tag101
+架构	项目	个人	
+[36m[INFO][0m 2019/04/10 19:16 200 354.74675ms 60.191.32.72 POST /teacher/enroll
+[36m[INFO][0m 2019/04/10 19:18 403 81.652µs 178.34.9.27 GET /
+[36m[INFO][0m 2019/04/10 19:32 403 63.793µs 125.76.60.36 GET /
+[36m[INFO][0m 2019/04/10 19:56 404 42.595µs 139.162.88.63 GET /echo.php
+[36m[INFO][0m 2019/04/10 19:59 403 59.818µs 71.6.232.4 GET /
+[36m[INFO][0m 2019/04/10 20:12 403 78.534µs 182.207.208.91 HEAD /
+[36m[INFO][0m 2019/04/10 20:32 403 58.715µs 191.5.119.20 GET /
+[36m[INFO][0m 2019/04/10 20:41 403 77.046µs 222.94.163.233 GET /
+[36m[INFO][0m 2019/04/10 20:46 404 55.297µs 42.86.94.121 GET /otsmobile/mgw.htm
+[WECHAT_ERROR] 2019/04/10 21:11:27.760796 /usr/local/gopath/src/github.com/chanxuehong/wechat/mp/core/server.go:444: the message ToUserName mismatch, have: gh_7f0d5fc2116f, want: gh_b4421d95f839
+[36m[INFO][0m 2019/04/10 21:11 200 188.984µs 140.207.54.78 POST /anon/wechat
+[36m[INFO][0m 2019/04/10 22:27 403 57.142µs 111.34.9.45 HEAD /
+[36m[INFO][0m 2019/04/10 23:14 403 61.847µs 84.241.41.40 GET /
+[36m[INFO][0m 2019/04/10 23:27 403 57.654µs 119.118.5.115 GET /
+[36m[INFO][0m 2019/04/11 00:37 404 40.306µs 80.82.70.187 GET /cache/global/img/gs.gif
+[36m[INFO][0m 2019/04/11 00:38 403 61.335µs 177.87.42.253 GET /
+[36m[INFO][0m 2019/04/11 00:41 403 67.123µs 107.170.200.61 GET /
+[36m[INFO][0m 2019/04/11 00:50 403 63.917µs 112.194.207.32 HEAD /
+[36m[INFO][0m 2019/04/11 00:50 404 58.827µs 198.167.223.52 GET /acadmin.php
+[36m[INFO][0m 2019/04/11 01:08 403 59.826µs 124.235.146.98 GET /
+[36m[INFO][0m 2019/04/11 01:48 403 60.143µs 177.128.84.30 GET /
+[36m[INFO][0m 2019/04/11 01:52 403 62.047µs 58.18.207.231 HEAD /
+[36m[INFO][0m 2019/04/11 02:54 403 61.424µs 139.162.106.181 GET /
+[36m[INFO][0m 2019/04/11 03:10 403 61.935µs 123.145.26.39 GET /
+[36m[INFO][0m 2019/04/11 04:55 403 67.687µs 124.89.119.5 GET /
+[36m[INFO][0m 2019/04/11 05:41 403 59.922µs 131.0.95.237 GET /
+[36m[INFO][0m 2019/04/11 07:05 403 73.742µs 103.237.175.69 GET /
+[36m[INFO][0m 2019/04/11 07:11 403 74.183µs 100.24.72.149 GET /
+[36m[INFO][0m 2019/04/11 07:14 403 58.638µs 117.13.169.42 GET /
+[36m[INFO][0m 2019/04/11 07:36 403 56.721µs 115.237.34.136 HEAD /
+[36m[INFO][0m 2019/04/11 09:21 403 59.822µs 45.33.26.45 GET /
+[36m[INFO][0m 2019/04/11 09:30 403 61.711µs 121.97.255.41 GET /
+[36m[INFO][0m 2019/04/11 09:30 403 31.888µs 121.97.255.41 GET /
+[36m[INFO][0m 2019/04/11 09:47 403 57.874µs 221.1.228.205 HEAD /
+[36m[INFO][0m 2019/04/11 09:50 403 59.515µs 120.36.123.209 GET /
+[36m[INFO][0m 2019/04/11 10:24 403 59.191µs 138.185.176.126 GET /
+[36m[INFO][0m 2019/04/11 10:39 404 53.364µs 80.82.70.187 GET /cache/global/img/gs.gif
+[36m[INFO][0m 2019/04/11 11:07 403 60.195µs 112.112.185.131 GET /
+[36m[INFO][0m 2019/04/11 11:48 403 61.867µs 221.206.20.19 HEAD /
+[36m[INFO][0m 2019/04/11 12:17 403 59.377µs 60.191.52.254 HEAD /
+2019/04/11 12:52:14 收到事件:
+<xml><ToUserName><![CDATA[gh_b4421d95f839]]></ToUserName>
+<FromUserName><![CDATA[oPKFh5lM9MA6_Svd39Km-84no7c8]]></FromUserName>
+<CreateTime>1554958334</CreateTime>
+<MsgType><![CDATA[event]]></MsgType>
+<Event><![CDATA[VIEW]]></Event>
+<EventKey><![CDATA[http://bci.renjiwulian.com/project]]></EventKey>
+<MenuId>529500866</MenuId>
+</xml>
+[36m[INFO][0m 2019/04/11 12:52 200 202.441µs 223.166.222.110 POST /anon/wechat
+[36m[INFO][0m 2019/04/11 12:52 200 389.193µs 61.151.178.169 GET /project
+[36m[INFO][0m 2019/04/11 12:52 304 96.55µs 124.160.215.124 GET /css/weui.min.css
+[36m[INFO][0m 2019/04/11 12:52 304 104.799µs 124.160.215.124 GET /css/background.css
+[36m[INFO][0m 2019/04/11 12:52 304 59.762µs 124.160.215.124 GET /css/jquery-weui.css
+[36m[INFO][0m 2019/04/11 12:52 404 20.663µs 61.151.178.169 GET /index.js
+[36m[INFO][0m 2019/04/11 12:52 304 49.319µs 61.151.178.169 GET /js/jquery-weui.js
+[36m[INFO][0m 2019/04/11 12:52 304 31.35µs 61.151.178.169 GET /js/jquery-2.1.1.min.js
+[36m[INFO][0m 2019/04/11 12:52 404 39.025µs 61.151.178.169 GET /index.js
+[36m[INFO][0m 2019/04/11 12:52 404 20.902µs 124.160.215.124 GET /favicon.ico
+2019/04/11 12:52:18 收到事件:
+<xml><ToUserName><![CDATA[gh_b4421d95f839]]></ToUserName>
+<FromUserName><![CDATA[oPKFh5lM9MA6_Svd39Km-84no7c8]]></FromUserName>
+<CreateTime>1554958338</CreateTime>
+<MsgType><![CDATA[event]]></MsgType>
+<Event><![CDATA[VIEW]]></Event>
+<EventKey><![CDATA[http://bci.renjiwulian.com/project]]></EventKey>
+<MenuId>529500866</MenuId>
+</xml>
+[36m[INFO][0m 2019/04/11 12:52 200 233.342µs 223.166.222.110 POST /anon/wechat
+[36m[INFO][0m 2019/04/11 12:52 200 126.697µs 61.151.178.169 GET /project
+[36m[INFO][0m 2019/04/11 12:52 404 53.787µs 61.151.178.169 GET /index.js
+[36m[INFO][0m 2019/04/11 12:52 404 17.689µs 124.160.215.124 GET /favicon.ico
+[36m[INFO][0m 2019/04/11 13:09 403 61.068µs 116.252.2.137 GET /
+[36m[INFO][0m 2019/04/11 13:22 403 60.3µs 46.34.168.158 GET /
+[36m[INFO][0m 2019/04/11 13:40 403 75.329µs 60.191.32.72 GET /
+[36m[INFO][0m 2019/04/11 13:40 404 22.941µs 60.191.32.72 GET /favicon.ico
+[36m[INFO][0m 2019/04/11 13:49 404 66.787µs 117.41.187.158 HEAD /search/www.ymwears.cn
+[36m[INFO][0m 2019/04/11 13:52 403 64.25µs 139.162.106.181 GET /
+[36m[INFO][0m 2019/04/11 13:53 404 52.061µs 117.41.187.208 HEAD /search/www.ymwears.cn
+[mysql] 2019/04/11 13:54:32 packets.go:112: closing bad idle connection: EOF
+[36m[INFO][0m 2019/04/11 13:54 200 1.742747ms 60.191.32.72 GET /teacher/list
+[36m[INFO][0m 2019/04/11 13:54 404 27.053µs 60.191.32.72 GET /favicon.ico
+[36m[INFO][0m 2019/04/11 13:55 200 1.138333ms 60.191.32.72 GET /teacher/list
+[36m[INFO][0m 2019/04/11 13:55 200 978.214µs 60.191.32.72 GET /student/list
+[36m[INFO][0m 2019/04/11 13:55 403 47.503µs 60.191.32.72 GET /
+2019/04/14 00:57:42 建立数据库连接
+2019/04/14 00:57:42 用户表已存在
+2019/04/14 00:57:42 CreateTag
+
+CreateTagerrcode: 45157, errmsg: invalid tag name hint: [rtgY2a06635190]
+
+CreateTagerrcode: 45157, errmsg: invalid tag name hint: [NaOhrA06635707]
+2019/04/14 00:57:43 GetTagList
+
+id: 2	name: 星标组	count: 0
+
+id: 100	name: student	count: 0
+
+id: 101	name: teacher	count: 0
+defaultMenus----
+架构	项目/任务	登记	
+conditionalMenus----
+架构	项目	个人	
+架构	任务	个人	
+
+2019/04/14 00:57:43 建立默认菜单
+2019/04/14 00:57:44 建立个性化学生菜单
+2019/04/14 00:57:44 建立个性化教师菜单
+defaultMenus----
+架构	项目/任务	登记	
+conditionalMenus----
+架构	项目	个人	
+架构	任务	个人	
+
+Now listening on: http://localhost:80
+Application started. Press CTRL+C to shut down.
+[36m[INFO][0m 2019/04/14 00:58 200 132.61µs 61.151.178.169 GET /test/test.html
+[36m[INFO][0m 2019/04/14 00:58 304 102.431µs 124.160.215.124 GET /favicon.ico
+[36m[INFO][0m 2019/04/14 00:58 200 427.894µs 223.167.152.124 GET /project
+[36m[INFO][0m 2019/04/14 00:58 404 43.819µs 61.151.178.169 GET /user/user
+[36m[INFO][0m 2019/04/14 00:58 200 112.658µs 61.151.178.169 GET /project
+[36m[INFO][0m 2019/04/14 00:58 404 57.808µs 61.151.178.169 GET /user/user
+[36m[INFO][0m 2019/04/14 00:58 200 116.594µs 61.151.178.169 GET /test/test.html
+[36m[INFO][0m 2019/04/14 00:58 200 136.124µs 61.151.178.169 GET /project
+[36m[INFO][0m 2019/04/14 00:58 404 66.624µs 61.151.178.169 GET /user/user
+[36m[INFO][0m 2019/04/14 01:29 403 76.159µs 120.78.231.236 GET /
+[36m[INFO][0m 2019/04/14 02:35 403 58.193µs 89.162.185.138 GET /
+[36m[INFO][0m 2019/04/14 03:12 200 107.362µs 61.151.178.169 GET /project
+[36m[INFO][0m 2019/04/14 03:12 200 104.05µs 61.151.178.169 GET /project
+[36m[INFO][0m 2019/04/14 03:12 304 124.201µs 124.160.215.124 GET /css/weui.min.css
+[36m[INFO][0m 2019/04/14 03:12 304 69.786µs 124.160.215.124 GET /css/jquery-weui.css
+[36m[INFO][0m 2019/04/14 03:12 304 66.096µs 124.160.215.124 GET /css/background.css
+[36m[INFO][0m 2019/04/14 03:12 304 97.25µs 61.151.178.169 GET /js/jquery-2.1.1.min.js
+[36m[INFO][0m 2019/04/14 03:12 304 63.407µs 61.151.178.169 GET /project/index.js
+[36m[INFO][0m 2019/04/14 03:12 304 36.04µs 61.151.178.169 GET /js/jquery-weui.js
+[36m[INFO][0m 2019/04/14 03:12 404 75.389µs 61.151.178.169 GET /user/user
+[36m[INFO][0m 2019/04/14 03:12 404 44.097µs 223.167.152.124 GET /user/user
+[36m[INFO][0m 2019/04/14 03:12 304 78.832µs 124.160.215.124 GET /favicon.ico
+[36m[INFO][0m 2019/04/14 03:12 200 140.811µs 61.151.178.169 GET /test/test.html
+[36m[INFO][0m 2019/04/14 03:12 304 95.512µs 61.151.178.169 GET /test/test.js
+[36m[INFO][0m 2019/04/14 03:12 304 73.403µs 61.151.178.169 GET /js/FileSaver.min.js
+[36m[INFO][0m 2019/04/14 04:09 403 61.731µs 139.162.106.181 GET /
+[36m[INFO][0m 2019/04/14 05:00 403 66.368µs 158.58.163.80 GET /
+[36m[INFO][0m 2019/04/14 05:29 403 64.939µs 115.127.103.122 GET /
+[36m[INFO][0m 2019/04/14 05:30 403 62.781µs 31.217.214.100 GET /
+[36m[INFO][0m 2019/04/14 07:56 403 82.335µs 47.97.16.76 GET /
+[36m[INFO][0m 2019/04/14 09:00 403 61.388µs 47.103.50.235 GET /
+[36m[INFO][0m 2019/04/14 09:00 404 19.926µs 47.103.50.235 GET /explicit_not_exist_path
+[36m[INFO][0m 2019/04/14 09:00 301 5.76µs 47.103.50.235 GET /index.html
+[36m[INFO][0m 2019/04/14 09:00 404 28.363µs 47.103.50.235 GET /index.php
+[36m[INFO][0m 2019/04/14 09:00 404 12.534µs 47.103.50.235 GET /index.jsp
+[36m[INFO][0m 2019/04/14 09:00 404 13.683µs 47.103.50.235 GET /admin
+[36m[INFO][0m 2019/04/14 09:00 200 301.814µs 47.103.50.235 GET /favicon.ico
+[36m[INFO][0m 2019/04/14 09:00 404 36.009µs 47.103.50.235 GET /robots.txt
+[36m[INFO][0m 2019/04/14 09:00 404 32.644µs 47.103.50.235 GET /README
+[36m[INFO][0m 2019/04/14 09:00 404 46.838µs 47.103.50.235 GET /solr
+[36m[INFO][0m 2019/04/14 09:00 404 21.209µs 47.103.50.235 GET /wcm
+[36m[INFO][0m 2019/04/14 09:00 404 15.965µs 47.103.50.235 GET /phpMyAdmin
+[36m[INFO][0m 2019/04/14 09:00 404 13.471µs 47.103.50.235 GET /phpmyadmin
+[36m[INFO][0m 2019/04/14 09:00 404 13.573µs 47.103.50.235 GET /pma
+[36m[INFO][0m 2019/04/14 09:53 403 61.891µs 116.62.215.53 GET /
+[36m[INFO][0m 2019/04/14 09:59 403 65.636µs 107.170.203.33 GET /
+[36m[INFO][0m 2019/04/14 12:08 404 54.74µs 198.167.223.52 GET /acadmin.php
+[mysql] 2019/04/14 12:30:38 packets.go:112: closing bad idle connection: EOF
+2019/04/14 12:30:38 GetAllMembers,role:	teacher
+[36m[INFO][0m 2019/04/14 12:30 200 1.707766ms 223.93.188.66 GET /teacher/list
+2019/04/14 12:31:12 GetAllMembers,role:	teacher
+[36m[INFO][0m 2019/04/14 12:31 200 1.026667ms 223.93.188.66 GET /teacher/list
+2019/04/14 12:32:17 GetAllMembers,role:	teacher
+[36m[INFO][0m 2019/04/14 12:32 200 1.020854ms 223.93.188.66 GET /teacher/list
+2019/04/14 12:32:38 GetAllMembers,role:	teacher
+[36m[INFO][0m 2019/04/14 12:32 200 994.949µs 223.93.188.66 GET /teacher/list
+2019/04/14 12:34:50 GetAllMembers,role:	teacher
+[36m[INFO][0m 2019/04/14 12:34 200 1.032689ms 223.93.188.66 GET /teacher/list
+2019/04/14 12:35:32 建立数据库连接
+2019/04/14 12:35:32 用户表已存在
+2019/04/14 12:35:32 CreateTag
+
+CreateTagerrcode: 45157, errmsg: invalid tag name hint: [m7mwjA05323951]
+
+CreateTagerrcode: 45157, errmsg: invalid tag name hint: [rvDimA05322995]
+2019/04/14 12:35:33 GetTagList
+
+id: 2	name: 星标组	count: 0
+
+id: 100	name: student	count: 0
+
+id: 101	name: teacher	count: 0
+defaultMenus----
+架构	项目/任务	登记	
+conditionalMenus----
+架构	项目	个人	
+架构	任务	个人	
+
+2019/04/14 12:35:33 建立默认菜单
+2019/04/14 12:35:34 建立个性化学生菜单
+2019/04/14 12:35:34 建立个性化教师菜单
+defaultMenus----
+架构	项目/任务	登记	
+conditionalMenus----
+架构	项目	个人	
+架构	任务	个人	
+
+[31m[ERRO][0m 2019/04/14 12:35 listen tcp :80: bind: address already in use
+[36m[INFO][0m 2019/04/14 12:35 200 201.729µs 61.151.178.167 GET /test/test.html
+[36m[INFO][0m 2019/04/14 12:35 200 151.298µs 61.151.178.167 GET /test/test.js
+[36m[INFO][0m 2019/04/14 12:35 404 31.552µs 223.104.246.139 GET /css/example.css
+[36m[INFO][0m 2019/04/14 12:35 200 4.641215ms 61.151.178.167 GET /js/jquery-2.1.1.min.js
+[36m[INFO][0m 2019/04/14 12:35 200 5.711333ms 61.151.178.167 GET /js/jquery-weui.js
+[36m[INFO][0m 2019/04/14 12:35 200 88.154µs 61.151.178.167 GET /js/FileSaver.min.js
+[36m[INFO][0m 2019/04/14 12:35 403 101.88µs 58.246.221.142 GET /
+[36m[INFO][0m 2019/04/14 12:35 403 60.917µs 58.246.221.73 GET /
+[36m[INFO][0m 2019/04/14 12:35 403 30.344µs 223.167.152.13 GET /
+[36m[INFO][0m 2019/04/14 12:35 403 42.478µs 58.247.212.61 GET /
+[36m[INFO][0m 2019/04/14 12:35 403 75.457µs 120.204.17.69 GET /
+[36m[INFO][0m 2019/04/14 12:35 403 45.032µs 120.204.17.46 GET /
+[36m[INFO][0m 2019/04/14 12:35 403 49.901µs 120.204.17.46 GET /
+[36m[INFO][0m 2019/04/14 12:35 403 26.61µs 120.204.17.69 GET /
+[36m[INFO][0m 2019/04/14 12:35 200 879.241967ms 223.104.246.139 GET /css/weui.css
+[36m[INFO][0m 2019/04/14 12:36 200 283.01µs 223.104.246.139 GET /favicon.ico
+2019/04/14 12:36:04 GetAllMembers,role:	teacher
+[36m[INFO][0m 2019/04/14 12:36 200 940.501µs 61.151.178.167 GET /teacher/list
+[HTTP Server] http: panic serving 61.151.178.167:61919: json: cannot unmarshal number into Go struct field StudentInfo.supervisor of type string
+goroutine 248 [running]:
+net/http.(*conn).serve.func1(0xc000607540)
+	/usr/go/src/net/http/server.go:1769 +0xc9
+panic(0xa24c00, 0xc0008d7be0)
+	/usr/go/src/runtime/panic.go:522 +0x1b5
+_/root/HMI_IOT/service.UpdateStudent(0xc45100, 0xc000228fc0)
+	/root/HMI_IOT/service/UserService.go:56 +0x1bc
+_/root/HMI_IOT/controller.EnrollStudent(0xc45100, 0xc000228fc0)
+	/root/HMI_IOT/controller/UserCtrl.go:17 +0x35
+github.com/kataras/iris/context.DefaultNext(0xc45100, 0xc000228fc0)
+	/root/go/src/github.com/kataras/iris/context/context.go:1208 +0x107
+github.com/kataras/iris/context.(*context).Next(0xc000228fc0)
+	/root/go/src/github.com/kataras/iris/context/context.go:1217 +0x3e
+github.com/kataras/iris/middleware/logger.(*requestLoggerMiddleware).ServeHTTP(0xc000114540, 0xc45100, 0xc000228fc0)
+	/root/go/src/github.com/kataras/iris/middleware/logger/logger.go:50 +0x8f
+github.com/kataras/iris/context.Do(0xc45100, 0xc000228fc0, 0xc000545890, 0x2, 0x2)
+	/root/go/src/github.com/kataras/iris/context/context.go:922 +0x81
+github.com/kataras/iris/context.(*context).Do(0xc000228fc0, 0xc000545890, 0x2, 0x2)
+	/root/go/src/github.com/kataras/iris/context/context.go:1094 +0x55
+github.com/kataras/iris/core/router.(*routerHandler).HandleRequest(0xc0002fbd60, 0xc45100, 0xc000228fc0)
+	/root/go/src/github.com/kataras/iris/core/router/handler.go:227 +0x555
+github.com/kataras/iris/core/router.(*Router).BuildRouter.func1(0xc2e4e0, 0xc0005101c0, 0xc000139100)
+	/root/go/src/github.com/kataras/iris/core/router/router.go:84 +0x8f
+github.com/kataras/iris/core/router.(*Router).ServeHTTP(0xc000219480, 0xc2e4e0, 0xc0005101c0, 0xc000139100)
+	/root/go/src/github.com/kataras/iris/core/router/router.go:161 +0x48
+net/http.serverHandler.ServeHTTP(0xc000251380, 0xc2e4e0, 0xc0005101c0, 0xc000139100)
+	/usr/go/src/net/http/server.go:2774 +0xab
+net/http.(*conn).serve(0xc000607540, 0xc2fde0, 0xc000061700)
+	/usr/go/src/net/http/server.go:1878 +0x84c
+created by net/http.(*Server).Serve
+	/usr/go/src/net/http/server.go:2884 +0x2f4
+[HTTP Server] http: panic serving 223.104.246.139:29664: json: cannot unmarshal number into Go struct field StudentInfo.supervisor of type string
+goroutine 215 [running]:
+net/http.(*conn).serve.func1(0xc000606820)
+	/usr/go/src/net/http/server.go:1769 +0xc9
+panic(0xa24c00, 0xc0008d7c20)
+	/usr/go/src/runtime/panic.go:522 +0x1b5
+_/root/HMI_IOT/service.UpdateStudent(0xc45100, 0xc000228c60)
+	/root/HMI_IOT/service/UserService.go:56 +0x1bc
+_/root/HMI_IOT/controller.EnrollStudent(0xc45100, 0xc000228c60)
+	/root/HMI_IOT/controller/UserCtrl.go:17 +0x35
+github.com/kataras/iris/context.DefaultNext(0xc45100, 0xc000228c60)
+	/root/go/src/github.com/kataras/iris/context/context.go:1208 +0x107
+github.com/kataras/iris/context.(*context).Next(0xc000228c60)
+	/root/go/src/github.com/kataras/iris/context/context.go:1217 +0x3e
+github.com/kataras/iris/middleware/logger.(*requestLoggerMiddleware).ServeHTTP(0xc000114540, 0xc45100, 0xc000228c60)
+	/root/go/src/github.com/kataras/iris/middleware/logger/logger.go:50 +0x8f
+github.com/kataras/iris/context.Do(0xc45100, 0xc000228c60, 0xc000545890, 0x2, 0x2)
+	/root/go/src/github.com/kataras/iris/context/context.go:922 +0x81
+github.com/kataras/iris/context.(*context).Do(0xc000228c60, 0xc000545890, 0x2, 0x2)
+	/root/go/src/github.com/kataras/iris/context/context.go:1094 +0x55
+github.com/kataras/iris/core/router.(*routerHandler).HandleRequest(0xc0002fbd60, 0xc45100, 0xc000228c60)
+	/root/go/src/github.com/kataras/iris/core/router/handler.go:227 +0x555
+github.com/kataras/iris/core/router.(*Router).BuildRouter.func1(0xc2e4e0, 0xc000510380, 0xc000138900)
+	/root/go/src/github.com/kataras/iris/core/router/router.go:84 +0x8f
+github.com/kataras/iris/core/router.(*Router).ServeHTTP(0xc000219480, 0xc2e4e0, 0xc000510380, 0xc000138900)
+	/root/go/src/github.com/kataras/iris/core/router/router.go:161 +0x48
+net/http.serverHandler.ServeHTTP(0xc000251380, 0xc2e4e0, 0xc000510380, 0xc000138900)
+	/usr/go/src/net/http/server.go:2774 +0xab
+net/http.(*conn).serve(0xc000606820, 0xc2fde0, 0xc000060440)
+	/usr/go/src/net/http/server.go:1878 +0x84c
+created by net/http.(*Server).Serve
+	/usr/go/src/net/http/server.go:2884 +0x2f4
+[HTTP Server] http: panic serving 223.104.246.139:29665: json: cannot unmarshal number into Go struct field StudentInfo.supervisor of type string
+goroutine 219 [running]:
+net/http.(*conn).serve.func1(0xc000606a00)
+	/usr/go/src/net/http/server.go:1769 +0xc9
+panic(0xa24c00, 0xc0008d7c80)
+	/usr/go/src/runtime/panic.go:522 +0x1b5
+_/root/HMI_IOT/service.UpdateStudent(0xc45100, 0xc000229a70)
+	/root/HMI_IOT/service/UserService.go:56 +0x1bc
+_/root/HMI_IOT/controller.EnrollStudent(0xc45100, 0xc000229a70)
+	/root/HMI_IOT/controller/UserCtrl.go:17 +0x35
+github.com/kataras/iris/context.DefaultNext(0xc45100, 0xc000229a70)
+	/root/go/src/github.com/kataras/iris/context/context.go:1208 +0x107
+github.com/kataras/iris/context.(*context).Next(0xc000229a70)
+	/root/go/src/github.com/kataras/iris/context/context.go:1217 +0x3e
+github.com/kataras/iris/middleware/logger.(*requestLoggerMiddleware).ServeHTTP(0xc000114540, 0xc45100, 0xc000229a70)
+	/root/go/src/github.com/kataras/iris/middleware/logger/logger.go:50 +0x8f
+github.com/kataras/iris/context.Do(0xc45100, 0xc000229a70, 0xc000545890, 0x2, 0x2)
+	/root/go/src/github.com/kataras/iris/context/context.go:922 +0x81
+github.com/kataras/iris/context.(*context).Do(0xc000229a70, 0xc000545890, 0x2, 0x2)
+	/root/go/src/github.com/kataras/iris/context/context.go:1094 +0x55
+github.com/kataras/iris/core/router.(*routerHandler).HandleRequest(0xc0002fbd60, 0xc45100, 0xc000229a70)
+	/root/go/src/github.com/kataras/iris/core/router/handler.go:227 +0x555
+github.com/kataras/iris/core/router.(*Router).BuildRouter.func1(0xc2e4e0, 0xc000510540, 0xc00013ee00)
+	/root/go/src/github.com/kataras/iris/core/router/router.go:84 +0x8f
+github.com/kataras/iris/core/router.(*Router).ServeHTTP(0xc000219480, 0xc2e4e0, 0xc000510540, 0xc00013ee00)
+	/root/go/src/github.com/kataras/iris/core/router/router.go:161 +0x48
+net/http.serverHandler.ServeHTTP(0xc000251380, 0xc2e4e0, 0xc000510540, 0xc00013ee00)
+	/usr/go/src/net/http/server.go:2774 +0xab
+net/http.(*conn).serve(0xc000606a00, 0xc2fde0, 0xc000060740)
+	/usr/go/src/net/http/server.go:1878 +0x84c
+created by net/http.(*Server).Serve
+	/usr/go/src/net/http/server.go:2884 +0x2f4
+[HTTP Server] http: panic serving 223.104.246.139:29666: json: cannot unmarshal number into Go struct field StudentInfo.supervisor of type string
+goroutine 252 [running]:
+net/http.(*conn).serve.func1(0xc0006077c0)
+	/usr/go/src/net/http/server.go:1769 +0xc9
+panic(0xa24c00, 0xc0008d7cd0)
+	/usr/go/src/runtime/panic.go:522 +0x1b5
+_/root/HMI_IOT/service.UpdateStudent(0xc45100, 0xc000229c20)
+	/root/HMI_IOT/service/UserService.go:56 +0x1bc
+_/root/HMI_IOT/controller.EnrollStudent(0xc45100, 0xc000229c20)
+	/root/HMI_IOT/controller/UserCtrl.go:17 +0x35
+github.com/kataras/iris/context.DefaultNext(0xc45100, 0xc000229c20)
+	/root/go/src/github.com/kataras/iris/context/context.go:1208 +0x107
+github.com/kataras/iris/context.(*context).Next(0xc000229c20)
+	/root/go/src/github.com/kataras/iris/context/context.go:1217 +0x3e
+github.com/kataras/iris/middleware/logger.(*requestLoggerMiddleware).ServeHTTP(0xc000114540, 0xc45100, 0xc000229c20)
+	/root/go/src/github.com/kataras/iris/middleware/logger/logger.go:50 +0x8f
+github.com/kataras/iris/context.Do(0xc45100, 0xc000229c20, 0xc000545890, 0x2, 0x2)
+	/root/go/src/github.com/kataras/iris/context/context.go:922 +0x81
+github.com/kataras/iris/context.(*context).Do(0xc000229c20, 0xc000545890, 0x2, 0x2)
+	/root/go/src/github.com/kataras/iris/context/context.go:1094 +0x55
+github.com/kataras/iris/core/router.(*routerHandler).HandleRequest(0xc0002fbd60, 0xc45100, 0xc000229c20)
+	/root/go/src/github.com/kataras/iris/core/router/handler.go:227 +0x555
+github.com/kataras/iris/core/router.(*Router).BuildRouter.func1(0xc2e4e0, 0xc000510700, 0xc000139200)
+	/root/go/src/github.com/kataras/iris/core/router/router.go:84 +0x8f
+github.com/kataras/iris/core/router.(*Router).ServeHTTP(0xc000219480, 0xc2e4e0, 0xc000510700, 0xc000139200)
+	/root/go/src/github.com/kataras/iris/core/router/router.go:161 +0x48
+net/http.serverHandler.ServeHTTP(0xc000251380, 0xc2e4e0, 0xc000510700, 0xc000139200)
+	/usr/go/src/net/http/server.go:2774 +0xab
+net/http.(*conn).serve(0xc0006077c0, 0xc2fde0, 0xc000061980)
+	/usr/go/src/net/http/server.go:1878 +0x84c
+created by net/http.(*Server).Serve
+	/usr/go/src/net/http/server.go:2884 +0x2f4
+[HTTP Server] http: panic serving 223.104.246.139:29667: json: cannot unmarshal number into Go struct field StudentInfo.supervisor of type string
+goroutine 254 [running]:
+net/http.(*conn).serve.func1(0xc000607900)
+	/usr/go/src/net/http/server.go:1769 +0xc9
+panic(0xa24c00, 0xc0008d7d20)
+	/usr/go/src/runtime/panic.go:522 +0x1b5
+_/root/HMI_IOT/service.UpdateStudent(0xc45100, 0xc000229d40)
+	/root/HMI_IOT/service/UserService.go:56 +0x1bc
+_/root/HMI_IOT/controller.EnrollStudent(0xc45100, 0xc000229d40)
+	/root/HMI_IOT/controller/UserCtrl.go:17 +0x35
+github.com/kataras/iris/context.DefaultNext(0xc45100, 0xc000229d40)
+	/root/go/src/github.com/kataras/iris/context/context.go:1208 +0x107
+github.com/kataras/iris/context.(*context).Next(0xc000229d40)
+	/root/go/src/github.com/kataras/iris/context/context.go:1217 +0x3e
+github.com/kataras/iris/middleware/logger.(*requestLoggerMiddleware).ServeHTTP(0xc000114540, 0xc45100, 0xc000229d40)
+	/root/go/src/github.com/kataras/iris/middleware/logger/logger.go:50 +0x8f
+github.com/kataras/iris/context.Do(0xc45100, 0xc000229d40, 0xc000545890, 0x2, 0x2)
+	/root/go/src/github.com/kataras/iris/context/context.go:922 +0x81
+github.com/kataras/iris/context.(*context).Do(0xc000229d40, 0xc000545890, 0x2, 0x2)
+	/root/go/src/github.com/kataras/iris/context/context.go:1094 +0x55
+github.com/kataras/iris/core/router.(*routerHandler).HandleRequest(0xc0002fbd60, 0xc45100, 0xc000229d40)
+	/root/go/src/github.com/kataras/iris/core/router/handler.go:227 +0x555
+github.com/kataras/iris/core/router.(*Router).BuildRouter.func1(0xc2e4e0, 0xc0005108c0, 0xc000139300)
+	/root/go/src/github.com/kataras/iris/core/router/router.go:84 +0x8f
+github.com/kataras/iris/core/router.(*Router).ServeHTTP(0xc000219480, 0xc2e4e0, 0xc0005108c0, 0xc000139300)
+	/root/go/src/github.com/kataras/iris/core/router/router.go:161 +0x48
+net/http.serverHandler.ServeHTTP(0xc000251380, 0xc2e4e0, 0xc0005108c0, 0xc000139300)
+	/usr/go/src/net/http/server.go:2774 +0xab
+net/http.(*conn).serve(0xc000607900, 0xc2fde0, 0xc000061ac0)
+	/usr/go/src/net/http/server.go:1878 +0x84c
+created by net/http.(*Server).Serve
+	/usr/go/src/net/http/server.go:2884 +0x2f4
+[36m[INFO][0m 2019/04/14 12:36 200 127.083µs 61.151.178.167 GET /test/test.html
+[36m[INFO][0m 2019/04/14 12:36 404 24.978µs 223.104.246.139 GET /css/example.css
+[36m[INFO][0m 2019/04/14 12:36 304 83.616µs 61.151.178.167 GET /test/test.js
+2019/04/14 12:37:00 GetAllMembers,role:	teacher
+[36m[INFO][0m 2019/04/14 12:37 200 1.024634ms 61.151.178.167 GET /teacher/list
+[36m[INFO][0m 2019/04/14 12:38 404 44.643µs 45.56.150.115 HEAD /robots.txt
+[31m[ERRO][0m 2019/04/14 12:39 http: Server closed

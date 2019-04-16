@@ -2,6 +2,9 @@
   suffixes = [".go"]
   ignore = []
 
+[server]
+    serverAddress = "http://test.renjiwulian.com"
+    
 [wechat]
     AppId = "wx2203c68c9311ea43"
     AppSecret = "40c40547e174ed99d1281b2890f7eeb3"
