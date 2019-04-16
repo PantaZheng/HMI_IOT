@@ -4,7 +4,7 @@ import (
 	"fmt"
 	"github.com/jinzhu/gorm"
 	_"github.com/jinzhu/gorm/dialects/mysql"
-	"github.com/pantazheng/HMI-IoT/config"
+	"github.com/pantazheng/HMI-IOT/config"
 	"github.com/pelletier/go-toml"
 	"log"
 )

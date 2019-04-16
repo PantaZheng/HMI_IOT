@@ -8,7 +8,7 @@ import (
 	"github.com/chanxuehong/wechat/mp/oauth2"
 	"github.com/chanxuehong/wechat/mp/user"
 	oa2 "github.com/chanxuehong/wechat/oauth2"
-	"github.com/pantazheng/HMI-IoT/config"
+	"github.com/pantazheng/HMI-IOT/config"
 	"github.com/pelletier/go-toml"
 	"log"
 )

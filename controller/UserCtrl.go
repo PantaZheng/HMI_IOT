@@ -2,8 +2,8 @@ package controller
 
 import (
 	"github.com/kataras/iris"
-	"github.com/pantazheng/HMI-IoT/models"
-	"github.com/pantazheng/HMI-IoT/service"
+	"github.com/pantazheng/HMI-IOT/models"
+	"github.com/pantazheng/HMI-IOT/service"
 )
 
 
