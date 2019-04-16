@@ -1,30 +1,10 @@
-function projectCtrl($scope, $http, $location, $window) {
-    // debugger
-    $.showLoading();
-    if ($window.sessionStorage.weChatId == null) {
-        var weChatId = $location.search().weChatId;
-        $window.sessionStorage.weChatId = weChatId;
-    }
-
+﻿app.controller('projectCtrl',function($scope, $http, $location, $window) {
     $scope.types = ["横向项目", "纵向项目", "实验室项目"];
-
-    $http({
-        url: "../user/user",
-        method: 'get',
-        headers: {token: $window.sessionStorage.weChatId}
-    }).success(function (res) {
-        console.log(res);
-        $scope.user = res;
-        $window.sessionStorage.user = JSON.stringify(res);
-        $scope.getProject(res.role, res.level);
-        $scope.getPrincipal();
-        $scope.getTeacher();
-        $scope.getProjects();
-        $.hideLoading();
-    }).error(function (err) {
-        $.hideLoading();
-        $.alert(err);
-    })
+    $http.get("../testData/project.json"
+    ).then(function(results){
+    	$scope.project=results.data.data; 
+		console.log($scope.projcet)
+    }); 
 
     $scope.submit = function () {
         console.log($scope.project);
@@ -158,7 +138,7 @@ function projectCtrl($scope, $http, $location, $window) {
             $.alert(err);
         })
     }
-}
+})
 
 function detailCtrl($scope, $http, $location, $window) {
     $.showLoading();
@@ -263,7 +243,6 @@ function detailCtrl($scope, $http, $location, $window) {
             ]
         });
     }
-
 }
 
 function updateCtrl($scope, $http, $location, $window) {
