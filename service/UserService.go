@@ -1,10 +1,9 @@
 package service
 
 import (
-	"../models"
 	"github.com/chanxuehong/wechat/mp/user"
 	"github.com/chanxuehong/wechat/oauth2"
-	_ "github.com/chanxuehong/wechat/oauth2"
+	"github.com/pantazheng/HMI-IoT/models"
 	"log"
 )
 

@@ -1,7 +1,6 @@
 package service
 
 import (
-	"../config"
 	"github.com/chanxuehong/wechat/mp/core"
 	"github.com/chanxuehong/wechat/mp/menu"
 	"github.com/chanxuehong/wechat/mp/message/callback/request"
@@ -9,6 +8,7 @@ import (
 	"github.com/chanxuehong/wechat/mp/oauth2"
 	"github.com/chanxuehong/wechat/mp/user"
 	oa2 "github.com/chanxuehong/wechat/oauth2"
+	"github.com/pantazheng/HMI-IoT/config"
 	"github.com/pelletier/go-toml"
 	"log"
 )
