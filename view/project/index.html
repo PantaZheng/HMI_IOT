@@ -13,10 +13,6 @@
     <link rel="stylesheet" href="../css/weui.css"/>
     <link rel="stylesheet" href="../css/weuix.css"/>
     <link rel="stylesheet" href="../css/background.css"/>
-    <link
-            href="//netdna.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css"
-            rel="stylesheet">
-
 </head>
 
 <body ng-controller="projectCtrl">
@@ -28,9 +24,9 @@
     </div>
     <div class="weui_tab_bd">
         <div id="tab1" class="weui_tab_bd_item weui_tab_bd_item_active">
-			<div class="weui-news" onclick="window.location='../project/detail.html'">
+			<div class="weui-news" ng-repeat="data in project" ng-if="data.tag==0" ng-click="jump(data.pid)" >
 				<ul class="weui-news-list">
-					<li class="weui-news-item" ng-repeat="data in project" ng-if="data.tag==0">
+					<li class="weui-news-item" >
 						<div class="weui-news-inners">
 								<div class="weui-news-title">{{data.title}}<span style="float: right;">{{data.time}}</span></div>
 								<div class="weui-news-text">
@@ -38,7 +34,6 @@
 								</div>
 							<div class="weui-news-info">
 								<div class="weui-news-infoitem">
-									<!-- <img src="../images/user.png"  class="weui-news-round"> -->
 									<span>{{data.charge}}</span>
 								</div>
 								<!-- <div class="weui-news-infoitem">1条评论</div> -->
@@ -182,7 +177,8 @@
 </div>
 <script src="../js/jquery-2.1.1.min.js"></script>
 <script src="../js/jquery-weui.js"></script>
-<script src="//cdn.bootcss.com/angular.js/1.2.28/angular.min.js"></script>
+<!-- <script src="//cdn.bootcss.com/angular.js/1.2.28/angular.min.js"></script> -->
+<script src="../js/angular.js"></script>
 <script src="../js/app.js"></script>
 <script src="../project/index.js"></script>
 </body>
