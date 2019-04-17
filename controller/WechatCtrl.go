@@ -27,16 +27,22 @@ func WeChat(ctx iris.Context) {
 
 func Menu(){
 	btnRelationShip:=menu.Button{}
-	btnRelationShip.SetAsViewButton("架构", service.ServerAddress+"/framework/frame.html")
+	btnRelationShip.SetAsViewButton("人员", service.ServerAddress+"/framework/frame.html")
 	btnProject:=menu.Button{}
-	btnProject.SetAsViewButton("项目",service.ServerAddress+"/project")
+	btnProject.SetAsViewButton("项目1",service.ServerAddress+"/project")
 	btnMission:=menu.Button{}
-	btnMission.SetAsViewButton("任务",service.ServerAddress+"/mission")
+	btnMission.SetAsViewButton("项目2",service.ServerAddress+"/mission")
+	btn3:=menu.Button{}
+	btn3.SetAsClickButton("项目3","p3")
+	btn4:=menu.Button{}
+	btn4.SetAsClickButton("项目4","p4")
+	btn5:=menu.Button{}
+	btn5.SetAsClickButton("SIMUSAFE","simusafe")
 	btnSubs:=[]menu.Button{btnProject,btnMission}
 	btnProjectMission:=menu.Button{}
-	btnProjectMission.SetAsSubMenuButton("项目",btnSubs)
+	btnProjectMission.SetAsSubMenuButton("内容",btnSubs)
 	btnEnroll:=menu.Button{}
-	btnEnroll.SetAsViewButton("个人信息","https://open.weixin.qq.com/connect/oauth2/authorize?appid="+service.WeChatAppId+"&redirect_uri="+service.ServerAddress+"/createUser&response_type=code&scope=snsapi_base&state=12#wechat_redirect")
+	btnEnroll.SetAsViewButton("进度","https://open.weixin.qq.com/connect/oauth2/authorize?appid="+service.WeChatAppId+"&redirect_uri="+service.ServerAddress+"/createUser&response_type=code&scope=snsapi_base&state=12#wechat_redirect")
 	defaultButtons:= []menu.Button{btnRelationShip,btnProjectMission,btnEnroll}
 	service.DefaultMenu(&menu.Menu{Buttons:defaultButtons})
 }
