@@ -38,7 +38,11 @@ func Menu(){
 	btn4.SetAsClickButton("项目4","p4")
 	btn5:=menu.Button{}
 	btn5.SetAsClickButton("SIMUSAFE","simusafe")
+<<<<<<< HEAD
 	btnSubs:=[]menu.Button{btnProject,btnMission,btn3,btn4,btn5}
+=======
+	btnSubs:=[]menu.Button{btnProject,btnMission}
+>>>>>>> master
 	btnProjectMission:=menu.Button{}
 	btnProjectMission.SetAsSubMenuButton("内容",btnSubs)
 	btnEnroll:=menu.Button{}
