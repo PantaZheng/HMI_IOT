@@ -1,11 +1,16 @@
-﻿app.controller('projectCtrl',function($scope, $http, $location, $window) {
+app.controller('projectCtrl',function($scope, $http, $location, $window) {
     $scope.types = ["横向项目", "纵向项目", "实验室项目"];
+	
     $http.get("../testData/project.json"
     ).then(function(results){
     	$scope.project=results.data.data; 
-		console.log($scope.projcet)
+		console.log($scope.project)
     }); 
 
+	$scope.jump =function(data){
+		$window.sessionStorage.pid = data;
+		window.location ="../project/detail.html";
+	}
     $scope.submit = function () {
         console.log($scope.project);
         if ($scope.project.principal.userId == null) {
@@ -34,142 +39,28 @@
             $.alert(err);
         })
     }
-    $scope.getProjects = function () {
-        var url = '';
-        if ($scope.user.level == 1) {
-            url = '../admin/project';
-        } else {
-            url = '../teacher/project';
-        }
-        if ($window.sessionStorage.projects == null || $window.sessionStorage.projects == '') {
-            $http({
-                url: url,
-                method: 'get',
-                headers: {token: $window.sessionStorage.weChatId}
-            }).success(function (data) {
-                $scope.projects = data;
-                $window.sessionStorage.projects = JSON.stringify($scope.projects);
-            }).error(function (err) {
-                $.alert(err);
-            })
-        } else {
-            $scope.projects = JSON.parse($window.sessionStorage.projects);
-        }
 
-    }
-
-    $scope.getPrincipal = function () {
-        if ($window.sessionStorage.principal == null) {
-            $http({
-                url: "../teacher/user/activePrincipal",
-                method: 'get',
-                headers: {token: $window.sessionStorage.weChatId}
-            }).success(function (data) {
-                $scope.principal = data;
-                $window.sessionStorage.principal = JSON.stringify($scope.principal);
-            }).error(function (err) {
-                $.alert(err);
-            })
-        } else {
-            $scope.principal = JSON.parse($window.sessionStorage.principal);
-        }
-
-    }
-    $scope.getTeacher = function () {
-        if ($window.sessionStorage.teacher == null) {
-            $http({
-                url: "../teacher/user/teacher",
-                method: 'get',
-                headers: {token: $window.sessionStorage.weChatId}
-            }).success(function (data) {
-                $scope.teacher = data;
-                $window.sessionStorage.teacher = JSON.stringify($scope.teacher);
-            }).error(function (err) {
-                $.alert(err);
-            })
-        } else {
-            $scope.teacher = JSON.parse($window.sessionStorage.teacher);
-        }
-
-    }
-    $scope.getProject = function (role, level) {
-        var url = "";
-        if (level == 1) {
-            url = "../admin/project"
-        } else if (role == "teacher") {
-            url = "../teacher/project"
-        } else {
-            url = "../user/project"
-        }
-        $http({
-            url: url,
-            method: 'get',
-            headers: {token: $window.sessionStorage.weChatId}
-        }).success(function (data) {
-            $scope.hp0 = new Array();
-            $scope.zp0 = new Array();
-            $scope.sp0 = new Array();
-            $scope.hp1 = new Array();
-            $scope.zp1 = new Array();
-            $scope.sp1 = new Array();
-            for (var i = 0; i < data.length; i++) {
-                if (data[i].type == '横向项目') {
-                    if (data[i].status == 0) {
-                        $scope.hp0.push(data[i]);
-                    } else {
-                        $scope.hp1.push(data[i]);
-                    }
-
-                } else if (data[i].type == '纵向项目') {
-                    if (data[i].status == 0) {
-                        $scope.zp0.push(data[i]);
-                    } else {
-                        $scope.zp1.push(data[i]);
-                    }
-                } else {
-                    if (data[i].status == 0) {
-                        $scope.sp0.push(data[i]);
-                    } else {
-                        $scope.sp1.push(data[i]);
-                    }
-                }
-            }
-        }).error(function (err) {
-            $.alert(err);
-        })
-    }
 })
 
-function detailCtrl($scope, $http, $location, $window) {
-    $.showLoading();
-    var id = $location.search().id;
-    $http({
-        url: "../teacher/project/detail/" + id,
-        method: 'get',
-        headers: {token: $window.sessionStorage.weChatId}
-    }).success(function (res) {
-        console.log(res);
-        $scope.p = res;
-        $scope.ps = new Array();
-        for (var i = 0; i < res.missions.length; i++) {
-            var name = res.missions[i].principal.name;
-            var isContain = false;
-            for (var j = 0; j < $scope.ps.length; j++) {
-                if (name == $scope.ps[j]) {
-                    isContain = true;
-                    break;
-                }
-            }
-            if (isContain == false) {
-                $scope.ps.push(name);
-            }
-        }
-        console.log($scope.ps);
-        $.hideLoading();
-    }).error(function (err) {
-        $.hideLoading();
-        $.alert(err);
-    })
+app.controller('detailCtrl',function($scope, $http, $location, $window) {
+    // $.showLoading();
+    $http.get("../testData/project.json"
+    ).then(function(results){
+    	$scope.project=results.data.data; 
+    }); 
+	
+	$scope.pid=$window.sessionStorage.pid;
+	// var pid=$window.sessionStorage.pid;
+//     $http({
+//         url: "http://bci.renjiwulian.com/project/details/" + pid,
+//         method: 'get'
+//     }).success(function (res) {
+//         console.log(res);
+//         $scope.p = res;
+//     }).error(function (err) {
+//         $.hideLoading();
+//         alert(err);
+//     })
 
     $scope.m = function (status) {
         var tips = "";
@@ -243,7 +134,7 @@ function detailCtrl($scope, $http, $location, $window) {
             ]
         });
     }
-}
+})
 
 function updateCtrl($scope, $http, $location, $window) {
     $scope.p = JSON.parse($window.sessionStorage.p);

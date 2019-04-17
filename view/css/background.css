@@ -10,3 +10,18 @@ html {
     background-color: #FAFAFA;  
 }
 
+.box{
+margin-left: 0.625rem;
+}
+.box img{width: 80%;float: left;}
+
+.stuList{
+	font-size: 25px; 
+	color: #000000;
+}
+
+.headBox{
+	width: 80px;
+	
+}
+.headBox img{width:75%;float: left;}
