@@ -1,8 +1,8 @@
 package models
 
 import (
-	"../database"
 	"github.com/jinzhu/gorm"
+	"github.com/pantazheng/HMI_IOT/database"
 	"log"
 )
 

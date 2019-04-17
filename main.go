@@ -1,11 +1,11 @@
 package main
 
 import (
-	"./controller"
 	"fmt"
 	"github.com/kataras/iris"
 	"github.com/kataras/iris/core/router"
 	"github.com/kataras/iris/middleware/logger"
+	"github.com/pantazheng/HMI_IOT/controller"
 )
 
 func init(){

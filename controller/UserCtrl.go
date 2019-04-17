@@ -1,9 +1,9 @@
 package controller
 
 import (
-	"../models"
-	"../service"
 	"github.com/kataras/iris"
+	"github.com/pantazheng/HMI_IOT/models"
+	"github.com/pantazheng/HMI_IOT/service"
 )
 
 

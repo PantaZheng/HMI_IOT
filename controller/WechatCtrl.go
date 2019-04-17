@@ -1,11 +1,11 @@
 package controller
 
 import (
-	"../service"
 	"github.com/chanxuehong/wechat/mp/core"
 	"github.com/chanxuehong/wechat/mp/menu"
 	"github.com/chanxuehong/wechat/mp/message/callback/request"
 	"github.com/kataras/iris"
+	"github.com/pantazheng/HMI_IOT/service"
 )
 
 
