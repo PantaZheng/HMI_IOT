@@ -27,7 +27,7 @@ func newApp() (api *iris.Application){
 	api.Get("/project/", func(ctx iris.Context) {
 		_=ctx.View("/project/index.html")
 	})
-	api.Get("/mission", func(ctx iris.Context){
+	api.Get("/mission/", func(ctx iris.Context){
 		_=ctx.View("/mission/index.html")
 	})
 	api.Get("/createUser/", func(ctx iris.Context) {
