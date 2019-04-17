@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html ng-app="app">
 
 <head lang="en">
@@ -24,9 +24,9 @@
     </div>
     <div class="weui_tab_bd">
         <div id="tab1" class="weui_tab_bd_item weui_tab_bd_item_active">
-			<div class="weui-news" ng-repeat="data in project" ng-if="data.tag==0" ng-click="jump(data.pid)" >
+			<div class="weui-news">
 				<ul class="weui-news-list">
-					<li class="weui-news-item" >
+					<li class="weui-news-item" ng-repeat="data in project" ng-if="data.tag==0" ng-click="jump(data.pid)" >
 						<div class="weui-news-inners">
 								<div class="weui-news-title">{{data.title}}<span style="float: right;">{{data.time}}</span></div>
 								<div class="weui-news-text">
@@ -45,9 +45,9 @@
         </div>
 
         <div id="tab2" class="weui_tab_bd_item ">
-			<div class="weui-news"onclick="window.location='../project/detail.html'">
+			<div class="weui-news">
 				<ul class="weui-news-list">
-					<li class="weui-news-item" ng-repeat="data in project" ng-if="data.tag==1">
+					<li class="weui-news-item" ng-repeat="data in project" ng-if="data.tag==1" ng-click="jump(data.pid)">
 						<div class="weui-news-inners">
 								<div class="weui-news-title">{{data.title}}<span style="float: right;">{{data.time}}</span></div>
 								<div class="weui-news-text">
@@ -55,10 +55,8 @@
 								</div>
 							<div class="weui-news-info">
 								<div class="weui-news-infoitem">
-									<!-- <img src="../images/user.png"  class="weui-news-round"> -->
 									<span>{{data.charge}}</span>
 								</div>
-								<!-- <div class="weui-news-infoitem">1条评论</div> -->
 							</div>
 						</div>
 					</li>
@@ -66,20 +64,14 @@
 			</div>	
         </div>
         <div id="tab3" class="weui_tab_bd_item">
-
             <form>
                 <div class="weui_cells">
-
-
                     <div class="weui_cell weui">
-
                         <div class="weui_cell_hd ">
-
                             <label class="weui_label weui_cell_primary">名称</label>
                         </div>
                         <div class="weui_cell_bd weui_cell_primary ">
-                            <input ng-model="project.title" class="weui_input" type="text"
-                                   placeholder="请输入项目或任务名称">
+                            <input ng-model="project.title" class="weui_input" type="text" placeholder="请输入项目或任务名称">
                         </div>
                     </div>
 
@@ -101,7 +93,6 @@
                     </div>
                 </div>
                 <div class="weui_cells">
-
                     <div class="weui_cell weui_cell_select">
                         <div class="weui_cell_bd weui_cell_primary">
                             <select class="weui_select" ng-model="project.principal.userId"
@@ -118,8 +109,6 @@
                             </select>
                         </div>
                     </div>
-
-
                     <div class="weui_cell weui_cell_select">
                         <div class="weui_cell_bd weui_cell_primary">
                             <select class="weui_select" ng-model="project.project.projectId"
@@ -128,8 +117,6 @@
                             </select>
                         </div>
                     </div>
-
-
                     <div class="weui_cell weui_cell_select">
                         <div class="weui_cell_bd weui_cell_primary">
                             <select class="weui_select" ng-model="project.type" ng-options="x for x in types">
@@ -149,7 +136,6 @@
                         </div>
                     </div>
                 </div>
-
                 <div class="weui_cells">
                     <div class="weui_cell">
                         <div class="weui_cell_bd weui_cell_primary">
@@ -161,8 +147,6 @@
                         </div>
                     </div>
                 </div>
-
-
                 <div class="weui_cells" style="background-color:#EFEFEF">
                     <div class="weui_cell weui_cell_primary">
                         <input class="weui_btn weui_btn_abled weui_btn_primary"
@@ -171,7 +155,6 @@
                 </div>
             </form>
         </div>
-
     </div>
 
 </div>

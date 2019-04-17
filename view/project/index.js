@@ -50,7 +50,7 @@ app.controller('detailCtrl',function($scope, $http, $location, $window) {
     }); 
 	
 	$scope.pid=$window.sessionStorage.pid;
-	var pid=$window.sessionStorage.pid;
+	// var pid=$window.sessionStorage.pid;
 //     $http({
 //         url: "http://bci.renjiwulian.com/project/details/" + pid,
 //         method: 'get'
