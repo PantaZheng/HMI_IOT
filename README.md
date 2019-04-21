@@ -66,122 +66,16 @@
 - 拉取名单
     - Get `/anon/list/{role:string}`
 
-### teacher
+## TODO
 
-- 拉取教师名单
-    - Get `/teacher/list`
+### 菜单接口
 
-        ```json
-        {
-            {
-                id: uint
-                name: string
-            },
-            {
-                ..
-                ..
-            },
-            ...
-        }
-        ```
+[菜单详情可见](/design/index.html)
 
-- 教师信息登记
-    - Post `/teacher/enroll`
+1. 绑定 click
+1. 架构 view	host/frame/index.html
+1. 新建 view    host/new/index.html
+1. 项目 view	host/project/index.html
+1. 任务 view	host/mission/index.html
+1. 进度 view	host/pace/index.html
 
-        ```json
-        {
-            code: string
-            name: string
-            sex: string
-            school: string
-            telephone: string
-        }
-        ```
-
-- 取消教师身份
-    - Post `/teacher/purify`
-
-        ```json
-        {
-            openid: string
-        }
-        ```
-
-### student
-
-- 拉取学生名单
-    - Get `/student/list`
-
-        ```json
-        {
-            {
-                id: uint
-                name: string
-            },
-            {
-                ..
-                ..
-            },
-            ...
-        }
-        ```
-
-- 学生信息登记
-    - post `/student/enroll`
-
-        ```json
-        {
-            code: string
-            name: string
-            sex: string
-            telephone: string
-            school: string
-            supervisor: string
-        }
-        ```
-
-- 取消学生身份
-    - Post `/teacher/purify`
-
-        ```json
-        {
-            openid: string
-        }
-        ```
-
-### 项目/任务
-
-- 获取名下所有项目
-    - get `project/all`
-- 获取项目详情:
-    - get `project/details{projectID}`
-
-        ```json
-        {
-            time://创建时间
-            title://项目题目
-            content://项目详细内容
-            []members://参与人员
-            leader://负责人员
-            startTime://开始时间
-            endTime：//结束时间
-        }
-        ```
-
-- 新建项目
-    - 教师
-    - `/project/new`
-    - post:
-
-        ```json
-        {
-            teacher:
-            time:
-            title:
-            content:
-            members:
-            leader:
-            startTime:
-            endTime:
-        }
-        ```
