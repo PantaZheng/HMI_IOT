@@ -38,22 +38,9 @@
     B|B2|B21
 1. 输出某个学生参与的所有任务，是依次去项目列表里面对比学生Id，还是应该新建一个表
     1. 为每个学生和用户新建一张表~~用户表中带项目列表~~
-1. 模块的结束~~???~~
+1. 模块的结束~~what~~
     1. 时间到了自动置为结束状态
     1. 模块下各任务均为结束状态则为结束
-
-### 菜单
-
-[菜单预览](https://pantazheng.github.io/HMI_IOT/design/index.html)
-
-- 人员
-    1. 绑定 click
-    1. 架构 view    `/frame/`
-- 内容
-    1. 新建 view    `/new/`
-    1. 项目 view    `/project/`
-    1. 任务 view    `/mission/`
-- 进度      view    `/pace/`
 
 ### 权限
 
@@ -79,6 +66,19 @@
     1. 需绑定，绑定为查看模式
     1. 能看到所有项目及详情，只有查看功能
     1. 可以看到项目，任务，模块等大概的进度，不能看到上传的文件成果
+
+### 菜单
+
+[菜单预览](https://pantazheng.github.io/HMI_IOT/design/index.html)
+
+- 人员
+    1. 绑定 click
+    1. 架构 view    `/frame/`
+- 内容
+    1. 新建 view    `/new/`
+    1. 项目 view    `/project/`
+    1. 任务 view    `/mission/`
+- 进度      view    `/pace/`
 
 #### 绑定
 
@@ -108,7 +108,7 @@
 1. 学生模式：level4的学生
 1. 查看模式：level5的专家教授，他们并不参与到项目中来，但需要查看项目进度
 
-```json
+```go
 //example member.json
 [
     {
@@ -135,11 +135,22 @@
 ]
 ```
 
-```json
+```go
 //professors.json
 ["name","name","name"]
 //level5的专家教授,输入姓名即可,无需电话
 ```
+
+#### 架构
+
+1. 架构点进去是项目列表（权限能看到的所有项目），选择项目查看该项目的人员架构
+1. 人员架构根据项目创建时选择的总负责人，参与的老师，老师带领的学生 建表
+
+API:
+
+- 获取项目列表 get   `/projectList` projectList.json
+- 获取人员架构 get   `/frame?pId={pId}`  frame.json
+
 
 ---
 
@@ -166,7 +177,7 @@
     - Post `/anon/enroll`
     - send
 
-        ```golang
+        ```go
         OpenId       string `gorm:"primary_key;unique;VARCHAR(191)" json:"openid"`
         Code         string `gorm:"not null VARCHAR(255)" json:"code"`
         Name         string `gorm:"not null VARCHAR(255)" json:"name"`
