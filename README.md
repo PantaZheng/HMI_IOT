@@ -80,7 +80,7 @@
     1. 任务 view    `/mission/`
 - 进度      view    `/pace/`
 
-#### 绑定
+#### 人员-绑定
 
 ~~绑定按钮做什么？？？~~
 
@@ -141,7 +141,7 @@
 //level5的专家教授,输入姓名即可,无需电话
 ```
 
-#### 架构
+#### 人员-架构
 
 1. 架构点进去是项目列表（权限能看到的所有项目），选择项目查看该项目的人员架构
 1. 人员架构根据项目创建时选择的总负责人，参与的老师，老师带领的学生 建表
@@ -149,8 +149,146 @@
 API:
 
 - 获取项目列表 get   `/projectList` projectList.json
+
+    ```go
+    [
+        {
+            "pId":"",
+            "pName":"",
+            "sTime":"",
+            "eTime":"",
+            "head":"",
+            "tag":"",
+            "content":""
+        },...
+    ]
+    ```
+
 - 获取人员架构 get   `/frame?pId={pId}`  frame.json
 
+    ```go
+    {//项目架构表单
+        "pId":"1",//项目ID
+        "pName":"",//项目名称
+        "frame": //架构
+        {
+            "head":"戴",//总负责人????
+            "PR":[{//各模块负责老师
+                "name":"曾",    //老师姓名，一个老师可能负多个模块
+                "tel":"",   //联系方式
+                "module":[{ //模块数组
+                    "moName":"",//模块名称
+                    "moId":"1",
+                    "stu":["赵月","杨思学","魏展"]//参与该模块的学生
+                    },{
+                    "moName":"",
+                    "moId":"3",
+                    "stu":["郑","杨"]
+                    }
+                ]
+            }{
+                "name":"周",
+                "tel":"",
+                "module":[{
+                    "moName":"",
+                    "moId":"1",
+                    "stu":["赵月","杨思学","魏展"]
+                    }
+                ]
+            }]
+        }
+    }
+    ```
+
+#### 内容-新建
+
+- 获取待审核项目列表    get `/projectList` projectList.json（同 架构项目列表）
+- 新建项目  post `/newProject` newProject.json
+
+    ```go
+    {
+        "name":"",  //项目名称
+        "creator":"",   //项目创建者
+        "cTime":"", //创建时间
+        "sTime":"", //项目开始时间
+        "eTime":"", //项目结束时间
+        "charge":"",    //项目负责人
+        "pType":"", //项目类型
+        "join":["",""], //参与项目的老师
+        "target":"",    //项目验收目标
+        "content":""    //项目详细内容
+    }
+    ```
+
+- 修改项目  post `/updateProject` newProject.json
+- ？？审核通过项目 post `/updateProject` 将通过项目审核老师的tag修改为 1
+    - 需要加tag
+
+#### 内容-项目
+
+1. 项目点进去能看到自己权限下的项目列表，项目数组初始为NULL，数据类型见project.json文件
+1. 项目部分主要实现对模块，任务的增删改功能，用户在这个部分主要是查看详情，新增，修改，删除
+1. 新建项目时，不选定参与人员，只创建一个项目的架子，join为Null
+    1. 参与人员应在创建模块时选定
+    1. 负责人在level2和level3的所有老师中进行选择
+    1. 项目创建人和创建时间要做记录
+1. 新建模块时，
+    1. 选定负责人在level2和level3的所有老师中进行选择
+    1. 选定参与人员，在level4的学生中进行选择，列表数据可直接采用绑定前预存的人员信息表 见 /绑定/member.json
+1. 项目，模块等创建时间由前端post过去，还是后台接收时自行记录？？
+    - ~~格式，可以后台创建~~
+
+- getdata
+    - 获取项目列表 get `/projectList` projectList.json（同 架构项目列表）
+    - 获取某项目详情 get `/project?pId={pId}` project.json
+
+        ```go
+        {
+            "pId":"",
+            "pName":"",
+            "pType":"",
+            "creater":"",
+            "cTime":"",
+            "charge":"",
+            "sTime":"",
+            "eTime":"",
+            "content":"",
+            "target":["论文2","专利2"],
+            "pTag":"", //布尔型，标记某新建的项目是否已经通过所有参与老师的审核。当teacher中的tag都为“1”时，表示所有老师都通过了该项目的审核，则pTag置为1
+            "teacher":[{
+                "name":"曾",
+                "tag":"0"//布尔型，标记该老师是否审核通过该项目。tag为0表示曾还未通过该项目审核
+            },{
+                "name":"张",
+                "tag":"1"//tag为1表示 张 已通过该项目审核
+            }],
+            "module":[{//项目模块列表
+                "moId":"",
+                "moName":"",
+                "cTime":"",
+                "content":"",
+                "tag":""
+            },{
+                "moId":"",
+                "moName":"",
+                "cTime":"",
+                "content":"",
+                "tag":""
+            }]
+        }
+        ```
+
+    - 获取某模块详情 get `/module?pId={pId}&moId={moId}` module.json
+    - 获取某任务详情 get `/module?pId={pId}&moId={moId}&miId={miId}` mission.json
+- postData
+    - 新建模块 post `/newModule` newModule.json
+    - 修改模块 post `/updateModule` newModule.json
+    - 新建任务 post `/newMission` newMission.json
+    - 修改任务 post `/updateMission` newMission.json
+    - 删除模块 delete `/deleteModule?{moId}`
+    - 删除任务 delete `/deleteMission?{miId}`
+
+#### 内容-任务
 
 ---
 
