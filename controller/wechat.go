@@ -33,7 +33,7 @@ func Menu(){
 	btnPerson:=menu.Button{}
 	btnPerson.SetAsSubMenuButton("人员",[]menu.Button{btnBinding,btnFrame})
 	btnNew :=menu.Button{}
-	btnNew.SetAsViewButton("人员", service.ServerAddress+"/new")
+	btnNew.SetAsViewButton("新建", service.ServerAddress+"/new")
 	btnProject:=menu.Button{}
 	btnProject.SetAsViewButton("项目",service.ServerAddress+"/project")
 	btnMission:=menu.Button{}
