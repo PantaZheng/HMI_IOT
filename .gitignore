@@ -4,4 +4,6 @@ create
 main
 */.idea/
 .sql
+*.out
 /config/config.toml
+controller/test/
