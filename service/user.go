@@ -3,7 +3,7 @@ package service
 import (
 	"github.com/chanxuehong/wechat/mp/user"
 	"github.com/chanxuehong/wechat/oauth2"
-	"github.com/pantazheng/HMI_IOT/models"
+	"github.com/pantazheng/bci/models"
 	"log"
 )
 
@@ -24,7 +24,7 @@ func checkOpenId(openid string,code string) (checkOpenId string){
 func UserInit(weChatInfo *user.UserInfo) string {
 	userInit:=&models.User{}
 	userInit.OpenId=weChatInfo.OpenId
-	userInit.Role="unEnrolled"
+	userInit.Level="unEnrolled"
 	models.EnrollUser(userInit)
 	log.Printf("UserInit:\t"+weChatInfo.OpenId)
 	return "欢迎关注"
@@ -38,6 +38,6 @@ func GetMembers(role string) (memberList []models.MemberInfo){
 func Enroll(userEnroll  *models.User)(openid string){
 	userEnroll.OpenId=checkOpenId(userEnroll.OpenId, userEnroll.Code)
 	models.EnrollUser(userEnroll)
-	log.Printf(userEnroll.OpenId+"\tEnrollRole\t"+userEnroll.Role+"\n")
+	log.Printf(userEnroll.OpenId+"\tEnrollRole\t"+userEnroll.Level+"\n")
 	return userEnroll.OpenId
 }

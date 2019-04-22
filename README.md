@@ -71,14 +71,14 @@
 
 [菜单预览](https://pantazheng.github.io/HMI_IOT/design/index.html)
 
-- 人员
-    1. 绑定 click
-    1. 架构 view    `/frame/`
+- 人员Person
+    1. 绑定 view
+    1. 架构frame view    `/frame`
 - 内容
-    1. 新建 view    `/new/`
-    1. 项目 view    `/project/`
-    1. 任务 view    `/mission/`
-- 进度      view    `/pace/`
+    1. 新建 view    `/new`
+    1. 项目 view    `/project`
+    1. 任务 view    `/mission`
+- 进度      view    `/pace`
 
 #### 人员-绑定
 
@@ -279,6 +279,10 @@ API:
         ```
 
     - 获取某模块详情 get `/module?pId={pId}&moId={moId}` module.json
+
+        ```
+        ```
+
     - 获取某任务详情 get `/module?pId={pId}&moId={moId}&miId={miId}` mission.json
 - postData
     - 新建模块 post `/newModule` newModule.json

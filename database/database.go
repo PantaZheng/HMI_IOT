@@ -3,8 +3,7 @@ package database
 import (
 	"fmt"
 	"github.com/jinzhu/gorm"
-	_ "github.com/jinzhu/gorm/dialects/mysql"
-	"github.com/pantazheng/HMI_IOT/config"
+	"github.com/pantazheng/bci/config"
 	"github.com/pelletier/go-toml"
 	"log"
 )

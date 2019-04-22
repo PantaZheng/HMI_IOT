@@ -5,7 +5,7 @@ import (
 	"github.com/chanxuehong/wechat/mp/menu"
 	"github.com/chanxuehong/wechat/mp/message/callback/request"
 	"github.com/kataras/iris"
-	"github.com/pantazheng/HMI_IOT/service"
+	"github.com/pantazheng/bci/service"
 )
 
 
