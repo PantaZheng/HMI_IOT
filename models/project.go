@@ -54,6 +54,6 @@ func GetInstructors(id uint)(instructors []User){
 
 func EnrollProject(project *Project){
 	recordProject:=Project{}
-	database.DB.FirstOrCreate(&recordProject,&Project{Title:recordProject.Title})
+	database.DB.FirstOrCreate(&recordProject,&Project{Name:recordProject.Name})
 
 }
