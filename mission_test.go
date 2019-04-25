@@ -3,9 +3,10 @@ package main
 import(
 	"fmt"
 	"github.com/pantazheng/bci/models"
+	"testing"
 )
 
-func main(){
+func TestMission(t *testing.T) {
 	mission:=new(models.MissionJson)
 	mission.Name="mission_test"
 	mission.StartTime=mission.Name+"StartTime"
