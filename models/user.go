@@ -41,12 +41,12 @@ type UserBriefJson struct {
 	Level	string	`json:"level"`
 }
 
-func init() {
-	database.DB.DropTable("users")
-	log.Printf("删除用户表\n")
-	database.DB.Set("gorm:table_options", "DEFAULT CHARSET=utf8 AUTO_INCREMENT=1;").AutoMigrate(&User{})
-	userTest()
-}
+//func init() {
+//	database.DB.DropTable("users")
+//	log.Printf("删除用户表\n")
+//	database.DB.Set("gorm:table_options", "DEFAULT CHARSET=utf8 AUTO_INCREMENT=1;").AutoMigrate(&User{})
+//	userTest()
+//}
 
 func userTest(){
 	_,_=UserCreate(&User{OpenId: "test1", Level:"unEnrolled"})

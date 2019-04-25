@@ -44,8 +44,11 @@ type MissionBriefJson struct{
 }
 
 func init(){
+	database.DB.DropTable("users")
 	database.DB.DropTable("missions")
+	database.DB.Set("gorm:table_options", "DEFAULT CHARSET=utf8 AUTO_INCREMENT=1;").AutoMigrate(&User{})
 	database.DB.Set("gorm:table_options", "DEFAULT CHARSET=utf8 AUTO_INCREMENT=1;").AutoMigrate(&Mission{})
+	userTest()
 	missionTest()
 }
 
