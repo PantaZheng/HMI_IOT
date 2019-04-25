@@ -19,25 +19,24 @@ func checkOpenId(openid string,code string) (checkOpenId string){
 	}
 }
 
-
 //用户初始化
 func UserInit(weChatInfo *user.UserInfo) string {
 	userInit:=&models.User{}
 	userInit.OpenId=weChatInfo.OpenId
 	userInit.Level="unEnrolled"
-	models.EnrollUser(userInit)
+	models.UserCreate(userInit)
 	log.Printf("UserInit:\t"+weChatInfo.OpenId)
 	return "欢迎关注"
 }
 
-func GetMembers(role string) (memberList []models.MemberInfo){
+func GetMembers(role string) (memberList []models.UserBriefJson){
 	memberList=models.GetMembersByRole(role)
 	return
 }
 
 func Enroll(userEnroll  *models.User)(openid string){
 	userEnroll.OpenId=checkOpenId(userEnroll.OpenId, userEnroll.Code)
-	models.EnrollUser(userEnroll)
+	models.UserCreate(userEnroll)
 	log.Printf(userEnroll.OpenId+"\tEnrollRole\t"+userEnroll.Level+"\n")
 	return userEnroll.OpenId
 }

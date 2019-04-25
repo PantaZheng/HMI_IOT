@@ -24,8 +24,8 @@ func newApp() (api *iris.Application){
 	
 	api.StaticWeb("/","./view")
 	api.RegisterView(iris.HTML("./view", ".html").Delims("[[","]]"))
-	api.Get("/binding/",func(ctx iris.Context){
-		_=ctx.View("/binding/index.html")
+	api.Get("/bind/index",func(ctx iris.Context){
+		_=ctx.View("/bind/index.html")
 	})
 	api.Get("/framework/",func(ctx iris.Context){
 		_=ctx.View("/framework/index.html")
@@ -36,9 +36,6 @@ func newApp() (api *iris.Application){
 	api.Get("/project/", func(ctx iris.Context) {
 		_=ctx.View("/project/index.html")
 	})
-	api.Get("/mission/", func(ctx iris.Context){
-		_=ctx.View("/mission/index.html")
-	})
 	api.Get("/pace/", func(ctx iris.Context) {
 		_=ctx.View("/pace/index.html")
 	})
@@ -47,18 +44,28 @@ func newApp() (api *iris.Application){
 		anon.PartyFunc("/wechat", func(weChat router.Party) {
 			weChat.Any("/", controller.WeChat)
 		})
-		anon.Post("/enroll",controller.Enroll)
-		anon.Get("/list/{role:string}",controller.List)
 	})
 
-	api.PartyFunc("/teacher",func(teacher router.Party){
-		//teacher.Get("/list",controller.GetTeachers)
-	})
-	api.PartyFunc("/student",func(student router.Party){
-		//student.Get("/list",controller.GetStudents)
+	api.PartyFunc("/user",func(user router.Party){
+		user.Get("/index",func(ctx iris.Context){
+			_=ctx.View("/user/index.html")
+		})
+		user.Post("/bind",func(ctx iris.Context){
+
+		})
 	})
 
-
+	api.PartyFunc("/mission",func(mission router.Party){
+		mission.Get("/index",func(ctx iris.Context){
+			_=ctx.View("/mission/index.html")
+		})
+		mission.Post("/create",controller.MissionCreate)
+		mission.Get("/find?id={id:uint}",controller.MissionFindByID)
+		mission.Get("/find?name={name:string}",controller.MissionFindByName)
+		mission.Put("/update",controller.MissionUpdate)
+		mission.Delete("/delete?id={id:uint}",controller.MissionDeleteByID)
+		mission.Delete("/delete?name={name:string}",controller.MissionDeleteByName)
+	})
 	return
 }
 
