@@ -17,7 +17,6 @@ const (
 
 type User struct {
 	gorm.Model
-	ID			uint		`gorm:"primary_key"`
 	OpenId		string		`gorm:"unique;"`
 	Code		string
 	Name		string

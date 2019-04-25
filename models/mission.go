@@ -10,7 +10,6 @@ import (
 
 type Mission struct{
 	gorm.Model
-	ID         uint	`gorm:"primary_key"`
 	Name       string
 	Creator    string
 	CreateTime string
