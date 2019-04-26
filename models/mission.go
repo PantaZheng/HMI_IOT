@@ -10,16 +10,16 @@ import (
 
 type Mission struct{
 	gorm.Model
-	Name       string
-	Creator    string
-	CreateTime string
-	StartTime  string
-	EndTime    string
-	Content    string
-	File       string
-	Tag        string
-	Users      []*User `gorm:"many2many:user_missions"` //多对多
-	ModuleID   uint                                      //归属模块
+	Name         string
+	Creator      string
+	CreateTime   string
+	StartTime    string
+	EndTime      string
+	Content      string
+	File         string
+	Tag          bool
+	Participants []*User `gorm:"many2many:user_missions"` //多对多
+	ModuleID     uint                                     //归属模块
 }
 
 type MissionJson struct{
@@ -31,7 +31,7 @@ type MissionJson struct{
 	EndTime    string           `json:"end_time"`     //结束时间
 	Content    string           `json:"content"`      //任务详细内容
 	File       string           `json:"file"`         //附件
-	Tag        string           `json:"tag"`          //标记
+	Tag        bool           	`json:"tag"`          //标记
 	Users      []*UserBriefJson `json:"participants"` //参与人员
 	ModuleID   uint             `json:"module"`
 }
@@ -41,15 +41,7 @@ type MissionBriefJson struct{
 	Name       string `json:"name"`       //名称
 	CreateTime string `json:"create_time"` //创建时间
 	Content    string `json:"content"`    //任务详细内容
-}
-
-func init(){
-	database.DB.DropTable("users")
-	database.DB.DropTable("missions")
-	database.DB.Set("gorm:table_options", "DEFAULT CHARSET=utf8 AUTO_INCREMENT=1;").AutoMigrate(&User{})
-	database.DB.Set("gorm:table_options", "DEFAULT CHARSET=utf8 AUTO_INCREMENT=1;").AutoMigrate(&Mission{})
-	userTest()
-	missionTest()
+	Tag		   string `json:"tag"`
 }
 
 func missionTest(){
@@ -70,7 +62,7 @@ func (missionJson *MissionJson) mission2MissionJSON(mission *Mission){
 	missionJson.Content= mission.Content
 	missionJson.File= mission.File
 	missionJson.Tag= mission.Tag
-	for _,v:=range mission.Users {
+	for _,v:=range mission.Participants {
 		missionJson.Users =append(missionJson.Users, &UserBriefJson{ID: v.ID,Name:v.Name})
 	}
 }
@@ -81,6 +73,7 @@ func(missionBriefJson *MissionBriefJson) mission2MissionBriefJSON(mission *Missi
 	missionBriefJson.CreateTime = mission.CreateTime
 	missionBriefJson.Content=mission.Content
 }
+
 
 
 func MissionCreate(missionJson *MissionJson) (missionBriefJson MissionBriefJson,err error){
@@ -105,7 +98,7 @@ func MissionCreate(missionJson *MissionJson) (missionBriefJson MissionBriefJson,
 			recordUser.ID=v.ID
 			users=append(users,recordUser)
 		}
-		database.DB.Model(&newMission).Association("Users").Append(users)
+		database.DB.Model(&newMission).Association("Participants").Append(users)
 	}else{
 		err=errors.New("MISSION CREATE FOUND RECORD")
 	}
@@ -118,7 +111,7 @@ func MissionFindOne(mission *Mission)(recordMissionJSON MissionJson, err error){
 	if database.DB.Find(&recordMission,&mission).RecordNotFound(){
 		err=errors.New("MISSION FIND NOT FOUND RECORD")
 	}else{
-		database.DB.Model(&mission).Related(&mission.Users)
+		database.DB.Model(&mission).Related(&mission.Participants)
 		recordMissionJSON.mission2MissionJSON(recordMission)
 	}
 	log.Printf("models.MissionFindOne:"+mission.Name)

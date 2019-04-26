@@ -3,26 +3,27 @@ package models
 import (
 	"github.com/jinzhu/gorm"
 	"github.com/pantazheng/bci/database"
-	"log"
 )
 
 type Project struct {
 	gorm.Model
-	Name       string		`json:"name"`//名称
-	Type        string		`json:"type"`//类型
-	Creator 	string	  	`json:"creator"`//创建者
-	CreateTime  string	  	`json:"createTime"`//创建时间
-	StartTime   string    	`json:"startTime"`//开始时间
- 	EndTime     string    	`json:"endTime"`//结束时间
-
-	PrincipalID	string	   	`json:"principal_id"`
-	PrincipalName    string    `json:"principal_name"`//负责人姓名
-	Principal    User    //负责人
-
-	Status      int       `json:"status"`
-	Acceptances  string    `json:"acceptance"`
-	Instructors []User    `json:"instructors"`
-	Missions    []Mission `json:"missions"`
+	Name       		string
+	Type        	string
+	Creator 		string
+	CreateTime  	string
+	StartTime   	string
+ 	EndTime     	string
+	Content      	string
+	Target			[]string
+	LeaderID	 	uint										//一对多外键
+	Leader       	User                                       	//belongs to
+	Participants 	[]*UserBriefJson							//参与人员
+	TagResult       bool
+	TagSet			[]Tag
+	Status      	int
+	Acceptances  	string
+	Instructors 	[]User
+	Missions    	[]Mission
 }
 
 type BriefProject struct {
@@ -36,11 +37,12 @@ type BriefProject struct {
 }
 
 
-func init(){
-	database.DB.DropTable("projects")
-	log.Printf("删除用户表")
-	database.DB.Set("gorm:table_options", "DEFAULT CHARSET=utf8 AUTO_INCREMENT=1;").AutoMigrate(&Project{}).AddForeignKey("principal_id,principal_name","users(id,name)","no action","no action")
+type Tag struct{
+	gorm.Model
+	Judge 	User
+	Tag		bool
 }
+
 
 func GetLeaders(id uint)(leaders []User){
 	database.DB.Find(&leaders,id).Select("leaders")

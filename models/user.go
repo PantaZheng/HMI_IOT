@@ -17,12 +17,17 @@ const (
 
 type User struct {
 	gorm.Model
-	OpenId		string		`gorm:"unique;"`
-	Code		string
-	Name		string
-	IDCard		string
-	Level		string
-	Missions 	[]*Mission	`gorm:"many2many:user_missions"`
+	OpenId    	string		`gorm:"unique;"`
+	Code      	string
+	Name      	string
+	IDCard    	string
+	Level     	string
+	LProjects	[]*Project `gorm:"foreignkey:LeaderID"`
+	PProjects	[]*Project `gorm:"many2many:user_projects"`
+	LModules	[]*Module   `gorm:"foreignkey:LeaderID"`
+	PModules 	[]*Module   `gorm:"many2many:user_modules"`
+	PMissions 	[]*Mission `gorm:"many2many:user_missions"`
+	PAchieves	[]*Gain    `gorm:"foreignkey:OwnerID"`
 }
 
 type UserJson struct {
@@ -30,7 +35,7 @@ type UserJson struct {
 	OpenId		string     			`json:"openid"`
 	Code		string     			`json:"code"`
 	Name		string     			`json:"name"`
-	IDCard		string				`json:"idCard"`
+	IDCard		string				`json:"id_card"`
 	Level		string     			`json:"level"`
 	Missions	[]*MissionBriefJson	`json:"missions"`
 }
@@ -40,13 +45,6 @@ type UserBriefJson struct {
 	Name	string	`json:"name"`
 	Level	string	`json:"level"`
 }
-
-//func init() {
-//	database.DB.DropTable("users")
-//	log.Printf("删除用户表\n")
-//	database.DB.Set("gorm:table_options", "DEFAULT CHARSET=utf8 AUTO_INCREMENT=1;").AutoMigrate(&User{})
-//	userTest()
-//}
 
 func userTest(){
 	_,_=UserCreate(&User{OpenId: "test1", Level:"unEnrolled"})
