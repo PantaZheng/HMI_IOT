@@ -7,33 +7,33 @@ import (
 
 type Project struct {
 	gorm.Model
-	Name       		string
-	Type        	string
-	Creator 		string
-	CreateTime  	string
-	StartTime   	string
- 	EndTime     	string
-	Content      	string
-	Target			[]string
-	LeaderID	 	uint										//一对多外键
-	Leader       	User                                       	//belongs to
-	Participants 	[]*UserBriefJson							//参与人员
-	TagResult       bool
-	TagSet			[]Tag
-	Status      	int
-	Acceptances  	string
-	Instructors 	[]User
-	Missions    	[]Mission
+	Name			string
+	Type			string
+	Creator			string
+	CreateTime		string
+	StartTime		string
+ 	EndTime			string
+	Content			string
+	Target			string
+	LeaderID		uint										//一对多外键
+	Leader			User                                       	//belongs to
+	Participants	[]*UserBriefJson							//参与人员
+	TagResult		bool
+	TagSet			[]*Tag
+	Status			int
+	Acceptances		string
+	Instructors		[]*User
+	Missions		[]*Mission
 }
 
 type BriefProject struct {
-	ID uint	`json:"id"`
-	Name string	`json:"name"`
-	StartTime   string    	`json:"startTime"`
-	EndTime     string    	`json:"endTime"`
-	PrincipalName    string    `json:"principal"`
-	Tag	string `json:"tag"`
-	Content string `json:"content"`
+	ID				uint	`json:"id"`
+	Name			string	`json:"name"`
+	StartTime		string	`json:"startTime"`
+	EndTime			string	`json:"endTime"`
+	PrincipalName	string	`json:"principal"`
+	Tag				string	`json:"tag"`
+	Content 		string	`json:"content"`
 }
 
 

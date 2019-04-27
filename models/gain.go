@@ -2,30 +2,31 @@ package models
 
 import (
 	"github.com/jinzhu/gorm"
+	"github.com/kataras/iris/core/errors"
 	"github.com/pantazheng/bci/database"
 	"time"
 )
 
 type Gain struct{
 	gorm.Model
-	Name 		string
-	Type 		string
-	File 		string
-	UpTime 		string
-	Remark 		string
+	Name		string
+	Type		string
+	File		string
+	UpTime		string
+	Remark		string
 	OwnerID		uint
-	MissionID 	uint
+	MissionID	uint
 }
 
 type GainJson struct {
-	ID 			uint	`json:"id"`
-	Name 		string	`json:"name"`		//新建必须
-	Type 		string	`json:"type"`		//新建类型
-	File 		string	`json:"file"`
-	UpTime 		string	`json:"up_time"`	//新建自动生成
-	Remark 		string	`json:"remark"`
+	ID			uint	`json:"id"`
+	Name		string	`json:"name"`		//新建必须
+	Type		string	`json:"type"`		//新建类型
+	File		string	`json:"file"`
+	UpTime		string	`json:"up_time"`	//新建自动生成
+	Remark		string	`json:"remark"`
 	OwnerID		uint	`json:"owner_id"`
-	MissionID 	uint	`json:"mission_id"`
+	MissionID	uint	`json:"mission_id"`
 }
 
 //name,type,file,remark,owner_id,mission_id
@@ -64,10 +65,20 @@ func GainCreate(newGainJson *GainJson) (recordGainJson *GainJson,err error){
 	}
 
 	if err=database.DB.Model(&newGain).First(&newGain).Error;err!=nil{
-		return
 	}else{
 		recordGainJson=new(GainJson)
 		recordGainJson.gain2GainJson(newGain)
-		return
 	}
+	return
 }
+
+func GainFindOne(gain *Gain)(recordGainJson GainJson,err error){
+	recordGain:=new(Gain)
+	if database.DB.Find(&recordGain,&gain).RecordNotFound() {
+		err = errors.New("GAIN FIND NOT FOUND RECORD")
+	}else{
+		recordGainJson.gain2GainJson(recordGain)
+	}
+	return
+}
+
