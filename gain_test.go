@@ -2,6 +2,7 @@ package main
 
 import (
 	"fmt"
+	"github.com/pantazheng/bci/database"
 	"github.com/pantazheng/bci/models"
 	"testing"
 )
@@ -16,6 +17,12 @@ func TestGain(t *testing.T) {
 	gain.OwnerID=1
 	gain.MissionID=1
 	res,err:=models.GainCreate(gain)
-	fmt.Println(res)
+	fmt.Print(res)
+	fmt.Println()
 	fmt.Println(err)
+	user:=new(models.User)
+	database.DB.Model(&user).Related(&gain)
+	fmt.Println(gain)
+	fmt.Println(gain.MissionID)
+	fmt.Println(gain.Remark)
 }
