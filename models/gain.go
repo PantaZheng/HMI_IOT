@@ -56,31 +56,43 @@ func (gainJson *GainJson) gain2GainJson(gain *Gain){
 }
 
 
-func GainCreate(newGainJson *GainJson) (recordGainJson *GainJson,err error){
+func GainCreate(gainJson *GainJson) (recordGainJson GainJson,err error){
 	//构建Gain
 	newGain:=new(Gain)
-	newGain.gainJson2Gain(newGainJson)
+	newGain.gainJson2Gain(gainJson)
 	newGain.UpTime=time.Now().Format("2006-01-02 15:04:05")
 	log.Println(newGain.UpTime)
 	//db新建
 	if err=database.DB.Create(&newGain).Error;err!=nil{
 		return
 	}
-
 	if err=database.DB.Model(&newGain).First(&newGain).Error;err!=nil{
 	}else{
-		recordGainJson=new(GainJson)
 		recordGainJson.gain2GainJson(newGain)
 	}
 	return
 }
 
-func GainFindOne(gain *Gain)(recordGainJson GainJson,err error){
+func GainFindByID(gain *Gain)(recordGainJson GainJson,err error){
 	recordGain:=new(Gain)
 	if database.DB.Find(&recordGain,&gain).RecordNotFound() {
-		err = errors.New("GAIN FIND NOT FOUND RECORD")
+		err = errors.New("GAIN FIND BY ID NOT FOUND RECORD")
 	}else{
 		recordGainJson.gain2GainJson(recordGain)
+	}
+	return
+}
+
+func GainsFindByOwner(owner *User)(gainsJson []GainJson,err error){
+	gains:=make([]Gain,1)
+	if database.DB.Model(&owner).Related(&gains,"OwnerID").RecordNotFound(){
+		err = errors.New("GAINS FIND BY OWNER NOT FOUND RECORD")
+	}else{
+		for _,v :=range gains{
+			tempJson:=&GainJson{}
+			tempJson.gain2GainJson(&v)
+			gainsJson=append(gainsJson,*tempJson)
+		}
 	}
 	return
 }
