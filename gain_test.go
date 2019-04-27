@@ -12,7 +12,6 @@ func TestGain(t *testing.T) {
 	gain.Name="gainTest"
 	gain.Type=gain.Name+".type"
 	gain.File=gain.Name+".file"
-	gain.UpTime=gain.Name+".up_time"
 	gain.Remark=gain.Name+".remark"
 	gain.OwnerID=1
 	gain.MissionID=1
@@ -21,8 +20,10 @@ func TestGain(t *testing.T) {
 	fmt.Println()
 	fmt.Println(err)
 	user:=new(models.User)
-	database.DB.Model(&user).Related(&gain)
-	fmt.Println(gain)
-	fmt.Println(gain.MissionID)
-	fmt.Println(gain.Remark)
+	user.ID=1
+	fmt.Println(user)
+	newGain:=new(models.Gain)
+	database.DB.Model(&user).Related(&newGain)
+	fmt.Println(newGain)
+	fmt.Println(newGain.UpTime)
 }

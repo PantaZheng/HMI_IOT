@@ -4,6 +4,7 @@ import (
 	"github.com/jinzhu/gorm"
 	"github.com/kataras/iris/core/errors"
 	"github.com/pantazheng/bci/database"
+	"log"
 	"time"
 )
 
@@ -15,7 +16,9 @@ type Gain struct{
 	UpTime		string
 	Remark		string
 	OwnerID		uint
+	Owner		User
 	MissionID	uint
+	Mission		Mission
 }
 
 type GainJson struct {
@@ -58,7 +61,7 @@ func GainCreate(newGainJson *GainJson) (recordGainJson *GainJson,err error){
 	newGain:=new(Gain)
 	newGain.gainJson2Gain(newGainJson)
 	newGain.UpTime=time.Now().Format("2006-01-02 15:04:05")
-
+	log.Println(newGain.UpTime)
 	//db新建
 	if err=database.DB.Create(&newGain).Error;err!=nil{
 		return
