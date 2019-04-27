@@ -22,9 +22,9 @@ func TestGain(t *testing.T) {
 	gain.MissionID=2
 	_,_=models.GainCreate(gain)
 
-	user:=new(models.User)
-	user.ID=1
-	gains,_:=models.GainsFindByMission(user)
+	mission:=new(models.Mission)
+	mission.ID=2
+	gains,_:=models.GainsFindByMission(mission)
 	for _,v :=range gains {
 		fmt.Println(v)
 	}
