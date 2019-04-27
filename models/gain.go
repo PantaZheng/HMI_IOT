@@ -97,3 +97,16 @@ func GainsFindByOwner(owner *User)(gainsJson []GainJson,err error){
 	return
 }
 
+func GainsFindByMission(mission *Mission)(gainsJson []GainJson,err error){
+	gains:=make([]Gain,1)
+	if database.DB.Model(&mission).Related(&gains,"MissionID").RecordNotFound(){
+		err = errors.New("GAINS FIND BY OWNER NOT FOUND RECORD")
+	}else{
+		for _,v :=range gains{
+			tempJson:=&GainJson{}
+			tempJson.gain2GainJson(&v)
+			gainsJson=append(gainsJson,*tempJson)
+		}
+	}
+	return
+}

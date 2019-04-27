@@ -13,7 +13,7 @@ func TestGain(t *testing.T) {
 	gain.File= gain.Name+".file"
 	gain.Remark= gain.Name+".remark"
 	gain.OwnerID=1
-	gain.MissionID=1
+	gain.MissionID=2
 
 
 	_,_=models.GainCreate(gain)
@@ -24,8 +24,8 @@ func TestGain(t *testing.T) {
 
 	user:=new(models.User)
 	user.ID=1
-	gains,_:=models.GainsFindByOwner(user)
+	gains,_:=models.GainsFindByMission(user)
 	for _,v :=range gains {
-		println(v)
+		fmt.Println(v)
 	}
 }
