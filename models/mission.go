@@ -18,31 +18,31 @@ type Mission struct{
 	Content			string
 	File			string
 	Tag				bool
-	Participants	[]*User `gorm:"many2many:user_missions"` //多对多
-	ModuleID		uint                                     //归属模块
+	Participants	[]*User `gorm:"many2many:user_missions"`
+	ModuleID		uint
 	Module			Module
 }
 
 type MissionJson struct{
 	ID				uint             `json:"id"`
-	Name			string           `json:"name"`         //名称
-	Creator			string           `json:"creator"`      //创建者
-	CreateTime		string           `json:"create_time"`  //创建时间
-	StartTime		string           `json:"start_time"`   //开始时间
-	EndTime			string           `json:"end_time"`     //结束时间
-	Content			string           `json:"content"`      //任务详细内容
-	File			string           `json:"file"`         //附件
-	Tag				bool             `json:"tag"`          //标记
-	Participants	[]*UserBriefJson `json:"participants"` //参与人员
-	ModuleID     uint             `json:"module"`
+	Name			string           `json:"name"`
+	Creator			string           `json:"creator"`
+	CreateTime		string           `json:"create_time"`
+	StartTime		string           `json:"start_time"`
+	EndTime			string           `json:"end_time"`
+	Content			string           `json:"content"`
+	File			string           `json:"file"`
+	Tag				bool             `json:"tag"`
+	Participants	[]*UserBriefJson `json:"participants"`
+	ModuleID		uint             `json:"module"`
 }
 
 type MissionBriefJson struct{
-	ID         uint   `json:"id"`
-	Name       string `json:"name"`       //名称
-	CreateTime string `json:"create_time"` //创建时间
-	Content    string `json:"content"`    //任务详细内容
-	Tag		   string `json:"tag"`
+	ID         uint		`json:"id"`
+	Name       string	`json:"name"`
+	CreateTime string	`json:"create_time"`
+	Content    string	`json:"content"`
+	Tag		   string	`json:"tag"`
 }
 
 func missionTestData(){

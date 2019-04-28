@@ -60,7 +60,7 @@ func newApp() (api *iris.Application){
 		gain.Get("/id/{id:uint}",controller.GainFindByID)
 		gain.Get("/owner/{id:uint}",controller.GainsFindByOwnerID)
 		gain.Get("/mission/{id:uint}",controller.GainsFindByMissionID)
-		gain.Put("/update",controller.GainUpdate)
+		gain.Put("/",controller.GainUpdate)
 		gain.Delete("/{id:uint}",controller.GainDeleteByID)
 	})
 
