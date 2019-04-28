@@ -1,6 +1,7 @@
 package models
 
 import (
+    "errors"
     "github.com/jinzhu/gorm"
     "github.com/pantazheng/bci/database"
     "log"
@@ -100,7 +101,9 @@ func GainsFindByOwner(owner *User)(gainsJson []GainJson,err error){
 
 func GainsFindByMission(mission *Mission)(gainsJson []GainJson,err error){
     gains:=make([]Gain,1)
-    if err=database.DB.Model(&mission).Related(&gains,"MissionID").Error;err==nil{
+    if database.DB.Model(&mission).Related(&gains,"MissionID").RecordNotFound(){
+        err=errors.New("GainsFindByMission NO MISSION RECORD")
+    }else{
         for _,v :=range gains{
             tempJson:=&GainJson{}
             tempJson.gain2GainJson(&v)

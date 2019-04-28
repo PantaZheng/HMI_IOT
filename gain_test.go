@@ -3,6 +3,7 @@ package main
 import (
 	"github.com/pantazheng/bci/models"
 	"log"
+	"strconv"
 	"testing"
 )
 
@@ -26,7 +27,19 @@ func TestGain(t *testing.T) {
 			log.Println(v)
 		}
 	}
-	gain.Name="gainTest1"
+	gain.Name="gainTest"+strconv.Itoa(int(gain.ID))
+	gain.Type= gain.Name+".type"
+	gain.File= gain.Name+".file"
+	gain.Remark= gain.Name+".remark"
+	gain.OwnerID=1
+	gain.MissionID=2
+	if gainJson,err:=models.GainUpdate(gain);err!=nil{
+		log.Println(err.Error())
+	}else{
+		log.Println(gainJson)
+	}
+	gain.ID=5
+	gain.Name="gainTest"+strconv.Itoa(int(gain.ID))
 	gain.Type= gain.Name+".type"
 	gain.File= gain.Name+".file"
 	gain.Remark= gain.Name+".remark"
