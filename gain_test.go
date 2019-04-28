@@ -10,10 +10,12 @@ import (
 func TestGain(t *testing.T) {
 	gain:=new(models.GainJson)
 	gain.ID=1
-	if g,err:=models.GainFindByID(gain);err!=nil{
-		log.Println(err.Error())
+	g:=&models.Gain{}
+	g.ID=1
+	if a,err:=models.GainFindByID(g);err!=nil{
+		log.Println(err)
 	}else{
-		log.Println(g)
+		log.Println(a)
 	}
 	mission:=new(models.Mission)
 	mission.ID=2
@@ -51,6 +53,11 @@ func TestGain(t *testing.T) {
 	gain.OwnerID=1
 	gain.MissionID=2
 	if gainJson,err:=models.GainUpdate(gain);err!=nil{
+		log.Println(err.Error())
+	}else{
+		log.Println(gainJson)
+	}
+	if gainJson,err:=models.GainDelete(gain);err!=nil{
 		log.Println(err.Error())
 	}else{
 		log.Println(gainJson)

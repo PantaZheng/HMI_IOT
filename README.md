@@ -30,8 +30,8 @@
     - [x] `func GainFindByID(gain *Gain)(recordGainJson GainJson,err error)`
     - [x] `func GainsFindByOwner(owner *User)(gainsJson []GainJson,err error)`
     - [x] `func GainsFindByMission(mission *Mission)(gainsJson []GainJson,err error)`
-    - [ ] `func GainUpdate`
-    - [ ] `func GainDeleteByID`
+    - [x] `func GainUpdate` ID
+    - [ ] `func GainDelete` ID
 
 - [ ] init
     - [ ] 表单删除

@@ -138,3 +138,13 @@ func GainUpdate(gainJson *GainJson) (recordGainJson GainJson,err error){
     }
     return
 }
+
+func GainDelete(gainJson *GainJson) (recordGainJson GainJson,err error) {
+    recordGain:=new(Gain)
+    recordGain.ID=gainJson.ID
+    if err=database.DB.First(&recordGain).Error;err==nil{
+         recordGainJson.gain2GainJson(recordGain)
+         err=database.DB.Delete(&recordGain).Error
+    }
+    return
+}
