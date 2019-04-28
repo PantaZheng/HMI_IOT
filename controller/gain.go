@@ -33,7 +33,7 @@ func GainFindByID(ctx iris.Context){
 }
 
 func GainsFindByOwnerID(ctx iris.Context){
-	id,_:=ctx.Params().GetUint("owner_id")
+	id,_:=ctx.Params().GetUint("id")
 	if gainsJson,err:=service.GainsFindByOwnerID(id);err!=nil{
 		ctx.StatusCode(iris.StatusAccepted)
 		_,_=ctx.Text(err.Error())
@@ -44,7 +44,7 @@ func GainsFindByOwnerID(ctx iris.Context){
 }
 
 func GainsFindByMissionID(ctx iris.Context){
-	id,_:=ctx.Params().GetUint("mission_id")
+	id,_:=ctx.Params().GetUint("id")
 	if gainsJson,err:=service.GainsFindByMissionID(id);err!=nil{
 		ctx.StatusCode(iris.StatusAccepted)
 		_,_=ctx.Text(err.Error())
