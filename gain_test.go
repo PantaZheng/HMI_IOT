@@ -10,6 +10,11 @@ import (
 func TestGain(t *testing.T) {
 	gain:=new(models.GainJson)
 	gain.ID=1
+	if g,err:=models.GainFindByID(gain);err!=nil{
+		log.Println(err.Error())
+	}else{
+		log.Println(g)
+	}
 	mission:=new(models.Mission)
 	mission.ID=2
 	if gains,err:=models.GainsFindByMission(mission);err!=nil{

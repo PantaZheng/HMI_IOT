@@ -23,21 +23,6 @@
 - [ ] gain
     - [x] `type Gain struct`
     - [x] `type GainJson struct`
-
-        ```go
-        type GainJson struct {
-    ID            uint	`json:"id"`
-    Name        string	`json:"name"`
-    Type		string	`json:"type"`
-    File		string	`json:"file"`
-    UpTime		string	`json:"up_time"`
-    Remark		string	`json:"remark"`
-    OwnerID		uint	`json:"owner_id"`
-    MissionID	uint	`json:"mission_id"`
-}
-
-        ```
-
     - [x] `func gainTestData`
     - [x] `func (gain *Gain) gainJson2Gain(gainJson *GainJson)`
     - [x] `func (gainJson *GainJson) gain2GainJson(gain *Gain)`
@@ -57,7 +42,22 @@
 - [ ] project
 - [ ] user
 
+---
 
+## 数据类型
+
+```go
+type GainJson struct {
+    ID          uint	`json:"id"`
+    Name		string	`json:"name"`
+    Type		string	`json:"type"`
+    File		string	`json:"file"`
+    UpTime		string	`json:"up_time"`
+    Remark		string	`json:"remark"`
+    OwnerID		uint	`json:"owner_id"`
+    MissionID	uint	`json:"mission_id"`
+}
+```
 
 ---
 

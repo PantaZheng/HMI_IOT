@@ -89,7 +89,12 @@ func GainFindByID(gain *Gain)(recordGainJson GainJson,err error){
 
 func GainsFindByOwner(owner *User)(gainsJson []GainJson,err error){
     gains:=make([]Gain,1)
-    if err=database.DB.Model(&owner).Related(&gains,"OwnerID").Error;err==nil{
+    if err=database.DB.Model(&owner).Related(&gains,"OwnerID").Error;err!=nil{
+        return
+    }
+    if len(gains)==0{
+        err=errors.New("GainsFindByOwner No Owner Record")
+    }else {
         for _,v :=range gains{
             tempJson:=&GainJson{}
             tempJson.gain2GainJson(&v)
@@ -105,7 +110,7 @@ func GainsFindByMission(mission *Mission)(gainsJson []GainJson,err error){
         return
     }
     if len(gains)==0{
-        err=errors.New("GainsFindByMission NO MISSION RECORD")
+        err=errors.New("GainsFindByMission No Mission Record")
     }else{
         for _,v :=range gains{
             tempJson:=&GainJson{}
