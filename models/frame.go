@@ -6,6 +6,5 @@ type Frame struct{
 	PrincipalID	string	   	`json:"principal_id"`
 	PrincipalName string	`json:"principal_name"`
 
-
 }
 

@@ -12,7 +12,7 @@ func TestMission(t *testing.T) {
 	mission.StartTime=mission.Name+"StartTime"
 	mission.EndTime=mission.Name+"EndTime"
 	mission.Content=mission.Name+"Content"
-	mission.Users=[]*models.UserBriefJson{{ID:1},
+	mission.Participants =[]*models.UserBriefJson{{ID: 1},
 		{ID:2},}
 	res,err:=models.MissionCreate(mission)
 	fmt.Println(res)

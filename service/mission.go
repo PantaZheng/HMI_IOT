@@ -1,13 +1,18 @@
 package service
 
-import "github.com/pantazheng/bci/models"
+import (
+	"github.com/jinzhu/gorm"
+	"github.com/pantazheng/bci/models"
+)
 
-func MissionCreate(missJson *models.MissionJson)(missionBriefJson models.MissionBriefJson,err error){
-	 return models.MissionCreate(missJson)
+func MissionCreate(mission *models.MissionJson)(missionBriefJson models.MissionBriefJson,err error){
+	 return models.MissionCreate(mission)
 }
 
 func MissionFindByID(id uint)(missionJson models.MissionJson,err error){
-	return models.MissionFindOne(&models.Mission{ID: id})
+	mission:=new(models.Mission)
+	mission.ID=id
+	return models.MissionFindOne(mission)
 }
 
 func MissionFindByName(name string)(missionJson models.MissionJson,err error){

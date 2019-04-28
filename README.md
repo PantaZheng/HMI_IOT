@@ -13,6 +13,52 @@
 1. 各子模块的index是单独定位的，其同目录下的js等文件，请使用`../dir/文件`格式
 1. `index.html`文件不单独暴露,使用`index`暴露
 
+## TODOLIST
+
+### models
+
+- [ ] frame
+    - [ ] `type Frame`
+    - [ ] `type FrameJson`
+- [ ] gain
+    - [x] `type Gain struct`
+    - [x] `type GainJson struct`
+
+        ```go
+        type GainJson struct {
+    ID            uint	`json:"id"`
+    Name        string	`json:"name"`
+    Type		string	`json:"type"`
+    File		string	`json:"file"`
+    UpTime		string	`json:"up_time"`
+    Remark		string	`json:"remark"`
+    OwnerID		uint	`json:"owner_id"`
+    MissionID	uint	`json:"mission_id"`
+}
+
+        ```
+
+    - [x] `func gainTestData`
+    - [x] `func (gain *Gain) gainJson2Gain(gainJson *GainJson)`
+    - [x] `func (gainJson *GainJson) gain2GainJson(gain *Gain)`
+    - [x] `func GainCreate(gainJson *GainJson) (recordGainJson GainJson,err error)`
+    - [x] `func GainFindByID(gain *Gain)(recordGainJson GainJson,err error)`
+    - [x] `func GainsFindByOwner(owner *User)(gainsJson []GainJson,err error)`
+    - [x] `func GainsFindByMission(mission *Mission)(gainsJson []GainJson,err error)`
+    - [ ] `func GainUpdate`
+    - [ ] `func GainDeleteByID`
+
+- [ ] init
+    - [ ] 表单删除
+    - [ ] 表单迁移
+    - [ ] 添加测试数据
+- [ ] mission
+- [ ] module
+- [ ] project
+- [ ] user
+
+
+
 ---
 
 ### 微信菜单
@@ -69,7 +115,3 @@ type UserBriefJson struct {
 
 - 拉取名单
     - Get `/anon/list/{role:string}`
-
-
-
-

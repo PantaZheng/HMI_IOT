@@ -46,7 +46,7 @@ type UserBriefJson struct {
 	Level	string	`json:"level"`
 }
 
-func userTest(){
+func userTestData(){
 	_,_=UserCreate(&User{OpenId: "test1", Level:"unEnrolled"})
 	_,_=UserCreate(&User{OpenId: "student1",Name:"student1", Level:"student"})
 	_,_=UserCreate(&User{OpenId: "teacher1",Name:"戴国骏", Level:"teacher"})
