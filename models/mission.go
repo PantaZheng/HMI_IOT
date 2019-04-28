@@ -20,7 +20,7 @@ type Mission struct{
 	Tag				bool
 	Participants	[]*User `gorm:"many2many:user_missions"` //多对多
 	ModuleID		uint                                     //归属模块
-	Moudle
+	Module			Module
 }
 
 type MissionJson struct{
