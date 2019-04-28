@@ -5,7 +5,6 @@ import (
     "github.com/jinzhu/gorm"
     "github.com/pantazheng/bci/database"
     "log"
-    "strconv"
     "time"
 )
 
@@ -23,7 +22,7 @@ type Gain struct{
 }
 
 type GainJson struct {
-    ID      	uint	`json:"id"`
+    ID          uint	`json:"id"`
     Name		string	`json:"name"`
     Type		string	`json:"type"`
     File		string	`json:"file"`
@@ -102,7 +101,10 @@ func GainsFindByOwner(owner *User)(gainsJson []GainJson,err error){
 
 func GainsFindByMission(mission *Mission)(gainsJson []GainJson,err error){
     gains:=make([]Gain,1)
-    if database.DB.Model(&mission).Related(&gains,"MissionID").RecordNotFound(){
+    if err=database.DB.Model(&mission).Related(&gains,"MissionID").Error;err!=nil{
+        return
+    }
+    if len(gains)==0{
         err=errors.New("GainsFindByMission NO MISSION RECORD")
     }else{
         for _,v :=range gains{
@@ -111,7 +113,6 @@ func GainsFindByMission(mission *Mission)(gainsJson []GainJson,err error){
             gainsJson=append(gainsJson,*tempJson)
         }
     }
-    println("GainsFindByMission: MissionID "+strconv.Itoa(int(mission.ID)))
     return
 }
 
