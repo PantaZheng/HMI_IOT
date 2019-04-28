@@ -5,6 +5,7 @@ import (
     "github.com/jinzhu/gorm"
     "github.com/pantazheng/bci/database"
     "log"
+    "strconv"
     "time"
 )
 
@@ -110,6 +111,7 @@ func GainsFindByMission(mission *Mission)(gainsJson []GainJson,err error){
             gainsJson=append(gainsJson,*tempJson)
         }
     }
+    println("GainsFindByMission: MissionID "+strconv.Itoa(int(mission.ID)))
     return
 }
 
