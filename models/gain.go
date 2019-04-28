@@ -79,7 +79,7 @@ func GainCreate(gainJson *GainJson) (recordGainJson GainJson,err error){
     return
 }
 
-func GainFindByID(gain *Gain)(recordGainJson GainJson,err error){
+func GainFind(gain *Gain)(recordGainJson GainJson,err error){
     recordGain:=new(Gain)
     if err=database.DB.Find(&recordGain,&gain).Error;err==nil {
         recordGainJson.gain2GainJson(recordGain)
@@ -121,6 +121,7 @@ func GainsFindByMission(mission *Mission)(gainsJson []GainJson,err error){
     return
 }
 
+//TODO:更新逻辑添加
 func GainUpdate(gainJson *GainJson) (recordGainJson GainJson,err error){
     recordGain:=new(Gain)
     recordGain.ID=gainJson.ID
@@ -139,6 +140,7 @@ func GainUpdate(gainJson *GainJson) (recordGainJson GainJson,err error){
     return
 }
 
+//TODO:删除逻辑添加
 func GainDelete(gainJson *GainJson) (recordGainJson GainJson,err error) {
     recordGain:=new(Gain)
     recordGain.ID=gainJson.ID

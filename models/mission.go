@@ -10,16 +10,17 @@ import (
 
 type Mission struct{
 	gorm.Model
-	Name         string
-	Creator      string
-	CreateTime   string
-	StartTime    string
-	EndTime      string
-	Content      string
-	File         string
-	Tag          bool
-	Participants []*User `gorm:"many2many:user_missions"` //多对多
-	ModuleID     uint                                     //归属模块
+	Name			string
+	Creator			string
+	CreateTime		string
+	StartTime		string
+	EndTime			string
+	Content			string
+	File			string
+	Tag				bool
+	Participants	[]*User `gorm:"many2many:user_missions"` //多对多
+	ModuleID		uint                                     //归属模块
+	Moudle
 }
 
 type MissionJson struct{
@@ -33,7 +34,6 @@ type MissionJson struct{
 	File			string           `json:"file"`         //附件
 	Tag				bool             `json:"tag"`          //标记
 	Participants	[]*UserBriefJson `json:"participants"` //参与人员
-	Gains			[]*GainJson
 	ModuleID     uint             `json:"module"`
 }
 

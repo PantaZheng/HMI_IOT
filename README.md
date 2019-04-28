@@ -17,30 +17,57 @@
 
 ### models
 
-- [ ] frame
-    - [ ] `type Frame`
-    - [ ] `type FrameJson`
 - [ ] gain
     - [x] `type Gain struct`
     - [x] `type GainJson struct`
-    - [x] `func gainTestData`
-    - [x] `func (gain *Gain) gainJson2Gain(gainJson *GainJson)`
-    - [x] `func (gainJson *GainJson) gain2GainJson(gain *Gain)`
-    - [x] `func GainCreate(gainJson *GainJson) (recordGainJson GainJson,err error)`
-    - [x] `func GainFindByID(gain *Gain)(recordGainJson GainJson,err error)`
-    - [x] `func GainsFindByOwner(owner *User)(gainsJson []GainJson,err error)`
-    - [x] `func GainsFindByMission(mission *Mission)(gainsJson []GainJson,err error)`
-    - [x] `func GainUpdate` ID
-    - [ ] `func GainDelete` ID
-
+    - [x] `gainTestData`
+    - [x] `gainJson2Gain`
+    - [x] `gain2GainJson`
+    - [x] `GainCreate`
+    - [x] `GainFind`
+    - [x] `GainsFindByOwner`
+    - [x] `GainsFindByMission`
+    - [x] `GainUpdate`
+        - 必须携带ID
+        - 目前只允许通过ID删除单条记录
+        - UpTime更新为当前时间
+    - [x] `GainDelete`
+        - 必须携带ID
+        - 目前由于只允许通过ID进行删除单条记录
+- [ ] mission
+    -
+- [ ] module
+- [ ] project
+- [ ] user
 - [ ] init
     - [ ] 表单删除
     - [ ] 表单迁移
     - [ ] 添加测试数据
-- [ ] mission
-- [ ] module
-- [ ] project
-- [ ] user
+- [ ] frame
+
+### servcie
+
+- [ ] gain
+    - [x] `GainCreate`
+    - [x] `GainFindByID`
+    - [x] `GainsFindByOwnerID`
+    - [x] `GainsFindByMissionID`
+    - [x] `GainUpdate`
+        - 必须携带ID
+    - [x] `GainDeleteByID`
+        - 必须携带ID
+
+### controller
+
+- [ ] gain
+    - [x] `GainCreate`
+    - [x] `GainFindByID`
+    - [x] `GainsFindByOwnerID`
+    - [x] `GainsFindByMissionID`
+    - [x] `GainUpdate`
+        - 必须携带ID
+    - [x] `GainDeleteByID`
+        - 必须携带ID
 
 ---
 

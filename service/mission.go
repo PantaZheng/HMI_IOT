@@ -1,7 +1,6 @@
 package service
 
 import (
-	"github.com/jinzhu/gorm"
 	"github.com/pantazheng/bci/models"
 )
 
@@ -16,7 +15,9 @@ func MissionFindByID(id uint)(missionJson models.MissionJson,err error){
 }
 
 func MissionFindByName(name string)(missionJson models.MissionJson,err error){
-	return models.MissionFindOne(&models.Mission{Name: name})
+	mission:=new(models.Mission)
+	mission.Name=name
+	return models.MissionFindOne(mission)
 }
 
 func MissionUpdate(missionJson *models.MissionJson)(missionBriefJson models.MissionBriefJson,err error){
@@ -24,9 +25,13 @@ func MissionUpdate(missionJson *models.MissionJson)(missionBriefJson models.Miss
 }
 
 func MissionDeleteByID(id uint)(missionBriefJson models.MissionBriefJson,err error){
-	return models.MissionDelete(&models.Mission{ID:id})
+	mission:=new(models.Mission)
+	mission.ID=id
+	return models.MissionDelete(mission)
 }
 
 func MissionDeleteByName(name string)(missionBriefJson models.MissionBriefJson,err error){
-	return models.MissionDelete(&models.Mission{Name:name})
+	mission:=new(models.Mission)
+	mission.Name=name
+	return models.MissionDelete(mission)
 }

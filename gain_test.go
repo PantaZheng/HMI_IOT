@@ -12,7 +12,7 @@ func TestGain(t *testing.T) {
 	gain.ID=1
 	g:=&models.Gain{}
 	g.ID=1
-	if a,err:=models.GainFindByID(g);err!=nil{
+	if a,err:=models.GainFind(g);err!=nil{
 		log.Println(err)
 	}else{
 		log.Println(a)
@@ -45,7 +45,7 @@ func TestGain(t *testing.T) {
 	}else{
 		log.Println(gainJson)
 	}
-	gain.ID=5
+	gain.ID=4
 	gain.Name="gainTest"+strconv.Itoa(int(gain.ID))
 	gain.Type= gain.Name+".type"
 	gain.File= gain.Name+".file"

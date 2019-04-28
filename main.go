@@ -55,6 +55,15 @@ func newApp() (api *iris.Application){
 		})
 	})
 
+	api.PartyFunc("/gain",func(gain router.Party){
+		gain.Post("/create",controller.GainCreate)
+		gain.Get("/find?id={id:uint}",controller.GainFindByID)
+		gain.Get("/find?owner_id={owner_id:uint}",controller.GainsFindByOwnerID)
+		gain.Get("/find?mission_id={mission_id:uint}",controller.GainsFindByMissionID)
+		gain.Put("/update",controller.GainUpdate)
+		gain.Delete("/delete?id={id:uint}",controller.GainDeleteByID)
+	})
+
 	api.PartyFunc("/mission",func(mission router.Party){
 		mission.Get("/index",func(ctx iris.Context){
 			_=ctx.View("/mission/index.html")
