@@ -162,7 +162,7 @@ type MissionBriefJson struct{
     - [x] `MissionCreate`
     - [x] `MissionFind`
     - [x] `MissionsFindByModule`
-    - [ ] `MissionUpdate`
+    - [x] `MissionUpdate`
     - [ ] `MissionDelete`
 
 - [ ] module

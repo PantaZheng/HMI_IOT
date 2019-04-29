@@ -16,12 +16,13 @@ func TestMission(t *testing.T) {
 		{ID:3}}
 	res1,_:=models.MissionCreate(mission)
 	log.Println(res1)
-	mission.Name="mission1_test"
-	mission.StartTime=mission.Name+"StartTime"
-	mission.EndTime=mission.Name+"EndTime"
-	mission.Content=mission.Name+"Content"
-	mission.Participants =[]models.UserBriefJson{{ID: 1},
-		{ID:2}}
-	res2,_:=models.MissionCreate(mission)
+	m:=new(models.Mission)
+	m.ID=res1.ID
+	res2,err:=models.MissionDelete(m)
 	log.Println(res2)
+	log.Println(err)
+	m.ID=10
+	res3,er3:=models.MissionDelete(m)
+	log.Println(res3)
+	log.Println(er3)
 }
