@@ -18,7 +18,7 @@ type Mission struct{
 	Content			string
 	File			string
 	Tag				bool
-	Participants	[]*User `gorm:"many2many:user_missions"`
+	Participants	[]*User		`gorm:"many2many:user_missions"`
 	ModuleID		uint
 	Module			Module
 }
@@ -117,7 +117,9 @@ func MissionCreate(missionJson *MissionJson) (missionBriefJson MissionBriefJson,
 
 func MissionFind(mission *Mission)(recordMissionJSON MissionJson, err error){
 	recordMission:=new(Mission)
-	if err=database.DB.Find(&recordMission,&mission).Error;err==nil{
+	log.Printf("missioninit:")
+	log.Println(&mission)
+	if err=database.DB.Preload("Participants").Find(&mission).Error;err==nil{
 		log.Printf("recordMission:")
 		log.Println(recordMission)
 		database.DB.Model(&mission).Related(&mission.Participants,"Participants")
@@ -127,6 +129,8 @@ func MissionFind(mission *Mission)(recordMissionJSON MissionJson, err error){
 		log.Printf("recordMission:")
 		log.Println(recordMission)
 	}
+	log.Printf("missionback:")
+	log.Println(&mission)
 	return
 }
 
