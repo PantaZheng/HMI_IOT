@@ -128,6 +128,14 @@ type MissionBriefJson struct{
 
 名称|method|path|传入body参数|接收body参数
 -|-|-|-|-
+MissionCreate|post|`/`|`MissionJson`|`MissionJson`
+MissionFindByID|get|`/id/{id:uint}`|-|`MissionJson`
+MissionFindByName|get|`/name/{name:string}`|-|`MissionJson`
+MissionsFindByModuleID|get|`/module/{id:uint}`|-|`[]MissionBriefJson`
+MissionUpdate|put|`/`|`MissionJson`<br>**参与者不可缺省更新**|`MissionJson`
+MissionDeleteByID|delete|`/id/{id:uint}`|-|`MissionJson`
+MissionDeleteByName|delete|`/name/{name:string}`|-|`MissionJson`
+
 
 ---
 
@@ -207,15 +215,16 @@ type MissionBriefJson struct{
         - 必须携带ID
     - [x] `GainDeleteByID`
         - 必须携带ID
-- [ ] mission 等待web测试
+- [x] mission
     - [x] `MissionCreate`
     - [x] `MissionFindByID`
             - 通过mission id去查成果
     - [x] `MissionFindByName`
-            - Name必须具有唯一性，才可使用该接口
+            - Name必须具有唯一性，才可使用该接口，多个匹配默认返回最后匹配
     - [x] `MissionsFindByModuleID`
     - [x] `MissionUpdate`
         - 必须携带ID
+        - 可缺省更新，但`Participants`字段不可缺少,Participants如无需修改，务必保证有原先的数据，该数据由于是关联用户表，较为特殊。
     - [x] `MissionDeleteByID`
     - [x] `MissionDeleteByName`
-        - Name必须具有唯一性，才可使用该接口
+        - Name必须具有唯一性，才可使用该接口,否则会删除最后匹配
