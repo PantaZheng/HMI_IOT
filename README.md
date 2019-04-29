@@ -134,7 +134,7 @@ type MissionBriefJson struct{
 
 ### models
 
-- [ ] gain
+- [x] gain
     - [x] `type Gain struct`
     - [x] `type GainJson struct`
     - [x] `gainTestData`
@@ -161,9 +161,9 @@ type MissionBriefJson struct{
     - [x] `mission2MissionBriefJSON`
     - [x] `MissionCreate`
     - [x] `MissionFind`
-    - [x] `MissionsFindByModule`
-    - [x] `MissionUpdate`
-    - [x] `MissionDelete`
+    - [ ] `MissionsFindByModule`
+    - [ ] `MissionUpdate`
+    - [ ] `MissionDelete`
 
 - [ ] module
 - [ ] project
@@ -176,7 +176,7 @@ type MissionBriefJson struct{
 
 ### servcie
 
-- [ ] gain
+- [x] gain
     - [x] `GainCreate`
     - [x] `GainFindByID`
     - [x] `GainsFindByOwnerID`
@@ -188,7 +188,7 @@ type MissionBriefJson struct{
 
 ### controller
 
-- [ ] gain
+- [x] gain
     - [x] `GainCreate`
     - [x] `GainFindByID`
     - [x] `GainsFindByOwnerID`

@@ -2,6 +2,7 @@ package main
 
 import (
 	"github.com/pantazheng/bci/models"
+	"log"
 	"testing"
 )
 
@@ -11,15 +12,17 @@ func TestMission(t *testing.T) {
 	mission.StartTime=mission.Name+"StartTime"
 	mission.EndTime=mission.Name+"EndTime"
 	mission.Content=mission.Name+"Content"
-	mission.Participants =[]*models.UserBriefJson{{ID: 1},
+	mission.Participants =[]models.UserBriefJson{{ID: 1},
 		{ID:3},}
 	_,_=models.MissionCreate(mission)
-	m1:=new(models.Mission)
-	m1.ID=1
-	_,_=models.MissionFind(m1)
-	m1.ID=2
-	_,_=models.MissionFind(m1)
-	m1.ID=3
-	_,_=models.MissionFind(m1)
-
+	module:=new(models.Module)
+	module.ID=1
+	r1,_:=models.MissionsFindByModule(module)
+	log.Println(r1)
+	module.ID=2
+	r2,_:=models.MissionsFindByModule(module)
+	log.Println(r2)
+	module.ID=3
+	r3,_:=models.MissionsFindByModule(module)
+	log.Println(r3)
 }

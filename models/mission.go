@@ -49,8 +49,12 @@ type MissionBriefJson struct{
 func missionTestData(){
 	_, _ =MissionCreate(&MissionJson{Name: "Mission1",ModuleID:1,Participants:[]UserBriefJson{{ID: 1},
 		{ID:2}}})
+	_, _ =MissionCreate(&MissionJson{Name: "Mission1",ModuleID:1,Participants:[]UserBriefJson{{ID: 1},
+		{ID:3}}})
 	_, _ =MissionCreate(&MissionJson{Name: "Mission2",ModuleID:2,Participants:[]UserBriefJson{{ID: 1},
 		{ID:2},{ID:3}}})
+	_, _ =MissionCreate(&MissionJson{Name: "Mission1",ModuleID:2,Participants:[]UserBriefJson{{ID: 1},
+		{ID:2}}})
 }
 
 //缺失participants
