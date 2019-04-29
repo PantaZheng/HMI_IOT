@@ -117,20 +117,13 @@ func MissionCreate(missionJson *MissionJson) (missionBriefJson MissionBriefJson,
 
 func MissionFind(mission *Mission)(recordMissionJSON MissionJson, err error){
 	recordMission:=new(Mission)
-	log.Printf("missioninit:")
-	log.Println(&mission)
-	if err=database.DB.Preload("Participants").Find(&mission).Error;err==nil{
-		log.Printf("recordMission:")
-		log.Println(recordMission)
-		database.DB.Model(&mission).Related(&mission.Participants,"Participants")
-		log.Printf("mission")
-		log.Println(mission)
+	if err=database.DB.First(&recordMission,&mission).Error;err==nil{
 		recordMissionJSON.mission2MissionJSON(mission)
 		log.Printf("recordMission:")
 		log.Println(recordMission)
 	}
-	log.Printf("missionback:")
-	log.Println(&mission)
+	log.Printf("missionjson:")
+	log.Println(&recordMission)
 	return
 }
 
