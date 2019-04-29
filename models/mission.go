@@ -78,12 +78,12 @@ func (missionJson *MissionJson) mission2MissionJSON(mission *Mission){
 	missionJson.File= mission.File
 	missionJson.Tag= mission.Tag
 	missionJson.ModuleID=mission.ModuleID
-	println("mission2MissionJSON-mission.Participants")
-	println(mission.Participants)
 	participants:=make([]*User,len(mission.Participants))
 	database.DB.Model(&mission).Related(&participants,"Participants")
-	for i,v:=range participants{
-		missionJson.Participants[i].user2UserJson(v)
+	tempUser:=&UserBriefJson{}
+	for _,v:=range participants{
+		tempUser.user2UserBriefJson(v)
+		missionJson.Participants=append(missionJson.Participants,tempUser)
 	}
 	return
 }
@@ -110,12 +110,8 @@ func MissionCreate(missionJson *MissionJson) (missionBriefJson MissionBriefJson,
 			users[i].ID=v.ID
 		}
 		err=database.DB.Model(&newMission).Association("Participants").Append(users).Error
-		log.Printf("newMission")
-		log.Println(newMission)
 		missionBriefJson.mission2MissionBriefJSON(newMission)
 	}
-	log.Printf("missionBriefJson")
-	log.Println(missionBriefJson)
 	return
 }
 

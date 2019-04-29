@@ -67,7 +67,7 @@ func (user *User) userJson2User(userJson *UserJson){
 	//}
 }
 
-func (userBriefJson *UserBriefJson) user2UserJson(user *User){
+func (userBriefJson *UserBriefJson) user2UserBriefJson(user *User){
 	userBriefJson.ID=user.ID
 	userBriefJson.Name=user.Name
 	userBriefJson.Level=user.Level
