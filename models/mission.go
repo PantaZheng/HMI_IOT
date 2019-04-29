@@ -85,6 +85,7 @@ func (missionJson *MissionJson) mission2MissionJSON(mission *Mission){
 		tempUser.user2UserBriefJson(v)
 		missionJson.Participants=append(missionJson.Participants,tempUser)
 	}
+	log.Println(&missionJson)
 	return
 }
 
@@ -119,11 +120,7 @@ func MissionFind(mission *Mission)(recordMissionJSON MissionJson, err error){
 	recordMission:=new(Mission)
 	if err=database.DB.First(&recordMission,&mission).Error;err==nil{
 		recordMissionJSON.mission2MissionJSON(mission)
-		log.Printf("recordMission:")
-		log.Println(recordMission)
 	}
-	log.Printf("missionjson:")
-	log.Println(&recordMission)
 	return
 }
 
