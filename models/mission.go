@@ -33,7 +33,7 @@ type MissionJson struct{
 	Content			string				`json:"content"`
 	File			string				`json:"file"`
 	Tag				bool				`json:"tag"`
-	Participants	[]*UserBriefJson	`json:"participants"`
+	Participants	[]UserBriefJson	`json:"participants"`
 	ModuleID		uint				`json:"module"`
 }
 
@@ -47,9 +47,9 @@ type MissionBriefJson struct{
 }
 
 func missionTestData(){
-	_, _ =MissionCreate(&MissionJson{Name: "Mission1",ModuleID:1,Participants:[]*UserBriefJson{{ID: 1},
+	_, _ =MissionCreate(&MissionJson{Name: "Mission1",ModuleID:1,Participants:[]UserBriefJson{{ID: 1},
 		{ID:2}}})
-	_, _ =MissionCreate(&MissionJson{Name: "Mission2",ModuleID:2,Participants:[]*UserBriefJson{{ID: 1},
+	_, _ =MissionCreate(&MissionJson{Name: "Mission2",ModuleID:2,Participants:[]UserBriefJson{{ID: 1},
 		{ID:2},{ID:3}}})
 }
 
@@ -83,7 +83,7 @@ func (missionJson *MissionJson) mission2MissionJSON(mission *Mission){
 	tempUser:=&UserBriefJson{}
 	for _,v:=range participants{
 		tempUser.user2UserBriefJson(v)
-		missionJson.Participants=append(missionJson.Participants,tempUser)
+		missionJson.Participants=append(missionJson.Participants,*tempUser)
 	}
 	log.Println(&missionJson)
 	return
