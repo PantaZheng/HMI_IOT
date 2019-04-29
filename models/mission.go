@@ -33,7 +33,7 @@ type MissionJson struct{
 	Content			string				`json:"content"`
 	File			string				`json:"file"`
 	Tag				bool				`json:"tag"`
-	Participants	[]UserBriefJson	`json:"participants"`
+	Participants	[]UserBriefJson		`json:"participants"`
 	ModuleID		uint				`json:"module"`
 }
 
@@ -172,6 +172,5 @@ func MissionDelete(mission *Mission)(recordMissionJson MissionJson,err error){
 		recordMissionJson.mission2MissionJSON(recordMission)
 		err=database.DB.Delete(&recordMission).Error
 	}
-	log.Printf("models.MissionFind:"+recordMission.Name)
 	return
 }

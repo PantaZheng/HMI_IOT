@@ -68,12 +68,13 @@ func newApp() (api *iris.Application){
 		mission.Get("/index",func(ctx iris.Context){
 			_=ctx.View("/mission/index.html")
 		})
-		mission.Post("/create",controller.MissionCreate)
-		mission.Get("/find?id={id:uint}",controller.MissionFindByID)
-		mission.Get("/find?name={name:string}",controller.MissionFindByName)
-		mission.Put("/update",controller.MissionUpdate)
-		mission.Delete("/delete?id={id:uint}",controller.MissionDeleteByID)
-		mission.Delete("/delete?name={name:string}",controller.MissionDeleteByName)
+		mission.Post("/",controller.MissionCreate)
+		mission.Get("/id/{id:uint}",controller.MissionFindByID)
+		mission.Get("/name/{name:string}",controller.MissionFindByName)
+		mission.Get("/module/{id:uint}",controller.MissionsFindByModuleID)
+		mission.Put("/",controller.MissionUpdate)
+		mission.Delete("/id/{id:uint}",controller.MissionDeleteByID)
+		mission.Delete("/name/{name:string}",controller.MissionDeleteByName)
 	})
 	return
 }

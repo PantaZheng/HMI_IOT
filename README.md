@@ -112,7 +112,7 @@ type MissionJson struct{
 	Content			string				`json:"content"`
 	File			string				`json:"file"`
 	Tag				bool				`json:"tag"`
-	Participants	[]*UserBriefJson	`json:"participants"`
+	Participants	[]UserBriefJson		`json:"participants"`
 	ModuleID		uint				`json:"module"`
 }
 
@@ -121,7 +121,8 @@ type MissionBriefJson struct{
 	Name		string	`json:"name"`
 	CreateTime	string	`json:"create_time"`
 	Content		string	`json:"content"`
-	Tag			string	`json:"tag"`
+	Tag			bool	`json:"tag"`
+	ModuleID	uint	`json:"module"`
 }
 ```
 
@@ -151,7 +152,7 @@ type MissionBriefJson struct{
     - [x] `GainDelete`
         - 必须携带ID
         - 目前由于只允许通过ID进行删除单条记录
-- [ ] mission
+- [x] mission
     - [x] `type Mission struct`
     - [x] `type MissionJson struct`
     - [x] `type MissionBriefJson struct`
@@ -163,8 +164,7 @@ type MissionBriefJson struct{
     - [x] `MissionFind`
     - [x] `MissionsFindByModule`
     - [x] `MissionUpdate`
-    - [ ] `MissionDelete`
-
+    - [x] `MissionDelete`
 - [ ] module
 - [ ] project
 - [ ] user
@@ -186,10 +186,15 @@ type MissionBriefJson struct{
     - [x] `GainDeleteByID`
         - 必须携带ID
 - [ ] mission
-    - [ ] `MissionCreate`
-    - [ ] `MissionFind`
-            - 需要加入成果返回嘛？
-            - 通过mission去查成果
+    - [x] `MissionCreate`
+    - [x] `MissionFindByID`
+            - 通过mission id去查成果
+    - [x] `MissionFindByName`
+    - [x] `MissionsFindByModuleID`
+    - [x] `MissionUpdate`
+        - 必须携带ID
+    - [x] `MissionDeleteByID`
+    - [x] `MissionDeleteByName`
 
 ### controller
 
@@ -202,3 +207,15 @@ type MissionBriefJson struct{
         - 必须携带ID
     - [x] `GainDeleteByID`
         - 必须携带ID
+- [ ] mission 等待web测试
+    - [x] `MissionCreate`
+    - [x] `MissionFindByID`
+            - 通过mission id去查成果
+    - [x] `MissionFindByName`
+            - Name必须具有唯一性，才可使用该接口
+    - [x] `MissionsFindByModuleID`
+    - [x] `MissionUpdate`
+        - 必须携带ID
+    - [x] `MissionDeleteByID`
+    - [x] `MissionDeleteByName`
+        - Name必须具有唯一性，才可使用该接口
