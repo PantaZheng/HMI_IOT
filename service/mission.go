@@ -11,13 +11,13 @@ func MissionCreate(mission *models.MissionJson)(missionBriefJson models.MissionB
 func MissionFindByID(id uint)(missionJson models.MissionJson,err error){
 	mission:=new(models.Mission)
 	mission.ID=id
-	return models.MissionFindOne(mission)
+	return models.MissionFind(mission)
 }
 
 func MissionFindByName(name string)(missionJson models.MissionJson,err error){
 	mission:=new(models.Mission)
 	mission.Name=name
-	return models.MissionFindOne(mission)
+	return models.MissionFind(mission)
 }
 
 func MissionUpdate(missionJson *models.MissionJson)(missionBriefJson models.MissionBriefJson,err error){

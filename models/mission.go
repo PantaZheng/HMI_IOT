@@ -24,33 +24,36 @@ type Mission struct{
 }
 
 type MissionJson struct{
-	ID				uint             `json:"id"`
-	Name			string           `json:"name"`
-	Creator			string           `json:"creator"`
-	CreateTime		string           `json:"create_time"`
-	StartTime		string           `json:"start_time"`
-	EndTime			string           `json:"end_time"`
-	Content			string           `json:"content"`
-	File			string           `json:"file"`
-	Tag				bool             `json:"tag"`
-	Participants	[]*UserBriefJson `json:"participants"`
-	ModuleID		uint             `json:"module"`
+	ID				uint				`json:"id"`
+	Name			string				`json:"name"`
+	Creator			string				`json:"creator"`
+	CreateTime		string				`json:"create_time"`
+	StartTime		string				`json:"start_time"`
+	EndTime			string				`json:"end_time"`
+	Content			string				`json:"content"`
+	File			string				`json:"file"`
+	Tag				bool				`json:"tag"`
+	Participants	[]*UserBriefJson	`json:"participants"`
+	ModuleID		uint				`json:"module"`
 }
 
 type MissionBriefJson struct{
-	ID         uint		`json:"id"`
-	Name       string	`json:"name"`
-	CreateTime string	`json:"create_time"`
-	Content    string	`json:"content"`
-	Tag		   string	`json:"tag"`
+	ID			uint	`json:"id"`
+	Name		string	`json:"name"`
+	CreateTime	string	`json:"create_time"`
+	Content		string	`json:"content"`
+	Tag			bool	`json:"tag"`
+	ModuleID	uint	`json:"module"`
 }
 
 func missionTestData(){
-	_, _ =MissionCreate(&MissionJson{Name: "Mission1",Content:"Mission1"})
-	_, _ =MissionCreate(&MissionJson{Name: "Mission2",Content:"Mission2"})
-	log.Println("missionTestData")
+	_, _ =MissionCreate(&MissionJson{Name: "Mission1",ModuleID:1,Participants:[]*UserBriefJson{{ID: 1},
+		{ID:2}}})
+	_, _ =MissionCreate(&MissionJson{Name: "Mission2",ModuleID:2,Participants:[]*UserBriefJson{{ID: 1},
+		{ID:2},{ID:3}}})
 }
 
+//缺失participants
 func (mission *Mission) missionJson2Mission(missionJson *MissionJson){
 	mission.ID=missionJson.ID
 	mission.Name=missionJson.Name
@@ -74,9 +77,13 @@ func (missionJson *MissionJson) mission2MissionJSON(mission *Mission){
 	missionJson.Content= mission.Content
 	missionJson.File= mission.File
 	missionJson.Tag= mission.Tag
-	for _,v:=range mission.Participants {
-		missionJson.Participants =append(missionJson.Participants, &UserBriefJson{ID: v.ID,Name:v.Name})
+	missionJson.ModuleID=mission.ModuleID
+	participants:=make([]User,1)
+	database.DB.Model(&mission).Related(&participants,"Participants")
+	for i,v:=range participants{
+		missionJson.Participants[i].user2UserJson(&v)
 	}
+	return
 }
 
 func(missionBriefJson *MissionBriefJson) mission2MissionBriefJSON(mission *Mission){
@@ -84,49 +91,59 @@ func(missionBriefJson *MissionBriefJson) mission2MissionBriefJSON(mission *Missi
 	missionBriefJson.Name= mission.Name
 	missionBriefJson.CreateTime = mission.CreateTime
 	missionBriefJson.Content=mission.Content
+	missionBriefJson.Tag=mission.Tag
+	missionBriefJson.ModuleID=mission.ModuleID
 }
-
-
 
 func MissionCreate(missionJson *MissionJson) (missionBriefJson MissionBriefJson,err error){
 	newMission := new(Mission)
-	newMission.Name=missionJson.Name
-	//createdTime
+	newMission.missionJson2Mission(missionJson)
 	newMission.CreateTime =time.Now().Format("2006-01-02 15:04:05")
-	recordMission:=new(Mission)
-	if database.DB.First(&recordMission,&Mission{Name: newMission.Name}).RecordNotFound(){
-		newMission.CreateTime =time.Now().Format("2006-01-02 15:04:05")
-		newMission.Creator=missionJson.Creator
-		newMission.Content=missionJson.Content
-		newMission.StartTime=missionJson.StartTime
-		newMission.EndTime=missionJson.EndTime
-		newMission.Content=missionJson.Content
-		newMission.File=missionJson.File
-		newMission.Tag=missionJson.Tag
-		database.DB.Create(&newMission)
-		var users []User
-		for _,v:=range missionJson.Participants {
-			recordUser:=User{}
-			recordUser.ID=v.ID
-			users=append(users,recordUser)
-		}
-		database.DB.Model(&newMission).Association("Participants").Append(users)
-	}else{
-		err=errors.New("MISSION CREATE FOUND RECORD")
+	if err=database.DB.Create(&newMission).Error;err!=nil{
+		return
 	}
-	log.Printf("models.MissionCreate:"+missionJson.Name)
+	if err=database.DB.Model(&newMission).First(&newMission).Error;err==nil{
+		users:=make([]User,len(missionJson.Participants))
+		for i,v:=range missionJson.Participants{
+			users[i].ID=v.ID
+		}
+		err=database.DB.Model(&newMission).Association("Participants").Append(users).Error
+		log.Printf("newMission")
+		log.Println(newMission)
+		missionBriefJson.mission2MissionBriefJSON(newMission)
+	}
+	log.Printf("missionBriefJson")
+	log.Println(missionBriefJson)
 	return
 }
 
-func MissionFindOne(mission *Mission)(recordMissionJSON MissionJson, err error){
+func MissionFind(mission *Mission)(recordMissionJSON MissionJson, err error){
 	recordMission:=new(Mission)
-	if database.DB.Find(&recordMission,&mission).RecordNotFound(){
-		err=errors.New("MISSION FIND NOT FOUND RECORD")
-	}else{
+	if err=database.DB.Find(&recordMission,&mission).Error;err==nil{
+		log.Printf("recordMission:")
+		log.Println(recordMission)
 		database.DB.Model(&mission).Related(&mission.Participants)
-		recordMissionJSON.mission2MissionJSON(recordMission)
+		log.Printf("mission")
+		log.Println(mission)
+		recordMissionJSON.mission2MissionJSON(mission)
 	}
-	log.Printf("models.MissionFindOne:"+mission.Name)
+	return
+}
+
+func MissionsFindByModule(Module *Module)(missionsBriefJson []MissionBriefJson,err error){
+	missions:=make([]Mission,1)
+	if err=database.DB.Model(&Module).Related(&missions,"ModuleID").Error;err!=nil{
+		return
+	}
+	if len(missions)==0{
+		err=errors.New("MissionsFindByModule No Owner Record")
+	}else{
+		for _,v:=range missions{
+			tempJson:=&MissionBriefJson{}
+			tempJson.mission2MissionBriefJSON(&v)
+			missionsBriefJson=append(missionsBriefJson,*tempJson)
+		}
+	}
 	return
 }
 
@@ -152,6 +169,6 @@ func MissionDelete(mission *Mission)(missionBriefJson MissionBriefJson,err error
 		missionBriefJson.mission2MissionBriefJSON(recordMission)
 		err=database.DB.Delete(&recordMission).Error
 	}
-	log.Printf("models.MissionFindOne:"+recordMission.Name)
+	log.Printf("models.MissionFind:"+recordMission.Name)
 	return
 }

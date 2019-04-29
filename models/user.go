@@ -37,7 +37,7 @@ type UserJson struct {
 	Name		string     			`json:"name"`
 	IDCard		string				`json:"id_card"`
 	Level		string     			`json:"level"`
-	Missions	[]*MissionBriefJson	`json:"missions"`
+	//Missions	[]*MissionBriefJson	`json:"missions"`
 }
 
 type UserBriefJson struct {
@@ -61,10 +61,16 @@ func (user *User) userJson2User(userJson *UserJson){
 	user.Name=userJson.Name
 	user.IDCard=userJson.IDCard
 	user.Level=userJson.Level
-	for _,v:=range userJson.Missions{
-		recordMission:=new(Mission)
-		database.DB.First(&recordMission,v.ID)
-	}
+	//for _,v:=range userJson.Missions{
+	//	recordMission:=new(Mission)
+	//	database.DB.First(&recordMission,v.ID)
+	//}
+}
+
+func (userBriefJson *UserBriefJson) user2UserJson(user *User){
+	userBriefJson.ID=user.ID
+	userBriefJson.Name=user.Name
+	userBriefJson.Level=user.Level
 }
 
 //登记信息

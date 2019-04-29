@@ -103,31 +103,34 @@ GainDeleteByID|delete|`/{id:uint}`|-|`GainJson`
 
 ```go
 type MissionJson struct{
-	ID				uint             `json:"id"`
-	Name			string           `json:"name"`
-	Creator			string           `json:"creator"`
-	CreateTime		string           `json:"create_time"`
-	StartTime		string           `json:"start_time"`
-	EndTime			string           `json:"end_time"`
-	Content			string           `json:"content"`
-	File			string           `json:"file"`
-	Tag				bool             `json:"tag"`
-	Participants	[]*UserBriefJson `json:"participants"`
-	ModuleID        uint             `json:"module"`
+	ID				uint				`json:"id"`
+	Name			string				`json:"name"`
+	Creator			string				`json:"creator"`
+	CreateTime		string				`json:"create_time"`
+	StartTime		string				`json:"start_time"`
+	EndTime			string				`json:"end_time"`
+	Content			string				`json:"content"`
+	File			string				`json:"file"`
+	Tag				bool				`json:"tag"`
+	Participants	[]*UserBriefJson	`json:"participants"`
+	ModuleID		uint				`json:"module"`
 }
 
 type MissionBriefJson struct{
-	ID         uint		`json:"id"`
-	Name       string	`json:"name"`
-	CreateTime string	`json:"create_time"`
-	Content    string	`json:"content"`
-	Tag		   string	`json:"tag"`
+	ID			uint	`json:"id"`
+	Name		string	`json:"name"`
+	CreateTime	string	`json:"create_time"`
+	Content		string	`json:"content"`
+	Tag			string	`json:"tag"`
 }
 ```
 
+名称|method|path|传入body参数|接收body参数
+-|-|-|-|-
+
 ---
 
-## TODOLIST
+## TODO
 
 ### models
 
@@ -149,7 +152,19 @@ type MissionBriefJson struct{
         - 必须携带ID
         - 目前由于只允许通过ID进行删除单条记录
 - [ ] mission
-    - [x]
+    - [x] `type Mission struct`
+    - [x] `type MissionJson struct`
+    - [x] `type MissionBriefJson struct`
+    - [x] `missionTestData`
+    - [x] `missionJson2Mission`
+    - [x] `mission2MissionJSON`
+    - [x] `mission2MissionBriefJSON`
+    - [x] `MissionCreate`
+    - [x] `MissionFind`
+    - [x] `MissionsFindByModule`
+    - [x] `MissionUpdate`
+    - [x] `MissionDelete`
+
 - [ ] module
 - [ ] project
 - [ ] user

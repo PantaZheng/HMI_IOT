@@ -4,7 +4,6 @@ import (
     "errors"
     "github.com/jinzhu/gorm"
     "github.com/pantazheng/bci/database"
-    "log"
     "time"
 )
 
@@ -60,7 +59,6 @@ func gainTestData(){
     _,_=GainCreate(&GainJson{Name:"gain2",OwnerID:2,MissionID:1})
     _,_=GainCreate(&GainJson{Name:"gain3",OwnerID:1,MissionID:2})
     _,_=GainCreate(&GainJson{Name:"gain4",OwnerID:2,MissionID:2})
-    log.Println("gainTestData")
 }
 
 func GainCreate(gainJson *GainJson) (recordGainJson GainJson,err error){
@@ -68,8 +66,6 @@ func GainCreate(gainJson *GainJson) (recordGainJson GainJson,err error){
     newGain:=new(Gain)
     newGain.gainJson2Gain(gainJson)
     newGain.UpTime=time.Now().Format("2006-01-02 15:04:05")
-    log.Println(newGain.UpTime)
-    //db新建
     if err=database.DB.Create(&newGain).Error;err!=nil{
         return
     }
@@ -93,7 +89,7 @@ func GainsFindByOwner(owner *User)(gainsJson []GainJson,err error){
         return
     }
     if len(gains)==0{
-        err=errors.New("GainsFindByOwner No Owner Record")
+        err=errors.New("GainsFindByOwner No Gain Record")
     }else {
         for _,v :=range gains{
             tempJson:=&GainJson{}
@@ -110,7 +106,7 @@ func GainsFindByMission(mission *Mission)(gainsJson []GainJson,err error){
         return
     }
     if len(gains)==0{
-        err=errors.New("GainsFindByMission No Mission Record")
+        err=errors.New("GainsFindByMission No Gain Record")
     }else{
         for _,v :=range gains{
             tempJson:=&GainJson{}
