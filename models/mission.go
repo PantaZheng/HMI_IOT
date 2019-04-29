@@ -78,10 +78,12 @@ func (missionJson *MissionJson) mission2MissionJSON(mission *Mission){
 	missionJson.File= mission.File
 	missionJson.Tag= mission.Tag
 	missionJson.ModuleID=mission.ModuleID
-	participants:=make([]User,1)
+	println("mission2MissionJSON-mission.Participants")
+	println(mission.Participants)
+	participants:=make([]*User,len(mission.Participants))
 	database.DB.Model(&mission).Related(&participants,"Participants")
 	for i,v:=range participants{
-		missionJson.Participants[i].user2UserJson(&v)
+		missionJson.Participants[i].user2UserJson(v)
 	}
 	return
 }
@@ -122,10 +124,12 @@ func MissionFind(mission *Mission)(recordMissionJSON MissionJson, err error){
 	if err=database.DB.Find(&recordMission,&mission).Error;err==nil{
 		log.Printf("recordMission:")
 		log.Println(recordMission)
-		database.DB.Model(&mission).Related(&mission.Participants)
+		database.DB.Model(&mission).Related(&mission.Participants,"Participants")
 		log.Printf("mission")
 		log.Println(mission)
 		recordMissionJSON.mission2MissionJSON(mission)
+		log.Printf("recordMission:")
+		log.Println(recordMission)
 	}
 	return
 }
