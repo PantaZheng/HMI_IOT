@@ -102,7 +102,7 @@ func(missionBriefJson *MissionBriefJson) mission2MissionBriefJSON(mission *Missi
 	missionBriefJson.ModuleID=mission.ModuleID
 }
 
-func MissionCreate(missionJson *MissionJson) (missionBriefJson MissionBriefJson,err error){
+func MissionCreate(missionJson *MissionJson) (recordMissionJson MissionJson,err error){
 	newMission := new(Mission)
 	newMission.missionJson2Mission(missionJson)
 	newMission.CreateTime =time.Now().Format("2006-01-02 15:04:05")
@@ -115,7 +115,7 @@ func MissionCreate(missionJson *MissionJson) (missionBriefJson MissionBriefJson,
 			users[i].ID=v.ID
 		}
 		err=database.DB.Model(&newMission).Association("Participants").Append(users).Error
-		missionBriefJson.mission2MissionBriefJSON(newMission)
+		recordMissionJson.mission2MissionJSON(newMission)
 	}
 	return
 }
@@ -145,17 +145,22 @@ func MissionsFindByModule(Module *Module)(missionsBriefJson []MissionBriefJson,e
 	return
 }
 
-func MissionUpdate(missionJson *MissionJson)(missionBriefJson MissionBriefJson,err error){
+func MissionUpdate(missionJson *MissionJson)(recordMissionJson MissionJson,err error){
 	updateMission:= new(Mission)
 	updateMission.missionJson2Mission(missionJson)
 	recordMission:=new(Mission)
-	if database.DB.First(&recordMission,&Mission{Name: updateMission.Name}).RecordNotFound(){
-		err = errors.New("MISSION UPDATE NOT FOUND RECORD")
+	recordMission.ID=updateMission.ID
+	if database.DB.First(&recordMission,&recordMission).RecordNotFound(){
+		err = errors.New("MissionUpdate No Mission Record")
 	}else{
 		database.DB.Model(&recordMission).Updates(updateMission)
-		missionBriefJson.mission2MissionBriefJSON(recordMission)
+		users:=make([]User,len(missionJson.Participants))
+		for i,v:=range missionJson.Participants{
+			users[i].ID=v.ID
+		}
+		err=database.DB.Model(&recordMission).Association("Participants").Replace(users).Error
+		recordMissionJson.mission2MissionJSON(recordMission)
 	}
-	log.Printf("models.MissionUpdate:"+recordMission.Name)
 	return
 }
 

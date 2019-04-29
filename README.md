@@ -161,7 +161,7 @@ type MissionBriefJson struct{
     - [x] `mission2MissionBriefJSON`
     - [x] `MissionCreate`
     - [x] `MissionFind`
-    - [ ] `MissionsFindByModule`
+    - [x] `MissionsFindByModule`
     - [ ] `MissionUpdate`
     - [ ] `MissionDelete`
 
@@ -185,6 +185,11 @@ type MissionBriefJson struct{
         - 必须携带ID
     - [x] `GainDeleteByID`
         - 必须携带ID
+- [ ] mission
+    - [ ] `MissionCreate`
+    - [ ] `MissionFind`
+            - 需要加入成果返回嘛？
+            - 通过mission去查成果
 
 ### controller
 
