@@ -123,7 +123,7 @@ func MissionCreate(missionJson *MissionJson) (recordMissionJson MissionJson,err 
 func MissionFind(mission *Mission)(recordMissionJSON MissionJson, err error){
 	recordMission:=new(Mission)
 	if err=database.DB.First(&recordMission,&mission).Error;err==nil{
-		recordMissionJSON.mission2MissionJSON(mission)
+		recordMissionJSON.mission2MissionJSON(recordMission)
 	}
 	return
 }
@@ -134,7 +134,7 @@ func MissionsFindByModule(Module *Module)(missionsBriefJson []MissionBriefJson,e
 		return
 	}
 	if len(missions)==0{
-		err=errors.New("MissionsFindByModule No Owner Record")
+		err=errors.New("MissionsFindByModule No Module Record")
 	}else{
 		for _,v:=range missions{
 			tempJson:=&MissionBriefJson{}
