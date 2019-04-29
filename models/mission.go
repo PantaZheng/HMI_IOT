@@ -164,12 +164,12 @@ func MissionUpdate(missionJson *MissionJson)(recordMissionJson MissionJson,err e
 	return
 }
 
-func MissionDelete(mission *Mission)(missionBriefJson MissionBriefJson,err error){
+func MissionDelete(mission *Mission)(recordMissionJson MissionJson,err error){
 	recordMission:=new(Mission)
 	if database.DB.Find(&recordMission,&mission).RecordNotFound(){
 		err=errors.New("MissionDelete No Mission Record")
 	}else{
-		missionBriefJson.mission2MissionBriefJSON(recordMission)
+		recordMissionJson.mission2MissionJSON(recordMission)
 		err=database.DB.Delete(&recordMission).Error
 	}
 	log.Printf("models.MissionFind:"+recordMission.Name)
