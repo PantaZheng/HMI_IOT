@@ -4,14 +4,13 @@ import (
 	"errors"
 	"github.com/jinzhu/gorm"
 	"github.com/pantazheng/bci/database"
-	"log"
 	"time"
 )
 
 type Mission struct{
 	gorm.Model
 	Name			string
-	Creator			string
+	CreatorID		uint
 	CreateTime		string
 	StartTime		string
 	EndTime			string
@@ -26,7 +25,7 @@ type Mission struct{
 type MissionJson struct{
 	ID				uint				`json:"id"`
 	Name			string				`json:"name"`
-	Creator			string				`json:"creator"`
+	CreatorID		uint				`json:"creator"`
 	CreateTime		string				`json:"create_time"`
 	StartTime		string				`json:"start_time"`
 	EndTime			string				`json:"end_time"`
@@ -48,21 +47,17 @@ type MissionBriefJson struct{
 }
 
 func missionTestData(){
-	_, _ =MissionCreate(&MissionJson{Name: "Mission1",ModuleID:1,Participants:[]UserBriefJson{{ID: 1},
-		{ID:2}}})
-	_, _ =MissionCreate(&MissionJson{Name: "Mission1",ModuleID:1,Participants:[]UserBriefJson{{ID: 1},
-		{ID:3}}})
-	_, _ =MissionCreate(&MissionJson{Name: "Mission2",ModuleID:2,Participants:[]UserBriefJson{{ID: 1},
-		{ID:2},{ID:3}}})
-	_, _ =MissionCreate(&MissionJson{Name: "Mission1",ModuleID:2,Participants:[]UserBriefJson{{ID: 1},
-		{ID:2}}})
+	_, _ =MissionCreate(&MissionJson{Name: "Mission1",ModuleID:1,Participants:[]UserBriefJson{{ID: 1},{ID:2}}})
+	_, _ =MissionCreate(&MissionJson{Name: "Mission2",ModuleID:1,Participants:[]UserBriefJson{{ID: 1},{ID:3}}})
+	_, _ =MissionCreate(&MissionJson{Name: "Mission3",ModuleID:2,Participants:[]UserBriefJson{{ID: 1},{ID:2},{ID:3}}})
+	_, _ =MissionCreate(&MissionJson{Name: "Mission4",ModuleID:2,Participants:[]UserBriefJson{{ID: 1},{ID:2}}})
 }
 
 //缺失participants
 func (mission *Mission) missionJson2Mission(missionJson *MissionJson){
 	mission.ID=missionJson.ID
 	mission.Name=missionJson.Name
-	mission.Creator=missionJson.Creator
+	mission.CreatorID=missionJson.CreatorID
 	mission.CreateTime=missionJson.CreateTime
 	mission.StartTime=missionJson.StartTime
 	mission.EndTime=missionJson.EndTime
@@ -75,7 +70,7 @@ func (mission *Mission) missionJson2Mission(missionJson *MissionJson){
 func (missionJson *MissionJson) mission2MissionJSON(mission *Mission){
 	missionJson.ID=mission.ID
 	missionJson.Name= mission.Name
-	missionJson.Creator= mission.Creator
+	missionJson.CreatorID= mission.CreatorID
 	missionJson.CreateTime = mission.CreateTime
 	missionJson.StartTime= mission.StartTime
 	missionJson.EndTime= mission.EndTime
@@ -91,11 +86,9 @@ func (missionJson *MissionJson) mission2MissionJSON(mission *Mission){
 		missionJson.Participants=append(missionJson.Participants,*tempUser)
 	}
 	missionJson.Gains,_=GainsFindByMission(mission)
-	log.Println(&missionJson)
-	return
 }
 
-func(missionBriefJson *MissionBriefJson) mission2MissionBriefJSON(mission *Mission){
+func(missionBriefJson *MissionBriefJson) mission2MissionBriefJson(mission *Mission){
 	missionBriefJson.ID=mission.ID
 	missionBriefJson.Name= mission.Name
 	missionBriefJson.CreateTime = mission.CreateTime
@@ -122,25 +115,25 @@ func MissionCreate(missionJson *MissionJson) (recordMissionJson MissionJson,err 
 	return
 }
 
-func MissionFind(mission *Mission)(recordMissionJSON MissionJson, err error){
+func MissionFind(mission *Mission)(recordMissionJson MissionJson, err error){
 	recordMission:=new(Mission)
 	if err=database.DB.First(&recordMission,&mission).Error;err==nil{
-		recordMissionJSON.mission2MissionJSON(recordMission)
+		recordMissionJson.mission2MissionJSON(recordMission)
 	}
 	return
 }
 
-func MissionsFindByModule(Module *Module)(missionsBriefJson []MissionBriefJson,err error){
+func MissionsFindByModule(module *Module)(missionsBriefJson []MissionBriefJson,err error){
 	missions:=make([]Mission,1)
-	if err=database.DB.Model(&Module).Related(&missions,"ModuleID").Error;err!=nil{
+	if err=database.DB.Model(&module).Related(&missions,"ModuleID").Error;err!=nil{
 		return
 	}
 	if len(missions)==0{
-		err=errors.New("MissionsFindByModule No Module Record")
+		err=errors.New("MissionsFindByModule No Mission Record")
 	}else{
 		for _,v:=range missions{
 			tempJson:=&MissionBriefJson{}
-			tempJson.mission2MissionBriefJSON(&v)
+			tempJson.mission2MissionBriefJson(&v)
 			missionsBriefJson=append(missionsBriefJson,*tempJson)
 		}
 	}
@@ -156,11 +149,13 @@ func MissionUpdate(missionJson *MissionJson)(recordMissionJson MissionJson,err e
 		err = errors.New("MissionUpdate No Mission Record")
 	}else{
 		database.DB.Model(&recordMission).Updates(updateMission)
-		users:=make([]User,len(missionJson.Participants))
-		for i,v:=range missionJson.Participants{
-			users[i].ID=v.ID
+		if num:=len(missionJson.Participants);num!=0{
+			users:=make([]User,num)
+			for i,v:=range missionJson.Participants{
+				users[i].ID=v.ID
+			}
+			err=database.DB.Model(&recordMission).Association("Participants").Replace(users).Error
 		}
-		err=database.DB.Model(&recordMission).Association("Participants").Replace(users).Error
 		recordMissionJson.mission2MissionJSON(recordMission)
 	}
 	return

@@ -38,7 +38,7 @@
 
 ### User
 
-Json:
+入口: `/user`
 
 ```go
 type UserJson struct {
@@ -56,8 +56,6 @@ type UserBriefJson struct {
 }
 ```
 
-- 微信接口
-    - Any `/anon/project`
 - 登记
     - Post `/anon/enroll`
     - send
@@ -105,13 +103,14 @@ GainDeleteByID|delete|`/{id:uint}`|-|`GainJson`
 type MissionJson struct{
 	ID				uint				`json:"id"`
 	Name			string				`json:"name"`
-	Creator			string				`json:"creator"`
+	CreatorID		uint				`json:"creator"` //不做关联，查看创建者信息，需调用user的接口
 	CreateTime		string				`json:"create_time"`
 	StartTime		string				`json:"start_time"`
 	EndTime			string				`json:"end_time"`
 	Content			string				`json:"content"`
 	File			string				`json:"file"`
 	Tag				bool				`json:"tag"`
+	Gains			[]GainJson			`json:"gains"`
 	Participants	[]UserBriefJson		`json:"participants"`
 	ModuleID		uint				`json:"module"`
 }
@@ -132,10 +131,39 @@ MissionCreate|post|`/`|`MissionJson`|`MissionJson`
 MissionFindByID|get|`/id/{id:uint}`|-|`MissionJson`
 MissionFindByName|get|`/name/{name:string}`|-|`MissionJson`
 MissionsFindByModuleID|get|`/module/{id:uint}`|-|`[]MissionBriefJson`
-MissionUpdate|put|`/`|`MissionJson`<br>**参与者不可缺省更新**|`MissionJson`
+MissionUpdate|put|`/`|`MissionJson`|`MissionJson`
 MissionDeleteByID|delete|`/id/{id:uint}`|-|`MissionJson`
 MissionDeleteByName|delete|`/name/{name:string}`|-|`MissionJson`
 
+### Module
+
+入口: `/module`
+
+```go
+type ModuleJson struct{
+	ID				uint				`json:"id"`
+	Name			string				`json:"name"`
+	CreatorID 		uint				`json:"creator"`
+	CreateTime  	string	  			`json:"create_time"`//创建时间
+	StartTime   	string    			`json:"start_time"`//开始时间
+	EndTime     	string    			`json:"end_time"`//结束时间
+	Content			string				`json:"content"`
+	Tag				bool				`json:"tag"`
+	ProjectID		uint				`json:"project"`
+	LeaderID		uint				`json:"leader"`
+	Participants 	[]UserBriefJson		`json:"participants"`//参与人员
+	Missions		[]MissionBriefJson	`json:"missions"`
+}
+
+type ModuleBriefJson struct{
+	ID				uint				`json:"id"`
+	Name			string				`json:"name"`
+	CreateTime  	string	  			`json:"create_time"`//创建时间
+	Content			string				`json:"content"`
+	Tag				string				`json:"tag"`
+	ProjectID		uint				`json:"project"`
+}
+```
 
 ---
 
@@ -174,6 +202,18 @@ MissionDeleteByName|delete|`/name/{name:string}`|-|`MissionJson`
     - [x] `MissionUpdate`
     - [x] `MissionDelete`
 - [ ] module
+    - [x] `type Module struct`
+    - [x] `type ModuleJson struct`
+    - [x] `type ModuleBriefJson struct`
+    - [x] `moduleJson2Module`
+    - [x] `module2ModuleJson`
+    - [x] `module2ModuleBriefJson`
+    - [x] `ModuleCreate`
+    - [x] `ModuleFind`
+    - [x] `ModulesFindByLeader`
+    - [x] `ModulesFindByProject`
+    - [x] `ModuleUpdate`
+    - [x] `ModuleDelete`
 - [ ] project
 - [ ] user
 - [ ] init
@@ -193,10 +233,10 @@ MissionDeleteByName|delete|`/name/{name:string}`|-|`MissionJson`
         - 必须携带ID
     - [x] `GainDeleteByID`
         - 必须携带ID
-- [ ] mission
+- [x] mission
     - [x] `MissionCreate`
     - [x] `MissionFindByID`
-            - 通过mission id去查成果
+        - 通过mission id去查成果
     - [x] `MissionFindByName`
     - [x] `MissionsFindByModuleID`
     - [x] `MissionUpdate`
@@ -218,13 +258,12 @@ MissionDeleteByName|delete|`/name/{name:string}`|-|`MissionJson`
 - [x] mission
     - [x] `MissionCreate`
     - [x] `MissionFindByID`
-            - 通过mission id去查成果
+        - 通过mission id去查成果
     - [x] `MissionFindByName`
-            - Name必须具有唯一性，才可使用该接口，多个匹配默认返回最后匹配
+        - Name必须具有唯一性，才可使用该接口，多个匹配默认返回最后匹配
     - [x] `MissionsFindByModuleID`
     - [x] `MissionUpdate`
         - 必须携带ID
-        - 可缺省更新，但`Participants`字段不可缺少,Participants如无需修改，务必保证有原先的数据，该数据由于是关联用户表，较为特殊。
     - [x] `MissionDeleteByID`
     - [x] `MissionDeleteByName`
         - Name必须具有唯一性，才可使用该接口,否则会删除最后匹配
