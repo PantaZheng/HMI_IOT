@@ -33,6 +33,7 @@ type MissionJson struct{
 	Content			string				`json:"content"`
 	File			string				`json:"file"`
 	Tag				bool				`json:"tag"`
+	Gains			[]GainJson			`json:"gains"`
 	Participants	[]UserBriefJson		`json:"participants"`
 	ModuleID		uint				`json:"module"`
 }
@@ -89,6 +90,7 @@ func (missionJson *MissionJson) mission2MissionJSON(mission *Mission){
 		tempUser.user2UserBriefJson(v)
 		missionJson.Participants=append(missionJson.Participants,*tempUser)
 	}
+	missionJson.Gains,_=GainsFindByMission(mission)
 	log.Println(&missionJson)
 	return
 }
