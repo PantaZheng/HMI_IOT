@@ -26,22 +26,22 @@ type Module struct{
 type ModuleJson struct{
 	ID				uint				`json:"id"`
 	Name			string				`json:"name"`
-	CreatorID 		uint				`json:"creator"`
-	CreateTime  	string	  			`json:"create_time"`//创建时间
-	StartTime   	string    			`json:"start_time"`//开始时间
-	EndTime     	string    			`json:"end_time"`//结束时间
+	CreatorID		uint				`json:"creator"`
+	CreateTime		string				`json:"create_time"`//创建时间
+	StartTime		string				`json:"start_time"`//开始时间
+	EndTime			string				`json:"end_time"`//结束时间
 	Content			string				`json:"content"`
 	Tag				bool				`json:"tag"`
 	ProjectID		uint				`json:"project"`
 	LeaderID		uint				`json:"leader"`
-	Participants 	[]UserBriefJson		`json:"participants"`//参与人员
+	Participants	[]UserBriefJson		`json:"participants"`//参与人员
 	Missions		[]MissionBriefJson	`json:"missions"`//创建或更新不会修改该字段，仅拉取使用
 }
 
 type ModuleBriefJson struct{
 	ID				uint				`json:"id"`
 	Name			string				`json:"name"`
-	CreateTime  	string	  			`json:"create_time"`//创建时间
+	CreateTime		string				`json:"create_time"`//创建时间
 	Content			string				`json:"content"`
 	Tag				bool				`json:"tag"`
 	ProjectID		uint				`json:"project"`
