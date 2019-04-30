@@ -274,11 +274,12 @@ type ModuleBriefJson struct{
     - [x] `MissionDeleteByID`
     - [x] `MissionDeleteByName`
         - Name必须具有唯一性，才可使用该接口,否则会删除最后匹配
-- [ ] module
-    - [ ] `ModuleCreate`
-    - [ ] `ModuleFindByID`
-    - [ ] `ModulesFindByLeaderID`
-    - [ ] `ModulesFindByProjectID`
-    - [ ] `ModuleUpdate`
+- [x] module
+    - [x] `ModuleCreate`
+    - [x] `ModuleFindByID`
+    - [x] `ModulesFindByLeaderID`
+    - [x] `ModulesFindByProjectID`
+    - [x] `ModuleUpdate`
         - id
-    - [ ] `ModuleDeleteByID`
+    - [x] `ModuleDeleteByID`
+    - iris测试
