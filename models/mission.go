@@ -4,6 +4,7 @@ import (
 	"errors"
 	"github.com/jinzhu/gorm"
 	"github.com/pantazheng/bci/database"
+	"log"
 	"time"
 )
 
@@ -78,6 +79,7 @@ func (missionJson *MissionJson) mission2MissionJSON(mission *Mission){
 	missionJson.File= mission.File
 	missionJson.Tag= mission.Tag
 	missionJson.ModuleID=mission.ModuleID
+	log.Println(mission)
 	participants:=make([]*User,len(mission.Participants))
 	database.DB.Model(&mission).Related(&participants,"Participants")
 	tempUser:=&UserBriefJson{}
@@ -86,6 +88,7 @@ func (missionJson *MissionJson) mission2MissionJSON(mission *Mission){
 		missionJson.Participants=append(missionJson.Participants,*tempUser)
 	}
 	missionJson.Gains,_=GainsFindByMission(mission)
+	log.Println(missionJson)
 }
 
 func(missionBriefJson *MissionBriefJson) mission2MissionBriefJson(mission *Mission){
