@@ -44,6 +44,7 @@ type ModuleBriefJson struct{
 	CreateTime		string				`json:"create_time"`//创建时间
 	Content			string				`json:"content"`
 	Tag				bool				`json:"tag"`
+	LeaderID		uint				`json:"leader"`
 	ProjectID		uint				`json:"project"`
 }
 
@@ -95,6 +96,7 @@ func(moduleBriefJson *ModuleBriefJson) module2ModuleBriefJson(module *Module){
 	moduleBriefJson.Content=module.Content
 	moduleBriefJson.Tag=module.Tag
 	moduleBriefJson.ProjectID=module.ProjectID
+	moduleBriefJson.LeaderID=module.LeaderID
 }
 
 func ModuleCreate(moduleJson *ModuleJson)(recordModuleJson ModuleJson,err error){

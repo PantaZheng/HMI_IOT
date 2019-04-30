@@ -212,7 +212,6 @@ type ModuleBriefJson struct{
     - [x] `ModulesFindByProject`
     - [x] `ModuleUpdate`
     - [x] `ModuleDelete`
-    - [x] module_test测试通过 2019-4-30 16:30
 - [ ] project
 - [ ] user
 - [ ] init
@@ -282,4 +281,3 @@ type ModuleBriefJson struct{
     - [x] `ModuleUpdate`
         - id
     - [x] `ModuleDeleteByID`
-    - iris测试

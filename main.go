@@ -81,9 +81,9 @@ func newApp() (api *iris.Application){
 		module.Post("/",controller.ModuleCreate)
 		module.Get("/id/{id:uint}",controller.ModuleFindByID)
 		module.Get("/leader/{id:uint}",controller.ModlesFindByLeaderID)
-		module.Get("/project/{id:uint}",controller.ModlesFindByProjectID)
+		module.Get("/project/{id:uint}",controller.ModulesFindByProjectID)
 		module.Put("/",controller.ModuleUpdate)
-		module.Delete("/",controller.ModuleDeleteByID)
+		module.Delete("/id/{id:uint}",controller.ModuleDeleteByID)
 	})
 
 	return
