@@ -4,7 +4,6 @@ import (
 	"errors"
 	"github.com/jinzhu/gorm"
 	"github.com/pantazheng/bci/database"
-	"log"
 	"time"
 )
 
@@ -79,7 +78,6 @@ func (moduleJson *ModuleJson) module2ModuleJson(module *Module){
 	moduleJson.Tag=module.Tag
 	moduleJson.ProjectID=module.ProjectID
 	moduleJson.LeaderID=module.LeaderID
-	log.Println(moduleJson)
 	participants:=make([]*User,len(module.Participants))
 	database.DB.Model(&module).Related(&participants,"Participants")
 	tempUser:=&UserBriefJson{}
@@ -88,7 +86,6 @@ func (moduleJson *ModuleJson) module2ModuleJson(module *Module){
 		moduleJson.Participants=append(moduleJson.Participants,*tempUser)
 	}
 	moduleJson.Missions,_=MissionsFindByModule(module)
-	log.Println(moduleJson)
 }
 
 func(moduleBriefJson *ModuleBriefJson) module2ModuleBriefJson(module *Module){
@@ -107,7 +104,7 @@ func ModuleCreate(moduleJson *ModuleJson)(recordModuleJson ModuleJson,err error)
 	if err=database.DB.Create(&newModule).Error;err!=nil{
 		return
 	}
-	if err=database.DB.Model(&newModule).First(&newModule).Error;err!=nil{
+	if err=database.DB.Model(&newModule).First(&newModule).Error;err==nil{
 		users:=make([]User,len(moduleJson.Participants))
 		for i,v:=range moduleJson.Participants{
 			users[i].ID=v.ID
