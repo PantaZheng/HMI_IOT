@@ -1,6 +1,4 @@
-# 505
-
-## 脑机协同微信公众号
+# BCI脑机协同微信公众号
 
 ## 域名
 
@@ -201,7 +199,7 @@ type ModuleBriefJson struct{
     - [x] `MissionsFindByModule`
     - [x] `MissionUpdate`
     - [x] `MissionDelete`
-- [ ] module
+- [x] module
     - [x] `type Module struct`
     - [x] `type ModuleJson struct`
     - [x] `type ModuleBriefJson struct`
@@ -214,6 +212,7 @@ type ModuleBriefJson struct{
     - [x] `ModulesFindByProject`
     - [x] `ModuleUpdate`
     - [x] `ModuleDelete`
+    - [x] module_test测试通过 2019-4-30 16:30
 - [ ] project
 - [ ] user
 - [ ] init
@@ -243,6 +242,14 @@ type ModuleBriefJson struct{
         - 必须携带ID
     - [x] `MissionDeleteByID`
     - [x] `MissionDeleteByName`
+- [x] module
+    - [x] `ModuleCreate`
+    - [x] `ModuleFindByID`
+    - [x] `ModulesFindByLeaderID`
+    - [x] `ModulesFindByProjectID`
+    - [x] `ModuleUpdate`
+        - id
+    - [x] `ModuleDeleteByID`
 
 ### controller
 
@@ -267,3 +274,11 @@ type ModuleBriefJson struct{
     - [x] `MissionDeleteByID`
     - [x] `MissionDeleteByName`
         - Name必须具有唯一性，才可使用该接口,否则会删除最后匹配
+- [ ] module
+    - [ ] `ModuleCreate`
+    - [ ] `ModuleFindByID`
+    - [ ] `ModulesFindByLeaderID`
+    - [ ] `ModulesFindByProjectID`
+    - [ ] `ModuleUpdate`
+        - id
+    - [ ] `ModuleDeleteByID`
