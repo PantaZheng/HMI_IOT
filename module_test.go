@@ -39,8 +39,10 @@ func moduleCreate()(moduleJson models.ModuleJson){
 	module:=new(models.ModuleJson)
 	module.Name="module_test5"
 	module.Participants=[]models.UserBriefJson{{ID:2},{ID:6}}
-	moduleJson,_=models.ModuleCreate(module)
+	tmp,err:=models.ModuleCreate(module)
 	log.Println(moduleJson)
+	log.Println(err)
+	moduleJson=tmp
 	return
 }
 
