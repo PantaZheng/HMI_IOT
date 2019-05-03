@@ -52,7 +52,7 @@ type BriefProject struct {
 }
 
 type TagJson struct{
-	ID 	uint	`json:"id"`
+	ID	uint	`json:"id"`
 	Tag	bool	`json:"tag"`
 }
 
@@ -74,7 +74,7 @@ func targetsJson2Target(targets []string) (target string){
 	return
 }
 
-func TagSet2Tags(tagSet string) (tags []*TagJson){
+func TagSet2Tags(tagSet string) (tags []TagJson){
 	temp:=strings.Split(tagSet,",")
 	for _,v:=range temp{
 		IdTag :=strings.Split(v,"+")
@@ -82,7 +82,7 @@ func TagSet2Tags(tagSet string) (tags []*TagJson){
 			id,_:=strconv.Atoi(IdTag[0])
 			idU:=uint(id)
 			t,_:=strconv.ParseBool(IdTag[1])
-			tags=append(tags,&TagJson{ID: idU,Tag:t} )
+			tags=append(tags,*&TagJson{ID: idU,Tag:t} )
 		}
 	}
 	return tags
