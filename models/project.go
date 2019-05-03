@@ -3,6 +3,7 @@ package models
 import (
 	"github.com/jinzhu/gorm"
 	"github.com/pantazheng/bci/database"
+	"strconv"
 	"strings"
 )
 
@@ -55,11 +56,11 @@ type TagJson struct{
 	Tag	bool	`json:"tag"`
 }
 
-func Target2TargetsJson (target string) []string{
+func target2TargetsJson (target string) []string{
 		return strings.Split(target,",")
 }
 
-func TargetsJson2Target(targets []string) (target string){
+func targetsJson2Target(targets []string) (target string){
 	l:=len(targets)
 	if l>0 {
 		for i, v := range targets {
@@ -73,7 +74,35 @@ func TargetsJson2Target(targets []string) (target string){
 	return
 }
 
+func TagSet2Tags(tagSet string) (tags []*TagJson){
+	temp:=strings.Split(tagSet,",")
+	for _,v:=range temp{
+		IdTag :=strings.Split(v,"+")
+		if len(IdTag)==2 {
+			id,_:=strconv.Atoi(IdTag[0])
+			idU:=uint(id)
+			t,_:=strconv.ParseBool(IdTag[1])
+			tags=append(tags,&TagJson{ID: idU,Tag:t} )
+		}
+	}
+	return tags
+}
 
+func Tags2TagSet(tags []TagJson)(tagSet string){
+	l:=len(tags)
+	if l>0 {
+		for i, v := range tags {
+			id:=strconv.FormatUint(uint64(v.ID),10)
+			t:=strconv.FormatBool(v.Tag)
+			if i == 0 {
+				tagSet += id+"+"+t
+			} else {
+				tagSet += ","+id+"+"+t
+			}
+		}
+	}
+	return
+}
 
 func GetLeaders(id uint)(leaders []User){
 	database.DB.Find(&leaders,id).Select("leaders")
