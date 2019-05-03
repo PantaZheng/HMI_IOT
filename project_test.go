@@ -7,7 +7,7 @@ import (
 )
 
 func TestProject(t *testing.T){
-
+	tagsTransfer()
 }
 
 //func targetTransfer(){
