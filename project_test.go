@@ -1,8 +1,7 @@
-package models
+package main
 
 import (
 	"github.com/pantazheng/bci/models"
-	"log"
 	"testing"
 )
 
