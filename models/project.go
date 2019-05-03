@@ -63,7 +63,7 @@ func TargetsJson2Target(targets []string) (target string){
 	l:=len(targets)
 	if l>0 {
 		for i, v := range targets {
-			if i == 1 {
+			if i == 0 {
 				target += v
 			} else {
 				target+=","+v
