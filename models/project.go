@@ -55,11 +55,11 @@ type TagJson struct{
 	Tag	bool	`json:"tag"`
 }
 
-func target2TargetsJson (target string) []string{
+func Target2TargetsJson (target string) []string{
 		return strings.Split(target,",")
 }
 
-func targetsJson2Target(targets []string) (target string){
+func TargetsJson2Target(targets []string) (target string){
 	l:=len(targets)
 	if l>0 {
 		for i, v := range targets {
