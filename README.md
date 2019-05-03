@@ -127,11 +127,9 @@ type MissionBriefJson struct{
 -|-|-|-|-
 MissionCreate|post|`/`|`MissionJson`|`MissionJson`
 MissionFindByID|get|`/id/{id:uint}`|-|`MissionJson`
-MissionFindByName|get|`/name/{name:string}`|-|`MissionJson`
 MissionsFindByModuleID|get|`/module/{id:uint}`|-|`[]MissionBriefJson`
 MissionUpdate|put|`/`|`MissionJson`|`MissionJson`
 MissionDeleteByID|delete|`/id/{id:uint}`|-|`MissionJson`
-MissionDeleteByName|delete|`/name/{name:string}`|-|`MissionJson`
 
 ### Module
 
@@ -141,25 +139,71 @@ MissionDeleteByName|delete|`/name/{name:string}`|-|`MissionJson`
 type ModuleJson struct{
 	ID				uint				`json:"id"`
 	Name			string				`json:"name"`
-	CreatorID 		uint				`json:"creator"`
-	CreateTime  	string	  			`json:"create_time"`//创建时间
-	StartTime   	string    			`json:"start_time"`//开始时间
-	EndTime     	string    			`json:"end_time"`//结束时间
+	CreatorID		uint				`json:"creator"`
+	CreateTime		string				`json:"create_time"`//创建时间
+	StartTime		string				`json:"start_time"`//开始时间
+	EndTime			string				`json:"end_time"`//结束时间
 	Content			string				`json:"content"`
 	Tag				bool				`json:"tag"`
 	ProjectID		uint				`json:"project"`
 	LeaderID		uint				`json:"leader"`
-	Participants 	[]UserBriefJson		`json:"participants"`//参与人员
-	Missions		[]MissionBriefJson	`json:"missions"`
+	Participants	[]UserBriefJson		`json:"participants"`//参与人员
+	Missions		[]MissionBriefJson	`json:"missions"`//创建或更新不会修改该字段，仅拉取使用
 }
 
 type ModuleBriefJson struct{
 	ID				uint				`json:"id"`
 	Name			string				`json:"name"`
-	CreateTime  	string	  			`json:"create_time"`//创建时间
+	CreateTime		string				`json:"create_time"`//创建时间
 	Content			string				`json:"content"`
-	Tag				string				`json:"tag"`
+	Tag				bool				`json:"tag"`
+	LeaderID		uint				`json:"leader"`
 	ProjectID		uint				`json:"project"`
+}
+```
+
+名称|method|path|传入body参数|接收body参数
+-|-|-|-|-
+ModuleCreate|post|`/`|`ModuleJson`|`ModuleJson`
+ModuleFindByID|get|`/id/{id:uint}`|-|`ModuleJson`
+ModulesFindByLeaderID|get|`/leader/{id:uint}`|-|`[]ModuleBriefJson`
+ModulesFindByProjectID|get|`/project/{id:uint}`|-|`[]ModuleBriefJson`
+ModuleUpdate|put|`/`|`ModuleJson`|`ModuleJson`
+ModuleDeleteByID|delete|`/id/{id:uint}`|-|`ModuleJson`
+
+### Project
+
+```go
+type ProjectJson struct {
+	ID				uint				`json:"id"`
+	Name			string				`json:"name"`
+	Type			string				`json:"type"`
+	Creator			string				`json:"creator"`
+	CreateTime		string				`json:"create_time"`
+	StartTime		string				`json:"start_time"`
+	EndTime			string				`json:"end_time"`
+	Content			string				`json:"content"`
+	Targets			[]string			`json:"targets"`
+	LeaderID		uint				`json:"leader"`
+	Teachers		[]UserBriefJson		`json:"teachers"`
+	Tag				bool				`json:"tag"`
+	TagSet			[]TagJson			`json:"tags"`
+	Modules			[]ModuleBriefJson	`json:"modules"`
+}
+
+type BriefProject struct {
+	ID				uint	`json:"id"`
+	Name			string	`json:"name"`
+	StartTime		string	`json:"startTime"`
+	EndTime			string	`json:"endTime"`
+	LeaderID		string	`json:"leader"`
+	Tag				string	`json:"tag"`
+	Content			string	`json:"content"`
+}
+
+type TagJson struct{
+	ID 	uint	`json:"id"`
+	Tag	bool	`json:"tag"`
 }
 ```
 
@@ -213,6 +257,11 @@ type ModuleBriefJson struct{
     - [x] `ModuleUpdate`
     - [x] `ModuleDelete`
 - [ ] project
+    - [x] `type Project struct`
+    - [x] `type BriefProject struct`
+    - [x] `type TagJson struct`
+    - [ ] ``
+
 - [ ] user
 - [ ] init
     - [ ] 表单删除

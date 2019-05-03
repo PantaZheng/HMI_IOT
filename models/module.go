@@ -15,7 +15,7 @@ type Module struct{
 	StartTime		string
 	EndTime			string
 	Content			string
-	Tag				bool
+	Tag				bool		//tag有Module负责人修改
 	Participants	[]*User		`gorm:"many2many:user_modules"` //多对多
 	LeaderID		uint										//一对多外键
 	Leader			User                                       //belongs to

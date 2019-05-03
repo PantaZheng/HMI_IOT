@@ -32,7 +32,7 @@ func ModuleFindByID(ctx iris.Context){
 	}
 }
 
-func ModlesFindByLeaderID(ctx iris.Context){
+func ModulesFindByLeaderID(ctx iris.Context){
 	id,_:=ctx.Params().GetUint("id")
 	if modulesJson,err:=service.ModulesFindByLeaderID(id);err!=nil{
 		ctx.StatusCode(iris.StatusAccepted)

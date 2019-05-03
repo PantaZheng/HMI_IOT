@@ -16,28 +16,10 @@ func newApp() (api *iris.Application){
 	api = iris.New()
 	api.Use(logger.New())
 
-	api.OnErrorCode(404,func(ctx iris.Context){
+	api.OnErrorCode(iris.StatusNotFound,func(ctx iris.Context){
 		if _,err:=ctx.Writef("404 not found");err!=nil{
 			fmt.Printf("%v",err)
 		}
-	})
-	
-	api.StaticWeb("/","./view")
-	api.RegisterView(iris.HTML("./view", ".html").Delims("[[","]]"))
-	api.Get("/bind/index",func(ctx iris.Context){
-		_=ctx.View("/bind/index.html")
-	})
-	api.Get("/framework/",func(ctx iris.Context){
-		_=ctx.View("/framework/index.html")
-	})
-	api.Get("/new/", func(ctx iris.Context) {
-		_=ctx.View("/new/index.html")
-	})
-	api.Get("/project/", func(ctx iris.Context) {
-		_=ctx.View("/project/index.html")
-	})
-	api.Get("/pace/", func(ctx iris.Context) {
-		_=ctx.View("/pace/index.html")
 	})
 
 	api.PartyFunc("/anon",func (anon router.Party){
@@ -65,9 +47,6 @@ func newApp() (api *iris.Application){
 	})
 
 	api.PartyFunc("/mission",func(mission router.Party){
-		mission.Get("/index",func(ctx iris.Context){
-			_=ctx.View("/mission/index.html")
-		})
 		mission.Post("/",controller.MissionCreate)
 		mission.Get("/id/{id:uint}",controller.MissionFindByID)
 		mission.Get("/name/{name:string}",controller.MissionFindByName)
@@ -80,7 +59,7 @@ func newApp() (api *iris.Application){
 	api.PartyFunc("/module",func(module router.Party){
 		module.Post("/",controller.ModuleCreate)
 		module.Get("/id/{id:uint}",controller.ModuleFindByID)
-		module.Get("/leader/{id:uint}",controller.ModlesFindByLeaderID)
+		module.Get("/leader/{id:uint}",controller.ModulesFindByLeaderID)
 		module.Get("/project/{id:uint}",controller.ModulesFindByProjectID)
 		module.Put("/",controller.ModuleUpdate)
 		module.Delete("/id/{id:uint}",controller.ModuleDeleteByID)
