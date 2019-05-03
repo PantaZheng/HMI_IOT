@@ -1,13 +1,11 @@
 package main
 
 import (
-	"github.com/pantazheng/bci/models"
-	"log"
 	"testing"
 )
 
 func TestProject(t *testing.T){
-	tagsTransfer()
+
 }
 
 //func targetTransfer(){
@@ -21,12 +19,12 @@ func TestProject(t *testing.T){
 //	log.Println(models.TargetsJson2Target([]string{"m1","m2","k3"}))
 //}
 
-func tagsTransfer(){
-	log.Println("target")
-	log.Println(models.TagSet2Tags(""))
-	log.Println(models.TagSet2Tags("1,2,3"))
-	log.Println(models.TagSet2Tags("1+true,2+false,3+true"))
-	log.Println(models.Tags2TagSet([]models.TagJson{}))
-	log.Println(models.Tags2TagSet([]models.TagJson{{10,false}}))
-	log.Println(models.Tags2TagSet([]models.TagJson{{11,true},{12,false},{13,true}}))
-}
+//func tagsTransfer(){
+//	log.Println("tag")
+//	log.Println(models.TagSet2Tags(""))
+//	log.Println(models.TagSet2Tags("1,2,3"))
+//	log.Println(models.TagSet2Tags("1+true,2+false,3+true"))
+//	log.Println(models.Tags2TagSet([]models.TagJson{}))
+//	log.Println(models.Tags2TagSet([]models.TagJson{{10,false}}))
+//	log.Println(models.Tags2TagSet([]models.TagJson{{11,true},{12,false},{13,true}}))
+//}

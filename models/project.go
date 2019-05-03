@@ -74,7 +74,7 @@ func targetsJson2Target(targets []string) (target string){
 	return
 }
 
-func TagSet2Tags(tagSet string) (tags []TagJson){
+func tagSet2TagsJson(tagSet string) (tags []TagJson){
 	temp:=strings.Split(tagSet,",")
 	for _,v:=range temp{
 		IdTag :=strings.Split(v,"+")
@@ -85,11 +85,12 @@ func TagSet2Tags(tagSet string) (tags []TagJson){
 			tags=append(tags,*&TagJson{ID: idU,Tag:t} )
 		}
 	}
-	return tags
+	return
 }
 
-func Tags2TagSet(tags []TagJson)(tagSet string){
+func tagsJson2TagSet(tags []TagJson)(tag bool,tagSet string){
 	l:=len(tags)
+	count:=0
 	if l>0 {
 		for i, v := range tags {
 			id:=strconv.FormatUint(uint64(v.ID),10)
@@ -99,23 +100,50 @@ func Tags2TagSet(tags []TagJson)(tagSet string){
 			} else {
 				tagSet += ","+id+"+"+t
 			}
+			if v.Tag==true{
+				count++
+			}
 		}
+	}
+	if count==l{
+		tag=true
 	}
 	return
 }
 
-func GetLeaders(id uint)(leaders []User){
-	database.DB.Find(&leaders,id).Select("leaders")
-	return
+func (project *Project) projectJson2Project(projectJson *ProjectJson){
+	project.ID=projectJson.ID
+	project.Name=projectJson.Name
+	project.Type=projectJson.Type
+	project.Creator=projectJson.Creator
+	project.CreateTime=projectJson.CreateTime
+	project.StartTime=projectJson.StartTime
+	project.EndTime=projectJson.EndTime
+	project.Content=projectJson.Content
+	project.Target=targetsJson2Target(projectJson.Targets)
+	project.LeaderID=projectJson.LeaderID
+	project.Tag,project.TagSet= tagsJson2TagSet(projectJson.TagSet)
 }
 
-func GetInstructors(id uint)(instructors []User){
-	database.DB.Find(&instructors,id).Select("instructors")
-	return
-}
-
-func EnrollProject(project *Project){
-	recordProject:=Project{}
-	database.DB.FirstOrCreate(&recordProject,&Project{Name:recordProject.Name})
-
+func (projectJson *ProjectJson) project2ProjectJson(project *Project){
+	projectJson.ID=project.ID
+	projectJson.Name=project.Name
+	projectJson.Type=project.Type
+	projectJson.Creator=project.Creator
+	projectJson.CreateTime=project.CreateTime
+	projectJson.StartTime=project.StartTime
+	projectJson.EndTime=project.EndTime
+	projectJson.Content=project.Content
+	projectJson.Targets=target2TargetsJson(project.Target)
+	projectJson.LeaderID=project.LeaderID
+	projectJson.Tag=project.Tag
+	projectJson.TagSet=tagSet2TagsJson(project.TagSet)
+	projectJson.Modules,_=ModulesFindByProject(project)
+	teachers:=make([]*User,len(project.Teachers))
+	database.DB.Model(&project).Related(&teachers,"Teachers")
+	tempUser:=&UserBriefJson{}
+	for _,v:=range teachers{
+		tempUser.user2UserBriefJson(v)
+		projectJson.Teachers=append(projectJson.Teachers,*tempUser)
+	}
 }

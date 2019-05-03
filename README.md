@@ -185,10 +185,10 @@ type ProjectJson struct {
 	Content			string				`json:"content"`
 	Targets			[]string			`json:"targets"`
 	LeaderID		uint				`json:"leader"`
-	Teachers		[]UserBriefJson		`json:"teachers"`
-	Tag				bool				`json:"tag"`
+	Teachers		[]UserBriefJson		`json:"teachers"`//id不可缺
+	Tag				bool				`json:"tag"`    //post、put不使用，直接传set
 	TagSet			[]TagJson			`json:"tags"`
-	Modules			[]ModuleBriefJson	`json:"modules"`
+	Modules			[]ModuleBriefJson	`json:"modules"` //仅拉取
 }
 
 type BriefProject struct {
@@ -257,11 +257,16 @@ type TagJson struct{
     - [x] `ModuleUpdate`
     - [x] `ModuleDelete`
 - [ ] project
-    - [x] `type Project struct`
-    - [x] `type BriefProject struct`
-    - [x] `type TagJson struct`
-    - [ ] ``
-
+    - [x]   `type Project struct`
+    - [x]   `type ProjectJson struct`
+    - [x]   `type BriefProject struct`
+    - [x]   `type TagJson struct`
+    - [x]   `target2TargetsJson`
+    - [x]   `targetsJson2Target`
+    - [x]   `tagSet2TagsJson`
+    - [x]   `tagsJson2TagSet`
+    - [x]   `projectJson2Project`
+    - [x]   `project2ProjectJson`
 - [ ] user
 - [ ] init
     - [ ] 表单删除
