@@ -42,7 +42,7 @@ func userUpdate(userJson *models.UserJson){
 func userFind(){
 	log.Println("userFind")
 	p:=new(models.User)
-	for i:=1;i<=6;i++{
+	for i:=1;i<=10;i++{
 		p.ID=uint(i)
 		if userJson,err:=models.UserFind(p);err!=nil{
 			log.Println(err)
@@ -54,7 +54,7 @@ func userFind(){
 
 func usersFindByLevel(){
 	log.Println("usersFindByLevel")
-	for i:=1;i<=6;i++{
+	for i:=1;i<=10;i++{
 		if ps,err:=models.UsersFindByLevel(i);err!=nil{
 			log.Println(err)
 		}else{
@@ -66,7 +66,7 @@ func usersFindByLevel(){
 func userDelete(){
 	log.Println("userDelete")
 	u:=new(models.User)
-	for i:=1;i<=3;i++{
+	for i:=1;i<=5;i++{
 		u.ID=uint(i)
 		if userJson,err:=models.UserDelete(u);err!=nil{
 			log.Println(err)

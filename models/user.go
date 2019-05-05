@@ -99,7 +99,7 @@ func UserFind(user *User)(recordUserJson UserJson,err error){
 
 func UsersFindByLevel(level int)(usersBriefJson []UserBriefJson,err error){
 	users:=make([]User,1)
-	if database.DB.Find(users,&User{Level:level}).RecordNotFound(){
+	if database.DB.Find(&users,&User{Level:level}).RecordNotFound(){
 		err=errors.New("ProjectsFindByLeader No Project Record")
 	}else{
 		for _,v:=range users{
