@@ -65,6 +65,15 @@ func newApp() (api *iris.Application){
 		module.Delete("/id/{id:uint}",controller.ModuleDeleteByID)
 	})
 
+	api.PartyFunc("/project",func(project router.Party){
+		project.Post("/",controller.ProjectCreate)
+		project.Get("/id/{id:uint}",controller.ProjectFindByID)
+		project.Get("/leader/{id:uint}",controller.ProjectsFindByLeaderID)
+		project.Get("/participant/{id:uint}",controller.ProjectsFindByParticipantID)
+		project.Put("/",controller.ProjectUpdate)
+		project.Delete("/id/{id:uint}",controller.ProjectDeleteByID)
+	})
+
 	return
 }
 

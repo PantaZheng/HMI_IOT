@@ -6,13 +6,6 @@
 
 ---
 
-## 注意事项
-
-1. 各子模块的index是单独定位的，其同目录下的js等文件，请使用`../dir/文件`格式
-1. `index.html`文件不单独暴露,使用`index`暴露
-
----
-
 ### 微信菜单
 
 [菜单预览](https://pantazheng.github.io/HMI_IOT/design/index.html)
@@ -257,24 +250,24 @@ type TagJson struct{
     - [x] `ModuleUpdate`
     - [x] `ModuleDelete`
 - [ ] project
-    - [x]   `type Project struct`
-    - [x]   `type ProjectJson struct`
-    - [x]   `type BriefProject struct`
-    - [x]   `type TagJson struct`
-    - [x]   `target2TargetsJson`
-    - [x]   `targetsJson2Target`
-    - [x]   `tagSet2TagsJson`
-    - [x]   `tagsJson2TagSet`
-    - [x]   `projectJson2Project`
-    - [x]   `project2ProjectJson`
-    - [x]   `project2ProjectBriefJson`
-    - [x]   `ProjectCreate`
-    - [x]   `ProjectFind`
-    - [x]   `ProjectsFindByLeader`
-    - [x]   `ProjectsFindByParticipant`
-    - [x]   `ProjectUpdate`
-    - [x]   `ProjectDelete`
-    - [ ]    `../project_test`
+    - [x] `type Project struct`
+    - [x] `type ProjectJson struct`
+    - [x] `type BriefProject struct`
+    - [x] `type TagJson struct`
+    - [x] `target2TargetsJson`
+    - [x] `targetsJson2Target`
+    - [x] `tagSet2TagsJson`
+    - [x] `tagsJson2TagSet`
+    - [x] `projectJson2Project`
+    - [x] `project2ProjectJson`
+    - [x] `project2ProjectBriefJson`
+    - [x] `ProjectCreate`
+    - [x] `ProjectFind`
+    - [x] `ProjectsFindByLeader`
+    - [x] `ProjectsFindByParticipant`
+    - [x] `ProjectUpdate`
+    - [x] `ProjectDelete`
+    - [x] `../project_test`
 - [ ] user
 - [ ] init
     - [ ] 表单删除
@@ -311,6 +304,13 @@ type TagJson struct{
     - [x] `ModuleUpdate`
         - id
     - [x] `ModuleDeleteByID`
+- [x] project
+    - [x] `ProjectCreate`
+    - [x] `ProjectFindByID`
+    - [x] `ProjectsFindByLeaderID`
+    - [x] `ProjectsFindByParticipantID`
+    - [x] `ProjectUpdate`
+    - [x] `ProjectDeleteByID`
 
 ### controller
 
@@ -343,3 +343,11 @@ type TagJson struct{
     - [x] `ModuleUpdate`
         - id
     - [x] `ModuleDeleteByID`
+- [ ] project
+    - [x] `ProjectCreate`
+    - [x] `ProjectFindByID`
+    - [x] `ProjectsFindByLeaderID`
+    - [x] `ProjectsFindByParticipantID`
+    - [x] `ProjectUpdate`
+        - id
+    - [x] `ProjectDeleteByID`
