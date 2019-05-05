@@ -187,7 +187,7 @@ func ProjectCreate(projectJson *ProjectJson)(recordProjectJson ProjectJson,err e
 
 func ProjectFind(project *Project)(recordProjectJson ProjectJson,err error){
 	recordProject:=new(Project)
-	if err=database.DB.First(&recordProjectJson,&project).Error;err==nil{
+	if err=database.DB.First(&recordProject,&project).Error;err==nil{
 		recordProjectJson.project2ProjectJson(recordProject)
 	}
 	return
