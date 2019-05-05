@@ -142,7 +142,7 @@ func GainDelete(gainJson *GainJson) (recordGainJson GainJson,err error) {
     recordGain.ID=gainJson.ID
     if err=database.DB.First(&recordGain).Error;err==nil{
          recordGainJson.gain2GainJson(recordGain)
-         err=database.DB.Delete(&recordGain).Error
+         err=database.DB.Unscoped().Delete(&recordGain).Error
     }
     return
 }

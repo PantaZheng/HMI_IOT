@@ -167,7 +167,7 @@ func MissionDelete(mission *Mission)(recordMissionJson MissionJson,err error){
 		err=errors.New("MissionDelete No Mission Record")
 	}else{
 		recordMissionJson.mission2MissionJSON(recordMission)
-		err=database.DB.Delete(&recordMission).Error
+		err=database.DB.Unscoped().Delete(&recordMission).Error
 	}
 	return
 }

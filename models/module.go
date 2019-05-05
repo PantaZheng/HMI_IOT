@@ -186,7 +186,7 @@ func ModuleDelete(module *Module)(recordModuleJson ModuleJson, err error){
 		err=errors.New("ModuleDelete No Module Record")
 	}else{
 		recordModuleJson.module2ModuleJson(recordModule)
-		err=database.DB.Delete(recordModule).Error
+		err=database.DB.Unscoped().Delete(recordModule).Error
 	}
 	return
 }
