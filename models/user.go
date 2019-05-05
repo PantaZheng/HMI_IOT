@@ -4,6 +4,7 @@ import (
 	"errors"
 	"github.com/jinzhu/gorm"
 	"github.com/pantazheng/bci/database"
+	"strconv"
 )
 
 const (
@@ -84,6 +85,11 @@ func (userBriefJson *UserBriefJson) user2UserBriefJson(user *User){
 func UserCreate(userJson *UserJson)(recordUserJson UserJson,err error){
 	newUser:=new(User)
 	newUser.userJson2User(userJson)
+	if newUser.OpenId==""{
+		tempUser:=&User{}
+		database.DB.Last(tempUser)
+		newUser.OpenId=strconv.Itoa(int(tempUser.ID)+1)
+	}
 	if err=database.DB.Create(&newUser).Error;err!=nil{
 		return
 	}
