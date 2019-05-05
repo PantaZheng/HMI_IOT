@@ -93,7 +93,7 @@ func projectsFindByParticipant(){
 	l:=new(models.User)
 	for i:=1;i<=7;i++{
 		l.ID=uint(i)
-		if ps,err:=models.ProjectsFindByLeader(l);err!=nil{
+		if ps,err:=models.ProjectsFindByParticipant(l);err!=nil{
 			log.Println(err)
 		}else{
 			log.Println(ps)
