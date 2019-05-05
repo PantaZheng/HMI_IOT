@@ -24,12 +24,12 @@ func Enroll(ctx iris.Context) {
 	}
 }
 
-func List(ctx iris.Context){
-	role:= ctx.Params().GetString("role")
-	memberList :=service.GetMembers(role)
-	if _,err:=ctx.JSON(memberList);err!=nil{
-		panic(err.Error())
-	}
-}
+//func List(ctx iris.Context){
+//	role:= ctx.Params().GetString("role")
+//	memberList :=service.GetMembers(role)
+//	if _,err:=ctx.JSON(memberList);err!=nil{
+//		panic(err.Error())
+//	}
+//}
 
 
