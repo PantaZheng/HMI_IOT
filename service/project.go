@@ -21,7 +21,7 @@ func ProjectsFindByLeaderID(id uint)(projects []models.ProjectBriefJson,err erro
 func ProjectsFindByParticipantID(id uint)(projects []models.ProjectBriefJson,err error){
 	participant:=new(models.User)
 	participant.ID=id
-	return models.ProjectsFindByLeader(participant)
+	return models.ProjectsFindByParticipant(participant)
 }
 
 func ProjectUpdate(projectJson *models.ProjectJson)(recordProjectJson models.ProjectJson,err error){
