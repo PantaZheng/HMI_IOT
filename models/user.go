@@ -4,15 +4,16 @@ import (
 	"github.com/jinzhu/gorm"
 	"github.com/pantazheng/bci/database"
 	"log"
+	"strconv"
 )
 
 const (
-	Level_Stranger = iota	// Stranger 未绑定
-	Level_Emeritus 			// Professor emeritus 专家教授
-	Level_Student			// Student 学生
-	Level_Assistant			// Assistant 助理
-	Level_Senior			// Senior lecturer 高级讲师
-	Level_Full				// Full professor 全职教授
+	LevelStranger         = iota // Stranger 未绑定
+	LevelEmeritus                // Professor emeritus 专家教授
+	LevelStudent                 // Student 学生
+	LevelAssistant              // Assistant 助理
+	LevelSenior                 // Senior lecturer 高级讲师
+	LevelFull                   // Full professor 全职教授
 )
 
 type User struct {
@@ -21,7 +22,7 @@ type User struct {
 	Code      	string
 	Name      	string
 	IDCard    	string
-	Level     	string
+	Level     	int
 	LProjects	[]*Project `gorm:"foreignkey:LeaderID"`
 	PProjects	[]*Project `gorm:"many2many:user_projects"`
 	LModules	[]*Module   `gorm:"foreignkey:LeaderID"`
@@ -36,22 +37,22 @@ type UserJson struct {
 	Code		string     			`json:"code"`
 	Name		string     			`json:"name"`
 	IDCard		string				`json:"id_card"`
-	Level		string     			`json:"level"`
+	Level		int     			`json:"level"`
 	//Missions	[]*MissionBriefJson	`json:"missions"`
 }
 
 type UserBriefJson struct {
 	ID		uint	`json:"id"`
 	Name	string	`json:"name"`
-	Level	string	`json:"level"`
+	Level	int	`json:"level"`
 }
 
 func userTestData(){
-	_,_=UserCreate(&User{OpenId: "test1", Level:"unEnrolled"})
-	_,_=UserCreate(&User{OpenId: "student1",Name:"student1", Level:"student"})
-	_,_=UserCreate(&User{OpenId: "teacher1",Name:"戴国骏", Level:"teacher"})
-	_,_=UserCreate(&User{OpenId: "teacher2",Name:"张桦", Level:"teacher"})
-	_,_=UserCreate(&User{OpenId: "teacher_unknown",Name:"其他导师", Level:"teacher"})
+	_,_=UserCreate(&User{OpenId: "test1", Level: LevelEmeritus})
+	_,_=UserCreate(&User{OpenId: "student1",Name:"student1", Level: LevelStudent})
+	_,_=UserCreate(&User{OpenId: "teacher1",Name:"戴国骏", Level: LevelFull})
+	_,_=UserCreate(&User{OpenId: "teacher2",Name:"张桦", Level:LevelSenior})
+	_,_=UserCreate(&User{OpenId: "teacher_unknown",Name:"其他导师", Level:LevelSenior})
 	log.Printf("user测试")
 }
 
@@ -78,21 +79,21 @@ func UserCreate(user *User)(userBriefJson UserBriefJson,err error){
 	recordUser:=User{}
 	database.DB.FirstOrCreate(&recordUser,&User{OpenId:user.OpenId})
 	database.DB.Model(&recordUser).Updates(user)
-	log.Printf("UserCreate\trole:"+user.Level +"\topenid:"+user.OpenId)
+	log.Printf("UserCreate\trole:"+strconv.Itoa(user.Level) +"\topenid:"+user.OpenId)
 	return
 }
 
 
 //根据Role获得成员信息
-func GetMembersByRole(role string) ( memberList [] UserBriefJson) {
+func GetMembersByRole(level int) ( memberList [] UserBriefJson) {
 	var users [] User
-	database.DB.Find(&users,&User{Level: role}).Select("id","name")
+	database.DB.Find(&users,&User{Level: level}).Select("id","name")
 	memberList=make([]UserBriefJson,len(users))
 	for i,v := range users {
 		memberList[i].ID=v.ID
 		memberList[i].Name=v.Name
 	}
-	log.Printf("Get:\t"+role+"s\n")
+	log.Printf("Get:\t"+strconv.Itoa(level)+"s\n")
 	return
 }
 

@@ -1,15 +1,17 @@
 package models
 
 import (
+	"errors"
 	"github.com/jinzhu/gorm"
 	"github.com/pantazheng/bci/database"
 	"strconv"
 	"strings"
+	"time"
 )
 
 type Project struct {
 	gorm.Model
-	Name			string
+	Name			string			`gorm:"unique"`
 	Type			string
 	Creator			string
 	CreateTime		string
@@ -19,7 +21,7 @@ type Project struct {
 	Target			string
 	LeaderID		uint
 	Leader			User
-	Teachers		[]*User		`gorm:"many2many:user_projects"`
+	Participants	[]*User		`gorm:"many2many:user_projects"`
 	TagSet			string
 	Tag				bool
 }
@@ -35,25 +37,32 @@ type ProjectJson struct {
 	Content			string				`json:"content"`
 	Targets			[]string			`json:"targets"`
 	LeaderID		uint				`json:"leader"`
-	Teachers		[]UserBriefJson		`json:"teachers"`
-	Tag				bool				`json:"tag"`
+	Participants	[]UserBriefJson		`json:"participants"`
+	Tag				bool				`json:"tag"`		//create、update
 	TagSet			[]TagJson			`json:"tags"`
-	Modules			[]ModuleBriefJson	`json:"modules"`
+	Modules			[]ModuleBriefJson	`json:"modules"`	//仅拉取更新
 }
 
-type BriefProject struct {
+type ProjectBriefJson struct {
 	ID				uint	`json:"id"`
 	Name			string	`json:"name"`
 	StartTime		string	`json:"startTime"`
 	EndTime			string	`json:"endTime"`
-	LeaderID		string	`json:"leader"`
-	Tag				string	`json:"tag"`
+	LeaderID		uint	`json:"leader"`
+	Tag				bool	`json:"tag"`
 	Content			string	`json:"content"`
 }
 
 type TagJson struct{
 	ID	uint	`json:"id"`
 	Tag	bool	`json:"tag"`
+}
+
+func projectTestData() {
+	_,_=ProjectCreate(&ProjectJson{Name:"Project1",Targets:[]string{"t1"},LeaderID:2,Participants:[]UserBriefJson{{ID:2}},TagSet:[]TagJson{{ID:2,Tag:true},{ID:3,Tag:false}}})
+	_,_=ProjectCreate(&ProjectJson{Name:"Project2",Targets:[]string{"t1","tt2"},LeaderID:3,Participants:[]UserBriefJson{{ID:3}},TagSet:[]TagJson{{ID:2,Tag:true},{ID:3,Tag:true}}})
+	_,_=ProjectCreate(&ProjectJson{Name:"Project3",Targets:[]string{"t1","tt2","ttt3"},LeaderID:4,Participants:[]UserBriefJson{{ID:2}},TagSet:[]TagJson{{ID:2,Tag:true},{ID:3,Tag:false}}})
+	_,_=ProjectCreate(&ProjectJson{Name:"Project4",Targets:[]string{"t1","tt2","ttt3"},LeaderID:5,Participants:[]UserBriefJson{{ID:2}},TagSet:[]TagJson{{ID:2,Tag:false},{ID:3,Tag:false}}})
 }
 
 func target2TargetsJson (target string) []string{
@@ -139,11 +148,113 @@ func (projectJson *ProjectJson) project2ProjectJson(project *Project){
 	projectJson.Tag=project.Tag
 	projectJson.TagSet=tagSet2TagsJson(project.TagSet)
 	projectJson.Modules,_=ModulesFindByProject(project)
-	teachers:=make([]*User,len(project.Teachers))
-	database.DB.Model(&project).Related(&teachers,"Teachers")
+	participants :=make([]*User,len(project.Participants))
+	database.DB.Model(&project).Related(&participants,"Participants")
 	tempUser:=&UserBriefJson{}
-	for _,v:=range teachers{
+	for _,v:=range participants {
 		tempUser.user2UserBriefJson(v)
-		projectJson.Teachers=append(projectJson.Teachers,*tempUser)
+		projectJson.Participants=append(projectJson.Participants,*tempUser)
 	}
+}
+
+func (projectBriefJson *ProjectBriefJson)project2ProjectBriefJson(project *Project){
+	projectBriefJson.ID=project.ID
+	projectBriefJson.Name=project.Name
+	projectBriefJson.StartTime=project.StartTime
+	projectBriefJson.EndTime=project.EndTime
+	projectBriefJson.LeaderID=project.LeaderID
+	projectBriefJson.Tag=project.Tag
+	projectBriefJson.Content=project.Content
+}
+
+func ProjectCreate(projectJson *ProjectJson)(recordProjectJson ProjectJson,err error){
+	newProject := new(Project)
+	newProject.projectJson2Project(projectJson)
+	newProject.CreateTime=time.Now().Format("2006-01-02 15:04:05")
+	if err=database.DB.Create(&newProject).Error;err!=nil{
+		return
+	}
+	if err=database.DB.Model(&newProject).First(&newProject).Error;err!=nil{
+		participants :=make([]User,len(projectJson.Participants))
+		for i,v:=range projectJson.Participants{
+			participants[i].ID=v.ID
+		}
+		err=database.DB.Model(&newProject).Association("Participants").Append(participants).Error
+		recordProjectJson.project2ProjectJson(newProject)
+	}
+	return
+}
+
+func ProjectFind(project *Project)(recordProjectJson ProjectJson,err error){
+	recordProject:=new(Project)
+	if err=database.DB.First(&recordProjectJson,&project).Error;err==nil{
+		recordProjectJson.project2ProjectJson(recordProject)
+	}
+	return
+}
+
+func ProjectsFindByLeader(leader *User)(projectsBriefJson []ProjectBriefJson,err error){
+	projects := make([]Project,1)
+	if err=database.DB.Model(&leader).Related(&projects,"LeaderID").Error;err!=nil{
+		return
+	}
+	if len(projects)==0{
+		err=errors.New("ProjectsFindByLeader No Project Record")
+	}else{
+		for _,v :=range  projects{
+			tempJson:=&ProjectBriefJson{}
+			tempJson.project2ProjectBriefJson(&v)
+			projectsBriefJson=append(projectsBriefJson,*tempJson)
+		}
+	}
+	return
+}
+
+func ProjectsFindByParticipant(participant *User)(projectsBriefJson []ProjectBriefJson,err error){
+	projects := make([]Project,1)
+	if err=database.DB.Model(&participant).Related(&projects,"Participants").Error;err!=nil{
+		return
+	}
+	if len(projects)==0{
+		err=errors.New("ProjectsFindByParticipants No Project Record")
+	}else{
+		for _,v :=range  projects{
+			tempJson:=&ProjectBriefJson{}
+			tempJson.project2ProjectBriefJson(&v)
+			projectsBriefJson=append(projectsBriefJson,*tempJson)
+		}
+	}
+	return
+}
+
+func ProjectUpdate(projectJson *ProjectJson)(recordProjectJson ProjectJson,err error){
+	updateProject := new(Project)
+	updateProject.projectJson2Project(projectJson)
+	recordProject := new(Project)
+	recordProject.ID=updateProject.ID
+	if database.DB.First(&recordProject,&recordProject).RecordNotFound(){
+		err = errors.New("ProjectUpdate No Module Record")
+	}else{
+		database.DB.Model(&recordProject).Updates(updateProject)
+		if num:=len(projectJson.Participants);num!=0{
+			users:=make([]User,num)
+			for i,v:=range projectJson.Participants{
+				users[i].ID=v.ID
+			}
+			err=database.DB.Model(&recordProject).Association("Participants").Replace(users).Error
+		}
+		recordProjectJson.project2ProjectJson(recordProject)
+	}
+	return
+}
+
+func ProjectDelete(project *Project)(recordProjectJson ProjectJson,err error){
+	recordProject := new (Project)
+	if database.DB.Find(&recordProject,&project).RecordNotFound(){
+		err=errors.New("ProjectDelete No Module Record")
+	}else{
+		recordProjectJson.project2ProjectJson(recordProject)
+		err=database.DB.Delete(recordProject).Error
+	}
+	return
 }

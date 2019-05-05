@@ -185,24 +185,24 @@ type ProjectJson struct {
 	Content			string				`json:"content"`
 	Targets			[]string			`json:"targets"`
 	LeaderID		uint				`json:"leader"`
-	Teachers		[]UserBriefJson		`json:"teachers"`//id不可缺
-	Tag				bool				`json:"tag"`    //post、put不使用，直接传set
+	Participants	[]UserBriefJson		`json:"participants"`
+	Tag				bool				`json:"tag"`		//create、update
 	TagSet			[]TagJson			`json:"tags"`
-	Modules			[]ModuleBriefJson	`json:"modules"` //仅拉取
+	Modules			[]ModuleBriefJson	`json:"modules"`	//仅拉取更新
 }
 
-type BriefProject struct {
+type ProjectBriefJson struct {
 	ID				uint	`json:"id"`
 	Name			string	`json:"name"`
 	StartTime		string	`json:"startTime"`
 	EndTime			string	`json:"endTime"`
-	LeaderID		string	`json:"leader"`
-	Tag				string	`json:"tag"`
+	LeaderID		uint	`json:"leader"`
+	Tag				bool	`json:"tag"`
 	Content			string	`json:"content"`
 }
 
 type TagJson struct{
-	ID 	uint	`json:"id"`
+	ID	uint	`json:"id"`
 	Tag	bool	`json:"tag"`
 }
 ```
@@ -267,6 +267,14 @@ type TagJson struct{
     - [x]   `tagsJson2TagSet`
     - [x]   `projectJson2Project`
     - [x]   `project2ProjectJson`
+    - [x]   `project2ProjectBriefJson`
+    - [x]   `ProjectCreate`
+    - [x]   `ProjectFind`
+    - [x]   `ProjectsFindByLeader`
+    - [x]   `ProjectsFindByParticipant`
+    - [x]   `ProjectUpdate`
+    - [x]   `ProjectDelete`
+    - [ ]    `../project_test`
 - [ ] user
 - [ ] init
     - [ ] 表单删除
