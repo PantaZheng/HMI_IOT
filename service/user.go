@@ -69,9 +69,9 @@ func UserDeleteByID(id uint)(recordUserJson models.UserJson,err error){
 }
 
 
-func UserDeleteByOpenID(opeid string)(recordUserJson models.UserJson,err error){
+func UserDeleteByOpenID(openid string)(recordUserJson models.UserJson,err error){
 	recordUser:=new(models.User)
-	recordUser.OpenId=opeid
+	recordUser.OpenId=openid
 	return models.UserDelete(recordUser)
 }
 
@@ -88,7 +88,7 @@ func UserBind(user *models.UserJson)(userJson models.UserJson,err error){
 		log.Println(recordUser1)
 		log.Println(err)
 	}
-	
+
 	//获取更新对象的ID
 	if recordUser2,err:=UserFindByIDCard(checkUser.IDCard);err==nil{
 		checkUser.ID=recordUser2.ID
