@@ -4,6 +4,7 @@ import (
 	"errors"
 	"github.com/jinzhu/gorm"
 	"github.com/pantazheng/bci/database"
+	"log"
 	"strconv"
 	"strings"
 	"time"
@@ -175,11 +176,13 @@ func ProjectCreate(projectJson *ProjectJson)(recordProjectJson ProjectJson,err e
 		return
 	}
 	if err=database.DB.Model(&newProject).First(&newProject).Error;err!=nil{
+		log.Println(newProject)
 		participants :=make([]User,len(projectJson.Participants))
 		for i,v:=range projectJson.Participants{
 			participants[i].ID=v.ID
 		}
 		err=database.DB.Model(&newProject).Association("Participants").Append(participants).Error
+		log.Println(newProject)
 		recordProjectJson.project2ProjectJson(newProject)
 	}
 	return
