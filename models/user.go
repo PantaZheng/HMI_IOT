@@ -119,9 +119,12 @@ func UserUpdate(userJson *UserJson)(recordUserJson UserJson,err error){
 	if database.DB.First(&recordUser,&recordUser).RecordNotFound(){
 		err = errors.New("UserUpdate No User Record")
 	}else{
-		database.DB.Model(&recordUser).Updates(updateUser)
-		err=database.DB.First(&recordUser,&recordUser).Error
-		recordUserJson.user2UserJson(recordUser)
+		if err=database.DB.Model(&recordUser).Updates(updateUser).Error;err!=nil{
+			return
+		}
+		if err=database.DB.First(&recordUser,&recordUser).Error;err==nil{
+			recordUserJson.user2UserJson(recordUser)
+		}
 	}
 	return
 }
