@@ -23,6 +23,21 @@ func newApp() (api *iris.Application){
 	})
 
 	api.StaticWeb("/","./view/src")
+	api.RegisterView(iris.HTML("./view", ".vue").Delims("[[","]]"))
+	api.StaticWeb("/","./view")
+	api.RegisterView(iris.HTML("./view", ".html").Delims("[[","]]"))
+	api.Get("/project/", func(ctx iris.Context) {
+		_=ctx.View("/project/index.html")
+	})
+	api.Get("/mission", func(ctx iris.Context){
+		_=ctx.View("/mission/index.html")
+	})
+	api.Get("/createUser/", func(ctx iris.Context) {
+		_=ctx.View("/createUser/index.html")
+	})
+	api.Get("/framework/", func(ctx iris.Context) {
+		_=ctx.View("/framework/index.html")
+	})
 
 	api.PartyFunc("/anon",func (anon router.Party){
 		anon.PartyFunc("/wechat", func(weChat router.Party) {
