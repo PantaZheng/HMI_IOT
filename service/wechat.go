@@ -49,7 +49,7 @@ func SubscribeEventHandler(ctx *core.Context){
 	event := request.GetSubscribeEvent(ctx.MixedMsg)
 	clt := wechatClient()
 	info,_:=user.Get(clt,event.FromUserName,"")
-	resp := response.NewText(event.FromUserName,event.ToUserName,event.CreateTime, UserInit(info))
+	resp := response.NewText(event.FromUserName,event.ToUserName,event.CreateTime, UserInitByWechat(info))
 	if err:=ctx.RawResponse(resp);err!=nil{
 		err.Error()
 	}

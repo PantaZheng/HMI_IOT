@@ -32,6 +32,16 @@
 入口: `/user`
 
 ```go
+
+const (
+	LevelStranger         = iota // Stranger 未绑定
+	LevelEmeritus                // Professor emeritus 专家教授
+	LevelStudent                 // Student 学生
+	LevelAssistant              // Assistant 助理
+	LevelSenior                 // Senior lecturer 高级讲师
+	LevelFull                   // Full professor 全职教授
+)
+
 type UserJson struct {
 	ID			uint				`json:"id"`
 	OpenId		string     			`json:"openid"`
@@ -293,12 +303,10 @@ ProjectDeleteByID|delete|`/id/{id:uint}`|-|`ProjectJson`
     - [x] `UsersFindByLevel`
     - [x] `UserUpdate`
     - [x] `UserDelete`
-
-
-- [ ] init
-    - [ ] 表单删除
-    - [ ] 表单迁移
-    - [ ] 添加测试数据
+- [x] init
+    - [x] 表单删除
+    - [x] 表单迁移
+    - [x] 添加测试数据
 - [ ] frame
 
 ### servcie
@@ -337,6 +345,15 @@ ProjectDeleteByID|delete|`/id/{id:uint}`|-|`ProjectJson`
     - [x] `ProjectsFindByParticipantID`
     - [x] `ProjectUpdate`
     - [x] `ProjectDeleteByID`
+- [x] user
+    - [x] `UserInitByWechat`
+    - [x] `UserCreate`
+    - [x] `UserUpdate`
+    - [x] `UserFindByID`
+    - [x] `UserFindByIDCard`
+    - [x] `UserFindByOpenID`
+    - [x] `UserDeleteById`
+    - [x] `UserDeleteByOpenId`
 
 ### controller
 
