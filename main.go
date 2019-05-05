@@ -22,6 +22,8 @@ func newApp() (api *iris.Application){
 		}
 	})
 
+	api.StaticWeb("/","./view/src")
+
 	api.PartyFunc("/anon",func (anon router.Party){
 		anon.PartyFunc("/wechat", func(weChat router.Party) {
 			weChat.Any("/", controller.WeChat)
