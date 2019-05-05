@@ -22,6 +22,7 @@ type User struct {
 	Name		string
 	IDCard		string
 	Level		int
+	Telephone	string
 	LProjects	[]*Project	`gorm:"foreignkey:LeaderID"`
 	PProjects	[]*Project	`gorm:"many2many:user_projects"`
 	LModules	[]*Module	`gorm:"foreignkey:LeaderID"`
@@ -37,6 +38,7 @@ type UserJson struct {
 	Name		string		`json:"name"`
 	IDCard		string		`json:"id_card"`
 	Level		int			`json:"level"`
+	Telephone	string		`json:"telephone"`
 }
 
 type UserBriefJson struct {
@@ -60,6 +62,7 @@ func (user *User) userJson2User(userJson *UserJson){
 	user.Name=userJson.Name
 	user.IDCard=userJson.IDCard
 	user.Level=userJson.Level
+	user.Telephone=userJson.Telephone
 }
 
 func (userJson *UserJson) user2UserJson(user *User){
@@ -68,6 +71,7 @@ func (userJson *UserJson) user2UserJson(user *User){
 	userJson.OpenId=user.OpenId
 	userJson.IDCard=user.IDCard
 	userJson.Level=user.Level
+	userJson.Telephone=user.Telephone
 }
 
 func (userBriefJson *UserBriefJson) user2UserBriefJson(user *User){
