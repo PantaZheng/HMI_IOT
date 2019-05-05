@@ -80,10 +80,8 @@ func UserBind(user *models.UserJson)(userJson models.UserJson,err error){
 	checkUser =checkOpenId(user)
 	//检查是否存在微信初始创建用户，有就删除
 	if recordUser1,err:=UserFindByOpenID(checkUser.OpenId);err==nil{
-		log.Println(recordUser1)
-		if recordUser1.IDCard!=""{
-			u,_:=UserDeleteByOpenID(recordUser1.OpenId)
-			log.Println(u)
+		if recordUser1.IDCard==""{
+			_,_=UserDeleteByOpenID(recordUser1.OpenId)
 		}
 	}
 	//获取更新对象的ID
