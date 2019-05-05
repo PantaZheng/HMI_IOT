@@ -212,7 +212,7 @@ func ProjectsFindByLeader(leader *User)(projectsBriefJson []ProjectBriefJson,err
 
 func ProjectsFindByParticipant(participant *User)(projectsBriefJson []ProjectBriefJson,err error){
 	projects := make([]Project,1)
-	if err=database.DB.Model(&participant).Related(&projects,"Participants").Error;err!=nil{
+	if err=database.DB.Model(&participant).Related(&projects,"PProjects").Error;err!=nil{
 		return
 	}
 	if len(projects)==0{
