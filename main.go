@@ -22,12 +22,10 @@ func newApp() (api *iris.Application){
 		}
 	})
 
-	api.StaticWeb("/","./view/src")
-	api.RegisterView(iris.HTML("./view", ".vue").Delims("[[","]]"))
 	api.StaticWeb("/","./view")
 	api.RegisterView(iris.HTML("./view", ".html").Delims("[[","]]"))
-	api.Get("/project/", func(ctx iris.Context) {
-		_=ctx.View("/project/index.html")
+	api.Get("/index/", func(ctx iris.Context) {
+		_=ctx.View("/index.html")
 	})
 	api.Get("/mission", func(ctx iris.Context){
 		_=ctx.View("/mission/index.html")
