@@ -29,12 +29,15 @@ func newApp() (api *iris.Application){
 	})
 
 	api.PartyFunc("/user",func(user router.Party){
-		user.Get("/index",func(ctx iris.Context){
-			_=ctx.View("/user/index.html")
-		})
-		user.Post("/bind",func(ctx iris.Context){
-
-		})
+		user.Post("/",controller.UserCreate)
+		user.Get("/id/{id:uint}",controller.UserFindByID)
+		user.Get("/id_card/{id_card:string}",controller.UserFindByIDCard)
+		user.Get("/openid/{openid:string}",controller.UserFindByOpenID)
+		user.Get("/level/{level:int}",controller.UsersFindByLevel)
+		user.Put("/update",controller.UserUpdate)
+		user.Put("/bind",controller.UserBind)
+		user.Delete("/id/{id:uint}",controller.UserDeleteByID)
+		user.Delete("/openid/{openid:string}",controller.UserDeleteByOpenID)
 	})
 
 	api.PartyFunc("/gain",func(gain router.Party){

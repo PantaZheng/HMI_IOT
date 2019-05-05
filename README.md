@@ -58,18 +58,17 @@ type UserBriefJson struct {
 }
 ```
 
-- 登记
-    - Post `/anon/enroll`
-    - send
-        - code不为空,其他都可为空
-    - resp
-
-        ```golang
-        OpenId       string `gorm:"primary_key;unique;VARCHAR(191)" json:"openid"`
-        ```
-
-- 拉取名单
-    - Get `/anon/list/{role:string}`
+名称|method|path|传入body参数|接收body参数
+-|-|-|-|-
+UserCreate|post|`/`|`UserJson`|`UserJson`
+UserFindByID|get|`/id/{id:uint}`|-|`UserJson`
+UserFindByIDCard|get|`/id_card/{id_card:string}`|-|`UserJson`
+UserFindByOpenID|get|`/openid/{openid:string}`|-|`UserJson`
+UsersFindByLevel|get|`level/{level:int}`|-|`[]UserJson`
+UserUpdate|put|`/update`|`UserJson`|`UserJson`
+UserBind|put|`/bind`|`UserJson`|`UserJson`
+UserDeleteByID|delete|`/{id:uint}`|-|`UserJson`
+UserDeleteByOpenID|delete|`/{openid:string}`|-|`UserJson`
 
 ### Gain
 
@@ -270,7 +269,7 @@ ProjectDeleteByID|delete|`/id/{id:uint}`|-|`ProjectJson`
     - [x] `ModulesFindByProject`
     - [x] `ModuleUpdate`
     - [x] `ModuleDelete`
-- [ ] project
+- [x] project
     - [x] `type Project struct`
     - [x] `type ProjectJson struct`
     - [x] `type BriefProject struct`
@@ -352,8 +351,9 @@ ProjectDeleteByID|delete|`/id/{id:uint}`|-|`ProjectJson`
     - [x] `UserFindByID`
     - [x] `UserFindByIDCard`
     - [x] `UserFindByOpenID`
-    - [x] `UserDeleteById`
-    - [x] `UserDeleteByOpenId`
+    - [x] `UserDeleteByID`
+    - [x] `UserDeleteByOpenID`
+    - [x] `UserBind`
 
 ### controller
 
@@ -394,3 +394,12 @@ ProjectDeleteByID|delete|`/id/{id:uint}`|-|`ProjectJson`
     - [x] `ProjectUpdate`
         - id
     - [x] `ProjectDeleteByID`
+- [x] user
+    - [x] `UserCreate`
+    - [x] `UserFindByID`
+    - [x] `UserFindByIDCard`
+    - [x] `UserFindByOpenID`
+    - [x] `UserDeleteByID`
+    - [x] `UserDeleteByOpenID`
+    - [x] `UserUpdate`
+    - [x] `UserBind`

@@ -58,17 +58,36 @@ func UserFindByOpenID(openid string)(recordUserJson models.UserJson,err error){
 	return models.UserFind(recordUser)
 }
 
-func UserDeleteByID(id uint)(){
+func UsersFindByLevel(level int)(usersBriefJson []models.UserBriefJson,err error){
+	return models.UsersFindByLevel(level)
+}
 
+func UserDeleteByID(id uint)(recordUserJson models.UserJson,err error){
+	recordUser:=new(models.User)
+	recordUser.ID=id
+	return models.UserDelete(recordUser)
+}
+
+
+func UserDeleteByOpenID(opeid string)(recordUserJson models.UserJson,err error){
+	recordUser:=new(models.User)
+	recordUser.OpenId=opeid
+	return models.UserDelete(recordUser)
 }
 
 func UserBind(user *models.UserJson)(userJson models.UserJson,err error){
 	checkUser := new(models.UserJson)
 	checkUser =checkOpenId(user)
-	if recordUser,err:=UserFindByOpenID(checkUser.OpenId);err==nil{
-		if recordUser.IDCard!=""{
-
+	//检查是否存在微信初始创建用户，有就删除
+	if recordUser1,err:=UserFindByOpenID(checkUser.OpenId);err==nil{
+		if recordUser1.IDCard!=""{
+			_,_=UserDeleteByOpenID(checkUser.OpenId)
 		}
 	}
-	return models.UserUpdate(checkUser)
+	//获取更新对象的ID
+	if recordUser2,err:=UserFindByIDCard(checkUser.IDCard);err==nil{
+		checkUser.ID=recordUser2.ID
+		return models.UserUpdate(checkUser)
+	}
+	return
 }
