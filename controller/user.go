@@ -1,9 +1,9 @@
 package controller
 
 import (
-	"github.com/kataras/iris"
-	"github.com/pantazheng/bci/models"
-	"github.com/pantazheng/bci/service"
+	_ "github.com/kataras/iris"
+	_ "github.com/pantazheng/bci/models"
+	_ "github.com/pantazheng/bci/service"
 )
 
 //func Enroll(ctx iris.Context) {
