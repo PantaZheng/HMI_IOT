@@ -22,10 +22,10 @@ func checkOpenId(openid string,code string) (checkOpenId string){
 
 //用户初始化
 func UserInit(weChatInfo *user.UserInfo) string {
-	userInit:=&models.User{}
-	userInit.OpenId=weChatInfo.OpenId
-	userInit.Level=models.LevelStranger
-	_, _ = models.UserCreate(userInit)
+	newUser :=new(models.UserJson)
+	newUser.OpenId=weChatInfo.OpenId
+	newUser.Level=models.LevelStranger
+	_, _ = models.UserCreate(newUser)
 	log.Printf("UserInit:\t"+weChatInfo.OpenId)
 	return "欢迎关注"
 }

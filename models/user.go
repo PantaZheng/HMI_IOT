@@ -1,10 +1,9 @@
 package models
 
 import (
+	"errors"
 	"github.com/jinzhu/gorm"
 	"github.com/pantazheng/bci/database"
-	"log"
-	"strconv"
 )
 
 const (
@@ -18,42 +17,41 @@ const (
 
 type User struct {
 	gorm.Model
-	OpenId    	string		`gorm:"unique;"`
-	Code      	string
-	Name      	string
-	IDCard    	string
-	Level     	int
-	LProjects	[]*Project `gorm:"foreignkey:LeaderID"`
-	PProjects	[]*Project `gorm:"many2many:user_projects"`
-	LModules	[]*Module   `gorm:"foreignkey:LeaderID"`
-	PModules 	[]*Module   `gorm:"many2many:user_modules"`
-	PMissions 	[]*Mission `gorm:"many2many:user_missions"`
-	PAchieves	[]*Gain    `gorm:"foreignkey:OwnerID"`
+	OpenId		string		`gorm:"unique"`
+	Code		string
+	Name		string
+	IDCard		string
+	Level		int
+	LProjects	[]*Project	`gorm:"foreignkey:LeaderID"`
+	PProjects	[]*Project	`gorm:"many2many:user_projects"`
+	LModules	[]*Module	`gorm:"foreignkey:LeaderID"`
+	PModules	[]*Module	`gorm:"many2many:user_modules"`
+	PMissions	[]*Mission	`gorm:"many2many:user_missions"`
+	PAchieves	[]*Gain		`gorm:"foreignkey:OwnerID"`
 }
 
 type UserJson struct {
-	ID			uint				`json:"id"`
-	OpenId		string     			`json:"openid"`
-	Code		string     			`json:"code"`
-	Name		string     			`json:"name"`
-	IDCard		string				`json:"id_card"`
-	Level		int     			`json:"level"`
-	//Missions	[]*MissionBriefJson	`json:"missions"`
+	ID			uint		`json:"id"`
+	OpenId		string		`json:"openid"`
+	Code		string		`json:"code"`
+	Name		string		`json:"name"`
+	IDCard		string		`json:"id_card"`
+	Level		int			`json:"level"`
 }
 
 type UserBriefJson struct {
 	ID		uint	`json:"id"`
 	Name	string	`json:"name"`
-	Level	int	`json:"level"`
+	Level	int		`json:"level"`
 }
 
 func userTestData(){
-	_,_=UserCreate(&User{OpenId: "test1", Level: LevelEmeritus})
-	_,_=UserCreate(&User{OpenId: "student1",Name:"student1", Level: LevelStudent})
-	_,_=UserCreate(&User{OpenId: "teacher1",Name:"戴国骏", Level: LevelFull})
-	_,_=UserCreate(&User{OpenId: "teacher2",Name:"张桦", Level:LevelSenior})
-	_,_=UserCreate(&User{OpenId: "teacher_unknown",Name:"其他导师", Level:LevelSenior})
-	log.Printf("user测试")
+	_,_=UserCreate(&UserJson{OpenId: "test1", Level: LevelEmeritus})
+	_,_=UserCreate(&UserJson{OpenId: "student1",Name:"student1", Level: LevelStudent})
+	_,_=UserCreate(&UserJson{OpenId: "assistant1",Name:"assistant1",Level:LevelAssistant})
+	_,_=UserCreate(&UserJson{OpenId: "full1",Name:"戴国骏", Level: LevelFull})
+	_,_=UserCreate(&UserJson{OpenId: "senior2",Name:"张桦", Level:LevelSenior})
+	_,_=UserCreate(&UserJson{OpenId: "teacher_unknown",Name:"其他导师", Level:LevelSenior})
 }
 
 func (user *User) userJson2User(userJson *UserJson){
@@ -62,10 +60,14 @@ func (user *User) userJson2User(userJson *UserJson){
 	user.Name=userJson.Name
 	user.IDCard=userJson.IDCard
 	user.Level=userJson.Level
-	//for _,v:=range userJson.Missions{
-	//	recordMission:=new(Mission)
-	//	database.DB.First(&recordMission,v.ID)
-	//}
+}
+
+func (userJson *UserJson) user2UserJson(user *User){
+	userJson.ID=user.ID
+	userJson.Name=user.Name
+	userJson.OpenId=user.OpenId
+	userJson.IDCard=user.IDCard
+	userJson.Level=user.Level
 }
 
 func (userBriefJson *UserBriefJson) user2UserBriefJson(user *User){
@@ -74,28 +76,67 @@ func (userBriefJson *UserBriefJson) user2UserBriefJson(user *User){
 	userBriefJson.Level=user.Level
 }
 
-//登记信息
-func UserCreate(user *User)(userBriefJson UserBriefJson,err error){
-	recordUser:=User{}
-	database.DB.FirstOrCreate(&recordUser,&User{OpenId:user.OpenId})
-	database.DB.Model(&recordUser).Updates(user)
-	log.Printf("UserCreate\trole:"+strconv.Itoa(user.Level) +"\topenid:"+user.OpenId)
-	return
-}
-
-
-//根据Role获得成员信息
-func GetMembersByRole(level int) ( memberList [] UserBriefJson) {
-	var users [] User
-	database.DB.Find(&users,&User{Level: level}).Select("id","name")
-	memberList=make([]UserBriefJson,len(users))
-	for i,v := range users {
-		memberList[i].ID=v.ID
-		memberList[i].Name=v.Name
+//创建用户
+func UserCreate(userJson *UserJson)(recordUserJson UserJson,err error){
+	newUser:=new(User)
+	newUser.userJson2User(userJson)
+	if err=database.DB.Create(&newUser).Error;err!=nil{
+		return
 	}
-	log.Printf("Get:\t"+strconv.Itoa(level)+"s\n")
+	if err=database.DB.Model(&newUser).First(&newUser).Error;err==nil{
+		recordUserJson.user2UserJson(newUser)
+	}
 	return
 }
+
+func UserFind(user *User)(recordUserJson UserJson,err error){
+	recordUser:=new(User)
+	if err=database.DB.First(&recordUser,&user).Error;err==nil{
+		recordUserJson.user2UserJson(recordUser)
+	}
+	return
+}
+
+func UsersFindByLevel(level int)(usersBriefJson []UserBriefJson,err error){
+	users:=make([]User,1)
+	if database.DB.Find(users,&User{Level:level}).RecordNotFound(){
+		err=errors.New("ProjectsFindByLeader No Project Record")
+	}else{
+		for _,v:=range users{
+			tempJson:=&UserBriefJson{}
+			tempJson.user2UserBriefJson(&v)
+			usersBriefJson=append(usersBriefJson,*tempJson)
+		}
+	}
+	return
+}
+
+func UserUpdate(userJson *UserJson)(recordUserJson UserJson,err error){
+	updateUser:=new(User)
+	updateUser.userJson2User(userJson)
+	recordUser:=new(User)
+	recordUser.ID=updateUser.ID
+	if database.DB.First(&recordUser,&recordUser).RecordNotFound(){
+		err = errors.New("UserUpdate No User Record")
+	}else{
+		database.DB.Model(&recordUser).Updates(updateUser)
+		err=database.DB.First(&recordUser,&recordUser).Error
+		recordUserJson.user2UserJson(recordUser)
+	}
+	return
+}
+
+func UserDelete(user *User)(recordUserJson UserJson, err error){
+	recordUser:=new(User)
+	if database.DB.First(&recordUser,&user).RecordNotFound(){
+		err=errors.New("UserDelete No User Record")
+	}else{
+		recordUserJson.user2UserJson(recordUser)
+		err=database.DB.Delete(recordUser).Error
+	}
+	return
+}
+
 
 
 

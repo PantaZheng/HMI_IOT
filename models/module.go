@@ -182,7 +182,7 @@ func ModuleUpdate(moduleJson *ModuleJson)(recordModuleJson ModuleJson,err error)
 
 func ModuleDelete(module *Module)(recordModuleJson ModuleJson, err error){
 	recordModule:=new(Module)
-	if database.DB.Find(&recordModule,&module).RecordNotFound(){
+	if database.DB.First(&recordModule,&module).RecordNotFound(){
 		err=errors.New("ModuleDelete No Module Record")
 	}else{
 		recordModuleJson.module2ModuleJson(recordModule)

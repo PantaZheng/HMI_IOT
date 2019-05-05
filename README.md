@@ -33,17 +33,18 @@
 
 ```go
 type UserJson struct {
-    ID       uint               `json:"id"`
-    OpenId   string             `json:"openid"`
-    Code     string             `json:"code"`
-    Name     string             `json:"name"`
-    Level    string             `json:"level"`
-    Missions []MissionBriefJson `json:"missions"`
+	ID			uint				`json:"id"`
+	OpenId		string     			`json:"openid"`
+	Code		string     			`json:"code"`
+	Name		string     			`json:"name"`
+	IDCard		string				`json:"id_card"`
+	Level		int     			`json:"level"`
 }
 
 type UserBriefJson struct {
-    ID uint `json:"id"`
-    Name string `json:"name"`
+	ID		uint	`json:"id"`
+	Name	string	`json:"name"`
+	Level	int	`json:"level"`
 }
 ```
 
@@ -200,6 +201,15 @@ type TagJson struct{
 }
 ```
 
+名称|method|path|传入body参数|接收body参数
+-|-|-|-|-
+ProjectCreate|post|`/`|`ProjectJson`|`ProjectJson`
+ProjectFindByID|get|`/id/{id:uint}`|-|`ProjectJson`
+ProjectsFindByLeaderID|get|`/leader/{id:uint}`|-|`[]ProjectBriefJson`
+ProjectssFindByParticipantID|get|`/participant/{id:uint}`|-|`[]ProjectBriefJson`
+ProjectUpdate|put|`/`|`projectJson`|`ProjectJson`
+ProjectDeleteByID|delete|`/id/{id:uint}`|-|`ProjectJson`
+
 ---
 
 ## TODO
@@ -240,6 +250,7 @@ type TagJson struct{
     - [x] `type Module struct`
     - [x] `type ModuleJson struct`
     - [x] `type ModuleBriefJson struct`
+    - [x] `moduleTestData`
     - [x] `moduleJson2Module`
     - [x] `module2ModuleJson`
     - [x] `module2ModuleBriefJson`
@@ -254,6 +265,7 @@ type TagJson struct{
     - [x] `type ProjectJson struct`
     - [x] `type BriefProject struct`
     - [x] `type TagJson struct`
+    - [x] `projectTestData`
     - [x] `target2TargetsJson`
     - [x] `targetsJson2Target`
     - [x] `tagSet2TagsJson`
@@ -268,7 +280,21 @@ type TagJson struct{
     - [x] `ProjectUpdate`
     - [x] `ProjectDelete`
     - [x] `../project_test`
-- [ ] user
+- [x] user
+    - [x] `type User struct`
+    - [x] `type UserJson struct`
+    - [x] `type UserBriefJson struct`
+    - [x] `userTestData`
+    - [x] `userJson2User`
+    - [x] `user2UserJson`
+    - [x] `user2UserBriefJson`
+    - [x] `UserCreate`
+    - [x] `UserFind`
+    - [x] `UsersFindByLevel`
+    - [x] `UserUpdate`
+    - [x] `UserDelete`
+
+
 - [ ] init
     - [ ] 表单删除
     - [ ] 表单迁移
@@ -343,7 +369,7 @@ type TagJson struct{
     - [x] `ModuleUpdate`
         - id
     - [x] `ModuleDeleteByID`
-- [ ] project
+- [x] project
     - [x] `ProjectCreate`
     - [x] `ProjectFindByID`
     - [x] `ProjectsFindByLeaderID`
