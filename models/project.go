@@ -254,7 +254,7 @@ func ProjectDelete(project *Project)(recordProjectJson ProjectJson,err error){
 		err=errors.New("ProjectDelete No Module Record")
 	}else{
 		recordProjectJson.project2ProjectJson(recordProject)
-		err=database.DB.Unscoped().Delete(recordProject).Error
+		err=database.DB.Unscoped().Delete(&recordProject).Error
 	}
 	return
 }

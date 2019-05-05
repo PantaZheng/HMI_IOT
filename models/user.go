@@ -131,7 +131,7 @@ func UserDelete(user *User)(recordUserJson UserJson, err error){
 		err=errors.New("UserDelete No User Record")
 	}else{
 		recordUserJson.user2UserJson(recordUser)
-		err=database.DB.Unscoped().Delete(recordUser).Error
+		err=database.DB.Unscoped().Delete(&recordUser).Error
 	}
 	return
 }
