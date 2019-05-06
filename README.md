@@ -43,18 +43,19 @@ const (
 )
 
 type UserJson struct {
-	ID			uint				`json:"id"`
-	OpenId		string     			`json:"openid"`
-	Code		string     			`json:"code"`
-	Name		string     			`json:"name"`
-	IDCard		string				`json:"id_card"`
-	Level		int     			`json:"level"`
+	ID			uint		`json:"id"`
+	OpenId		string		`json:"openid"`
+	Code		string		`json:"code"`
+	Name		string		`json:"name"`
+	IDCard		string		`json:"id_card"`
+	Level		int			`json:"level"`
+	Telephone	string		`json:"telephone"`
 }
 
 type UserBriefJson struct {
 	ID		uint	`json:"id"`
 	Name	string	`json:"name"`
-	Level	int	`json:"level"`
+	Level	int		`json:"level"`
 }
 ```
 
