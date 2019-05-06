@@ -13,14 +13,15 @@ type Project struct {
 	gorm.Model
 	Name			string			`gorm:"unique"`
 	Type			string
-	Creator			string
+	CreatorID		uint
+	Creator			*User
 	CreateTime		string
 	StartTime		string
 	EndTime			string
 	Content			string
 	Target			string
 	LeaderID		uint
-	Leader			User
+	Leader			*User
 	Participants	[]*User		`gorm:"many2many:user_projects"`
 	TagSet			string
 	Tag				bool
@@ -30,27 +31,27 @@ type ProjectJson struct {
 	ID				uint				`json:"id"`
 	Name			string				`json:"name"`
 	Type			string				`json:"type"`
-	Creator			string				`json:"creator"`
+	Creator			*UserBriefJson		`json:"creator"`
 	CreateTime		string				`json:"create_time"`
 	StartTime		string				`json:"start_time"`
 	EndTime			string				`json:"end_time"`
 	Content			string				`json:"content"`
 	Targets			[]string			`json:"targets"`
-	LeaderID		uint				`json:"leader"`
-	Participants	[]UserBriefJson		`json:"participants"`
+	Leader			*UserBriefJson		`json:"leader"`
+	Participants	[]*UserBriefJson		`json:"participants"`
 	Tag				bool				`json:"tag"`		//create、update
 	TagSet			[]TagJson			`json:"tags"`
 	Modules			[]ModuleBriefJson	`json:"modules"`	//仅拉取更新
 }
 
 type ProjectBriefJson struct {
-	ID				uint	`json:"id"`
-	Name			string	`json:"name"`
-	StartTime		string	`json:"startTime"`
-	EndTime			string	`json:"endTime"`
-	LeaderID		uint	`json:"leader"`
-	Tag				bool	`json:"tag"`
-	Content			string	`json:"content"`
+	ID				uint			`json:"id"`
+	Name			string			`json:"name"`
+	StartTime		string			`json:"startTime"`
+	EndTime			string			`json:"endTime"`
+	Leader			*UserBriefJson	`json:"leader"`
+	Tag				bool			`json:"tag"`
+	Content			string			`json:"content"`
 }
 
 type TagJson struct{
@@ -59,10 +60,10 @@ type TagJson struct{
 }
 
 func projectTestData() {
-	_,_=ProjectCreate(&ProjectJson{Name:"Project1",Targets:[]string{"t1"},LeaderID:2,Participants:[]UserBriefJson{{ID:2}},TagSet:[]TagJson{{ID:2,Tag:true},{ID:3,Tag:false}}})
-	_,_=ProjectCreate(&ProjectJson{Name:"Project2",Targets:[]string{"t1","tt2"},LeaderID:3,Participants:[]UserBriefJson{{ID:3}},TagSet:[]TagJson{{ID:2,Tag:true},{ID:3,Tag:true}}})
-	_,_=ProjectCreate(&ProjectJson{Name:"Project3",Targets:[]string{"t1","tt2","ttt3"},LeaderID:4,Participants:[]UserBriefJson{{ID:2}},TagSet:[]TagJson{{ID:2,Tag:true},{ID:3,Tag:false}}})
-	_,_=ProjectCreate(&ProjectJson{Name:"Project4",Targets:[]string{"t1","tt2","ttt3"},LeaderID:5,Participants:[]UserBriefJson{{ID:2}},TagSet:[]TagJson{{ID:2,Tag:false},{ID:3,Tag:false}}})
+	_,_=ProjectCreate(&ProjectJson{Name:"Project1",Targets:[]string{"t1"},Leader:&UserBriefJson{ID:2},Participants:[]*UserBriefJson{{ID:2}},TagSet:[]TagJson{{ID:2,Tag:true},{ID:3,Tag:false}}})
+	_,_=ProjectCreate(&ProjectJson{Name:"Project2",Targets:[]string{"t1","tt2"},Leader:&UserBriefJson{ID:3},Participants:[]*UserBriefJson{{ID:3}},TagSet:[]TagJson{{ID:2,Tag:true},{ID:3,Tag:true}}})
+	_,_=ProjectCreate(&ProjectJson{Name:"Project3",Targets:[]string{"t1","tt2","ttt3"},Leader:&UserBriefJson{ID:4},Participants:[]*UserBriefJson{{ID:2}},TagSet:[]TagJson{{ID:2,Tag:true},{ID:3,Tag:false}}})
+	_,_=ProjectCreate(&ProjectJson{Name:"Project4",Targets:[]string{"t1","tt2","ttt3"},Leader:&UserBriefJson{ID:5},Participants:[]*UserBriefJson{{ID:2}},TagSet:[]TagJson{{ID:2,Tag:false},{ID:3,Tag:false}}})
 }
 
 func target2TargetsJson (target string) []string{
@@ -98,6 +99,11 @@ func tagSet2TagsJson(tagSet string) (tags []TagJson){
 }
 
 func tagsJson2TagSet(tags []TagJson)(tag bool,tagSet string){
+	/**
+	@Author: PantaZheng
+	@Description:TagJson转换为db中user表中的TagSet
+	@Date: 2019/5/6 23:14
+	*/
 	l:=len(tags)
 	count:=0
 	if l>0 {
@@ -124,13 +130,13 @@ func (project *Project) projectJson2Project(projectJson *ProjectJson){
 	project.ID=projectJson.ID
 	project.Name=projectJson.Name
 	project.Type=projectJson.Type
-	project.Creator=projectJson.Creator
+	project.CreatorID=projectJson.Creator.ID
 	project.CreateTime=projectJson.CreateTime
 	project.StartTime=projectJson.StartTime
 	project.EndTime=projectJson.EndTime
 	project.Content=projectJson.Content
 	project.Target=targetsJson2Target(projectJson.Targets)
-	project.LeaderID=projectJson.LeaderID
+	project.LeaderID=projectJson.Leader.ID
 	project.Tag,project.TagSet= tagsJson2TagSet(projectJson.TagSet)
 }
 
@@ -138,13 +144,13 @@ func (projectJson *ProjectJson) project2ProjectJson(project *Project){
 	projectJson.ID=project.ID
 	projectJson.Name=project.Name
 	projectJson.Type=project.Type
-	projectJson.Creator=project.Creator
+	projectJson.Creator.User2UserBriefJson(project.Creator)
 	projectJson.CreateTime=project.CreateTime
 	projectJson.StartTime=project.StartTime
 	projectJson.EndTime=project.EndTime
 	projectJson.Content=project.Content
 	projectJson.Targets=target2TargetsJson(project.Target)
-	projectJson.LeaderID=project.LeaderID
+	projectJson.Leader.User2UserBriefJson(project.Leader)
 	projectJson.Tag=project.Tag
 	projectJson.TagSet=tagSet2TagsJson(project.TagSet)
 	projectJson.Modules,_=ModulesFindByProject(project)
@@ -152,8 +158,8 @@ func (projectJson *ProjectJson) project2ProjectJson(project *Project){
 	database.DB.Model(&project).Related(&participants,"Participants")
 	tempUser:=&UserBriefJson{}
 	for _,v:=range participants {
-		tempUser.user2UserBriefJson(v)
-		projectJson.Participants=append(projectJson.Participants,*tempUser)
+		tempUser.User2UserBriefJson(v)
+		projectJson.Participants=append(projectJson.Participants,tempUser)
 	}
 }
 
@@ -162,7 +168,7 @@ func (projectBriefJson *ProjectBriefJson)project2ProjectBriefJson(project *Proje
 	projectBriefJson.Name=project.Name
 	projectBriefJson.StartTime=project.StartTime
 	projectBriefJson.EndTime=project.EndTime
-	projectBriefJson.LeaderID=project.LeaderID
+	projectBriefJson.Leader.User2UserBriefJson(project.Leader)
 	projectBriefJson.Tag=project.Tag
 	projectBriefJson.Content=project.Content
 }

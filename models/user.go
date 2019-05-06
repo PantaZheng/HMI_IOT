@@ -24,8 +24,10 @@ type User struct {
 	IDCard		string
 	Level		int
 	Telephone	string
+	CProjects	[]*Project	`gorm:"foreignkey:CreatorID"`
 	LProjects	[]*Project	`gorm:"foreignkey:LeaderID"`
 	PProjects	[]*Project	`gorm:"many2many:user_projects"`
+	CModules	[]*Module	`gorm:"foreignkey:CreatorID"`
 	LModules	[]*Module	`gorm:"foreignkey:LeaderID"`
 	PModules	[]*Module	`gorm:"many2many:user_modules"`
 	PMissions	[]*Mission	`gorm:"many2many:user_missions"`
@@ -57,6 +59,7 @@ func userTestData(){
 	_,_=UserCreate(&UserJson{OpenId: "teacher_unknown",Name:"其他导师", Level:LevelSenior})
 }
 
+
 func (user *User) userJson2User(userJson *UserJson){
 	user.ID=userJson.ID
 	user.OpenId=userJson.OpenId
@@ -75,10 +78,16 @@ func (userJson *UserJson) user2UserJson(user *User){
 	userJson.Telephone=user.Telephone
 }
 
-func (userBriefJson *UserBriefJson) user2UserBriefJson(user *User){
+func (userBriefJson *UserBriefJson) User2UserBriefJson(user *User){
+	/**
+	@Author: PantaZheng
+	@Description: 该函数可能会被其他文件引用
+	@Date: 2019/5/6 23:15
+	*/
 	userBriefJson.ID=user.ID
 	userBriefJson.Name=user.Name
 	userBriefJson.Level=user.Level
+	return
 }
 
 //创建用户
@@ -99,6 +108,7 @@ func UserCreate(userJson *UserJson)(recordUserJson UserJson,err error){
 	return
 }
 
+
 func UserFind(user *User)(recordUserJson UserJson,err error){
 	recordUser:=new(User)
 	if err=database.DB.First(&recordUser,&user).Error;err==nil{
@@ -114,12 +124,13 @@ func UsersFindByLevel(level int)(usersBriefJson []UserBriefJson,err error){
 	}else{
 		for _,v:=range users{
 			tempJson:=&UserBriefJson{}
-			tempJson.user2UserBriefJson(&v)
+			tempJson.User2UserBriefJson(&v)
 			usersBriefJson=append(usersBriefJson,*tempJson)
 		}
 	}
 	return
 }
+
 
 func UserUpdate(userJson *UserJson)(recordUserJson UserJson,err error){
 	updateUser:=new(User)

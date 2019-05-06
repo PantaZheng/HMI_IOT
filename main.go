@@ -29,7 +29,6 @@ func newApp() (api *iris.Application){
 		weChat.Any("/", controller.WeChat)
 	})
 
-
 	api.PartyFunc("/user",func(user router.Party){
 		user.Post("/",controller.UserCreate)
 		user.Get("/id/{id:uint}",controller.UserFindByID)

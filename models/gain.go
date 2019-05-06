@@ -100,7 +100,7 @@ func GainsFindByOwner(owner *User)(gainsJson []GainJson,err error){
     return
 }
 
-func GainsFindByMission(mission *Mission)(gainsJson []GainJson,err error){
+func GainsFindByMission(mission *Mission)(gainsJson []*GainJson,err error){
     gains:=make([]Gain,1)
     if err=database.DB.Model(&mission).Related(&gains,"MissionID").Error;err!=nil{
         return
@@ -111,7 +111,7 @@ func GainsFindByMission(mission *Mission)(gainsJson []GainJson,err error){
         for _,v :=range gains{
             tempJson:=&GainJson{}
             tempJson.gain2GainJson(&v)
-            gainsJson=append(gainsJson,*tempJson)
+            gainsJson=append(gainsJson,tempJson)
         }
     }
     return
@@ -138,6 +138,14 @@ func GainUpdate(gainJson *GainJson) (recordGainJson GainJson,err error){
 
 //TODO:删除逻辑添加
 func GainDelete(gainJson *GainJson) (recordGainJson GainJson,err error) {
+    /**
+     * @field:
+     * @filename: gain.go
+     * @param: 
+     * @return: GainJson{}, nil
+     * @author: panta
+     * @date: 2019/5/6 21:27
+     */
     recordGain:=new(Gain)
     recordGain.ID=gainJson.ID
     if err=database.DB.First(&recordGain).Error;err==nil{

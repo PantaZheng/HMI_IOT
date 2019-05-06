@@ -11,31 +11,32 @@ type Module struct{
 	gorm.Model
 	Name			string
 	CreatorID		uint
+	Creator			*User
 	CreateTime		string
 	StartTime		string
 	EndTime			string
 	Content			string
 	Tag				bool		//tag有Module负责人修改
-	Participants	[]*User		`gorm:"many2many:user_modules"` //多对多
-	LeaderID		uint										//一对多外键
-	Leader			User                                       //belongs to
-	ProjectID		uint                                       //归属项目
-	Project			Project
+	Participants	[]*User		`gorm:"many2many:user_modules"`
+	LeaderID		uint
+	Leader			*User
+	ProjectID		uint
+	Project			*Project
 }
 
 type ModuleJson struct{
 	ID				uint				`json:"id"`
 	Name			string				`json:"name"`
-	CreatorID		uint				`json:"creator"`
+	Creator			*UserBriefJson		`json:"creator"`
 	CreateTime		string				`json:"create_time"`//创建时间
 	StartTime		string				`json:"start_time"`//开始时间
 	EndTime			string				`json:"end_time"`//结束时间
 	Content			string				`json:"content"`
 	Tag				bool				`json:"tag"`
-	ProjectID		uint				`json:"project"`
-	LeaderID		uint				`json:"leader"`
-	Participants	[]UserBriefJson		`json:"participants"`//参与人员
-	Missions		[]MissionBriefJson	`json:"missions"`//创建或更新不会修改该字段，仅拉取使用
+	ProjectID		uint				`json:"project_id"`
+	Leader			*UserBriefJson		`json:"leader"`
+	Participants	[]*UserBriefJson		`json:"participants"`//参与人员
+	Missions		[]*MissionBriefJson	`json:"missions"`//创建或更新不会修改该字段，仅拉取使用
 }
 
 type ModuleBriefJson struct{
@@ -49,42 +50,42 @@ type ModuleBriefJson struct{
 }
 
 func moduleTestData(){
-	_,_=ModuleCreate(&ModuleJson{Name:"Module1",ProjectID:1,LeaderID:1,Participants:[]UserBriefJson{{ID: 2}, {ID:3}}})
-	_,_=ModuleCreate(&ModuleJson{Name:"Module1",ProjectID:2,LeaderID:1,Participants:[]UserBriefJson{{ID: 3}, {ID:4}}})
-	_,_=ModuleCreate(&ModuleJson{Name:"Module1",ProjectID:1,LeaderID:2,Participants:[]UserBriefJson{{ID: 2},{ID:3},{ID:4}}})
-	_,_=ModuleCreate(&ModuleJson{Name:"Module1",ProjectID:2,LeaderID:2,Participants:[]UserBriefJson{{ID: 2},{ID:3},{ID:4},{ID:5}}})
+	_,_=ModuleCreate(&ModuleJson{Name:"Module1",ProjectID:1,Leader:&UserBriefJson{ID:2},Participants:[]*UserBriefJson{{ID: 2}, {ID:3}}})
+	_,_=ModuleCreate(&ModuleJson{Name:"Module1",ProjectID:2,Leader:&UserBriefJson{ID:2},Participants:[]*UserBriefJson{{ID: 3}, {ID:4}}})
+	_,_=ModuleCreate(&ModuleJson{Name:"Module1",ProjectID:1,Leader:&UserBriefJson{ID:3},Participants:[]*UserBriefJson{{ID: 2},{ID:3},{ID:4}}})
+	_,_=ModuleCreate(&ModuleJson{Name:"Module1",ProjectID:2,Leader:&UserBriefJson{ID:4},Participants:[]*UserBriefJson{{ID: 2},{ID:3},{ID:4},{ID:5}}})
 }
 
 func (module *Module) moduleJson2Module(moduleJson *ModuleJson){
 	module.ID=moduleJson.ID
 	module.Name=moduleJson.Name
-	module.CreatorID=moduleJson.CreatorID
+	module.CreatorID=moduleJson.Creator.ID
 	module.CreateTime=moduleJson.CreateTime
 	module.StartTime=moduleJson.StartTime
 	module.EndTime=moduleJson.EndTime
 	module.Content=moduleJson.Content
 	module.Tag=moduleJson.Tag
 	module.ProjectID=moduleJson.ProjectID
-	module.LeaderID=moduleJson.LeaderID
+	module.LeaderID=moduleJson.Leader.ID
 }
 
 func (moduleJson *ModuleJson) module2ModuleJson(module *Module){
 	moduleJson.ID=module.ID
 	moduleJson.Name=module.Name
-	moduleJson.CreatorID=module.CreatorID
+	moduleJson.Creator.User2UserBriefJson(module.Creator)
 	moduleJson.CreateTime=module.CreateTime
 	moduleJson.StartTime=module.StartTime
 	moduleJson.EndTime=module.EndTime
 	moduleJson.Content=module.Content
 	moduleJson.Tag=module.Tag
 	moduleJson.ProjectID=module.ProjectID
-	moduleJson.LeaderID=module.LeaderID
+	moduleJson.Leader.User2UserBriefJson(module.Leader)
 	participants:=make([]*User,len(module.Participants))
 	database.DB.Model(&module).Related(&participants,"Participants")
 	tempUser:=&UserBriefJson{}
 	for _,v:=range participants{
-		tempUser.user2UserBriefJson(v)
-		moduleJson.Participants=append(moduleJson.Participants,*tempUser)
+		tempUser.User2UserBriefJson(v)
+		moduleJson.Participants=append(moduleJson.Participants,tempUser)
 	}
 	moduleJson.Missions,_=MissionsFindByModule(module)
 }

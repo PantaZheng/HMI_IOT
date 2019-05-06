@@ -20,7 +20,7 @@ func GainsFindByOwnerID(id uint)(gainsJson []models.GainJson,err error){
 }
 
 //mission单一确定
-func GainsFindByMissionID(id uint)(gainsJson []models.GainJson,err error){
+func GainsFindByMissionID(id uint)(gainsJson []*models.GainJson,err error){
 	mission:=new(models.Mission)
 	mission.ID=id
 	return models.GainsFindByMission(mission)
