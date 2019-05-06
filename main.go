@@ -39,7 +39,7 @@ func newApp() (api *iris.Application){
 
 
 	api.PartyFunc("/wechat", func(weChat router.Party) {
-		weChat.Any("/", controller.WeChat)]
+		weChat.Any("/", controller.WeChat)
 	})
 
 
@@ -97,6 +97,6 @@ func newApp() (api *iris.Application){
 
 func main() {
 	app := newApp()
-	_ = app.Run(iris.Addr(":81"))
+	_ = app.Run(iris.Addr(":80"))
 }
 
