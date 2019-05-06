@@ -64,7 +64,7 @@ UserCreate|post|`/`|`UserJson`|`UserJson`
 UserFindByID|get|`/id/{id:uint}`|-|`UserJson`
 UserFindByIDCard|get|`/id_card/{id_card:string}`|-|`UserJson`
 UserFindByOpenID|get|`/openid/{openid:string}`|-|`UserJson`
-UsersFindByLevel|get|`level/{level:int}`|-|`[]UserJson`
+UsersFindByLevel|get|`/level/{level:int}`|-|`[]UserBriefJson`
 UserUpdate|put|`/update`|`UserJson`|`UserJson`
 UserBind|put|`/bind`|`UserJson`|`UserJson`
 UserDeleteByID|delete|`/{id:uint}`|-|`UserJson`
