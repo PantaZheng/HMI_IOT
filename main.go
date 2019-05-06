@@ -24,7 +24,7 @@ func newApp() (api *iris.Application){
 
 	api.StaticWeb("/","./view")
 	api.RegisterView(iris.HTML("./view", ".html").Delims("[[","]]"))
-	api.Get("/index/", func(ctx iris.Context) {
+	api.Get("/index", func(ctx iris.Context) {
 		_=ctx.View("/index.html")
 	})
 	api.Get("/mission", func(ctx iris.Context){
@@ -97,6 +97,6 @@ func newApp() (api *iris.Application){
 
 func main() {
 	app := newApp()
-	_ = app.Run(iris.Addr(":80"))
+	_ = app.Run(iris.Addr(":81"))
 }
 
