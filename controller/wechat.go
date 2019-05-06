@@ -29,7 +29,7 @@ func Menu(){
 	btnBinding:=menu.Button{}
 	btnBinding.SetAsViewButton("绑定","https://open.weixin.qq.com/connect/oauth2/authorize?appid="+service.WeChatAppId+"&redirect_uri="+service.ServerAddress+"/index&response_type=code&scope=snsapi_base&state=12#wechat_redirect")
 	btnFrame:=menu.Button{}
-	btnFrame.SetAsViewButton("架构",service.ServerAddress+"/framework")
+	btnFrame.SetAsViewButton("架构",service.ServerAddress+"/index/frame")
 	btnPerson:=menu.Button{}
 	btnPerson.SetAsSubMenuButton("人员",[]menu.Button{btnBinding,btnFrame})
 	btnNew :=menu.Button{}
