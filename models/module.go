@@ -35,7 +35,7 @@ type ModuleJson struct{
 	Tag				bool				`json:"tag"`
 	ProjectID		uint				`json:"project_id"`
 	Leader			*UserBriefJson		`json:"leader"`
-	Participants	[]*UserBriefJson		`json:"participants"`//参与人员
+	Participants	[]*UserBriefJson	`json:"participants"`//参与人员
 	Missions		[]*MissionBriefJson	`json:"missions"`//创建或更新不会修改该字段，仅拉取使用
 }
 
@@ -126,7 +126,7 @@ func ModuleFind(module *Module) (recordModuleJson ModuleJson,err error){
 	return
 }
 
-func ModulesFindByLeader(leader *User)(modulesBriefJson []ModuleBriefJson,err error){
+func ModulesFindByLeader(leader *User)(modulesBriefJson []*ModuleBriefJson,err error){
 	modules := make([]Module,1)
 	if err=database.DB.Model(&leader).Related(&modules,"LeaderID").Error;err!=nil{
 		return
@@ -137,13 +137,13 @@ func ModulesFindByLeader(leader *User)(modulesBriefJson []ModuleBriefJson,err er
 		for _,v:=range modules{
 			tempJson:=&ModuleBriefJson{}
 			tempJson.module2ModuleBriefJson(&v)
-			modulesBriefJson=append(modulesBriefJson,*tempJson)
+			modulesBriefJson=append(modulesBriefJson,tempJson)
 		}
 	}
 	return
 }
 
-func ModulesFindByProject(project *Project)(modulesBriefJson []ModuleBriefJson,err error){
+func ModulesFindByProject(project *Project)(modulesBriefJson []*ModuleBriefJson,err error){
 	modules := make([]Module,1)
 	if err=database.DB.Model(&project).Related(&modules,"ProjectID").Error;err!=nil{
 		return
@@ -154,7 +154,7 @@ func ModulesFindByProject(project *Project)(modulesBriefJson []ModuleBriefJson,e
 		for _,v:=range modules{
 			tempJson:=&ModuleBriefJson{}
 			tempJson.module2ModuleBriefJson(&v)
-			modulesBriefJson=append(modulesBriefJson,*tempJson)
+			modulesBriefJson=append(modulesBriefJson,tempJson)
 		}
 	}
 	return

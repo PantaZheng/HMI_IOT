@@ -77,14 +77,14 @@ UserDeleteByOpenID|delete|`/{openid:string}`|-|`UserJson`
 
 ```go
 type GainJson struct {
-    ID          uint	`json:"id"`
-    Name		string	`json:"name"`
-    Type		string	`json:"type"`
-    File		string	`json:"file"`
-    UpTime		string	`json:"up_time"`
-    Remark		string	`json:"remark"`
-    OwnerID		uint	`json:"owner_id"`
-    MissionID	uint	`json:"mission_id"`
+    ID          uint	        `json:"id"`
+    Name		string	        `json:"name"`
+    Type		string	        `json:"type"`
+    File		string	        `json:"file"`
+    UpTime		string	        `json:"up_time"`
+    Remark		string	        `json:"remark"`
+    Owner		*UserBriefJson	`json:"owner"`
+    MissionID	uint	        `json:"mission_id"`
 }
 ```
 
@@ -92,8 +92,8 @@ type GainJson struct {
 -|-|-|-|-
 GainCreate|post|`/`|`GainJson`|`GainJson`
 GainFindByID|get|`/id/{id:uint}`|-|`GainJson`
-GainsFindByOwnerID|get|`/owner/{id:uint}`|-|`[]GainJson`
-GainsFindByMissionID|get|`/mission/{id:uint}`|-|`[]GainJson`
+GainsFindByOwnerID|get|`/owner/{id:uint}`|-|`[]*GainJson`
+GainsFindByMissionID|get|`/mission/{id:uint}`|-|`[]*GainJson`
 GainUpdate|put|`/`|`GainJson`|`GainJson`
 GainDeleteByID|delete|`/{id:uint}`|-|`GainJson`
 
@@ -105,15 +105,15 @@ GainDeleteByID|delete|`/{id:uint}`|-|`GainJson`
 type MissionJson struct{
 	ID				uint				`json:"id"`
 	Name			string				`json:"name"`
-	CreatorID		uint				`json:"creator"` //不做关联，查看创建者信息，需调用user的接口
+	Creator			*UserBriefJson		`json:"creator"`
 	CreateTime		string				`json:"create_time"`
 	StartTime		string				`json:"start_time"`
 	EndTime			string				`json:"end_time"`
 	Content			string				`json:"content"`
 	File			string				`json:"file"`
-	Tag				bool				`json:"tag"`
-	Gains			[]GainJson			`json:"gains"`
-	Participants	[]UserBriefJson		`json:"participants"`
+	Tag				bool				`json:"tag"`	//tag由module负责人决定
+	Gains			[]*GainJson			`json:"gains"`
+	Participants	[]*UserBriefJson	`json:"participants"`
 	ModuleID		uint				`json:"module"`
 }
 
@@ -131,7 +131,7 @@ type MissionBriefJson struct{
 -|-|-|-|-
 MissionCreate|post|`/`|`MissionJson`|`MissionJson`
 MissionFindByID|get|`/id/{id:uint}`|-|`MissionJson`
-MissionsFindByModuleID|get|`/module/{id:uint}`|-|`[]MissionBriefJson`
+MissionsFindByModuleID|get|`/module/{id:uint}`|-|`[]*MissionBriefJson`
 MissionUpdate|put|`/`|`MissionJson`|`MissionJson`
 MissionDeleteByID|delete|`/id/{id:uint}`|-|`MissionJson`
 
@@ -143,16 +143,16 @@ MissionDeleteByID|delete|`/id/{id:uint}`|-|`MissionJson`
 type ModuleJson struct{
 	ID				uint				`json:"id"`
 	Name			string				`json:"name"`
-	CreatorID		uint				`json:"creator"`
+	Creator			*UserBriefJson		`json:"creator"`
 	CreateTime		string				`json:"create_time"`//创建时间
 	StartTime		string				`json:"start_time"`//开始时间
 	EndTime			string				`json:"end_time"`//结束时间
 	Content			string				`json:"content"`
 	Tag				bool				`json:"tag"`
-	ProjectID		uint				`json:"project"`
-	LeaderID		uint				`json:"leader"`
-	Participants	[]UserBriefJson		`json:"participants"`//参与人员
-	Missions		[]MissionBriefJson	`json:"missions"`//创建或更新不会修改该字段，仅拉取使用
+	ProjectID		uint				`json:"project_id"`
+	Leader			*UserBriefJson		`json:"leader"`
+	Participants	[]*UserBriefJson	`json:"participants"`//参与人员
+	Missions		[]*MissionBriefJson	`json:"missions"`//创建或更新不会修改该字段，仅拉取使用
 }
 
 type ModuleBriefJson struct{
@@ -182,27 +182,27 @@ type ProjectJson struct {
 	ID				uint				`json:"id"`
 	Name			string				`json:"name"`
 	Type			string				`json:"type"`
-	Creator			string				`json:"creator"`
+	Creator			*UserBriefJson		`json:"creator"`
 	CreateTime		string				`json:"create_time"`
 	StartTime		string				`json:"start_time"`
 	EndTime			string				`json:"end_time"`
 	Content			string				`json:"content"`
 	Targets			[]string			`json:"targets"`
-	LeaderID		uint				`json:"leader"`
-	Participants	[]UserBriefJson		`json:"participants"`
+	Leader			*UserBriefJson		`json:"leader"`
+	Participants	[]*UserBriefJson	`json:"participants"`
 	Tag				bool				`json:"tag"`		//create、update
 	TagSet			[]TagJson			`json:"tags"`
 	Modules			[]ModuleBriefJson	`json:"modules"`	//仅拉取更新
 }
 
 type ProjectBriefJson struct {
-	ID				uint	`json:"id"`
-	Name			string	`json:"name"`
-	StartTime		string	`json:"startTime"`
-	EndTime			string	`json:"endTime"`
-	LeaderID		uint	`json:"leader"`
-	Tag				bool	`json:"tag"`
-	Content			string	`json:"content"`
+	ID				uint			`json:"id"`
+	Name			string			`json:"name"`
+	StartTime		string			`json:"startTime"`
+	EndTime			string			`json:"endTime"`
+	Leader			*UserBriefJson	`json:"leader"`
+	Tag				bool			`json:"tag"`
+	Content			string			`json:"content"`
 }
 
 type TagJson struct{

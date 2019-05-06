@@ -20,7 +20,7 @@ type Mission struct{
 	Tag				bool
 	Participants	[]*User		`gorm:"many2many:user_missions"`
 	ModuleID		uint
-	Module			Module
+	Module			*Module
 }
 
 type MissionJson struct{
@@ -34,7 +34,7 @@ type MissionJson struct{
 	File			string				`json:"file"`
 	Tag				bool				`json:"tag"`	//tag由module负责人决定
 	Gains			[]*GainJson			`json:"gains"`
-	Participants	[]*UserBriefJson		`json:"participants"`
+	Participants	[]*UserBriefJson	`json:"participants"`
 	ModuleID		uint				`json:"module"`
 }
 

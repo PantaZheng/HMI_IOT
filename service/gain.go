@@ -13,7 +13,7 @@ func GainFindByID(id uint)(gainJson models.GainJson,err error){
 }
 
 //owner单一确定
-func GainsFindByOwnerID(id uint)(gainsJson []models.GainJson,err error){
+func GainsFindByOwnerID(id uint)(gainsJson []*models.GainJson,err error){
 	owner:=new(models.User)
 	owner.ID=id
 	return models.GainsFindByOwner(owner)

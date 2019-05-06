@@ -20,7 +20,7 @@ func ModulesFindByLeaderID(id uint)(modulesBriefJson []models.ModuleBriefJson,er
 	return models.ModulesFindByLeader(leader)
 }
 
-func ModulesFindByProjectID(id uint)(modulesBriefJson []models.ModuleBriefJson,err error){
+func ModulesFindByProjectID(id uint)(modulesBriefJson []*models.ModuleBriefJson,err error){
 	project:=new(models.Project)
 	project.ID=id
 	return models.ModulesFindByProject(project)

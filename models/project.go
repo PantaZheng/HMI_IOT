@@ -38,10 +38,10 @@ type ProjectJson struct {
 	Content			string				`json:"content"`
 	Targets			[]string			`json:"targets"`
 	Leader			*UserBriefJson		`json:"leader"`
-	Participants	[]*UserBriefJson		`json:"participants"`
+	Participants	[]*UserBriefJson	`json:"participants"`
 	Tag				bool				`json:"tag"`		//create、update
-	TagSet			[]TagJson			`json:"tags"`
-	Modules			[]ModuleBriefJson	`json:"modules"`	//仅拉取更新
+	TagSet			[]*TagJson			`json:"tags"`
+	Modules			[]*ModuleBriefJson	`json:"modules"`	//仅拉取更新
 }
 
 type ProjectBriefJson struct {
@@ -60,10 +60,10 @@ type TagJson struct{
 }
 
 func projectTestData() {
-	_,_=ProjectCreate(&ProjectJson{Name:"Project1",Targets:[]string{"t1"},Leader:&UserBriefJson{ID:2},Participants:[]*UserBriefJson{{ID:2}},TagSet:[]TagJson{{ID:2,Tag:true},{ID:3,Tag:false}}})
-	_,_=ProjectCreate(&ProjectJson{Name:"Project2",Targets:[]string{"t1","tt2"},Leader:&UserBriefJson{ID:3},Participants:[]*UserBriefJson{{ID:3}},TagSet:[]TagJson{{ID:2,Tag:true},{ID:3,Tag:true}}})
-	_,_=ProjectCreate(&ProjectJson{Name:"Project3",Targets:[]string{"t1","tt2","ttt3"},Leader:&UserBriefJson{ID:4},Participants:[]*UserBriefJson{{ID:2}},TagSet:[]TagJson{{ID:2,Tag:true},{ID:3,Tag:false}}})
-	_,_=ProjectCreate(&ProjectJson{Name:"Project4",Targets:[]string{"t1","tt2","ttt3"},Leader:&UserBriefJson{ID:5},Participants:[]*UserBriefJson{{ID:2}},TagSet:[]TagJson{{ID:2,Tag:false},{ID:3,Tag:false}}})
+	_,_=ProjectCreate(&ProjectJson{Name:"Project1",Targets:[]string{"t1"},Leader:&UserBriefJson{ID:2},Participants:[]*UserBriefJson{{ID:2}},TagSet:[]*TagJson{{ID:2,Tag:true},{ID:3,Tag:false}}})
+	_,_=ProjectCreate(&ProjectJson{Name:"Project2",Targets:[]string{"t1","tt2"},Leader:&UserBriefJson{ID:3},Participants:[]*UserBriefJson{{ID:3}},TagSet:[]*TagJson{{ID:2,Tag:true},{ID:3,Tag:true}}})
+	_,_=ProjectCreate(&ProjectJson{Name:"Project3",Targets:[]string{"t1","tt2","ttt3"},Leader:&UserBriefJson{ID:4},Participants:[]*UserBriefJson{{ID:2}},TagSet:[]*TagJson{{ID:2,Tag:true},{ID:3,Tag:false}}})
+	_,_=ProjectCreate(&ProjectJson{Name:"Project4",Targets:[]string{"t1","tt2","ttt3"},Leader:&UserBriefJson{ID:5},Participants:[]*UserBriefJson{{ID:2}},TagSet:[]*TagJson{{ID:2,Tag:false},{ID:3,Tag:false}}})
 }
 
 func target2TargetsJson (target string) []string{
@@ -84,7 +84,7 @@ func targetsJson2Target(targets []string) (target string){
 	return
 }
 
-func tagSet2TagsJson(tagSet string) (tags []TagJson){
+func tagSet2TagsJson(tagSet string) (tags []*TagJson){
 	temp:=strings.Split(tagSet,",")
 	for _,v:=range temp{
 		IdTag :=strings.Split(v,"+")
@@ -92,13 +92,13 @@ func tagSet2TagsJson(tagSet string) (tags []TagJson){
 			id,_:=strconv.Atoi(IdTag[0])
 			idU:=uint(id)
 			t,_:=strconv.ParseBool(IdTag[1])
-			tags=append(tags,*&TagJson{ID: idU,Tag:t} )
+			tags=append(tags,&TagJson{ID: idU,Tag:t} )
 		}
 	}
 	return
 }
 
-func tagsJson2TagSet(tags []TagJson)(tag bool,tagSet string){
+func tagsJson2TagSet(tags []*TagJson)(tag bool,tagSet string){
 	/**
 	@Author: PantaZheng
 	@Description:TagJson转换为db中user表中的TagSet
