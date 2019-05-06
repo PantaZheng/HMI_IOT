@@ -22,8 +22,8 @@ func newApp() (api *iris.Application){
 		}
 	})
 
-	api.StaticWeb("/","./view")
-	api.RegisterView(iris.HTML("./view", ".html").Delims("[[","]]"))
+	api.StaticWeb("/","./dist/static")
+	api.RegisterView(iris.HTML("./dist", ".html").Delims("[[","]]"))
 	api.Get("/index", func(ctx iris.Context) {
 		_=ctx.View("/index.html")
 	})
@@ -37,11 +37,11 @@ func newApp() (api *iris.Application){
 		_=ctx.View("/framework/index.html")
 	})
 
-	api.PartyFunc("/anon",func (anon router.Party){
-		anon.PartyFunc("/wechat", func(weChat router.Party) {
-			weChat.Any("/", controller.WeChat)
-		})
+
+	api.PartyFunc("/wechat", func(weChat router.Party) {
+		weChat.Any("/", controller.WeChat)]
 	})
+
 
 	api.PartyFunc("/user",func(user router.Party){
 		user.Post("/",controller.UserCreate)
