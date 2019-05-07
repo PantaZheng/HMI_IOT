@@ -76,8 +76,8 @@ UserFindByOpenID|get|`/openid/{openid:string}`|-|`UserJson`
 UsersFindByLevel|get|`/level/{level:int}`|-|`[]UserBriefJson`
 UserUpdate|put|`/update`|`UserJson`|`UserJson`
 UserBind|put|`/bind`|`UserJson`|`UserJson`
-UserDeleteByID|delete|`/{id:uint}`|-|`UserJson`
-UserDeleteByOpenID|delete|`/{openid:string}`|-|`UserJson`
+UserDeleteByID|delete|`/id/{id:uint}`|-|`UserJson`
+UserDeleteByOpenID|delete|`/id/{openid:string}`|-|`UserJson`
 
 ### Gain
 
