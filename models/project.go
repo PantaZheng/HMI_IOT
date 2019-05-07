@@ -14,14 +14,14 @@ type Project struct {
 	Name			string			`gorm:"unique"`
 	Type			string
 	CreatorID		uint
-	Creator			*User
+	Creator			User
 	CreateTime		string
 	StartTime		string
 	EndTime			string
 	Content			string
 	Target			string
 	LeaderID		uint
-	Leader			*User
+	Leader			User
 	Participants	[]*User		`gorm:"many2many:user_projects"`
 	TagSet			string
 	Tag				bool
@@ -148,13 +148,13 @@ func (projectJson *ProjectJson) project2ProjectJson(project *Project){
 	projectJson.ID=project.ID
 	projectJson.Name=project.Name
 	projectJson.Type=project.Type
-	projectJson.Creator.User2UserBriefJson(project.Creator)
+	projectJson.Creator.User2UserBriefJson(&project.Creator)
 	projectJson.CreateTime=project.CreateTime
 	projectJson.StartTime=project.StartTime
 	projectJson.EndTime=project.EndTime
 	projectJson.Content=project.Content
 	projectJson.Targets=target2TargetsJson(project.Target)
-	projectJson.Leader.User2UserBriefJson(project.Leader)
+	projectJson.Leader.User2UserBriefJson(&project.Leader)
 	projectJson.Tag=project.Tag
 	projectJson.TagSet=tagSet2TagsJson(project.TagSet)
 	projectJson.Modules,_=ModulesFindByProject(project)
@@ -172,7 +172,7 @@ func (projectBriefJson *ProjectBriefJson)project2ProjectBriefJson(project *Proje
 	projectBriefJson.Name=project.Name
 	projectBriefJson.StartTime=project.StartTime
 	projectBriefJson.EndTime=project.EndTime
-	projectBriefJson.Leader.User2UserBriefJson(project.Leader)
+	projectBriefJson.Leader.User2UserBriefJson(&project.Leader)
 	projectBriefJson.Tag=project.Tag
 	projectBriefJson.Content=project.Content
 }

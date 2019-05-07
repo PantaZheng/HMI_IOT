@@ -11,7 +11,7 @@ type Mission struct{
 	gorm.Model
 	Name			string
 	CreatorID		uint
-	Creator			*User
+	Creator			User
 	CreateTime		string
 	StartTime		string
 	EndTime			string
@@ -20,7 +20,7 @@ type Mission struct{
 	Tag				bool
 	Participants	[]*User		`gorm:"many2many:user_missions"`
 	ModuleID		uint
-	Module			*Module
+	Module			Module
 }
 
 type MissionJson struct{
@@ -71,7 +71,7 @@ func (mission *Mission) missionJson2Mission(missionJson *MissionJson){
 func (missionJson *MissionJson) mission2MissionJSON(mission *Mission){
 	missionJson.ID=mission.ID
 	missionJson.Name= mission.Name
-	missionJson.Creator.User2UserBriefJson(mission.Creator)
+	missionJson.Creator.User2UserBriefJson(&mission.Creator)
 	missionJson.CreateTime = mission.CreateTime
 	missionJson.StartTime= mission.StartTime
 	missionJson.EndTime= mission.EndTime

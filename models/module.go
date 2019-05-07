@@ -11,7 +11,7 @@ type Module struct{
 	gorm.Model
 	Name			string
 	CreatorID		uint
-	Creator			*User
+	Creator			User
 	CreateTime		string
 	StartTime		string
 	EndTime			string
@@ -19,9 +19,9 @@ type Module struct{
 	Tag				bool		//tag有Module负责人修改
 	Participants	[]*User		`gorm:"many2many:user_modules"`
 	LeaderID		uint
-	Leader			*User
+	Leader			User
 	ProjectID		uint
-	Project			*Project
+	Project			Project
 }
 
 type ModuleJson struct{
@@ -72,14 +72,14 @@ func (module *Module) moduleJson2Module(moduleJson *ModuleJson){
 func (moduleJson *ModuleJson) module2ModuleJson(module *Module){
 	moduleJson.ID=module.ID
 	moduleJson.Name=module.Name
-	moduleJson.Creator.User2UserBriefJson(module.Creator)
+	moduleJson.Creator.User2UserBriefJson(&module.Creator)
 	moduleJson.CreateTime=module.CreateTime
 	moduleJson.StartTime=module.StartTime
 	moduleJson.EndTime=module.EndTime
 	moduleJson.Content=module.Content
 	moduleJson.Tag=module.Tag
 	moduleJson.ProjectID=module.ProjectID
-	moduleJson.Leader.User2UserBriefJson(module.Leader)
+	moduleJson.Leader.User2UserBriefJson(&module.Leader)
 	participants:=make([]*User,len(module.Participants))
 	database.DB.Model(&module).Related(&participants,"Participants")
 	tempUser:=&UserBriefJson{}
