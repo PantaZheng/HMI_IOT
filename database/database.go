@@ -14,7 +14,7 @@ import (
 *@param diver string
  */
 
-var(
+var (
 	DB = New()
 )
 
@@ -33,6 +33,3 @@ func New() *gorm.DB {
 	log.Printf("建立数据库连接\n")
 	return DB
 }
-
-
-

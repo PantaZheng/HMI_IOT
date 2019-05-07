@@ -15,7 +15,6 @@ var (
  */
 func New() *toml.Tree {
 	config, err := toml.LoadFile("./config/config.toml")
-
 	if err != nil {
 		fmt.Println("TomlError ", err.Error())
 	}

@@ -34,28 +34,36 @@
 ```go
 
 const (
-	LevelStranger         = iota // Stranger 未绑定
-	LevelEmeritus                // Professor emeritus 专家教授
-	LevelStudent                 // Student 学生
-	LevelAssistant              // Assistant 助理
-	LevelSenior                 // Senior lecturer 高级讲师
-	LevelFull                   // Full professor 全职教授
+	// LevelStranger 未绑定
+	LevelStranger  = iota
+	// LevelEmeritus Professor emeritus 专家教授
+	LevelEmeritus
+	// LevelStudent 学生
+	LevelStudent
+	// LevelAssistant 助理
+	LevelAssistant
+	// LevelSenior Senior lecturer 高级讲师
+	LevelSenior
+	// LevelFull Full professor 全职教授
+	LevelFull
 )
 
-type UserJson struct {
-	ID			uint		`json:"id"`
-	OpenId		string		`json:"openid"`
-	Code		string		`json:"code"`
-	Name		string		`json:"name"`
-	IDCard		string		`json:"id_card"`
-	Level		int			`json:"level"`
-	Telephone	string		`json:"telephone"`
+//UserJSON 用户Json原型
+type UserJSON struct {
+	ID        uint   `json:"id"`
+	OpenID    string `json:"openid"`
+	Code      string `json:"code"`
+	Name      string `json:"name"`
+	IDCard    string `json:"id_card"`
+	Level     int    `json:"level"`
+	Telephone string `json:"telephone"`
 }
 
-type UserBriefJson struct {
-	ID		uint	`json:"id"`
-	Name	string	`json:"name"`
-	Level	int		`json:"level"`
+//UserBriefJSON 简洁版的用户Json信息
+type UserBriefJSON struct {
+	ID    uint   `json:"id"`
+	Name  string `json:"name"`
+	Level int    `json:"level"`
 }
 ```
 
@@ -77,14 +85,14 @@ UserDeleteByOpenID|delete|`/{openid:string}`|-|`UserJson`
 
 ```go
 type GainJson struct {
-    ID          uint	        `json:"id"`
-    Name		string	        `json:"name"`
-    Type		string	        `json:"type"`
-    File		string	        `json:"file"`
-    UpTime		string	        `json:"up_time"`
-    Remark		string	        `json:"remark"`
-    Owner		*UserBriefJson	`json:"owner"`
-    MissionID	uint	        `json:"mission_id"`
+	ID        uint          `json:"id"`
+	Name      string        `json:"name"`
+	Type      string        `json:"type"`
+	File      string        `json:"file"`
+	UpTime    string        `json:"up_time"`
+	Remark    string        `json:"remark"`
+	Owner     UserBriefJSON `json:"owner"`
+	MissionID uint          `json:"mission_id"`
 }
 ```
 
@@ -102,28 +110,28 @@ GainDeleteByID|delete|`/{id:uint}`|-|`GainJson`
 入口: `/mission`
 
 ```go
-type MissionJson struct{
-	ID				uint				`json:"id"`
-	Name			string				`json:"name"`
-	Creator			UserBriefJson		`json:"creator"`
-	CreateTime		string				`json:"create_time"`
-	StartTime		string				`json:"start_time"`
-	EndTime			string				`json:"end_time"`
-	Content			string				`json:"content"`
-	File			string				`json:"file"`
-	Tag				bool				`json:"tag"`	//tag由module负责人决定
-	Gains			[]GainJson			`json:"gains"`
-	Participants	[]UserBriefJson		`json:"participants"`
-	ModuleID		uint				`json:"module"`
+type MissionJson struct {
+	ID           uint            `json:"id"`
+	Name         string          `json:"name"`
+	Creator      UserBriefJSON   `json:"creator"`
+	CreateTime   string          `json:"create_time"`
+	StartTime    string          `json:"start_time"`
+	EndTime      string          `json:"end_time"`
+	Content      string          `json:"content"`
+	File         string          `json:"file"`
+	Tag				bool		 `json:"tag"` //tag由module负责人决定
+	Gains        []GainJson      `json:"gains"`
+	Participants []UserBriefJSON `json:"participants"`
+	ModuleID     uint            `json:"module"`
 }
 
-type MissionBriefJson struct{
-	ID			uint	`json:"id"`
-	Name		string	`json:"name"`
-	CreateTime	string	`json:"create_time"`
-	Content		string	`json:"content"`
-	Tag			bool	`json:"tag"`
-	ModuleID	uint	`json:"module"`
+type MissionBriefJson struct {
+	ID         uint   `json:"id"`
+	Name       string `json:"name"`
+	CreateTime string `json:"create_time"`
+	Content    string `json:"content"`
+	Tag        bool   `json:"tag"`
+	ModuleID   uint   `json:"module"`
 }
 ```
 
@@ -140,29 +148,29 @@ MissionDeleteByID|delete|`/id/{id:uint}`|-|`MissionJson`
 入口: `/module`
 
 ```go
-type ModuleJson struct{
-	ID				uint				`json:"id"`
-	Name			string				`json:"name"`
-	Creator			UserBriefJson		`json:"creator"`
-	CreateTime		string				`json:"create_time"`//创建时间
-	StartTime		string				`json:"start_time"`//开始时间
-	EndTime			string				`json:"end_time"`//结束时间
-	Content			string				`json:"content"`
-	Tag				bool				`json:"tag"`
-	ProjectID		uint				`json:"project_id"`
-	Leader			UserBriefJson		`json:"leader"`
-	Participants	[]UserBriefJson		`json:"participants"`//参与人员
-	Missions		[]MissionBriefJson	`json:"missions"`//创建或更新不会修改该字段，仅拉取使用
+type ModuleJson struct {
+	ID           uint               `json:"id"`
+	Name         string             `json:"name"`
+	Creator      UserBriefJSON      `json:"creator"`
+	CreateTime   string             `json:"create_time"` //创建时间
+	StartTime    string             `json:"start_time"`  //开始时间
+	EndTime      string             `json:"end_time"`    //结束时间
+	Content      string             `json:"content"`
+	Tag          bool               `json:"tag"`
+	ProjectID    uint               `json:"project_id"`
+	Leader       UserBriefJSON      `json:"leader"`
+	Participants []UserBriefJSON    `json:"participants"` //参与人员
+	Missions     []MissionBriefJson `json:"missions"`     //创建或更新不会修改该字段，仅拉取使用
 }
 
-type ModuleBriefJson struct{
-	ID				uint				`json:"id"`
-	Name			string				`json:"name"`
-	CreateTime		string				`json:"create_time"`//创建时间
-	Content			string				`json:"content"`
-	Tag				bool				`json:"tag"`
-	LeaderID		uint				`json:"leader"`
-	ProjectID		uint				`json:"project"`
+type ModuleBriefJson struct {
+	ID         uint          `json:"id"`
+	Name       string        `json:"name"`
+	CreateTime string        `json:"create_time"` //创建时间
+	Content    string        `json:"content"`
+	Tag        bool          `json:"tag"`
+	Leader     UserBriefJSON `json:"leader"`
+	ProjectID  uint          `json:"project"`
 }
 ```
 
@@ -179,35 +187,35 @@ ModuleDeleteByID|delete|`/id/{id:uint}`|-|`ModuleJson`
 
 ```go
 type ProjectJson struct {
-	ID				uint				`json:"id"`
-	Name			string				`json:"name"`
-	Type			string				`json:"type"`
-	Creator			UserBriefJson		`json:"creator"`
-	CreateTime		string				`json:"create_time"`
-	StartTime		string				`json:"start_time"`
-	EndTime			string				`json:"end_time"`
-	Content			string				`json:"content"`
-	Targets			[]string			`json:"targets"`
-	Leader			UserBriefJson		`json:"leader"`
-	Participants	[]UserBriefJson		`json:"participants"`
-	Tag				bool				`json:"tag"`		//create、update
-	TagSet			[]TagJson			`json:"tags"`
-	Modules			[]ModuleBriefJson	`json:"modules"`	//仅拉取更新
+	ID           uint              `json:"id"`
+	Name         string            `json:"name"`
+	Type         string            `json:"type"`
+	Creator      UserBriefJSON     `json:"creator"`
+	CreateTime   string            `json:"create_time"`
+	StartTime    string            `json:"start_time"`
+	EndTime      string            `json:"end_time"`
+	Content      string            `json:"content"`
+	Targets      []string          `json:"targets"`
+	Leader       UserBriefJSON     `json:"leader"`
+	Participants []UserBriefJSON   `json:"participants"`
+	Tag          bool              `json:"tag"` //create、update
+	TagSet       []TagJson         `json:"tags"`
+	Modules      []ModuleBriefJson `json:"modules"` //仅拉取更新
 }
 
 type ProjectBriefJson struct {
-	ID				uint			`json:"id"`
-	Name			string			`json:"name"`
-	StartTime		string			`json:"startTime"`
-	EndTime			string			`json:"endTime"`
-	Leader			UserBriefJson	`json:"leader"`
-	Tag				bool			`json:"tag"`
-	Content			string			`json:"content"`
+	ID        uint          `json:"id"`
+	Name      string        `json:"name"`
+	StartTime string        `json:"startTime"`
+	EndTime   string        `json:"endTime"`
+	Leader    UserBriefJSON `json:"leader"`
+	Tag       bool          `json:"tag"`
+	Content   string        `json:"content"`
 }
 
-type TagJson struct{
-	ID	uint	`json:"id"`
-	Tag	bool	`json:"tag"`
+type TagJson struct {
+	ID  uint `json:"id"`
+	Tag bool `json:"tag"`
 }
 ```
 

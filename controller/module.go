@@ -7,75 +7,74 @@ import (
 	"log"
 )
 
-func ModuleCreate(ctx iris.Context){
+func ModuleCreate(ctx iris.Context) {
 	module := new(models.ModuleJson)
-	if err:=ctx.ReadJSON(module);err!=nil{
+	if err := ctx.ReadJSON(module); err != nil {
 		log.Println(err.Error())
 	}
-	if moduleJson,err:=service.ModuleCreate(module);err!=nil{
+	if moduleJson, err := service.ModuleCreate(module); err != nil {
 		ctx.StatusCode(iris.StatusAccepted)
-		_,_=ctx.Text(err.Error())
-	}else{
+		_, _ = ctx.Text(err.Error())
+	} else {
 		ctx.StatusCode(iris.StatusOK)
-		_,_=ctx.JSON(moduleJson)
+		_, _ = ctx.JSON(moduleJson)
 	}
 }
 
-func ModuleFindByID(ctx iris.Context){
-	id,_:=ctx.Params().GetUint("id")
-	if moduleJson,err:=service.ModuleFindByID(id);err!=nil{
+func ModuleFindByID(ctx iris.Context) {
+	id, _ := ctx.Params().GetUint("id")
+	if moduleJson, err := service.ModuleFindByID(id); err != nil {
 		ctx.StatusCode(iris.StatusAccepted)
-		_,_=ctx.Text(err.Error())
-	}else{
+		_, _ = ctx.Text(err.Error())
+	} else {
 		ctx.StatusCode(iris.StatusOK)
-		_,_=ctx.JSON(moduleJson)
+		_, _ = ctx.JSON(moduleJson)
 	}
 }
 
-func ModulesFindByLeaderID(ctx iris.Context){
-	id,_:=ctx.Params().GetUint("id")
-	if modulesJson,err:=service.ModulesFindByLeaderID(id);err!=nil{
+func ModulesFindByLeaderID(ctx iris.Context) {
+	id, _ := ctx.Params().GetUint("id")
+	if modulesJson, err := service.ModulesFindByLeaderID(id); err != nil {
 		ctx.StatusCode(iris.StatusAccepted)
-		_,_=ctx.Text(err.Error())
-	}else{
+		_, _ = ctx.Text(err.Error())
+	} else {
 		ctx.StatusCode(iris.StatusOK)
-		_,_=ctx.JSON(modulesJson)
+		_, _ = ctx.JSON(modulesJson)
 	}
 }
 
-
-func ModulesFindByProjectID(ctx iris.Context){
-	id,_:=ctx.Params().GetUint("id")
-	if modulesJson,err:=service.ModulesFindByProjectID(id);err!=nil{
+func ModulesFindByProjectID(ctx iris.Context) {
+	id, _ := ctx.Params().GetUint("id")
+	if modulesJson, err := service.ModulesFindByProjectID(id); err != nil {
 		ctx.StatusCode(iris.StatusAccepted)
-		_,_=ctx.Text(err.Error())
-	}else{
+		_, _ = ctx.Text(err.Error())
+	} else {
 		ctx.StatusCode(iris.StatusOK)
-		_,_=ctx.JSON(modulesJson)
+		_, _ = ctx.JSON(modulesJson)
 	}
 }
 
-func ModuleUpdate(ctx iris.Context){
+func ModuleUpdate(ctx iris.Context) {
 	module := new(models.ModuleJson)
-	if err:=ctx.ReadJSON(module);err!=nil{
+	if err := ctx.ReadJSON(module); err != nil {
 		log.Println(err.Error())
 	}
-	if moduleJson,err:=service.ModuleUpdate(module);err!=nil{
+	if moduleJson, err := service.ModuleUpdate(module); err != nil {
 		ctx.StatusCode(iris.StatusAccepted)
-		_,_=ctx.Text(err.Error())
-	}else{
+		_, _ = ctx.Text(err.Error())
+	} else {
 		ctx.StatusCode(iris.StatusOK)
-		_,_=ctx.JSON(moduleJson)
+		_, _ = ctx.JSON(moduleJson)
 	}
 }
 
-func ModuleDeleteByID(ctx iris.Context){
-	id,_:=ctx.Params().GetUint("id")
-	if moduleJson,err:=service.ModuleDeleteByID(id);err!=nil{
+func ModuleDeleteByID(ctx iris.Context) {
+	id, _ := ctx.Params().GetUint("id")
+	if moduleJson, err := service.ModuleDeleteByID(id); err != nil {
 		ctx.StatusCode(iris.StatusAccepted)
-		_,_=ctx.Text(err.Error())
-	}else{
+		_, _ = ctx.Text(err.Error())
+	} else {
 		ctx.StatusCode(iris.StatusOK)
-		_,_=ctx.JSON(moduleJson)
+		_, _ = ctx.JSON(moduleJson)
 	}
 }

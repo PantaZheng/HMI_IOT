@@ -6,9 +6,9 @@ import (
 	"testing"
 )
 
-func TestUser(t *testing.T){
-	user:=userCreate()
-	user.Name+="test"
+func TestUser(t *testing.T) {
+	user := userCreate()
+	user.Name += "test"
 	userUpdate(&user)
 	userFind()
 	usersFindByLevel()
@@ -16,61 +16,61 @@ func TestUser(t *testing.T){
 	userFind()
 }
 
-func userCreate()(userJson models.UserJson){
+func userCreate() (userJson models.UserJSON) {
 	log.Println("userCreate")
-	user :=new (models.UserJson)
-	user.Name="project_test"
-	if tmp,err:=models.UserCreate(user);err!=nil{
+	user := new(models.UserJSON)
+	user.Name = "project_test"
+	if tmp, err := models.UserCreate(user); err != nil {
 		log.Println(err)
-	}else{
+	} else {
 		log.Println(tmp)
-		userJson=tmp
+		userJson = tmp
 	}
 	return
 }
 
-func userUpdate(userJson *models.UserJson){
+func userUpdate(userJson *models.UserJSON) {
 	log.Println("userUpdate")
-	if p,err:=models.UserUpdate(userJson);err!=nil{
+	if p, err := models.UserUpdate(userJson); err != nil {
 		log.Println(err)
-	}else{
+	} else {
 		log.Println(p)
 	}
 	return
 }
 
-func userFind(){
+func userFind() {
 	log.Println("userFind")
-	p:=new(models.User)
-	for i:=1;i<=10;i++{
-		p.ID=uint(i)
-		if userJson,err:=models.UserFind(p);err!=nil{
+	p := new(models.User)
+	for i := 1; i <= 10; i++ {
+		p.ID = uint(i)
+		if userJson, err := models.UserFind(p); err != nil {
 			log.Println(err)
-		}else{
+		} else {
 			log.Println(userJson)
 		}
 	}
 }
 
-func usersFindByLevel(){
+func usersFindByLevel() {
 	log.Println("usersFindByLevel")
-	for i:=1;i<=10;i++{
-		if ps,err:=models.UsersFindByLevel(i);err!=nil{
+	for i := 1; i <= 10; i++ {
+		if ps, err := models.UsersFindByLevel(i); err != nil {
 			log.Println(err)
-		}else{
+		} else {
 			log.Println(ps)
 		}
 	}
 }
 
-func userDelete(){
+func userDelete() {
 	log.Println("userDelete")
-	u:=new(models.User)
-	for i:=1;i<=5;i++{
-		u.ID=uint(i)
-		if userJson,err:=models.UserDelete(u);err!=nil{
+	u := new(models.User)
+	for i := 1; i <= 5; i++ {
+		u.ID = uint(i)
+		if userJson, err := models.UserDelete(u); err != nil {
 			log.Println(err)
-		}else{
+		} else {
 			log.Println(userJson)
 		}
 	}
