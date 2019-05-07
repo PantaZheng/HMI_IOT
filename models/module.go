@@ -80,7 +80,6 @@ func (moduleJson *ModuleJson) module2ModuleJson(module *Module){
 	creator.ID=module.CreatorID
 	database.DB.First(creator,creator)
 	moduleJson.Creator.User2UserBriefJson(creator)
-	moduleJson.Creator.User2UserBriefJson(creator)
 	moduleJson.CreateTime=module.CreateTime
 	moduleJson.StartTime=module.StartTime
 	moduleJson.EndTime=module.EndTime

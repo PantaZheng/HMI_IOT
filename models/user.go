@@ -24,7 +24,7 @@ type User struct {
 	IDCard		string
 	Level		int
 	Telephone	string
-	LProjects	[]*Project	`gorm:"foreignkey:LeaderID;association_foreignkey:ID"`
+	LProjects	[]*Project	`gorm:"foreignkey:LeaderID"`
 	PProjects	[]*Project	`gorm:"many2many:user_projects"`
 	LModules	[]*Module	`gorm:"foreignkey:LeaderID"`
 	PModules	[]*Module	`gorm:"many2many:user_modules"`
