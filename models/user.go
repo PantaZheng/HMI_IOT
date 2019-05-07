@@ -30,6 +30,7 @@ type User struct {
 	CModules	[]*Module	`gorm:"foreignkey:CreatorID"`
 	LModules	[]*Module	`gorm:"foreignkey:LeaderID"`
 	PModules	[]*Module	`gorm:"many2many:user_modules"`
+	CMissions	[]*Mission	`gorm:"foreignkey:CreatorID"`
 	PMissions	[]*Mission	`gorm:"many2many:user_missions"`
 	OGains		[]*Gain		`gorm:"foreignkey:OwnerID"`
 }

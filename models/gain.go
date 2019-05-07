@@ -57,10 +57,14 @@ func (gainJson *GainJson) gain2GainJson(gain *Gain){
 }
 
 func gainTestData(){
-	_,_=GainCreate(&GainJson{Name:"gain1",Owner:*&UserBriefJson{ID:1},MissionID:1})
-	_,_=GainCreate(&GainJson{Name:"gain2",Owner:*&UserBriefJson{ID:2},MissionID:1})
-	_,_=GainCreate(&GainJson{Name:"gain3",Owner:*&UserBriefJson{ID:1},MissionID:2})
-	_,_=GainCreate(&GainJson{Name:"gain4",Owner:*&UserBriefJson{ID:2},MissionID:2})
+	u2 :=&UserBriefJson{ID: 2}
+	u3 :=&UserBriefJson{ID: 3}
+	u4 :=&UserBriefJson{ID: 4}
+	u5 :=&UserBriefJson{ID: 5}
+	_,_=GainCreate(&GainJson{Name:"gain1",Owner:*u2,MissionID:1})
+	_,_=GainCreate(&GainJson{Name:"gain2",Owner:*u3,MissionID:1})
+	_,_=GainCreate(&GainJson{Name:"gain3",Owner:*u4,MissionID:2})
+	_,_=GainCreate(&GainJson{Name:"gain4",Owner:*u5,MissionID:2})
 }
 
 func GainCreate(gainJson *GainJson) (recordGainJson GainJson,err error){

@@ -50,10 +50,15 @@ type ModuleBriefJson struct{
 }
 
 func moduleTestData(){
-	_,_=ModuleCreate(&ModuleJson{Name:"Module1",ProjectID:1,Leader:*&UserBriefJson{ID:2},Participants:[]UserBriefJson{{ID: 2}, {ID:3}}})
-	_,_=ModuleCreate(&ModuleJson{Name:"Module1",ProjectID:2,Leader:*&UserBriefJson{ID:2},Participants:[]UserBriefJson{{ID: 3}, {ID:4}}})
-	_,_=ModuleCreate(&ModuleJson{Name:"Module1",ProjectID:1,Leader:*&UserBriefJson{ID:3},Participants:[]UserBriefJson{{ID: 2},{ID:3},{ID:4}}})
-	_,_=ModuleCreate(&ModuleJson{Name:"Module1",ProjectID:2,Leader:*&UserBriefJson{ID:4},Participants:[]UserBriefJson{{ID: 2},{ID:3},{ID:4},{ID:5}}})
+	u2 :=&UserBriefJson{ID: 2}
+	u3 :=&UserBriefJson{ID: 3}
+	u4 :=&UserBriefJson{ID: 4}
+	u5 :=&UserBriefJson{ID: 5}
+	u6 :=&UserBriefJson{ID: 6}
+	_,_=ModuleCreate(&ModuleJson{Name:"Module1",Creator:*u2,ProjectID:1,Leader:*u2,Participants:[]UserBriefJson{*u2, *u3}})
+	_,_=ModuleCreate(&ModuleJson{Name:"Module1",Creator:*u2,ProjectID:2,Leader:*u2,Participants:[]UserBriefJson{*u6, *u2}})
+	_,_=ModuleCreate(&ModuleJson{Name:"Module1",Creator:*u4,ProjectID:1,Leader:*u3,Participants:[]UserBriefJson{*u2,*u3,*u4}})
+	_,_=ModuleCreate(&ModuleJson{Name:"Module1",Creator:*u4,ProjectID:2,Leader:*u5,Participants:[]UserBriefJson{*u2,*u3,*u6}})
 }
 
 func (module *Module) moduleJson2Module(moduleJson *ModuleJson){

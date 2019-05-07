@@ -48,10 +48,15 @@ type MissionBriefJson struct{
 }
 
 func missionTestData(){
-	_, _ =MissionCreate(&MissionJson{Name: "Mission1",ModuleID:1,Participants:[]UserBriefJson{{ID: 1},{ID:2}}})
-	_, _ =MissionCreate(&MissionJson{Name: "Mission2",ModuleID:1,Participants:[]UserBriefJson{{ID: 1},{ID:3}}})
-	_, _ =MissionCreate(&MissionJson{Name: "Mission3",ModuleID:2,Participants:[]UserBriefJson{{ID: 1},{ID:2},{ID:3}}})
-	_, _ =MissionCreate(&MissionJson{Name: "Mission4",ModuleID:2,Participants:[]UserBriefJson{{ID: 1},{ID:2}}})
+	u2 :=&UserBriefJson{ID: 2}
+	u3 :=&UserBriefJson{ID: 3}
+	u4 :=&UserBriefJson{ID: 4}
+	u5 :=&UserBriefJson{ID: 5}
+	u6 :=&UserBriefJson{ID: 6}
+	_, _ =MissionCreate(&MissionJson{Name: "Mission1",Creator:*u2,ModuleID:1,Participants:[]UserBriefJson{*u2,*u3}})
+	_, _ =MissionCreate(&MissionJson{Name: "Mission2",Creator:*u3,ModuleID:1,Participants:[]UserBriefJson{*u2,*u4}})
+	_, _ =MissionCreate(&MissionJson{Name: "Mission3",Creator:*u4,ModuleID:2,Participants:[]UserBriefJson{*u2,*u3,*u4}})
+	_, _ =MissionCreate(&MissionJson{Name: "Mission4",Creator:*u5,ModuleID:2,Participants:[]UserBriefJson{*u2,*u3,*u6}})
 }
 
 //缺失participants

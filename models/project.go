@@ -38,7 +38,7 @@ type ProjectJson struct {
 	Content			string				`json:"content"`
 	Targets			[]string			`json:"targets"`
 	Leader			UserBriefJson		`json:"leader"`
-	Participants	[]UserBriefJson	`json:"participants"`
+	Participants	[]UserBriefJson		`json:"participants"`
 	Tag				bool				`json:"tag"`		//create、update
 	TagSet			[]TagJson			`json:"tags"`
 	Modules			[]ModuleBriefJson	`json:"modules"`	//仅拉取更新
@@ -60,14 +60,15 @@ type TagJson struct{
 }
 
 func projectTestData() {
-	leader1:=&UserBriefJson{ID:2}
-	leader2:=&UserBriefJson{ID:3}
-	leader3:=&UserBriefJson{ID:4}
-	leader4:=&UserBriefJson{ID:5}
-	_,_=ProjectCreate(&ProjectJson{Name:"Project1",Targets:[]string{"t1"},Leader:*leader1,Participants:[]UserBriefJson{*leader1},TagSet:[]TagJson{{ID:2,Tag:true},{ID:3,Tag:false}}})
-	_,_=ProjectCreate(&ProjectJson{Name:"Project2",Targets:[]string{"t1","tt2"},Leader:*leader2,Participants:[]UserBriefJson{*leader3},TagSet:[]TagJson{{ID:2,Tag:true},{ID:3,Tag:true}}})
-	_,_=ProjectCreate(&ProjectJson{Name:"Project3",Targets:[]string{"t1","tt2","ttt3"},Leader:*leader3,Participants:[]UserBriefJson{*leader1,*leader2},TagSet:[]TagJson{{ID:2,Tag:true},{ID:3,Tag:false}}})
-	_,_=ProjectCreate(&ProjectJson{Name:"Project4",Targets:[]string{"t1","tt2","ttt3"},Leader:*leader4,Participants:[]UserBriefJson{*leader4,*leader1},TagSet:[]TagJson{{ID:2,Tag:false},{ID:3,Tag:false}}})
+	u2 :=&UserBriefJson{ID: 2}
+	u3 :=&UserBriefJson{ID: 3}
+	u4 :=&UserBriefJson{ID: 4}
+	u5 :=&UserBriefJson{ID: 5}
+	u6 :=&UserBriefJson{ID: 6}
+	_,_=ProjectCreate(&ProjectJson{Name:"Project1",Creator:*u3,Targets:[]string{"t1"},Leader:*u4,Participants:[]UserBriefJson{*u2},TagSet:[]TagJson{{ID: 2,Tag:true},{ID: 3,Tag:false}}})
+	_,_=ProjectCreate(&ProjectJson{Name:"Project2",Creator:*u2,Targets:[]string{"t1","tt2"},Leader:*u2,Participants:[]UserBriefJson{*u3},TagSet:[]TagJson{{ID: 2,Tag:true},{ID: 3,Tag:true}}})
+	_,_=ProjectCreate(&ProjectJson{Name:"Project3",Creator:*u3,Targets:[]string{"t1","tt2","ttt3"},Leader:*u3,Participants:[]UserBriefJson{*u3,*u2},TagSet:[]TagJson{{ID: 2,Tag:true},{ID: 3,Tag:false}}})
+	_,_=ProjectCreate(&ProjectJson{Name:"Project4",Creator:*u5,Targets:[]string{"t1","tt2","ttt3"},Leader:*u6,Participants:[]UserBriefJson{*u4,*u5},TagSet:[]TagJson{{ID: 2,Tag:false},{ID: 3,Tag:false}}})
 }
 
 func target2TargetsJson (target string) []string{
