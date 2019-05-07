@@ -27,7 +27,7 @@ type GainJson struct {
 	File		string	        `json:"file"`
 	UpTime		string	        `json:"up_time"`
 	Remark		string	        `json:"remark"`
-	Owner		*UserBriefJson	`json:"owner"`
+	Owner		UserBriefJson	`json:"owner"`
 	MissionID	uint	        `json:"mission_id"`
 }
 
@@ -55,10 +55,10 @@ func (gainJson *GainJson) gain2GainJson(gain *Gain){
 }
 
 func gainTestData(){
-	_,_=GainCreate(&GainJson{Name:"gain1",Owner:&UserBriefJson{ID:1},MissionID:1})
-	_,_=GainCreate(&GainJson{Name:"gain2",Owner:&UserBriefJson{ID:2},MissionID:1})
-	_,_=GainCreate(&GainJson{Name:"gain3",Owner:&UserBriefJson{ID:1},MissionID:2})
-	_,_=GainCreate(&GainJson{Name:"gain4",Owner:&UserBriefJson{ID:2},MissionID:2})
+	_,_=GainCreate(&GainJson{Name:"gain1",Owner:*&UserBriefJson{ID:1},MissionID:1})
+	_,_=GainCreate(&GainJson{Name:"gain2",Owner:*&UserBriefJson{ID:2},MissionID:1})
+	_,_=GainCreate(&GainJson{Name:"gain3",Owner:*&UserBriefJson{ID:1},MissionID:2})
+	_,_=GainCreate(&GainJson{Name:"gain4",Owner:*&UserBriefJson{ID:2},MissionID:2})
 }
 
 func GainCreate(gainJson *GainJson) (recordGainJson GainJson,err error){
@@ -100,7 +100,7 @@ func GainsFindByOwner(owner *User)(gainsJson []*GainJson,err error){
 	return
 }
 
-func GainsFindByMission(mission *Mission)(gainsJson []*GainJson,err error){
+func GainsFindByMission(mission *Mission)(gainsJson []GainJson,err error){
 	gains:=make([]Gain,1)
 	if err=database.DB.Model(&mission).Related(&gains,"MissionID").Error;err!=nil{
 		return
@@ -111,7 +111,7 @@ func GainsFindByMission(mission *Mission)(gainsJson []*GainJson,err error){
 		for _,v :=range gains{
 			tempJson:=&GainJson{}
 			tempJson.gain2GainJson(&v)
-			gainsJson=append(gainsJson,tempJson)
+			gainsJson=append(gainsJson,*tempJson)
 		}
 	}
 	return

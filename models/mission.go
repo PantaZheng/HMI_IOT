@@ -26,15 +26,15 @@ type Mission struct{
 type MissionJson struct{
 	ID				uint				`json:"id"`
 	Name			string				`json:"name"`
-	Creator			*UserBriefJson		`json:"creator"`
+	Creator			UserBriefJson		`json:"creator"`
 	CreateTime		string				`json:"create_time"`
 	StartTime		string				`json:"start_time"`
 	EndTime			string				`json:"end_time"`
 	Content			string				`json:"content"`
 	File			string				`json:"file"`
 	Tag				bool				`json:"tag"`	//tag由module负责人决定
-	Gains			[]*GainJson			`json:"gains"`
-	Participants	[]*UserBriefJson	`json:"participants"`
+	Gains			[]GainJson			`json:"gains"`
+	Participants	[]UserBriefJson	`json:"participants"`
 	ModuleID		uint				`json:"module"`
 }
 
@@ -48,10 +48,10 @@ type MissionBriefJson struct{
 }
 
 func missionTestData(){
-	_, _ =MissionCreate(&MissionJson{Name: "Mission1",ModuleID:1,Participants:[]*UserBriefJson{{ID: 1},{ID:2}}})
-	_, _ =MissionCreate(&MissionJson{Name: "Mission2",ModuleID:1,Participants:[]*UserBriefJson{{ID: 1},{ID:3}}})
-	_, _ =MissionCreate(&MissionJson{Name: "Mission3",ModuleID:2,Participants:[]*UserBriefJson{{ID: 1},{ID:2},{ID:3}}})
-	_, _ =MissionCreate(&MissionJson{Name: "Mission4",ModuleID:2,Participants:[]*UserBriefJson{{ID: 1},{ID:2}}})
+	_, _ =MissionCreate(&MissionJson{Name: "Mission1",ModuleID:1,Participants:[]UserBriefJson{{ID: 1},{ID:2}}})
+	_, _ =MissionCreate(&MissionJson{Name: "Mission2",ModuleID:1,Participants:[]UserBriefJson{{ID: 1},{ID:3}}})
+	_, _ =MissionCreate(&MissionJson{Name: "Mission3",ModuleID:2,Participants:[]UserBriefJson{{ID: 1},{ID:2},{ID:3}}})
+	_, _ =MissionCreate(&MissionJson{Name: "Mission4",ModuleID:2,Participants:[]UserBriefJson{{ID: 1},{ID:2}}})
 }
 
 //缺失participants
@@ -84,7 +84,7 @@ func (missionJson *MissionJson) mission2MissionJSON(mission *Mission){
 	tempUser:=&UserBriefJson{}
 	for _,v:=range participants{
 		tempUser.User2UserBriefJson(v)
-		missionJson.Participants=append(missionJson.Participants,tempUser)
+		missionJson.Participants=append(missionJson.Participants,*tempUser)
 	}
 	missionJson.Gains,_=GainsFindByMission(mission)
 }
@@ -124,7 +124,7 @@ func MissionFind(mission *Mission)(recordMissionJson MissionJson, err error){
 	return
 }
 
-func MissionsFindByModule(module *Module)(missionsBriefJson []*MissionBriefJson,err error){
+func MissionsFindByModule(module *Module)(missionsBriefJson []MissionBriefJson,err error){
 	missions:=make([]Mission,1)
 	if err=database.DB.Model(&module).Related(&missions,"ModuleID").Error;err!=nil{
 		return
@@ -135,7 +135,7 @@ func MissionsFindByModule(module *Module)(missionsBriefJson []*MissionBriefJson,
 		for _,v:=range missions{
 			tempJson:=&MissionBriefJson{}
 			tempJson.mission2MissionBriefJson(&v)
-			missionsBriefJson=append(missionsBriefJson,tempJson)
+			missionsBriefJson=append(missionsBriefJson,*tempJson)
 		}
 	}
 	return

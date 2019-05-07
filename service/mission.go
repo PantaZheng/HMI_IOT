@@ -20,7 +20,7 @@ func MissionFindByName(name string)(missionJson models.MissionJson,err error){
 	return models.MissionFind(mission)
 }
 
-func MissionsFindByModuleID(id uint)(missionsBriefJson []*models.MissionBriefJson,err error){
+func MissionsFindByModuleID(id uint)(missionsBriefJson []models.MissionBriefJson,err error){
 	module:=new(models.Module)
 	module.ID=id
 	return models.MissionsFindByModule(module)
