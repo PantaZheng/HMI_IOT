@@ -60,10 +60,14 @@ type TagJson struct{
 }
 
 func projectTestData() {
-	_,_=ProjectCreate(&ProjectJson{Name:"Project1",Targets:[]string{"t1"},Leader:&UserBriefJson{ID:2},Participants:[]*UserBriefJson{{ID:2}},TagSet:[]*TagJson{{ID:2,Tag:true},{ID:3,Tag:false}}})
-	_,_=ProjectCreate(&ProjectJson{Name:"Project2",Targets:[]string{"t1","tt2"},Leader:&UserBriefJson{ID:3},Participants:[]*UserBriefJson{{ID:3}},TagSet:[]*TagJson{{ID:2,Tag:true},{ID:3,Tag:true}}})
-	_,_=ProjectCreate(&ProjectJson{Name:"Project3",Targets:[]string{"t1","tt2","ttt3"},Leader:&UserBriefJson{ID:4},Participants:[]*UserBriefJson{{ID:2}},TagSet:[]*TagJson{{ID:2,Tag:true},{ID:3,Tag:false}}})
-	_,_=ProjectCreate(&ProjectJson{Name:"Project4",Targets:[]string{"t1","tt2","ttt3"},Leader:&UserBriefJson{ID:5},Participants:[]*UserBriefJson{{ID:2}},TagSet:[]*TagJson{{ID:2,Tag:false},{ID:3,Tag:false}}})
+	leader1:=&UserBriefJson{ID:2}
+	leader2:=&UserBriefJson{ID:3}
+	leader3:=&UserBriefJson{ID:4}
+	leader4:=&UserBriefJson{ID:5}
+	_,_=ProjectCreate(&ProjectJson{Name:"Project1",Targets:[]string{"t1"},Leader:leader1,Participants:[]*UserBriefJson{{ID:2}},TagSet:[]*TagJson{{ID:2,Tag:true},{ID:3,Tag:false}}})
+	_,_=ProjectCreate(&ProjectJson{Name:"Project2",Targets:[]string{"t1","tt2"},Leader:leader2,Participants:[]*UserBriefJson{{ID:3}},TagSet:[]*TagJson{{ID:2,Tag:true},{ID:3,Tag:true}}})
+	_,_=ProjectCreate(&ProjectJson{Name:"Project3",Targets:[]string{"t1","tt2","ttt3"},Leader:leader3,Participants:[]*UserBriefJson{{ID:2}},TagSet:[]*TagJson{{ID:2,Tag:true},{ID:3,Tag:false}}})
+	_,_=ProjectCreate(&ProjectJson{Name:"Project4",Targets:[]string{"t1","tt2","ttt3"},Leader:leader4,Participants:[]*UserBriefJson{{ID:2}},TagSet:[]*TagJson{{ID:2,Tag:false},{ID:3,Tag:false}}})
 }
 
 func target2TargetsJson (target string) []string{
