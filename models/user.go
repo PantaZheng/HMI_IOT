@@ -31,7 +31,7 @@ type User struct {
 	LModules	[]*Module	`gorm:"foreignkey:LeaderID"`
 	PModules	[]*Module	`gorm:"many2many:user_modules"`
 	PMissions	[]*Mission	`gorm:"many2many:user_missions"`
-	PAchieves	[]*Gain		`gorm:"foreignkey:OwnerID"`
+	OGains		[]*Gain		`gorm:"foreignkey:OwnerID"`
 }
 
 type UserJson struct {

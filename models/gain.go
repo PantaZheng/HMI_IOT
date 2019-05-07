@@ -51,7 +51,7 @@ func (gainJson *GainJson) gain2GainJson(gain *Gain){
 	gainJson.UpTime=gain.UpTime
 	gainJson.Remark=gain.Remark
 	owner:=&User{}
-	database.DB.Model(&gain).Related(&owner,"LeaderID")
+	database.DB.Model(&gain).Related(&owner,"OwnerID")
 	gainJson.Owner.User2UserBriefJson(owner)
 	gainJson.MissionID=gain.MissionID
 }
