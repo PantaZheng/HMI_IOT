@@ -14,7 +14,6 @@ type Project struct {
 	Name			string			`gorm:"unique"`
 	Type			string
 	CreatorID		uint
-	Creator			User
 	CreateTime		string
 	StartTime		string
 	EndTime			string
@@ -150,7 +149,8 @@ func (projectJson *ProjectJson) project2ProjectJson(project *Project){
 	projectJson.Name=project.Name
 	projectJson.Type=project.Type
 	creator:=&User{}
-	database.DB.Model(&project).Related(&creator,"CreatorID")
+	creator.ID=project.CreatorID
+	database.DB.First(creator,creator)
 	projectJson.Creator.User2UserBriefJson(creator)
 	projectJson.CreateTime=project.CreateTime
 	projectJson.StartTime=project.StartTime

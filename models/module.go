@@ -11,7 +11,6 @@ type Module struct{
 	gorm.Model
 	Name			string
 	CreatorID		uint
-	Creator			User
 	CreateTime		string
 	StartTime		string
 	EndTime			string
@@ -78,7 +77,9 @@ func (moduleJson *ModuleJson) module2ModuleJson(module *Module){
 	moduleJson.ID=module.ID
 	moduleJson.Name=module.Name
 	creator:=&User{}
-	database.DB.Model(&module).Related(&creator,"CreatorID")
+	creator.ID=module.CreatorID
+	database.DB.First(creator,creator)
+	moduleJson.Creator.User2UserBriefJson(creator)
 	moduleJson.Creator.User2UserBriefJson(creator)
 	moduleJson.CreateTime=module.CreateTime
 	moduleJson.StartTime=module.StartTime
