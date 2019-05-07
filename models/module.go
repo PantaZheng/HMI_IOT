@@ -77,8 +77,7 @@ func (moduleJson *ModuleJson) module2ModuleJson(module *Module){
 	moduleJson.ID=module.ID
 	moduleJson.Name=module.Name
 	creator:=&User{}
-	creator.ID=module.CreatorID
-	database.DB.First(creator,creator)
+	database.DB.Model(&module).Related(&creator,"CreatorID")
 	moduleJson.Creator.User2UserBriefJson(creator)
 	moduleJson.CreateTime=module.CreateTime
 	moduleJson.StartTime=module.StartTime
@@ -88,7 +87,7 @@ func (moduleJson *ModuleJson) module2ModuleJson(module *Module){
 	moduleJson.ProjectID=module.ProjectID
 	leader:=&User{}
 	database.DB.Model(&module).Related(&leader,"LeaderID")
-	moduleJson.Creator.User2UserBriefJson(leader)
+	moduleJson.Leader.User2UserBriefJson(leader)
 	participants:=make([]*User,len(module.Participants))
 	database.DB.Model(&module).Related(&participants,"Participants")
 	tempUser:=&UserBriefJson{}

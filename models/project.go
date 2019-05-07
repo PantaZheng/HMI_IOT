@@ -149,8 +149,7 @@ func (projectJson *ProjectJson) project2ProjectJson(project *Project){
 	projectJson.Name=project.Name
 	projectJson.Type=project.Type
 	creator:=&User{}
-	creator.ID=project.CreatorID
-	database.DB.First(creator,creator)
+	database.DB.Model(&project).Related(&creator,"CreatorID")
 	projectJson.Creator.User2UserBriefJson(creator)
 	projectJson.CreateTime=project.CreateTime
 	projectJson.StartTime=project.StartTime
@@ -159,7 +158,7 @@ func (projectJson *ProjectJson) project2ProjectJson(project *Project){
 	projectJson.Targets=target2TargetsJson(project.Target)
 	leader:=&User{}
 	database.DB.Model(&project).Related(&leader,"LeaderID")
-	projectJson.Creator.User2UserBriefJson(leader)
+	projectJson.Leader.User2UserBriefJson(leader)
 	projectJson.Tag=project.Tag
 	projectJson.TagSet=tagSet2TagsJson(project.TagSet)
 	projectJson.Modules,_=ModulesFindByProject(project)
