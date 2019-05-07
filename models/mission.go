@@ -71,6 +71,9 @@ func (mission *Mission) missionJson2Mission(missionJson *MissionJson){
 func (missionJson *MissionJson) mission2MissionJSON(mission *Mission){
 	missionJson.ID=mission.ID
 	missionJson.Name= mission.Name
+	creator:=&User{}
+	database.DB.Model(&mission).Related(&creator,"CreatorID")
+	missionJson.Creator.User2UserBriefJson(creator)
 	missionJson.Creator.User2UserBriefJson(&mission.Creator)
 	missionJson.CreateTime = mission.CreateTime
 	missionJson.StartTime= mission.StartTime
