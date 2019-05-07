@@ -34,7 +34,7 @@ type ModuleJson struct{
 	Tag				bool				`json:"tag"`
 	ProjectID		uint				`json:"project_id"`
 	Leader			UserBriefJson		`json:"leader"`
-	Participants	[]UserBriefJson	`json:"participants"`//参与人员
+	Participants	[]UserBriefJson		`json:"participants"`//参与人员
 	Missions		[]MissionBriefJson	`json:"missions"`//创建或更新不会修改该字段，仅拉取使用
 }
 
