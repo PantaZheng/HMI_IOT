@@ -7,9 +7,10 @@ import (
 	"strconv"
 )
 
+//TODO:使用MAP实现
 const (
 	// LevelStranger 未绑定
-	LevelStranger  = iota
+	LevelStranger = iota
 	// LevelEmeritus Professor emeritus 专家教授
 	LevelEmeritus
 	// LevelStudent 学生

@@ -77,7 +77,6 @@ func newApp() (api *iris.Application) {
 		project.Put("/", controller.ProjectUpdate)
 		project.Delete("/id/{id:uint}", controller.ProjectDeleteByID)
 	})
-
 	return
 }
 

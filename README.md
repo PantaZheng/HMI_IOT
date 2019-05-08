@@ -11,12 +11,12 @@
 [菜单预览](https://pantazheng.github.io/HMI_IOT/design/index.html)
 
 - 人员Person
-    1. 绑定 view    `/user/index`
-    1. 架构 view    `/frame/index`
+  1. 绑定 view    `/user/index`
+  1. 架构 view    `/frame/index`
 - 内容
-    1. 新建 view    `/new/index`
-    1. 项目 view    `/project/index`
-    1. 任务 view    `/mission/index`
+  1. 新建 view    `/new/index`
+  1. 项目 view    `/project/index`
+  1. 任务 view    `/mission/index`
 - 进度      view    `/pace/index`
 
 ---
@@ -232,183 +232,204 @@ ProjectDeleteByID|delete|`/id/{id:uint}`|-|`ProjectJson`
 
 ## TODO
 
+### top deign
+
+- [ ] PACE进度实现
+- [ ] FRAME框架实现
+- [ ] 之前的实例化方式都是指针创建，改用对象
+- [ ] level改用`map`实现
+- [ ] createTime不用加time,只用data
+- [ ] models、service采用`method`重写`function`
+- [ ] 使用`interface`写不同等级用户，允许拥有不同的权限
+- [ ] mysql 使用`utf8mb4`，用户表加入微信用户名
+  - `mb4`: most bytes 4
+- [ ] 操作系统将文件重定向到文件
+- [ ] JSON数据做忽略零值处理`omitempty`
+- [ ] JSON命名风格改为骆驼风格
+- [ ] 时间风格，在utils中添加转换时间的工具
+  - `layout: 2006-01-02`
+
+  ```bash
+  > .log 2>&1
+  ```
+
 ### models
 
 - [x] gain
-    - [x] `type Gain struct`
-    - [x] `type GainJson struct`
-    - [x] `gainTestData`
-    - [x] `gainJson2Gain`
-    - [x] `gain2GainJson`
-    - [x] `GainCreate`
-    - [x] `GainFind`
-    - [x] `GainsFindByOwner`
-    - [x] `GainsFindByMission`
-    - [x] `GainUpdate`
-        - 必须携带ID
-        - 目前只允许通过ID删除单条记录
-        - UpTime更新为当前时间
-    - [x] `GainDelete`
-        - 必须携带ID
-        - 目前由于只允许通过ID进行删除单条记录
+  - [x] `type Gain struct`
+  - [x] `type GainJson struct`
+  - [x] `gainTestData`
+  - [x] `gainJson2Gain`
+  - [x] `gain2GainJson`
+  - [x] `GainCreate`
+  - [x] `GainFind`
+  - [x] `GainsFindByOwner`
+  - [x] `GainsFindByMission`
+  - [x] `GainUpdate`
+    - 必须携带ID
+    - 目前只允许通过ID删除单条记录
+    - UpTime更新为当前时间
+  - [x] `GainDelete`
+    - 必须携带ID
+    - 目前由于只允许通过ID进行删除单条记录
 - [x] mission
-    - [x] `type Mission struct`
-    - [x] `type MissionJson struct`
-    - [x] `type MissionBriefJson struct`
-    - [x] `missionTestData`
-    - [x] `missionJson2Mission`
-    - [x] `mission2MissionJSON`
-    - [x] `mission2MissionBriefJSON`
-    - [x] `MissionCreate`
-    - [x] `MissionFind`
-    - [x] `MissionsFindByModule`
-    - [x] `MissionUpdate`
-    - [x] `MissionDelete`
+  - [x] `type Mission struct`
+  - [x] `type MissionJson struct`
+  - [x] `type MissionBriefJson struct`
+  - [x] `missionTestData`
+  - [x] `missionJson2Mission`
+  - [x] `mission2MissionJSON`
+  - [x] `mission2MissionBriefJSON`
+  - [x] `MissionCreate`
+  - [x] `MissionFind`
+  - [x] `MissionsFindByModule`
+  - [x] `MissionUpdate`
+  - [x] `MissionDelete`
 - [x] module
-    - [x] `type Module struct`
-    - [x] `type ModuleJson struct`
-    - [x] `type ModuleBriefJson struct`
-    - [x] `moduleTestData`
-    - [x] `moduleJson2Module`
-    - [x] `module2ModuleJson`
-    - [x] `module2ModuleBriefJson`
-    - [x] `ModuleCreate`
-    - [x] `ModuleFind`
-    - [x] `ModulesFindByLeader`
-    - [x] `ModulesFindByProject`
-    - [x] `ModuleUpdate`
-    - [x] `ModuleDelete`
+  - [x] `type Module struct`
+  - [x] `type ModuleJson struct`
+  - [x] `type ModuleBriefJson struct`
+  - [x] `moduleTestData`
+  - [x] `moduleJson2Module`
+  - [x] `module2ModuleJson`
+  - [x] `module2ModuleBriefJson`
+  - [x] `ModuleCreate`
+  - [x] `ModuleFind`
+  - [x] `ModulesFindByLeader`
+  - [x] `ModulesFindByProject`
+  - [x] `ModuleUpdate`
+  - [x] `ModuleDelete`
 - [x] project
-    - [x] `type Project struct`
-    - [x] `type ProjectJson struct`
-    - [x] `type BriefProject struct`
-    - [x] `type TagJson struct`
-    - [x] `projectTestData`
-    - [x] `target2TargetsJson`
-    - [x] `targetsJson2Target`
-    - [x] `tagSet2TagsJson`
-    - [x] `tagsJson2TagSet`
-    - [x] `projectJson2Project`
-    - [x] `project2ProjectJson`
-    - [x] `project2ProjectBriefJson`
-    - [x] `ProjectCreate`
-    - [x] `ProjectFind`
-    - [x] `ProjectsFindByLeader`
-    - [x] `ProjectsFindByParticipant`
-    - [x] `ProjectUpdate`
-    - [x] `ProjectDelete`
-    - [x] `../project_test`
+  - [x] `type Project struct`
+  - [x] `type ProjectJson struct`
+  - [x] `type BriefProject struct`
+  - [x] `type TagJson struct`
+  - [x] `projectTestData`
+  - [x] `target2TargetsJson`
+  - [x] `targetsJson2Target`
+  - [x] `tagSet2TagsJson`
+  - [x] `tagsJson2TagSet`
+  - [x] `projectJson2Project`
+  - [x] `project2ProjectJson`
+  - [x] `project2ProjectBriefJson`
+  - [x] `ProjectCreate`
+  - [x] `ProjectFind`
+  - [x] `ProjectsFindByLeader`
+  - [x] `ProjectsFindByParticipant`
+  - [x] `ProjectUpdate`
+  - [x] `ProjectDelete`
+  - [x] `../project_test`
 - [x] user
-    - [x] `type User struct`
-    - [x] `type UserJson struct`
-    - [x] `type UserBriefJson struct`
-    - [x] `userTestData`
-    - [x] `userJson2User`
-    - [x] `user2UserJson`
-    - [x] `user2UserBriefJson`
-    - [x] `UserCreate`
-    - [x] `UserFind`
-    - [x] `UsersFindByLevel`
-    - [x] `UserUpdate`
-    - [x] `UserDelete`
+  - [x] `type User struct`
+  - [x] `type UserJson struct`
+  - [x] `type UserBriefJson struct`
+  - [x] `userTestData`
+  - [x] `userJson2User`
+  - [x] `user2UserJson`
+  - [x] `user2UserBriefJson`
+  - [x] `UserCreate`
+  - [x] `UserFind`
+  - [x] `UsersFindByLevel`
+  - [x] `UserUpdate`
+  - [x] `UserDelete`
 - [x] init
-    - [x] 表单删除
-    - [x] 表单迁移
-    - [x] 添加测试数据
+  - [x] 表单删除
+  - [x] 表单迁移
+  - [x] 添加测试数据
 - [ ] frame
 
 ### servcie
 
 - [x] gain
-    - [x] `GainCreate`
-    - [x] `GainFindByID`
-    - [x] `GainsFindByOwnerID`
-    - [x] `GainsFindByMissionID`
-    - [x] `GainUpdate`
-        - 必须携带ID
-    - [x] `GainDeleteByID`
-        - 必须携带ID
+  - [x] `GainCreate`
+  - [x] `GainFindByID`
+  - [x] `GainsFindByOwnerID`
+  - [x] `GainsFindByMissionID`
+  - [x] `GainUpdate`
+    - 必须携带ID
+  - [x] `GainDeleteByID`
+    - 必须携带ID
 - [x] mission
-    - [x] `MissionCreate`
-    - [x] `MissionFindByID`
-        - 通过mission id去查成果
-    - [x] `MissionFindByName`
-    - [x] `MissionsFindByModuleID`
-    - [x] `MissionUpdate`
-        - 必须携带ID
-    - [x] `MissionDeleteByID`
-    - [x] `MissionDeleteByName`
+  - [x] `MissionCreate`
+  - [x] `MissionFindByID`
+    - 通过mission id去查成果
+  - [x] `MissionFindByName`
+  - [x] `MissionsFindByModuleID`
+  - [x] `MissionUpdate`
+    - 必须携带ID
+  - [x] `MissionDeleteByID`
+  - [x] `MissionDeleteByName`
 - [x] module
-    - [x] `ModuleCreate`
-    - [x] `ModuleFindByID`
-    - [x] `ModulesFindByLeaderID`
-    - [x] `ModulesFindByProjectID`
-    - [x] `ModuleUpdate`
-        - id
-    - [x] `ModuleDeleteByID`
+  - [x] `ModuleCreate`
+  - [x] `ModuleFindByID`
+  - [x] `ModulesFindByLeaderID`
+  - [x] `ModulesFindByProjectID`
+  - [x] `ModuleUpdate`
+    - id
+  - [x] `ModuleDeleteByID`
 - [x] project
-    - [x] `ProjectCreate`
-    - [x] `ProjectFindByID`
-    - [x] `ProjectsFindByLeaderID`
-    - [x] `ProjectsFindByParticipantID`
-    - [x] `ProjectUpdate`
-    - [x] `ProjectDeleteByID`
+  - [x] `ProjectCreate`
+  - [x] `ProjectFindByID`
+  - [x] `ProjectsFindByLeaderID`
+  - [x] `ProjectsFindByParticipantID`
+  - [x] `ProjectUpdate`
+  - [x] `ProjectDeleteByID`
 - [x] user
-    - [x] `UserInitByWechat`
-    - [x] `UserCreate`
-    - [x] `UserUpdate`
-    - [x] `UserFindByID`
-    - [x] `UserFindByIDCard`
-    - [x] `UserFindByOpenID`
-    - [x] `UserDeleteByID`
-    - [x] `UserDeleteByOpenID`
-    - [x] `UserBind`
+  - [x] `UserInitByWechat`
+  - [x] `UserCreate`
+  - [x] `UserUpdate`
+  - [x] `UserFindByID`
+  - [x] `UserFindByIDCard`
+  - [x] `UserFindByOpenID`
+  - [x] `UserDeleteByID`
+  - [x] `UserDeleteByOpenID`
+  - [x] `UserBind`
 
 ### controller
 
 - [x] gain
-    - [x] `GainCreate`
-    - [x] `GainFindByID`
-    - [x] `GainsFindByOwnerID`
-    - [x] `GainsFindByMissionID`
-    - [x] `GainUpdate`
-        - 必须携带ID
-    - [x] `GainDeleteByID`
-        - 必须携带ID
+  - [x] `GainCreate`
+  - [x] `GainFindByID`
+  - [x] `GainsFindByOwnerID`
+  - [x] `GainsFindByMissionID`
+  - [x] `GainUpdate`
+    - 必须携带ID
+  - [x] `GainDeleteByID`
+    - 必须携带ID
 - [x] mission
-    - [x] `MissionCreate`
-    - [x] `MissionFindByID`
-        - 通过mission id去查成果
-    - [x] `MissionFindByName`
-        - Name必须具有唯一性，才可使用该接口，多个匹配默认返回最后匹配
-    - [x] `MissionsFindByModuleID`
-    - [x] `MissionUpdate`
-        - 必须携带ID
-    - [x] `MissionDeleteByID`
-    - [x] `MissionDeleteByName`
-        - Name必须具有唯一性，才可使用该接口,否则会删除最后匹配
+  - [x] `MissionCreate`
+  - [x] `MissionFindByID`
+    - 通过mission id去查成果
+  - [x] `MissionFindByName`
+    - Name必须具有唯一性，才可使用该接口，多个匹配默认返回最后匹配
+  - [x] `MissionsFindByModuleID`
+  - [x] `MissionUpdate`
+    - 必须携带ID
+  - [x] `MissionDeleteByID`
+  - [x] `MissionDeleteByName`
+    - Name必须具有唯一性，才可使用该接口,否则会删除最后匹配
 - [x] module
-    - [x] `ModuleCreate`
-    - [x] `ModuleFindByID`
-    - [x] `ModulesFindByLeaderID`
-    - [x] `ModulesFindByProjectID`
-    - [x] `ModuleUpdate`
-        - id
-    - [x] `ModuleDeleteByID`
+  - [x] `ModuleCreate`
+  - [x] `ModuleFindByID`
+  - [x] `ModulesFindByLeaderID`
+  - [x] `ModulesFindByProjectID`
+  - [x] `ModuleUpdate`
+    - id
+  - [x] `ModuleDeleteByID`
 - [x] project
-    - [x] `ProjectCreate`
-    - [x] `ProjectFindByID`
-    - [x] `ProjectsFindByLeaderID`
-    - [x] `ProjectsFindByParticipantID`
-    - [x] `ProjectUpdate`
-        - id
-    - [x] `ProjectDeleteByID`
+  - [x] `ProjectCreate`
+  - [x] `ProjectFindByID`
+  - [x] `ProjectsFindByLeaderID`
+  - [x] `ProjectsFindByParticipantID`
+  - [x] `ProjectUpdate`
+    - id
+  - [x] `ProjectDeleteByID`
 - [x] user
-    - [x] `UserCreate`
-    - [x] `UserFindByID`
-    - [x] `UserFindByIDCard`
-    - [x] `UserFindByOpenID`
-    - [x] `UserDeleteByID`
-    - [x] `UserDeleteByOpenID`
-    - [x] `UserUpdate`
-    - [x] `UserBind`
+  - [x] `UserCreate`
+  - [x] `UserFindByID`
+  - [x] `UserFindByIDCard`
+  - [x] `UserFindByOpenID`
+  - [x] `UserDeleteByID`
+  - [x] `UserDeleteByOpenID`
+  - [x] `UserUpdate`
+  - [x] `UserBind`

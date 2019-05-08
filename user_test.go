@@ -74,4 +74,5 @@ func userDelete() {
 			log.Println(userJson)
 		}
 	}
+
 }
