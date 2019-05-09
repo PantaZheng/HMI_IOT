@@ -25,10 +25,10 @@ type GainJson struct {
 	Name      string        `json:"name"`
 	Type      string        `json:"type"`
 	File      string        `json:"file"`
-	UpTime    string        `json:"up_time"`
+	UpTime    string        `json:"upTime"`
 	Remark    string        `json:"remark"`
 	Owner     UserBriefJSON `json:"owner"`
-	MissionID uint          `json:"mission_id"`
+	MissionID uint          `json:"missionID"`
 }
 
 func (gain *Gain) gainJson2Gain(gainJson *GainJson) {

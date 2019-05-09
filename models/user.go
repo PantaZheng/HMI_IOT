@@ -49,7 +49,7 @@ type UserJSON struct {
 	OpenID    string `json:"openid"`
 	Code      string `json:"code"`
 	Name      string `json:"name"`
-	IDCard    string `json:"id_card"`
+	IDCard    string `json:"idCard"`
 	Level     int    `json:"level"`
 	Telephone string `json:"telephone"`
 }

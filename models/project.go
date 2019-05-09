@@ -31,9 +31,9 @@ type ProjectJson struct {
 	Name         string            `json:"name"`
 	Type         string            `json:"type"`
 	Creator      UserBriefJSON     `json:"creator"`
-	CreateTime   string            `json:"create_time"`
-	StartTime    string            `json:"start_time"`
-	EndTime      string            `json:"end_time"`
+	CreateTime   string            `json:"createTime"`
+	StartTime    string            `json:"startTime"`
+	EndTime      string            `json:"endTime"`
 	Content      string            `json:"content"`
 	Targets      []string          `json:"targets"`
 	Leader       UserBriefJSON     `json:"leader"`

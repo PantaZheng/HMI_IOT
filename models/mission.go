@@ -27,9 +27,9 @@ type MissionJson struct {
 	ID           uint            `json:"id"`
 	Name         string          `json:"name"`
 	Creator      UserBriefJSON   `json:"creator"`
-	CreateTime   string          `json:"create_time"`
-	StartTime    string          `json:"start_time"`
-	EndTime      string          `json:"end_time"`
+	CreateTime   string          `json:"createTime"`
+	StartTime    string          `json:"startTime"`
+	EndTime      string          `json:"endTime"`
 	Content      string          `json:"content"`
 	File         string          `json:"file"`
 	Tag          bool            `json:"tag"` //tag由module负责人决定
@@ -41,7 +41,7 @@ type MissionJson struct {
 type MissionBriefJson struct {
 	ID         uint   `json:"id"`
 	Name       string `json:"name"`
-	CreateTime string `json:"create_time"`
+	CreateTime string `json:"createTime"`
 	Content    string `json:"content"`
 	Tag        bool   `json:"tag"`
 	ModuleID   uint   `json:"module"`

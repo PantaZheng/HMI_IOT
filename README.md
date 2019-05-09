@@ -54,7 +54,7 @@ type UserJSON struct {
 	OpenID    string `json:"openid"`
 	Code      string `json:"code"`
 	Name      string `json:"name"`
-	IDCard    string `json:"id_card"`
+	IDCard    string `json:"idCard"`
 	Level     int    `json:"level"`
 	Telephone string `json:"telephone"`
 }
@@ -89,10 +89,10 @@ type GainJson struct {
 	Name      string        `json:"name"`
 	Type      string        `json:"type"`
 	File      string        `json:"file"`
-	UpTime    string        `json:"up_time"`
+	UpTime    string        `json:"upTime"`
 	Remark    string        `json:"remark"`
 	Owner     UserBriefJSON `json:"owner"`
-	MissionID uint          `json:"mission_id"`
+	MissionID uint          `json:"missionID"`
 }
 ```
 
@@ -114,9 +114,9 @@ type MissionJson struct {
 	ID           uint            `json:"id"`
 	Name         string          `json:"name"`
 	Creator      UserBriefJSON   `json:"creator"`
-	CreateTime   string          `json:"create_time"`
-	StartTime    string          `json:"start_time"`
-	EndTime      string          `json:"end_time"`
+	CreateTime   string          `json:"createTime"`
+	StartTime    string          `json:"startTime"`
+	EndTime      string          `json:"endTime"`
 	Content      string          `json:"content"`
 	File         string          `json:"file"`
 	Tag          bool            `json:"tag"` //tag由module负责人决定
@@ -128,7 +128,7 @@ type MissionJson struct {
 type MissionBriefJson struct {
 	ID         uint   `json:"id"`
 	Name       string `json:"name"`
-	CreateTime string `json:"create_time"`
+	CreateTime string `json:"createTime"`
 	Content    string `json:"content"`
 	Tag        bool   `json:"tag"`
 	ModuleID   uint   `json:"module"`
@@ -234,6 +234,13 @@ ProjectDeleteByID|delete|`/id/{id:uint}`|-|`ProjectJson`
 
 ### top deign
 
+2019-5-9
+
+- [ ] 单表JSON数据格式合并，在service层做置空处理
+- [ ] 微信在service层面的对后台消息的反馈
+
+2019-5-8
+
 - [ ] PACE进度实现
 - [ ] FRAME框架实现
 - [ ] 之前的实例化方式都是指针创建，改用对象
@@ -245,7 +252,7 @@ ProjectDeleteByID|delete|`/id/{id:uint}`|-|`ProjectJson`
   - `mb4`: most bytes 4
 - [ ] 操作系统将文件重定向到文件
 - [ ] JSON数据做忽略零值处理`omitempty`
-- [ ] JSON命名风格改为骆驼风格
+- [x] JSON命名风格改为骆驼风格
 - [ ] 时间风格，在utils中添加转换时间的工具
   - `layout: 2006-01-02`
 
