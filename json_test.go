@@ -1,8 +1,10 @@
 package main
 
 import (
+	"encoding/json"
 	"github.com/jinzhu/gorm"
 	"log"
+	"reflect"
 	"testing"
 )
 
@@ -16,9 +18,9 @@ import (
 */
 
 func TestJson(t *testing.T) {
-	json := UserJSON{ID: 1, IDCard: "1111"}
-	log.Println(json)
-	log.Println(json.Telephone)
+	userJSON := UserJSON{ID: 1, IDCard: "1111"}
+	log.Println(json.Marshal(userJSON))
+	log.Println(reflect.TypeOf(userJSON.Telephone))
 }
 
 type User struct {
