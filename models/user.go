@@ -45,20 +45,29 @@ type User struct {
 
 //UserJSON 用户Json原型
 type UserJSON struct {
-	ID        uint   `json:"id"`
-	OpenID    string `json:"openid"`
-	Code      string `json:"code"`
-	Name      string `json:"name"`
-	IDCard    string `json:"idCard"`
-	Level     int    `json:"level"`
-	Telephone string `json:"telephone"`
+	/**
+	@Author: PantaZheng
+	@Description:用户JSON
+	@Date: 2019/5/9 10:42
+	*/
+	ID        uint   `json:"id,omitempty"`
+	OpenID    string `json:"openid,omitempty"`
+	Code      string `json:"code,omitempty"`
+	Name      string `json:"name,omitempty"`
+	IDCard    string `json:"idCard,omitempty"`
+	Level     int    `json:"level,omitempty"`
+	Telephone string `json:"telephone,omitempty"`
 }
 
-//UserBriefJSON 简洁版的用户Json信息
-type UserBriefJSON struct {
-	ID    uint   `json:"id"`
-	Name  string `json:"name"`
-	Level int    `json:"level"`
+func (userJSON *UserJSON)checkUniqueConstraint(tag bool){
+	/**
+	@Author: PantaZheng
+	@Description:检查UserJSON的唯一性要求是否满足，ID,
+	OpenID,IDCard
+	@Date: 2019/5/9 10:44
+	*/
+	count:=0
+	if userJSON.ID==""
 }
 
 func userTestData() {
@@ -86,6 +95,10 @@ func (userJson *UserJSON) user2UserJSON(user *User) {
 	userJson.IDCard = user.IDCard
 	userJson.Level = user.Level
 	userJson.Telephone = user.Telephone
+}
+
+func BriedJSONMaker(user *User) {
+
 }
 
 //User2UserBriefJSON DB的User转化为BriefJSON

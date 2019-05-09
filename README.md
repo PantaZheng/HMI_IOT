@@ -238,6 +238,7 @@ ProjectDeleteByID|delete|`/id/{id:uint}`|-|`ProjectJson`
 
 - [ ] 单表JSON数据格式合并，在service层做置空处理
 - [ ] 微信在service层面的对后台消息的反馈
+- [ ] 操作函数`er`命名
 
 2019-5-8
 
