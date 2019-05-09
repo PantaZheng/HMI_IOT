@@ -58,6 +58,14 @@ type TagJson struct {
 	Tag bool `json:"tag"`
 }
 
+func (project Project) Creator() (recordUser User, err error) {
+	if err = database.DB.Create(user).Error; err != nil {
+
+		return
+	}
+
+}
+
 func projectTestData() {
 	u2 := &UserBriefJSON{ID: 2}
 	u3 := &UserBriefJSON{ID: 3}

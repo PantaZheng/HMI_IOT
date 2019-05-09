@@ -24,7 +24,7 @@ func New() *gorm.DB {
 	userName := configTree.Get("databaseUserName").(string)
 	password := configTree.Get("databasePassword").(string)
 	databaseName := configTree.Get("databaseName").(string)
-	connect := userName + ":" + password + "@/" + databaseName + "?charset=utf8&parseTime=True&loc=Local"
+	connect := userName + ":" + password + "@/" + databaseName + "?charset=utf8mb4&parseTime=True&loc=Local"
 	DB, err := gorm.Open(driver, connect)
 
 	if err != nil {

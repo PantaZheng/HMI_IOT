@@ -45,6 +45,6 @@ type UserJSON struct {
 	Code      string `json:"code,omitempty"`
 	Name      string `json:"name,omitempty"`
 	IDCard    string `json:"idCard,omitempty"`
-	Level     int    `json:"level,omitempty"`
+	Level     int    `json:"level"`
 	Telephone string `json:"telephone,omitempty"`
 }
