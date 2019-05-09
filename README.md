@@ -247,7 +247,7 @@ ProjectDeleteByID|delete|`/id/{id:uint}`|-|`ProjectJson`
 - [ ] 之前的实例化方式都是指针创建，改用对象
 - [ ] level改用`map`实现
 - [ ] createTime不用加time,只用data
-- [ ] models、service采用`method`重写`function`
+- [ ] models、service采用`method`重写`function`，----
 - [ ] 使用`interface`写不同等级用户，允许拥有不同的权限
 - [ ] mysql 使用`utf8mb4`，用户表加入微信用户名
   - `mb4`: most bytes 4

@@ -1,46 +1,55 @@
 package main
 
 import (
-	"github.com/jinzhu/gorm"
-	"github.com/pantazheng/bci/database"
 	"log"
 	"testing"
 )
 
-//User 数据库用户表
-type User struct {
-	gorm.Model
-	OpenID string `gorm:"unique"`
-	Code   string
-	Name   string
-	IDCard string
-	Level  int
+var LevelMap = map[string]int{
+	//Stranger 未绑定
+	"Stranger": 0,
+	//Emeritus Professor emeritus 专家教授
+	"Emeritus": 1,
+	//Student 学生
+	"Student": 2,
+	//Assistant 助理
+	"Assistant": 3,
+	//Senior Senior lecturer 高级讲师
+	"Senior": 4,
+	//Full Full professor 全职教授
+	"Full": 5,
 }
 
-//Creator 创建User
-func (user *User) Creator() (err error) {
-	/**
-	@Author: PantaZheng
-	@Description:
-	@Date: 2019/5/9 13:29
-	*/
-	if err = database.DB.Create(&user).Error; err != nil {
-		return
-	}
-	if err = database.DB.First(&user).Error; err != nil {
-		return
-	}
-	return
-}
+////User 数据库用户表
+//type User struct {
+//	gorm.Model
+//	OpenID string `gorm:"unique"`
+//	Code   string
+//	Name   string
+//	IDCard string
+//	Level  int
+//}
+
+////Creator 创建User
+//func (user *User) Creator() (err error) {
+//	/**
+//	@Author: PantaZheng
+//	@Description:
+//	@Date: 2019/5/9 13:29
+//	*/
+//	if err = database.DB.Create(&user).Error; err != nil {
+//		return
+//	}
+//	if err = database.DB.First(&user).Error; err != nil {
+//		return
+//	}
+//	return
+//}
 
 func TestUser(t *testing.T) {
-	database.DB.DropTable("users")
-	database.DB.Set("gorm:table_options", "DEFAULT CHARSET=utf8mb4 AUTO_INCREMENT=1;").AutoMigrate(&User{})
-	user := &User{Name: "111"}
-	log.Println(user)
-	err := user.Creator()
-	log.Println(err)
-	log.Println(user)
+	for _, v := range LevelMap {
+		log.Println(v)
+	}
 }
 
 //func userCreate() (userJson models.UserJSON) {

@@ -8,6 +8,24 @@ import (
 	"log"
 )
 
+//TODO:使用MAP实现
+LevelMap:=map[string]int{
+	//Stranger 未绑定
+	"Stranger"=iota
+	//Emeritus Professor emeritus 专家教授
+	"Emeritus"
+	//Student 学生
+	"Student"
+	//Assistant 助理
+	"Assistant"
+	//Senior Senior lecturer 高级讲师
+	"Senior"
+	//Full Full professor 全职教授
+	"Full"
+}
+
+
+
 //UserJSON 用户Json原型
 type UserJSON struct {
 	/**
@@ -54,18 +72,6 @@ func UserJSON2User(userJSON *UserJSON, user *models.User) {
 	user.IDCard = userJSON.IDCard
 	user.Level = userJSON.Level
 	user.Telephone = userJSON.Telephone
-}
-
-func (userJSON UserJSON) checkUniqueConstraint(err error) {
-	/**
-	@Author: PantaZheng
-	@Description:检查UserJSON的唯一性要求是否满足，ID,
-	OpenID,IDCard
-	@Date: 2019/5/9 10:44
-	*/
-	if userJSON.OpenID == "" && userJSON.ID == 0 {
-		err = errors.New("checkUniqueConstraint:\t\n需要OpenID或ID来满足用户唯一性")
-	}
 }
 
 func exchangeOpenId(code string) (openid string, err error) {
