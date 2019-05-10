@@ -33,20 +33,36 @@
 
 ```go
 
-const (
-	// LevelStranger 未绑定
-	LevelStranger  = iota
-	// LevelEmeritus Professor emeritus 专家教授
-	LevelEmeritus
-	// LevelStudent 学生
-	LevelStudent
-	// LevelAssistant 助理
-	LevelAssistant
-	// LevelSenior Senior lecturer 高级讲师
-	LevelSenior
-	// LevelFull Full professor 全职教授
-	LevelFull
-)
+LevelMap = map[string]int{
+  //Stranger 未绑定
+  "Stranger": 0,
+  //Emeritus Professor emeritus 专家教授
+  "Emeritus": 1,
+  //Student 学生
+  "Student": 2,
+  //Assistant 助理
+  "Assistant": 3,
+  //Senior Senior lecturer 高级讲师
+  "Senior": 4,
+  //Full Full professor 全职教授
+  "Full": 5,
+}
+
+//UserJSON 用户Json原型
+type UserJSON struct {
+	/**
+	@Author: PantaZheng
+	@Description:用户JSON
+	@Date: 2019/5/9 10:42
+	*/
+	ID        int    `json:"id,omitempty"`
+	OpenID    string `json:"openid,omitempty"`
+	Code      string `json:"code,omitempty"`
+	Name      string `json:"name,omitempty"`
+	IDCard    string `json:"idCard,omitempty"`
+	Level     int    `json:"level"`
+	Telephone string `json:"telephone,omitempty"`
+}
 
 //UserJSON 用户Json原型
 type UserJSON struct {
@@ -59,23 +75,15 @@ type UserJSON struct {
 	Telephone string `json:"telephone"`
 }
 
-//UserBriefJSON 简洁版的用户Json信息
-type UserBriefJSON struct {
-	ID    uint   `json:"id"`
-	Name  string `json:"name"`
-	Level int    `json:"level"`
-}
 ```
 
-名称|method|path|传入body参数|接收body参数
--|-|-|-|-
-UserCreate|post|`/`|`UserJson`|`UserJson`
-UserFindByID|get|`/id/{id:uint}`|-|`UserJson`
-UserFindByIDCard|get|`/id_card/{id_card:string}`|-|`UserJson`
-UserFindByOpenID|get|`/openid/{openid:string}`|-|`UserJson`
-UsersFindByLevel|get|`/level/{level:int}`|-|`[]UserBriefJson`
+名称|method|path|传入body参数|接收body参数|
+-|-|-|:-|:-
+UserCreate|post|`/`|`UserJson`<br>IDCard必须存在|`UserJson`<br>id,openid,id_card三者至少存在一个，其他项均可缺省
+UserFindByID|get|`/id/{id:uint}`|-|`UserJson`|
+UsersFindByLevel|get|`/level/{level:int}`|-|`[]UserJson`|仅包含id,name
 UserUpdate|put|`/update`|`UserJson`|`UserJson`
-UserBind|put|`/bind`|`UserJson`|`UserJson`
+UserBind|put|`/bind`|`UserJson`<br>openid,code仅且存在一个|`UserJson`
 UserDeleteByID|delete|`/id/{id:uint}`|-|`UserJson`
 UserDeleteByOpenID|delete|`/id/{openid:string}`|-|`UserJson`
 
@@ -236,30 +244,31 @@ ProjectDeleteByID|delete|`/id/{id:uint}`|-|`ProjectJson`
 
 2019-5-9
 
-- [ ] 单表JSON数据格式合并，在service层做置空处理
+- [ ] JSON 放到service层处理 ---
 - [ ] 微信在service层面的对后台消息的反馈
-- [ ] 操作函数`er`命名
+- [ ] 判断数据库表是否为空
 
 2019-5-8
 
 - [ ] PACE进度实现
 - [ ] FRAME框架实现
-- [ ] 之前的实例化方式都是指针创建，改用对象
-- [ ] level改用`map`实现
+- [ ] 之前的实例化方式都是指针创建，改用对象---
+- [x] level改用`map`实现
 - [ ] createTime不用加time,只用data
-- [ ] models、service采用`method`重写`function`，----
-- [ ] 使用`interface`写不同等级用户，允许拥有不同的权限
-- [ ] mysql 使用`utf8mb4`，用户表加入微信用户名
-  - `mb4`: most bytes 4
-- [ ] 操作系统将文件重定向到文件
-- [ ] JSON数据做忽略零值处理`omitempty`
-- [x] JSON命名风格改为骆驼风格
 - [ ] 时间风格，在utils中添加转换时间的工具
   - `layout: 2006-01-02`
+- [ ] models、service采用`method`重写`function`，----
+- [ ] 使用`interface`写不同等级用户，允许拥有不同的权限
+- [x] mysql 使用`utf8mb4`，用户表加入微信用户名
+  - `mb4`: most bytes 4
+- [ ] 操作系统将文件重定向到文件
 
   ```bash
   > .log 2>&1
   ```
+
+- [ ] JSON数据做忽略零值处理`omitempty`---
+- [x] JSON命名风格改为骆驼风格
 
 ### models
 
@@ -329,17 +338,13 @@ ProjectDeleteByID|delete|`/id/{id:uint}`|-|`ProjectJson`
   - [x] `../project_test`
 - [x] user
   - [x] `type User struct`
-  - [x] `type UserJson struct`
-  - [x] `type UserBriefJson struct`
-  - [x] `userTestData`
-  - [x] `userJson2User`
-  - [x] `user2UserJson`
-  - [x] `user2UserBriefJson`
-  - [x] `UserCreate`
-  - [x] `UserFind`
-  - [x] `UsersFindByLevel`
-  - [x] `UserUpdate`
-  - [x] `UserDelete`
+  - [x] `checkUnique`
+  - [x] `User2UserJSON`
+  - [x] `Create`
+  - [x] `First`
+  - [x] `Find`
+  - [x] `Updates`
+  - [x] `Delete`
 - [x] init
   - [x] 表单删除
   - [x] 表单迁移
@@ -383,15 +388,21 @@ ProjectDeleteByID|delete|`/id/{id:uint}`|-|`ProjectJson`
   - [x] `ProjectUpdate`
   - [x] `ProjectDeleteByID`
 - [x] user
-  - [x] `UserInitByWechat`
-  - [x] `UserCreate`
-  - [x] `UserUpdate`
+  - [x] `userTestData`
+  - [x] `UserJSON2User`
+  - [x] `exchangeOpenId`
+  - [x] `simplify`
+  - [x] `Create`
+  - [x] `Bind`
+  - [x] `First`
   - [x] `UserFindByID`
-  - [x] `UserFindByIDCard`
   - [x] `UserFindByOpenID`
+  - [x] `UserFindByIDCard`
+  - [x] `Find`
+  - [x] `UsersFindByLevel`
+  - [x] `Updates`
   - [x] `UserDeleteByID`
   - [x] `UserDeleteByOpenID`
-  - [x] `UserBind`
 
 ### controller
 
@@ -434,10 +445,11 @@ ProjectDeleteByID|delete|`/id/{id:uint}`|-|`ProjectJson`
   - [x] `ProjectDeleteByID`
 - [x] user
   - [x] `UserCreate`
+  - [x] `UserBind`
   - [x] `UserFindByID`
   - [x] `UserFindByIDCard`
   - [x] `UserFindByOpenID`
   - [x] `UserDeleteByID`
-  - [x] `UserDeleteByOpenID`
-  - [x] `UserUpdate`
+  - [x] `UserDeleteByIDCarD`
+  - [x] `UserUpdates`
   - [x] `UserBind`

@@ -40,7 +40,7 @@ var LevelMap = map[string]int{
 //	if err = database.DB.Create(&user).Error; err != nil {
 //		return
 //	}
-//	if err = database.DB.First(&user).Error; err != nil {
+//	if err = database.DB.first(&user).Error; err != nil {
 //		return
 //	}
 //	return

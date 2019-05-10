@@ -4,38 +4,28 @@ import (
 	"errors"
 	"github.com/jinzhu/gorm"
 	"github.com/pantazheng/bci/database"
-	"strconv"
+	"github.com/pantazheng/bci/service"
 )
 
 //User 数据库用户表.
 type User struct {
 	gorm.Model
-	OpenID    string `gorm:"unique"`
-	Code      string
-	Name      string
-	IDCard    string `gorm:"unique"`
-	Level     int
-	Telephone string
-	CProjects []*Project `gorm:"foreignkey:CreatorID"`
-	LProjects []*Project `gorm:"foreignkey:LeaderID"`
-	PProjects []*Project `gorm:"many2many:user_projects"`
-	CModules  []*Module  `gorm:"foreignkey:CreatorID"`
-	LModules  []*Module  `gorm:"foreignkey:LeaderID"`
-	PModules  []*Module  `gorm:"many2many:user_modules"`
-	CMissions []*Mission `gorm:"foreignkey:CreatorID"`
-	PMissions []*Mission `gorm:"many2many:user_missions"`
-	OGains    []*Gain    `gorm:"foreignkey:OwnerID"`
-}
-
-func userTestData() {
-	user1=&User{OpenID:"test1",Level:1
-	}
-	_, _ = UserCreate(&UserJSON{OpenID: "test1", Level: LevelEmeritus})
-	_, _ = UserCreate(&UserJSON{OpenID: "student1", Name: "student1", Level: LevelStudent})
-	_, _ = UserCreate(&UserJSON{OpenID: "assistant1", Name: "assistant1", Level: LevelAssistant})
-	_, _ = UserCreate(&UserJSON{OpenID: "full1", Name: "戴国骏", Level: LevelFull})
-	_, _ = UserCreate(&UserJSON{OpenID: "senior2", Name: "张桦", Level: LevelSenior})
-	_, _ = UserCreate(&UserJSON{OpenID: "teacher_unknown", Name: "其他导师", Level: LevelSenior})
+	OpenID     string `gorm:"unique;index:openid_index"`
+	WeChatName string
+	Code       string
+	Name       string
+	IDCard     string `gorm:"unique;index:idCard_index"`
+	Level      int
+	Telephone  string
+	//CProjects  []*Project `gorm:"foreignkey:CreatorID"`
+	//LProjects  []*Project `gorm:"foreignkey:LeaderID"`
+	//PProjects  []*Project `gorm:"many2many:user_projects"`
+	//CModules   []*Module  `gorm:"foreignkey:CreatorID"`
+	//LModules   []*Module  `gorm:"foreignkey:LeaderID"`
+	//PModules   []*Module  `gorm:"many2many:user_modules"`
+	//CMissions  []*Mission `gorm:"foreignkey:CreatorID"`
+	//PMissions  []*Mission `gorm:"many2many:user_missions"`
+	//OGains     []*Gain    `gorm:"foreignkey:OwnerID"`
 }
 
 func (user *User) checkUnique() (err error) {
@@ -51,7 +41,25 @@ func (user *User) checkUnique() (err error) {
 	return
 }
 
-//Creator 创建User.
+//User2UserJSON User表单转换到UserJSON.
+func (user *User) User2UserJSON(userJSON service.UserJSON) {
+	/**
+	  @Author: PantaZheng
+	  @Description:
+	  @Date: 2019/5/9 12:04
+	*/
+	userJSON.ID = user.ID
+	userJSON.OpenID = user.OpenID
+	userJSON.WeChatName = user.WeChatName
+	userJSON.Code = user.Code
+	userJSON.Name = user.Name
+	userJSON.IDCard = user.IDCard
+	userJSON.Level = user.Level
+	userJSON.Telephone = user.Telephone
+	return
+}
+
+//Create 创建User.
 func (user *User) Create() (err error) {
 	/**
 	@Author: PantaZheng
@@ -61,13 +69,13 @@ func (user *User) Create() (err error) {
 	if err = user.checkUnique(); err != nil {
 		return
 	}
-	if err = database.DB.Create(&user).Error; err != nil {
+	if err = database.DB.Create(user).Error; err != nil {
 		return
 	}
 	return
 }
 
-//First 查找首个用户.
+//first 查找首个用户.
 func (user *User) First() (err error) {
 	/**
 	@Author: PantaZheng
@@ -77,70 +85,53 @@ func (user *User) First() (err error) {
 	if err = user.checkUnique(); err != nil {
 		return
 	}
-	err = database.DB.First(&user).Error
+	err = database.DB.First(user).Error
 	return
 }
 
-//Finds 查找多个用户.
+//Find 查找多个用户.
 func (user *User) Find() (users []*User, err error) {
 	/**
 	@Author: PantaZheng
 	@Description:
 	@Date: 2019/5/9 14:08
 	*/
-	err = database.DB.Find(&users, &user).Error
+	err = database.DB.Find(users, user).Error
 	return
 }
 
 //Updates 非覆盖式更新，零值不更新.
-func (user *User) Updates() (err error) {
+func (user *User) Updates(newUser *User) (err error) {
 	/**
 	@Author: PantaZheng
 	@Description:
 	@Date: 2019/5/9 14:29
 	*/
-	hitUser := User{}
-	hitUser = *user
-	if err= hitUser.First();err!=nil{
-		return
-	}
-	err = database.DB.Model(&hitUser).Updates(&user).Error
+	err = database.DB.Model(user).Updates(newUser).Error
 	return
 }
 
 //Save 覆盖式更新，零值更新.
-func (user *User) Save() (err error) {
+func (user *User) Save(newUser *User) (err error) {
 	/**
 	@Author: PantaZheng
 	@Description:
 	@Date: 2019/5/9 14:29
 	*/
-	hitUser := User{}
-	hitUser = *user
-	if err= hitUser.First();err!=nil{
-		return
-	}
-	err = database.DB.Model(&hitUser).Save(&user).Error
+	err = database.DB.Model(user).Updates(newUser).Error
 	return
 }
 
 //Delete 先将openid和idCard置为id来实现，再软删除.
-func (user *User) Delete() (err error){
+func (user *User) Delete() (err error) {
 	/**
 	@Author: PantaZheng
 	@Description:
 	@Date: 2019/5/9 14:36
 	*/
-	if err= user.First();err!=nil{
+	if err = user.Updates(&User{OpenID: string(user.ID), IDCard: string(user.ID)}); err != nil {
 		return
 	}
-	user.OpenID=string(user.ID)
-	user.IDCard=string(user.ID)
-	if err=user.Updates();err!=nil{
-		return
-	}
-	err = database.DB.Delete(&user).Error
+	err = database.DB.Delete(user).Error
 	return
 }
-
-

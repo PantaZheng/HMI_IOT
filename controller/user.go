@@ -2,115 +2,165 @@ package controller
 
 import (
 	"github.com/kataras/iris"
-	"github.com/pantazheng/bci/models"
 	"github.com/pantazheng/bci/service"
 	"log"
 )
 
 func UserCreate(ctx iris.Context) {
-	newUser := new(models.UserJSON)
-	if err := ctx.ReadJSON(newUser); err != nil {
-		log.Println(err.Error())
-	}
-	if userJson, err := service.UserCreate(newUser); err != nil {
+	u := new(service.UserJSON)
+	if err := ctx.ReadJSON(u); err != nil {
 		ctx.StatusCode(iris.StatusAccepted)
-		_, _ = ctx.Text(err.Error())
+		info := err.Error()
+		_, _ = ctx.Text(info)
+		log.Println(info)
 	} else {
-		ctx.StatusCode(iris.StatusOK)
-		_, _ = ctx.JSON(userJson)
+		if err := u.Create(); err != nil {
+			ctx.StatusCode(iris.StatusAccepted)
+			info := err.Error()
+			_, _ = ctx.Text(info)
+			log.Println(info)
+		} else {
+			ctx.StatusCode(iris.StatusOK)
+			_, _ = ctx.JSON(u)
+		}
 	}
 }
 
-func UserFindByID(ctx iris.Context) {
-	id, _ := ctx.Params().GetUint("id")
-	if userJson, err := service.UserFindByID(id); err != nil {
+func UserBind(ctx iris.Context) {
+	u := new(service.UserJSON)
+	if err := ctx.ReadJSON(u); err != nil {
 		ctx.StatusCode(iris.StatusAccepted)
-		_, _ = ctx.Text(err.Error())
+		info := err.Error()
+		_, _ = ctx.Text(info)
+		log.Println(info)
 	} else {
-		ctx.StatusCode(iris.StatusOK)
-		_, _ = ctx.JSON(userJson)
+		if err := u.Bind(); err != nil {
+			ctx.StatusCode(iris.StatusAccepted)
+			info := err.Error()
+			_, _ = ctx.Text(info)
+			log.Println(info)
+		} else {
+			ctx.StatusCode(iris.StatusOK)
+			_, _ = ctx.JSON(u)
+		}
+	}
+
+}
+
+func UserFindByID(ctx iris.Context) {
+	if id, err := ctx.Params().GetUint("id"); err != nil {
+		ctx.StatusCode(iris.StatusAccepted)
+		info := err.Error()
+		_, _ = ctx.Text(info)
+		log.Println(info)
+	} else {
+		if u, err := service.UserFindByID(id); err != nil {
+			ctx.StatusCode(iris.StatusAccepted)
+			info := err.Error()
+			_, _ = ctx.Text(info)
+			log.Println(info)
+		} else {
+			ctx.StatusCode(iris.StatusOK)
+			_, _ = ctx.JSON(u)
+		}
 	}
 }
 
 func UserFindByIDCard(ctx iris.Context) {
 	idCard := ctx.Params().GetString("id_card")
-	if userJson, err := service.UserFindByIDCard(idCard); err != nil {
+	if u, err := service.UserFindByIDCard(idCard); err != nil {
 		ctx.StatusCode(iris.StatusAccepted)
-		_, _ = ctx.Text(err.Error())
+		info := err.Error()
+		_, _ = ctx.Text(info)
+		log.Println(info)
 	} else {
 		ctx.StatusCode(iris.StatusOK)
-		_, _ = ctx.JSON(userJson)
+		_, _ = ctx.JSON(u)
 	}
 }
 
 func UserFindByOpenID(ctx iris.Context) {
 	openid := ctx.Params().GetString("openid")
-	if userJson, err := service.UserFindByOpenID(openid); err != nil {
+	if u, err := service.UserFindByOpenID(openid); err != nil {
 		ctx.StatusCode(iris.StatusAccepted)
-		_, _ = ctx.Text(err.Error())
+		info := err.Error()
+		_, _ = ctx.Text(info)
+		log.Println(info)
 	} else {
 		ctx.StatusCode(iris.StatusOK)
-		_, _ = ctx.JSON(userJson)
+		_, _ = ctx.JSON(u)
 	}
 }
 
 func UsersFindByLevel(ctx iris.Context) {
-	level, _ := ctx.Params().GetInt("level")
-	if usersJson, err := service.UsersFindByLevel(level); err != nil {
+	if level, err := ctx.Params().GetInt("level"); err != nil {
 		ctx.StatusCode(iris.StatusAccepted)
-		_, _ = ctx.Text(err.Error())
+		info := err.Error()
+		_, _ = ctx.Text(info)
+		log.Println(info)
 	} else {
-		ctx.StatusCode(iris.StatusOK)
-		_, _ = ctx.JSON(usersJson)
+		if usersJson, err := service.UsersFindByLevel(level); err != nil {
+			ctx.StatusCode(iris.StatusAccepted)
+			info := err.Error()
+			_, _ = ctx.Text(info)
+			log.Println(info)
+		} else {
+			ctx.StatusCode(iris.StatusOK)
+			_, _ = ctx.JSON(usersJson)
+		}
 	}
 }
 
 func UserDeleteByID(ctx iris.Context) {
-	id, _ := ctx.Params().GetUint("id")
-	if userJson, err := service.UserDeleteByID(id); err != nil {
+	if id, err := ctx.Params().GetUint("id"); err != nil {
 		ctx.StatusCode(iris.StatusAccepted)
-		_, _ = ctx.Text(err.Error())
+		info := err.Error()
+		_, _ = ctx.Text(info)
+		log.Println(info)
+	} else {
+		if userJson, err := service.UserDeleteByID(id); err != nil {
+			ctx.StatusCode(iris.StatusAccepted)
+			info := err.Error()
+			_, _ = ctx.Text(info)
+			log.Println(info)
+		} else {
+			ctx.StatusCode(iris.StatusOK)
+			_, _ = ctx.JSON(userJson)
+		}
+	}
+
+}
+
+func UserDeleteByIDCard(ctx iris.Context) {
+	idCard := ctx.Params().GetString("id_card")
+	if userJson, err := service.UserDeleteByIDCard(idCard); err != nil {
+		ctx.StatusCode(iris.StatusAccepted)
+		info := err.Error()
+		_, _ = ctx.Text(info)
+		log.Println(info)
 	} else {
 		ctx.StatusCode(iris.StatusOK)
 		_, _ = ctx.JSON(userJson)
 	}
 }
 
-func UserDeleteByOpenID(ctx iris.Context) {
-	id := ctx.Params().GetString("openid")
-	if userJson, err := service.UserDeleteByOpenID(id); err != nil {
+func UserUpdates(ctx iris.Context) {
+	u := new(service.UserJSON)
+	if err := ctx.ReadJSON(u); err != nil {
 		ctx.StatusCode(iris.StatusAccepted)
-		_, _ = ctx.Text(err.Error())
+		info := err.Error()
+		_, _ = ctx.Text(info)
+		log.Println(info)
 	} else {
-		ctx.StatusCode(iris.StatusOK)
-		_, _ = ctx.JSON(userJson)
+		if err := u.Updates(); err != nil {
+			ctx.StatusCode(iris.StatusAccepted)
+			info := err.Error()
+			_, _ = ctx.Text(info)
+			log.Println(info)
+		} else {
+			ctx.StatusCode(iris.StatusOK)
+			_, _ = ctx.JSON(u)
+		}
 	}
-}
 
-func UserUpdate(ctx iris.Context) {
-	newUser := new(models.UserJSON)
-	if err := ctx.ReadJSON(newUser); err != nil {
-		log.Println(err.Error())
-	}
-	if userJson, err := service.UserUpdate(newUser); err != nil {
-		ctx.StatusCode(iris.StatusAccepted)
-		_, _ = ctx.Text(err.Error())
-	} else {
-		ctx.StatusCode(iris.StatusOK)
-		_, _ = ctx.JSON(userJson)
-	}
-}
-
-func UserBind(ctx iris.Context) {
-	newUser := new(models.UserJSON)
-	if err := ctx.ReadJSON(newUser); err != nil {
-		log.Println(err.Error())
-	}
-	if userJson, err := service.UserBind(newUser); err != nil {
-		ctx.StatusCode(iris.StatusAccepted)
-		_, _ = ctx.Text(err.Error())
-	} else {
-		ctx.StatusCode(iris.StatusOK)
-		_, _ = ctx.JSON(userJson)
-	}
 }
