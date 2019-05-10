@@ -6,6 +6,7 @@ import (
 	"github.com/chanxuehong/wechat/oauth2"
 	"github.com/pantazheng/bci/models"
 	"log"
+	"strconv"
 )
 
 const title = "service.user."
@@ -163,10 +164,10 @@ func (userJSON *UserJSON) Create() (err error) {
 	if u.OpenID == "" || u.IDCard == "" {
 		newUser := &models.User{}
 		if u.OpenID == "" {
-			newUser.OpenID = string(u.ID)
+			newUser.OpenID = strconv.Itoa(int(u.ID))
 		}
 		if u.IDCard == "" {
-			newUser.IDCard = string(u.ID)
+			newUser.IDCard = strconv.Itoa(int(u.ID))
 		}
 		if err = u.Updates(newUser); err != nil {
 			err = errors.New(field + err.Error())

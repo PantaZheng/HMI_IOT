@@ -12,7 +12,7 @@ import "github.com/pantazheng/bci/database"
 */
 
 func init() {
-	if database.DB.HasTable("users") {
+	if !database.DB.HasTable("users") {
 		userTestData()
 	}
 
