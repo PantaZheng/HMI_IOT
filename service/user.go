@@ -167,6 +167,10 @@ func (userJSON *UserJSON) Create() (err error) {
 	@Date: 2019/5/9 23:11
 	*/
 	field = title + "Create:\t"
+	if err = userJSON.checkLevel(); err != nil {
+		err = errors.New(field + err.Error())
+		return
+	}
 	u := userJSON.UserJSON2User()
 	if err = u.Create(); err != nil {
 		err = errors.New(field + err.Error())
@@ -345,6 +349,10 @@ func (userJSON *UserJSON) Updates() (err error) {
 	@Date: 2019/5/10 14:09
 	*/
 	field = title + "Updates:\t"
+	if err = userJSON.checkLevel(); err != nil {
+		err = errors.New(field + err.Error())
+		return
+	}
 	u := userJSON.UserJSON2User()
 	newUser := new(models.User)
 	newUser.ID = u.ID

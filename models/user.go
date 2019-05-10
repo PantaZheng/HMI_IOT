@@ -4,6 +4,7 @@ import (
 	"errors"
 	"github.com/jinzhu/gorm"
 	"github.com/pantazheng/bci/database"
+	"log"
 )
 
 //User 数据库用户表.
@@ -73,6 +74,7 @@ func (user *User) First() (err error) {
 func (user *User) FindOne() (err error) {
 	users := make([]User, 1)
 	find := database.DB.Find(&users, &user)
+	log.Println(users)
 	err = find.Error
 	if len(users) > 1 {
 		err = errors.New("多个匹配，请确保唯一性")
