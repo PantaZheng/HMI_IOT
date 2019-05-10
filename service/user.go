@@ -139,6 +139,7 @@ func UserInitByWechat(weChatInfo *user.UserInfo) string {
 	field = title + "UserInitByWechat:\t"
 	u := new(UserJSON)
 	u.OpenID = weChatInfo.OpenId
+	u.WechatName = weChatInfo.Nickname
 	if err := u.Create(); err != nil {
 		err = errors.New(field + err.Error())
 		return err.Error()

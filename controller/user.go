@@ -14,14 +14,21 @@ func UserCreate(ctx iris.Context) {
 		_, _ = ctx.Text(info)
 		log.Println(info)
 	} else {
-		if err := u.Create(); err != nil {
+		if u.WechatName != "" || u.OpenID != "" {
 			ctx.StatusCode(iris.StatusAccepted)
-			info := err.Error()
+			info := "Create接口不支持微信信息创建，请使用Bind接口"
 			_, _ = ctx.Text(info)
 			log.Println(info)
 		} else {
-			ctx.StatusCode(iris.StatusOK)
-			_, _ = ctx.JSON(u)
+			if err := u.Create(); err != nil {
+				ctx.StatusCode(iris.StatusAccepted)
+				info := err.Error()
+				_, _ = ctx.Text(info)
+				log.Println(info)
+			} else {
+				ctx.StatusCode(iris.StatusOK)
+				_, _ = ctx.JSON(u)
+			}
 		}
 	}
 }
