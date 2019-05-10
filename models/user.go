@@ -72,14 +72,11 @@ func (user *User) First() (err error) {
 
 func (user *User) FindOne() (err error) {
 	users := make([]User, 1)
-	if database.DB.Find(users, user).RecordNotFound() {
-		err = errors.New("RecordNotFound")
-	} else {
-		if len(users) > 1 {
-			err = errors.New("多个匹配，请确保唯一性")
-		}
+	find := database.DB.Find(&users, &user)
+	err = find.Error
+	if len(users) > 1 {
+		err = errors.New("多个匹配，请确保唯一性")
 	}
-	return
 }
 
 //Find 查找多个用户.
@@ -89,9 +86,7 @@ func (user *User) Find() (users []*User, err error) {
 	@Description:
 	@Date: 2019/5/9 14:08
 	*/
-	if database.DB.Find(users, user).RecordNotFound() {
-		err = errors.New("RecordNotFound")
-	}
+	err = database.DB.Find(&users, &user).Error
 	return
 }
 
