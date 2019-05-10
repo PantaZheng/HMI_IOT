@@ -55,7 +55,7 @@ func (user *User) Create() (err error) {
 	return
 }
 
-//first 查找首个用户.
+//first 根据id查找用户.
 func (user *User) First() (err error) {
 	/**
 	@Author: PantaZheng
@@ -67,8 +67,15 @@ func (user *User) First() (err error) {
 	}
 	first := database.DB.First(user)
 	err = first.Error
-	if first.RecordNotFound() {
-		err = errors.New("RecordNotFound")
+	return
+}
+
+func (user *User) FindOne() (err error) {
+	users := make([]User, 1)
+	find := database.DB.Find(users, user)
+	err = find.Error
+	if len(users) > 1 {
+		err = errors.New("多个匹配，请确保唯一性")
 	}
 	return
 }

@@ -234,9 +234,20 @@ func (userJSON *UserJSON) Bind() (err error) {
 
 //First 单用户查找的原子方法
 func (userJSON *UserJSON) First() (err error) {
-	field = title + "first:\t"
+	field = title + "First:\t"
 	u := userJSON.UserJSON2User()
 	if err = u.First(); err != nil {
+		err = errors.New(field + err.Error())
+	} else {
+		*userJSON = User2UserJSON(&u)
+	}
+	return
+}
+
+func (userJSON *UserJSON) FindOne() (err error) {
+	field = title + "FindOne:\t"
+	u := userJSON.UserJSON2User()
+	if err = u.FindOne(); err != nil {
 		err = errors.New(field + err.Error())
 	} else {
 		*userJSON = User2UserJSON(&u)
@@ -264,7 +275,7 @@ func UserFindByOpenID(openid string) (userJSON UserJSON, err error) {
 	@Date: 2019/5/10 1:52
 	*/
 	userJSON = UserJSON{OpenID: openid}
-	err = userJSON.First()
+	err = userJSON.FindOne()
 	return
 }
 
@@ -276,7 +287,7 @@ func UserFindByIDCard(idCard string) (userJSON UserJSON, err error) {
 	@Date: 2019/5/10 1:52
 	*/
 	userJSON = UserJSON{IDCard: idCard}
-	err = userJSON.First()
+	err = userJSON.FindOne()
 	return
 }
 
