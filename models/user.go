@@ -4,7 +4,6 @@ import (
 	"errors"
 	"github.com/jinzhu/gorm"
 	"github.com/pantazheng/bci/database"
-	"log"
 )
 
 //User 数据库用户表.
@@ -89,9 +88,6 @@ func (user *User) FindOne() (err error) {
 			*user = users[0]
 		}
 	}
-	log.Println(len(users))
-	log.Println(user)
-	log.Println(err)
 	return
 }
 
