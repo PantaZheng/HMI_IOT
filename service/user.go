@@ -48,12 +48,12 @@ type UserJSON struct {
 }
 
 func userTestData() {
-	u0 := &UserJSON{OpenID: "Stranger1", WechatName: "神秘人", Code: "神秘代码", Name: "Stranger1", IDCard: "000", Level: 0, Telephone: "110"}
-	u1 := &UserJSON{OpenID: "Emeritus1", WechatName: "万磁王", Code: "九头蛇", Name: "无关教授1", IDCard: "001", Level: 1}
-	u2 := &UserJSON{OpenID: "Student1", WechatName: "逃学", IDCard: "2", Name: "student1", Level: 2}
-	u3 := &UserJSON{OpenID: "Assistant1", WechatName: "小秘书", IDCard: "003", Name: "Assistant1", Level: 3}
-	u4 := &UserJSON{OpenID: "Senior1", WechatName: "高级打工仔", IDCard: "4", Name: "Senior1", Level: 4}
-	u5 := &UserJSON{OpenID: "Full1", WechatName: "全职叫兽", IDCard: "5", Name: "Full1", Level: 5}
+	u0 := &UserJSON{OpenID: "Stranger1", WechatName: "神秘人", Code: "神秘代码", Name: "Stranger1", IDCard: "000", Level: 1, Telephone: "110"}
+	u1 := &UserJSON{OpenID: "Emeritus1", WechatName: "万磁王", Code: "九头蛇", Name: "无关教授1", IDCard: "001", Level: 2}
+	u2 := &UserJSON{OpenID: "Student1", WechatName: "逃学", IDCard: "2", Name: "student1", Level: 3}
+	u3 := &UserJSON{OpenID: "Assistant1", WechatName: "小秘书", IDCard: "003", Name: "Assistant1", Level: 4}
+	u4 := &UserJSON{OpenID: "Senior1", WechatName: "高级打工仔", IDCard: "4", Name: "Senior1", Level: 5}
+	u5 := &UserJSON{OpenID: "Full1", WechatName: "全职叫兽", IDCard: "5", Name: "Full1", Level: 6}
 	_ = u0.Create()
 	_ = u1.Create()
 	_ = u2.Create()
@@ -127,6 +127,16 @@ func (userJSON *UserJSON) simplify() {
 	userJSON.IDCard = ""
 	userJSON.Level = 0
 	userJSON.Telephone = ""
+}
+
+func (userJSON *UserJSON) checkLevel() (err error) {
+	err = errors.New("权限等级不在列表中")
+	for _, v := range LevelMap {
+		if v == userJSON.Level {
+			err = nil
+		}
+	}
+	return
 }
 
 //UserInitByWechat 用户登录微信初始化微信.
@@ -319,8 +329,11 @@ func UsersFindByLevel(level int) (usersJSON []UserJSON, err error) {
 	@Description:
 	@Date: 2019/5/10 14:01
 	*/
+	field = title + "UsersFindByLevel\t:"
 	userJSON := UserJSON{Level: level}
-	usersJSON, err = userJSON.Find()
+	if err = userJSON.checkLevel(); err == nil {
+		usersJSON, err = userJSON.Find()
+	}
 	return
 }
 
