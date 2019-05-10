@@ -290,7 +290,7 @@ func UserFindByOpenID(openid string) (userJSON UserJSON, err error) {
 	@Date: 2019/5/10 1:52
 	*/
 	userJSON = UserJSON{OpenID: openid}
-	err = userJSON.FindOne()
+	err = userJSON.First()
 	return
 }
 

@@ -67,6 +67,7 @@ func (user *User) First() (err error) {
 		return
 	}
 	first := database.DB.First(user)
+	log.Println(first)
 	err = first.Error
 	return
 }
@@ -74,10 +75,13 @@ func (user *User) First() (err error) {
 func (user *User) FindOne() (err error) {
 	users := make([]User, 1)
 	find := database.DB.Find(&users, &user)
-	log.Println(users)
 	err = find.Error
-	if len(users) > 1 {
-		err = errors.New("多个匹配，请确保唯一性")
+	if err == nil {
+		if l := len(users); l > 1 {
+			err = errors.New("多个匹配，请确保唯一性")
+		} else if l < 0 {
+			err = errors.New("多个匹配，请确保唯一性")
+		}
 	}
 	return
 }
