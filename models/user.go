@@ -4,7 +4,6 @@ import (
 	"errors"
 	"github.com/jinzhu/gorm"
 	"github.com/pantazheng/bci/database"
-	"github.com/pantazheng/bci/service"
 )
 
 //User 数据库用户表.
@@ -38,24 +37,6 @@ func (user *User) checkUnique() (err error) {
 	if user.OpenID == "" && user.ID == 0 && user.IDCard == "" {
 		err = errors.New("checkUnique:\t\n需要OpenID或ID或IDCard来满足用户唯一性")
 	}
-	return
-}
-
-//User2UserJSON User表单转换到UserJSON.
-func (user *User) User2UserJSON(userJSON service.UserJSON) {
-	/**
-	  @Author: PantaZheng
-	  @Description:
-	  @Date: 2019/5/9 12:04
-	*/
-	userJSON.ID = user.ID
-	userJSON.OpenID = user.OpenID
-	userJSON.WeChatName = user.WeChatName
-	userJSON.Code = user.Code
-	userJSON.Name = user.Name
-	userJSON.IDCard = user.IDCard
-	userJSON.Level = user.Level
-	userJSON.Telephone = user.Telephone
 	return
 }
 

@@ -11,6 +11,7 @@ import (
 const title = "service.user."
 
 var (
+	//LevelMap 用户权限管理
 	LevelMap = map[string]int{
 		//Stranger 未绑定
 		"Stranger": 0,
@@ -54,7 +55,7 @@ func userTestData() {
 	_ = UserJSON{OpenID: "Full1", IDCard: "5", Name: "Full1", Level: 5}.Create()
 }
 
-//UserJSON2User
+//UserJSON2User UserJSON转换到User.
 func (userJSON *UserJSON) UserJSON2User() (user models.User) {
 	/**
 	@Author: PantaZheng
@@ -72,7 +73,25 @@ func (userJSON *UserJSON) UserJSON2User() (user models.User) {
 	return
 }
 
-func (userJSON *UserJSON) exchangeOpenId() (err error) {
+//User2UserJSON User表单转换到UserJSON.
+func User2UserJSON(user *models.User) (userJSON UserJSON) {
+	/**
+	  @Author: PantaZheng
+	  @Description:
+	  @Date: 2019/5/9 12:04
+	*/
+	userJSON.ID = user.ID
+	userJSON.OpenID = user.OpenID
+	userJSON.WeChatName = user.WeChatName
+	userJSON.Code = user.Code
+	userJSON.Name = user.Name
+	userJSON.IDCard = user.IDCard
+	userJSON.Level = user.Level
+	userJSON.Telephone = user.Telephone
+	return
+}
+
+func (userJSON *UserJSON) exchangeOpenID() (err error) {
 	/**
 	@Author: PantaZheng
 	@Description: 根据code换取openid
@@ -151,10 +170,11 @@ func (userJSON *UserJSON) Create() (err error) {
 		}
 	}
 	//userJSON接收数据库创建记录
-	u.User2UserJSON(*userJSON)
+	*userJSON = User2UserJSON(&u)
 	return
 }
 
+//Bind 用户绑定.
 func (userJSON *UserJSON) Bind() (err error) {
 	/**
 	@Author: PantaZheng
@@ -163,7 +183,7 @@ func (userJSON *UserJSON) Bind() (err error) {
 	*/
 	//检查openid和code
 	field = title + "Bind" + ":\t\n"
-	if err = userJSON.exchangeOpenId(); err != nil {
+	if err = userJSON.exchangeOpenID(); err != nil {
 		err = errors.New(field + err.Error())
 		return
 	}
@@ -194,28 +214,30 @@ func (userJSON *UserJSON) Bind() (err error) {
 			err = errors.New(field + err.Error())
 			return
 		}
-		presortedUser.User2UserJSON(*userJSON)
+		*userJSON = User2UserJSON(presortedUser)
 	} else {
 		//无预存信息,修改微信初始化的User，添加姓名和身份证号
 		if err = wechatUser.Updates(&models.User{Name: userJSON.Name, IDCard: userJSON.IDCard}); err != nil {
 			err = errors.New(field + err.Error())
 			return
 		}
-		wechatUser.User2UserJSON(*userJSON)
+		*userJSON = User2UserJSON(wechatUser)
 	}
 	return
 }
 
+//First 单用户查找的原子方法
 func (userJSON *UserJSON) First() (err error) {
 	field = title + "first" + ":\t\n"
 	u := userJSON.UserJSON2User()
 	if err = u.First(); err != nil {
 		err = errors.New(field + err.Error())
 	}
-	u.User2UserJSON(*userJSON)
+	*userJSON = User2UserJSON(&u)
 	return
 }
 
+//UserFindByID 通过数据库ID查找单用户.
 func UserFindByID(id uint) (userJSON UserJSON, err error) {
 	/**
 	@Author: PantaZheng
@@ -227,6 +249,7 @@ func UserFindByID(id uint) (userJSON UserJSON, err error) {
 	return
 }
 
+//UserFindByOpenID 通过微信OpenID查找单用户.
 func UserFindByOpenID(openid string) (userJSON UserJSON, err error) {
 	/**
 	@Author: PantaZheng
@@ -238,6 +261,7 @@ func UserFindByOpenID(openid string) (userJSON UserJSON, err error) {
 	return
 }
 
+//UserFindByIDCard 通过身份证查找单用户.
 func UserFindByIDCard(idCard string) (userJSON UserJSON, err error) {
 	/**
 	@Author: PantaZheng
@@ -249,6 +273,7 @@ func UserFindByIDCard(idCard string) (userJSON UserJSON, err error) {
 	return
 }
 
+//Find 多用户查找的原子方法.
 func (userJSON *UserJSON) Find() (usersJSON []UserJSON, err error) {
 	/**
 	@Author: PantaZheng
@@ -262,12 +287,13 @@ func (userJSON *UserJSON) Find() (usersJSON []UserJSON, err error) {
 	} else {
 		usersJSON = make([]UserJSON, len(users))
 		for i, v := range users {
-			v.User2UserJSON(usersJSON[i])
+			usersJSON[i] = User2UserJSON(v)
 		}
 	}
 	return
 }
 
+//UsersFindByLevel 通过权限等级查找用户表.
 func UsersFindByLevel(level int) (usersJSON []UserJSON, err error) {
 	/**
 	@Author: PantaZheng
@@ -294,10 +320,11 @@ func (userJSON *UserJSON) Updates() (err error) {
 		err = errors.New(field + err.Error())
 		return
 	}
-	u.User2UserJSON(*userJSON)
+	*userJSON = User2UserJSON(&u)
 	return
 }
 
+//Delete 用户删除的原子方法.
 func (userJSON *UserJSON) Delete() (err error) {
 	/**
 	@Author: PantaZheng
@@ -310,28 +337,30 @@ func (userJSON *UserJSON) Delete() (err error) {
 		err = errors.New(field + err.Error())
 		return
 	}
-	u.User2UserJSON(*userJSON)
+	*userJSON = User2UserJSON(&u)
 	return
 }
 
-func UserDeleteByID(id uint) (userJson UserJSON, err error) {
+//UserDeleteByID 通过数据库ID删除用户.
+func UserDeleteByID(id uint) (userJSON UserJSON, err error) {
 	/**
 	@Author: PantaZheng
 	@Description:
 	@Date: 2019/5/10 14:28
 	*/
-	userJson = UserJSON{ID: id}
-	err = userJson.Delete()
+	userJSON = UserJSON{ID: id}
+	err = userJSON.Delete()
 	return
 }
 
-func UserDeleteByIDCard(idCard string) (userJson UserJSON, err error) {
+//UserDeleteByIDCard 通过I身份证删除用户.
+func UserDeleteByIDCard(idCard string) (userJSON UserJSON, err error) {
 	/**
 	@Author: PantaZheng
 	@Description:
 	@Date: 2019/5/10 14:30
 	*/
-	userJson = UserJSON{IDCard: idCard}
-	err = userJson.Delete()
+	userJSON = UserJSON{IDCard: idCard}
+	err = userJSON.Delete()
 	return
 }
