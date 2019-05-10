@@ -9,10 +9,10 @@ import (
 //User 数据库用户表.
 type User struct {
 	gorm.Model
-	OpenID     string `gorm:"unique;index:openid_index"`
+	OpenID     string `gorm:"unique"`
 	WechatName string
 	Name       string
-	IDCard     string `gorm:"unique;index:idCard_index"`
+	IDCard     string `gorm:"unique"`
 	Level      int
 	Telephone  string
 	//CProjects  []*Project `gorm:"foreignkey:CreatorID"`
