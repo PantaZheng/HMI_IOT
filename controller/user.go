@@ -6,6 +6,8 @@ import (
 	"log"
 )
 
+const title = "controller.user."
+
 func UserCreate(ctx iris.Context) {
 	u := new(service.UserJSON)
 	if err := ctx.ReadJSON(u); err != nil {
@@ -16,7 +18,7 @@ func UserCreate(ctx iris.Context) {
 	} else {
 		if u.WechatName != "" || u.OpenID != "" {
 			ctx.StatusCode(iris.StatusAccepted)
-			info := "Create接口不支持微信信息创建，请使用Bind接口"
+			info := title + ":\tCreate接口不支持微信信息"
 			_, _ = ctx.Text(info)
 			log.Println(info)
 		} else {

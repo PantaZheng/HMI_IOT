@@ -65,7 +65,11 @@ func (user *User) First() (err error) {
 	if err = user.checkUnique(); err != nil {
 		return
 	}
-	err = database.DB.First(user).Error
+	first := database.DB.First(user)
+	err = first.Error
+	if first.RecordNotFound() {
+		err = errors.New("RecordNotFound")
+	}
 	return
 }
 
