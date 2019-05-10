@@ -47,12 +47,12 @@ type UserJSON struct {
 }
 
 func userTestData() {
-	u0 := &UserJSON{OpenID: "Stranger1", IDCard: "0", Name: "Stranger1", Level: 0}
-	u1 := &UserJSON{OpenID: "Emeritus1", IDCard: "1", Name: "Emeritus1", Level: 1}
-	u2 := &UserJSON{OpenID: "student1", IDCard: "2", Name: "student1", Level: 2}
-	u3 := &UserJSON{OpenID: "Assistant1", IDCard: "3", Name: "Assistant1", Level: 3}
-	u4 := &UserJSON{OpenID: "Senior1", IDCard: "4", Name: "Senior1", Level: 4}
-	u5 := &UserJSON{OpenID: "Full1", IDCard: "5", Name: "Full1", Level: 5}
+	u0 := &UserJSON{OpenID: "Stranger1", WeChatName: "神秘人", Code: "神秘代码", Name: "Stranger1", IDCard: "000", Level: 0, Telephone: "110"}
+	u1 := &UserJSON{OpenID: "Emeritus1", WeChatName: "万磁王", Code: "九头蛇", Name: "无关教授1", IDCard: "001", Level: 1}
+	u2 := &UserJSON{OpenID: "Student1", WeChatName: "逃学", IDCard: "2", Name: "student1", Level: 2}
+	u3 := &UserJSON{OpenID: "Assistant1", WeChatName: "小秘书", IDCard: "003", Name: "Assistant1", Level: 3}
+	u4 := &UserJSON{OpenID: "Senior1", WeChatName: "高级打工仔", IDCard: "4", Name: "Senior1", Level: 4}
+	u5 := &UserJSON{OpenID: "Full1", WeChatName: "全职叫兽", IDCard: "5", Name: "Full1", Level: 5}
 	_ = u0.Create()
 	_ = u1.Create()
 	_ = u2.Create()
@@ -72,7 +72,6 @@ func (userJSON *UserJSON) UserJSON2User() (user models.User) {
 	user.OpenID = userJSON.OpenID
 	user.WeChatName = userJSON.WeChatName
 	user.Name = userJSON.Name
-	user.Code = userJSON.Code
 	user.IDCard = userJSON.IDCard
 	user.Level = userJSON.Level
 	user.Telephone = userJSON.Telephone
@@ -89,7 +88,6 @@ func User2UserJSON(user *models.User) (userJSON UserJSON) {
 	userJSON.ID = user.ID
 	userJSON.OpenID = user.OpenID
 	userJSON.WeChatName = user.WeChatName
-	userJSON.Code = user.Code
 	userJSON.Name = user.Name
 	userJSON.IDCard = user.IDCard
 	userJSON.Level = user.Level
@@ -103,7 +101,7 @@ func (userJSON *UserJSON) exchangeOpenID() (err error) {
 	@Description: 根据code换取openid
 	@Date: 2019/5/9 12:32
 	*/
-	field = title + "exchangeOpenId" + ":\t\n"
+	field = title + "exchangeOpenId:\t"
 	if userJSON.OpenID == "" {
 		if userJSON.Code != "" {
 			token := &oauth2.Token{}
@@ -137,7 +135,7 @@ func UserInitByWechat(weChatInfo *user.UserInfo) string {
 	@Description: 用户登录微信初始化微信,默认level等级为Stranger
 	@Date: 2019/5/9 23:13
 	*/
-	field = title + "UserInitByWechat" + ":\t\n"
+	field = title + "UserInitByWechat:\t"
 	u := new(UserJSON)
 	u.OpenID = weChatInfo.OpenId
 	if err := u.Create(); err != nil {
@@ -155,7 +153,7 @@ func (userJSON *UserJSON) Create() (err error) {
 	@Description: Service层 User创建
 	@Date: 2019/5/9 23:11
 	*/
-	field = title + "Create" + ":\t\n"
+	field = title + "Create:\t"
 	u := userJSON.UserJSON2User()
 	if err = u.Create(); err != nil {
 		err = errors.New(field + err.Error())
@@ -188,7 +186,7 @@ func (userJSON *UserJSON) Bind() (err error) {
 	@Date: 2019/5/10 2:31
 	*/
 	//检查openid和code
-	field = title + "Bind" + ":\t\n"
+	field = title + "Bind:\t"
 	if err = userJSON.exchangeOpenID(); err != nil {
 		err = errors.New(field + err.Error())
 		return
@@ -197,7 +195,7 @@ func (userJSON *UserJSON) Bind() (err error) {
 	_ = wechatUser.First()
 	//检查微信是否已绑定
 	if wechatUser.Level != LevelMap["Stranger"] {
-		err = errors.New(field + "用户" + wechatUser.Name + "已经绑定过\n,如有修改需要请联系管理员")
+		err = errors.New(field + "用户" + wechatUser.Name + "已经绑定过,如有修改需要请联系管理员")
 		return
 	}
 	presortedUser := &models.User{IDCard: userJSON.IDCard}
@@ -216,7 +214,7 @@ func (userJSON *UserJSON) Bind() (err error) {
 			return
 		}
 		//修改预存用户信息
-		if err = presortedUser.Updates(&models.User{OpenID: userJSON.OpenID, Code: userJSON.Code, WeChatName: wechatUser.WeChatName}); err != nil {
+		if err = presortedUser.Updates(&models.User{OpenID: userJSON.OpenID, WeChatName: wechatUser.WeChatName}); err != nil {
 			err = errors.New(field + err.Error())
 		} else {
 			*userJSON = User2UserJSON(presortedUser)
@@ -234,7 +232,7 @@ func (userJSON *UserJSON) Bind() (err error) {
 
 //First 单用户查找的原子方法
 func (userJSON *UserJSON) First() (err error) {
-	field = title + "first" + ":\t\n"
+	field = title + "first:\t"
 	u := userJSON.UserJSON2User()
 	if err = u.First(); err != nil {
 		err = errors.New(field + err.Error())
@@ -287,7 +285,7 @@ func (userJSON *UserJSON) Find() (usersJSON []UserJSON, err error) {
 	@Description:
 	@Date: 2019/5/10 13:49
 	*/
-	field = title + "Find" + ":\t\n"
+	field = title + "Find:\t"
 	u := userJSON.UserJSON2User()
 	if users, err := u.Find(); err != nil {
 		err = errors.New(field + err.Error())
@@ -319,7 +317,7 @@ func (userJSON *UserJSON) Updates() (err error) {
 	@Description:
 	@Date: 2019/5/10 14:09
 	*/
-	field = title + "Updates" + ":\t\n"
+	field = title + "Updates:\t"
 	u := userJSON.UserJSON2User()
 	newUser := new(models.User)
 	newUser.ID = u.ID
@@ -338,7 +336,7 @@ func (userJSON *UserJSON) Delete() (err error) {
 	@Description:
 	@Date: 2019/5/10 14:16
 	*/
-	field = title + "Delete" + ":\t\n"
+	field = title + "Delete:\t"
 	u := userJSON.UserJSON2User()
 	if err := u.Delete(); err != nil {
 		err = errors.New(field + err.Error())

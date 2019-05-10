@@ -1,5 +1,7 @@
 package service
 
+import "github.com/pantazheng/bci/database"
+
 /**
 *@Author: PantaZheng
 *@CreateAt: 2019/5/10 0:21
@@ -10,7 +12,10 @@ package service
 */
 
 func init() {
-	userTestData()
+	if database.DB.HasTable("users") {
+		userTestData()
+	}
+
 	//projectTestData()
 	//moduleTestData()
 	//missionTestData()

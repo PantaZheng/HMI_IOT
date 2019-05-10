@@ -11,7 +11,6 @@ type User struct {
 	gorm.Model
 	OpenID     string `gorm:"unique;index:openid_index"`
 	WeChatName string
-	Code       string
 	Name       string
 	IDCard     string `gorm:"unique;index:idCard_index"`
 	Level      int
