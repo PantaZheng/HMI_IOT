@@ -67,7 +67,6 @@ func (user *User) First() (err error) {
 		return
 	}
 	first := database.DB.First(user)
-	log.Println(first)
 	err = first.Error
 	return
 }
@@ -83,6 +82,7 @@ func (user *User) FindOne() (err error) {
 			err = errors.New("多个匹配，请确保唯一性")
 		}
 	}
+	log.Println(user)
 	return
 }
 
