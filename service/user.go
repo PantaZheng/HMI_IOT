@@ -47,12 +47,18 @@ type UserJSON struct {
 }
 
 func userTestData() {
-	_ = UserJSON{OpenID: "Stranger1", IDCard: "0", Name: "Stranger1", Level: 0}.Create()
-	_ = UserJSON{OpenID: "Emeritus1", IDCard: "1", Name: "Emeritus1", Level: 1}.Create()
-	_ = UserJSON{OpenID: "student1", IDCard: "2", Name: "student1", Level: 2}.Create()
-	_ = UserJSON{OpenID: "Assistant1", IDCard: "3", Name: "Assistant1", Level: 3}.Create()
-	_ = UserJSON{OpenID: "Senior1", IDCard: "4", Name: "Senior1", Level: 4}.Create()
-	_ = UserJSON{OpenID: "Full1", IDCard: "5", Name: "Full1", Level: 5}.Create()
+	u0 := &UserJSON{OpenID: "Stranger1", IDCard: "0", Name: "Stranger1", Level: 0}
+	u1 := &UserJSON{OpenID: "Emeritus1", IDCard: "1", Name: "Emeritus1", Level: 1}
+	u2 := &UserJSON{OpenID: "student1", IDCard: "2", Name: "student1", Level: 2}
+	u3 := &UserJSON{OpenID: "Assistant1", IDCard: "3", Name: "Assistant1", Level: 3}
+	u4 := &UserJSON{OpenID: "Senior1", IDCard: "4", Name: "Senior1", Level: 4}
+	u5 := &UserJSON{OpenID: "Full1", IDCard: "5", Name: "Full1", Level: 5}
+	_ = u0.Create()
+	_ = u1.Create()
+	_ = u2.Create()
+	_ = u3.Create()
+	_ = u4.Create()
+	_ = u5.Create()
 }
 
 //UserJSON2User UserJSON转换到User.
@@ -212,16 +218,16 @@ func (userJSON *UserJSON) Bind() (err error) {
 		//修改预存用户信息
 		if err = presortedUser.Updates(&models.User{OpenID: userJSON.OpenID, Code: userJSON.Code, WeChatName: wechatUser.WeChatName}); err != nil {
 			err = errors.New(field + err.Error())
-			return
+		} else {
+			*userJSON = User2UserJSON(presortedUser)
 		}
-		*userJSON = User2UserJSON(presortedUser)
 	} else {
 		//无预存信息,修改微信初始化的User，添加姓名和身份证号
 		if err = wechatUser.Updates(&models.User{Name: userJSON.Name, IDCard: userJSON.IDCard}); err != nil {
 			err = errors.New(field + err.Error())
-			return
+		} else {
+			*userJSON = User2UserJSON(wechatUser)
 		}
-		*userJSON = User2UserJSON(wechatUser)
 	}
 	return
 }
@@ -232,8 +238,9 @@ func (userJSON *UserJSON) First() (err error) {
 	u := userJSON.UserJSON2User()
 	if err = u.First(); err != nil {
 		err = errors.New(field + err.Error())
+	} else {
+		*userJSON = User2UserJSON(&u)
 	}
-	*userJSON = User2UserJSON(&u)
 	return
 }
 
@@ -318,9 +325,9 @@ func (userJSON *UserJSON) Updates() (err error) {
 	newUser.ID = u.ID
 	if err := u.Updates(newUser); err != nil {
 		err = errors.New(field + err.Error())
-		return
+	} else {
+		*userJSON = User2UserJSON(&u)
 	}
-	*userJSON = User2UserJSON(&u)
 	return
 }
 
@@ -335,9 +342,9 @@ func (userJSON *UserJSON) Delete() (err error) {
 	u := userJSON.UserJSON2User()
 	if err := u.Delete(); err != nil {
 		err = errors.New(field + err.Error())
-		return
+	} else {
+		*userJSON = User2UserJSON(&u)
 	}
-	*userJSON = User2UserJSON(&u)
 	return
 }
 
