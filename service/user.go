@@ -262,7 +262,7 @@ func (userJSON *UserJSON) First() (err error) {
 func (userJSON *UserJSON) FindOne() (err error) {
 	field = title + "FindOne:\t"
 	u := userJSON.UserJSON2User()
-	if err = u.FindOne(); err != nil {
+	if err := u.FindOne(); err != nil {
 		err = errors.New(field + err.Error())
 	} else {
 		*userJSON = User2UserJSON(&u)

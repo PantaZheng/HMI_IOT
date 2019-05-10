@@ -72,17 +72,26 @@ func (user *User) First() (err error) {
 }
 
 func (user *User) FindOne() (err error) {
-	users := make([]User, 1)
+	/**
+	@Author: PantaZheng
+	@Description:
+	@Date: 2019/5/10 22:22
+	*/
+	var users []User
 	find := database.DB.Find(&users, &user)
 	err = find.Error
 	if err == nil {
 		if l := len(users); l > 1 {
 			err = errors.New("多个匹配，请确保唯一性")
-		} else if l < 0 {
-			err = errors.New("多个匹配，请确保唯一性")
+		} else if l == 0 {
+			err = errors.New("没有匹配记录")
+		} else {
+			*user = users[0]
 		}
 	}
+	log.Println(len(users))
 	log.Println(user)
+	log.Println(err)
 	return
 }
 
