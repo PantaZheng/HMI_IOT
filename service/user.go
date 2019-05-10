@@ -38,7 +38,7 @@ type UserJSON struct {
 	*/
 	ID         uint   `json:"id,omitempty"`
 	OpenID     string `json:"openid,omitempty"`
-	WeChatName string `json:"openid,omitempty"`
+	WechatName string `json:"wechatName,omitempty"`
 	Code       string `json:"code,omitempty"`
 	Name       string `json:"name,omitempty"`
 	IDCard     string `json:"idCard,omitempty"`
@@ -47,12 +47,12 @@ type UserJSON struct {
 }
 
 func userTestData() {
-	u0 := &UserJSON{OpenID: "Stranger1", WeChatName: "神秘人", Code: "神秘代码", Name: "Stranger1", IDCard: "000", Level: 0, Telephone: "110"}
-	u1 := &UserJSON{OpenID: "Emeritus1", WeChatName: "万磁王", Code: "九头蛇", Name: "无关教授1", IDCard: "001", Level: 1}
-	u2 := &UserJSON{OpenID: "Student1", WeChatName: "逃学", IDCard: "2", Name: "student1", Level: 2}
-	u3 := &UserJSON{OpenID: "Assistant1", WeChatName: "小秘书", IDCard: "003", Name: "Assistant1", Level: 3}
-	u4 := &UserJSON{OpenID: "Senior1", WeChatName: "高级打工仔", IDCard: "4", Name: "Senior1", Level: 4}
-	u5 := &UserJSON{OpenID: "Full1", WeChatName: "全职叫兽", IDCard: "5", Name: "Full1", Level: 5}
+	u0 := &UserJSON{OpenID: "Stranger1", WechatName: "神秘人", Code: "神秘代码", Name: "Stranger1", IDCard: "000", Level: 0, Telephone: "110"}
+	u1 := &UserJSON{OpenID: "Emeritus1", WechatName: "万磁王", Code: "九头蛇", Name: "无关教授1", IDCard: "001", Level: 1}
+	u2 := &UserJSON{OpenID: "Student1", WechatName: "逃学", IDCard: "2", Name: "student1", Level: 2}
+	u3 := &UserJSON{OpenID: "Assistant1", WechatName: "小秘书", IDCard: "003", Name: "Assistant1", Level: 3}
+	u4 := &UserJSON{OpenID: "Senior1", WechatName: "高级打工仔", IDCard: "4", Name: "Senior1", Level: 4}
+	u5 := &UserJSON{OpenID: "Full1", WechatName: "全职叫兽", IDCard: "5", Name: "Full1", Level: 5}
 	_ = u0.Create()
 	_ = u1.Create()
 	_ = u2.Create()
@@ -70,7 +70,7 @@ func (userJSON *UserJSON) UserJSON2User() (user models.User) {
 	*/
 	user.ID = userJSON.ID
 	user.OpenID = userJSON.OpenID
-	user.WeChatName = userJSON.WeChatName
+	user.WechatName = userJSON.WechatName
 	user.Name = userJSON.Name
 	user.IDCard = userJSON.IDCard
 	user.Level = userJSON.Level
@@ -87,7 +87,7 @@ func User2UserJSON(user *models.User) (userJSON UserJSON) {
 	*/
 	userJSON.ID = user.ID
 	userJSON.OpenID = user.OpenID
-	userJSON.WeChatName = user.WeChatName
+	userJSON.WechatName = user.WechatName
 	userJSON.Name = user.Name
 	userJSON.IDCard = user.IDCard
 	userJSON.Level = user.Level
@@ -121,7 +121,7 @@ func (userJSON *UserJSON) exchangeOpenID() (err error) {
 //simplify 简化，仅保留：id、Name、Level.
 func (userJSON *UserJSON) simplify() {
 	userJSON.OpenID = ""
-	userJSON.WeChatName = ""
+	userJSON.WechatName = ""
 	userJSON.Code = ""
 	userJSON.IDCard = ""
 	userJSON.Level = 0
@@ -214,7 +214,7 @@ func (userJSON *UserJSON) Bind() (err error) {
 			return
 		}
 		//修改预存用户信息
-		if err = presortedUser.Updates(&models.User{OpenID: userJSON.OpenID, WeChatName: wechatUser.WeChatName}); err != nil {
+		if err = presortedUser.Updates(&models.User{OpenID: userJSON.OpenID, WechatName: wechatUser.WechatName}); err != nil {
 			err = errors.New(field + err.Error())
 		} else {
 			*userJSON = User2UserJSON(presortedUser)
