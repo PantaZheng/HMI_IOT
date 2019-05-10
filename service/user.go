@@ -15,17 +15,17 @@ var (
 	//LevelMap 用户权限管理
 	LevelMap = map[string]int{
 		//Stranger 未绑定
-		"Stranger": 0,
+		"Stranger": 1,
 		//Emeritus Professor emeritus 专家教授
-		"Emeritus": 1,
+		"Emeritus": 2,
 		//Student 学生
-		"Student": 2,
+		"Student": 3,
 		//Assistant 助理
-		"Assistant": 3,
+		"Assistant": 4,
 		//Senior Senior lecturer 高级讲师
-		"Senior": 4,
+		"Senior": 5,
 		//Full Full professor 全职教授
-		"Full": 5,
+		"Full": 6,
 	}
 	field = ""
 )
@@ -140,6 +140,7 @@ func UserInitByWechat(weChatInfo *user.UserInfo) string {
 	u := new(UserJSON)
 	u.OpenID = weChatInfo.OpenId
 	u.WechatName = weChatInfo.Nickname
+	u.Level = LevelMap["Stranger"]
 	if err := u.Create(); err != nil {
 		err = errors.New(field + err.Error())
 		return err.Error()

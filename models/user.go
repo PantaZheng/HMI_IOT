@@ -77,6 +77,7 @@ func (user *User) FindOne() (err error) {
 	if len(users) > 1 {
 		err = errors.New("多个匹配，请确保唯一性")
 	}
+	return
 }
 
 //Find 查找多个用户.
