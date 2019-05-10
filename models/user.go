@@ -72,10 +72,11 @@ func (user *User) First() (err error) {
 
 func (user *User) FindOne() (err error) {
 	users := make([]User, 1)
-	find := database.DB.Find(users, user)
-	err = find.Error
-	if len(users) > 1 {
-		err = errors.New("多个匹配，请确保唯一性")
+	if err = database.DB.Find(users, user).Error; err != nil {
+	} else {
+		if len(users) > 1 {
+			err = errors.New("多个匹配，请确保唯一性")
+		}
 	}
 	return
 }
