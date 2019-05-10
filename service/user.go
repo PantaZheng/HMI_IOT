@@ -209,14 +209,17 @@ func (userJSON *UserJSON) Bind() (err error) {
 		return
 	}
 	wechatUser := &models.User{OpenID: userJSON.OpenID}
-	_ = wechatUser.First()
+	//查找微信用户
+	if err = wechatUser.FindOne(); err != nil {
+		err = errors.New(field + "数据库查找关联OpenID用户出错，:\t" + err.Error())
+	}
 	//检查微信是否已绑定
-	if wechatUser.Level != LevelMap["Stranger"] {
+	if wechatUser.Level > LevelMap["Stranger"] {
 		err = errors.New(field + "用户" + wechatUser.Name + "已经绑定过,如有修改需要请联系管理员")
 		return
 	}
 	presortedUser := &models.User{IDCard: userJSON.IDCard}
-	_ = presortedUser.First()
+	_ = presortedUser.FindOne()
 	//检查是否有预存信息
 	if presortedUser.ID != 0 {
 		//有预存信息，比对姓名
