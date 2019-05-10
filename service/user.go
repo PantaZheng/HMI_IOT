@@ -207,6 +207,10 @@ func (userJSON *UserJSON) Bind() (err error) {
 		return
 	}
 	field = title + "Bind:\t"
+	if userJSON.IDCard == "" && userJSON.Name == "" {
+		err = errors.New(field + "绑定必须有身份证和姓名信息\t")
+		return
+	}
 	wechatUser := &models.User{OpenID: userJSON.OpenID}
 	//查找微信关联信息
 	if err = wechatUser.FindOne(); err != nil {
