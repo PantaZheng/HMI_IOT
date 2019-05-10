@@ -203,15 +203,15 @@ func (userJSON *UserJSON) Bind() (err error) {
 	@Date: 2019/5/10 2:31
 	*/
 	//检查openid和code
-	field = title + "Bind:\t"
 	if err = userJSON.exchangeOpenID(); err != nil {
-		err = errors.New(field + err.Error())
 		return
 	}
+	field = title + "Bind:\t"
 	wechatUser := &models.User{OpenID: userJSON.OpenID}
-	//查找微信用户
+	//查找微信关联信息
 	if err = wechatUser.FindOne(); err != nil {
-		err = errors.New(field + "数据库查找关联OpenID用户出错，:\t" + err.Error())
+		err = errors.New(field + "数据库查找关联OpenID用户出错:\t" + err.Error())
+		return
 	}
 	//检查微信是否已绑定
 	if wechatUser.Level > LevelMap["Stranger"] {
@@ -221,7 +221,7 @@ func (userJSON *UserJSON) Bind() (err error) {
 	presortedUser := &models.User{IDCard: userJSON.IDCard}
 	_ = presortedUser.FindOne()
 	//检查是否有预存信息
-	if presortedUser.ID != 0 {
+	if presortedUser.Name != "" {
 		//有预存信息，比对姓名
 		if presortedUser.Name != userJSON.Name {
 			err = errors.New(field + "用户名:" + userJSON.Name + "和身份证号:" + userJSON.IDCard + "不匹配,请检查输入信息")
