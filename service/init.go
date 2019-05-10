@@ -1,6 +1,9 @@
 package service
 
-import "github.com/pantazheng/bci/database"
+import (
+	"github.com/pantazheng/bci/database"
+	"github.com/pantazheng/bci/models"
+)
 
 /**
 *@Author: PantaZheng
@@ -11,9 +14,21 @@ import "github.com/pantazheng/bci/database"
 @Software: GoLand
 */
 
+//func init() {
+//	database.DB.Set("gorm:table_options", "DEFAULT CHARSET=utf8mb4 AUTO_INCREMENT=1;").AutoMigrate(&User{}, &Project{}, &Module{}, &Mission{}, &Gain{})
+//	userTestData()
+//	projectTestData()
+//	moduleTestData()
+//	missionTestData()
+//	gainTestData()
+//}
+
 func init() {
 	if !database.DB.HasTable("users") {
+		database.DB.Set("gorm:table_options", "DEFAULT CHARSET=utf8mb4 AUTO_INCREMENT=1;").AutoMigrate(&models.User{})
 		userTestData()
+	} else {
+		database.DB.Set("gorm:table_options", "DEFAULT CHARSET=utf8mb4 AUTO_INCREMENT=1;").AutoMigrate(&models.User{})
 	}
 
 	//projectTestData()
