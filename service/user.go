@@ -26,7 +26,6 @@ var (
 		//Full Full professor 全职教授
 		"Full": 6,
 	}
-	field = ""
 )
 
 //UserJSON 用户Json原型
@@ -101,19 +100,20 @@ func (userJSON *UserJSON) exchangeOpenID() (err error) {
 	@Description: 根据code换取openid
 	@Date: 2019/5/9 12:32
 	*/
-	field = title + "exchangeOpenId:\t"
 	if userJSON.OpenID == "" {
 		if userJSON.Code != "" {
 			token := &oauth2.Token{}
-			if err := ExchangeToken(token, userJSON.Code); err != nil {
-				err = errors.New(field + err.Error())
+			if err = ExchangeToken(token, userJSON.Code); err == nil {
+				userJSON.OpenID = token.OpenId
 			}
-			userJSON.OpenID = token.OpenId
 		} else {
-			err = errors.New(field + "openid和code不可同时为空")
+			err = errors.New("openid和code不可同时为空")
 		}
 	} else if userJSON.Code != "" {
-		err = errors.New(field + "有openid就别传code了，我不会去换的")
+		err = errors.New("有openid就别传code了，我不会去换的")
+	}
+	if err != nil {
+		err = errors.New(title + "exchangeOpenId:\t" + err.Error())
 	}
 	return
 }
@@ -129,10 +129,11 @@ func (userJSON *UserJSON) simplify() {
 }
 
 func (userJSON *UserJSON) checkLevel() (err error) {
-	err = errors.New("权限等级不在列表中")
+	err = errors.New(title + "Find:\t" + "权限等级不在列表中")
 	for _, v := range LevelMap {
 		if v == userJSON.Level {
 			err = nil
+			return
 		}
 	}
 	return
@@ -145,14 +146,12 @@ func UserInitByWechat(weChatInfo *user.UserInfo) string {
 	@Description: 用户登录微信初始化微信,默认level等级为Stranger
 	@Date: 2019/5/9 23:13
 	*/
-	field = title + "UserInitByWechat:\t"
 	u := new(UserJSON)
 	u.OpenID = weChatInfo.OpenId
 	u.WechatName = weChatInfo.Nickname
 	u.Level = LevelMap["Stranger"]
 	if err := u.Create(); err != nil {
-		err = errors.New(field + err.Error())
-		return err.Error()
+		return title + "UserInitByWechat:\t" + err.Error()
 	}
 	log.Printf("UserInit:\t" + weChatInfo.OpenId)
 	return "欢迎关注"
@@ -165,18 +164,16 @@ func (userJSON *UserJSON) Create() (err error) {
 	@Description: Service层 User创建
 	@Date: 2019/5/9 23:11
 	*/
-	field = title + "Create:\t"
-	if err = userJSON.checkLevel(); err != nil {
-		err = errors.New(field + err.Error())
-		return
+	if err = userJSON.checkLevel(); err == nil {
+		u := userJSON.UserJSON2User()
+		if err = u.Create(); err == nil {
+			//userJSON接收数据库创建记录
+			*userJSON = User2UserJSON(&u)
+		}
 	}
-	u := userJSON.UserJSON2User()
-	if err = u.Create(); err != nil {
-		err = errors.New(field + err.Error())
-		return
+	if err != nil {
+		err = errors.New(title + "Create:\t" + err.Error())
 	}
-	//userJSON接收数据库创建记录
-	*userJSON = User2UserJSON(&u)
 	return
 }
 
@@ -188,80 +185,66 @@ func (userJSON *UserJSON) Bind() (err error) {
 	@Date: 2019/5/10 2:31
 	*/
 	//检查openid和code
-	if err = userJSON.exchangeOpenID(); err != nil {
-		return
-	}
-	field = title + "Bind:\t"
-	if userJSON.IDCard == "" && userJSON.Name == "" {
-		err = errors.New(field + "绑定必须有身份证和姓名信息\t")
-		return
-	}
-	wechatUser := &models.User{OpenID: userJSON.OpenID}
-	//查找微信关联信息
-	if err = wechatUser.FindOne(); err != nil {
-		err = errors.New(field + "数据库查找关联OpenID用户出错:\t" + err.Error())
-		return
-	}
-	//检查微信是否已绑定
-	if wechatUser.Level > LevelMap["Stranger"] {
-		err = errors.New(field + "用户" + wechatUser.Name + "已经绑定过,如有修改需要请联系管理员")
-		return
-	}
-	presortedUser := &models.User{IDCard: userJSON.IDCard}
-	_ = presortedUser.FindOne()
-	//检查是否有预存信息
-	if presortedUser.Name != "" {
-		//有预存信息，比对姓名
-		if presortedUser.Name != userJSON.Name {
-			err = errors.New(field + "用户名:" + userJSON.Name + "和身份证号:" + userJSON.IDCard + "不匹配,请检查输入信息")
-			return
-		}
-		//TODO：进行绑定操作，1.删除微信初始化的User；2.预存User添加微信信息
-		//软删除微信初始化创建的用户信息
-		if err = wechatUser.Delete(); err != nil {
-			err = errors.New(field + err.Error())
-			return
-		}
-		//修改预存用户信息
-		presortedUser.OpenID = userJSON.OpenID
-		presortedUser.WechatName = userJSON.WechatName
-		if err = presortedUser.Updates(); err != nil {
-			err = errors.New(field + err.Error())
+	if err = userJSON.exchangeOpenID(); err == nil {
+		if userJSON.IDCard == "" && userJSON.Name == "" {
+			err = errors.New("绑定必须有身份证和姓名信息\t")
 		} else {
-			*userJSON = User2UserJSON(presortedUser)
+			wechatUser := &models.User{OpenID: userJSON.OpenID}
+			//查找微信关联信息
+			if err = wechatUser.FindOne(); err != nil {
+				err = errors.New("数据库查找关联OpenID用户出错:\t" + err.Error())
+			} else if wechatUser.Level > LevelMap["Stranger"] {
+				err = errors.New("用户" + wechatUser.Name + "已经绑定过,如有修改需要请联系管理员")
+			} else {
+				presortedUser := &models.User{IDCard: userJSON.IDCard}
+				_ = presortedUser.FindOne()
+				//检查是否有预存信息
+				if presortedUser.Name != "" {
+					//有预存信息，比对姓名
+					if presortedUser.Name != userJSON.Name {
+						err = errors.New("用户名:" + userJSON.Name + "和身份证号:" + userJSON.IDCard + "不匹配,请检查输入信息")
+					} else if err = wechatUser.Delete(); err == nil {
+						//预存User添加微信信息
+						presortedUser.OpenID = userJSON.OpenID
+						presortedUser.WechatName = userJSON.WechatName
+						if err = presortedUser.Updates(); err == nil {
+							*userJSON = User2UserJSON(presortedUser)
+						}
+					}
+				} else {
+					//无预存信息,修改微信初始化的User，添加姓名和身份证号
+					wechatUser.Name = userJSON.Name
+					wechatUser.IDCard = userJSON.IDCard
+					if err = wechatUser.Updates(); err == nil {
+						*userJSON = User2UserJSON(wechatUser)
+					}
+				}
+			}
 		}
-	} else {
-		//无预存信息,修改微信初始化的User，添加姓名和身份证号
-		wechatUser.Name = userJSON.Name
-		wechatUser.IDCard = userJSON.IDCard
-		if err = wechatUser.Updates(); err != nil {
-			err = errors.New(field + err.Error())
-		} else {
-			*userJSON = User2UserJSON(wechatUser)
-		}
+	}
+	if err != nil {
+		err = errors.New(title + "Bind:\t" + err.Error())
 	}
 	return
 }
 
 //First 单用户查找的原子方法
 func (userJSON *UserJSON) First() (err error) {
-	field = title + "First:\t"
 	u := userJSON.UserJSON2User()
-	if err = u.First(); err != nil {
-		err = errors.New(field + err.Error())
-	} else {
+	if err = u.First(); err == nil {
 		*userJSON = User2UserJSON(&u)
+	} else {
+		err = errors.New(title + "First:\t" + err.Error())
 	}
 	return
 }
 
 func (userJSON *UserJSON) FindOne() (err error) {
-	field = title + "FindOne:\t"
 	u := userJSON.UserJSON2User()
-	if err = u.FindOne(); err != nil {
-		err = errors.New(field + err.Error())
-	} else {
+	if err = u.FindOne(); err == nil {
 		*userJSON = User2UserJSON(&u)
+	} else {
+		err = errors.New(title + "FindOne:\t" + err.Error())
 	}
 	return
 }
@@ -309,15 +292,14 @@ func (userJSON *UserJSON) Find() (usersJSON []UserJSON, err error) {
 	@Description:
 	@Date: 2019/5/10 13:49
 	*/
-	field = title + "Find:\t"
 	u := userJSON.UserJSON2User()
-	if users, err := u.Find(); err != nil {
-		err = errors.New(field + err.Error())
-	} else {
+	if users, err := u.Find(); err == nil {
 		usersJSON = make([]UserJSON, len(users))
 		for i, v := range users {
 			usersJSON[i] = User2UserJSON(v)
 		}
+	} else {
+		err = errors.New(title + "Find:\t" + err.Error())
 	}
 	return
 }
@@ -329,12 +311,12 @@ func UsersFindByLevel(level int) (usersJSON []UserJSON, err error) {
 	@Description:
 	@Date: 2019/5/10 14:01
 	*/
-	field = title + "UsersFindByLevel\t:"
 	userJSON := UserJSON{Level: level}
 	if err = userJSON.checkLevel(); err == nil {
 		usersJSON, err = userJSON.Find()
-	} else {
-		err = errors.New(field + err.Error())
+	}
+	if err != nil {
+		err = errors.New(title + "UsersFindByLevel\t:" + err.Error())
 	}
 	return
 }
@@ -346,21 +328,18 @@ func (userJSON *UserJSON) Updates() (err error) {
 	@Description:
 	@Date: 2019/5/10 14:09
 	*/
-	field = title + "Updates:\t"
-	if err = userJSON.checkLevel(); err != nil {
-		err = errors.New(field + err.Error())
-		return
+	if err = userJSON.checkLevel(); err == nil {
+		if userJSON.ID == 0 {
+			err = errors.New("更新信息必须包含用户ID")
+		} else {
+			u := userJSON.UserJSON2User()
+			if err = u.Updates(); err == nil {
+				*userJSON = User2UserJSON(&u)
+			}
+		}
 	}
-	if userJSON.ID == 0 {
-		err = errors.New(field + "更新信息必须包含用户ID")
-		return
-	}
-	u := userJSON.UserJSON2User()
-	if err := u.Updates(); err != nil {
-		err = errors.New(field + err.Error())
-	} else {
-		*userJSON = User2UserJSON(&u)
-
+	if err != nil {
+		err = errors.New(title + "Updates:\t" + err.Error())
 	}
 	return
 }
@@ -372,12 +351,12 @@ func (userJSON *UserJSON) Delete() (err error) {
 	@Description:
 	@Date: 2019/5/10 14:16
 	*/
-	field = title + "Delete:\t"
 	u := userJSON.UserJSON2User()
-	if err := u.Delete(); err != nil {
-		err = errors.New(field + err.Error())
-	} else {
+	if err = u.Delete(); err == nil {
 		*userJSON = User2UserJSON(&u)
+	}
+	if err != nil {
+		err = errors.New(title + "Delete:\t" + err.Error())
 	}
 	return
 }
