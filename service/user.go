@@ -5,7 +5,6 @@ import (
 	"github.com/chanxuehong/wechat/mp/user"
 	"github.com/chanxuehong/wechat/oauth2"
 	"github.com/pantazheng/bci/models"
-	"log"
 )
 
 const title = "service.user."
@@ -135,7 +134,7 @@ func (userJSON *UserJSON) simplify() {
 }
 
 func (userJSON *UserJSON) checkLevel() (err error) {
-	err = errors.New(title + "Find:\t" + "权限等级不在列表中")
+	err = errors.New(title + "checkLevel:\t" + "权限等级不在列表中")
 	for _, v := range LevelMap {
 		if v == userJSON.Level {
 			err = nil
@@ -152,15 +151,21 @@ func UserInitByWechat(weChatInfo *user.UserInfo) string {
 	@Description: 用户登录微信初始化微信,默认level等级为Stranger
 	@Date: 2019/5/9 23:13
 	*/
+	message := ""
 	u := new(UserJSON)
 	u.OpenID = weChatInfo.OpenId
 	u.WechatName = weChatInfo.Nickname
-	u.Level = LevelMap["Stranger"]
-	if err := u.Create(); err != nil {
-		return title + "UserInitByWechat:\t" + err.Error()
+	if err := u.FindOne(); err == nil {
+		if err := u.Updates(); err != nil {
+			message = "欢迎老用户" + u.WechatName + "重新关注"
+		}
+	} else {
+		u.Level = LevelMap["Stranger"]
+		if err := u.Create(); err != nil {
+			message = "欢迎新用户" + u.WechatName + ",请进行绑定操作"
+		}
 	}
-	log.Printf("UserInit:\t" + weChatInfo.OpenId)
-	return "欢迎关注"
+	return message
 }
 
 //Create 创建User.
@@ -194,7 +199,7 @@ func (userJSON *UserJSON) Bind() (err error) {
 	if err = userJSON.exchangeOpenID(); err == nil {
 		if userJSON.IDCard == "" || userJSON.Name == "" {
 			err = errors.New("绑定必须有同时身份证和姓名信息\t")
-		} else {
+		} else if err = userJSON.checkLevel(); err == nil {
 			wechatUser := &models.User{OpenID: userJSON.OpenID}
 			//查找微信关联信息
 			if err = wechatUser.FindOne(); err != nil {
