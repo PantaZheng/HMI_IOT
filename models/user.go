@@ -42,8 +42,8 @@ func (user *User) checkUnique() (err error) {
 	return
 }
 
+//检查是否有OpenID和IDCard，零值设置为ID,并更新字段信息
 func (user *User) makeOpenIDIDCARDNotEmpty() (tag bool) {
-	//检查是否有OpenID和IDCard，零值设置为ID,并更新字段信息
 	if user.OpenID == "" || user.IDCard == "" {
 		if user.OpenID == "" {
 			user.OpenID = strconv.Itoa(int(user.ID))
@@ -56,7 +56,7 @@ func (user *User) makeOpenIDIDCARDNotEmpty() (tag bool) {
 	return
 }
 
-//Create 创建User.
+//Create Create()
 func (user *User) Create() (err error) {
 	/**
 	@Author: PantaZheng
@@ -76,7 +76,7 @@ func (user *User) Create() (err error) {
 	return
 }
 
-//first 根据id查找用户.
+//First 根据id查找用户.
 func (user *User) First() (err error) {
 	/**
 	@Author: PantaZheng
@@ -93,6 +93,7 @@ func (user *User) First() (err error) {
 	return
 }
 
+//FindOne 单个查找非主键.
 func (user *User) FindOne() (err error) {
 	/**
 	@Author: PantaZheng
@@ -129,11 +130,11 @@ func (user *User) Find() (users []*User, err error) {
 	return
 }
 
-//Updates 非覆盖式更新，零值不更新.根据ID更新
+//Updates 非覆盖式更新,零值不更新,根据ID定位用户.
 func (user *User) Updates() (err error) {
 	/**
 	@Author: PantaZheng
-	@Description:
+	@Description: 非覆盖式更新,零值不更新,根据ID定位用户.注意:Model不可缺
 	@Date: 2019/5/9 14:29
 	*/
 	u := new(User)

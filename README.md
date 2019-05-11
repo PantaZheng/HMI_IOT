@@ -55,18 +55,7 @@ type UserJSON struct {
 	@Description:用户JSON
 	@Date: 2019/5/9 10:42
 	*/
-	ID        int    `json:"id,omitempty"`
-	OpenID    string `json:"openid,omitempty"`
-	Code      string `json:"code,omitempty"`
-	Name      string `json:"name,omitempty"`
-	IDCard    string `json:"idCard,omitempty"`
-	Level     int    `json:"level"`
-	Telephone string `json:"telephone,omitempty"`
-}
-
-//UserJSON 用户Json原型
-type UserJSON struct {
-	ID        uint   `json:"id"`
+	ID        int    `json:"id"`
 	OpenID    string `json:"openid"`
 	Code      string `json:"code"`
 	Name      string `json:"name"`
@@ -74,13 +63,14 @@ type UserJSON struct {
 	Level     int    `json:"level"`
 	Telephone string `json:"telephone"`
 }
-
 ```
 
 名称|method|path|传入body参数|接收body参数|
 -|-|-|:-|:-
 UserCreate|post|`/`|`UserJson`<br>IDCard必须存在|`UserJson`<br>id,openid,id_card三者至少存在一个，其他项均可缺省
 UserFindByID|get|`/id/{id:uint}`|-|`UserJson`|
+UserFindByIDCard|`/id_card/{id_card:string}`|-|`UserJson`
+UserFindByOpenID|`/openid/{openid:string}`|-|`UserJson`
 UsersFindByLevel|get|`/level/{level:int}`|-|`[]UserJson`|仅包含id,name
 UserUpdate|put|`/update`|`UserJson`|`UserJson`
 UserBind|put|`/bind`|`UserJson`<br>openid,code仅且存在一个|`UserJson`
@@ -272,79 +262,94 @@ ProjectDeleteByID|delete|`/id/{id:uint}`|-|`ProjectJson`
 
 ### models
 
-- [x] gain
-  - [x] `type Gain struct`
-  - [x] `type GainJson struct`
-  - [x] `gainTestData`
-  - [x] `gainJson2Gain`
-  - [x] `gain2GainJson`
-  - [x] `GainCreate`
-  - [x] `GainFind`
-  - [x] `GainsFindByOwner`
-  - [x] `GainsFindByMission`
-  - [x] `GainUpdate`
+- [ ] gain
+  - [ ] `type Gain struct`
+  - [ ] `type GainJson struct`
+  - [ ] `gainTestData`
+  - [ ] `gainJson2Gain`
+  - [ ] `gain2GainJson`
+  - [ ] `GainCreate`
+  - [ ] `GainFind`
+  - [ ] `GainsFindByOwner`
+  - [ ] `GainsFindByMission`
+  - [ ] `GainUpdate`
     - 必须携带ID
     - 目前只允许通过ID删除单条记录
     - UpTime更新为当前时间
-  - [x] `GainDelete`
+  - [ ] `GainDelete`
     - 必须携带ID
     - 目前由于只允许通过ID进行删除单条记录
-- [x] mission
-  - [x] `type Mission struct`
-  - [x] `type MissionJson struct`
-  - [x] `type MissionBriefJson struct`
-  - [x] `missionTestData`
-  - [x] `missionJson2Mission`
-  - [x] `mission2MissionJSON`
-  - [x] `mission2MissionBriefJSON`
-  - [x] `MissionCreate`
-  - [x] `MissionFind`
-  - [x] `MissionsFindByModule`
-  - [x] `MissionUpdate`
-  - [x] `MissionDelete`
-- [x] module
-  - [x] `type Module struct`
-  - [x] `type ModuleJson struct`
-  - [x] `type ModuleBriefJson struct`
-  - [x] `moduleTestData`
-  - [x] `moduleJson2Module`
-  - [x] `module2ModuleJson`
-  - [x] `module2ModuleBriefJson`
-  - [x] `ModuleCreate`
-  - [x] `ModuleFind`
-  - [x] `ModulesFindByLeader`
-  - [x] `ModulesFindByProject`
-  - [x] `ModuleUpdate`
-  - [x] `ModuleDelete`
-- [x] project
-  - [x] `type Project struct`
-  - [x] `type ProjectJson struct`
-  - [x] `type BriefProject struct`
-  - [x] `type TagJson struct`
-  - [x] `projectTestData`
-  - [x] `target2TargetsJson`
-  - [x] `targetsJson2Target`
-  - [x] `tagSet2TagsJson`
-  - [x] `tagsJson2TagSet`
-  - [x] `projectJson2Project`
-  - [x] `project2ProjectJson`
-  - [x] `project2ProjectBriefJson`
-  - [x] `ProjectCreate`
-  - [x] `ProjectFind`
-  - [x] `ProjectsFindByLeader`
-  - [x] `ProjectsFindByParticipant`
-  - [x] `ProjectUpdate`
-  - [x] `ProjectDelete`
-  - [x] `../project_test`
+- [ ] mission
+  - [ ] `type Mission struct`
+  - [ ] `type MissionJson struct`
+  - [ ] `type MissionBriefJson struct`
+  - [ ] `missionTestData`
+  - [ ] `missionJson2Mission`
+  - [ ] `mission2MissionJSON`
+  - [ ] `mission2MissionBriefJSON`
+  - [ ] `MissionCreate`
+  - [ ] `MissionFind`
+  - [ ] `MissionsFindByModule`
+  - [ ] `MissionUpdate`
+  - [ ] `MissionDelete`
+- [ ] module
+  - [ ] `type Module struct`
+  - [ ] `type ModuleJson struct`
+  - [ ] `type ModuleBriefJson struct`
+  - [ ] `moduleTestData`
+  - [ ] `moduleJson2Module`
+  - [ ] `module2ModuleJson`
+  - [ ] `module2ModuleBriefJson`
+  - [ ] `ModuleCreate`
+  - [ ] `ModuleFind`
+  - [ ] `ModulesFindByLeader`
+  - [ ] `ModulesFindByProject`
+  - [ ] `ModuleUpdate`
+  - [ ] `ModuleDelete`
+- [ ] project
+  - [ ] `type Project struct`
+  - [ ] `type ProjectJson struct`
+  - [ ] `type BriefProject struct`
+  - [ ] `type TagJson struct`
+  - [ ] `projectTestData`
+  - [ ] `target2TargetsJson`
+  - [ ] `targetsJson2Target`
+  - [ ] `tagSet2TagsJson`
+  - [ ] `tagsJson2TagSet`
+  - [ ] `projectJson2Project`
+  - [ ] `project2ProjectJson`
+  - [ ] `project2ProjectBriefJson`
+  - [ ] `ProjectCreate`
+  - [ ] `ProjectFind`
+  - [ ] `ProjectsFindByLeader`
+  - [ ] `ProjectsFindByParticipant`
+  - [ ] `ProjectUpdate`
+  - [ ] `ProjectDelete`
+  - [ ] `../project_test`
 - [x] user
-  - [x] `type User struct`
-  - [x] `checkUnique`
-  - [x] `User2UserJSON`
-  - [x] `Create`
-  - [x] `First`
-  - [x] `Find`
-  - [x] `Updates`
-  - [x] `Delete`
+  - [ ] `type User struct` User 数据库用户表.
+    - 与其他表的关联没有达成
+  - [x] `checkUnique` 检查UserJSON的唯一性要求是否满足，ID,OpenID,IDCard
+  - [x] `makeOpenIDIDCARDNotEmpty` 检查是否有OpenID和IDCard，零值设置为ID,并更新字段信息
+  - [x] `Create` User Create
+    1. checkUnique
+    1. db.Create
+    1. makeOpenIDIDCARDNotEmpty
+        1. user.Updates
+  - [x] `First` 根据id查找用户.
+    1. checkUnique
+    1. db.First
+  - [x] `FindOne` 单个查找非主键.
+    1. db.find
+    1. check len(users)
+  - [x] `Find` 查找多个用户
+    1. db.find
+  - [x] `Updates` Updates 非覆盖式更新,零值不更新,根据ID定位用户.
+    1. db.Updates
+  - [x] `Delete` Delete 先将openid和idCard置为id，再软删除.
+    1. ID->OpenID,IDCard
+    1. user.Updates
+    1. db.Delete
 - [x] init
   - [x] 表单删除
   - [x] 表单迁移

@@ -35,23 +35,23 @@ type UserJSON struct {
 	@Description:用户JSON
 	@Date: 2019/5/9 10:42
 	*/
-	ID         uint   `json:"id,omitempty"`
-	OpenID     string `json:"openid,omitempty"`
-	WechatName string `json:"wechatName,omitempty"`
-	Code       string `json:"code,omitempty"`
-	Name       string `json:"name,omitempty"`
-	IDCard     string `json:"idCard,omitempty"`
+	ID         uint   `json:"id"`
+	OpenID     string `json:"openid"`
+	WechatName string `json:"wechatName"`
+	Code       string `json:"code"`
+	Name       string `json:"name"`
+	IDCard     string `json:"idCard"`
 	Level      int    `json:"level"`
-	Telephone  string `json:"telephone,omitempty"`
+	Telephone  string `json:"telephone"`
 }
 
 func userTestData() {
-	u0 := &UserJSON{OpenID: "Stranger1", WechatName: "神秘人", Code: "神秘代码", Name: "Stranger1", IDCard: "000", Level: 1, Telephone: "110"}
-	u1 := &UserJSON{OpenID: "Emeritus1", WechatName: "万磁王", Code: "九头蛇", Name: "无关教授1", IDCard: "001", Level: 2}
-	u2 := &UserJSON{OpenID: "Student1", WechatName: "逃学", IDCard: "2", Name: "student1", Level: 3}
-	u3 := &UserJSON{OpenID: "Assistant1", WechatName: "小秘书", IDCard: "003", Name: "Assistant1", Level: 4}
-	u4 := &UserJSON{OpenID: "Senior1", WechatName: "高级打工仔", IDCard: "4", Name: "Senior1", Level: 5}
-	u5 := &UserJSON{OpenID: "Full1", WechatName: "全职叫兽", IDCard: "5", Name: "Full1", Level: 6}
+	u0 := &UserJSON{OpenID: "Stranger1", WechatName: "小蜘蛛", Code: "Spider-Man", Name: "Peter Benjamin Parker", Level: 1, Telephone: "110"}
+	u1 := &UserJSON{OpenID: "Emeritus1", WechatName: "万磁王", Code: "002", Name: "Max Eisenhardt", IDCard: "Magneto", Level: 2}
+	u2 := &UserJSON{WechatName: "金刚狼", IDCard: "Wolverine", Name: "Logan Howlett", Level: 3}
+	u3 := &UserJSON{OpenID: "Assistant1", WechatName: "小辣椒", Name: "Pepper Potts", Level: 4}
+	u4 := &UserJSON{WechatName: "钢铁侠", IDCard: "Iron Man", Name: "Tony Stark", Level: 5}
+	u5 := &UserJSON{OpenID: "Full1", WechatName: "灭霸", IDCard: "5", Name: "Thanos", Level: 6}
 	_ = u0.Create()
 	_ = u1.Create()
 	_ = u2.Create()
@@ -104,9 +104,8 @@ func (userJSON *UserJSON) exchangeOpenID() (err error) {
 		if userJSON.Code != "" {
 			token := &oauth2.Token{}
 			if err = ExchangeToken(token, userJSON.Code); err == nil {
-				log.Println(token)
 				if token.OpenId == "" {
-					err = errors.New("ExchangeToken,未换取到OpenID")
+					err = errors.New("ExchangeToken,未换取到OpenID,请检查用户Code")
 				} else {
 					userJSON.OpenID = token.OpenId
 				}
@@ -319,6 +318,9 @@ func UsersFindByLevel(level int) (usersJSON []UserJSON, err error) {
 	userJSON := UserJSON{Level: level}
 	if err = userJSON.checkLevel(); err == nil {
 		usersJSON, err = userJSON.Find()
+		if len(usersJSON) == 0 {
+			err = errors.New("当前权限的没有用户存在")
+		}
 	}
 	if err != nil {
 		err = errors.New(title + "UsersFindByLevel\t:" + err.Error())
