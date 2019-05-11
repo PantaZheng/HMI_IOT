@@ -4,8 +4,11 @@ import (
 	"errors"
 	"github.com/jinzhu/gorm"
 	"github.com/pantazheng/bci/database"
+	"log"
 	"strconv"
 )
+
+const title = "models.user."
 
 //User 数据库用户表.
 type User struct {
@@ -67,7 +70,9 @@ func (user *User) Create() (err error) {
 	if err = database.DB.Create(user).Error; err != nil {
 		return
 	}
+	log.Println(user)
 	if user.makeOpenIDIDCARDNotEmpty() {
+		log.Println(user)
 		if err = database.DB.Updates(user).Error; err != nil {
 			return
 		}
