@@ -24,6 +24,7 @@ import (
 //}
 
 func init() {
+	database.DB.DropTable("users")
 	if !database.DB.HasTable("users") {
 		database.DB.Set("gorm:table_options", "DEFAULT CHARSET=utf8mb4 AUTO_INCREMENT=1;").AutoMigrate(&models.User{})
 		userTestData()
