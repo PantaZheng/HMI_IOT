@@ -398,7 +398,19 @@ ProjectDeleteByID|delete|`/id/{id:uint}`|-|`ProjectJson`
   - [x] `exchangeOpenId`
   - [x] `simplify`
   - [x] `Create`
-  - [ ] `Bind` ----
+  - [ ] `Bind`
+    1. exchangeOpenID
+    1. check IDCard和Name是否有空
+    1. level !=LevelMap["Stranger"]
+    1. checklevel illegal
+    1. wechatUser.FindOne()
+    1. wechatUser.Level > LevelMap["Stranger"]
+    1. presortedUser.FindOne()
+        1. presortedUser.Name != ""
+            1. presortedUser.Name != userJSON.Name
+            1. if presortedUser.Level == LevelMap["Stranger"]
+            1. wechatUser.Delete()
+        1. wechatUser.Updates()
   - [ ] `First`
   - [ ] `FindOne`
   - [ ] `Updates` ----

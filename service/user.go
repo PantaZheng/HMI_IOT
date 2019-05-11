@@ -203,7 +203,7 @@ func (userJSON *UserJSON) Bind() (err error) {
 	if err = userJSON.exchangeOpenID(); err == nil {
 		if userJSON.IDCard == "" || userJSON.Name == "" {
 			err = errors.New("绑定必须有同时身份证和姓名信息\t")
-		} else if userJSON.Level == 1 {
+		} else if userJSON.Level == LevelMap["Stranger"] {
 			err = errors.New("绑定权限不能设置为1级\t")
 		} else if err = userJSON.checkLevel(); err == nil {
 			wechatUser := &models.User{OpenID: userJSON.OpenID}
@@ -224,6 +224,9 @@ func (userJSON *UserJSON) Bind() (err error) {
 						//预存User添加微信信息
 						presortedUser.OpenID = userJSON.OpenID
 						presortedUser.WechatName = userJSON.WechatName
+						if presortedUser.Level == LevelMap["Stranger"] {
+							presortedUser.Level = userJSON.Level
+						}
 						if err = presortedUser.Updates(); err == nil {
 							*userJSON = User2UserJSON(presortedUser)
 						}
@@ -232,6 +235,7 @@ func (userJSON *UserJSON) Bind() (err error) {
 					//无预存信息,修改微信初始化的User，添加姓名和身份证号
 					wechatUser.Name = userJSON.Name
 					wechatUser.IDCard = userJSON.IDCard
+					wechatUser.Level = userJSON.Level
 					if err = wechatUser.Updates(); err == nil {
 						*userJSON = User2UserJSON(wechatUser)
 					}
