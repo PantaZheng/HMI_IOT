@@ -104,7 +104,11 @@ func (userJSON *UserJSON) exchangeOpenID() (err error) {
 		if userJSON.Code != "" {
 			token := &oauth2.Token{}
 			if err = ExchangeToken(token, userJSON.Code); err == nil {
-				userJSON.OpenID = token.OpenId
+				if token.OpenId == "" {
+					err = errors.New("ExchangeToken,未换取到OpenID")
+				} else {
+					userJSON.OpenID = token.OpenId
+				}
 			}
 		} else {
 			err = errors.New("openid和code不可同时为空")
