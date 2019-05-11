@@ -218,13 +218,12 @@ func (userJSON *UserJSON) Bind() (err error) {
 				_ = presortedUser.FindOne()
 				//检查是否有预存信息
 				if presortedUser.Name != "" {
+					presortedUser.OpenID = wechatUser.OpenID
+					presortedUser.WechatName = wechatUser.WechatName
 					//有预存信息，比对姓名
 					if presortedUser.Name != userJSON.Name {
 						err = errors.New("用户名:" + userJSON.Name + "和身份证号:" + userJSON.IDCard + "不匹配,请检查输入信息")
 					} else if err = wechatUser.Delete(); err == nil {
-						//预存User添加微信信息
-						presortedUser.OpenID = wechatUser.OpenID
-						presortedUser.WechatName = wechatUser.WechatName
 						if presortedUser.Level == LevelMap["Stranger"] {
 							presortedUser.Level = userJSON.Level
 						}
