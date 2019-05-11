@@ -162,6 +162,7 @@ func UserInitByWechat(weChatInfo *user.UserInfo) string {
 			message = title + "UserInitByWechat:\t" + err.Error()
 		}
 	} else {
+		u.WechatName = weChatInfo.Nickname
 		u.Level = LevelMap["Stranger"]
 		if err = u.Create(); err == nil {
 			message = "欢迎新用户" + u.WechatName + ",请进行绑定操作"
