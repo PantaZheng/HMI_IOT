@@ -64,6 +64,7 @@ type UserJSON struct {
 	Level      int    `json:"level"`
 	Telephone  string `json:"telephone"`
 }
+//正常的User用户的CODE和IDCard不得为ID的数字
 ```
 
 名称|method|path|传入body参数|接收body参数|
@@ -132,6 +133,7 @@ type MissionBriefJson struct {
 	Tag        bool   `json:"tag"`
 	ModuleID   uint   `json:"module"`
 }
+
 ```
 
 名称|method|path|传入body参数|接收body参数
@@ -443,8 +445,9 @@ ProjectDeleteByID|delete|`/id/{id:uint}`|-|`ProjectJson`
     1. `checkLevel`
     1. `u.Updates()`
   - [x] `Delete`
-  - [ ] `UserDeleteByID` ----
-  - [ ] `UserDeleteByOpenID` ----
+    1. `u.Delete()`
+  - [x] `UserDeleteByID`
+  - [x] `UserDeleteByOpenID`
 
 ### controller
 
