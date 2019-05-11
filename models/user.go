@@ -46,13 +46,16 @@ func (user *User) checkUnique() (err error) {
 func (user *User) makeOpenIDIDCARDNotEmpty() (tag bool) {
 	//检查是否有OpenID和IDCard，零值设置为ID,并更新字段信息
 	if user.OpenID == "" || user.IDCard == "" {
+		u := new(User)
+		u.ID = user.ID
 		if user.OpenID == "" {
-			user.OpenID = strconv.Itoa(int(user.ID))
+			u.OpenID = strconv.Itoa(int(user.ID))
 		}
 		if user.IDCard == "" {
-			user.IDCard = strconv.Itoa(int(user.ID))
+			u.IDCard = strconv.Itoa(int(user.ID))
 		}
 		tag = true
+		*user = *u
 	}
 	return
 }
@@ -70,13 +73,12 @@ func (user *User) Create() (err error) {
 	if err = database.DB.Create(user).Error; err != nil {
 		return
 	}
-	log.Println(user)
 	if user.makeOpenIDIDCARDNotEmpty() {
-		log.Println(user)
 		if err = database.DB.Updates(user).Error; err != nil {
 			return
 		}
 	}
+	log.Println(user)
 	return
 }
 
