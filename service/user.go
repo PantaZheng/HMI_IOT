@@ -203,6 +203,8 @@ func (userJSON *UserJSON) Bind() (err error) {
 	if err = userJSON.exchangeOpenID(); err == nil {
 		if userJSON.IDCard == "" || userJSON.Name == "" {
 			err = errors.New("绑定必须有同时身份证和姓名信息\t")
+		} else if userJSON.Level == 1 {
+			err = errors.New("绑定权限不能设置为1级\t")
 		} else if err = userJSON.checkLevel(); err == nil {
 			wechatUser := &models.User{OpenID: userJSON.OpenID}
 			//查找微信关联信息
