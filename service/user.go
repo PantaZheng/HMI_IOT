@@ -156,13 +156,17 @@ func UserInitByWechat(weChatInfo *user.UserInfo) string {
 	u.OpenID = weChatInfo.OpenId
 	u.WechatName = weChatInfo.Nickname
 	if err := u.FindOne(); err == nil {
-		if err := u.Updates(); err != nil {
+		if err := u.Updates(); err == nil {
 			message = "欢迎老用户" + u.WechatName + "重新关注"
+		} else {
+			message = title + "UserInitByWechat:\t" + err.Error()
 		}
 	} else {
 		u.Level = LevelMap["Stranger"]
-		if err := u.Create(); err != nil {
+		if err = u.Create(); err == nil {
 			message = "欢迎新用户" + u.WechatName + ",请进行绑定操作"
+		} else {
+			message = title + "UserInitByWechat:\t" + err.Error()
 		}
 	}
 	return message
