@@ -52,12 +52,14 @@ func userTestData() {
 	u3 := &UserJSON{OpenID: "Assistant1", WechatName: "小辣椒", Name: "Pepper Potts", Level: 4}
 	u4 := &UserJSON{WechatName: "钢铁侠", IDCard: "Iron Man", Name: "Tony Stark", Level: 5}
 	u5 := &UserJSON{OpenID: "Full1", WechatName: "灭霸", IDCard: "5", Name: "Thanos", Level: 6}
+	u6 := &UserJSON{IDCard: "6", Name: "海王", Level: 6}
 	_ = u0.Create()
 	_ = u1.Create()
 	_ = u2.Create()
 	_ = u3.Create()
 	_ = u4.Create()
 	_ = u5.Create()
+	_ = u6.Create()
 }
 
 //UserJSON2User UserJSON转换到User.
