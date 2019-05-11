@@ -392,17 +392,17 @@ ProjectDeleteByID|delete|`/id/{id:uint}`|-|`ProjectJson`
   - [x] `UserJSON2User`
   - [x] `exchangeOpenId`
   - [x] `simplify`
-  - [x] `Create` ---
-  - [x] `Bind` ----
-  - [x] `First`
-  - [x] `FindOne`
+  - [x] `Create`
+  - [ ] `Bind` ----
+  - [ ] `First`
+  - [ ] `FindOne`
   - [ ] `Updates` ----
   - [ ] `Delete` ---
-  - [x] `UserFindByID`
-  - [x] `UserFindByOpenID`
-  - [x] `UserFindByIDCard`
-  - [x] `Find`
-  - [x] `UsersFindByLevel`
+  - [ ] `UserFindByID`
+  - [ ] `UserFindByOpenID`
+  - [ ] `UserFindByIDCard`
+  - [ ] `Find`
+  - [ ] `UsersFindByLevel`
   - [ ] `UserDeleteByID` ----
   - [ ] `UserDeleteByOpenID` ----
 
