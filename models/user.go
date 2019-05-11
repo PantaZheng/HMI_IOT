@@ -103,24 +103,24 @@ func (user *User) Find() (users []*User, err error) {
 }
 
 //Updates 非覆盖式更新，零值不更新.
-func (user *User) Updates(newUser *User) (err error) {
+func (user *User) Updates(oldUser *User) (err error) {
 	/**
 	@Author: PantaZheng
 	@Description:
 	@Date: 2019/5/9 14:29
 	*/
-	err = database.DB.Model(user).Updates(newUser).Error
+	err = database.DB.Model(oldUser).Updates(user).Error
 	return
 }
 
 //Save 覆盖式更新，零值更新.
-func (user *User) Save(newUser *User) (err error) {
+func (user *User) Save(oldUser *User) (err error) {
 	/**
 	@Author: PantaZheng
 	@Description:
 	@Date: 2019/5/9 14:29
 	*/
-	err = database.DB.Model(user).Updates(newUser).Error
+	err = database.DB.Model(oldUser).Updates(user).Error
 	return
 }
 

@@ -344,6 +344,8 @@ func UsersFindByLevel(level int) (usersJSON []UserJSON, err error) {
 	userJSON := UserJSON{Level: level}
 	if err = userJSON.checkLevel(); err == nil {
 		usersJSON, err = userJSON.Find()
+	} else {
+		err = errors.New(field + err.Error())
 	}
 	return
 }
@@ -360,10 +362,14 @@ func (userJSON *UserJSON) Updates() (err error) {
 		err = errors.New(field + err.Error())
 		return
 	}
+	if userJSON.ID == 0 {
+		err = errors.New(field + "更新信息必须包含用户ID")
+		return
+	}
 	u := userJSON.UserJSON2User()
-	newUser := new(models.User)
-	newUser.ID = u.ID
-	if err := u.Updates(newUser); err != nil {
+	oldUser := new(models.User)
+	oldUser.ID = u.ID
+	if err := u.Updates(oldUser); err != nil {
 		err = errors.New(field + err.Error())
 	} else {
 		*userJSON = User2UserJSON(&u)
