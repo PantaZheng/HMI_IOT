@@ -129,7 +129,6 @@ func (userJSON *UserJSON) simplify() {
 	userJSON.WechatName = ""
 	userJSON.Code = ""
 	userJSON.IDCard = ""
-	userJSON.Level = 0
 	userJSON.Telephone = ""
 }
 
@@ -318,6 +317,7 @@ func (userJSON *UserJSON) Find() (usersJSON []UserJSON, err error) {
 		usersJSON = make([]UserJSON, len(users))
 		for i, v := range users {
 			usersJSON[i] = User2UserJSON(v)
+			usersJSON[i].simplify()
 		}
 	} else {
 		err = errors.New(title + "Find:\t" + err.Error())

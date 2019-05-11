@@ -152,13 +152,15 @@ func (user *User) Delete() (err error) {
 	@Description:
 	@Date: 2019/5/9 14:36
 	*/
-	user.OpenID = strconv.Itoa(int(user.ID))
-	user.IDCard = strconv.Itoa(int(user.ID))
-	if err = user.Updates(); err == nil {
-		err = database.DB.Delete(user).Error
-	}
-	if err != nil {
-		err = errors.New(title + "Delete:\t" + err.Error())
+	if err = user.FindOne(); err == nil {
+		user.OpenID = strconv.Itoa(int(user.ID))
+		user.IDCard = strconv.Itoa(int(user.ID))
+		if err = user.Updates(); err == nil {
+			err = database.DB.Delete(user).Error
+		}
+		if err != nil {
+			err = errors.New(title + "Delete:\t" + err.Error())
+		}
 	}
 	return
 }

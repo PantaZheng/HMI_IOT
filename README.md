@@ -55,13 +55,14 @@ type UserJSON struct {
 	@Description:用户JSON
 	@Date: 2019/5/9 10:42
 	*/
-	ID        int    `json:"id"`
-	OpenID    string `json:"openid"`
-	Code      string `json:"code"`
-	Name      string `json:"name"`
-	IDCard    string `json:"idCard"`
-	Level     int    `json:"level"`
-	Telephone string `json:"telephone"`
+	ID         uint   `json:"id"`
+	OpenID     string `json:"openid"`
+	WechatName string `json:"wechatName"`
+	Code       string `json:"code"`
+	Name       string `json:"name"`
+	IDCard     string `json:"idCard"`
+	Level      int    `json:"level"`
+	Telephone  string `json:"telephone"`
 }
 ```
 
@@ -332,24 +333,24 @@ ProjectDeleteByID|delete|`/id/{id:uint}`|-|`ProjectJson`
   - [x] `checkUnique` 检查UserJSON的唯一性要求是否满足，ID,OpenID,IDCard
   - [x] `makeOpenIDIDCARDNotEmpty` 检查是否有OpenID和IDCard，零值设置为ID,并更新字段信息
   - [x] `Create` User Create
-    1. checkUnique
-    1. db.Create
-    1. makeOpenIDIDCARDNotEmpty
-        1. user.Updates
+    1. `checkUnique`
+    1. `db.Create`
+    1. `makeOpenIDIDCARDNotEmpty`
+        1. `user.Updates`
   - [x] `First` 根据id查找用户.
-    1. checkUnique
-    1. db.First
+    1. `checkUnique`
+    1. `db.First`
   - [x] `FindOne` 单个查找非主键.
-    1. db.find
-    1. check len(users)
+    1. `db.find`
+    1. `check len(users)`
   - [x] `Find` 查找多个用户
-    1. db.find
+    1. `db.find`
   - [x] `Updates` Updates 非覆盖式更新,零值不更新,根据ID定位用户.
-    1. db.Updates
+    1. `db.Updates`
   - [x] `Delete` Delete 先将openid和idCard置为id，再软删除.
     1. ID->OpenID,IDCard
-    1. user.Updates
-    1. db.Delete
+    1. `user.Updates`
+    1. `db.Delete`
 - [x] init
   - [x] 表单删除
   - [x] 表单迁移
@@ -395,31 +396,53 @@ ProjectDeleteByID|delete|`/id/{id:uint}`|-|`ProjectJson`
 - [x] user
   - [x] `userTestData`
   - [x] `UserJSON2User`
+  - [x] `User2UserJSON`
   - [x] `exchangeOpenId`
-  - [x] `simplify`
+    1. userJSON.OpenID == ""
+    1. userJSON.Code != ""
+    1. ExchangeToken
+    1. userJSON.OpenID = token.OpenId
+  - [x] `simplify` simplify 简化，仅保留：id、Name、Level.
+  - [x] `checkLevel`
+  - [x] `UserInitByWechat`
+    1. `u.FindOne()`
+        1. `u.Updates()` old
+        1. `u.Create()` new
   - [x] `Create`
-  - [ ] `Bind`
-    1. exchangeOpenID
+    1. `userJSON.checkLevel()`
+    1. `u.Create()`
+  - [x] `Bind`
+    1. `exchangeOpenID`
     1. check IDCard和Name是否有空
-    1. level !=LevelMap["Stranger"]
-    1. checklevel illegal
-    1. wechatUser.FindOne()
-    1. wechatUser.Level > LevelMap["Stranger"]
-    1. presortedUser.FindOne()
-        1. presortedUser.Name != ""
-            1. presortedUser.Name != userJSON.Name
-            1. if presortedUser.Level == LevelMap["Stranger"]
-            1. wechatUser.Delete()
-        1. wechatUser.Updates()
-  - [ ] `First`
-  - [ ] `FindOne`
-  - [ ] `Updates` ----
-  - [ ] `Delete` ---
-  - [ ] `UserFindByID`
-  - [ ] `UserFindByOpenID`
-  - [ ] `UserFindByIDCard`
-  - [ ] `Find`
-  - [ ] `UsersFindByLevel`
+    1. `level !=LevelMap["Stranger"]`
+    1. `checklevel illegal`
+    1. `wechatUser.FindOne()`
+    1. `wechatUser.Level > LevelMap["Stranger"]`
+    1. `presortedUser.FindOne()`
+        1. `presortedUser.Name != ""`
+            1. Openid,WechatName->presortedUser
+            1. `presortedUser.Name != userJSON.Name`
+            1. `if presortedUser.Level == LevelMap["Stranger"]`
+            1. `wechatUser.Delete()`
+            1. `presortedUser.Updates()`
+        1. `wechatUser.Updates()`
+  - [x] `First`
+    1. `u.First()`
+  - [x] `FindOne`
+    1. `u.FindOne()`
+  - [x] `UserFindByID`
+  - [x] `UserFindByOpenID`
+  - [x] `UserFindByIDCard`
+  - [x] `Find`
+    1. `u.Find()`
+    1. `simplify()`
+  - [x] `UsersFindByLevel`
+    1. `checkLevel()`
+    1. `userJSON.Find()`
+  - [x] `Updates`
+    1. `checkLevel`
+    1. `u.Updates()`
+  - [x] `Delete`
   - [ ] `UserDeleteByID` ----
   - [ ] `UserDeleteByOpenID` ----
 
