@@ -6,7 +6,6 @@ import (
 	"github.com/chanxuehong/wechat/oauth2"
 	"github.com/pantazheng/bci/models"
 	"log"
-	"strconv"
 )
 
 const title = "service.user."
@@ -176,20 +175,6 @@ func (userJSON *UserJSON) Create() (err error) {
 		err = errors.New(field + err.Error())
 		return
 	}
-	//OpenID和IDCard零值设置为ID,并更新字段信息
-	if u.OpenID == "" || u.IDCard == "" {
-		newUser := &models.User{}
-		if u.OpenID == "" {
-			newUser.OpenID = strconv.Itoa(int(u.ID))
-		}
-		if u.IDCard == "" {
-			newUser.IDCard = strconv.Itoa(int(u.ID))
-		}
-		if err = u.Updates(newUser); err != nil {
-			err = errors.New(field + err.Error())
-			return
-		}
-	}
 	//userJSON接收数据库创建记录
 	*userJSON = User2UserJSON(&u)
 	return
@@ -238,14 +223,18 @@ func (userJSON *UserJSON) Bind() (err error) {
 			return
 		}
 		//修改预存用户信息
-		if err = presortedUser.Updates(&models.User{OpenID: userJSON.OpenID, WechatName: wechatUser.WechatName}); err != nil {
+		presortedUser.OpenID = userJSON.OpenID
+		presortedUser.WechatName = userJSON.WechatName
+		if err = presortedUser.Updates(); err != nil {
 			err = errors.New(field + err.Error())
 		} else {
 			*userJSON = User2UserJSON(presortedUser)
 		}
 	} else {
 		//无预存信息,修改微信初始化的User，添加姓名和身份证号
-		if err = wechatUser.Updates(&models.User{Name: userJSON.Name, IDCard: userJSON.IDCard}); err != nil {
+		wechatUser.Name = userJSON.Name
+		wechatUser.IDCard = userJSON.IDCard
+		if err = wechatUser.Updates(); err != nil {
 			err = errors.New(field + err.Error())
 		} else {
 			*userJSON = User2UserJSON(wechatUser)
@@ -367,12 +356,11 @@ func (userJSON *UserJSON) Updates() (err error) {
 		return
 	}
 	u := userJSON.UserJSON2User()
-	oldUser := new(models.User)
-	oldUser.ID = u.ID
-	if err := u.Updates(oldUser); err != nil {
+	if err := u.Updates(); err != nil {
 		err = errors.New(field + err.Error())
 	} else {
 		*userJSON = User2UserJSON(&u)
+
 	}
 	return
 }

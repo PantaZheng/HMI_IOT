@@ -4,6 +4,7 @@ import (
 	"errors"
 	"github.com/jinzhu/gorm"
 	"github.com/pantazheng/bci/database"
+	"strconv"
 )
 
 //User 数据库用户表.
@@ -39,6 +40,18 @@ func (user *User) checkUnique() (err error) {
 	return
 }
 
+func (user *User) makeOpenIDIDCARDNotEmpty() {
+	//检查是否有OpenID和IDCard，零值设置为ID,并更新字段信息
+	if user.OpenID == "" || user.IDCard == "" {
+		if user.OpenID == "" {
+			user.OpenID = strconv.Itoa(int(user.ID))
+		}
+		if user.IDCard == "" {
+			user.IDCard = strconv.Itoa(int(user.ID))
+		}
+	}
+}
+
 //Create 创建User.
 func (user *User) Create() (err error) {
 	/**
@@ -49,6 +62,7 @@ func (user *User) Create() (err error) {
 	if err = user.checkUnique(); err != nil {
 		return
 	}
+	user.makeOpenIDIDCARDNotEmpty()
 	if err = database.DB.Create(user).Error; err != nil {
 		return
 	}
@@ -102,36 +116,29 @@ func (user *User) Find() (users []*User, err error) {
 	return
 }
 
-//Updates 非覆盖式更新，零值不更新.
-func (user *User) Updates(oldUser *User) (err error) {
+//Updates 非覆盖式更新，零值不更新.根据ID更新
+func (user *User) Updates() (err error) {
 	/**
 	@Author: PantaZheng
 	@Description:
 	@Date: 2019/5/9 14:29
 	*/
-	err = database.DB.Model(oldUser).Updates(user).Error
+	u := new(User)
+	u.ID = user.ID
+	err = database.DB.Model(u).Updates(user).Error
 	return
 }
 
-//Save 覆盖式更新，零值更新.
-func (user *User) Save(oldUser *User) (err error) {
-	/**
-	@Author: PantaZheng
-	@Description:
-	@Date: 2019/5/9 14:29
-	*/
-	err = database.DB.Model(oldUser).Updates(user).Error
-	return
-}
-
-//Delete 先将openid和idCard置为id来实现，再软删除.
+//Delete 先将openid和idCard置为id，再软删除.
 func (user *User) Delete() (err error) {
 	/**
 	@Author: PantaZheng
 	@Description:
 	@Date: 2019/5/9 14:36
 	*/
-	if err = user.Updates(&User{OpenID: string(user.ID), IDCard: string(user.ID)}); err != nil {
+	user.OpenID = strconv.Itoa(int(user.ID))
+	user.IDCard = strconv.Itoa(int(user.ID))
+	if err = user.Updates(); err != nil {
 		return
 	}
 	err = database.DB.Delete(user).Error
