@@ -154,8 +154,8 @@ func UserInitByWechat(weChatInfo *user.UserInfo) string {
 	message := ""
 	u := new(UserJSON)
 	u.OpenID = weChatInfo.OpenId
-	u.WechatName = weChatInfo.Nickname
 	if err := u.FindOne(); err == nil {
+		u.WechatName = weChatInfo.Nickname
 		if err := u.Updates(); err == nil {
 			message = "欢迎老用户" + u.WechatName + "重新关注"
 		} else {
