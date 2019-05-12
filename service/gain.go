@@ -1,37 +1,204 @@
 package service
 
-//import "github.com/pantazheng/bci/models"
-//
-//func GainCreate(gain *models.GainJson) (gainJson models.GainJson, err error) {
-//	return models.GainCreate(gain)
-//}
-//
-//func GainFindByID(id uint) (gainJson models.GainJson, err error) {
-//	gain := new(models.Gain)
-//	gain.ID = id
-//	return models.GainFind(gain)
-//}
-//
-////owner单一确定
-//func GainsFindByOwnerID(id uint) (gainsJson []*models.GainJson, err error) {
-//	owner := new(models.User)
-//	owner.ID = id
-//	return models.GainsFindByOwner(owner)
-//}
-//
+import (
+	"errors"
+	"github.com/pantazheng/bci/models"
+	"log"
+)
+
+const titleGain = "service.gain."
+
+type GainJSON struct {
+	/**
+	@Author: PantaZheng
+	@Description:
+	@Date: 2019/5/13 1:17
+	*/
+	ID        uint     `json:"id"`
+	Name      string   `json:"name"`
+	Type      string   `json:"type"`
+	File      string   `json:"file"`
+	UpTime    string   `json:"upTime"`
+	Remark    string   `json:"remark"`
+	OwnerID   uint     `json:"ownerID"`
+	Owner     UserJSON `json:"owner"`
+	MissionID uint     `json:"missionID"`
+}
+
+func gainTestData() {
+	/**
+	@Author: PantaZheng
+	@Description:
+	@Date: 2019/5/13 2:39
+	*/
+	u1 := UserJSON{ID: 2}
+	u2 := UserJSON{ID: 3}
+	u3 := UserJSON{ID: 4}
+	u4 := UserJSON{ID: 5}
+	u5 := UserJSON{ID: 6}
+	u6 := UserJSON{ID: 7}
+	_ = GainJSON{Name: "gain1", Owner: u1, MissionID: 1}.Create()
+	_ = GainJSON{Name: "gain2", Owner: u2, MissionID: 1}.Create()
+	_ = GainJSON{Name: "gain3", Owner: u3, MissionID: 2}.Create()
+	_ = GainJSON{Name: "gain4", Owner: u4, MissionID: 2}.Create()
+	_ = GainJSON{Name: "gain5", Owner: u5, MissionID: 1}.Create()
+	_ = GainJSON{Name: "gain6", Owner: u6, MissionID: 2}.Create()
+}
+
+func gain2GainJSON(gain *models.Gain) (gainJSON GainJSON) {
+	/**
+	@Author: PantaZheng
+	@Description:
+	@Date: 2019/5/13 2:05
+	*/
+	gainJSON.ID = gain.ID
+	gainJSON.Name = gain.Name
+	gainJSON.Type = gain.Type
+	gainJSON.File = gain.File
+	gainJSON.UpTime = gain.UpTime
+	gainJSON.Remark = gain.Remark
+	gainJSON.OwnerID = gain.OwnerID
+	owner := &UserJSON{ID: gainJSON.OwnerID}
+	if err := owner.First(); err != nil {
+		log.Println(err.Error())
+	}
+	gainJSON.Owner = userJSON2UserBriefJSON(owner)
+	gainJSON.MissionID = gain.MissionID
+	return
+}
+
+func gainJSON2GainBriefJSON(gainJSON1 *GainJSON) (gainJSON2 GainJSON) {
+	/**
+	@Author: PantaZheng
+	@Description:
+	@Date: 2019/5/13 3:14
+	*/
+	gainJSON2.ID = gainJSON1.ID
+	gainJSON2.Name = gainJSON1.Name
+	gainJSON2.UpTime = gainJSON1.UpTime
+	gainJSON2.OwnerID = gainJSON1.OwnerID
+	gainJSON2.MissionID = gainJSON1.MissionID
+	return
+}
+
+func Gains2BriefGainsJSON(gains []*models.Gain) (gainsJSON []GainJSON) {
+	gainsJSON = make([]GainJSON, len(gains))
+	for i, v := range gains {
+		g := gain2GainJSON(v)
+		gainsJSON[i] = gainJSON2GainBriefJSON(&g)
+	}
+	return
+}
+
+//gainJSON2Gain GainJSON转换到Gain.
+func (gainJSON *GainJSON) gainJSON2Gain() (gain models.Gain) {
+	/**
+	@Author: PantaZheng
+	@Description:
+	@Date: 2019/5/13 2:39
+	*/
+	gain.ID = gainJSON.ID
+	gain.Name = gainJSON.Name
+	gain.Type = gainJSON.Type
+	gain.File = gainJSON.File
+	gain.UpTime = gainJSON.UpTime
+	gain.Remark = gainJSON.Remark
+	gain.OwnerID = gainJSON.Owner.ID
+	gain.MissionID = gainJSON.MissionID
+	return
+}
+
+func (gainJSON *GainJSON) Create() (err error) {
+	/**
+	@Author: PantaZheng
+	@Description:
+	@Date: 2019/5/13 2:39
+	*/
+	//TODO:检查成果归属者是否在Mission的参与者中
+	owner := UserJSON{ID: gainJSON.OwnerID}
+	if err = owner.First(); err == nil {
+		g := gainJSON.gainJSON2Gain()
+		if err = g.Create(); err == nil {
+			*gainJSON = gain2GainJSON(&g)
+		}
+	}
+	if err != nil {
+		err = errors.New(titleGain + "Create:\t" + err.Error())
+	}
+	return
+}
+
+func (gainJSON *GainJSON) First() (err error) {
+	/**
+	@Author: PantaZheng
+	@Description:
+	@Date: 2019/5/13 2:39
+	*/
+	g := gainJSON.gainJSON2Gain()
+	if err = g.First(); err == nil {
+		*gainJSON = gain2GainJSON(&g)
+	} else {
+		err = errors.New(titleGain + "First:\t" + err.Error())
+	}
+	return
+}
+
+//owner单一确定
+func GainsFindByOwnerID(id uint) (gainsJson []GainJSON, err error) {
+	/**
+	@Author: PantaZheng
+	@Description:
+	@Date: 2019/5/13 2:44
+	*/
+	if gains, err := models.FindByOwnerID(id); err == nil {
+		gainsJson = Gains2BriefGainsJSON(gains)
+	} else {
+		err = errors.New(titleGain + "GainsFindByOwnerID:\t" + err.Error())
+	}
+	return
+}
+
 ////mission单一确定
-//func GainsFindByMissionID(id uint) (gainsJson []models.GainJson, err error) {
+//func GainsFindByMissionID(id uint) (gainsJson []models.GainJSON, err error) {
 //	mission := new(models.Mission)
 //	mission.ID = id
 //	return models.GainsFindByMission(mission)
 //}
-//
-//func GainUpdate(gainJson *models.GainJson) (recordGainJson models.GainJson, err error) {
-//	return models.GainUpdate(gainJson)
-//}
-//
-//func GainDeleteByID(id uint) (recordGainJson models.GainJson, err error) {
-//	gain := new(models.GainJson)
-//	gain.ID = id
-//	return models.GainDelete(gain)
-//}
+
+//Updates 更新成果数据，id定位成果记录.
+func (gainJSON *GainJSON) Updates() (err error) {
+	/**
+	@Author: PantaZheng
+	@Description:
+	@Date: 2019/5/13 3:25
+	*/
+	g := gainJSON.gainJSON2Gain()
+	if err = g.Updates(); err == nil {
+		*gainJSON = gain2GainJSON(&g)
+	} else {
+		err = errors.New(titleGain + "Updates:\t" + err.Error())
+	}
+	return
+}
+
+func (gainJSON *GainJSON) Delete() (err error) {
+	/**
+	@Author: PantaZheng
+	@Description:
+	@Date: 2019/5/13 3:30
+	*/
+	g := gainJSON.gainJSON2Gain()
+	if err = g.Delete(); err == nil {
+		*gainJSON = gain2GainJSON(&g)
+	} else {
+		err = errors.New(titleGain + "Delete:\t" + err.Error())
+	}
+	return
+}
+
+//GainDeleteByID 通过数据库ID删除Gain.
+func GainDeleteByID(id uint) (gainJSON GainJSON, err error) {
+	gainJSON = GainJSON{ID: id}
+	err = gainJSON.Delete()
+	return
+}

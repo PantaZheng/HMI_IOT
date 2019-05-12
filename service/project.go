@@ -1,11 +1,11 @@
 package service
 
-//import "github.com/pantazheng/bci/models"
-//
-//func ProjectCreate(project *models.ProjectJson) (projectJson models.ProjectJson, err error) {
-//	return models.ProjectCreate(project)
-//}
-//
+import "github.com/pantazheng/bci/models"
+
+func ProjectCreate(project *models.ProjectJson) (projectJson models.ProjectJson, err error) {
+	return models.ProjectCreate(project)
+}
+
 //func ProjectFindByID(id uint) (recordProjectJson models.ProjectJson, err error) {
 //	project := new(models.Project)
 //	project.ID = id

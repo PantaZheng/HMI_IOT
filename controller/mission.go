@@ -1,27 +1,26 @@
 package controller
 
-//
-//import (
-//	"github.com/kataras/iris"
-//	"github.com/pantazheng/bci/models"
-//	"github.com/pantazheng/bci/service"
-//	"log"
-//)
-//
-//func MissionCreate(ctx iris.Context) {
-//	mission := new(models.MissionJson)
-//	if err := ctx.ReadJSON(mission); err != nil {
-//		log.Println(err.Error())
-//	}
-//	if missionJson, err := service.MissionCreate(mission); err != nil {
-//		ctx.StatusCode(iris.StatusAccepted)
-//		_, _ = ctx.Text(err.Error())
-//	} else {
-//		ctx.StatusCode(iris.StatusOK)
-//		_, _ = ctx.JSON(missionJson)
-//	}
-//}
-//
+import (
+	"github.com/kataras/iris"
+	"github.com/pantazheng/bci/models"
+	"github.com/pantazheng/bci/service"
+	"log"
+)
+
+func MissionCreate(ctx iris.Context) {
+	mission := new(models.MissionJson)
+	if err := ctx.ReadJSON(mission); err != nil {
+		log.Println(err.Error())
+	}
+	if missionJson, err := service.MissionCreate(mission); err != nil {
+		ctx.StatusCode(iris.StatusAccepted)
+		_, _ = ctx.Text(err.Error())
+	} else {
+		ctx.StatusCode(iris.StatusOK)
+		_, _ = ctx.JSON(missionJson)
+	}
+}
+
 //func MissionFindByID(ctx iris.Context) {
 //	id, _ := ctx.Params().GetUint("id")
 //	if missionJson, err := service.MissionFindByID(id); err != nil {

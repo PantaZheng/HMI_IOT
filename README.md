@@ -32,21 +32,23 @@
 入口: `/user`
 
 ```go
-
-LevelMap = map[string]int{
-  //Stranger 未绑定
-  "Stranger": 0,
-  //Emeritus Professor emeritus 专家教授
-  "Emeritus": 1,
-  //Student 学生
-  "Student": 2,
-  //Assistant 助理
-  "Assistant": 3,
-  //Senior Senior lecturer 高级讲师
-  "Senior": 4,
-  //Full Full professor 全职教授
-  "Full": 5,
-}
+var (
+	//LevelMap 用户权限管理
+	LevelMap = map[string]int{
+		//Stranger 未绑定
+		"Stranger": 1,
+		//Emeritus Professor emeritus 专家教授，只能查看项目简要信息
+		"Emeritus": 2,
+		//Student 学生，查看项目的简要信息、参与模块详细信息、参与任务详细信息
+		"Student": 3,
+		//Senior Senior lecturer 高级讲师，只能查看自己项目下的所有信息
+		"Senior": 4,
+		//Assistant 助理,全部权限
+		"Assistant": 5,
+		//Full Full professor 全职教授，全部权限
+		"Full": 6,
+	}
+)
 
 //UserJSON 用户Json原型
 type UserJSON struct {
@@ -85,14 +87,19 @@ UserDeleteByOpenID|delete|`/id/{openid:string}`|-|`UserJson`
 
 ```go
 type GainJson struct {
-	ID        uint          `json:"id"`
-	Name      string        `json:"name"`
-	Type      string        `json:"type"`
-	File      string        `json:"file"`
-	UpTime    string        `json:"upTime"`
-	Remark    string        `json:"remark"`
-	Owner     UserBriefJSON `json:"owner"`
-	MissionID uint          `json:"missionID"`
+	/**
+	@Author: PantaZheng
+	@Description:
+	@Date: 2019/5/13 1:17
+	*/
+	ID        uint     `json:"id"`
+	Name      string   `json:"name"`
+	Type      string   `json:"type"`
+	File      string   `json:"file"`
+	UpTime    string   `json:"upTime"`
+	Remark    string   `json:"remark"`
+	Owner     UserJSON `json:"owner"`
+	MissionID uint     `json:"missionID"`
 }
 ```
 
@@ -266,22 +273,25 @@ ProjectDeleteByID|delete|`/id/{id:uint}`|-|`ProjectJson`
 ### models
 
 - [ ] gain
-  - [ ] `type Gain struct`
-  - [ ] `type GainJson struct`
-  - [ ] `gainTestData`
-  - [ ] `gainJson2Gain`
-  - [ ] `gain2GainJson`
-  - [ ] `GainCreate`
-  - [ ] `GainFind`
-  - [ ] `GainsFindByOwner`
+  - [x] `type Gain struct`
+  - [x] `Create`
+    1. uptime
+    1. `db.create`
+  - [x] `First`
+    1. checkid
+    1. `db.first`
+  - [x] `FindByOwner`
+    1. `owner.findone`
+    1. `db.Model(&owner).Related(&gains, "OwnerID")`
+  - [x] `GainsFindByOwner`
   - [ ] `GainsFindByMission`
   - [ ] `GainUpdate`
-    - 必须携带ID
-    - 目前只允许通过ID删除单条记录
-    - UpTime更新为当前时间
+    1. checkid
+    1. update uptime
+    1. `database.DB.Model(&g).Updates(&gain)`
   - [ ] `GainDelete`
-    - 必须携带ID
-    - 目前由于只允许通过ID进行删除单条记录
+    1. checkid
+    1. `db.delete`
 - [ ] mission
   - [ ] `type Mission struct`
   - [ ] `type MissionJson struct`
@@ -362,9 +372,18 @@ ProjectDeleteByID|delete|`/id/{id:uint}`|-|`ProjectJson`
 ### servcie
 
 - [x] gain
-  - [x] `GainCreate`
-  - [x] `GainFindByID`
+  - [x] `type GainJson struct`
+  - [x] `gainTestData`
+  - [x] `gain2GainJSON`
+  - [x] `gainJSON2GainBriefJSON`
+  - [x] `gainJSON2Gain`
+  - [x] `Create`
+    1. TODO: 相关模块人员查验，当前是`owner.First()`仅校验owner存在
+    1. `g.Create()`
+  - [x] `First`
+    - `g.First()`
   - [x] `GainsFindByOwnerID`
+    1. 服务层对任务做精简 Gains2SimpleGains
   - [x] `GainsFindByMissionID`
   - [x] `GainUpdate`
     - 必须携带ID

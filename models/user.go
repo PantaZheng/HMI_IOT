@@ -7,7 +7,7 @@ import (
 	"strconv"
 )
 
-const title = "models.user"
+const titleUser = "models.user."
 
 //User 数据库用户表.
 type User struct {
@@ -18,28 +18,15 @@ type User struct {
 	IDCard     string `gorm:"unique"`
 	Level      int
 	Telephone  string
-	//CProjects  []*Project `gorm:"foreignkey:CreatorID"`
-	//LProjects  []*Project `gorm:"foreignkey:LeaderID"`
-	//PProjects  []*Project `gorm:"many2many:user_projects"`
-	//CModules   []*Module  `gorm:"foreignkey:CreatorID"`
-	//LModules   []*Module  `gorm:"foreignkey:LeaderID"`
-	//PModules   []*Module  `gorm:"many2many:user_modules"`
-	//CMissions  []*Mission `gorm:"foreignkey:CreatorID"`
-	//PMissions  []*Mission `gorm:"many2many:user_missions"`
-	//OGains     []*Gain    `gorm:"foreignkey:OwnerID"`
-}
-
-func (user *User) checkUnique() (err error) {
-	/**
-	@Author: PantaZheng
-	@Description:检查UserJSON的唯一性要求是否满足，ID,
-	OpenID,IDCard
-	@Date: 2019/5/9 10:44
-	*/
-	if user.OpenID == "" && user.ID == 0 && user.IDCard == "" {
-		err = errors.New(title + "checkUnique:\t" + "需要OpenID或ID或IDCard来满足用户唯一性")
-	}
-	return
+	CProjects  []*Project `gorm:"foreignkey:CreatorID"`
+	LProjects  []*Project `gorm:"foreignkey:LeaderID"`
+	PProjects  []*Project `gorm:"many2many:user_projects"`
+	CModules   []*Module  `gorm:"foreignkey:CreatorID"`
+	LModules   []*Module  `gorm:"foreignkey:LeaderID"`
+	PModules   []*Module  `gorm:"many2many:user_modules"`
+	CMissions  []*Mission `gorm:"foreignkey:CreatorID"`
+	PMissions  []*Mission `gorm:"many2many:user_missions"`
+	OGains     []*Gain    `gorm:"foreignkey:OwnerID"`
 }
 
 //检查是否有OpenID和IDCard，零值设置为ID,并更新字段信息
@@ -63,15 +50,17 @@ func (user *User) Create() (err error) {
 	@Description:
 	@Date: 2019/5/9 13:29
 	*/
-	if err = user.checkUnique(); err == nil {
+	if user.OpenID == "" && user.IDCard == "" {
 		if err = database.DB.Create(&user).Error; err == nil {
 			if user.makeOpenIDIDCARDNotEmpty() {
 				err = user.Updates()
 			}
 		}
+	} else {
+		err = errors.New("需要OpenID或IDCard来满足用户唯一性")
 	}
 	if err != nil {
-		err = errors.New(title + "Create:\t" + err.Error())
+		err = errors.New(titleUser + "Create:\t" + err.Error())
 	}
 	return
 }
@@ -83,12 +72,13 @@ func (user *User) First() (err error) {
 	@Description:
 	@Date: 2019/5/9 14:02
 	*/
-	if err = user.checkUnique(); err == nil {
-		first := database.DB.First(user)
-		err = first.Error
-	}
-	if err != nil {
-		err = errors.New(title + "First:\t" + err.Error())
+	u := &User{}
+	u.ID = user.ID
+	if err = database.DB.First(&u).Error; err != nil {
+		err = errors.New(titleUser + "First:\t" + err.Error())
+
+	} else {
+		*user = *u
 	}
 	return
 }
@@ -111,7 +101,7 @@ func (user *User) FindOne() (err error) {
 		}
 	}
 	if err != nil {
-		err = errors.New(title + "FindOne:\t" + err.Error())
+		err = errors.New(titleUser + "FindOne:\t" + err.Error())
 	}
 	return
 }
@@ -124,8 +114,13 @@ func (user *User) Find() (users []*User, err error) {
 	@Date: 2019/5/9 14:08
 	*/
 
-	if err = database.DB.Find(&users, &user).Error; err != nil {
-		err = errors.New(title + "Find:\t" + err.Error())
+	if err = database.DB.Find(&users, &user).Error; err == nil {
+		if len(users) == 0 {
+			err = errors.New("record not found")
+		}
+	}
+	if err != nil {
+		err = errors.New(titleUser + "Find:\t" + err.Error())
 	}
 	return
 }
@@ -139,8 +134,8 @@ func (user *User) Updates() (err error) {
 	*/
 	u := new(User)
 	u.ID = user.ID
-	if err = database.DB.Model(u).Updates(user).Error; err != nil {
-		err = errors.New(title + "Updates:\t" + err.Error())
+	if err = database.DB.Model(&u).Updates(&user).Error; err != nil {
+		err = errors.New(titleUser + "Updates:\t" + err.Error())
 	}
 	return
 }
@@ -156,10 +151,10 @@ func (user *User) Delete() (err error) {
 		user.OpenID = strconv.Itoa(int(user.ID))
 		user.IDCard = strconv.Itoa(int(user.ID))
 		if err = user.Updates(); err == nil {
-			err = database.DB.Delete(user).Error
+			err = database.DB.Delete(&user).Error
 		}
 		if err != nil {
-			err = errors.New(title + "Delete:\t" + err.Error())
+			err = errors.New(titleUser + "Delete:\t" + err.Error())
 		}
 	}
 	return
