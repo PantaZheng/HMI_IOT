@@ -53,8 +53,7 @@ func (gain *Gain) Create() (err error) {
 	if err = gain.checkForeignKey(); err == nil {
 		gain.UpTime = time.Now().Format("2006-01-02")
 		if err = database.DB.Create(&gain).Error; err == nil {
-			gain.Owner.ID = gain.OwnerID
-			err = gain.Owner.First()
+			err = gain.First()
 		}
 	}
 	if err != nil {
@@ -142,8 +141,7 @@ func (gain *Gain) Updates() (err error) {
 		g.ID = gain.ID
 		gain.UpTime = time.Now().Format("2006-01-02")
 		if err = database.DB.Model(&g).Updates(&gain).Error; err == nil {
-			err = g.First()
-			*gain = g
+			err = gain.First()
 		}
 	}
 	if err != nil {
@@ -153,13 +151,10 @@ func (gain *Gain) Updates() (err error) {
 }
 
 func (gain *Gain) Delete() (err error) {
-	g1 := Gain{}
-	g1.ID = gain.ID
-	if err = g1.First(); err == nil {
-		*gain = g1
-		g2 := Gain{}
-		g2.ID = gain.ID
-		err = database.DB.Delete(&g2).Error
+	if err = gain.First(); err == nil {
+		g := Gain{}
+		g.ID = gain.ID
+		err = database.DB.Delete(&g).Error
 	}
 	if err != nil {
 		err = errors.New(titleGain + "Delete:\t" + err.Error())
