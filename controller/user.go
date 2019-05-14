@@ -7,8 +7,6 @@ import (
 	"log"
 )
 
-const titleUser = "controller.user."
-
 func UserCreate(ctx iris.Context) {
 	/**
 	@Author: PantaZheng
@@ -29,7 +27,7 @@ func UserCreate(ctx iris.Context) {
 	}
 	if err != nil {
 		ctx.StatusCode(iris.StatusAccepted)
-		info := titleUser + err.Error()
+		info := err.Error()
 		_, _ = ctx.Text(info)
 		log.Println(info)
 	}
@@ -51,7 +49,7 @@ func UserBind(ctx iris.Context) {
 	}
 	if err != nil {
 		ctx.StatusCode(iris.StatusAccepted)
-		info := titleUser + err.Error()
+		info := err.Error()
 		_, _ = ctx.Text(info)
 		log.Println(info)
 	}
@@ -76,7 +74,7 @@ func UserFindByID(ctx iris.Context) {
 	}
 	if err != nil {
 		ctx.StatusCode(iris.StatusAccepted)
-		info := titleUser + err.Error()
+		info := err.Error()
 		_, _ = ctx.Text(info)
 		log.Println(info)
 	}
@@ -94,7 +92,7 @@ func UserFindByIDCard(ctx iris.Context) {
 		_, _ = ctx.JSON(u)
 	} else {
 		ctx.StatusCode(iris.StatusAccepted)
-		info := titleUser + err.Error()
+		info := err.Error()
 		_, _ = ctx.Text(info)
 		log.Println(info)
 	}
@@ -112,7 +110,7 @@ func UserFindByOpenID(ctx iris.Context) {
 		_, _ = ctx.JSON(u)
 	} else {
 		ctx.StatusCode(iris.StatusAccepted)
-		info := titleUser + err.Error()
+		info := err.Error()
 		_, _ = ctx.Text(info)
 		log.Println(info)
 	}
@@ -137,7 +135,7 @@ func UsersFindByLevel(ctx iris.Context) {
 	}
 	if err != nil {
 		ctx.StatusCode(iris.StatusAccepted)
-		info := titleUser + err.Error()
+		info := err.Error()
 		_, _ = ctx.Text(info)
 		log.Println(info)
 	}
@@ -162,7 +160,7 @@ func UserDeleteByID(ctx iris.Context) {
 	}
 	if err != nil {
 		ctx.StatusCode(iris.StatusAccepted)
-		info := titleUser + err.Error()
+		info := err.Error()
 		_, _ = ctx.Text(info)
 		log.Println(info)
 	}
@@ -181,7 +179,7 @@ func UserDeleteByIDCard(ctx iris.Context) {
 	} else {
 		ctx.StatusCode(iris.StatusAccepted)
 		info := err.Error()
-		_, _ = ctx.Text(titleUser + info)
+		_, _ = ctx.Text(info)
 		log.Println(info)
 	}
 }
@@ -202,7 +200,7 @@ func UserUpdates(ctx iris.Context) {
 	}
 	if err != nil {
 		ctx.StatusCode(iris.StatusAccepted)
-		info := titleUser + err.Error()
+		info := err.Error()
 		_, _ = ctx.Text(info)
 		log.Println(info)
 	}

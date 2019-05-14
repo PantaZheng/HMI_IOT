@@ -6,8 +6,6 @@ import (
 	"log"
 )
 
-const titleGain = "controller.user."
-
 func GainCreate(ctx iris.Context) {
 	/**
 	@Author: PantaZheng
@@ -24,7 +22,7 @@ func GainCreate(ctx iris.Context) {
 	}
 	if err != nil {
 		ctx.StatusCode(iris.StatusAccepted)
-		info := titleGain + err.Error()
+		info := err.Error()
 		_, _ = ctx.Text(info)
 		log.Println(info)
 	}
@@ -49,7 +47,7 @@ func GainFindByID(ctx iris.Context) {
 	}
 	if err != nil {
 		ctx.StatusCode(iris.StatusAccepted)
-		info := titleGain + err.Error()
+		info := err.Error()
 		_, _ = ctx.Text(info)
 		log.Println(info)
 	}
@@ -74,7 +72,7 @@ func GainsFindByOwnerID(ctx iris.Context) {
 	}
 	if err != nil {
 		ctx.StatusCode(iris.StatusAccepted)
-		info := titleGain + err.Error()
+		info := err.Error()
 		_, _ = ctx.Text(info)
 		log.Println(info)
 	}
@@ -99,7 +97,7 @@ func GainsFindByMissionID(ctx iris.Context) {
 	}
 	if err != nil {
 		ctx.StatusCode(iris.StatusAccepted)
-		info := titleGain + err.Error()
+		info := err.Error()
 		_, _ = ctx.Text(info)
 		log.Println(info)
 	}
@@ -121,7 +119,7 @@ func GainUpdate(ctx iris.Context) {
 	}
 	if err != nil {
 		ctx.StatusCode(iris.StatusAccepted)
-		info := titleGain + err.Error()
+		info := err.Error()
 		_, _ = ctx.Text(info)
 		log.Println(info)
 	}
@@ -146,7 +144,7 @@ func GainDeleteByID(ctx iris.Context) {
 	}
 	if err != nil {
 		ctx.StatusCode(iris.StatusAccepted)
-		info := titleGain + err.Error()
+		info := err.Error()
 		_, _ = ctx.Text(info)
 		log.Println(info)
 	}
