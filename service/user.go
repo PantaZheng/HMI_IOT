@@ -57,6 +57,8 @@ func userTestData() {
 	for _, v := range users {
 		if err := v.Create(); err != nil {
 			log.Println(err.Error())
+		} else {
+			log.Println(v)
 		}
 	}
 }
