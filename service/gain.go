@@ -79,6 +79,7 @@ func gainJSON2GainBriefJSON(gainJSON1 *GainJSON) (gainJSON2 GainJSON) {
 	gainJSON2.Name = gainJSON1.Name
 	gainJSON2.UpTime = gainJSON1.UpTime
 	gainJSON2.OwnerID = gainJSON1.OwnerID
+	gainJSON2.Owner = gainJSON1.Owner
 	gainJSON2.MissionID = gainJSON1.MissionID
 	return
 }
