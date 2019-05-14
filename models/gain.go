@@ -100,14 +100,12 @@ func GainsFindByOwnerID(id uint) (gains []Gain, err error) {
 	*/
 	owner := User{}
 	owner.ID = id
+	gains = make([]Gain, len(gains))
 	if err = owner.First(); err == nil {
 		if err = database.DB.Model(&owner).Related(&gains, "OwnerID").Error; err == nil {
-			g := make([]Gain, len(gains))
-			for i, v := range gains {
+			for _, v := range gains {
 				v.Owner = owner
-				g[i] = v
 			}
-			gains = g
 			log.Println(gains)
 		}
 	}
