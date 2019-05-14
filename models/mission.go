@@ -44,7 +44,7 @@ func (mission *Mission) Create() (err error) {
 	return
 }
 
-func (mission *Mission) AppendParticipants(participants []*User) (err error) {
+func (mission *Mission) AppendParticipants(participants []User) (err error) {
 	m := &Mission{}
 	m.ID = mission.ID
 	if err = database.DB.Model(&m).Association("Participants").Append(participants).Error; err != nil {
@@ -72,7 +72,7 @@ func (mission *Mission) First() (err error) {
 	return
 }
 
-func (mission *Mission) FindParticipants() (participants []*User, err error) {
+func (mission *Mission) FindParticipants() (participants []User, err error) {
 	/**
 	@Author: PantaZheng
 	@Description:

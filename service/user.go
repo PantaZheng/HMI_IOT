@@ -136,19 +136,19 @@ func (userJSON *UserJSON) exchangeOpenID() (err error) {
 	return
 }
 
-func users2BriefUsersJSON(users []*models.User) (usersJSON []UserJSON) {
+func users2BriefUsersJSON(users []models.User) (usersJSON []UserJSON) {
 	usersJSON = make([]UserJSON, len(users))
 	for i, v := range users {
-		u := user2UserJSON(v)
+		u := user2UserJSON(&v)
 		usersJSON[i] = userJSON2UserBriefJSON(&u)
 	}
 	return
 }
 
-func usersJSON2Users(usersJSON []UserJSON) (users []*models.User) {
-	users = make([]*models.User, len(usersJSON))
+func usersJSON2Users(usersJSON []UserJSON) (users []models.User) {
+	users = make([]models.User, len(usersJSON))
 	for i, v := range usersJSON {
-		*users[i] = v.userJSON2User()
+		users[i] = v.userJSON2User()
 	}
 	return
 }
