@@ -31,22 +31,18 @@ func gainTestData() {
 	@Description:
 	@Date: 2019/5/13 2:39
 	*/
-	u1 := UserJSON{ID: 2}
-	u2 := UserJSON{ID: 3}
-	u3 := UserJSON{ID: 4}
-	u4 := UserJSON{ID: 5}
-	u5 := UserJSON{ID: 6}
-	u6 := UserJSON{ID: 7}
 	gains := make([]GainJSON, 6)
-	gains[0] = GainJSON{Name: "gain1", Owner: u1, MissionID: 1}
-	gains[1] = GainJSON{Name: "gain2", Owner: u2, MissionID: 1}
-	gains[2] = GainJSON{Name: "gain3", Owner: u3, MissionID: 2}
-	gains[3] = GainJSON{Name: "gain4", Owner: u4, MissionID: 2}
-	gains[4] = GainJSON{Name: "gain5", Owner: u5, MissionID: 3}
-	gains[5] = GainJSON{Name: "gain6", Owner: u6, MissionID: 3}
+	gains[0] = GainJSON{Name: "gain1", OwnerID: 2, MissionID: 1}
+	gains[1] = GainJSON{Name: "gain2", OwnerID: 3, MissionID: 1}
+	gains[2] = GainJSON{Name: "gain3", OwnerID: 3, MissionID: 2}
+	gains[3] = GainJSON{Name: "gain4", OwnerID: 4, MissionID: 2}
+	gains[4] = GainJSON{Name: "gain5", OwnerID: 6, MissionID: 3}
+	gains[5] = GainJSON{Name: "gain6", OwnerID: 7, MissionID: 3}
 	for _, v := range gains {
 		if err := v.Create(); err != nil {
 			log.Println(err.Error())
+		} else {
+			log.Println(v)
 		}
 	}
 }

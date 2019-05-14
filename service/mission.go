@@ -43,6 +43,8 @@ func missionTestData() {
 	for _, v := range missions {
 		if err := v.Create(); err != nil {
 			log.Println(err.Error())
+		} else {
+			log.Println(v)
 		}
 	}
 }
@@ -148,10 +150,8 @@ func (missionJSON *MissionJson) Create() (err error) {
 func (missionJSON *MissionJson) IfParticipants(id uint) (err error) {
 	err = errors.New("成员不在任务的参与者中")
 	m := missionJSON.missionJSON2Mission()
-	log.Println(id)
 	if participants, err1 := m.FindParticipants(); err1 == nil {
 		for _, v := range participants {
-			log.Println(v.ID)
 			if v.ID == id {
 				err = nil
 			}
