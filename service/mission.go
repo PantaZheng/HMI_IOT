@@ -148,9 +148,10 @@ func (missionJSON *MissionJson) Create() (err error) {
 func (missionJSON *MissionJson) IfParticipants(id uint) (err error) {
 	err = errors.New("成员不在任务的参与者中")
 	m := missionJSON.missionJSON2Mission()
+	log.Println(id)
 	if participants, err1 := m.FindParticipants(); err1 == nil {
-		log.Println(participants)
 		for _, v := range participants {
+			log.Println(v.ID)
 			if v.ID == id {
 				err = nil
 			}
