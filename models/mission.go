@@ -122,6 +122,7 @@ func (mission *Mission) Updates() (err error) {
 	m := &Mission{}
 	m.ID = mission.ID
 	participants := mission.Participants
+	mission.Participants = nil
 	if err = database.DB.Model(&m).Updates(&mission).Error; err == nil {
 		*mission = *m
 		mission.Creator.ID = mission.CreatorID
