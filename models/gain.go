@@ -109,7 +109,7 @@ func (gain *Gain) Updates() (err error) {
 	if err = database.DB.Model(&g).Updates(&gain).Error; err != nil {
 		err = errors.New(titleGain + "Updates:\t" + err.Error())
 	} else {
-		*gain = *g
+		_ = g.First()
 	}
 	return
 }
