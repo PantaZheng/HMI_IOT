@@ -22,14 +22,7 @@ type Gain struct {
 	Mission   Mission
 }
 
-//Create Create()
-func (gain *Gain) Create() (err error) {
-	/**
-	@Author: PantaZheng
-	@Description:
-	@Date: 2019/5/13 0:00
-	*/
-
+func (gain *Gain) checkMission() (err error) {
 	m := &Mission{}
 	m.ID = gain.MissionID
 	if err = m.First(); err == nil {
@@ -39,12 +32,22 @@ func (gain *Gain) Create() (err error) {
 				err = nil
 			}
 		}
-		if err == nil {
-			gain.UpTime = time.Now().Format("2006-01-02")
-			if err = database.DB.Create(&gain).Error; err == nil {
-				gain.Owner.ID = gain.OwnerID
-				err = gain.Owner.First()
-			}
+	}
+	return
+}
+
+//Create Create()
+func (gain *Gain) Create() (err error) {
+	/**
+	@Author: PantaZheng
+	@Description:
+	@Date: 2019/5/13 0:00
+	*/
+	if err = gain.checkMission(); err == nil {
+		gain.UpTime = time.Now().Format("2006-01-02")
+		if err = database.DB.Create(&gain).Error; err == nil {
+			gain.Owner.ID = gain.OwnerID
+			err = gain.Owner.First()
 		}
 	}
 	if err != nil {
@@ -127,12 +130,14 @@ func (gain *Gain) Updates() (err error) {
 	@Description:
 	@Date: 2019/5/13 1:09
 	*/
-	g := &Gain{}
-	g.ID = gain.ID
-	gain.UpTime = time.Now().Format("2006-01-02")
-	if err = database.DB.Model(&g).Updates(&gain).Error; err == nil {
-		err = g.First()
-		*gain = *g
+	if err = gain.checkMission(); err == nil {
+		g := &Gain{}
+		g.ID = gain.ID
+		gain.UpTime = time.Now().Format("2006-01-02")
+		if err = database.DB.Model(&g).Updates(&gain).Error; err == nil {
+			err = g.First()
+			*gain = *g
+		}
 	}
 	if err != nil {
 		err = errors.New(titleGain + "Updates:\t" + err.Error())
