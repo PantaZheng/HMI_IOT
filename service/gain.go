@@ -60,11 +60,7 @@ func gain2GainJSON(gain *models.Gain) (gainJSON GainJSON) {
 	gainJSON.UpTime = gain.UpTime
 	gainJSON.Remark = gain.Remark
 	gainJSON.OwnerID = gain.OwnerID
-	owner := &UserJSON{ID: gainJSON.OwnerID}
-	if err := owner.First(); err != nil {
-		log.Println(err.Error())
-	}
-	gainJSON.Owner = userJSON2UserBriefJSON(owner)
+	gainJSON.Owner = user2UserJSON(&gain.Owner)
 	gainJSON.MissionID = gain.MissionID
 	return
 }
@@ -79,7 +75,7 @@ func gainJSON2GainBriefJSON(gainJSON1 *GainJSON) (gainJSON2 GainJSON) {
 	gainJSON2.Name = gainJSON1.Name
 	gainJSON2.UpTime = gainJSON1.UpTime
 	gainJSON2.OwnerID = gainJSON1.OwnerID
-	gainJSON2.Owner = gainJSON1.Owner
+	gainJSON2.Owner = userJSON2UserBriefJSON(&gainJSON1.Owner)
 	gainJSON2.MissionID = gainJSON1.MissionID
 	return
 }
@@ -162,7 +158,7 @@ func GainsFindByOID(id uint) (gainsJson []GainJSON, err error) {
 	@Description:
 	@Date: 2019/5/13 2:44
 	*/
-	if gains, err := models.GainsFindByID(id); err == nil {
+	if gains, err := models.GainsFindByOwnerID(id); err == nil {
 		gainsJson = gains2BriefGainsJSON(gains)
 	} else {
 		err = errors.New(titleGain + "GainsFindByOID:\t" + err.Error())
@@ -177,10 +173,10 @@ func GainsFindByMID(id uint) (gainsJson []GainJSON, err error) {
 	@Description:
 	@Date: 2019/5/13 12:25
 	*/
-	if gains, err := models.GainsFindByMID(id); err == nil {
+	if gains, err := models.GainsFindByMissionID(id); err == nil {
 		gainsJson = gains2BriefGainsJSON(gains)
 	} else {
-		err = errors.New(titleGain + "GainsFindByMID:\t" + err.Error())
+		err = errors.New(titleGain + "GainsFindByMissionID:\t" + err.Error())
 	}
 	return
 }
@@ -194,7 +190,6 @@ func (gainJSON *GainJSON) Updates() (err error) {
 	*/
 	g := gainJSON.gainJSON2Gain()
 	if err = g.Updates(); err == nil {
-		_ = g.First()
 		*gainJSON = gain2GainJSON(&g)
 	} else {
 		err = errors.New(titleGain + "Updates:\t" + err.Error())
@@ -209,7 +204,6 @@ func (gainJSON *GainJSON) Delete() (err error) {
 	@Date: 2019/5/13 3:30
 	*/
 	g := gainJSON.gainJSON2Gain()
-	_ = gainJSON.First()
 	if err = g.Delete(); err != nil {
 		err = errors.New(titleGain + "Delete:\t" + err.Error())
 	}
