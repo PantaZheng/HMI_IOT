@@ -144,10 +144,9 @@ func (gain *Gain) Updates() (err error) {
 func (gain *Gain) Delete() (err error) {
 	g := &Gain{}
 	g.ID = gain.ID
-	if err = database.DB.Delete(&g).Error; err == nil {
+	if err = database.DB.First(&g).Error; err == nil {
 		*gain = *g
-		gain.Owner.ID = gain.OwnerID
-		err = gain.Owner.First()
+		err = database.DB.Delete(&g).Error
 	}
 	if err != nil {
 		err = errors.New(titleGain + "Updates:\t" + err.Error())
