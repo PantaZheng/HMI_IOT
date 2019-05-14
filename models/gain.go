@@ -22,14 +22,21 @@ type Gain struct {
 	Mission   Mission
 }
 
-func (gain *Gain) checkMission() (err error) {
+func (gain *Gain) checkForeignKey() (err error) {
+	/**
+	@Author: PantaZheng
+	@Description:
+	@Date: 2019/5/14 23:56
+	*/
 	m := &Mission{}
 	m.ID = gain.MissionID
 	if err = m.First(); err == nil {
-		err = errors.New("OwnerID not in mission's participants")
-		for _, v := range m.Participants {
-			if gain.OwnerID == v.ID {
-				err = nil
+		if gain.OwnerID != 0 {
+			err = errors.New("OwnerID not in mission's participants")
+			for _, v := range m.Participants {
+				if gain.OwnerID == v.ID {
+					err = nil
+				}
 			}
 		}
 	}
@@ -43,7 +50,7 @@ func (gain *Gain) Create() (err error) {
 	@Description:
 	@Date: 2019/5/13 0:00
 	*/
-	if err = gain.checkMission(); err == nil {
+	if err = gain.checkForeignKey(); err == nil {
 		gain.UpTime = time.Now().Format("2006-01-02")
 		if err = database.DB.Create(&gain).Error; err == nil {
 			gain.Owner.ID = gain.OwnerID
@@ -130,7 +137,7 @@ func (gain *Gain) Updates() (err error) {
 	@Description:
 	@Date: 2019/5/13 1:09
 	*/
-	if err = gain.checkMission(); err == nil {
+	if err = gain.checkForeignKey(); err == nil {
 		g := &Gain{}
 		g.ID = gain.ID
 		gain.UpTime = time.Now().Format("2006-01-02")
