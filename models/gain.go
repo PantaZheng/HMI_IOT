@@ -84,6 +84,9 @@ func GainsFindByOwnerID(id uint) (gains []Gain, err error) {
 	owner.ID = id
 	if err = owner.First(); err == nil {
 		if err = database.DB.Model(&owner).Related(&gains, "OwnerID").Error; err == nil {
+			owner := &User{}
+			owner.ID = id
+			err = owner.First()
 			for _, v := range gains {
 				v.Owner = *owner
 			}
