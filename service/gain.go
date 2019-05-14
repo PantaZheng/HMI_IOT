@@ -208,9 +208,8 @@ func (gainJSON *GainJSON) Delete() (err error) {
 	@Date: 2019/5/13 3:30
 	*/
 	g := gainJSON.gainJSON2Gain()
-	if err = g.Delete(); err == nil {
-		*gainJSON = gain2GainJSON(&g)
-	} else {
+	_ = gainJSON.First()
+	if err = g.Delete(); err != nil {
 		err = errors.New(titleGain + "Delete:\t" + err.Error())
 	}
 	return
