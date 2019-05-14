@@ -31,6 +31,7 @@ func gainTestData() {
 	@Description:
 	@Date: 2019/5/13 2:39
 	*/
+	log.Println("gainTestData")
 	gains := make([]GainJSON, 6)
 	gains[0] = GainJSON{Name: "gain1", OwnerID: 2, MissionID: 1}
 	gains[1] = GainJSON{Name: "gain2", OwnerID: 4, MissionID: 1}
@@ -104,7 +105,7 @@ func (gainJSON *GainJSON) gainJSON2Gain() (gain models.Gain) {
 	gain.File = gainJSON.File
 	gain.UpTime = gainJSON.UpTime
 	gain.Remark = gainJSON.Remark
-	gain.OwnerID = gainJSON.Owner.ID
+	gain.OwnerID = gainJSON.OwnerID
 	gain.MissionID = gainJSON.MissionID
 	return
 }

@@ -46,6 +46,7 @@ type UserJSON struct {
 }
 
 func userTestData() {
+	log.Println("userTestData")
 	users := make([]UserJSON, 7)
 	users[0] = UserJSON{OpenID: "Stranger1", WechatName: "小蜘蛛", Code: "Spider-Man", Name: "Peter Benjamin Parker", Level: 1, Telephone: "110"}
 	users[1] = UserJSON{OpenID: "Emeritus1", WechatName: "万磁王", Code: "002", Name: "Max Eisenhardt", IDCard: "Magneto", Level: 2}

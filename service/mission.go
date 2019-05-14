@@ -30,6 +30,7 @@ type MissionJson struct {
 }
 
 func missionTestData() {
+	log.Println("missionTestData")
 	u1 := UserJSON{ID: 2}
 	u2 := UserJSON{ID: 3}
 	u3 := UserJSON{ID: 4}
@@ -47,6 +48,7 @@ func missionTestData() {
 			log.Println(v)
 		}
 	}
+	log.Println()
 }
 
 func mission2MissionJSON(mission *models.Mission) (missionJSON MissionJson) {
