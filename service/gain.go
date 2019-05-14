@@ -41,8 +41,8 @@ func gainTestData() {
 	_ = GainJSON{Name: "gain2", Owner: u2, MissionID: 1}.Create()
 	_ = GainJSON{Name: "gain3", Owner: u3, MissionID: 2}.Create()
 	_ = GainJSON{Name: "gain4", Owner: u4, MissionID: 2}.Create()
-	_ = GainJSON{Name: "gain5", Owner: u5, MissionID: 1}.Create()
-	_ = GainJSON{Name: "gain6", Owner: u6, MissionID: 2}.Create()
+	_ = GainJSON{Name: "gain5", Owner: u5, MissionID: 3}.Create()
+	_ = GainJSON{Name: "gain6", Owner: u6, MissionID: 3}.Create()
 }
 
 func gain2GainJSON(gain *models.Gain) (gainJSON GainJSON) {
@@ -81,7 +81,7 @@ func gainJSON2GainBriefJSON(gainJSON1 *GainJSON) (gainJSON2 GainJSON) {
 	return
 }
 
-func Gains2BriefGainsJSON(gains []*models.Gain) (gainsJSON []GainJSON) {
+func gains2BriefGainsJSON(gains []*models.Gain) (gainsJSON []GainJSON) {
 	gainsJSON = make([]GainJSON, len(gains))
 	for i, v := range gains {
 		g := gain2GainJSON(v)
@@ -114,9 +114,9 @@ func (gainJSON *GainJSON) Create() (err error) {
 	@Description:
 	@Date: 2019/5/13 2:39
 	*/
-	//TODO:检查成果归属者是否在Mission的参与者中
-	owner := UserJSON{ID: gainJSON.OwnerID}
-	if err = owner.First(); err == nil {
+	//TODO:检查成果归属者是否在Mission的参与者中,前端选择
+	m := MissionJson{}
+	if err = m.IfParticipants(gainJSON.OwnerID); err == nil {
 		g := gainJSON.gainJSON2Gain()
 		if err = g.Create(); err == nil {
 			*gainJSON = gain2GainJSON(&g)
@@ -128,6 +128,7 @@ func (gainJSON *GainJSON) Create() (err error) {
 	return
 }
 
+//First 单Gain查找的原子方法.
 func (gainJSON *GainJSON) First() (err error) {
 	/**
 	@Author: PantaZheng
@@ -143,27 +144,42 @@ func (gainJSON *GainJSON) First() (err error) {
 	return
 }
 
+//GainFindByID 通过数据库ID查找单Gain.
+func GainFindByID(id uint) (gainJSON GainJSON, err error) {
+	gainJSON = GainJSON{ID: id}
+	err = gainJSON.First()
+	return
+}
+
 //owner单一确定
-func GainsFindByOwnerID(id uint) (gainsJson []GainJSON, err error) {
+func GainsFindByOID(id uint) (gainsJson []GainJSON, err error) {
 	/**
 	@Author: PantaZheng
 	@Description:
 	@Date: 2019/5/13 2:44
 	*/
-	if gains, err := models.FindByOwnerID(id); err == nil {
-		gainsJson = Gains2BriefGainsJSON(gains)
+	if gains, err := models.GainsFindByID(id); err == nil {
+		gainsJson = gains2BriefGainsJSON(gains)
 	} else {
-		err = errors.New(titleGain + "GainsFindByOwnerID:\t" + err.Error())
+		err = errors.New(titleGain + "GainsFindByOID:\t" + err.Error())
 	}
 	return
 }
 
-////mission单一确定
-//func GainsFindByMissionID(id uint) (gainsJson []models.GainJSON, err error) {
-//	mission := new(models.Mission)
-//	mission.ID = id
-//	return models.GainsFindByMission(mission)
-//}
+//mission单一确定
+func GainsFindByMID(id uint) (gainsJson []GainJSON, err error) {
+	/**
+	@Author: PantaZheng
+	@Description:
+	@Date: 2019/5/13 12:25
+	*/
+	if gains, err := models.GainsFindByMID(id); err == nil {
+		gainsJson = gains2BriefGainsJSON(gains)
+	} else {
+		err = errors.New(titleGain + "GainsFindByMID:\t" + err.Error())
+	}
+	return
+}
 
 //Updates 更新成果数据，id定位成果记录.
 func (gainJSON *GainJSON) Updates() (err error) {

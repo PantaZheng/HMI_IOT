@@ -118,27 +118,24 @@ GainDeleteByID|delete|`/{id:uint}`|-|`GainJson`
 
 ```go
 type MissionJson struct {
-	ID           uint            `json:"id"`
-	Name         string          `json:"name"`
-	Creator      UserBriefJSON   `json:"creator"`
-	CreateTime   string          `json:"createTime"`
-	StartTime    string          `json:"startTime"`
-	EndTime      string          `json:"endTime"`
-	Content      string          `json:"content"`
-	File         string          `json:"file"`
-	Tag          bool            `json:"tag"` //tag由module负责人决定
-	Gains        []GainJson      `json:"gains"`
-	Participants []UserBriefJSON `json:"participants"`
-	ModuleID     uint            `json:"module"`
-}
-
-type MissionBriefJson struct {
-	ID         uint   `json:"id"`
-	Name       string `json:"name"`
-	CreateTime string `json:"createTime"`
-	Content    string `json:"content"`
-	Tag        bool   `json:"tag"`
-	ModuleID   uint   `json:"module"`
+	/**
+	@Author: PantaZheng
+	@Description:
+	@Date: 2019/5/13 23:50
+	*/
+	ID           uint   `json:"id"`
+	Name         string `json:"name"`
+	CreatorID    uint
+	Creator      UserJSON   `json:"creator"`
+	CreateTime   string     `json:"createTime"`
+	StartTime    string     `json:"startTime"`
+	EndTime      string     `json:"endTime"`
+	Content      string     `json:"content"`
+	File         string     `json:"file"`
+	Tag          bool       `json:"tag"` //tag由module负责人决定
+	Gains        []GainJSON `json:"gains"`
+	Participants []UserJSON `json:"participants"`
+	//ModuleID     uint       `json:"module"`
 }
 
 ```
@@ -272,39 +269,41 @@ ProjectDeleteByID|delete|`/id/{id:uint}`|-|`ProjectJson`
 
 ### models
 
-- [ ] gain
+- [x] gain
   - [x] `type Gain struct`
   - [x] `Create`
     1. uptime
     1. `db.create`
   - [x] `First`
-    1. checkid
+    1. getid
     1. `db.first`
-  - [x] `FindByOwner`
-    1. `owner.findone`
+  - [x] `GainsFindByOwnerID`
+    1. `owner.First`
     1. `db.Model(&owner).Related(&gains, "OwnerID")`
-  - [x] `GainsFindByOwner`
-  - [ ] `GainsFindByMission`
-  - [ ] `GainUpdate`
-    1. checkid
+  - [x] `GainsFindByMissionID`
+    1. `mission.First`
+    1. `database.DB.Model(&mission).Related(&gains, "MissionID")`
+  - [x] `Updates`
     1. update uptime
     1. `database.DB.Model(&g).Updates(&gain)`
-  - [ ] `GainDelete`
-    1. checkid
+  - [x] `GainDelete`
     1. `db.delete`
-- [ ] mission
-  - [ ] `type Mission struct`
-  - [ ] `type MissionJson struct`
-  - [ ] `type MissionBriefJson struct`
-  - [ ] `missionTestData`
-  - [ ] `missionJson2Mission`
-  - [ ] `mission2MissionJSON`
-  - [ ] `mission2MissionBriefJSON`
-  - [ ] `MissionCreate`
-  - [ ] `MissionFind`
-  - [ ] `MissionsFindByModule`
-  - [ ] `MissionUpdate`
-  - [ ] `MissionDelete`
+- [x] mission
+  - [x] `type Mission struct`
+  - [x] `Create`
+    1. uptime
+    1. `db.create`
+  - [x] `AppendParticipants`
+    1. getid
+    1. `database.DB.Model(&m).Association("Participants").Append(participants)`
+  - [x] `First`
+    1. getid
+    1. `db.First`
+  - [x] `MissionsFindByCID`
+  - [x] `MissionsFindByPID`
+  - [x] `Updates`
+  - [x] `UpdateParticipants`
+  - [x] `Delete`
 - [ ] module
   - [ ] `type Module struct`
   - [ ] `type ModuleJson struct`
@@ -376,6 +375,7 @@ ProjectDeleteByID|delete|`/id/{id:uint}`|-|`ProjectJson`
   - [x] `gainTestData`
   - [x] `gain2GainJSON`
   - [x] `gainJSON2GainBriefJSON`
+  - [x] `gains2BriefGainsJSON`
   - [x] `gainJSON2Gain`
   - [x] `Create`
     1. TODO: 相关模块人员查验，当前是`owner.First()`仅校验owner存在
@@ -387,18 +387,24 @@ ProjectDeleteByID|delete|`/id/{id:uint}`|-|`ProjectJson`
   - [x] `GainsFindByMissionID`
   - [x] `GainUpdate`
     - 必须携带ID
+  - [x] `Delete`
   - [x] `GainDeleteByID`
     - 必须携带ID
-- [x] mission
-  - [x] `MissionCreate`
-  - [x] `MissionFindByID`
+- [] mission
+  - [x] `type MissionJson struct`
+  - [x] `mission2MissionJSON`
+  - [x] `missionJSON2MissionBriefJSON`
+  - [x] `missions2MissionsBriefJSON`
+  - [ ] `missionJSON2Mission`
+  - [ ] `MissionCreate`
+  - [ ] `MissionFindByID`
     - 通过mission id去查成果
-  - [x] `MissionFindByName`
-  - [x] `MissionsFindByModuleID`
-  - [x] `MissionUpdate`
+  - [ ] `MissionFindByName`
+  - [ ] `MissionsFindByModuleID`
+  - [ ] `MissionUpdate`
     - 必须携带ID
-  - [x] `MissionDeleteByID`
-  - [x] `MissionDeleteByName`
+  - [ ] `MissionDeleteByID`
+  - [ ] `MissionDeleteByName`
 - [x] module
   - [x] `ModuleCreate`
   - [x] `ModuleFindByID`

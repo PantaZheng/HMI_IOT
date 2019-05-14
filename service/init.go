@@ -24,12 +24,13 @@ import (
 //}
 
 func init() {
-	database.DB.DropTableIfExists("users").DropTableIfExists("gains")
+	database.DB.DropTableIfExists("users", "gains", "missions")
 	if database.DB.HasTable("users") {
-		database.DB.Set("gorm:table_options", "DEFAULT CHARSET=utf8mb4 AUTO_INCREMENT=1;").AutoMigrate(&models.User{}, &models.Gain{})
+		database.DB.Set("gorm:table_options", "DEFAULT CHARSET=utf8mb4 AUTO_INCREMENT=1;").AutoMigrate(&models.User{}, &models.Gain{}, models.Mission{})
 	} else {
-		database.DB.Set("gorm:table_options", "DEFAULT CHARSET=utf8mb4 AUTO_INCREMENT=1;").AutoMigrate(&models.User{}, &models.Gain{})
+		database.DB.Set("gorm:table_options", "DEFAULT CHARSET=utf8mb4 AUTO_INCREMENT=1;").AutoMigrate(&models.User{}, &models.Gain{}, models.Mission{})
 		userTestData()
+		missionTestData()
 		gainTestData()
 	}
 	//projectTestData()

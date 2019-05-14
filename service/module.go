@@ -1,12 +1,12 @@
 package service
 
-import (
-	"github.com/pantazheng/bci/models"
-)
-
-func ModuleCreate(module *models.ModuleJson) (moduleJson models.ModuleJson, err error) {
-	return models.ModuleCreate(module)
-}
+//import (
+//	"github.com/pantazheng/bci/models"
+//)
+//
+//func ModuleCreate(module *models.ModuleJson) (moduleJson models.ModuleJson, err error) {
+//	return models.ModuleCreate(module)
+//}
 
 //func ModuleFindByID(id uint) (recordModuleJson models.ModuleJson, err error) {
 //	module := new(models.Module)

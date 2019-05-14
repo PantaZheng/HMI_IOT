@@ -53,15 +53,15 @@ func (gain *Gain) First() (err error) {
 	return
 }
 
-//FindByOwner 通过OwnerID来查找多个用户.
-func FindByOwnerID(ownerID uint) (gains []*Gain, err error) {
+//GainsFindByID 通过OwnerID来查找成果.
+func GainsFindByID(id uint) (gains []*Gain, err error) {
 	/**
 	@Author: PantaZheng
 	@Description:
 	@Date: 2019/5/13 0:29
 	*/
 	owner := &User{}
-	owner.ID = ownerID
+	owner.ID = id
 	if err = owner.First(); err == nil {
 		if err = database.DB.Model(&owner).Related(&gains, "OwnerID").Error; err == nil {
 			if len(gains) == 0 {
@@ -70,27 +70,32 @@ func FindByOwnerID(ownerID uint) (gains []*Gain, err error) {
 		}
 	}
 	if err != nil {
-		err = errors.New(titleGain + "FindByOwner:\t" + err.Error())
+		err = errors.New(titleGain + "FindByOwnerID:\t" + err.Error())
 	}
 	return
 }
 
-//func GainsFindByMission(mission *Mission) (gainsJson []GainJson, err error) {
-//	gains := make([]Gain, 1)
-//	if err = database.DB.Model(&mission).Related(&gains, "MissionID").Error; err != nil {
-//		return
-//	}
-//	if len(gains) == 0 {
-//		err = errors.New("GainsFindByMission No Gain Record")
-//	} else {
-//		for _, v := range gains {
-//			tempJson := &GainJson{}
-//			tempJson.gain2GainJson(&v)
-//			gainsJson = append(gainsJson, *tempJson)
-//		}
-//	}
-//	return
-//}
+//FindByMissionID 通过OwnerID来查找任务下的成果.
+func GainsFindByMID(id uint) (gains []*Gain, err error) {
+	/**
+	@Author: PantaZheng
+	@Description:
+	@Date: 2019/5/13 12:15
+	*/
+	mission := &Mission{}
+	mission.ID = id
+	if err = mission.First(); err == nil {
+		if err = database.DB.Model(&mission).Related(&gains, "MissionID").Error; err == nil {
+			if len(gains) == 0 {
+				err = errors.New("record not found")
+			}
+		}
+	}
+	if err != nil {
+		err = errors.New(titleGain + "GainsFindByMID:\t" + err.Error())
+	}
+	return
+}
 
 func (gain *Gain) Updates() (err error) {
 	/**
@@ -98,11 +103,13 @@ func (gain *Gain) Updates() (err error) {
 	@Description:
 	@Date: 2019/5/13 1:09
 	*/
-	g := new(Gain)
+	g := &Gain{}
 	g.ID = gain.ID
 	gain.UpTime = time.Now().Format("2006-01-02")
 	if err = database.DB.Model(&g).Updates(&gain).Error; err != nil {
 		err = errors.New(titleGain + "Updates:\t" + err.Error())
+	} else {
+		*gain = *g
 	}
 	return
 }

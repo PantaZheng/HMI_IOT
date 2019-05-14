@@ -113,7 +113,7 @@ func (user *User) Find() (users []*User, err error) {
 	@Description:
 	@Date: 2019/5/9 14:08
 	*/
-
+	database.DB.Find(&users)
 	if err = database.DB.Find(&users, &user).Error; err == nil {
 		if len(users) == 0 {
 			err = errors.New("record not found")

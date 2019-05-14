@@ -41,15 +41,15 @@ func newApp() (api *iris.Application) {
 		user.Delete("/id_card/{id_card:string}", controller.UserDeleteByIDCard)
 	})
 
-	//api.PartyFunc("/gain", func(gain router.Party) {
-	//	gain.Post("/", controller.GainCreate)
-	//	gain.Get("/id/{id:uint}", controller.GainFindByID)
-	//	gain.Get("/owner/{id:uint}", controller.GainsFindByOwnerID)
-	//	gain.Get("/mission/{id:uint}", controller.GainsFindByMissionID)
-	//	gain.Put("/", controller.GainUpdate)
-	//	gain.Delete("/{id:uint}", controller.GainDeleteByID)
-	//})
-	//
+	api.PartyFunc("/gain", func(gain router.Party) {
+		gain.Post("/", controller.GainCreate)
+		gain.Get("/id/{id:uint}", controller.GainFindByID)
+		gain.Get("/owner/{id:uint}", controller.GainsFindByOwnerID)
+		gain.Get("/mission/{id:uint}", controller.GainsFindByMissionID)
+		gain.Put("/", controller.GainUpdate)
+		gain.Delete("/{id:uint}", controller.GainDeleteByID)
+	})
+
 	//api.PartyFunc("/mission", func(mission router.Party) {
 	//	mission.Post("/", controller.MissionCreate)
 	//	mission.Get("/id/{id:uint}", controller.MissionFindByID)

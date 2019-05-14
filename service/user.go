@@ -129,11 +129,19 @@ func (userJSON *UserJSON) exchangeOpenID() (err error) {
 	return
 }
 
-func Users2BriefUsersJSON(users []*models.User) (usersJSON []UserJSON) {
+func users2BriefUsersJSON(users []*models.User) (usersJSON []UserJSON) {
 	usersJSON = make([]UserJSON, len(users))
 	for i, v := range users {
 		u := user2UserJSON(v)
 		usersJSON[i] = userJSON2UserBriefJSON(&u)
+	}
+	return
+}
+
+func usersJSON2Users(usersJSON []UserJSON) (users []*models.User) {
+	users = make([]*models.User, len(usersJSON))
+	for i, v := range usersJSON {
+		*users[i] = v.userJSON2User()
 	}
 	return
 }
@@ -318,7 +326,7 @@ func (userJSON *UserJSON) Find() (usersJSON []UserJSON, err error) {
 	*/
 	u := userJSON.userJSON2User()
 	if users, err := u.Find(); err == nil {
-		usersJSON = Users2BriefUsersJSON(users)
+		usersJSON = users2BriefUsersJSON(users)
 	} else {
 		err = errors.New(titleUser + "Find:\t" + err.Error())
 	}

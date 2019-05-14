@@ -10,6 +10,11 @@ import (
 const titleMission = "models.mission."
 
 type Mission struct {
+	/**
+	@Author: PantaZheng
+	@Description:
+	@Date: 2019/5/13 15:43
+	*/
 	gorm.Model
 	Name         string
 	CreatorID    uint
@@ -22,7 +27,7 @@ type Mission struct {
 	Tag          bool
 	Participants []*User `gorm:"many2many:user_missions"`
 	ModuleID     uint
-	Module       Module
+	//Module       Module
 }
 
 //Create 创建Mission, 不添加成员
@@ -50,59 +55,121 @@ func (mission *Mission) AppendParticipants(participants []*User) (err error) {
 	return
 }
 
-//func MissionFind(mission *Mission) (recordMissionJson MissionJson, err error) {
-//	recordMission := new(Mission)
-//	if err = database.DB.First(&recordMission, &mission).Error; err == nil {
-//		recordMissionJson.mission2MissionJSON(recordMission)
-//	}
-//	return
-//}
-//
-//func MissionsFindByModule(module *Module) (missionsBriefJson []MissionBriefJson, err error) {
-//	missions := make([]Mission, 1)
-//	if err = database.DB.Model(&module).Related(&missions, "ModuleID").Error; err != nil {
-//		return
-//	}
-//	if len(missions) == 0 {
-//		err = errors.New("MissionsFindByModule No Mission Record")
-//	} else {
-//		for _, v := range missions {
-//			tempJson := &MissionBriefJson{}
-//			tempJson.mission2MissionBriefJson(&v)
-//			missionsBriefJson = append(missionsBriefJson, *tempJson)
-//		}
-//	}
-//	return
-//}
-//
-//func MissionUpdate(missionJson *MissionJson) (recordMissionJson MissionJson, err error) {
-//	updateMission := new(Mission)
-//	updateMission.missionJson2Mission(missionJson)
-//	recordMission := new(Mission)
-//	recordMission.ID = updateMission.ID
-//	if database.DB.First(&recordMission, &recordMission).RecordNotFound() {
-//		err = errors.New("MissionUpdate No Mission Record")
-//	} else {
-//		database.DB.Model(&recordMission).Updates(updateMission)
-//		if num := len(missionJson.Participants); num != 0 {
-//			users := make([]User, num)
-//			for i, v := range missionJson.Participants {
-//				users[i].ID = v.ID
-//			}
-//			err = database.DB.Model(&recordMission).Association("Participants").Replace(users).Error
-//		}
-//		recordMissionJson.mission2MissionJSON(recordMission)
-//	}
-//	return
-//}
-//
-//func MissionDelete(mission *Mission) (recordMissionJson MissionJson, err error) {
-//	recordMission := new(Mission)
-//	if database.DB.Find(&recordMission, &mission).RecordNotFound() {
-//		err = errors.New("MissionDelete No Mission Record")
-//	} else {
-//		recordMissionJson.mission2MissionJSON(recordMission)
-//		err = database.DB.Unscoped().Delete(&recordMission).Error
-//	}
-//	return
-//}
+//First 根据id查找Mission.
+func (mission *Mission) First() (err error) {
+	/**
+	@Author: PantaZheng
+	@Description:
+	@Date: 2019/5/13 15:49
+	*/
+	m := &Mission{}
+	m.ID = mission.ID
+	if err = database.DB.First(&m).Error; err != nil {
+		err = errors.New(titleMission + "First:\t" + err.Error())
+	} else {
+		*mission = *m
+	}
+	return
+}
+
+func (mission *Mission) FindParticipants() (participants []*User, err error) {
+	/**
+	@Author: PantaZheng
+	@Description:
+	@Date: 2019/5/14 9:34
+	*/
+	m := &Mission{}
+	m.ID = mission.ID
+	if err = database.DB.Model(&m).Related(&participants, "Participants").Error; err != nil {
+		err = errors.New(titleMission + "FindParticipants:\t" + err.Error())
+	} else {
+		*mission = *m
+	}
+	return
+}
+
+// MissionsFindByCID通过CreatorID查找Missions
+func MissionsFindByCID(id uint) (missions []*Mission, err error) {
+	/**
+	@Author: PantaZheng
+	@Description:
+	@Date: 2019/5/13 16:06
+	*/
+	creator := &User{}
+	creator.ID = id
+	if err = creator.First(); err == nil {
+		if err = database.DB.Model(&creator).Related(&missions, "CreatorID").Error; err == nil {
+			if len(missions) == 0 {
+				err = errors.New("record not found")
+			}
+		}
+	}
+	if err != nil {
+		err = errors.New(titleMission + "MissionsFindByCreatorID:\t" + err.Error())
+	}
+	return
+}
+
+func MissionsFindByPID(id uint) (missions []*Mission, err error) {
+	/**
+	@Author: PantaZheng
+	@Description:
+	@Date: 2019/5/13 16:06
+	*/
+	participant := &User{}
+	participant.ID = id
+	if err = participant.First(); err == nil {
+		if err = database.DB.Model(&participant).Related(&missions, "PMissions").Error; err == nil {
+			if len(missions) == 0 {
+				err = errors.New("record not found")
+			}
+		}
+	}
+	if err != nil {
+		err = errors.New(titleMission + "MissionsFindByPID:\t" + err.Error())
+	}
+	return
+}
+
+func (mission *Mission) Updates() (err error) {
+	/**
+	@Author: PantaZheng
+	@Description:
+	@Date: 2019/5/13 23:18
+	*/
+	m := &Mission{}
+	m.ID = mission.ID
+	if err = database.DB.Model(&m).Updates(&mission).Error; err != nil {
+		err = errors.New(titleMission + "Updates:\t" + err.Error())
+	} else {
+		*mission = *m
+	}
+	return
+}
+
+func (mission *Mission) UpdateParticipants(participants []*User) (err error) {
+	/**
+	@Author: PantaZheng
+	@Description:
+	@Date: 2019/5/13 23:36
+	*/
+	m := &Mission{}
+	m.ID = mission.ID
+	if err = database.DB.Model(&m).Association("Participants").Replace(participants).Error; err != nil {
+		err = errors.New(titleMission + "AppendParticipants:\t" + err.Error())
+	} else {
+		*mission = *m
+	}
+	return
+}
+
+func (mission *Mission) Delete() (err error) {
+	m := &Mission{}
+	m.ID = mission.ID
+	if err = database.DB.Delete(&m).Error; err != nil {
+		err = errors.New(titleGain + "Delete:\t" + err.Error())
+	} else {
+		*mission = *m
+	}
+	return
+}
