@@ -70,10 +70,10 @@ func (gain *Gain) First() (err error) {
 	@Description:
 	@Date: 2019/5/13 0:57
 	*/
-	g := &Gain{}
+	g := Gain{}
 	g.ID = gain.ID
 	if err = database.DB.First(&g).Error; err == nil {
-		*gain = *g
+		*gain = g
 		gain.Owner.ID = gain.OwnerID
 		err = gain.Owner.First()
 	}
@@ -90,15 +90,15 @@ func GainsFindByOwnerID(id uint) (gains []Gain, err error) {
 	@Description:
 	@Date: 2019/5/13 0:29
 	*/
-	owner := &User{}
+	owner := User{}
 	owner.ID = id
 	if err = owner.First(); err == nil {
 		if err = database.DB.Model(&owner).Related(&gains, "OwnerID").Error; err == nil {
-			owner := &User{}
+			owner := User{}
 			owner.ID = id
 			err = owner.First()
 			for _, v := range gains {
-				v.Owner = *owner
+				v.Owner = owner
 			}
 		}
 	}
@@ -138,12 +138,12 @@ func (gain *Gain) Updates() (err error) {
 	@Date: 2019/5/13 1:09
 	*/
 	if err = gain.checkForeignKey(); err == nil {
-		g := &Gain{}
+		g := Gain{}
 		g.ID = gain.ID
 		gain.UpTime = time.Now().Format("2006-01-02")
 		if err = database.DB.Model(&g).Updates(&gain).Error; err == nil {
 			err = g.First()
-			*gain = *g
+			*gain = g
 		}
 	}
 	if err != nil {
@@ -153,10 +153,10 @@ func (gain *Gain) Updates() (err error) {
 }
 
 func (gain *Gain) Delete() (err error) {
-	g := &Gain{}
+	g := Gain{}
 	g.ID = gain.ID
 	if err = database.DB.First(&g).Error; err == nil {
-		*gain = *g
+		*gain = g
 		err = database.DB.Delete(&g).Error
 	}
 	if err != nil {
