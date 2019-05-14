@@ -25,7 +25,7 @@ type Mission struct {
 	Content      string
 	File         string
 	Tag          bool
-	Participants []*User `gorm:"many2many:user_missions"`
+	Participants []User `gorm:"many2many:user_missions"`
 	ModuleID     uint
 	//Module       Module
 }
@@ -143,7 +143,7 @@ func (mission *Mission) Updates() (err error) {
 func (mission *Mission) Delete() (err error) {
 	m := &Mission{}
 	m.ID = mission.ID
-	participants := make([]*User, 0)
+	participants := make([]User, 0)
 	if err = database.DB.Model(&mission).Association("Participants").Find(&participants).Error; err == nil {
 		m := &Mission{}
 		m.ID = mission.ID

@@ -72,12 +72,7 @@ func mission2MissionJSON(mission *models.Mission) (missionJSON MissionJson) {
 	missionJSON.File = mission.File
 	missionJSON.Tag = mission.Tag
 	//missionJSON.ModuleID = mission.ModuleID
-	//user创建接口
-	if participants, err := mission.FindParticipants(); err != nil {
-		log.Println(err.Error())
-	} else {
-		missionJSON.Participants = users2BriefUsersJSON(participants)
-	}
+	missionJSON.Participants = users2BriefUsersJSON(mission.Participants)
 	missionJSON.Gains, _ = GainsFindByMID(mission.ID)
 	return
 }
@@ -111,7 +106,6 @@ func missions2MissionsBriefJSON(missions []*models.Mission) (missionsJSON []Miss
 	return
 }
 
-//缺失participants
 func (missionJSON *MissionJson) missionJSON2Mission() (mission models.Mission) {
 	/**
 	@Author: PantaZheng
@@ -127,6 +121,7 @@ func (missionJSON *MissionJson) missionJSON2Mission() (mission models.Mission) {
 	mission.Content = missionJSON.Content
 	mission.File = missionJSON.File
 	mission.Tag = missionJSON.Tag
+	mission.Participants = usersJSON2Users(missionJSON.Participants)
 	//mission.ModuleID = missionJSON.ModuleID
 	return
 }
@@ -137,30 +132,11 @@ func (missionJSON *MissionJson) Create() (err error) {
 	if err = creator.First(); err == nil {
 		m := missionJSON.missionJSON2Mission()
 		if err = m.Create(); err == nil {
-			users := usersJSON2Users(missionJSON.Participants)
-			if err = m.AppendParticipants(users); err == nil {
-				*missionJSON = mission2MissionJSON(&m)
-			}
+			*missionJSON = mission2MissionJSON(&m)
 		}
 	}
 	if err != nil {
 		err = errors.New(titleMission + "Create:\t" + err.Error())
-	}
-	return
-}
-
-func (missionJSON *MissionJson) IfParticipants(id uint) (err error) {
-	err = errors.New("成员不在任务的参与者中")
-	m := missionJSON.missionJSON2Mission()
-	if participants, err1 := m.FindParticipants(); err1 == nil {
-		for _, v := range participants {
-			if v.ID == id {
-				err = nil
-			}
-		}
-	}
-	if err != nil {
-		err = errors.New(titleMission + "IfParticipants:\t" + err.Error())
 	}
 	return
 }

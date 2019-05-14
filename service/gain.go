@@ -80,10 +80,10 @@ func gainJSON2GainBriefJSON(gainJSON1 *GainJSON) (gainJSON2 GainJSON) {
 	return
 }
 
-func gains2BriefGainsJSON(gains []*models.Gain) (gainsJSON []GainJSON) {
+func gains2BriefGainsJSON(gains []models.Gain) (gainsJSON []GainJSON) {
 	gainsJSON = make([]GainJSON, len(gains))
 	for i, v := range gains {
-		g := gain2GainJSON(v)
+		g := gain2GainJSON(&v)
 		gainsJSON[i] = gainJSON2GainBriefJSON(&g)
 	}
 	return
@@ -114,13 +114,9 @@ func (gainJSON *GainJSON) Create() (err error) {
 	@Date: 2019/5/13 2:39
 	*/
 	//TODO:检查成果归属者是否在Mission的参与者中,前端选择
-	m := MissionJson{}
-	m.ID = gainJSON.MissionID
-	if err = m.IfParticipants(gainJSON.OwnerID); err == nil {
-		g := gainJSON.gainJSON2Gain()
-		if err = g.Create(); err == nil {
-			*gainJSON = gain2GainJSON(&g)
-		}
+	g := gainJSON.gainJSON2Gain()
+	if err = g.Create(); err == nil {
+		*gainJSON = gain2GainJSON(&g)
 	}
 	if err != nil {
 		err = errors.New(titleGain + "Create:\t" + err.Error())

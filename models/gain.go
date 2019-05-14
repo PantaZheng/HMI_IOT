@@ -29,10 +29,23 @@ func (gain *Gain) Create() (err error) {
 	@Description:
 	@Date: 2019/5/13 0:00
 	*/
-	gain.UpTime = time.Now().Format("2006-01-02")
-	if err = database.DB.Create(&gain).Error; err == nil {
-		gain.Owner.ID = gain.OwnerID
-		err = gain.Owner.First()
+
+	m := &Mission{}
+	m.ID = gain.MissionID
+	if err = m.First(); err == nil {
+		err = errors.New("OwnerID not in mission's participants")
+		for _, v := range m.Participants {
+			if gain.OwnerID == v.ID {
+				err = nil
+			}
+		}
+		if err == nil {
+			gain.UpTime = time.Now().Format("2006-01-02")
+			if err = database.DB.Create(&gain).Error; err == nil {
+				gain.Owner.ID = gain.OwnerID
+				err = gain.Owner.First()
+			}
+		}
 	}
 	if err != nil {
 		err = errors.New(titleGain + "Create:\t" + err.Error())
@@ -61,7 +74,7 @@ func (gain *Gain) First() (err error) {
 }
 
 //GainsFindByOwnerID 通过OwnerID来查找成果.
-func GainsFindByOwnerID(id uint) (gains []*Gain, err error) {
+func GainsFindByOwnerID(id uint) (gains []Gain, err error) {
 	/**
 	@Author: PantaZheng
 	@Description:
@@ -83,7 +96,7 @@ func GainsFindByOwnerID(id uint) (gains []*Gain, err error) {
 }
 
 //FindByMissionID 通过OwnerID来查找任务下的成果.
-func GainsFindByMissionID(id uint) (gains []*Gain, err error) {
+func GainsFindByMissionID(id uint) (gains []Gain, err error) {
 	/**
 	@Author: PantaZheng
 	@Description:
