@@ -65,13 +65,12 @@ func userTestData() {
 }
 
 //userJSON2User UserJSON转换到User.
-func (userJSON *UserJSON) userJSON2User() (user *models.User) {
+func (userJSON *UserJSON) userJSON2User() (user models.User) {
 	/**
 	@Author: PantaZheng
 	@Description: UserJSON转化为User
 	@Date: 2019/5/9 13:14
 	*/
-	user = &models.User{}
 	user.ID = userJSON.ID
 	user.OpenID = userJSON.OpenID
 	user.WechatName = userJSON.WechatName
@@ -83,7 +82,7 @@ func (userJSON *UserJSON) userJSON2User() (user *models.User) {
 }
 
 //user2UserJSON User表单转换到UserJSON.
-func user2UserJSON(user *models.User) (userJSON UserJSON) {
+func user2UserJSON(user models.User) (userJSON UserJSON) {
 	/**
 	  @Author: PantaZheng
 	  @Description:
@@ -141,7 +140,7 @@ func (userJSON *UserJSON) exchangeOpenID() (err error) {
 	return
 }
 
-func users2BriefUsersJSON(users []*models.User) (usersJSON []UserJSON) {
+func users2BriefUsersJSON(users []models.User) (usersJSON []UserJSON) {
 	usersJSON = make([]UserJSON, len(users))
 	for i, v := range users {
 		u := user2UserJSON(v)
@@ -150,8 +149,8 @@ func users2BriefUsersJSON(users []*models.User) (usersJSON []UserJSON) {
 	return
 }
 
-func usersJSON2Users(usersJSON []UserJSON) (users []*models.User) {
-	users = make([]*models.User, len(usersJSON))
+func usersJSON2Users(usersJSON []UserJSON) (users []models.User) {
+	users = make([]models.User, len(usersJSON))
 	for i, v := range usersJSON {
 		users[i] = v.userJSON2User()
 	}
@@ -230,14 +229,14 @@ func (userJSON *UserJSON) Bind() (err error) {
 		} else if userJSON.Level == LevelMap["Stranger"] {
 			err = errors.New("绑定权限不能设置为1级\t")
 		} else if err = userJSON.checkLevel(); err == nil {
-			wechatUser := &models.User{OpenID: userJSON.OpenID}
+			wechatUser := models.User{OpenID: userJSON.OpenID}
 			//查找微信关联信息
 			if err = wechatUser.FindOne(); err != nil {
 				err = errors.New("数据库查找关联OpenID用户出错:\t" + err.Error())
 			} else if wechatUser.Level > LevelMap["Stranger"] {
 				err = errors.New("用户" + wechatUser.Name + "已经绑定过,如有修改需要请联系管理员")
 			} else {
-				presortedUser := &models.User{IDCard: userJSON.IDCard}
+				presortedUser := models.User{IDCard: userJSON.IDCard}
 				_ = presortedUser.FindOne()
 				//检查是否有预存信息
 				if presortedUser.Name != "" {

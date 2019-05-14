@@ -24,9 +24,9 @@ type User struct {
 	//CModules   []*Module  `gorm:"foreignkey:CreatorID"`
 	//LModules   []*Module  `gorm:"foreignkey:LeaderID"`
 	//PModules   []*Module  `gorm:"many2many:user_modules"`
-	CMissions []*Mission `gorm:"foreignkey:CreatorID"`
-	PMissions []*Mission `gorm:"many2many:user_missions"`
-	OGains    []*Gain    `gorm:"foreignkey:OwnerID"`
+	CMissions []Mission `gorm:"foreignkey:CreatorID"`
+	PMissions []Mission `gorm:"many2many:user_missions"`
+	OGains    []Gain    `gorm:"foreignkey:OwnerID"`
 }
 
 //检查是否有OpenID和IDCard，零值设置为ID,并更新字段信息
@@ -111,7 +111,7 @@ func (user *User) FindOne() (err error) {
 }
 
 //Find 查找多个用户.
-func (user *User) Find() (users []*User, err error) {
+func (user *User) Find() (users []User, err error) {
 	/**
 	@Author: PantaZheng
 	@Description:

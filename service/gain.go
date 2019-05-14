@@ -47,7 +47,7 @@ func gainTestData() {
 		}
 	}
 }
-func gain2GainJSON(gain *models.Gain) (gainJSON GainJSON) {
+func gain2GainJSON(gain models.Gain) (gainJSON GainJSON) {
 	/**
 	@Author: PantaZheng
 	@Description:
@@ -80,7 +80,7 @@ func gainJSON2GainBriefJSON(gainJSON1 *GainJSON) (gainJSON2 GainJSON) {
 	return
 }
 
-func gains2BriefGainsJSON(gains []*models.Gain) (gainsJSON []GainJSON) {
+func gains2BriefGainsJSON(gains []models.Gain) (gainsJSON []GainJSON) {
 	gainsJSON = make([]GainJSON, len(gains))
 	for i, v := range gains {
 		g := gain2GainJSON(v)
@@ -116,7 +116,7 @@ func (gainJSON *GainJSON) Create() (err error) {
 	//TODO:检查成果归属者是否在Mission的参与者中,前端选择
 	g := gainJSON.gainJSON2Gain()
 	if err = g.Create(); err == nil {
-		*gainJSON = gain2GainJSON(&g)
+		*gainJSON = gain2GainJSON(g)
 	}
 	if err != nil {
 		err = errors.New(titleGain + "Create:\t" + err.Error())
@@ -133,7 +133,7 @@ func (gainJSON *GainJSON) First() (err error) {
 	*/
 	g := gainJSON.gainJSON2Gain()
 	if err = g.First(); err == nil {
-		*gainJSON = gain2GainJSON(&g)
+		*gainJSON = gain2GainJSON(g)
 	} else {
 		err = errors.New(titleGain + "First:\t" + err.Error())
 	}
@@ -186,7 +186,7 @@ func (gainJSON *GainJSON) Updates() (err error) {
 	*/
 	g := gainJSON.gainJSON2Gain()
 	if err = g.Updates(); err == nil {
-		*gainJSON = gain2GainJSON(&g)
+		*gainJSON = gain2GainJSON(g)
 	} else {
 		err = errors.New(titleGain + "Updates:\t" + err.Error())
 	}
@@ -201,7 +201,7 @@ func (gainJSON *GainJSON) Delete() (err error) {
 	*/
 	g := gainJSON.gainJSON2Gain()
 	if err = g.Delete(); err == nil {
-		*gainJSON = gain2GainJSON(&g)
+		*gainJSON = gain2GainJSON(g)
 	} else {
 		err = errors.New(titleGain + "Delete:\t" + err.Error())
 	}

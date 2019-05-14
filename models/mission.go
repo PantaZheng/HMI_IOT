@@ -18,14 +18,14 @@ type Mission struct {
 	gorm.Model
 	Name         string
 	CreatorID    uint
-	Creator      *User
+	Creator      User
 	CreateTime   string
 	StartTime    string
 	EndTime      string
 	Content      string
 	File         string
 	Tag          bool
-	Participants []*User `gorm:"many2many:user_missions"`
+	Participants []User `gorm:"many2many:user_missions"`
 	ModuleID     uint
 	//Module       Module
 }
@@ -42,10 +42,8 @@ func (mission *Mission) Create() (err error) {
 	}
 	mission.CreateTime = time.Now().Format("2006-01-02")
 	participants := mission.Participants
-	if mission.Participants == nil {
-		mission.Participants = []*User{}
-	}
-	mission.Creator = &User{}
+	mission.Participants = make([]User, 0)
+	mission.Creator = User{}
 	if err = database.DB.Create(&mission).Error; err == nil {
 		mission.Creator.ID = mission.CreatorID
 		if participants != nil {
@@ -89,7 +87,7 @@ func (mission *Mission) First() (err error) {
 }
 
 // MissionsFindByCID通过CreatorID查找Missions
-func MissionsFindByCID(id uint) (missions []*Mission, err error) {
+func MissionsFindByCID(id uint) (missions []Mission, err error) {
 	/**
 	@Author: PantaZheng
 	@Description:
@@ -106,7 +104,7 @@ func MissionsFindByCID(id uint) (missions []*Mission, err error) {
 	return
 }
 
-func MissionsFindByPID(id uint) (missions []*Mission, err error) {
+func MissionsFindByPID(id uint) (missions []Mission, err error) {
 	/**
 	@Author: PantaZheng
 	@Description:
@@ -155,7 +153,7 @@ func (mission *Mission) Updates() (err error) {
 func (mission *Mission) Delete() (err error) {
 	m := &Mission{}
 	m.ID = mission.ID
-	participants := make([]*User, 0)
+	participants := make([]User, 0)
 	if err = database.DB.Model(&mission).Association("Participants").Find(&participants).Error; err == nil {
 		m := &Mission{}
 		m.ID = mission.ID
