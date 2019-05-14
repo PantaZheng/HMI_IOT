@@ -80,7 +80,7 @@ func (mission *Mission) FindParticipants() (participants []User, err error) {
 	*/
 	m := &Mission{}
 	m.ID = mission.ID
-	if err = database.DB.Model(&m).Related(&participants, "Participants").Error; err != nil {
+	if err = database.DB.Model(&m).Association("Participants").Find(&participants).Error; err != nil {
 		err = errors.New(titleMission + "FindParticipants:\t" + err.Error())
 	} else {
 		*mission = *m
