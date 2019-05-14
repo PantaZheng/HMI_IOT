@@ -148,7 +148,7 @@ func GainFindByID(id uint) (gainJSON GainJSON, err error) {
 }
 
 //owner单一确定
-func GainsFindByOID(id uint) (gainsJson []GainJSON, err error) {
+func GainsFindByOwnerID(id uint) (gainsJson []GainJSON, err error) {
 	/**
 	@Author: PantaZheng
 	@Description:
@@ -157,7 +157,7 @@ func GainsFindByOID(id uint) (gainsJson []GainJSON, err error) {
 	if gains, err := models.GainsFindByOwnerID(id); err == nil {
 		gainsJson = gains2BriefGainsJSON(gains)
 	} else {
-		err = errors.New(titleGain + "GainsFindByOID:\t" + err.Error())
+		err = errors.New(titleGain + "GainsFindByOwnerID:\t" + err.Error())
 	}
 	return
 }

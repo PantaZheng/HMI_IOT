@@ -48,7 +48,6 @@ func missionTestData() {
 			log.Println(v)
 		}
 	}
-	log.Println()
 }
 
 func mission2MissionJSON(mission *models.Mission) (missionJSON MissionJson) {
