@@ -103,15 +103,12 @@ func GainsFindByOwnerID(id uint) (gains []Gain, err error) {
 	if err = owner.First(); err == nil {
 		if err = database.DB.Model(&owner).Related(&gains, "OwnerID").Error; err == nil {
 			err = owner.First()
-			log.Println("循环前")
-			log.Println(owner)
 			for _, v := range gains {
-				v.Owner = owner
+				&v.Owner = &owner
 				log.Println("循环中")
-				log.Println(owner)
+				log.Println(v.Owner)
 			}
 			log.Println("循环后")
-			log.Println(owner)
 			log.Println(gains)
 		}
 	}
