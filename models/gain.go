@@ -100,7 +100,7 @@ func GainsFindByOwnerID(id uint) (gains []Gain, err error) {
 	*/
 	owner := &User{}
 	owner.ID = id
-	g := make([]*Gain, 0)
+	g := make([]Gain, 0)
 	if err = owner.First(); err == nil {
 		if err = database.DB.Model(&owner).Related(g, "OwnerID").Error; err == nil {
 			err = owner.First()
@@ -108,7 +108,7 @@ func GainsFindByOwnerID(id uint) (gains []Gain, err error) {
 				v.Owner = *owner
 				log.Println("循环中")
 				log.Println(v.Owner)
-				gains = append(gains, *v)
+				gains = append(gains, v)
 			}
 			log.Println("循环后")
 			log.Println(gains)
