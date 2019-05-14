@@ -111,7 +111,7 @@ func (user *User) FindOne() (err error) {
 }
 
 //Find 查找多个用户.
-func (user *User) Find() (users []User, err error) {
+func (user *User) Find() (users []*User, err error) {
 	/**
 	@Author: PantaZheng
 	@Description:

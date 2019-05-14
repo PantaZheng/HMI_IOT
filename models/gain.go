@@ -17,9 +17,9 @@ type Gain struct {
 	UpTime    string
 	Remark    string
 	OwnerID   uint
-	Owner     User
+	Owner     *User
 	MissionID uint
-	Mission   Mission
+	Mission   *Mission
 }
 
 func (gain *Gain) checkForeignKey() (err error) {
@@ -91,13 +91,13 @@ func (gain *Gain) First() (err error) {
 }
 
 //GainsFindByOwnerID 通过OwnerID来查找成果.
-func GainsFindByOwnerID(id uint) (gains []Gain, err error) {
+func GainsFindByOwnerID(id uint) (gains []*Gain, err error) {
 	/**
 	@Author: PantaZheng
 	@Description:
 	@Date: 2019/5/13 0:29
 	*/
-	owner := User{}
+	owner := &User{}
 	owner.ID = id
 	if err = owner.First(); err == nil {
 		if err = database.DB.Model(&owner).Related(&gains, "OwnerID").Error; err == nil {
@@ -114,7 +114,7 @@ func GainsFindByOwnerID(id uint) (gains []Gain, err error) {
 }
 
 //FindByMissionID 通过OwnerID来查找任务下的成果.
-func GainsFindByMissionID(id uint) (gains []Gain, err error) {
+func GainsFindByMissionID(id uint) (gains []*Gain, err error) {
 	/**
 	@Author: PantaZheng
 	@Description:

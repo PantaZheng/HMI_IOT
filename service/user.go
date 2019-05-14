@@ -65,12 +65,13 @@ func userTestData() {
 }
 
 //userJSON2User UserJSON转换到User.
-func (userJSON *UserJSON) userJSON2User() (user models.User) {
+func (userJSON *UserJSON) userJSON2User() (user *models.User) {
 	/**
 	@Author: PantaZheng
 	@Description: UserJSON转化为User
 	@Date: 2019/5/9 13:14
 	*/
+	user = &models.User{}
 	user.ID = userJSON.ID
 	user.OpenID = userJSON.OpenID
 	user.WechatName = userJSON.WechatName
@@ -99,12 +100,13 @@ func user2UserJSON(user *models.User) (userJSON UserJSON) {
 }
 
 //user2UserBriefJSON 简化，仅保留：id、Name、Level.
-func userJSON2UserBriefJSON(userJSON1 *UserJSON) (userJSON2 UserJSON) {
+func userJSON2UserBriefJSON(userJSON1 UserJSON) (userJSON2 UserJSON) {
 	/**
 	@Author: PantaZheng
 	@Description:
 	@Date: 2019/5/13 2:57
 	*/
+	userJSON2 = UserJSON{}
 	userJSON2.ID = userJSON1.ID
 	userJSON2.Name = userJSON1.Name
 	userJSON2.Level = userJSON1.Level
@@ -139,17 +141,17 @@ func (userJSON *UserJSON) exchangeOpenID() (err error) {
 	return
 }
 
-func users2BriefUsersJSON(users []models.User) (usersJSON []UserJSON) {
+func users2BriefUsersJSON(users []*models.User) (usersJSON []UserJSON) {
 	usersJSON = make([]UserJSON, len(users))
 	for i, v := range users {
-		u := user2UserJSON(&v)
-		usersJSON[i] = userJSON2UserBriefJSON(&u)
+		u := user2UserJSON(v)
+		usersJSON[i] = userJSON2UserBriefJSON(u)
 	}
 	return
 }
 
-func usersJSON2Users(usersJSON []UserJSON) (users []models.User) {
-	users = make([]models.User, len(usersJSON))
+func usersJSON2Users(usersJSON []UserJSON) (users []*models.User) {
+	users = make([]*models.User, len(usersJSON))
 	for i, v := range usersJSON {
 		users[i] = v.userJSON2User()
 	}
@@ -205,7 +207,7 @@ func (userJSON *UserJSON) Create() (err error) {
 	if err = userJSON.checkLevel(); err == nil {
 		u := userJSON.userJSON2User()
 		if err = u.Create(); err == nil {
-			*userJSON = user2UserJSON(&u)
+			*userJSON = user2UserJSON(u)
 		}
 	}
 	if err != nil {
@@ -274,7 +276,7 @@ func (userJSON *UserJSON) Bind() (err error) {
 func (userJSON *UserJSON) First() (err error) {
 	u := userJSON.userJSON2User()
 	if err = u.First(); err == nil {
-		*userJSON = user2UserJSON(&u)
+		*userJSON = user2UserJSON(u)
 	} else {
 		err = errors.New(titleUser + "First:\t" + err.Error())
 	}
@@ -284,7 +286,7 @@ func (userJSON *UserJSON) First() (err error) {
 func (userJSON *UserJSON) FindOne() (err error) {
 	u := userJSON.userJSON2User()
 	if err = u.FindOne(); err == nil {
-		*userJSON = user2UserJSON(&u)
+		*userJSON = user2UserJSON(u)
 	} else {
 		err = errors.New(titleUser + "FindOne:\t" + err.Error())
 	}
@@ -370,7 +372,7 @@ func (userJSON *UserJSON) Updates() (err error) {
 	if err = userJSON.checkLevel(); err == nil {
 		u := userJSON.userJSON2User()
 		if err = u.Updates(); err == nil {
-			*userJSON = user2UserJSON(&u)
+			*userJSON = user2UserJSON(u)
 		}
 	}
 	if err != nil {
@@ -388,7 +390,7 @@ func (userJSON *UserJSON) Delete() (err error) {
 	*/
 	u := userJSON.userJSON2User()
 	if err = u.Delete(); err == nil {
-		*userJSON = user2UserJSON(&u)
+		*userJSON = user2UserJSON(u)
 	}
 	if err != nil {
 		err = errors.New(titleUser + "Delete:\t" + err.Error())

@@ -59,7 +59,7 @@ func mission2MissionJSON(mission *models.Mission) (missionJSON MissionJson) {
 	missionJSON.ID = mission.ID
 	missionJSON.Name = mission.Name
 	missionJSON.CreatorID = mission.CreatorID
-	creator := &UserJSON{ID: missionJSON.CreatorID}
+	creator := UserJSON{ID: missionJSON.CreatorID}
 	if err := creator.First(); err != nil {
 		log.Println(err.Error())
 	}

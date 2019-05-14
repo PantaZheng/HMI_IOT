@@ -60,7 +60,7 @@ func gain2GainJSON(gain *models.Gain) (gainJSON GainJSON) {
 	gainJSON.UpTime = gain.UpTime
 	gainJSON.Remark = gain.Remark
 	gainJSON.OwnerID = gain.OwnerID
-	gainJSON.Owner = user2UserJSON(&gain.Owner)
+	gainJSON.Owner = user2UserJSON(gain.Owner)
 	gainJSON.MissionID = gain.MissionID
 	return
 }
@@ -75,15 +75,15 @@ func gainJSON2GainBriefJSON(gainJSON1 *GainJSON) (gainJSON2 GainJSON) {
 	gainJSON2.Name = gainJSON1.Name
 	gainJSON2.UpTime = gainJSON1.UpTime
 	gainJSON2.OwnerID = gainJSON1.OwnerID
-	gainJSON2.Owner = userJSON2UserBriefJSON(&gainJSON1.Owner)
+	gainJSON2.Owner = userJSON2UserBriefJSON(gainJSON1.Owner)
 	gainJSON2.MissionID = gainJSON1.MissionID
 	return
 }
 
-func gains2BriefGainsJSON(gains []models.Gain) (gainsJSON []GainJSON) {
+func gains2BriefGainsJSON(gains []*models.Gain) (gainsJSON []GainJSON) {
 	gainsJSON = make([]GainJSON, len(gains))
 	for i, v := range gains {
-		g := gain2GainJSON(&v)
+		g := gain2GainJSON(v)
 		gainsJSON[i] = gainJSON2GainBriefJSON(&g)
 	}
 	return
