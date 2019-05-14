@@ -153,11 +153,13 @@ func (gain *Gain) Updates() (err error) {
 }
 
 func (gain *Gain) Delete() (err error) {
-	g := Gain{}
-	g.ID = gain.ID
-	if err = database.DB.First(&g).Error; err == nil {
-		*gain = g
-		err = database.DB.Delete(&g).Error
+	g1 := Gain{}
+	g1.ID = gain.ID
+	if err = g1.First(); err == nil {
+		*gain = g1
+		g2 := Gain{}
+		g2.ID = gain.ID
+		err = database.DB.Delete(&g2).Error
 	}
 	if err != nil {
 		err = errors.New(titleGain + "Delete:\t" + err.Error())
