@@ -39,8 +39,8 @@ func missionTestData() {
 	u6 := UserJSON{ID: 7}
 	missions := make([]MissionJson, 3)
 	missions[0] = MissionJson{Name: "钢铁侠", CreatorID: 5, StartTime: "2008-1-1", EndTime: "2017-1-2", Content: "你不是世界上唯一的超级英雄。", File: "朝花夕拾", Participants: []UserJSON{u1, u3, u4, u5}}
-	missions[1] = MissionJson{Name: "无敌浩克", CreatorID: 4, StartTime: "2008-3-1", EndTime: "2017-1-2", Content: "浩克应该加入他（复仇者联盟）", File: "", Participants: []UserJSON{u4, u5}}
-	missions[2] = MissionJson{Name: "海王", CreatorID: 7, StartTime: "2008-3-1", EndTime: "2017-1-2", Content: "浩克应该加入他（复仇者联盟）", File: "", Participants: []UserJSON{u2, u6}}
+	missions[1] = MissionJson{Name: "无敌浩克", CreatorID: 4, StartTime: "2008-3-1", EndTime: "2017-1-2", Content: "复仇者联盟", File: "", Participants: []UserJSON{u4, u5}}
+	missions[2] = MissionJson{Name: "海王", CreatorID: 7, StartTime: "2008-3-1", EndTime: "2017-1-2", Content: "你永远与我同在也永远是我的兄弟", File: "", Participants: []UserJSON{u2, u6}}
 	for _, v := range missions {
 		if err := v.Create(); err != nil {
 			log.Println(err.Error())

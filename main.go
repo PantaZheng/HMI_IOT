@@ -47,7 +47,7 @@ func newApp() (api *iris.Application) {
 		gain.Get("/owner/{id:uint}", controller.GainsFindByOwnerID)
 		gain.Get("/mission/{id:uint}", controller.GainsFindByMissionID)
 		gain.Put("/", controller.GainUpdate)
-		gain.Delete("/{id:uint}", controller.GainDeleteByID)
+		gain.Delete("/id/{id:uint}", controller.GainDeleteByID)
 	})
 
 	//api.PartyFunc("/mission", func(mission router.Party) {
