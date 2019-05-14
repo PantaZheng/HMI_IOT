@@ -50,6 +50,9 @@ func (gain *Gain) Create() (err error) {
 	@Description:
 	@Date: 2019/5/13 0:00
 	*/
+	if gain.ID != 0 {
+		gain.ID = 0
+	}
 	if err = gain.checkForeignKey(); err == nil {
 		gain.UpTime = time.Now().Format("2006-01-02")
 		if err = database.DB.Create(&gain).Error; err == nil {
@@ -69,12 +72,17 @@ func (gain *Gain) First() (err error) {
 	@Description:
 	@Date: 2019/5/13 0:57
 	*/
-	g := Gain{}
-	g.ID = gain.ID
-	if err = database.DB.First(&g).Error; err == nil {
-		*gain = g
-		gain.Owner.ID = gain.OwnerID
-		err = gain.Owner.First()
+
+	if gain.ID > 0 {
+		g := Gain{}
+		g.ID = gain.ID
+		if err = database.DB.First(&g).Error; err == nil {
+			*gain = g
+			gain.Owner.ID = gain.OwnerID
+			err = gain.Owner.First()
+		}
+	} else {
+		err = errors.New("ID必须为正数")
 	}
 	if err != nil {
 		err = errors.New(titleGain + "First:\t" + err.Error())

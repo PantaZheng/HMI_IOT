@@ -72,13 +72,17 @@ func (user *User) First() (err error) {
 	@Description:
 	@Date: 2019/5/9 14:02
 	*/
-	u := &User{}
-	u.ID = user.ID
-	if err = database.DB.First(&u).Error; err != nil {
-		err = errors.New(titleUser + "First:\t" + err.Error())
-
+	if user.ID > 0 {
+		u := User{}
+		u.ID = user.ID
+		if err = database.DB.First(&u).Error; err == nil {
+			*user = u
+		}
 	} else {
-		*user = *u
+		err = errors.New("ID必须为正数")
+	}
+	if err != nil {
+		err = errors.New(titleUser + "First:\t" + err.Error())
 	}
 	return
 }

@@ -163,7 +163,7 @@ func GainsFindByOID(id uint) (gainsJson []GainJSON, err error) {
 }
 
 //mission单一确定
-func GainsFindByMID(id uint) (gainsJson []GainJSON, err error) {
+func GainsFindByMissionID(id uint) (gainsJson []GainJSON, err error) {
 	/**
 	@Author: PantaZheng
 	@Description:

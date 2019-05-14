@@ -73,7 +73,7 @@ func mission2MissionJSON(mission *models.Mission) (missionJSON MissionJson) {
 	missionJSON.Tag = mission.Tag
 	//missionJSON.ModuleID = mission.ModuleID
 	missionJSON.Participants = users2BriefUsersJSON(mission.Participants)
-	missionJSON.Gains, _ = GainsFindByMID(mission.ID)
+	missionJSON.Gains, _ = GainsFindByMissionID(mission.ID)
 	return
 }
 

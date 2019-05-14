@@ -37,6 +37,9 @@ func (mission *Mission) Create() (err error) {
 	@Description:
 	@Date: 2019/5/13 3:48
 	*/
+	if mission.ID != 0 {
+		mission.ID = 0
+	}
 	mission.CreateTime = time.Now().Format("2006-01-02")
 	participants := mission.Participants
 	mission.Participants = nil
@@ -63,14 +66,18 @@ func (mission *Mission) First() (err error) {
 	@Description:
 	@Date: 2019/5/13 15:49
 	*/
-	m := &Mission{}
-	m.ID = mission.ID
-	if err = database.DB.First(&m).Error; err == nil {
-		*mission = *m
-		if err = database.DB.Model(&mission).Association("Participants").Find(&mission.Participants).Error; err == nil {
-			mission.Creator.ID = mission.CreatorID
-			err = mission.Creator.First()
+	if mission.ID > 0 {
+		m := &Mission{}
+		m.ID = mission.ID
+		if err = database.DB.First(&m).Error; err == nil {
+			*mission = *m
+			if err = database.DB.Model(&mission).Association("Participants").Find(&mission.Participants).Error; err == nil {
+				mission.Creator.ID = mission.CreatorID
+				err = mission.Creator.First()
+			}
 		}
+	} else {
+		err = errors.New("ID必须为正数")
 	}
 	if err != nil {
 		err = errors.New(titleMission + "First:\t" + err.Error())

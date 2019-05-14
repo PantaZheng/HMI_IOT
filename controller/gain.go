@@ -86,7 +86,7 @@ func GainsFindByMissionID(ctx iris.Context) {
 	*/
 	err := *new(error)
 	if id, err1 := ctx.Params().GetUint("id"); err1 == nil {
-		if gainsJson, err2 := service.GainsFindByMID(id); err2 == nil {
+		if gainsJson, err2 := service.GainsFindByMissionID(id); err2 == nil {
 			ctx.StatusCode(iris.StatusOK)
 			_, _ = ctx.JSON(gainsJson)
 		} else {
