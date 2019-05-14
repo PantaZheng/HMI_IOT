@@ -43,6 +43,7 @@ func (mission *Mission) Create() (err error) {
 	mission.CreateTime = time.Now().Format("2006-01-02")
 	participants := mission.Participants
 	mission.Participants = make([]*User, 0)
+	mission.Creator = &User{}
 	if err = database.DB.Create(&mission).Error; err == nil {
 		mission.Creator.ID = mission.CreatorID
 		if participants != nil {
