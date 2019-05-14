@@ -4,6 +4,7 @@ import (
 	"errors"
 	"github.com/jinzhu/gorm"
 	"github.com/pantazheng/bci/database"
+	"log"
 	"time"
 )
 
@@ -105,7 +106,11 @@ func GainsFindByOwnerID(id uint) (gains []Gain, err error) {
 			for _, v := range gains {
 				v.Owner = owner
 			}
+			log.Println("判断内")
+			log.Println(gains)
 		}
+		log.Println("判断外")
+		log.Println(gains)
 	}
 	if err != nil {
 		err = errors.New(titleGain + "FindByOwnerID:\t" + err.Error())
