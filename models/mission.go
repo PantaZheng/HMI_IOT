@@ -4,7 +4,6 @@ import (
 	"errors"
 	"github.com/jinzhu/gorm"
 	"github.com/pantazheng/bci/database"
-	"log"
 	"time"
 )
 
@@ -81,10 +80,6 @@ func (mission *Mission) FindParticipants() (participants []User, err error) {
 	*/
 	m := &Mission{}
 	m.ID = mission.ID
-	participants = make([]User, 1)
-	log.Println("测试")
-	log.Println(m)
-	log.Println(database.DB.Model(&m).Association("Participants").Error)
 	if err = database.DB.Model(&m).Association("Participants").Find(&participants).Error; err != nil {
 		err = errors.New(titleMission + "FindParticipants:\t" + err.Error())
 	} else {

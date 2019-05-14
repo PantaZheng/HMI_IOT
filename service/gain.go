@@ -121,6 +121,7 @@ func (gainJSON *GainJSON) Create() (err error) {
 	*/
 	//TODO:检查成果归属者是否在Mission的参与者中,前端选择
 	m := MissionJson{}
+	m.ID = gainJSON.MissionID
 	if err = m.IfParticipants(gainJSON.OwnerID); err == nil {
 		g := gainJSON.gainJSON2Gain()
 		if err = g.Create(); err == nil {
