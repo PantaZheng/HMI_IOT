@@ -108,8 +108,6 @@ func (gain *Gain) Updates() (err error) {
 	gain.UpTime = time.Now().Format("2006-01-02")
 	if err = database.DB.Model(&g).Updates(&gain).Error; err != nil {
 		err = errors.New(titleGain + "Updates:\t" + err.Error())
-	} else {
-		_ = g.First()
 	}
 	return
 }

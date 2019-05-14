@@ -193,6 +193,7 @@ func (gainJSON *GainJSON) Updates() (err error) {
 	*/
 	g := gainJSON.gainJSON2Gain()
 	if err = g.Updates(); err == nil {
+		_ = g.First()
 		*gainJSON = gain2GainJSON(&g)
 	} else {
 		err = errors.New(titleGain + "Updates:\t" + err.Error())
