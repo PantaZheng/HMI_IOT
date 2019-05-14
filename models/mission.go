@@ -50,7 +50,7 @@ func (mission *Mission) AppendParticipants(participants []User) (err error) {
 	if err = database.DB.Model(&m).Association("Participants").Append(participants).Error; err != nil {
 		err = errors.New(titleMission + "AppendParticipants:\t" + err.Error())
 	} else {
-		*mission = *m
+		mission.Participants = m.Participants
 	}
 	return
 }
@@ -83,7 +83,7 @@ func (mission *Mission) FindParticipants() (participants []User, err error) {
 	if err = database.DB.Model(&m).Association("Participants").Find(&participants).Error; err != nil {
 		err = errors.New(titleMission + "FindParticipants:\t" + err.Error())
 	} else {
-		*mission = *m
+		mission.Participants = m.Participants
 	}
 	return
 }
@@ -158,7 +158,7 @@ func (mission *Mission) UpdateParticipants(participants []*User) (err error) {
 	if err = database.DB.Model(&m).Association("Participants").Replace(participants).Error; err != nil {
 		err = errors.New(titleMission + "AppendParticipants:\t" + err.Error())
 	} else {
-		*mission = *m
+		mission.Participants = m.Participants
 	}
 	return
 }
