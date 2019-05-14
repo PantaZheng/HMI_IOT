@@ -51,13 +51,13 @@ func (user *User) Create() (err error) {
 	@Date: 2019/5/9 13:29
 	*/
 	if user.OpenID == "" && user.IDCard == "" {
+		err = errors.New("需要OpenID或IDCard来满足用户唯一性")
+	} else {
 		if err = database.DB.Create(&user).Error; err == nil {
 			if user.makeOpenIDIDCARDNotEmpty() {
 				err = user.Updates()
 			}
 		}
-	} else {
-		err = errors.New("需要OpenID或IDCard来满足用户唯一性")
 	}
 	if err != nil {
 		err = errors.New(titleUser + "Create:\t" + err.Error())
