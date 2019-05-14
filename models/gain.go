@@ -98,22 +98,24 @@ func GainsFindByOwnerID(id uint) (gains []Gain, err error) {
 	@Description:
 	@Date: 2019/5/13 0:29
 	*/
-	owner := User{}
+	owner := &User{}
 	owner.ID = id
 	if err = owner.First(); err == nil {
 		if err = database.DB.Model(&owner).Related(&gains, "OwnerID").Error; err == nil {
-			err = owner.First()
-			for _, v := range gains {
-				&v.Owner = &owner
-				log.Println("循环中")
-				log.Println(v.Owner)
-			}
-			log.Println("循环后")
-			log.Println(gains)
+
 		}
 	}
 	if err != nil {
 		err = errors.New(titleGain + "FindByOwnerID:\t" + err.Error())
+	} else {
+		err = owner.First()
+		for _, v := range gains {
+			v.Owner = *owner
+			log.Println("循环中")
+			log.Println(v.Owner)
+		}
+		log.Println("循环后")
+		log.Println(gains)
 	}
 	return
 }
