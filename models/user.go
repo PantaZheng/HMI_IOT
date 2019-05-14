@@ -12,10 +12,10 @@ const titleUser = "models.user."
 //User 数据库用户表.
 type User struct {
 	gorm.Model
-	OpenID     string `gorm:"unique"`
+	OpenID     string `gorm:"not null,unique"`
 	WechatName string
 	Name       string
-	IDCard     string `gorm:"unique"`
+	IDCard     string `gorm:"not null,unique"`
 	Level      int
 	Telephone  string
 	//CProjects  []*Project `gorm:"foreignkey:CreatorID"`
