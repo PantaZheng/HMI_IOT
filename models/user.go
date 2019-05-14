@@ -18,15 +18,15 @@ type User struct {
 	IDCard     string `gorm:"unique"`
 	Level      int
 	Telephone  string
-	CProjects  []*Project `gorm:"foreignkey:CreatorID"`
-	LProjects  []*Project `gorm:"foreignkey:LeaderID"`
-	PProjects  []*Project `gorm:"many2many:user_projects"`
-	CModules   []*Module  `gorm:"foreignkey:CreatorID"`
-	LModules   []*Module  `gorm:"foreignkey:LeaderID"`
-	PModules   []*Module  `gorm:"many2many:user_modules"`
-	CMissions  []*Mission `gorm:"foreignkey:CreatorID"`
-	PMissions  []*Mission `gorm:"many2many:user_missions"`
-	OGains     []*Gain    `gorm:"foreignkey:OwnerID"`
+	//CProjects  []*Project `gorm:"foreignkey:CreatorID"`
+	//LProjects  []*Project `gorm:"foreignkey:LeaderID"`
+	//PProjects  []*Project `gorm:"many2many:user_projects"`
+	//CModules   []*Module  `gorm:"foreignkey:CreatorID"`
+	//LModules   []*Module  `gorm:"foreignkey:LeaderID"`
+	//PModules   []*Module  `gorm:"many2many:user_modules"`
+	CMissions []*Mission `gorm:"foreignkey:CreatorID"`
+	PMissions []*Mission `gorm:"many2many:user_missions"`
+	OGains    []*Gain    `gorm:"foreignkey:OwnerID"`
 }
 
 //检查是否有OpenID和IDCard，零值设置为ID,并更新字段信息

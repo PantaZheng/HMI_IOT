@@ -37,14 +37,19 @@ func gainTestData() {
 	u4 := UserJSON{ID: 5}
 	u5 := UserJSON{ID: 6}
 	u6 := UserJSON{ID: 7}
-	_ = GainJSON{Name: "gain1", Owner: u1, MissionID: 1}.Create()
-	_ = GainJSON{Name: "gain2", Owner: u2, MissionID: 1}.Create()
-	_ = GainJSON{Name: "gain3", Owner: u3, MissionID: 2}.Create()
-	_ = GainJSON{Name: "gain4", Owner: u4, MissionID: 2}.Create()
-	_ = GainJSON{Name: "gain5", Owner: u5, MissionID: 3}.Create()
-	_ = GainJSON{Name: "gain6", Owner: u6, MissionID: 3}.Create()
+	gains := make([]GainJSON, 6)
+	gains[0] = GainJSON{Name: "gain1", Owner: u1, MissionID: 1}
+	gains[1] = GainJSON{Name: "gain2", Owner: u2, MissionID: 1}
+	gains[2] = GainJSON{Name: "gain3", Owner: u3, MissionID: 2}
+	gains[3] = GainJSON{Name: "gain4", Owner: u4, MissionID: 2}
+	gains[4] = GainJSON{Name: "gain5", Owner: u5, MissionID: 3}
+	gains[5] = GainJSON{Name: "gain6", Owner: u6, MissionID: 3}
+	for _, v := range gains {
+		if err := v.Create(); err != nil {
+			log.Println(err.Error())
+		}
+	}
 }
-
 func gain2GainJSON(gain *models.Gain) (gainJSON GainJSON) {
 	/**
 	@Author: PantaZheng
