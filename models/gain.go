@@ -4,7 +4,6 @@ import (
 	"errors"
 	"github.com/jinzhu/gorm"
 	"github.com/pantazheng/bci/database"
-	"log"
 	"time"
 )
 
@@ -105,10 +104,8 @@ func GainsFindByOwnerID(id uint) (gains []Gain, err error) {
 			for i := 0; i < len(gains); i++ {
 				gains[i].Owner = owner
 			}
-			log.Println(gains)
 		}
 	}
-	log.Println(gains)
 	if err != nil {
 		err = errors.New(titleGain + "FindByOwnerID:\t" + err.Error())
 	}
@@ -126,9 +123,11 @@ func GainsFindByMissionID(id uint) (gains []Gain, err error) {
 	mission.ID = id
 	if err = mission.First(); err == nil {
 		if err = database.DB.Model(&mission).Related(&gains, "MissionID").Error; err == nil {
-			for _, v := range gains {
-				v.Owner.ID = v.OwnerID
-				err = v.Owner.First()
+			for i := 0; i < len(gains); i++ {
+				gains[i].Owner.ID = gains[i].OwnerID
+				if err = gains[i].Owner.First(); err != nil {
+					break
+				}
 			}
 		}
 	}
