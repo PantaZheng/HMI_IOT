@@ -36,7 +36,7 @@ func (mission *Mission) checkForeignKey() (err error) {
 	@Description:
 	@Date: 2019/5/15 18:02
 	*/
-	m := &Mission{}
+	m := &Module{}
 	m.ID = mission.ModuleID
 	if err = m.First(); err == nil {
 		if mission.CreatorID > 0 {
