@@ -35,11 +35,11 @@ func moduleTestData() {
 	u6 := UserJSON{ID: 7}
 	u7 := UserJSON{ID: 8}
 	modules := make([]ModuleJSON, 5)
-	modules[0] = ModuleJSON{Name: "钢铁侠与浩克", CreatorID: 1, StartTime: "2001-1-1", EndTime: "11111-1-1", Content: "不得不说的秘密", LeaderID: 2, Participants: []UserJSON{u1, u2, u3, u4, u5}}
-	modules[1] = ModuleJSON{Name: "海王", CreatorID: 2, StartTime: "2001-1-1", EndTime: "11111-1-1", Content: "弟弟被绿", LeaderID: 5, Participants: []UserJSON{u2, u3, u4, u5, u6}}
-	modules[2] = ModuleJSON{Name: "雷神1", CreatorID: 2, StartTime: "2001-1-1", EndTime: "11111-1-1", Content: "徐", LeaderID: 7, Participants: []UserJSON{u5, u6, u7}}
-	modules[3] = ModuleJSON{Name: "雷神2", CreatorID: 2, StartTime: "2001-1-1", EndTime: "11111-1-1", Content: "锦", LeaderID: 7, Participants: []UserJSON{u5}}
-	modules[3] = ModuleJSON{Name: "雷神3", CreatorID: 2, StartTime: "2001-1-1", EndTime: "11111-1-1", Content: "江", LeaderID: 7, Participants: []UserJSON{u5}}
+	modules[0] = ModuleJSON{Name: "钢铁侠与浩克", CreatorID: 1, StartTime: "2001-1-1", EndTime: "11111-1-1", Content: "不得不说的秘密", LeaderID: 2, Participants: []UserJSON{u1, u2, u3, u4, u5}, ProjectID: 1}
+	modules[1] = ModuleJSON{Name: "海王", CreatorID: 2, StartTime: "2001-1-1", EndTime: "11111-1-1", Content: "弟弟被绿", LeaderID: 5, Participants: []UserJSON{u2, u3, u4, u5, u6}, ProjectID: 1}
+	modules[2] = ModuleJSON{Name: "雷神1", CreatorID: 2, StartTime: "2001-1-1", EndTime: "11111-1-1", Content: "徐", LeaderID: 7, Participants: []UserJSON{u5, u6, u7}, ProjectID: 2}
+	modules[3] = ModuleJSON{Name: "雷神2", CreatorID: 2, StartTime: "2001-1-1", EndTime: "11111-1-1", Content: "锦", LeaderID: 7, Participants: []UserJSON{u5}, ProjectID: 3}
+	modules[3] = ModuleJSON{Name: "雷神3", CreatorID: 2, StartTime: "2001-1-1", EndTime: "11111-1-1", Content: "江", LeaderID: 7, Participants: []UserJSON{u5}, ProjectID: 4}
 	for _, v := range modules {
 		if err := v.Create(); err != nil {
 			log.Println(err.Error())
