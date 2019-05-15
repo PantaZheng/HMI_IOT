@@ -154,10 +154,10 @@ func GainsFindByOwnerID(id uint) (gainsJson []GainJSON, err error) {
 	@Description:
 	@Date: 2019/5/13 2:44
 	*/
-	if gains, err := models.GainsFindByOwnerID(id); err == nil {
+	if gains, err1 := models.GainsFindByOwnerID(id); err1 == nil {
 		gainsJson = gains2BriefGainsJSON(gains)
 	} else {
-		err = errors.New(titleGain + "GainsFindByOwnerID:\t" + err.Error())
+		err = errors.New(titleGain + "GainsFindByOwnerID:\t" + err1.Error())
 	}
 	return
 }
@@ -169,10 +169,10 @@ func GainsFindByMissionID(id uint) (gainsJson []GainJSON, err error) {
 	@Description:
 	@Date: 2019/5/13 12:25
 	*/
-	if gains, err := models.GainsFindByMissionID(id); err == nil {
+	if gains, err1 := models.GainsFindByMissionID(id); err1 == nil {
 		gainsJson = gains2BriefGainsJSON(gains)
 	} else {
-		err = errors.New(titleGain + "GainsFindByMissionID:\t" + err.Error())
+		err = errors.New(titleGain + "GainsFindByMissionID:\t" + err1.Error())
 	}
 	return
 }
