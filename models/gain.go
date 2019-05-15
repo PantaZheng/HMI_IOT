@@ -53,7 +53,7 @@ func (gain *Gain) Create() (err error) {
 	gain.ID = 0
 	if err = gain.checkForeignKey(); err == nil {
 		gain.UpTime = time.Now().Format("2006-01-02")
-		if err = database.DB.Set("gorm:save_associations", false).Create(&gain).Error; err == nil {
+		if err = database.DB.Create(&gain).Error; err == nil {
 			err = gain.First()
 		}
 	}
@@ -144,7 +144,7 @@ func (gain *Gain) Updates() (err error) {
 		g := Gain{}
 		g.ID = gain.ID
 		gain.UpTime = time.Now().Format("2006-01-02")
-		if err = database.DB.Set("gorm:save_associations", false).Model(&g).Updates(&gain).Error; err == nil {
+		if err = database.DB.Model(&g).Updates(&gain).Error; err == nil {
 			err = gain.First()
 		}
 	}

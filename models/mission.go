@@ -63,7 +63,7 @@ func (mission *Mission) Create() (err error) {
 		mission.CreateTime = time.Now().Format("2006-01-02")
 		participants := mission.Participants
 		mission.Participants = make([]User, 0)
-		if err = database.DB.Set("gorm:save_associations", false).Create(&mission).Error; err == nil {
+		if err = database.DB.Create(&mission).Error; err == nil {
 			if participants != nil {
 				err = database.DB.Model(&mission).Association("Participants").Append(participants).Error
 			}
@@ -185,7 +185,7 @@ func (mission *Mission) Updates() (err error) {
 		m.ID = mission.ID
 		participants := mission.Participants
 		mission.Participants = nil
-		if err = database.DB.Set("gorm:save_associations", false).Model(&m).Updates(&mission).Error; err == nil {
+		if err = database.DB.Model(&m).Updates(&mission).Error; err == nil {
 			if participants != nil {
 				err = database.DB.Model(&m).Association("Participants").Replace(participants).Error
 			}
