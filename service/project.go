@@ -48,6 +48,13 @@ func projectTestData() {
 	projects[1] = ProjectJSON{Name: "复仇者联盟2：奥创纪元", CreatorID: 1, Targets: []string{"tag1", "tag3"}, LeaderID: 5, Participants: []UserJSON{u2, u3, u4, u5, u6, u7}}
 	projects[2] = ProjectJSON{Name: "复仇者联盟3：无限战争", CreatorID: 1, Targets: []string{"tag3", "tag4"}, LeaderID: 6, Participants: []UserJSON{u1, u2, u3, u4, u5, u6, u7}}
 	projects[3] = ProjectJSON{Name: "复仇者联盟4：终局之战", CreatorID: 2, Targets: []string{"tag8", "tag9"}, LeaderID: 7, Participants: []UserJSON{u1, u2, u3, u4, u5, u6, u7}}
+	for _, v := range projects {
+		if err := v.Create(); err != nil {
+			log.Println(err.Error())
+		} else {
+			log.Println(v)
+		}
+	}
 }
 
 func target2TargetsJson(target string) []string {
