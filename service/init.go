@@ -20,8 +20,8 @@ func init() {
 		database.DB.Set("gorm:table_options", "DEFAULT CHARSET=utf8mb4 AUTO_INCREMENT=1;").AutoMigrate(&models.User{}, &models.Gain{}, models.Mission{}, &models.Module{}, &models.Project{})
 	} else {
 		database.DB.Set("gorm:table_options", "DEFAULT CHARSET=utf8mb4 AUTO_INCREMENT=1;").AutoMigrate(&models.User{}, &models.Gain{}, models.Mission{}, models.Module{}, &models.Project{})
-		projectTestData()
 		userTestData()
+		projectTestData()
 		moduleTestData()
 		missionTestData()
 		gainTestData()
