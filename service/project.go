@@ -178,13 +178,13 @@ func (projectJSON *ProjectJSON) projectJSON2Project() (project models.Project) {
 	project.ID = projectJSON.ID
 	project.Name = projectJSON.Name
 	project.Type = projectJSON.Type
-	project.CreatorID = projectJSON.Creator.ID
+	project.CreatorID = projectJSON.CreatorID
 	project.CreateTime = projectJSON.CreateTime
 	project.StartTime = projectJSON.StartTime
 	project.EndTime = projectJSON.EndTime
 	project.Content = projectJSON.Content
 	project.Target = targetsJson2Target(projectJSON.Targets)
-	project.LeaderID = projectJSON.Leader.ID
+	project.LeaderID = projectJSON.LeaderID
 	project.Participants = usersJSON2Users(projectJSON.Participants)
 	project.Tag, project.TagSet = tagsJson2TagSet(projectJSON.TagSet)
 	return
