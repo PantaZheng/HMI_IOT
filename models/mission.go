@@ -27,7 +27,28 @@ type Mission struct {
 	Tag          bool
 	Participants []User `gorm:"many2many:user_missions"`
 	ModuleID     uint
-	//Module       Module
+	Module       Module
+}
+
+func (mission *Mission) checkForeignKey() (err error) {
+	/**
+	@Author: PantaZheng
+	@Description:
+	@Date: 2019/5/15 18:02
+	*/
+	m := &Mission{}
+	m.ID = mission.ModuleID
+	if err = m.First(); err == nil {
+		if mission.CreatorID > 0 {
+			err = errors.New("OwnerID not in mission's participants")
+			for _, v := range m.Participants {
+				if mission.CreatorID == v.ID {
+					err = nil
+				}
+			}
+		}
+	}
+	return
 }
 
 //Create 创建Mission, 不添加成员
@@ -37,21 +58,18 @@ func (mission *Mission) Create() (err error) {
 	@Description:
 	@Date: 2019/5/13 3:48
 	*/
-	if mission.ID != 0 {
-		mission.ID = 0
-	}
-	mission.CreateTime = time.Now().Format("2006-01-02")
-	participants := mission.Participants
-	mission.Participants = make([]User, 0)
-	mission.Creator = User{}
-	if err = database.DB.Create(&mission).Error; err == nil {
-		mission.Creator.ID = mission.CreatorID
-		if participants != nil {
-			if err = database.DB.Model(&mission).Association("Participants").Append(participants).Error; err == nil {
-				err = mission.Creator.First()
+	mission.ID = 0
+	if err = mission.checkForeignKey(); err == nil {
+		mission.CreateTime = time.Now().Format("2006-01-02")
+		participants := mission.Participants
+		mission.Participants = make([]User, 0)
+		if err = database.DB.Create(&mission).Error; err == nil {
+			if participants != nil {
+				err = database.DB.Model(&mission).Association("Participants").Append(participants).Error
 			}
-		} else {
-			err = mission.Creator.First()
+			if err == nil {
+				err = mission.First()
+			}
 		}
 	}
 	if err != nil {
@@ -87,7 +105,7 @@ func (mission *Mission) First() (err error) {
 }
 
 // MissionsFindByCID通过CreatorID查找Missions
-func MissionsFindByCID(id uint) (missions []Mission, err error) {
+func MissionsFindByCreatorID(id uint) (missions []Mission, err error) {
 	/**
 	@Author: PantaZheng
 	@Description:
@@ -96,7 +114,13 @@ func MissionsFindByCID(id uint) (missions []Mission, err error) {
 	creator := &User{}
 	creator.ID = id
 	if err = creator.First(); err == nil {
-		err = database.DB.Model(&creator).Related(&missions, "CreatorID").Error
+		if err = database.DB.Model(&creator).Related(&missions, "CreatorID").Error; err == nil {
+			for i := 0; i < len(missions); i++ {
+				if err = missions[i].First(); err != nil {
+					break
+				}
+			}
+		}
 	}
 	if err != nil {
 		err = errors.New(titleMission + "MissionsFindByCreatorID:\t" + err.Error())
@@ -104,7 +128,7 @@ func MissionsFindByCID(id uint) (missions []Mission, err error) {
 	return
 }
 
-func MissionsFindByPID(id uint) (missions []Mission, err error) {
+func MissionsFindByParticipantID(id uint) (missions []Mission, err error) {
 	/**
 	@Author: PantaZheng
 	@Description:
@@ -113,10 +137,39 @@ func MissionsFindByPID(id uint) (missions []Mission, err error) {
 	participant := &User{}
 	participant.ID = id
 	if err = participant.First(); err == nil {
-		err = database.DB.Model(&participant).Related(&missions, "PMissions").Error
+		if err = database.DB.Model(&participant).Related(&missions, "PMissions").Error; err == nil {
+			for i := 0; i < len(missions); i++ {
+				if err = missions[i].First(); err != nil {
+					break
+				}
+			}
+		}
 	}
 	if err != nil {
-		err = errors.New(titleMission + "MissionsFindByPID:\t" + err.Error())
+		err = errors.New(titleMission + "MissionsFindByParticipantID:\t" + err.Error())
+	}
+	return
+}
+
+func MissionsFindByModuleID(id uint) (missions []Mission, err error) {
+	/**
+	@Author: PantaZheng
+	@Description:
+	@Date: 2019/5/13 12:15
+	*/
+	module := &Module{}
+	module.ID = id
+	if err = module.First(); err == nil {
+		if err = database.DB.Model(&module).Related(&missions, "ModuleID").Error; err == nil {
+			for i := 0; i < len(missions); i++ {
+				if err = missions[i].First(); err != nil {
+					break
+				}
+			}
+		}
+	}
+	if err != nil {
+		err = errors.New(titleGain + "GainsFindByMissionID:\t" + err.Error())
 	}
 	return
 }
@@ -127,20 +180,17 @@ func (mission *Mission) Updates() (err error) {
 	@Description:
 	@Date: 2019/5/13 23:18
 	*/
-	m := &Mission{}
-	m.ID = mission.ID
-	participants := mission.Participants
-	mission.Participants = nil
-	if err = database.DB.Model(&m).Updates(&mission).Error; err == nil {
-		*mission = *m
-		mission.Creator.ID = mission.CreatorID
-		if participants != nil {
-			if err = database.DB.Model(&mission).Association("Participants").Replace(participants).Error; err == nil {
-				err = mission.Creator.First()
+	if err = mission.checkForeignKey(); err == nil {
+		m := &Mission{}
+		m.ID = mission.ID
+		participants := mission.Participants
+		mission.Participants = nil
+		if err = database.DB.Model(&m).Updates(&mission).Error; err == nil {
+			if participants != nil {
+				err = database.DB.Model(&m).Association("Participants").Replace(participants).Error
 			}
-		} else {
-			if err = database.DB.Model(&mission).Association("Participants").Find(&mission.Participants).Error; err == nil {
-				err = mission.Creator.First()
+			if err == nil {
+				err = mission.First()
 			}
 		}
 	}
@@ -151,21 +201,13 @@ func (mission *Mission) Updates() (err error) {
 }
 
 func (mission *Mission) Delete() (err error) {
-	m := &Mission{}
-	m.ID = mission.ID
-	participants := make([]User, 0)
-	if err = database.DB.Model(&mission).Association("Participants").Find(&participants).Error; err == nil {
-		m := &Mission{}
+	if err = mission.First(); err == nil {
+		m := Mission{}
 		m.ID = mission.ID
-		if err = database.DB.Delete(&m).Error; err == nil {
-			*mission = *m
-			mission.Participants = participants
-			mission.Creator.ID = mission.CreatorID
-			err = mission.Creator.First()
-		}
+		err = database.DB.Delete(&m).Error
 	}
 	if err != nil {
-		err = errors.New(titleMission + "Updates\t" + err.Error())
+		err = errors.New(titleMission + "Delete\t" + err.Error())
 	}
 	return
 }

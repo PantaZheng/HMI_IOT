@@ -32,13 +32,14 @@ func gainTestData() {
 	@Date: 2019/5/13 2:39
 	*/
 	log.Println("gainTestData")
-	gains := make([]GainJSON, 6)
+	gains := make([]GainJSON, 7)
 	gains[0] = GainJSON{Name: "gain1", OwnerID: 2, MissionID: 1}
 	gains[1] = GainJSON{Name: "gain2", OwnerID: 4, MissionID: 1}
 	gains[2] = GainJSON{Name: "gain3", OwnerID: 5, MissionID: 2}
 	gains[3] = GainJSON{Name: "gain4", OwnerID: 6, MissionID: 2}
 	gains[4] = GainJSON{Name: "gain5", OwnerID: 7, MissionID: 3}
 	gains[5] = GainJSON{Name: "gain6", OwnerID: 3, MissionID: 3}
+	gains[6] = GainJSON{Name: "gain6", OwnerID: 3, MissionID: 4}
 	for _, v := range gains {
 		if err := v.Create(); err != nil {
 			log.Println(err.Error())
@@ -60,7 +61,8 @@ func gain2GainJSON(gain models.Gain) (gainJSON GainJSON) {
 	gainJSON.UpTime = gain.UpTime
 	gainJSON.Remark = gain.Remark
 	gainJSON.OwnerID = gain.OwnerID
-	gainJSON.Owner = user2UserJSON(gain.Owner)
+	owner := user2UserJSON(gain.Owner)
+	gainJSON.Owner = userJSON2UserBriefJSON(owner)
 	gainJSON.MissionID = gain.MissionID
 	return
 }
@@ -113,7 +115,6 @@ func (gainJSON *GainJSON) Create() (err error) {
 	@Description:
 	@Date: 2019/5/13 2:39
 	*/
-	//TODO:检查成果归属者是否在Mission的参与者中,前端选择
 	g := gainJSON.gainJSON2Gain()
 	if err = g.Create(); err == nil {
 		*gainJSON = gain2GainJSON(g)
@@ -148,14 +149,14 @@ func GainFindByID(id uint) (gainJSON GainJSON, err error) {
 }
 
 //owner单一确定
-func GainsFindByOwnerID(id uint) (gainsJson []GainJSON, err error) {
+func GainsFindByOwnerID(id uint) (gainsJSON []GainJSON, err error) {
 	/**
 	@Author: PantaZheng
 	@Description:
 	@Date: 2019/5/13 2:44
 	*/
 	if gains, err1 := models.GainsFindByOwnerID(id); err1 == nil {
-		gainsJson = gains2BriefGainsJSON(gains)
+		gainsJSON = gains2BriefGainsJSON(gains)
 	} else {
 		err = errors.New(titleGain + "GainsFindByOwnerID:\t" + err1.Error())
 	}

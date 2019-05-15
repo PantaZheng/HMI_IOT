@@ -40,7 +40,7 @@ func GainFindByID(ctx iris.Context) {
 			ctx.StatusCode(iris.StatusOK)
 			_, _ = ctx.JSON(g)
 		} else {
-			err=err2
+			err = err2
 		}
 	} else {
 		err = err1

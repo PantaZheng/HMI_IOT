@@ -50,16 +50,17 @@ func newApp() (api *iris.Application) {
 		gain.Delete("/id/{id:uint}", controller.GainDeleteByID)
 	})
 
-	//api.PartyFunc("/mission", func(mission router.Party) {
-	//	mission.Post("/", controller.MissionCreate)
-	//	mission.Get("/id/{id:uint}", controller.MissionFindByID)
-	//	mission.Get("/name/{name:string}", controller.MissionFindByName)
-	//	mission.Get("/module/{id:uint}", controller.MissionsFindByModuleID)
-	//	mission.Put("/", controller.MissionUpdate)
-	//	mission.Delete("/id/{id:uint}", controller.MissionDeleteByID)
-	//	mission.Delete("/name/{name:string}", controller.MissionDeleteByName)
-	//})
-	//
+	api.PartyFunc("/mission", func(mission router.Party) {
+		mission.Post("/", controller.MissionCreate)
+		mission.Get("/id/{id:uint}", controller.MissionFindByID)
+		mission.Get("/creator/{id:uint}", controller.MissionsFindByCreatorID)
+		mission.Get("/participant/{id:uint}", controller.MissionsFindByParticipantID)
+		mission.Get("/module/{id:uint}", controller.MissionsFindByModuleID)
+		mission.Put("/", controller.MissionUpdate)
+		mission.Delete("/id/{id:uint}", controller.MissionDeleteByID)
+		mission.Delete("/name/{name:string}", controller.MissionDeleteByName)
+	})
+
 	//api.PartyFunc("/module", func(module router.Party) {
 	//	module.Post("/", controller.ModuleCreate)
 	//	module.Get("/id/{id:uint}", controller.ModuleFindByID)

@@ -17,12 +17,10 @@ func UserCreate(ctx iris.Context) {
 	err := *new(error)
 	if err = ctx.ReadJSON(u); err == nil {
 		if u.WechatName != "" || u.OpenID != "" {
-			err = errors.New(":\tCreate接口不支持微信信息")
-		} else {
-			if err := u.Create(); err == nil {
-				ctx.StatusCode(iris.StatusOK)
-				_, _ = ctx.JSON(u)
-			}
+			err = errors.New("UserCreate接口不支持微信信息")
+		} else if err = u.Create(); err == nil {
+			ctx.StatusCode(iris.StatusOK)
+			_, _ = ctx.JSON(u)
 		}
 	}
 	if err != nil {
@@ -42,7 +40,7 @@ func UserBind(ctx iris.Context) {
 	u := new(service.UserJSON)
 	err := *new(error)
 	if err = ctx.ReadJSON(u); err == nil {
-		if err := u.Bind(); err == nil {
+		if err = u.Bind(); err == nil {
 			ctx.StatusCode(iris.StatusOK)
 			_, _ = ctx.JSON(u)
 		}
@@ -193,7 +191,7 @@ func UserUpdates(ctx iris.Context) {
 	u := new(service.UserJSON)
 	err := *new(error)
 	if err = ctx.ReadJSON(u); err == nil {
-		if err := u.Updates(); err == nil {
+		if err = u.Updates(); err == nil {
 			ctx.StatusCode(iris.StatusOK)
 			_, _ = ctx.JSON(u)
 		}

@@ -21,9 +21,9 @@ type User struct {
 	//CProjects  []*Project `gorm:"foreignkey:CreatorID"`
 	//LProjects  []*Project `gorm:"foreignkey:LeaderID"`
 	//PProjects  []*Project `gorm:"many2many:user_projects"`
-	//CModules   []*Module  `gorm:"foreignkey:CreatorID"`
-	//LModules   []*Module  `gorm:"foreignkey:LeaderID"`
-	//PModules   []*Module  `gorm:"many2many:user_modules"`
+	CModules  []Module  `gorm:"foreignkey:CreatorID"`
+	LModules  []Module  `gorm:"foreignkey:LeaderID"`
+	PModules  []Module  `gorm:"many2many:user_modules"`
 	CMissions []Mission `gorm:"foreignkey:CreatorID"`
 	PMissions []Mission `gorm:"many2many:user_missions"`
 	OGains    []Gain    `gorm:"foreignkey:OwnerID"`
@@ -50,6 +50,7 @@ func (user *User) Create() (err error) {
 	@Description:
 	@Date: 2019/5/9 13:29
 	*/
+	user.ID = 0
 	if user.OpenID == "" && user.IDCard == "" {
 		err = errors.New("需要OpenID或IDCard来满足用户唯一性")
 	} else {

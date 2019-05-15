@@ -117,15 +117,18 @@ GainDeleteByID|delete|`/{id:uint}`|-|`GainJson`
 入口: `/mission`
 
 ```go
+
+
+
 type MissionJson struct {
 	/**
 	@Author: PantaZheng
 	@Description:
 	@Date: 2019/5/13 23:50
 	*/
-	ID           uint   `json:"id"`
-	Name         string `json:"name"`
-	CreatorID    uint
+	ID           uint       `json:"id"`
+	Name         string     `json:"name"`
+	CreatorID    uint       `json:"creatorID"`
 	Creator      UserJSON   `json:"creator"`
 	CreateTime   string     `json:"createTime"`
 	StartTime    string     `json:"startTime"`
@@ -153,25 +156,45 @@ MissionDeleteByID|delete|`/id/{id:uint}`|-|`MissionJson`
 入口: `/module`
 
 ```go
-type ModuleJson struct {
-	ID           uint               `json:"id"`
-	Name         string             `json:"name"`
-	Creator      UserBriefJSON      `json:"creator"`
-	CreateTime   string             `json:"create_time"` //创建时间
-	StartTime    string             `json:"start_time"`  //开始时间
-	EndTime      string             `json:"end_time"`    //结束时间
-	Content      string             `json:"content"`
-	Tag          bool               `json:"tag"`
-	ProjectID    uint               `json:"project_id"`
-	Leader       UserBriefJSON      `json:"leader"`
-	Participants []UserBriefJSON    `json:"participants"` //参与人员
-	Missions     []MissionBriefJson `json:"missions"`     //创建或更新不会修改该字段，仅拉取使用
+
+type Module struct {
+	gorm.Model
+	Name         string
+	CreatorID    uint
+	Creator      User
+	CreateTime   string
+	StartTime    string
+	EndTime      string
+	Content      string
+	Tag          bool
+	Participants []User `gorm:"many2many:user_modules"`
+	LeaderID     uint
+	Leader       User
+	//ProjectID    uint
+	//Project      Project
+}
+
+type ModuleJSON struct {
+	ID           uint          `json:"id"`
+	Name         string        `json:"name"`
+	CreatorID    uint          `json:"creatorID"`
+	Creator      UserJSON      `json:"creator"`
+	CreateTime   string        `json:"createTime"` //创建时间
+	StartTime    string        `json:"startTime"`  //开始时间
+	EndTime      string        `json:"endTime"`    //结束时间
+	Content      string        `json:"content"`
+	Tag          bool          `json:"tag"`
+	LeaderID     uint          `json:"leaderID"`
+	Leader       UserJSON      `json:"leader"`
+	Participants []UserJSON    `json:"participants"` //参与人员
+	Missions     []MissionJSON `json:"missions"`     //创建或更新不会修改该字段，仅拉取使用
+	ProjectID    uint          `json:"projectID"`
 }
 
 type ModuleBriefJson struct {
 	ID         uint          `json:"id"`
 	Name       string        `json:"name"`
-	CreateTime string        `json:"create_time"` //创建时间
+	CreateTime string        `json:"createTime"` //创建时间
 	Content    string        `json:"content"`
 	Tag        bool          `json:"tag"`
 	Leader     UserBriefJSON `json:"leader"`

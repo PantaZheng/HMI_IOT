@@ -31,7 +31,7 @@ func (gain *Gain) checkForeignKey() (err error) {
 	m := &Mission{}
 	m.ID = gain.MissionID
 	if err = m.First(); err == nil {
-		if gain.OwnerID != 0 {
+		if gain.OwnerID > 0 {
 			err = errors.New("OwnerID not in mission's participants")
 			for _, v := range m.Participants {
 				if gain.OwnerID == v.ID {
@@ -50,9 +50,7 @@ func (gain *Gain) Create() (err error) {
 	@Description:
 	@Date: 2019/5/13 0:00
 	*/
-	if gain.ID != 0 {
-		gain.ID = 0
-	}
+	gain.ID = 0
 	if err = gain.checkForeignKey(); err == nil {
 		gain.UpTime = time.Now().Format("2006-01-02")
 		if err = database.DB.Create(&gain).Error; err == nil {
@@ -124,8 +122,7 @@ func GainsFindByMissionID(id uint) (gains []Gain, err error) {
 	if err = mission.First(); err == nil {
 		if err = database.DB.Model(&mission).Related(&gains, "MissionID").Error; err == nil {
 			for i := 0; i < len(gains); i++ {
-				gains[i].Owner.ID = gains[i].OwnerID
-				if err = gains[i].Owner.First(); err != nil {
+				if err = gains[i].First(); err != nil {
 					break
 				}
 			}

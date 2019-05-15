@@ -47,7 +47,7 @@ type UserJSON struct {
 
 func userTestData() {
 	log.Println("userTestData")
-	users := make([]UserJSON, 7)
+	users := make([]UserJSON, 8)
 	users[0] = UserJSON{OpenID: "Stranger1", WechatName: "小蜘蛛", Code: "Spider-Man", Name: "Peter Benjamin Parker", Level: 1, Telephone: "110"}
 	users[1] = UserJSON{OpenID: "Emeritus1", WechatName: "万磁王", Code: "002", Name: "Max Eisenhardt", IDCard: "Magneto", Level: 2}
 	users[2] = UserJSON{WechatName: "金刚狼", IDCard: "Wolverine", Name: "Logan Howlett", Level: 3}
@@ -55,6 +55,7 @@ func userTestData() {
 	users[4] = UserJSON{WechatName: "钢铁侠", IDCard: "Iron Man", Name: "Tony Stark", Level: 5}
 	users[5] = UserJSON{OpenID: "Full1", WechatName: "灭霸", IDCard: "5", Name: "Thanos", Level: 6}
 	users[6] = UserJSON{IDCard: "6", Name: "海王", Level: 6}
+	users[7] = UserJSON{IDCard: "7", Name: "雷神", Level: 6}
 	for _, v := range users {
 		if err := v.Create(); err != nil {
 			log.Println(err.Error())

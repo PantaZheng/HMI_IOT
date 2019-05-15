@@ -8,15 +8,15 @@ import (
 
 const titleMission = "service.mission."
 
-type MissionJson struct {
+type MissionJSON struct {
 	/**
 	@Author: PantaZheng
 	@Description:
 	@Date: 2019/5/13 23:50
 	*/
-	ID           uint   `json:"id"`
-	Name         string `json:"name"`
-	CreatorID    uint
+	ID           uint       `json:"id"`
+	Name         string     `json:"name"`
+	CreatorID    uint       `json:"creatorID"`
 	Creator      UserJSON   `json:"creator"`
 	CreateTime   string     `json:"createTime"`
 	StartTime    string     `json:"startTime"`
@@ -26,7 +26,7 @@ type MissionJson struct {
 	Tag          bool       `json:"tag"` //tag由module负责人决定
 	Gains        []GainJSON `json:"gains"`
 	Participants []UserJSON `json:"participants"`
-	//ModuleID     uint       `json:"module"`
+	ModuleID     uint       `json:"module"`
 }
 
 func missionTestData() {
@@ -37,10 +37,12 @@ func missionTestData() {
 	u4 := UserJSON{ID: 5}
 	u5 := UserJSON{ID: 6}
 	u6 := UserJSON{ID: 7}
-	missions := make([]MissionJson, 3)
-	missions[0] = MissionJson{Name: "钢铁侠", CreatorID: 5, StartTime: "2008-1-1", EndTime: "2017-1-2", Content: "你不是世界上唯一的超级英雄。", File: "朝花夕拾", Participants: []UserJSON{u1, u3, u4, u5}}
-	missions[1] = MissionJson{Name: "无敌浩克", CreatorID: 4, StartTime: "2008-3-1", EndTime: "2017-1-2", Content: "复仇者联盟", File: "", Participants: []UserJSON{u4, u5}}
-	missions[2] = MissionJson{Name: "海王", CreatorID: 7, StartTime: "2008-3-1", EndTime: "2017-1-2", Content: "你永远与我同在也永远是我的兄弟", File: "", Participants: []UserJSON{u2, u6}}
+	u7 := UserJSON{ID: 8}
+	missions := make([]MissionJSON, 4)
+	missions[0] = MissionJSON{Name: "钢铁侠1", CreatorID: 5, StartTime: "2008-1-1", EndTime: "2017-1-2", Content: "你不是世界上唯一的超级英雄。", File: "朝花夕拾", Participants: []UserJSON{u1, u3, u4, u5}, ModuleID: 1}
+	missions[1] = MissionJSON{Name: "无敌浩克", CreatorID: 4, StartTime: "2008-3-1", EndTime: "2017-1-2", Content: "复仇者联盟", File: "", Participants: []UserJSON{u4, u5}, ModuleID: 1}
+	missions[2] = MissionJSON{Name: "海王1", CreatorID: 7, StartTime: "2008-3-1", EndTime: "2017-1-2", Content: "你永远与我同在也永远是我的兄弟", File: "", Participants: []UserJSON{u2, u6}, ModuleID: 2}
+	missions[3] = MissionJSON{Name: "雷神1", CreatorID: 7, StartTime: "2008-3-1", EndTime: "2017-1-2", Content: "那些你笑就跟着你笑的人，如果不是傻子，就是爱你的人。", File: "", Participants: []UserJSON{u5, u7}, ModuleID: 3}
 	for _, v := range missions {
 		if err := v.Create(); err != nil {
 			log.Println(err.Error())
@@ -50,7 +52,7 @@ func missionTestData() {
 	}
 }
 
-func mission2MissionJSON(mission *models.Mission) (missionJSON MissionJson) {
+func mission2MissionJSON(mission *models.Mission) (missionJSON MissionJSON) {
 	/**
 	@Author: PantaZheng
 	@Description:
@@ -59,10 +61,7 @@ func mission2MissionJSON(mission *models.Mission) (missionJSON MissionJson) {
 	missionJSON.ID = mission.ID
 	missionJSON.Name = mission.Name
 	missionJSON.CreatorID = mission.CreatorID
-	creator := UserJSON{ID: missionJSON.CreatorID}
-	if err := creator.First(); err != nil {
-		log.Println(err.Error())
-	}
+	creator := user2UserJSON(mission.Creator)
 	missionJSON.Creator = userJSON2UserBriefJSON(creator)
 	missionJSON.CreateTime = mission.CreateTime
 	missionJSON.StartTime = mission.StartTime
@@ -70,13 +69,13 @@ func mission2MissionJSON(mission *models.Mission) (missionJSON MissionJson) {
 	missionJSON.Content = mission.Content
 	missionJSON.File = mission.File
 	missionJSON.Tag = mission.Tag
-	//missionJSON.ModuleID = mission.ModuleID
+	missionJSON.ModuleID = mission.ModuleID
 	missionJSON.Participants = users2BriefUsersJSON(mission.Participants)
 	missionJSON.Gains, _ = GainsFindByMissionID(mission.ID)
 	return
 }
 
-func missionJSON2MissionBriefJSON(missionJSON1 *MissionJson) (missionJSON2 MissionJson) {
+func missionJSON2MissionBriefJSON(missionJSON1 *MissionJSON) (missionJSON2 MissionJSON) {
 	/**
 	@Author: PantaZheng
 	@Description:
@@ -87,25 +86,25 @@ func missionJSON2MissionBriefJSON(missionJSON1 *MissionJson) (missionJSON2 Missi
 	missionJSON2.CreateTime = missionJSON1.CreateTime
 	missionJSON2.Content = missionJSON1.Content
 	missionJSON2.Tag = missionJSON1.Tag
-	//missionJSON2.ModuleID=missionJSON1.ModuleID
+	missionJSON2.ModuleID = missionJSON1.ModuleID
 	return
 }
 
-func missions2MissionsBriefJSON(missions []*models.Mission) (missionsJSON []MissionJson) {
+func missions2MissionsBriefJSON(missions []models.Mission) (missionsJSON []MissionJSON) {
 	/**
 	@Author: PantaZheng
 	@Description:
 	@Date: 2019/5/14 10:00
 	*/
-	missionsJSON = make([]MissionJson, len(missions))
+	missionsJSON = make([]MissionJSON, len(missions))
 	for i, v := range missions {
-		m := mission2MissionJSON(v)
+		m := mission2MissionJSON(&v)
 		missionsJSON[i] = missionJSON2MissionBriefJSON(&m)
 	}
 	return
 }
 
-func (missionJSON *MissionJson) missionJSON2Mission() (mission models.Mission) {
+func (missionJSON *MissionJSON) missionJSON2Mission() (mission models.Mission) {
 	/**
 	@Author: PantaZheng
 	@Description:
@@ -121,18 +120,14 @@ func (missionJSON *MissionJson) missionJSON2Mission() (mission models.Mission) {
 	mission.File = missionJSON.File
 	mission.Tag = missionJSON.Tag
 	mission.Participants = usersJSON2Users(missionJSON.Participants)
-	//mission.ModuleID = missionJSON.ModuleID
+	mission.ModuleID = missionJSON.ModuleID
 	return
 }
 
-func (missionJSON *MissionJson) Create() (err error) {
-	//TODO:检查creator是否归属module
-	creator := UserJSON{ID: missionJSON.CreatorID}
-	if err = creator.First(); err == nil {
-		m := missionJSON.missionJSON2Mission()
-		if err = m.Create(); err == nil {
-			*missionJSON = mission2MissionJSON(&m)
-		}
+func (missionJSON *MissionJSON) Create() (err error) {
+	m := missionJSON.missionJSON2Mission()
+	if err = m.Create(); err == nil {
+		*missionJSON = mission2MissionJSON(&m)
 	}
 	if err != nil {
 		err = errors.New(titleMission + "Create:\t" + err.Error())
@@ -140,36 +135,87 @@ func (missionJSON *MissionJson) Create() (err error) {
 	return
 }
 
-//func MissionFindByID(id uint) (missionJson models.MissionJson, err error) {
-//	mission := new(models.Mission)
-//	mission.ID = id
-//	return models.MissionFind(mission)
-//}
-//
-//func MissionFindByName(name string) (missionJson models.MissionJson, err error) {
-//	mission := new(models.Mission)
-//	mission.Name = name
-//	return models.MissionFind(mission)
-//}
-//
-//func MissionsFindByModuleID(id uint) (missionsBriefJson []models.MissionBriefJson, err error) {
-//	module := new(models.Module)
-//	module.ID = id
-//	return models.MissionsFindByModule(module)
-//}
-//
-//func MissionUpdate(missionJson *models.MissionJson) (recordMissionJson models.MissionJson, err error) {
-//	return models.MissionUpdate(missionJson)
-//}
-//
-//func MissionDeleteByID(id uint) (recordMissionJson models.MissionJson, err error) {
-//	mission := new(models.Mission)
-//	mission.ID = id
-//	return models.MissionDelete(mission)
-//}
-//
-//func MissionDeleteByName(name string) (recordMissionJson models.MissionJson, err error) {
-//	mission := new(models.Mission)
-//	mission.Name = name
-//	return models.MissionDelete(mission)
-//}
+func (missionJSON *MissionJSON) First() (err error) {
+	/**
+	@Author: PantaZheng
+	@Description:
+	@Date: 2019/5/15 18:42
+	*/
+	m := missionJSON.missionJSON2Mission()
+	if err = m.First(); err == nil {
+		*missionJSON = mission2MissionJSON(&m)
+	} else {
+		err = errors.New(titleMission + "First:\t" + err.Error())
+	}
+	return
+}
+
+//MissionFindByID 通过数据库ID查找单Mission.
+func MissionFindByID(id uint) (missionJSON MissionJSON, err error) {
+	missionJSON = MissionJSON{ID: id}
+	err = missionJSON.First()
+	return
+}
+
+func MissionsFindByCreatorID(id uint) (missionsJSON []MissionJSON, err error) {
+	if missions, err1 := models.MissionsFindByCreatorID(id); err1 == nil {
+		missionsJSON = missions2MissionsBriefJSON(missions)
+	} else {
+		err = errors.New(titleMission + "MissionsFindByCreatorID:\t" + err1.Error())
+	}
+	return
+}
+
+func MissionsFindByParticipantID(id uint) (missionsJSON []MissionJSON, err error) {
+	if missions, err1 := models.MissionsFindByParticipantID(id); err1 == nil {
+		missionsJSON = missions2MissionsBriefJSON(missions)
+	} else {
+		err = errors.New(titleMission + "MissionsFindByParticipantID:\t" + err1.Error())
+	}
+	return
+}
+
+func MissionsFindByModuleID(id uint) (missionsJSON []MissionJSON, err error) {
+	if missions, err1 := models.MissionsFindByModuleID(id); err1 == nil {
+		missionsJSON = missions2MissionsBriefJSON(missions)
+	} else {
+		err = errors.New(titleMission + "MissionsFindByModuleID:\t" + err1.Error())
+	}
+	return
+}
+
+func (missionJSON *MissionJSON) Updates() (err error) {
+	/**
+	@Author: PantaZheng
+	@Description:
+	@Date: 2019/5/15 18:53
+	*/
+	m := missionJSON.missionJSON2Mission()
+	if err = m.Updates(); err == nil {
+		*missionJSON = mission2MissionJSON(&m)
+	} else {
+		err = errors.New(titleMission + "Updates:\t" + err.Error())
+	}
+	return
+}
+
+func (missionJSON *MissionJSON) Delete() (err error) {
+	/**
+	@Author: PantaZheng
+	@Description:
+	@Date: 2019/5/15 18:53
+	*/
+	m := missionJSON.missionJSON2Mission()
+	if err = m.Delete(); err == nil {
+		*missionJSON = mission2MissionJSON(&m)
+	} else {
+		err = errors.New(titleMission + "Updates:\t" + err.Error())
+	}
+	return
+}
+
+func MissionDeleteByID(id uint) (missionJSON MissionJSON, err error) {
+	mission := MissionJSON{ID: id}
+	err = mission.Delete()
+	return
+}
