@@ -39,7 +39,7 @@ func gainTestData() {
 	gains[3] = GainJSON{Name: "gain4", OwnerID: 6, MissionID: 2}
 	gains[4] = GainJSON{Name: "gain5", OwnerID: 7, MissionID: 3}
 	gains[5] = GainJSON{Name: "gain6", OwnerID: 3, MissionID: 3}
-	gains[6] = GainJSON{Name: "gain6", OwnerID: 3, MissionID: 4}
+	gains[6] = GainJSON{Name: "gain6", OwnerID: 5, MissionID: 4}
 	for _, v := range gains {
 		if err := v.Create(); err != nil {
 			log.Println(err.Error())

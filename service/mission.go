@@ -26,7 +26,7 @@ type MissionJSON struct {
 	Tag          bool       `json:"tag"` //tag由module负责人决定
 	Gains        []GainJSON `json:"gains"`
 	Participants []UserJSON `json:"participants"`
-	ModuleID     uint       `json:"module"`
+	ModuleID     uint       `json:"moduleID"`
 }
 
 func missionTestData() {
@@ -215,7 +215,7 @@ func (missionJSON *MissionJSON) Delete() (err error) {
 }
 
 func MissionDeleteByID(id uint) (missionJSON MissionJSON, err error) {
-	mission := MissionJSON{ID: id}
-	err = mission.Delete()
+	missionJSON = MissionJSON{ID: id}
+	err = missionJSON.Delete()
 	return
 }
