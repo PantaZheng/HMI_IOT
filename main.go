@@ -60,23 +60,27 @@ func newApp() (api *iris.Application) {
 		mission.Delete("/id/{id:uint}", controller.MissionDeleteByID)
 	})
 
-	//api.PartyFunc("/module", func(module router.Party) {
-	//	module.Post("/", controller.ModuleCreate)
-	//	module.Get("/id/{id:uint}", controller.ModuleFindByID)
-	//	module.Get("/leader/{id:uint}", controller.ModulesFindByLeaderID)
-	//	module.Get("/project/{id:uint}", controller.ModulesFindByProjectID)
-	//	module.Put("/", controller.ModuleUpdate)
-	//	module.Delete("/id/{id:uint}", controller.ModuleDeleteByID)
-	//})
-	//
-	//api.PartyFunc("/project", func(project router.Party) {
-	//	project.Post("/", controller.ProjectCreate)
-	//	project.Get("/id/{id:uint}", controller.ProjectFindByID)
-	//	project.Get("/leader/{id:uint}", controller.ProjectsFindByLeaderID)
-	//	project.Get("/participant/{id:uint}", controller.ProjectsFindByParticipantID)
-	//	project.Put("/", controller.ProjectUpdate)
-	//	project.Delete("/id/{id:uint}", controller.ProjectDeleteByID)
-	//})
+	api.PartyFunc("/module", func(module router.Party) {
+		module.Post("/", controller.ModuleCreate)
+		module.Get("/id/{id:uint}", controller.ModuleFindByID)
+		module.Get("/creator/{id:uint}", controller.ModulesFindByCreatorID)
+		module.Get("/leader/{id:uint}", controller.ModulesFindByLeaderID)
+		module.Get("/participant/{id:uint}", controller.ModulesFindByParticipantID)
+		module.Get("/project/{id:uint}", controller.ModulesFindByProjectID)
+		module.Put("/", controller.ModuleUpdate)
+		module.Delete("/id/{id:uint}", controller.ModuleDeleteByID)
+	})
+
+	api.PartyFunc("/project", func(project router.Party) {
+		project.Post("/", controller.ProjectCreate)
+		project.Get("/id/{id:uint}", controller.ProjectFindByID)
+		project.Get("/all", controller.ProjectsFindALl)
+		project.Get("/creator/{id:uint}", controller.ProjectsFindByCreatorID)
+		project.Get("/leader/{id:uint}", controller.ProjectsFindByLeaderID)
+		project.Get("/participant/{id:uint}", controller.ProjectsFindByParticipantID)
+		project.Put("/", controller.ProjectUpdate)
+		project.Delete("/id/{id:uint}", controller.ProjectDeleteByID)
+	})
 	return
 }
 

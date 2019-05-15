@@ -34,10 +34,12 @@ func moduleTestData() {
 	u5 := UserJSON{ID: 6}
 	u6 := UserJSON{ID: 7}
 	u7 := UserJSON{ID: 8}
-	modules := make([]ModuleJSON, 3)
+	modules := make([]ModuleJSON, 5)
 	modules[0] = ModuleJSON{Name: "钢铁侠与浩克", CreatorID: 1, StartTime: "2001-1-1", EndTime: "11111-1-1", Content: "不得不说的秘密", LeaderID: 2, Participants: []UserJSON{u1, u2, u3, u4, u5}}
 	modules[1] = ModuleJSON{Name: "海王", CreatorID: 2, StartTime: "2001-1-1", EndTime: "11111-1-1", Content: "弟弟被绿", LeaderID: 5, Participants: []UserJSON{u2, u3, u4, u5, u6}}
-	modules[2] = ModuleJSON{Name: "雷神", CreatorID: 2, StartTime: "2001-1-1", EndTime: "11111-1-1", Content: "徐锦江", LeaderID: 7, Participants: []UserJSON{u5, u6, u7}}
+	modules[2] = ModuleJSON{Name: "雷神1", CreatorID: 2, StartTime: "2001-1-1", EndTime: "11111-1-1", Content: "徐", LeaderID: 7, Participants: []UserJSON{u5, u6, u7}}
+	modules[3] = ModuleJSON{Name: "雷神2", CreatorID: 2, StartTime: "2001-1-1", EndTime: "11111-1-1", Content: "锦", LeaderID: 7, Participants: []UserJSON{u5}}
+	modules[3] = ModuleJSON{Name: "雷神3", CreatorID: 2, StartTime: "2001-1-1", EndTime: "11111-1-1", Content: "江", LeaderID: 7, Participants: []UserJSON{u5}}
 	for _, v := range modules {
 		if err := v.Create(); err != nil {
 			log.Println(err.Error())
@@ -112,7 +114,11 @@ func (moduleJSON *ModuleJSON) moduleJSON2Module() (module models.Module) {
 }
 
 func (moduleJSON *ModuleJSON) Create() (err error) {
-	//TODO:检查creator是否归属module
+	/**
+	@Author: PantaZheng
+	@Description:
+	@Date: 2019/5/15 22:15
+	*/
 	creator := UserJSON{ID: moduleJSON.CreatorID}
 	if err = creator.First(); err == nil {
 		m := moduleJSON.moduleJSON2Module()
@@ -136,35 +142,111 @@ func (moduleJSON *ModuleJSON) First() (err error) {
 	if err = m.First(); err == nil {
 		*moduleJSON = module2ModuleJson(&m)
 	} else {
-		err = errors.New(titleMission + "First:\t" + err.Error())
+		err = errors.New(titleModule + "First:\t" + err.Error())
 	}
 	return
 }
 
-//func ModuleFindByID(id uint) (recordModuleJson models.ModuleJSON, err error) {
-//	module := new(models.Module)
-//	module.ID = id
-//	return models.ModuleFind(module)
-//}
-//
-//func ModulesFindByLeaderID(id uint) (modulesBriefJson []models.ModuleBriefJson, err error) {
-//	leader := new(models.User)
-//	leader.ID = id
-//	return models.ModulesFindByLeader(leader)
-//}
-//
-//func ModulesFindByProjectID(id uint) (modulesBriefJson []models.ModuleBriefJson, err error) {
-//	project := new(models.Project)
-//	project.ID = id
-//	return models.ModulesFindByProject(project)
-//}
-//
-//func ModuleUpdate(moduleJson *models.ModuleJSON) (recordModuleJson models.ModuleJSON, err error) {
-//	return models.ModuleUpdate(moduleJson)
-//}
-//
-//func ModuleDeleteByID(id uint) (recordModuleJson models.ModuleJSON, err error) {
-//	module := new(models.Module)
-//	module.ID = id
-//	return models.ModuleDelete(module)
-//}
+func ModuleFindByID(id uint) (moduleJSON ModuleJSON, err error) {
+	/**
+	@Author: PantaZheng
+	@Description:
+	@Date: 2019/5/15 22:15
+	*/
+	moduleJSON = ModuleJSON{ID: id}
+	err = moduleJSON.First()
+	return
+}
+
+func ModulesFindByCreatorID(id uint) (modulesJSON []ModuleJSON, err error) {
+	/**
+	@Author: PantaZheng
+	@Description:
+	@Date: 2019/5/15 22:15
+	*/
+	if modules, err1 := models.ModulesFindByCreatorID(id); err1 == nil {
+		modulesJSON = modules2ModulesBriefJSON(modules)
+	} else {
+		err = errors.New(titleModule + "MissionsFindByCreatorID:\t" + err1.Error())
+	}
+	return
+}
+
+func ModulesFindByLeaderID(id uint) (
+	modulesJSON []ModuleJSON, err error) {
+	/**
+	@Author: PantaZheng
+	@Description:
+	@Date: 2019/5/15 22:15
+	*/
+	if modules, err1 := models.ModulesFindByLeaderID(id); err1 == nil {
+		modulesJSON = modules2ModulesBriefJSON(modules)
+	} else {
+		err = errors.New(titleModule + "ModulesFindByLeaderID:\t" + err1.Error())
+	}
+	return
+}
+
+func ModulesFindByParticipantID(id uint) (modulesJSON []ModuleJSON, err error) {
+	/**
+	@Author: PantaZheng
+	@Description:
+	@Date: 2019/5/15 22:14
+	*/
+	if modules, err1 := models.ModulesFindByParticipantID(id); err1 == nil {
+		modulesJSON = modules2ModulesBriefJSON(modules)
+	} else {
+		err = errors.New(titleModule + "ModulesFindByLeaderID:\t" + err1.Error())
+	}
+	return
+}
+
+func ModulesFindByProjectID(id uint) (modulesJSON []ModuleJSON, err error) {
+	/**
+	@Author: PantaZheng
+	@Description:
+	@Date: 2019/5/15 22:14
+	*/
+	if modules, err1 := models.ModulesFindByProjectID(id); err1 == nil {
+		modulesJSON = modules2ModulesBriefJSON(modules)
+	} else {
+		err = errors.New(titleModule + "ModulesFindByLeaderID:\t" + err1.Error())
+	}
+	return
+}
+
+func (moduleJSON *ModuleJSON) Updates() (err error) {
+	/**
+	@Author: PantaZheng
+	@Description:
+	@Date: 2019/5/15 22:16
+	*/
+	m := moduleJSON.moduleJSON2Module()
+	if err = m.Updates(); err == nil {
+		*moduleJSON = module2ModuleJson(&m)
+	} else {
+		err = errors.New(titleMission + "Updates:\t" + err.Error())
+	}
+	return
+}
+
+func (moduleJSON *ModuleJSON) Delete() (err error) {
+	/**
+	@Author: PantaZheng
+	@Description:
+	@Date: 2019/5/15 22:18
+	*/
+	m := moduleJSON.moduleJSON2Module()
+	if err = m.Delete(); err == nil {
+		*moduleJSON = module2ModuleJson(&m)
+	} else {
+		err = errors.New(titleMission + "Updates:\t" + err.Error())
+	}
+	return
+}
+
+func ModuleDeleteByID(id uint) (moduleJSON ModuleJSON, err error) {
+	moduleJSON = ModuleJSON{ID: id}
+	err = moduleJSON.Delete()
+	return
+}

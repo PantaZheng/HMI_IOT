@@ -12,21 +12,21 @@ const titleUser = "models.user."
 //User 数据库用户表.
 type User struct {
 	gorm.Model
-	OpenID     string `gorm:"not null,unique"`
+	OpenID     string `gorm:"unique"`
 	WechatName string
 	Name       string
-	IDCard     string `gorm:"not null,unique"`
+	IDCard     string `gorm:"unique"`
 	Level      int
 	Telephone  string
-	//CProjects  []*Project `gorm:"foreignkey:CreatorID"`
-	//LProjects  []*Project `gorm:"foreignkey:LeaderID"`
-	//PProjects  []*Project `gorm:"many2many:user_projects"`
-	CModules  []Module  `gorm:"foreignkey:CreatorID"`
-	LModules  []Module  `gorm:"foreignkey:LeaderID"`
-	PModules  []Module  `gorm:"many2many:user_modules"`
-	CMissions []Mission `gorm:"foreignkey:CreatorID"`
-	PMissions []Mission `gorm:"many2many:user_missions"`
-	OGains    []Gain    `gorm:"foreignkey:OwnerID"`
+	CProjects  []Project `gorm:"foreignkey:CreatorID"`
+	LProjects  []Project `gorm:"foreignkey:LeaderID"`
+	PProjects  []Project `gorm:"many2many:user_projects"`
+	CModules   []Module  `gorm:"foreignkey:CreatorID"`
+	LModules   []Module  `gorm:"foreignkey:LeaderID"`
+	PModules   []Module  `gorm:"many2many:user_modules"`
+	CMissions  []Mission `gorm:"foreignkey:CreatorID"`
+	PMissions  []Mission `gorm:"many2many:user_missions"`
+	OGains     []Gain    `gorm:"foreignkey:OwnerID"`
 }
 
 //检查是否有OpenID和IDCard，零值设置为ID,并更新字段信息

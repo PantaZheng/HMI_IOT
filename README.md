@@ -214,31 +214,24 @@ ModuleDeleteByID|delete|`/id/{id:uint}`|-|`ModuleJson`
 ### Project
 
 ```go
-type ProjectJson struct {
-	ID           uint              `json:"id"`
-	Name         string            `json:"name"`
-	Type         string            `json:"type"`
-	Creator      UserBriefJSON     `json:"creator"`
-	CreateTime   string            `json:"create_time"`
-	StartTime    string            `json:"start_time"`
-	EndTime      string            `json:"end_time"`
-	Content      string            `json:"content"`
-	Targets      []string          `json:"targets"`
-	Leader       UserBriefJSON     `json:"leader"`
-	Participants []UserBriefJSON   `json:"participants"`
-	Tag          bool              `json:"tag"` //create、update
-	TagSet       []TagJson         `json:"tags"`
-	Modules      []ModuleBriefJson `json:"modules"` //仅拉取更新
-}
 
-type ProjectBriefJson struct {
-	ID        uint          `json:"id"`
-	Name      string        `json:"name"`
-	StartTime string        `json:"startTime"`
-	EndTime   string        `json:"endTime"`
-	Leader    UserBriefJSON `json:"leader"`
-	Tag       bool          `json:"tag"`
-	Content   string        `json:"content"`
+type ProjectJson struct {
+	ID           uint         `json:"id"`
+	Name         string       `json:"name"`
+	Type         string       `json:"type"`
+	CreatorID    uint         `json:"creatorID"`
+	Creator      UserJSON     `json:"creator"`
+	CreateTime   string       `json:"createTime"`
+	StartTime    string       `json:"startTime"`
+	EndTime      string       `json:"endTime"`
+	Content      string       `json:"content"`
+	Targets      []string     `json:"targets"`
+	LeaderID     uint         `json:"leaderID"`
+	Leader       UserJSON     `json:"leader"`
+	Participants []UserJSON   `json:"participants"`
+	Tag          bool         `json:"tag"` //create、update
+	TagSet       []TagJson    `json:"tags"`
+	Modules      []ModuleJSON `json:"modules"` //仅拉取更新
 }
 
 type TagJson struct {

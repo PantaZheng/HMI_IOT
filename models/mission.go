@@ -204,7 +204,9 @@ func (mission *Mission) Delete() (err error) {
 	if err = mission.First(); err == nil {
 		m := Mission{}
 		m.ID = mission.ID
-		err = database.DB.Delete(&m).Error
+		if err = database.DB.Model(&m).Association("Participants").Clear().Error; err == nil {
+			err = database.DB.Delete(&m).Error
+		}
 	}
 	if err != nil {
 		err = errors.New(titleMission + "Delete\t" + err.Error())
