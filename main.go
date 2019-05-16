@@ -22,8 +22,13 @@ func newApp() (api *iris.Application) {
 		}
 	})
 
-	api.StaticWeb("/", "./view")
 	api.RegisterView(iris.HTML("./view", ".html").Delims("[[", "]]"))
+	api.PartyFunc("/vue", func(vue router.Party) {
+		vue.Get("/index", func(ctx iris.Context) {
+			_ = ctx.View("/vue/#/")
+		})
+		vue.StaticWeb("/", "./view")
+	})
 	api.PartyFunc("/wechat", func(weChat router.Party) {
 		weChat.Any("/", controller.WeChat)
 	})
