@@ -22,7 +22,7 @@ func newApp() (api *iris.Application) {
 		}
 	})
 
-	api.StaticWeb("/vue", "/view")
+	api.StaticWeb("/", "/view")
 	api.PartyFunc("/wechat", func(weChat router.Party) {
 		weChat.Any("/", controller.WeChat)
 	})
