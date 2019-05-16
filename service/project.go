@@ -11,6 +11,11 @@ import (
 const titleProject = "service.project."
 
 type ProjectJSON struct {
+	/**
+	@Author: PantaZheng
+	@Description:
+	@Date: 2019/5/16 15:07
+	*/
 	ID           uint         `json:"id"`
 	Name         string       `json:"name"`
 	Type         string       `json:"type"`
@@ -30,6 +35,11 @@ type ProjectJSON struct {
 }
 
 type TagJson struct {
+	/**
+	@Author: PantaZheng
+	@Description:
+	@Date: 2019/5/16 15:07
+	*/
 	ID  uint `json:"id"`
 	Tag bool `json:"tag"`
 }

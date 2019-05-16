@@ -66,12 +66,11 @@ type UserJSON struct {
 	Level      int    `json:"level"`
 	Telephone  string `json:"telephone"`
 }
-//正常的User用户的CODE和IDCard不得为ID的数字
 ```
 
 名称|method|path|传入body参数|接收body参数|
 -|-|-|:-|:-
-UserCreate|post|`/`|`UserJson`<br>IDCard必须存在|`UserJson`<br>id,openid,id_card三者至少存在一个，其他项均可缺省
+UserCreate|post|`/`|`UserJson`<br>IDCard,Level|`UserJson`<br>id,openid,id_card三者至少存在一个，其他项均可缺省
 UserFindByID|get|`/id/{id:uint}`|-|`UserJson`|
 UserFindByIDCard|`/id_card/{id_card:string}`|-|`UserJson`
 UserFindByOpenID|`/openid/{openid:string}`|-|`UserJson`
@@ -117,10 +116,7 @@ GainDeleteByID|delete|`/{id:uint}`|-|`GainJson`
 入口: `/mission`
 
 ```go
-
-
-
-type MissionJson struct {
+type MissionJSON struct {
 	/**
 	@Author: PantaZheng
 	@Description:
@@ -138,9 +134,8 @@ type MissionJson struct {
 	Tag          bool       `json:"tag"` //tag由module负责人决定
 	Gains        []GainJSON `json:"gains"`
 	Participants []UserJSON `json:"participants"`
-	//ModuleID     uint       `json:"module"`
+	ModuleID     uint       `json:"moduleID"`
 }
-
 ```
 
 名称|method|path|传入body参数|接收body参数
@@ -156,25 +151,12 @@ MissionDeleteByID|delete|`/id/{id:uint}`|-|`MissionJson`
 入口: `/module`
 
 ```go
-
-type Module struct {
-	gorm.Model
-	Name         string
-	CreatorID    uint
-	Creator      User
-	CreateTime   string
-	StartTime    string
-	EndTime      string
-	Content      string
-	Tag          bool
-	Participants []User `gorm:"many2many:user_modules"`
-	LeaderID     uint
-	Leader       User
-	//ProjectID    uint
-	//Project      Project
-}
-
 type ModuleJSON struct {
+	/**
+	@Author: PantaZheng
+	@Description:
+	@Date: 2019/5/16 15:06
+	*/
 	ID           uint          `json:"id"`
 	Name         string        `json:"name"`
 	CreatorID    uint          `json:"creatorID"`
@@ -190,16 +172,6 @@ type ModuleJSON struct {
 	Missions     []MissionJSON `json:"missions"`     //创建或更新不会修改该字段，仅拉取使用
 	ProjectID    uint          `json:"projectID"`
 }
-
-type ModuleBriefJson struct {
-	ID         uint          `json:"id"`
-	Name       string        `json:"name"`
-	CreateTime string        `json:"createTime"` //创建时间
-	Content    string        `json:"content"`
-	Tag        bool          `json:"tag"`
-	Leader     UserBriefJSON `json:"leader"`
-	ProjectID  uint          `json:"project"`
-}
 ```
 
 名称|method|path|传入body参数|接收body参数
@@ -214,8 +186,12 @@ ModuleDeleteByID|delete|`/id/{id:uint}`|-|`ModuleJson`
 ### Project
 
 ```go
-
-type ProjectJson struct {
+type ProjectJSON struct {
+	/**
+	@Author: PantaZheng
+	@Description:
+	@Date: 2019/5/16 15:07
+	*/
 	ID           uint         `json:"id"`
 	Name         string       `json:"name"`
 	Type         string       `json:"type"`
@@ -230,11 +206,16 @@ type ProjectJson struct {
 	Leader       UserJSON     `json:"leader"`
 	Participants []UserJSON   `json:"participants"`
 	Tag          bool         `json:"tag"` //create、update
-	TagSet       []TagJson    `json:"tags"`
+	TagSet       []TagJson    `json:"tagSet"`
 	Modules      []ModuleJSON `json:"modules"` //仅拉取更新
 }
 
 type TagJson struct {
+	/**
+	@Author: PantaZheng
+	@Description:
+	@Date: 2019/5/16 15:07
+	*/
 	ID  uint `json:"id"`
 	Tag bool `json:"tag"`
 }
@@ -255,32 +236,30 @@ ProjectDeleteByID|delete|`/id/{id:uint}`|-|`ProjectJson`
 
 ### top deign
 
-2019-5-9
+2019-5 第二周
 
-- [ ] JSON 放到service层处理 ---
-- [ ] 微信在service层面的对后台消息的反馈
-- [ ] 判断数据库表是否为空
-
-2019-5-8
-
+- [x] JSON 放到service层处理
+- [x] 微信在service层面的对后台消息的反馈
+- [x] 判断数据库表是否为空
 - [ ] PACE进度实现
 - [ ] FRAME框架实现
-- [ ] 之前的实例化方式都是指针创建，改用对象---
+- [x] 之前的实例化方式都是指针创建，改用对象
 - [x] level改用`map`实现
-- [ ] createTime不用加time,只用data
-- [ ] 时间风格，在utils中添加转换时间的工具
-  - `layout: 2006-01-02`
-- [ ] models、service采用`method`重写`function`，----
+- [x] createTime不用加time,只用data
+- [x]] 时间风格，在utils中添加转换时间的工具
+  - 直接改`layout: 2006-01-02`就可以
+- [x] models、service采用`method`重写`function`
 - [ ] 使用`interface`写不同等级用户，允许拥有不同的权限
 - [x] mysql 使用`utf8mb4`，用户表加入微信用户名
   - `mb4`: most bytes 4
 - [ ] 操作系统将文件重定向到文件
 
-  ```bash
-  > .log 2>&1
-  ```
+    ```bash
+    > .log 2>&1
+    ```
 
-- [ ] JSON数据做忽略零值处理`omitempty`---
+- [X] JSON数据做忽略零值处理
+  - 不做零值处理
 - [x] JSON命名风格改为骆驼风格
 
 ### models

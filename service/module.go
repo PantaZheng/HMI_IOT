@@ -9,6 +9,11 @@ import (
 const titleModule = "service.module."
 
 type ModuleJSON struct {
+	/**
+	@Author: PantaZheng
+	@Description:
+	@Date: 2019/5/16 15:06
+	*/
 	ID           uint          `json:"id"`
 	Name         string        `json:"name"`
 	CreatorID    uint          `json:"creatorID"`

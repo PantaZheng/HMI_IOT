@@ -283,6 +283,7 @@ func (userJSON *UserJSON) First() (err error) {
 	return
 }
 
+//FindOne 非ID方式查找用户
 func (userJSON *UserJSON) FindOne() (err error) {
 	u := userJSON.userJSON2User()
 	if err = u.FindOne(); err == nil {
