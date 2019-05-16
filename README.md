@@ -143,7 +143,8 @@ type MissionJSON struct {
 MissionCreate|post|`/`|`MissionJson`|`MissionJson`
 MissionFindByID|get|`/id/{id:uint}`|-|`MissionJson`
 MissionsFindByCreatorID|get|`/creator/{id:uint}`|-|`[]MissionJSON`
-MissionsFindByModuleID|get|`/module/{id:uint}`|-|`[]MissionBriefJson`
+MissionsFindByParticipantID||`/participant/{id:uint}`|-|`[]MissionJSON`
+MissionsFindByModuleID|get|`/module/{id:uint}`|-|`[]MissionJson`
 MissionUpdate|put|`/`|`MissionJson`|`MissionJson`
 MissionDeleteByID|delete|`/id/{id:uint}`|-|`MissionJson`
 
@@ -179,12 +180,16 @@ type ModuleJSON struct {
 -|-|-|-|-
 ModuleCreate|post|`/`|`ModuleJson`|`ModuleJson`
 ModuleFindByID|get|`/id/{id:uint}`|-|`ModuleJson`
-ModulesFindByLeaderID|get|`/leader/{id:uint}`|-|`[]ModuleBriefJson`
-ModulesFindByProjectID|get|`/project/{id:uint}`|-|`[]ModuleBriefJson`
+ModulesFindByCreatorID|`get`|`/id/{id:uint}`|-|`[]ModuleJson`
+ModulesFindByLeaderID|get|`/leader/{id:uint}`|-|`[]ModuleJson`
+ModulesFindByParticipantID|get|`/participant/{id:uint}`|-|`[]ModuleJson`
+ModulesFindByProjectID|get|`/project/{id:uint}`|-|`[]ModuleJson`
 ModuleUpdate|put|`/`|`ModuleJson`|`ModuleJson`
 ModuleDeleteByID|delete|`/id/{id:uint}`|-|`ModuleJson`
 
 ### Project
+
+入口: `/project`
 
 ```go
 type ProjectJSON struct {
@@ -226,6 +231,8 @@ type TagJson struct {
 -|-|-|-|-
 ProjectCreate|post|`/`|`ProjectJson`|`ProjectJson`
 ProjectFindByID|get|`/id/{id:uint}`|-|`ProjectJson`
+ProjectsFindALl|get|`/all`|-|`[]ProjectJSON`
+ProjectsFindByCreatorID|get|`/creator/{id:uint}`|-|`[]ProjectBriefJson`
 ProjectsFindByLeaderID|get|`/leader/{id:uint}`|-|`[]ProjectBriefJson`
 ProjectssFindByParticipantID|get|`/participant/{id:uint}`|-|`[]ProjectBriefJson`
 ProjectUpdate|put|`/`|`projectJson`|`ProjectJson`
