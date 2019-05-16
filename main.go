@@ -22,9 +22,7 @@ func newApp() (api *iris.Application) {
 		}
 	})
 
-	api.PartyFunc("/vue", func(vue router.Party) {
-		vue.StaticWeb("/vue", "./view")
-	})
+	api.StaticWeb("/vue", "/view")
 	api.PartyFunc("/wechat", func(weChat router.Party) {
 		weChat.Any("/", controller.WeChat)
 	})
