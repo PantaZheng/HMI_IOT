@@ -25,7 +25,7 @@ func newApp() (api *iris.Application) {
 	api.RegisterView(iris.HTML("./view", ".html").Delims("[[", "]]"))
 	api.PartyFunc("/vue", func(vue router.Party) {
 		vue.Get("/index", func(ctx iris.Context) {
-			_ = ctx.View("./view/index.html")
+			_ = ctx.View("/view/index.html")
 		})
 		vue.StaticWeb("/", "./view")
 	})
