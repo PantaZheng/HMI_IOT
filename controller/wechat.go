@@ -1,4 +1,4 @@
-package controller
+﻿package controller
 
 import (
 	"github.com/chanxuehong/wechat/mp/core"
@@ -32,14 +32,14 @@ func Menu() {
 	btnPerson := menu.Button{}
 	btnPerson.SetAsSubMenuButton("人员", []menu.Button{btnBinding, btnFrame})
 	btnNew := menu.Button{}
-	btnNew.SetAsViewButton("新建", service.ServerAddress+"/new")
+	btnNew.SetAsViewButton("新建", service.ServerAddress+"/#/newProject")
 	btnProject := menu.Button{}
-	btnProject.SetAsViewButton("项目", service.ServerAddress+"/project")
+	btnProject.SetAsViewButton("项目", service.ServerAddress+"/#/project")
 	btnMission := menu.Button{}
-	btnMission.SetAsViewButton("任务", service.ServerAddress+"/mission")
+	btnMission.SetAsViewButton("任务", service.ServerAddress+"/#/mission")
 	btnContent := menu.Button{}
 	btnContent.SetAsSubMenuButton("内容", []menu.Button{btnNew, btnProject, btnMission})
 	btnPace := menu.Button{}
-	btnPace.SetAsViewButton("进度", service.ServerAddress+"/pace")
+	btnPace.SetAsViewButton("进度", service.ServerAddress+"/#/pace")
 	service.DefaultMenu(&menu.Menu{Buttons: []menu.Button{btnPerson, btnContent, btnPace}})
 }

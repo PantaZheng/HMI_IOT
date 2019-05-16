@@ -1,55 +1,71 @@
 {
-  "pId":"1",
-  "pName":"脑机协同之项目管理",
-  "pType":"横向",
-  "creator":"苟若芸",
-  "cTime":"2019.4.15",
-  "charge":"戴国骏",
-  "sTime":"2019.5.10",
-  "eTime":"2022.6.15",
+  "id":"1",
+  "name":"脑机协同之项目管理",
+  "type": "横向",
+  "creator":{"name":"苟若芸","id": "2","level": "LevelAssistant"},
+  "create_time":"2019.4.15",
+  "leader":{"name":"戴国骏","id": "1","level": "LevelFull"},
+  "start_time":"2019.5.10",
+  "end_time":"2022.6.15",
+  "targets": ["发表两篇SCI论文","一个专利"],
   "content":"草长莺飞而雨天不知细叶谁猜出风萧萧兮易水寒壮士一去兮不复返强进去就膜拜头风吹起涟漪草长莺飞而雨天不知细叶谁猜出风萧萧兮易水寒壮士一去兮不复返强进去就膜拜头风吹起涟漪草长莺飞而雨天不知细叶谁猜出风萧萧兮易水寒壮士一去兮不复返强进去就膜拜头风吹起涟漪草长莺飞而雨天不知细叶谁猜出风萧萧兮易水寒壮士一去兮不复返强进去就膜拜头风吹起涟漪",
-  "target":["发表一篇SCI论文","两个专利"],
-  "pTag":"1",
-  "teacher":[
+  "tag":false,
+  "participants":[
     {
+      "id":"0",
       "name":"曾虹",
-      "tag":"0"
+      "level": "LevelSenior"
     },
     {
+      "id":"9",
       "name":"张桦",
-      "tag":"1"
+      "level": "LevelSenior"
     },
     {
-      "name":"吴以凡",
-      "tag":"1"
+      "id":"12",
+      "name":"郑鹏达",
+      "level": "LevelStudent"
     },
     {
+      "id":"5",
+      "name":"苟若芸",
+      "level": "LevelStudent"
+    },
+    {
+      "id":"7",
       "name":"周文晖",
-      "tag":"1"
+      "level": "LevelSenior"
     },
     {
-      "name":"孔万增",
-      "tag":"1"
-    },
-    {
-      "name":"张建海",
-      "tag":"1"
+      "id":"8",
+      "name":"赵月",
+      "level": "LevelStudent"
     }
   ],
   "module":[
     {
-      "moId":"1",
-      "moName":"模块一",
-      "cTime":"2019.4.32",
+      "id":"1",
+      "name":"模块一",
+      "create_time":"2019.4.32",
       "content":"昨夜西风凋敝树独上高楼望尽天涯路竹杖芒鞋轻胜马谁怕一蓑烟雨任平生",
-      "tag":"0"
+      "tag":"0",
+      "leader":{"name":"张桦","id": "1","level": "LevelFull"}
     },
     {
-      "moId":"2",
-      "moName":"模块一",
-      "cTime":"2019.4.28",
+      "id":"2",
+      "name":"模块二",
+      "create_time":"2019.4.32",
       "content":"昨夜西风凋敝树独上高楼望尽天涯路竹杖芒鞋轻胜马谁怕一蓑烟雨任平生",
-      "tag":"0"
+      "tag":"1",
+      "leader":{"name":"曾虹","id": "2","level": "LevelFull"}
+    },
+    {
+      "id":"3",
+      "name":"模块三",
+      "create_time":"2019.4.32",
+      "content":"昨夜西风凋敝树独上高楼望尽天涯路竹杖芒鞋轻胜马谁怕一蓑烟雨任平生",
+      "tag":"0",
+      "leader":{"name":"曾虹","id": "2","level": "LevelFull"}
     }
   ]
 }
