@@ -72,13 +72,13 @@ type UserJSON struct {
 -|-|-|:-|:-
 UserCreate|post|`/`|`UserJson`<br>IDCard,Level|`UserJson`<br>id,openid,id_card三者至少存在一个，其他项均可缺省
 UserFindByID|get|`/id/{id:uint}`|-|`UserJson`|
-UserFindByIDCard|`/id_card/{id_card:string}`|-|`UserJson`
-UserFindByOpenID|`/openid/{openid:string}`|-|`UserJson`
+UserFindByIDCard|get|`/id_card/{id_card:string}`|-|`UserJson`
+UserFindByOpenID|get|`/openid/{openid:string}`|-|`UserJson`
 UsersFindByLevel|get|`/level/{level:int}`|-|`[]UserJson`|仅包含id,name
 UserUpdate|put|`/update`|`UserJson`|`UserJson`
 UserBind|put|`/bind`|`UserJson`<br>openid,code仅且存在一个|`UserJson`
 UserDeleteByID|delete|`/id/{id:uint}`|-|`UserJson`
-UserDeleteByOpenID|delete|`/id/{openid:string}`|-|`UserJson`
+UserDeleteByIDCard|delete|`/id_card/{id_card:string}`|-|`UserJson`
 
 ### Gain
 
@@ -142,6 +142,7 @@ type MissionJSON struct {
 -|-|-|-|-
 MissionCreate|post|`/`|`MissionJson`|`MissionJson`
 MissionFindByID|get|`/id/{id:uint}`|-|`MissionJson`
+MissionsFindByCreatorID|get|`/creator/{id:uint}`|-|`[]MissionJSON`
 MissionsFindByModuleID|get|`/module/{id:uint}`|-|`[]MissionBriefJson`
 MissionUpdate|put|`/`|`MissionJson`|`MissionJson`
 MissionDeleteByID|delete|`/id/{id:uint}`|-|`MissionJson`
