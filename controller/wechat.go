@@ -26,20 +26,20 @@ func WeChat(ctx iris.Context) {
 
 func Menu() {
 	btnBinding := menu.Button{}
-	btnBinding.SetAsViewButton("绑定", "https://open.weixin.qq.com/connect/oauth2/authorize?appid="+service.WeChatAppId+"&response_type=code&scope=snsapi_base&redirect_uri="+service.ServerAddress+"/vue/index&state=12#wechat_redirect")
+	btnBinding.SetAsViewButton("绑定", "https://open.weixin.qq.com/connect/oauth2/authorize?appid="+service.WeChatAppId+"&response_type=code&scope=snsapi_base&redirect_uri="+service.VueAddress+"index/#/&state=12#wechat_redirect")
 	btnFrame := menu.Button{}
-	btnFrame.SetAsViewButton("架构", service.ServerAddress+"/#/frame")
+	btnFrame.SetAsViewButton("架构", service.VueAddress+"/#/frame")
 	btnPerson := menu.Button{}
 	btnPerson.SetAsSubMenuButton("人员", []menu.Button{btnBinding, btnFrame})
 	btnNew := menu.Button{}
-	btnNew.SetAsViewButton("新建", service.ServerAddress+"/#/newProject")
+	btnNew.SetAsViewButton("新建", service.VueAddress+"/#/newProject")
 	btnProject := menu.Button{}
-	btnProject.SetAsViewButton("项目", service.ServerAddress+"/#/project")
+	btnProject.SetAsViewButton("项目", service.VueAddress+"/#/project")
 	btnMission := menu.Button{}
-	btnMission.SetAsViewButton("任务", service.ServerAddress+"/#/mission")
+	btnMission.SetAsViewButton("任务", service.VueAddress+"/#/mission")
 	btnContent := menu.Button{}
 	btnContent.SetAsSubMenuButton("内容", []menu.Button{btnNew, btnProject, btnMission})
 	btnPace := menu.Button{}
-	btnPace.SetAsViewButton("进度", service.ServerAddress+"/#/pace")
+	btnPace.SetAsViewButton("进度", service.VueAddress+"/#/pace")
 	service.DefaultMenu(&menu.Menu{Buttons: []menu.Button{btnPerson, btnContent, btnPace}})
 }

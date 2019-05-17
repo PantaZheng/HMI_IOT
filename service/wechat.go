@@ -15,6 +15,7 @@ import (
 
 var (
 	ServerAddress       = config.Conf.Get("server.serverAddress").(string)
+	VueAddress          = ServerAddress + "/vue/"
 	WeChatConfigTree    = config.Conf.Get("wechat").(*toml.Tree)
 	WeChatOriId         = WeChatConfigTree.Get("OriId").(string)
 	WeChatAppId         = WeChatConfigTree.Get("AppId").(string)
