@@ -250,6 +250,27 @@ func ProjectFindByID(id uint) (projectJSON ProjectJSON, err error) {
 	return
 }
 
+func ProjectFrameByID(id uint) (projectJSON ProjectJSON, err error) {
+	/**
+	@Author: PantaZheng
+	@Description:
+	@Date: 2019/5/17 10:51
+	*/
+	projectJSON = ProjectJSON{ID: id}
+	if err = projectJSON.First(); err == nil {
+		l := len(projectJSON.Modules)
+		for i := 0; i < l; i++ {
+			if err = projectJSON.Modules[i].First(); err != nil {
+				break
+			}
+		}
+	}
+	if err != nil {
+		err = errors.New(titleProject + "ProjectFrameByID:\t" + err.Error())
+	}
+	return
+}
+
 func ProjectsFindAll() (projectsJSON []ProjectJSON, err error) {
 	/**
 	@Author: PantaZheng

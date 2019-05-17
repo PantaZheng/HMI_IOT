@@ -43,6 +43,26 @@ func ProjectFindByID(ctx iris.Context) {
 	}
 }
 
+func ProjectFrameByID(ctx iris.Context) {
+	err := *new(error)
+	if id, err1 := ctx.Params().GetUint("id"); err1 == nil {
+		if p, err2 := service.ProjectFrameByID(id); err2 == nil {
+			ctx.StatusCode(iris.StatusOK)
+			_, _ = ctx.JSON(p)
+		} else {
+			err = err2
+		}
+	} else {
+		err = err1
+	}
+	if err != nil {
+		ctx.StatusCode(iris.StatusAccepted)
+		info := err.Error()
+		_, _ = ctx.Text(info)
+		log.Println(info)
+	}
+}
+
 func ProjectsFindALl(ctx iris.Context) {
 	/**
 	@Author: PantaZheng
