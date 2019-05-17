@@ -234,8 +234,14 @@ func (userJSON *UserJSON) Bind() (err error) {
 			//查找微信关联信息
 			if err = wechatUser.FindOne(); err != nil {
 				err = errors.New("数据库查找关联OpenID用户出错:\t" + err.Error())
-			} else if wechatUser.Level > LevelMap["Stranger"] {
-				err = errors.New("用户" + wechatUser.Name + "已经绑定过,如有修改需要请联系管理员")
+			} else if wechatUser.IDCard != "" {
+				//已绑定用户
+				wechatUser.Name = userJSON.Name
+				wechatUser.IDCard = userJSON.IDCard
+				wechatUser.Level = userJSON.Level
+				if err = wechatUser.Updates(); err == nil {
+					*userJSON = user2UserJSON(wechatUser)
+				}
 			} else {
 				presortedUser := models.User{IDCard: userJSON.IDCard}
 				_ = presortedUser.FindOne()
@@ -247,12 +253,10 @@ func (userJSON *UserJSON) Bind() (err error) {
 					if presortedUser.Name != userJSON.Name {
 						err = errors.New("用户名:" + userJSON.Name + "和身份证号:" + userJSON.IDCard + "不匹配,请检查输入信息")
 					} else if err = wechatUser.Delete(); err == nil {
-						if presortedUser.Level == LevelMap["Stranger"] {
-							presortedUser.Level = userJSON.Level
-						}
-						if err = presortedUser.Updates(); err == nil {
-							*userJSON = user2UserJSON(presortedUser)
-						}
+						presortedUser.Level = userJSON.Level
+					}
+					if err = presortedUser.Updates(); err == nil {
+						*userJSON = user2UserJSON(presortedUser)
 					}
 				} else {
 					//无预存信息,修改微信初始化的User，添加姓名和身份证号
