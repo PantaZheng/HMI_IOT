@@ -17,8 +17,6 @@ type Mission struct {
 	*/
 	gorm.Model
 	Name         string
-	CreatorID    uint
-	Creator      User
 	CreateTime   string
 	StartTime    string
 	EndTime      string
@@ -38,16 +36,7 @@ func (mission *Mission) checkForeignKey() (err error) {
 	*/
 	m := &Module{}
 	m.ID = mission.ModuleID
-	if err = m.First(); err == nil {
-		if mission.CreatorID > 0 {
-			err = errors.New("OwnerID not in mission's participants")
-			for _, v := range m.Participants {
-				if mission.CreatorID == v.ID {
-					err = nil
-				}
-			}
-		}
-	}
+	err = m.First()
 	return
 }
 
@@ -90,10 +79,7 @@ func (mission *Mission) First() (err error) {
 		m.ID = mission.ID
 		if err = database.DB.First(&m).Error; err == nil {
 			*mission = *m
-			if err = database.DB.Model(&mission).Association("Participants").Find(&mission.Participants).Error; err == nil {
-				mission.Creator.ID = mission.CreatorID
-				err = mission.Creator.First()
-			}
+			err = database.DB.Model(&mission).Association("Participants").Find(&mission.Participants).Error
 		}
 	} else {
 		err = errors.New("ID必须为正数")
