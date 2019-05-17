@@ -67,7 +67,7 @@ func module2ModuleJson(module *models.Module) (moduleJSON ModuleJSON) {
 	moduleJSON.Tag = module.Tag
 	moduleJSON.LeaderID = module.LeaderID
 	leader := user2UserJSON(module.Leader)
-	moduleJSON.Creator = userJSON2UserBriefJSON(leader)
+	moduleJSON.Leader  = userJSON2UserBriefJSON(leader)
 	moduleJSON.Participants = users2BriefUsersJSON(module.Participants)
 	moduleJSON.Missions, _ = MissionsFindByModuleID(module.ID)
 	moduleJSON.ProjectID = module.ProjectID
