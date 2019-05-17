@@ -231,6 +231,7 @@ type TagJson struct {
 -|-|-|-|-
 ProjectCreate|post|`/`|`ProjectJson`|`ProjectJson`
 ProjectFindByID|get|`/id/{id:uint}`|-|`ProjectJson`
+ProjectFindByFrame|get|`frame/{id:uint}`|-|`ProjectJSON`
 ProjectsFindALl|get|`/all`|-|`[]ProjectJSON`
 ProjectsFindByCreatorID|get|`/creator/{id:uint}`|-|`[]ProjectBriefJson`
 ProjectsFindByLeaderID|get|`/leader/{id:uint}`|-|`[]ProjectBriefJson`
