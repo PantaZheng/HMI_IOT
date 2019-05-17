@@ -9,7 +9,7 @@ import (
 func MissionCreate(ctx iris.Context) {
 	m := new(service.MissionJSON)
 	err := *new(error)
-	if err = ctx.ReadJSON(m); err != nil {
+	if err = ctx.ReadJSON(m); err == nil {
 		if err = m.Create(); err == nil {
 			ctx.StatusCode(iris.StatusOK)
 			_, _ = ctx.JSON(m)
