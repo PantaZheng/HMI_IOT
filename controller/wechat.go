@@ -1,4 +1,4 @@
-package controller
+﻿package controller
 
 import (
 	"github.com/chanxuehong/wechat/mp/core"
@@ -28,18 +28,18 @@ func Menu() {
 	btnBinding := menu.Button{}
 	btnBinding.SetAsViewButton("绑定", "https://open.weixin.qq.com/connect/oauth2/authorize?appid="+service.WeChatAppId+"&response_type=code&scope=snsapi_base&redirect_uri="+service.VueAddress+"/index/#/&state=12#wechat_redirect")
 	btnFrame := menu.Button{}
-	btnFrame.SetAsViewButton("架构", service.VueAddress+"/#/frame")
+	btnFrame.SetAsViewButton("架构", service.VueAddress+"/index/#/frame")
 	btnPerson := menu.Button{}
 	btnPerson.SetAsSubMenuButton("人员", []menu.Button{btnBinding, btnFrame})
 	btnNew := menu.Button{}
-	btnNew.SetAsViewButton("新建", service.VueAddress+"/#/newProject")
+	btnNew.SetAsViewButton("新建", service.VueAddress+"/index/#/newProject")
 	btnProject := menu.Button{}
-	btnProject.SetAsViewButton("项目", service.VueAddress+"/#/project")
+	btnProject.SetAsViewButton("项目", service.VueAddress+"/index/#/project")
 	btnMission := menu.Button{}
-	btnMission.SetAsViewButton("任务", service.VueAddress+"/#/mission")
+	btnMission.SetAsViewButton("任务", service.VueAddress+"/index/#/mission")
 	btnContent := menu.Button{}
 	btnContent.SetAsSubMenuButton("内容", []menu.Button{btnNew, btnProject, btnMission})
 	btnPace := menu.Button{}
-	btnPace.SetAsViewButton("进度", service.VueAddress+"/#/pace")
+	btnPace.SetAsViewButton("进度", service.VueAddress+"/index/#/pace")
 	service.DefaultMenu(&menu.Menu{Buttons: []menu.Button{btnPerson, btnContent, btnPace}})
 }
