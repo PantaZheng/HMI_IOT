@@ -9,7 +9,7 @@ import (
 func ProjectCreate(ctx iris.Context) {
 	p := new(service.ProjectJSON)
 	err := *new(error)
-	if err = ctx.ReadJSON(p); err != nil {
+	if err = ctx.ReadJSON(p); err == nil {
 		if err = p.Create(); err == nil {
 			ctx.StatusCode(iris.StatusOK)
 			_, _ = ctx.JSON(p)
