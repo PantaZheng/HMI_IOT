@@ -26,7 +26,7 @@ func WeChat(ctx iris.Context) {
 
 func Menu() {
 	btnBinding := menu.Button{}
-	btnBinding.SetAsViewButton("绑定", "https://open.weixin.qq.com/connect/oauth2/authorize?appid="+service.WeChatAppId+"&response_type=code&scope=snsapi_base&redirect_uri="+service.VueAddress+"index/#/&state=12#wechat_redirect")
+	btnBinding.SetAsViewButton("绑定", "https://open.weixin.qq.com/connect/oauth2/authorize?appid="+service.WeChatAppId+"&response_type=code&scope=snsapi_base&redirect_uri="+service.VueAddress+"/index/#/&state=12#wechat_redirect")
 	btnFrame := menu.Button{}
 	btnFrame.SetAsViewButton("架构", service.VueAddress+"/#/frame")
 	btnPerson := menu.Button{}
