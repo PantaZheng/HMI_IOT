@@ -105,7 +105,6 @@ type GainJson struct {
 名称|method|path|传入body参数|接收body参数
 -|-|-|-|-
 GainCreate|post|`/`|`GainJson`|`GainJson`
-PostFile|post|`/file/{id:uint}`|Form|-
 GainFindByID|get|`/id/{id:uint}`|-|`GainJson`
 GainsFindByOwnerID|get|`/owner/{id:uint}`|-|`[]GainJson`
 GainsFindByMissionID|get|`/mission/{id:uint}`|-|`[]GainJson`
