@@ -8,7 +8,7 @@
 
 ### 微信菜单
 
-[菜单预览](https://pantazheng.github.io/HMI_IOT/design/index.html)
+[菜单预览](https://pantazheng.github.io/bci/design/index.html)
 
 - 人员Person
   1. 绑定 view    `/user/index`
