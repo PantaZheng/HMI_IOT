@@ -126,18 +126,17 @@ type MissionJSON struct {
 	*/
 	ID           uint       `json:"id"`
 	Name         string     `json:"name"`
-	CreatorID    uint       `json:"creatorID"`
-	Creator      UserJSON   `json:"creator"`
 	CreateTime   string     `json:"createTime"`
 	StartTime    string     `json:"startTime"`
 	EndTime      string     `json:"endTime"`
 	Content      string     `json:"content"`
+	Target       string     `json:"target"`
 	File         string     `json:"file"`
 	Tag          bool       `json:"tag"` //tag由module负责人决定
 	Gains        []GainJSON `json:"gains"`
 	Participants []UserJSON `json:"participants"`
 	ModuleID     uint       `json:"moduleID"`
-}
+
 ```
 
 名称|method|path|传入body参数|接收body参数
@@ -159,7 +158,7 @@ type ModuleJSON struct {
 	/**
 	@Author: PantaZheng
 	@Description:
-	@Date: 2019/5/16 15:06
+	@Date: 2019/5/16 15:53
 	*/
 	ID           uint          `json:"id"`
 	Name         string        `json:"name"`
@@ -169,6 +168,7 @@ type ModuleJSON struct {
 	StartTime    string        `json:"startTime"`  //开始时间
 	EndTime      string        `json:"endTime"`    //结束时间
 	Content      string        `json:"content"`
+	Target       string        `json:"target"`
 	Tag          bool          `json:"tag"`
 	LeaderID     uint          `json:"leaderID"`
 	Leader       UserJSON      `json:"leader"`
