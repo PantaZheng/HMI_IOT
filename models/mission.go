@@ -21,6 +21,7 @@ type Mission struct {
 	StartTime    string
 	EndTime      string
 	Content      string
+	Target       string
 	File         string
 	Tag          bool
 	Participants []User `gorm:"many2many:user_missions"`

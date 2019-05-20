@@ -22,6 +22,7 @@ type ModuleJSON struct {
 	StartTime    string        `json:"startTime"`  //开始时间
 	EndTime      string        `json:"endTime"`    //结束时间
 	Content      string        `json:"content"`
+	Target       string        `json:"target"`
 	Tag          bool          `json:"tag"`
 	LeaderID     uint          `json:"leaderID"`
 	Leader       UserJSON      `json:"leader"`
@@ -64,10 +65,11 @@ func module2ModuleJson(module *models.Module) (moduleJSON ModuleJSON) {
 	moduleJSON.StartTime = module.StartTime
 	moduleJSON.EndTime = module.EndTime
 	moduleJSON.Content = module.Content
+	moduleJSON.Target = module.Target
 	moduleJSON.Tag = module.Tag
 	moduleJSON.LeaderID = module.LeaderID
 	leader := user2UserJSON(module.Leader)
-	moduleJSON.Leader  = userJSON2UserBriefJSON(leader)
+	moduleJSON.Leader = userJSON2UserBriefJSON(leader)
 	moduleJSON.Participants = users2BriefUsersJSON(module.Participants)
 	moduleJSON.Missions, _ = MissionsFindByModuleID(module.ID)
 	moduleJSON.ProjectID = module.ProjectID
@@ -112,6 +114,7 @@ func (moduleJSON *ModuleJSON) moduleJSON2Module() (module models.Module) {
 	module.StartTime = moduleJSON.StartTime
 	module.EndTime = moduleJSON.EndTime
 	module.Content = moduleJSON.Content
+	module.Target = moduleJSON.Target
 	module.Tag = moduleJSON.Tag
 	module.LeaderID = moduleJSON.LeaderID
 	module.Participants = usersJSON2Users(moduleJSON.Participants)

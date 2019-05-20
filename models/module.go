@@ -18,6 +18,7 @@ type Module struct {
 	StartTime    string
 	EndTime      string
 	Content      string
+	Target       string
 	Tag          bool
 	Participants []User `gorm:"many2many:user_modules"`
 	LeaderID     uint

@@ -20,6 +20,7 @@ type MissionJSON struct {
 	StartTime    string     `json:"startTime"`
 	EndTime      string     `json:"endTime"`
 	Content      string     `json:"content"`
+	Target       string     `json:"target"`
 	File         string     `json:"file"`
 	Tag          bool       `json:"tag"` //tag由module负责人决定
 	Gains        []GainJSON `json:"gains"`
@@ -62,6 +63,7 @@ func mission2MissionJSON(mission *models.Mission) (missionJSON MissionJSON) {
 	missionJSON.StartTime = mission.StartTime
 	missionJSON.EndTime = mission.EndTime
 	missionJSON.Content = mission.Content
+	missionJSON.Target = mission.Target
 	missionJSON.File = mission.File
 	missionJSON.Tag = mission.Tag
 	missionJSON.ModuleID = mission.ModuleID
@@ -111,6 +113,7 @@ func (missionJSON *MissionJSON) missionJSON2Mission() (mission models.Mission) {
 	mission.StartTime = missionJSON.StartTime
 	mission.EndTime = missionJSON.EndTime
 	mission.Content = missionJSON.Content
+	mission.Target = missionJSON.Target
 	mission.File = missionJSON.File
 	mission.Tag = missionJSON.Tag
 	mission.Participants = usersJSON2Users(missionJSON.Participants)
