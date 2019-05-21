@@ -277,7 +277,7 @@ func ProjectsFindAll() (projectsJSON []ProjectJSON, err error) {
 	@Description:
 	@Date: 2019/5/15 23:49
 	*/
-	if projects, err1 := models.ProjectsFindALl(); err1 == nil {
+	if projects, err1 := models.ProjectsFindAll(); err1 == nil {
 		projectsJSON = projects2ProjectsBriefJSON(projects)
 	} else {
 		err = errors.New(titleProject + "ProjectsFindAll:\t" + err1.Error())

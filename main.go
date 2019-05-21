@@ -58,6 +58,7 @@ func newApp() (api *iris.Application) {
 	api.PartyFunc("/mission", func(mission router.Party) {
 		mission.Post("/", controller.MissionCreate)
 		mission.Get("/id/{id:uint}", controller.MissionFindByID)
+		mission.Get("/all", controller.MissionsFindAll)
 		mission.Get("/creator/{id:uint}", controller.MissionsFindByCreatorID)
 		mission.Get("/participant/{id:uint}", controller.MissionsFindByParticipantID)
 		mission.Get("/module/{id:uint}", controller.MissionsFindByModuleID)
@@ -80,7 +81,7 @@ func newApp() (api *iris.Application) {
 		project.Post("/", controller.ProjectCreate)
 		project.Get("/id/{id:uint}", controller.ProjectFindByID)
 		project.Get("/frame/{id:uint}", controller.ProjectFrameByID)
-		project.Get("/all", controller.ProjectsFindALl)
+		project.Get("/all", controller.ProjectsFindAll)
 		project.Get("/creator/{id:uint}", controller.ProjectsFindByCreatorID)
 		project.Get("/leader/{id:uint}", controller.ProjectsFindByLeaderID)
 		project.Get("/participant/{id:uint}", controller.ProjectsFindByParticipantID)

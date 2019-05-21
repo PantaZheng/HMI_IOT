@@ -3,6 +3,7 @@ package tools
 import (
 	"strconv"
 	"sync"
+	"time"
 )
 
 /**
@@ -18,7 +19,7 @@ type Tools struct {
 }
 
 var (
-	Tool = new()
+	Tool = New()
 	once sync.Once
 )
 
@@ -39,4 +40,8 @@ func (t *Tools) ParseInt(s string) int {
 
 func (t *Tools) ParseString(i int) string {
 	return strconv.Itoa(i)
+}
+
+func (t *Tools) TimeFormat(time *time.Time) string {
+	return time.Format("2016-01-02")
 }

@@ -43,6 +43,23 @@ func MissionFindByID(ctx iris.Context) {
 	}
 }
 
+func MissionsFindAll(ctx iris.Context) {
+	/**
+	@Author: PantaZheng
+	@Description:
+	@Date: 2019/5/21 12:34
+	*/
+	if missionsJSON, err := service.MissionsFindAll(); err == nil {
+		ctx.StatusCode(iris.StatusOK)
+		_, _ = ctx.JSON(missionsJSON)
+	} else {
+		ctx.StatusCode(iris.StatusAccepted)
+		info := err.Error()
+		_, _ = ctx.Text(info)
+		log.Println(info)
+	}
+}
+
 func MissionsFindByCreatorID(ctx iris.Context) {
 	/**
 	@Author: PantaZheng

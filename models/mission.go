@@ -91,6 +91,21 @@ func (mission *Mission) First() (err error) {
 	return
 }
 
+func MissionsFindAll() (missions []Mission, err error) {
+	missions = make([]Mission, 0)
+	if err = database.DB.Find(&missions).Error; err == nil {
+		for i := 0; i < len(missions); i++ {
+			if err = missions[i].First(); err != nil {
+				break
+			}
+		}
+	}
+	if err != nil {
+		err = errors.New(titleMission + "MissionsFindAll:\t" + err.Error())
+	}
+	return
+}
+
 // MissionsFindByCID通过CreatorID查找Missions
 func MissionsFindByCreatorID(id uint) (missions []Mission, err error) {
 	/**

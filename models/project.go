@@ -79,7 +79,7 @@ func (project *Project) First() (err error) {
 	return
 }
 
-func ProjectsFindALl() (projects []Project, err error) {
+func ProjectsFindAll() (projects []Project, err error) {
 	projects = make([]Project, 1)
 	if err = database.DB.Find(&projects).Error; err == nil {
 		for i := 0; i < len(projects); i++ {
@@ -89,7 +89,7 @@ func ProjectsFindALl() (projects []Project, err error) {
 		}
 	}
 	if err != nil {
-		err = errors.New(titleProject + "ProjectsFindALl:\t" + err.Error())
+		err = errors.New(titleProject + "ProjectsFindAll:\t" + err.Error())
 	}
 	return
 }

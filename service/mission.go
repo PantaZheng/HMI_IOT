@@ -147,6 +147,20 @@ func (missionJSON *MissionJSON) First() (err error) {
 	return
 }
 
+func MissionsFindAll() (missionsJSON []MissionJSON, err error) {
+	/**
+	@Author: PantaZheng
+	@Description:
+	@Date: 2019/5/21 12:32
+	*/
+	if missions, err1 := models.MissionsFindAll(); err1 == nil {
+		missionsJSON = missions2MissionsBriefJSON(missions)
+	} else {
+		err = errors.New(titleMission + "MissionsFindAll:\t" + err1.Error())
+	}
+	return
+}
+
 //MissionFindByID 通过数据库ID查找单Mission.
 func MissionFindByID(id uint) (missionJSON MissionJSON, err error) {
 	missionJSON = MissionJSON{ID: id}

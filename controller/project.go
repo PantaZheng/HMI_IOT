@@ -63,7 +63,7 @@ func ProjectFrameByID(ctx iris.Context) {
 	}
 }
 
-func ProjectsFindALl(ctx iris.Context) {
+func ProjectsFindAll(ctx iris.Context) {
 	/**
 	@Author: PantaZheng
 	@Description:
