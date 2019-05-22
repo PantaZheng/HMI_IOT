@@ -44,7 +44,7 @@ func New() *Config {
 	config := &Config{}
 	tomlTree, err := toml.LoadFile("./config/config.toml")
 	if err == nil {
-		err = tomlTree.Unmarshal(&config)
+		err = tomlTree.Unmarshal(config)
 	}
 	if err != nil {
 		log.Println("TomlError ", err.Error())
