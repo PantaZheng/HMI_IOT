@@ -106,30 +106,6 @@ func MissionsFindAll() (missions []Mission, err error) {
 	return
 }
 
-// MissionsFindByCID通过CreatorID查找Missions
-func MissionsFindByCreatorID(id uint) (missions []Mission, err error) {
-	/**
-	@Author: PantaZheng
-	@Description:
-	@Date: 2019/5/13 16:06
-	*/
-	creator := &User{}
-	creator.ID = id
-	if err = creator.First(); err == nil {
-		if err = database.DB.Model(&creator).Related(&missions, "CreatorID").Error; err == nil {
-			for i := 0; i < len(missions); i++ {
-				if err = missions[i].First(); err != nil {
-					break
-				}
-			}
-		}
-	}
-	if err != nil {
-		err = errors.New(titleMission + "MissionsFindByCreatorID:\t" + err.Error())
-	}
-	return
-}
-
 func MissionsFindByParticipantID(id uint) (missions []Mission, err error) {
 	/**
 	@Author: PantaZheng

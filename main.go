@@ -5,7 +5,9 @@ import (
 	"github.com/kataras/iris"
 	"github.com/kataras/iris/core/router"
 	"github.com/kataras/iris/middleware/logger"
+	"github.com/pantazheng/bci/config"
 	"github.com/pantazheng/bci/controller"
+	"strconv"
 )
 
 func init() {
@@ -93,5 +95,5 @@ func newApp() (api *iris.Application) {
 
 func main() {
 	app := newApp()
-	_ = app.Run(iris.Addr(":80"))
+	_ = app.Run(iris.Addr(":" + strconv.Itoa(config.Conf.APP.Port)))
 }

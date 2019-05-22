@@ -9,21 +9,13 @@ import (
 	"github.com/chanxuehong/wechat/mp/user"
 	oa2 "github.com/chanxuehong/wechat/oauth2"
 	"github.com/pantazheng/bci/config"
-	"github.com/pelletier/go-toml"
 	"log"
 )
 
 var (
-	ServerAddress       = config.Conf.Get("server.serverAddress").(string)
-	VueAddress          = ServerAddress + "/vue"
-	WeChatConfigTree    = config.Conf.Get("wechat").(*toml.Tree)
-	WeChatOriId         = WeChatConfigTree.Get("OriId").(string)
-	WeChatAppId         = WeChatConfigTree.Get("AppId").(string)
-	WeChatAppSecret     = WeChatConfigTree.Get("AppSecret").(string)
-	WeChatToken         = WeChatConfigTree.Get("Token").(string)
-	WeChatEncodedAESKey = WeChatConfigTree.Get("EncodedAESKey").(string)
-	defaultClt          = wechatClient()
-	tokenEndpoint       = oauth2.Endpoint{AppId: WeChatAppId, AppSecret: WeChatAppSecret}
+	wechatConfig  = config.Conf.Wechat
+	defaultClt    = wechatClient()
+	tokenEndpoint = oauth2.Endpoint{AppId: wechatConfig.AppID, AppSecret: wechatConfig.AppSecret}
 )
 
 func TextMsgHandler(ctx *core.Context) {
@@ -61,7 +53,7 @@ func DefaultEventHandler(ctx *core.Context) {
 }
 
 func wechatClient() *core.Client {
-	accessTokenTokenServer := core.NewDefaultAccessTokenServer(WeChatAppId, WeChatAppSecret, nil)
+	accessTokenTokenServer := core.NewDefaultAccessTokenServer(wechatConfig.AppID, wechatConfig.AppSecret, nil)
 	return core.NewClient(accessTokenTokenServer, nil)
 }
 

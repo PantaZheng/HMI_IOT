@@ -5,7 +5,6 @@ import (
 	"github.com/jinzhu/gorm"
 	_ "github.com/jinzhu/gorm/dialects/mysql"
 	"github.com/pantazheng/bci/config"
-	"github.com/pelletier/go-toml"
 	"log"
 )
 
@@ -19,14 +18,9 @@ var (
 )
 
 func New() *gorm.DB {
-	driver := config.Conf.Get("database.driver").(string)
-	configTree := config.Conf.Get(driver).(*toml.Tree)
-	userName := configTree.Get("databaseUserName").(string)
-	password := configTree.Get("databasePassword").(string)
-	databaseName := configTree.Get("databaseName").(string)
-	connect := userName + ":" + password + "@/" + databaseName + "?charset=utf8mb4&parseTime=True&loc=Local"
-	DB, err := gorm.Open(driver, connect)
-
+	mysqlConfig := config.Conf.MySql
+	connect := mysqlConfig.UserName + ":" + mysqlConfig.Password + "@/" + mysqlConfig.DBName + "?charset" + mysqlConfig.Charset + "&parseTime=True&loc=Local"
+	DB, err := gorm.Open(mysqlConfig.DBDriver, connect)
 	if err != nil {
 		panic(fmt.Sprintf("No error should happen when connecting to  database, but got err=%+v", err))
 	}
