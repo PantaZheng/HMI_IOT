@@ -61,7 +61,6 @@ func newApp() (api *iris.Application) {
 		mission.Post("/", controller.MissionCreate)
 		mission.Get("/id/{id:uint}", controller.MissionFindByID)
 		mission.Get("/all", controller.MissionsFindAll)
-		mission.Get("/creator/{id:uint}", controller.MissionsFindByCreatorID)
 		mission.Get("/participant/{id:uint}", controller.MissionsFindByParticipantID)
 		mission.Get("/module/{id:uint}", controller.MissionsFindByModuleID)
 		mission.Put("/", controller.MissionUpdate)

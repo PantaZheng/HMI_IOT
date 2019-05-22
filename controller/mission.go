@@ -60,31 +60,6 @@ func MissionsFindAll(ctx iris.Context) {
 	}
 }
 
-func MissionsFindByCreatorID(ctx iris.Context) {
-	/**
-	@Author: PantaZheng
-	@Description:
-	@Date: 2019/5/13 15:40
-	*/
-	err := *new(error)
-	if id, err1 := ctx.Params().GetUint("id"); err1 == nil {
-		if gainsJson, err2 := service.MissionsFindByCreatorID(id); err2 == nil {
-			ctx.StatusCode(iris.StatusOK)
-			_, _ = ctx.JSON(gainsJson)
-		} else {
-			err = err2
-		}
-	} else {
-		err = err1
-	}
-	if err != nil {
-		ctx.StatusCode(iris.StatusAccepted)
-		info := err.Error()
-		_, _ = ctx.Text(info)
-		log.Println(info)
-	}
-}
-
 func MissionsFindByParticipantID(ctx iris.Context) {
 	err := *new(error)
 	if id, err1 := ctx.Params().GetUint("id"); err1 == nil {

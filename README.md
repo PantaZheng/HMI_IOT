@@ -142,7 +142,7 @@ type MissionJSON struct {
 -|-|-|-|-
 MissionCreate|post|`/`|`MissionJson`|`MissionJson`
 MissionFindByID|get|`/id/{id:uint}`|-|`MissionJson`
-MissionsFindByCreatorID|get|`/creator/{id:uint}`|-|`[]MissionJSON`
+MissionsFindALL|get|`/all`|-|`[]MissionJSON`
 MissionsFindByParticipantID||`/participant/{id:uint}`|-|`[]MissionJSON`
 MissionsFindByModuleID|get|`/module/{id:uint}`|-|`[]MissionJson`
 MissionUpdate|put|`/`|`MissionJson`|`MissionJson`
@@ -181,7 +181,7 @@ type ModuleJSON struct {
 -|-|-|-|-
 ModuleCreate|post|`/`|`ModuleJson`|`ModuleJson`
 ModuleFindByID|get|`/id/{id:uint}`|-|`ModuleJson`
-ModulesFindByCreatorID|`get`|`/id/{id:uint}`|-|`[]ModuleJson`
+ModulesFindByCreatorID|get|`/id/{id:uint}`|-|`[]ModuleJson`
 ModulesFindByLeaderID|get|`/leader/{id:uint}`|-|`[]ModuleJson`
 ModulesFindByParticipantID|get|`/participant/{id:uint}`|-|`[]ModuleJson`
 ModulesFindByProjectID|get|`/project/{id:uint}`|-|`[]ModuleJson`
@@ -251,8 +251,8 @@ ProjectDeleteByID|delete|`/id/{id:uint}`|-|`ProjectJson`
 - [x] JSON 放到service层处理
 - [x] 微信在service层面的对后台消息的反馈
 - [x] 判断数据库表是否为空
-- [ ] PACE进度实现
-- [ ] FRAME框架实现
+- [x] PACE进度实现
+- [x] FRAME框架实现
 - [x] 之前的实例化方式都是指针创建，改用对象
 - [x] level改用`map`实现
 - [x] createTime不用加time,只用data

@@ -168,15 +168,6 @@ func MissionFindByID(id uint) (missionJSON MissionJSON, err error) {
 	return
 }
 
-func MissionsFindByCreatorID(id uint) (missionsJSON []MissionJSON, err error) {
-	if missions, err1 := models.MissionsFindByCreatorID(id); err1 == nil {
-		missionsJSON = missions2MissionsBriefJSON(missions)
-	} else {
-		err = errors.New(titleMission + "MissionsFindByCreatorID:\t" + err1.Error())
-	}
-	return
-}
-
 func MissionsFindByParticipantID(id uint) (missionsJSON []MissionJSON, err error) {
 	if missions, err1 := models.MissionsFindByParticipantID(id); err1 == nil {
 		missionsJSON = missions2MissionsBriefJSON(missions)
