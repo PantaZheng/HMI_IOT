@@ -170,7 +170,7 @@ func UserDeleteByTelephone(ctx iris.Context) {
 	@Description:
 	@Date: 2019/5/13 15:41
 	*/
-	tel := ctx.Params().GetString("tel")
+	tel := ctx.Params().GetString("telephone")
 	if userJson, err := service.UserDeleteByTelephone(tel); err == nil {
 		ctx.StatusCode(iris.StatusOK)
 		_, _ = ctx.JSON(userJson)
