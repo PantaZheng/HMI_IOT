@@ -4,6 +4,7 @@ import (
 	"errors"
 	"github.com/pantazheng/bci/models"
 	"log"
+	"time"
 )
 
 const titleMission = "service.mission."
@@ -78,7 +79,6 @@ func mission2MissionJSON(mission *models.Mission) (missionJSON MissionJSON) {
 	missionJSON.Content = mission.Content
 	missionJSON.Target = mission.Target
 	missionJSON.File = mission.File
-	missionJSON.Tag = mission.Tag
 	missionJSON.ModuleID = mission.ModuleID
 	missionJSON.Participants = users2BriefUsersJSON(mission.Participants)
 	missionJSON.Gains, _ = GainsFindByMissionID(mission.ID)
@@ -128,9 +128,21 @@ func (missionJSON *MissionJSON) missionJSON2Mission() (mission models.Mission) {
 	mission.Content = missionJSON.Content
 	mission.Target = missionJSON.Target
 	mission.File = missionJSON.File
-	mission.Tag = missionJSON.Tag
 	mission.Participants = usersJSON2Users(missionJSON.Participants)
 	mission.ModuleID = missionJSON.ModuleID
+	return
+}
+
+func (missionJSON *MissionJSON) checkTime() (err error) {
+	if start, err := time.Parse("2006-01-02", missionJSON.StartTime); err == nil {
+		if end, err := time.Parse("2006-01-02", missionJSON.EndTime); err == nil {
+			if start.Sub(end) < 0 {
+				missionJSON.Tag = false
+			} else {
+				missionJSON.Tag = true
+			}
+		}
+	}
 	return
 }
 
@@ -154,6 +166,7 @@ func (missionJSON *MissionJSON) First() (err error) {
 	m := missionJSON.missionJSON2Mission()
 	if err = m.First(); err == nil {
 		*missionJSON = mission2MissionJSON(&m)
+		err = missionJSON.checkTime()
 	} else {
 		err = errors.New(titleMission + "First:\t" + err.Error())
 	}

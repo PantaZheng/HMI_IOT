@@ -4,6 +4,7 @@ import (
 	"errors"
 	"github.com/pantazheng/bci/models"
 	"log"
+	"time"
 )
 
 const titleModule = "service.module."
@@ -123,6 +124,19 @@ func (moduleJSON *ModuleJSON) moduleJSON2Module() (module models.Module) {
 	module.Tag = moduleJSON.Tag
 	module.LeaderID = moduleJSON.LeaderID
 	module.ProjectID = moduleJSON.ProjectID
+	return
+}
+
+func (moduleJSON *ModuleJSON) checkTime() (err error) {
+	if start, err := time.Parse("2006-01-02", moduleJSON.StartTime); err == nil {
+		if end, err := time.Parse("2006-01-02", moduleJSON.EndTime); err == nil {
+			if start.Sub(end) < 0 {
+				moduleJSON.Tag = false
+			} else {
+				moduleJSON.Tag = true
+			}
+		}
+	}
 	return
 }
 
