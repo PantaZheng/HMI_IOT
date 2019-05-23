@@ -130,7 +130,7 @@ func (moduleJSON *ModuleJSON) moduleJSON2Module() (module models.Module) {
 func (moduleJSON *ModuleJSON) checkTime() (err error) {
 	if start, err := time.Parse("2006-01-02", moduleJSON.StartTime); err == nil {
 		if end, err := time.Parse("2006-01-02", moduleJSON.EndTime); err == nil {
-			if start.Sub(end) < 0 {
+			if end.Sub(start) < 0 {
 				moduleJSON.Tag = false
 			} else {
 				moduleJSON.Tag = true

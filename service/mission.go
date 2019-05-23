@@ -136,7 +136,7 @@ func (missionJSON *MissionJSON) missionJSON2Mission() (mission models.Mission) {
 func (missionJSON *MissionJSON) checkTime() (err error) {
 	if start, err := time.Parse("2006-01-02", missionJSON.StartTime); err == nil {
 		if end, err := time.Parse("2006-01-02", missionJSON.EndTime); err == nil {
-			if start.Sub(end) < 0 {
+			if end.Sub(start) < 0 {
 				missionJSON.Tag = false
 			} else {
 				missionJSON.Tag = true
