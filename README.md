@@ -236,7 +236,7 @@ type ProjectJSON struct {
 	StartTime    string       `json:"startTime"`
 	EndTime      string       `json:"endTime"`
 	Content      string       `json:"content"`
-	Targets      []string     `json:"targets"`
+	Target       string       `json:"target"`
 	LeaderID     uint         `json:"leaderID"`
 	Leader       UserJSON     `json:"leader"`
 	Participants []UserJSON   `json:"participants"`
@@ -266,7 +266,8 @@ type FramePaceJSON struct {
 	StartTime string            `json:"startTime"`
 	EndTime   string            `json:"endTime"`
 	Leader    UserJSON          `json:"leader"`
-	Modules   []ModuleBriefJSON `json:"modules"`
+	Modules   []ModuleBriefJSON `json:"modules"` //仅拉取更新
+
 }
 ```
 
@@ -281,7 +282,6 @@ ProjectsFindByLeaderID|get|`/leader/{id:uint}`|-|`[]ProjectBriefJson`
 ProjectssFindByParticipantID|get|`/participant/{id:uint}`|-|`[]ProjectBriefJson`
 ProjectUpdate|put|`/`|`projectJson`|`ProjectJson`
 ProjectDeleteByID|delete|`/id/{id:uint}`|-|`ProjectJson`
-
 ---
 
 ## TODO

@@ -82,24 +82,6 @@ func projectTestData() {
 	}
 }
 
-func target2TargetsJson(target string) []string {
-	return strings.Split(target, ",")
-}
-
-func targetsJson2Target(targets []string) (target string) {
-	l := len(targets)
-	if l > 0 {
-		for i, v := range targets {
-			if i == 0 {
-				target += v
-			} else {
-				target += "," + v
-			}
-		}
-	}
-	return
-}
-
 func tagSet2TagsJson(tagSet string) (tags []TagJson) {
 	temp := strings.Split(tagSet, ",")
 	for _, v := range temp {
