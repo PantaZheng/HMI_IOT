@@ -28,6 +28,19 @@ type MissionJSON struct {
 	ModuleID     uint       `json:"moduleID"`
 }
 
+type MissionBriefJSON struct {
+	/**
+	@Author: PantaZheng
+	@Description:
+	@Date: 2019/5/24 0:32
+	*/
+	ID           uint       `json:"id"`
+	Name         string     `json:"name"`
+	StartTime    string     `json:"startTime"`
+	EndTime      string     `json:"endTime"`
+	Participants []UserJSON `json:"participants"`
+}
+
 func missionTestData() {
 	log.Println("missionTestData")
 	u1 := UserJSON{ID: 2}

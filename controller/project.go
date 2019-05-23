@@ -43,10 +43,10 @@ func ProjectFindByID(ctx iris.Context) {
 	}
 }
 
-func ProjectFrameByID(ctx iris.Context) {
+func ProjectFramPaceByID(ctx iris.Context) {
 	err := *new(error)
 	if id, err1 := ctx.Params().GetUint("id"); err1 == nil {
-		if p, err2 := service.ProjectFrameByID(id); err2 == nil {
+		if p, err2 := service.ProjectFramePaceByID(id); err2 == nil {
 			ctx.StatusCode(iris.StatusOK)
 			_, _ = ctx.JSON(p)
 		} else {

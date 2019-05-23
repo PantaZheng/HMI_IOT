@@ -11,20 +11,19 @@ const titleModule = "models.module."
 
 type Module struct {
 	gorm.Model
-	Name         string
-	CreatorID    uint
-	Creator      User
-	CreateTime   string
-	StartTime    string
-	EndTime      string
-	Content      string
-	Target       string
-	Tag          bool
-	Participants []User `gorm:"many2many:user_modules"`
-	LeaderID     uint
-	Leader       User
-	ProjectID    uint
-	Project      Project
+	Name       string
+	CreatorID  uint
+	Creator    User
+	CreateTime string
+	StartTime  string
+	EndTime    string
+	Content    string
+	Target     string
+	Tag        bool
+	LeaderID   uint
+	Leader     User
+	ProjectID  uint
+	Project    Project
 }
 
 func (module *Module) checkForeignKey() (err error) {
@@ -48,15 +47,8 @@ func (module *Module) Create() (err error) {
 	module.ID = 0
 	if err = module.checkForeignKey(); err == nil {
 		module.CreateTime = time.Now().Format("2006-01-02")
-		participants := module.Participants
-		module.Participants = make([]User, 0)
 		if err = database.DB.Create(&module).Error; err == nil {
-			if participants != nil {
-				err = database.DB.Model(&module).Association("Participants").Append(participants).Error
-			}
-			if err == nil {
-				err = module.First()
-			}
+			err = module.First()
 		}
 	}
 	if err != nil {
@@ -76,12 +68,10 @@ func (module *Module) First() (err error) {
 		m.ID = module.ID
 		if err = database.DB.First(&m).Error; err == nil {
 			*module = *m
-			if err = database.DB.Model(&module).Association("Participants").Find(&module.Participants).Error; err == nil {
-				module.Creator.ID = module.CreatorID
-				module.Leader.ID = module.LeaderID
-				if err = module.Creator.First(); err == nil {
-					err = module.Leader.First()
-				}
+			module.Creator.ID = module.CreatorID
+			module.Leader.ID = module.LeaderID
+			if err = module.Creator.First(); err == nil {
+				err = module.Leader.First()
 			}
 		}
 	} else {
@@ -174,15 +164,8 @@ func (module *Module) Updates() (err error) {
 	if err = module.checkForeignKey(); err == nil {
 		m := &Module{}
 		m.ID = module.ID
-		participants := module.Participants
-		module.Participants = nil
 		if err = database.DB.Model(&m).Updates(&module).Error; err == nil {
-			if participants != nil {
-				err = database.DB.Model(&m).Association("Participants").Replace(participants).Error
-			}
-			if err == nil {
-				err = module.First()
-			}
+			err = module.First()
 		}
 	}
 	if err != nil {

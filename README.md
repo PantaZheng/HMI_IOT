@@ -135,7 +135,20 @@ type MissionJSON struct {
 	Gains        []GainJSON `json:"gains"`
 	Participants []UserJSON `json:"participants"`
 	ModuleID     uint       `json:"moduleID"`
+}
 
+type MissionBriefJSON struct {
+	/**
+	@Author: PantaZheng
+	@Description:
+	@Date: 2019/5/24 0:32
+	*/
+	ID           uint       `json:"id"`
+	Name         string     `json:"name"`
+	StartTime    string     `json:"startTime"`
+	EndTime      string     `json:"endTime"`
+	Participants []UserJSON `json:"participants"`
+}
 ```
 
 名称|method|path|传入body参数|接收body参数
@@ -161,21 +174,34 @@ type ModuleJSON struct {
 	@Description:
 	@Date: 2019/5/16 15:53
 	*/
-	ID           uint          `json:"id"`
-	Name         string        `json:"name"`
-	CreatorID    uint          `json:"creatorID"`
-	Creator      UserJSON      `json:"creator"`
-	CreateTime   string        `json:"createTime"` //创建时间
-	StartTime    string        `json:"startTime"`  //开始时间
-	EndTime      string        `json:"endTime"`    //结束时间
-	Content      string        `json:"content"`
-	Target       string        `json:"target"`
-	Tag          bool          `json:"tag"`
-	LeaderID     uint          `json:"leaderID"`
-	Leader       UserJSON      `json:"leader"`
-	Participants []UserJSON    `json:"participants"` //参与人员
-	Missions     []MissionJSON `json:"missions"`     //创建或更新不会修改该字段，仅拉取使用
-	ProjectID    uint          `json:"projectID"`
+	ID         uint          `json:"id"`
+	Name       string        `json:"name"`
+	CreatorID  uint          `json:"creatorID"`
+	Creator    UserJSON      `json:"creator"`
+	CreateTime string        `json:"createTime"` //创建时间
+	StartTime  string        `json:"startTime"`  //开始时间
+	EndTime    string        `json:"endTime"`    //结束时间
+	Content    string        `json:"content"`
+	Target     string        `json:"target"`
+	Tag        bool          `json:"tag"`
+	LeaderID   uint          `json:"leaderID"`
+	Leader     UserJSON      `json:"leader"`
+	Missions   []MissionJSON `json:"missions"` //创建或更新不会修改该字段，仅拉取使用
+	ProjectID  uint          `json:"projectID"`
+}
+
+type ModuleBriefJSON struct {
+	/**
+	@Author: PantaZheng
+	@Description:
+	@Date: 2019/5/24 0:32
+	*/
+	ID        uint               `json:"id"`
+	Name      string             `json:"name"`
+	StartTime string             `json:"startTime"`
+	EndTime   string             `json:"endTime"`
+	Leader    UserJSON           `json:"leader"`
+	Missions  []MissionBriefJSON `json:"missions"`
 }
 ```
 
@@ -223,10 +249,24 @@ type TagJson struct {
 	/**
 	@Author: PantaZheng
 	@Description:
-	@Date: 2019/5/16 15:07
+	@Date: 2019/5/16 15:53
 	*/
 	ID  uint `json:"id"`
 	Tag bool `json:"tag"`
+}
+
+type FramePaceJSON struct {
+	/**
+	@Author: PantaZheng
+	@Description:
+	@Date: 2019/5/24 0:32
+	*/
+	ID        uint              `json:"id"`
+	Name      string            `json:"name"`
+	StartTime string            `json:"startTime"`
+	EndTime   string            `json:"endTime"`
+	Leader    UserJSON          `json:"leader"`
+	Modules   []ModuleBriefJSON `json:"modules"`
 }
 ```
 
@@ -234,7 +274,7 @@ type TagJson struct {
 -|-|-|-|-
 ProjectCreate|post|`/`|`ProjectJson`|`ProjectJson`
 ProjectFindByID|get|`/id/{id:uint}`|-|`ProjectJson`
-ProjectFindByFrame|get|`frame/{id:uint}`|-|`ProjectJSON`
+ProjectFramPaceByID|get|`frame/{id:uint}`|-|`FramePaceJSON`
 ProjectsFindALl|get|`/all`|-|`[]ProjectJSON`
 ProjectsFindByCreatorID|get|`/creator/{id:uint}`|-|`[]ProjectBriefJson`
 ProjectsFindByLeaderID|get|`/leader/{id:uint}`|-|`[]ProjectBriefJson`

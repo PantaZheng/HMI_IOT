@@ -14,38 +14,44 @@ type ModuleJSON struct {
 	@Description:
 	@Date: 2019/5/16 15:53
 	*/
-	ID           uint          `json:"id"`
-	Name         string        `json:"name"`
-	CreatorID    uint          `json:"creatorID"`
-	Creator      UserJSON      `json:"creator"`
-	CreateTime   string        `json:"createTime"` //创建时间
-	StartTime    string        `json:"startTime"`  //开始时间
-	EndTime      string        `json:"endTime"`    //结束时间
-	Content      string        `json:"content"`
-	Target       string        `json:"target"`
-	Tag          bool          `json:"tag"`
-	LeaderID     uint          `json:"leaderID"`
-	Leader       UserJSON      `json:"leader"`
-	Participants []UserJSON    `json:"participants"` //参与人员
-	Missions     []MissionJSON `json:"missions"`     //创建或更新不会修改该字段，仅拉取使用
-	ProjectID    uint          `json:"projectID"`
+	ID         uint          `json:"id"`
+	Name       string        `json:"name"`
+	CreatorID  uint          `json:"creatorID"`
+	Creator    UserJSON      `json:"creator"`
+	CreateTime string        `json:"createTime"` //创建时间
+	StartTime  string        `json:"startTime"`  //开始时间
+	EndTime    string        `json:"endTime"`    //结束时间
+	Content    string        `json:"content"`
+	Target     string        `json:"target"`
+	Tag        bool          `json:"tag"`
+	LeaderID   uint          `json:"leaderID"`
+	Leader     UserJSON      `json:"leader"`
+	Missions   []MissionJSON `json:"missions"` //创建或更新不会修改该字段，仅拉取使用
+	ProjectID  uint          `json:"projectID"`
+}
+
+type ModuleBriefJSON struct {
+	/**
+	@Author: PantaZheng
+	@Description:
+	@Date: 2019/5/24 0:32
+	*/
+	ID        uint               `json:"id"`
+	Name      string             `json:"name"`
+	StartTime string             `json:"startTime"`
+	EndTime   string             `json:"endTime"`
+	Leader    UserJSON           `json:"leader"`
+	Missions  []MissionBriefJSON `json:"missions"`
 }
 
 func moduleTestData() {
 	log.Println("moduleTestData")
-	u1 := UserJSON{ID: 2}
-	u2 := UserJSON{ID: 3}
-	u3 := UserJSON{ID: 4}
-	u4 := UserJSON{ID: 5}
-	u5 := UserJSON{ID: 6}
-	u6 := UserJSON{ID: 7}
-	u7 := UserJSON{ID: 8}
 	modules := make([]ModuleJSON, 5)
-	modules[0] = ModuleJSON{Name: "钢铁侠与浩克", CreatorID: 1, StartTime: "2001-1-1", EndTime: "11111-1-1", Content: "不得不说的秘密", LeaderID: 2, Participants: []UserJSON{u1, u2, u3, u4, u5}, ProjectID: 1}
-	modules[1] = ModuleJSON{Name: "海王", CreatorID: 2, StartTime: "2001-1-1", EndTime: "11111-1-1", Content: "弟弟被绿", LeaderID: 5, Participants: []UserJSON{u2, u3, u4, u5, u6}, ProjectID: 1}
-	modules[2] = ModuleJSON{Name: "雷神1", CreatorID: 2, StartTime: "2001-1-1", EndTime: "11111-1-1", Content: "徐", LeaderID: 7, Participants: []UserJSON{u5, u6, u7}, ProjectID: 2}
-	modules[3] = ModuleJSON{Name: "雷神2", CreatorID: 2, StartTime: "2001-2-1", EndTime: "11111-1-1", Content: "锦", LeaderID: 7, Participants: []UserJSON{u5}, ProjectID: 3}
-	modules[4] = ModuleJSON{Name: "雷神3", CreatorID: 2, StartTime: "2001-1-1", EndTime: "11111-1-1", Content: "江", LeaderID: 7, Participants: []UserJSON{u5}, ProjectID: 4}
+	modules[0] = ModuleJSON{Name: "钢铁侠与浩克", CreatorID: 1, StartTime: "2001-1-1", EndTime: "11111-1-1", Content: "不得不说的秘密", LeaderID: 2, ProjectID: 1}
+	modules[1] = ModuleJSON{Name: "海王", CreatorID: 2, StartTime: "2001-1-1", EndTime: "11111-1-1", Content: "弟弟被绿", LeaderID: 5, ProjectID: 1}
+	modules[2] = ModuleJSON{Name: "雷神1", CreatorID: 2, StartTime: "2001-1-1", EndTime: "11111-1-1", Content: "徐", LeaderID: 7, ProjectID: 2}
+	modules[3] = ModuleJSON{Name: "雷神2", CreatorID: 2, StartTime: "2001-2-1", EndTime: "11111-1-1", Content: "锦", LeaderID: 7, ProjectID: 3}
+	modules[4] = ModuleJSON{Name: "雷神3", CreatorID: 2, StartTime: "2001-1-1", EndTime: "11111-1-1", Content: "江", LeaderID: 7, ProjectID: 4}
 	for _, v := range modules {
 		if err := v.Create(); err != nil {
 			log.Println(err.Error())
@@ -70,7 +76,6 @@ func module2ModuleJson(module *models.Module) (moduleJSON ModuleJSON) {
 	moduleJSON.LeaderID = module.LeaderID
 	leader := user2UserJSON(module.Leader)
 	moduleJSON.Leader = userJSON2UserBriefJSON(leader)
-	moduleJSON.Participants = users2BriefUsersJSON(module.Participants)
 	moduleJSON.Missions, _ = MissionsFindByModuleID(module.ID)
 	moduleJSON.ProjectID = module.ProjectID
 	return
@@ -117,7 +122,6 @@ func (moduleJSON *ModuleJSON) moduleJSON2Module() (module models.Module) {
 	module.Target = moduleJSON.Target
 	module.Tag = moduleJSON.Tag
 	module.LeaderID = moduleJSON.LeaderID
-	module.Participants = usersJSON2Users(moduleJSON.Participants)
 	module.ProjectID = moduleJSON.ProjectID
 	return
 }

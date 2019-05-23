@@ -44,6 +44,21 @@ type TagJson struct {
 	Tag bool `json:"tag"`
 }
 
+type FramePaceJSON struct {
+	/**
+	@Author: PantaZheng
+	@Description:
+	@Date: 2019/5/24 0:32
+	*/
+	ID        uint              `json:"id"`
+	Name      string            `json:"name"`
+	StartTime string            `json:"startTime"`
+	EndTime   string            `json:"endTime"`
+	Leader    UserJSON          `json:"leader"`
+	Modules   []ModuleBriefJSON `json:"modules"` //仅拉取更新
+
+}
+
 func projectTestData() {
 	log.Println("projectTestData")
 	u1 := UserJSON{ID: 2}
@@ -250,17 +265,42 @@ func ProjectFindByID(id uint) (projectJSON ProjectJSON, err error) {
 	return
 }
 
-func ProjectFrameByID(id uint) (projectJSON ProjectJSON, err error) {
+func ProjectFramePaceByID(id uint) (framePaceJSON FramePaceJSON, err error) {
 	/**
 	@Author: PantaZheng
 	@Description:
 	@Date: 2019/5/17 10:51
 	*/
-	projectJSON = ProjectJSON{ID: id}
+	projectJSON := &ProjectJSON{ID: id}
 	if err = projectJSON.First(); err == nil {
+		framePaceJSON.ID = projectJSON.ID
+		framePaceJSON.Name = projectJSON.Name
+		framePaceJSON.StartTime = projectJSON.StartTime
+		framePaceJSON.EndTime = projectJSON.EndTime
+		framePaceJSON.Leader = projectJSON.Leader
 		l := len(projectJSON.Modules)
+		framePaceJSON.Modules = make([]ModuleBriefJSON, l)
 		for i := 0; i < l; i++ {
 			if err = projectJSON.Modules[i].First(); err != nil {
+				framePaceJSON.Modules[i].ID = projectJSON.Modules[i].ID
+				framePaceJSON.Modules[i].Name = projectJSON.Modules[i].Name
+				framePaceJSON.Modules[i].StartTime = projectJSON.Modules[i].StartTime
+				framePaceJSON.Modules[i].EndTime = projectJSON.Modules[i].EndTime
+				framePaceJSON.Modules[i].Leader = projectJSON.Modules[i].Leader
+				m := len(projectJSON.Modules[i].Missions)
+				framePaceJSON.Modules[i].Missions = make([]MissionBriefJSON, m)
+				for j := 0; j < m; j++ {
+					if err = projectJSON.Modules[i].Missions[j].First(); err != nil {
+						framePaceJSON.Modules[i].Missions[j].ID = projectJSON.Modules[i].Missions[j].ID
+						framePaceJSON.Modules[i].Missions[j].Name = projectJSON.Modules[i].Missions[j].Name
+						framePaceJSON.Modules[i].Missions[j].StartTime = projectJSON.Modules[i].Missions[j].StartTime
+						framePaceJSON.Modules[i].Missions[j].EndTime = projectJSON.Modules[i].Missions[j].EndTime
+						framePaceJSON.Modules[i].Missions[j].Participants = projectJSON.Modules[i].Missions[j].Participants
+					} else {
+						break
+					}
+				}
+			} else {
 				break
 			}
 		}
@@ -337,10 +377,31 @@ func (projectJSON *ProjectJSON) Updates() (err error) {
 	@Date: 2019/5/15 23:15
 	*/
 	p := projectJSON.projectJSON2Project()
-	if err = p.Updates(); err == nil {
-		*projectJSON = project2ProjectJson(&p)
+	l := len(projectJSON.TagSet)
+	if l > 1 {
+		err = errors.New("更新时，TagSet必须为空或者仅存在一个")
+	} else if l == 0 {
+		err = p.Updates()
 	} else {
-		err = errors.New(titleProject + "Updates:\t" + err.Error())
+		set := projectJSON.TagSet[0]
+		if err = p.First(); err == nil {
+			tagSet := tagSet2TagsJson(p.TagSet)
+			flag := false
+			for i := 0; i < len(tagSet); i++ {
+				if set.ID == tagSet[i].ID {
+					set.Tag = tagSet[i].Tag
+					flag = true
+					break
+				}
+			}
+			if !flag {
+				err = errors.New("tagSet不存在该对象ID")
+			}
+		}
+		err = p.Updates()
+	}
+	if err != nil {
+		err = errors.New(titleProject + "Updates\t" + err.Error())
 	}
 	return
 }

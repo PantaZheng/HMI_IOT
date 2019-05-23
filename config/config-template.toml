@@ -1,5 +1,3 @@
-vueAddress = "http://test.renjiwulian.com/"
-
 [mysql]
     DBDriver = "mysql"
     DBName ="BCI"
@@ -15,8 +13,5 @@ vueAddress = "http://test.renjiwulian.com/"
     EncodedAESKey = "iesxoHBsnaKVry5E8xd8gavmJLTVVNcd8aS7w3KYOaU"
 
 [app]
-    port=80
-
-
-
-
+    Address = "http://test.renjiwulian.com/"
+    Port=80
