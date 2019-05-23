@@ -34,7 +34,7 @@ type ModuleBriefJSON struct {
 	/**
 	@Author: PantaZheng
 	@Description:
-	@Date: 2019/5/24 0:32
+	@Date: 2019/5/24 0:41
 	*/
 	ID        uint               `json:"id"`
 	Name      string             `json:"name"`

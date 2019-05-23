@@ -25,7 +25,7 @@ type ProjectJSON struct {
 	StartTime    string       `json:"startTime"`
 	EndTime      string       `json:"endTime"`
 	Content      string       `json:"content"`
-	Targets      []string     `json:"targets"`
+	Target       string       `json:"target"`
 	LeaderID     uint         `json:"leaderID"`
 	Leader       UserJSON     `json:"leader"`
 	Participants []UserJSON   `json:"participants"`
@@ -69,10 +69,10 @@ func projectTestData() {
 	u6 := UserJSON{ID: 7}
 	u7 := UserJSON{ID: 8}
 	projects := make([]ProjectJSON, 4)
-	projects[0] = ProjectJSON{Name: "复仇者联盟", CreatorID: 1, Targets: []string{"tag1", "tag2"}, LeaderID: 4, Participants: []UserJSON{u1, u2, u3, u4, u5, u6, u7}}
-	projects[1] = ProjectJSON{Name: "复仇者联盟2：奥创纪元", CreatorID: 1, Targets: []string{"tag1", "tag3"}, LeaderID: 5, Participants: []UserJSON{u2, u3, u4, u5, u6, u7}}
-	projects[2] = ProjectJSON{Name: "复仇者联盟3：无限战争", CreatorID: 1, Targets: []string{"tag3", "tag4"}, LeaderID: 6, Participants: []UserJSON{u1, u2, u3, u4, u5, u6, u7}}
-	projects[3] = ProjectJSON{Name: "复仇者联盟4：终局之战", CreatorID: 2, Targets: []string{"tag8", "tag9"}, LeaderID: 7, Participants: []UserJSON{u1, u2, u3, u4, u5, u6, u7}}
+	projects[0] = ProjectJSON{Name: "复仇者联盟", CreatorID: 1, Target: "tag1,tag2", LeaderID: 4, Participants: []UserJSON{u1, u2, u3, u4, u5, u6, u7}}
+	projects[1] = ProjectJSON{Name: "复仇者联盟2：奥创纪元", CreatorID: 1, Target: "tag1,tag3", LeaderID: 5, Participants: []UserJSON{u2, u3, u4, u5, u6, u7}}
+	projects[2] = ProjectJSON{Name: "复仇者联盟3：无限战争", CreatorID: 1, Target: "tag3,tag4", LeaderID: 6, Participants: []UserJSON{u1, u2, u3, u4, u5, u6, u7}}
+	projects[3] = ProjectJSON{Name: "复仇者联盟4：终局之战", CreatorID: 2, Target: "tag8,tag9", LeaderID: 7, Participants: []UserJSON{u1, u2, u3, u4, u5, u6, u7}}
 	for _, v := range projects {
 		if err := v.Create(); err != nil {
 			log.Println(err.Error())
@@ -158,7 +158,7 @@ func project2ProjectJson(project *models.Project) (projectJSON ProjectJSON) {
 	projectJSON.StartTime = project.StartTime
 	projectJSON.EndTime = project.EndTime
 	projectJSON.Content = project.Content
-	projectJSON.Targets = target2TargetsJson(project.Target)
+	projectJSON.Target = project.Target
 	projectJSON.LeaderID = project.LeaderID
 	leader := user2UserJSON(project.Leader)
 	projectJSON.Leader = userJSON2UserBriefJSON(leader)
@@ -208,7 +208,7 @@ func (projectJSON *ProjectJSON) projectJSON2Project() (project models.Project) {
 	project.StartTime = projectJSON.StartTime
 	project.EndTime = projectJSON.EndTime
 	project.Content = projectJSON.Content
-	project.Target = targetsJson2Target(projectJSON.Targets)
+	project.Target = projectJSON.Target
 	project.LeaderID = projectJSON.LeaderID
 	project.Participants = usersJSON2Users(projectJSON.Participants)
 	project.Tag, project.TagSet = tagsJson2TagSet(projectJSON.TagSet)
@@ -278,30 +278,30 @@ func ProjectFramePaceByID(id uint) (framePaceJSON FramePaceJSON, err error) {
 		framePaceJSON.StartTime = projectJSON.StartTime
 		framePaceJSON.EndTime = projectJSON.EndTime
 		framePaceJSON.Leader = projectJSON.Leader
-		l := len(projectJSON.Modules)
+		modules, _ := ModulesFindByProjectID(projectJSON.ID)
+		l := len(modules)
+		module := ModuleJSON{}
 		framePaceJSON.Modules = make([]ModuleBriefJSON, l)
 		for i := 0; i < l; i++ {
-			if err = projectJSON.Modules[i].First(); err != nil {
-				framePaceJSON.Modules[i].ID = projectJSON.Modules[i].ID
-				framePaceJSON.Modules[i].Name = projectJSON.Modules[i].Name
-				framePaceJSON.Modules[i].StartTime = projectJSON.Modules[i].StartTime
-				framePaceJSON.Modules[i].EndTime = projectJSON.Modules[i].EndTime
-				framePaceJSON.Modules[i].Leader = projectJSON.Modules[i].Leader
-				m := len(projectJSON.Modules[i].Missions)
-				framePaceJSON.Modules[i].Missions = make([]MissionBriefJSON, m)
-				for j := 0; j < m; j++ {
-					if err = projectJSON.Modules[i].Missions[j].First(); err != nil {
-						framePaceJSON.Modules[i].Missions[j].ID = projectJSON.Modules[i].Missions[j].ID
-						framePaceJSON.Modules[i].Missions[j].Name = projectJSON.Modules[i].Missions[j].Name
-						framePaceJSON.Modules[i].Missions[j].StartTime = projectJSON.Modules[i].Missions[j].StartTime
-						framePaceJSON.Modules[i].Missions[j].EndTime = projectJSON.Modules[i].Missions[j].EndTime
-						framePaceJSON.Modules[i].Missions[j].Participants = projectJSON.Modules[i].Missions[j].Participants
-					} else {
-						break
-					}
-				}
-			} else {
-				break
+			module = modules[i]
+			_ = module.First()
+			framePaceJSON.Modules[i].ID = module.ID
+			framePaceJSON.Modules[i].Name = module.Name
+			framePaceJSON.Modules[i].StartTime = module.StartTime
+			framePaceJSON.Modules[i].EndTime = module.EndTime
+			framePaceJSON.Modules[i].Leader = module.Leader
+			missions, _ := MissionsFindByModuleID(module.ID)
+			m := len(missions)
+			mission := MissionJSON{}
+			framePaceJSON.Modules[i].Missions = make([]MissionBriefJSON, m)
+			for j := 0; j < m; j++ {
+				mission = missions[j]
+				_ = mission.First()
+				framePaceJSON.Modules[i].Missions[j].ID = mission.ID
+				framePaceJSON.Modules[i].Missions[j].Name = mission.Name
+				framePaceJSON.Modules[i].Missions[j].StartTime = mission.StartTime
+				framePaceJSON.Modules[i].Missions[j].EndTime = mission.EndTime
+				framePaceJSON.Modules[i].Missions[j].Participants = mission.Participants
 			}
 		}
 	}
