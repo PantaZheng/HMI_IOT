@@ -4,7 +4,6 @@ import (
 	"errors"
 	"github.com/pantazheng/bci/models"
 	"log"
-	"time"
 )
 
 const titleMission = "service.mission."
@@ -130,19 +129,6 @@ func (missionJSON *MissionJSON) missionJSON2Mission() (mission models.Mission) {
 	mission.File = missionJSON.File
 	mission.Participants = usersJSON2Users(missionJSON.Participants)
 	mission.ModuleID = missionJSON.ModuleID
-	return
-}
-
-func (missionJSON *MissionJSON) checkTime() (err error) {
-	if start, err := time.Parse("2006-01-02", missionJSON.StartTime); err == nil {
-		if end, err := time.Parse("2006-01-02", missionJSON.EndTime); err == nil {
-			if end.Sub(start) < 0 {
-				missionJSON.Tag = false
-			} else {
-				missionJSON.Tag = true
-			}
-		}
-	}
 	return
 }
 
