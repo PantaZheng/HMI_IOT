@@ -45,7 +45,7 @@ func moduleTestData() {
 	modules[1] = ModuleJSON{Name: "海王", CreatorID: 2, StartTime: "2001-1-1", EndTime: "11111-1-1", Content: "弟弟被绿", LeaderID: 5, Participants: []UserJSON{u2, u3, u4, u5, u6}, ProjectID: 1}
 	modules[2] = ModuleJSON{Name: "雷神1", CreatorID: 2, StartTime: "2001-1-1", EndTime: "11111-1-1", Content: "徐", LeaderID: 7, Participants: []UserJSON{u5, u6, u7}, ProjectID: 2}
 	modules[3] = ModuleJSON{Name: "雷神2", CreatorID: 2, StartTime: "2001-1-1", EndTime: "11111-1-1", Content: "锦", LeaderID: 7, Participants: []UserJSON{u5}, ProjectID: 3}
-	modules[3] = ModuleJSON{Name: "雷神3", CreatorID: 2, StartTime: "2001-1-1", EndTime: "11111-1-1", Content: "江", LeaderID: 7, Participants: []UserJSON{u5}, ProjectID: 4}
+	modules[4] = ModuleJSON{Name: "雷神3", CreatorID: 2, StartTime: "2001-1-1", EndTime: "11111-1-1", Content: "江", LeaderID: 7, Participants: []UserJSON{u5}, ProjectID: 4}
 	for _, v := range modules {
 		if err := v.Create(); err != nil {
 			log.Println(err.Error())
