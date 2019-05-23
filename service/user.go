@@ -40,7 +40,6 @@ type UserJSON struct {
 	WechatName string `json:"wechatName"`
 	Code       string `json:"code"`
 	Name       string `json:"name"`
-	IDCard     string `json:"idCard"`
 	Level      int    `json:"level"`
 	Telephone  string `json:"telephone"`
 }
@@ -49,13 +48,13 @@ func userTestData() {
 	log.Println("userTestData")
 	users := make([]UserJSON, 8)
 	users[0] = UserJSON{OpenID: "Stranger1", WechatName: "小蜘蛛", Code: "Spider-Man", Name: "Peter Benjamin Parker", Level: 1, Telephone: "110"}
-	users[1] = UserJSON{OpenID: "Emeritus1", WechatName: "万磁王", Code: "002", Name: "Max Eisenhardt", IDCard: "Magneto", Level: 2}
-	users[2] = UserJSON{WechatName: "金刚狼", IDCard: "Wolverine", Name: "Logan Howlett", Level: 3}
+	users[1] = UserJSON{OpenID: "Emeritus1", WechatName: "万磁王", Code: "002", Name: "Max Eisenhardt", Level: 2}
+	users[2] = UserJSON{WechatName: "金刚狼", Name: "Logan Howlett", Level: 3}
 	users[3] = UserJSON{OpenID: "Assistant1", WechatName: "小辣椒", Name: "Pepper Potts", Level: 4}
-	users[4] = UserJSON{WechatName: "钢铁侠", IDCard: "Iron Man", Name: "Tony Stark", Level: 5}
-	users[5] = UserJSON{OpenID: "Full1", WechatName: "灭霸", IDCard: "5", Name: "Thanos", Level: 6}
-	users[6] = UserJSON{IDCard: "6", Name: "海王", Level: 6}
-	users[7] = UserJSON{IDCard: "7", Name: "雷神", Level: 6}
+	users[4] = UserJSON{WechatName: "钢铁侠", Name: "Tony Stark", Level: 5}
+	users[5] = UserJSON{OpenID: "Full1", WechatName: "灭霸", Name: "Thanos", Level: 6}
+	users[6] = UserJSON{Name: "海王", Level: 6}
+	users[7] = UserJSON{Name: "雷神", Level: 6}
 	for _, v := range users {
 		if err := v.Create(); err != nil {
 			log.Println(err.Error())
@@ -76,7 +75,6 @@ func (userJSON *UserJSON) userJSON2User() (user models.User) {
 	user.OpenID = userJSON.OpenID
 	user.WechatName = userJSON.WechatName
 	user.Name = userJSON.Name
-	user.IDCard = userJSON.IDCard
 	user.Level = userJSON.Level
 	user.Telephone = userJSON.Telephone
 	return
@@ -93,7 +91,6 @@ func user2UserJSON(user models.User) (userJSON UserJSON) {
 	userJSON.OpenID = user.OpenID
 	userJSON.WechatName = user.WechatName
 	userJSON.Name = user.Name
-	userJSON.IDCard = user.IDCard
 	userJSON.Level = user.Level
 	userJSON.Telephone = user.Telephone
 	return
@@ -225,8 +222,8 @@ func (userJSON *UserJSON) Bind() (err error) {
 	*/
 	//检查openid和code
 	if err = userJSON.exchangeOpenID(); err == nil {
-		if userJSON.IDCard == "" || userJSON.Name == "" {
-			err = errors.New("绑定必须有同时身份证和姓名信息\t")
+		if userJSON.Telephone == "" || userJSON.Name == "" {
+			err = errors.New("绑定必须有同时电话和姓名信息\t")
 		} else if userJSON.Level == LevelMap["Stranger"] {
 			err = errors.New("绑定权限不能设置为1级\t")
 		} else if err = userJSON.checkLevel(); err == nil {
@@ -234,16 +231,16 @@ func (userJSON *UserJSON) Bind() (err error) {
 			//查找微信关联信息
 			if err = wechatUser.FindOne(); err != nil {
 				err = errors.New("数据库查找关联OpenID用户出错:\t" + err.Error())
-			} else if wechatUser.IDCard != "" {
+			} else if wechatUser.Telephone != "" {
 				//已绑定用户
 				wechatUser.Name = userJSON.Name
-				wechatUser.IDCard = userJSON.IDCard
+				wechatUser.Telephone = userJSON.Telephone
 				wechatUser.Level = userJSON.Level
 				if err = wechatUser.Updates(); err == nil {
 					*userJSON = user2UserJSON(wechatUser)
 				}
 			} else {
-				presortedUser := models.User{IDCard: userJSON.IDCard}
+				presortedUser := models.User{Telephone: userJSON.Telephone}
 				_ = presortedUser.FindOne()
 				//检查是否有预存信息
 				if presortedUser.Name != "" {
@@ -251,7 +248,7 @@ func (userJSON *UserJSON) Bind() (err error) {
 					presortedUser.WechatName = wechatUser.WechatName
 					//有预存信息，比对姓名
 					if presortedUser.Name != userJSON.Name {
-						err = errors.New("用户名:" + userJSON.Name + "和身份证号:" + userJSON.IDCard + "不匹配,请检查输入信息")
+						err = errors.New("用户名:" + userJSON.Name + "和电话:" + userJSON.Telephone + "不匹配,请检查输入信息")
 					} else if err = wechatUser.Delete(); err == nil {
 						presortedUser.Level = userJSON.Level
 					}
@@ -261,7 +258,7 @@ func (userJSON *UserJSON) Bind() (err error) {
 				} else {
 					//无预存信息,修改微信初始化的User，添加姓名和身份证号
 					wechatUser.Name = userJSON.Name
-					wechatUser.IDCard = userJSON.IDCard
+					wechatUser.Telephone = userJSON.Telephone
 					wechatUser.Level = userJSON.Level
 					if err = wechatUser.Updates(); err == nil {
 						*userJSON = user2UserJSON(wechatUser)
@@ -322,14 +319,14 @@ func UserFindByOpenID(openid string) (userJSON UserJSON, err error) {
 	return
 }
 
-//UserFindByIDCard 通过身份证查找单用户.
-func UserFindByIDCard(idCard string) (userJSON UserJSON, err error) {
+//UserFindByTelephone 通过电话查找单用户.
+func UserFindByTelephone(telephone string) (userJSON UserJSON, err error) {
 	/**
 	@Author: PantaZheng
 	@Description:
 	@Date: 2019/5/10 1:52
 	*/
-	userJSON = UserJSON{IDCard: idCard}
+	userJSON = UserJSON{Telephone: telephone}
 	err = userJSON.FindOne()
 	return
 }
@@ -415,14 +412,14 @@ func UserDeleteByID(id uint) (userJSON UserJSON, err error) {
 	return
 }
 
-//UserDeleteByIDCard 通过I身份证删除用户.
-func UserDeleteByIDCard(idCard string) (userJSON UserJSON, err error) {
+//UserDeleteByTelephone 通过电话删除用户.
+func UserDeleteByTelephone(telephone string) (userJSON UserJSON, err error) {
 	/**
 	@Author: PantaZheng
 	@Description:
 	@Date: 2019/5/10 14:30
 	*/
-	userJSON = UserJSON{IDCard: idCard}
+	userJSON = UserJSON{Telephone: telephone}
 	err = userJSON.Delete()
 	return
 }

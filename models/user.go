@@ -15,9 +15,8 @@ type User struct {
 	OpenID     string `gorm:"unique"`
 	WechatName string
 	Name       string
-	IDCard     string `gorm:"unique"`
 	Level      int
-	Telephone  string
+	Telephone  string    `gorm:"unique"`
 	CProjects  []Project `gorm:"foreignkey:CreatorID"`
 	LProjects  []Project `gorm:"foreignkey:LeaderID"`
 	PProjects  []Project `gorm:"many2many:user_projects"`
@@ -30,13 +29,13 @@ type User struct {
 }
 
 //检查是否有OpenID和IDCard，零值设置为ID,并更新字段信息
-func (user *User) makeOpenIDIDCARDNotEmpty() (tag bool) {
-	if user.OpenID == "" || user.IDCard == "" {
+func (user *User) makeOpenIDTelephoneNotEmpty() (tag bool) {
+	if user.OpenID == "" || user.Telephone == "" {
 		if user.OpenID == "" {
 			user.OpenID = strconv.Itoa(int(user.ID))
 		}
-		if user.IDCard == "" {
-			user.IDCard = strconv.Itoa(int(user.ID))
+		if user.Telephone == "" {
+			user.Telephone = strconv.Itoa(int(user.ID))
 		}
 		tag = true
 	}
@@ -51,11 +50,11 @@ func (user *User) Create() (err error) {
 	@Date: 2019/5/9 13:29
 	*/
 	user.ID = 0
-	if user.OpenID == "" && user.IDCard == "" {
-		err = errors.New("需要OpenID或IDCard来满足用户唯一性")
+	if user.OpenID == "" && user.Telephone == "" {
+		err = errors.New("需要OpenID或Telephone来满足用户唯一性")
 	} else {
 		if err = database.DB.Create(&user).Error; err == nil {
-			if user.makeOpenIDIDCARDNotEmpty() {
+			if user.makeOpenIDTelephoneNotEmpty() {
 				err = user.Updates()
 			}
 		}
@@ -154,7 +153,7 @@ func (user *User) Delete() (err error) {
 	*/
 	if err = user.FindOne(); err == nil {
 		user.OpenID = strconv.Itoa(int(user.ID))
-		user.IDCard = strconv.Itoa(int(user.ID))
+		user.Telephone = strconv.Itoa(int(user.ID))
 		if err = user.Updates(); err == nil {
 			err = database.DB.Delete(&user).Error
 		}

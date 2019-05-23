@@ -78,14 +78,14 @@ func UserFindByID(ctx iris.Context) {
 	}
 }
 
-func UserFindByIDCard(ctx iris.Context) {
+func UserFindByTelephone(ctx iris.Context) {
 	/**
 	@Author: PantaZheng
 	@Description:
 	@Date: 2019/5/13 15:41
 	*/
-	idCard := ctx.Params().GetString("id_card")
-	if u, err := service.UserFindByIDCard(idCard); err == nil {
+	tel := ctx.Params().GetString("telephone")
+	if u, err := service.UserFindByTelephone(tel); err == nil {
 		ctx.StatusCode(iris.StatusOK)
 		_, _ = ctx.JSON(u)
 	} else {
@@ -164,14 +164,14 @@ func UserDeleteByID(ctx iris.Context) {
 	}
 }
 
-func UserDeleteByIDCard(ctx iris.Context) {
+func UserDeleteByTelephone(ctx iris.Context) {
 	/**
 	@Author: PantaZheng
 	@Description:
 	@Date: 2019/5/13 15:41
 	*/
-	idCard := ctx.Params().GetString("id_card")
-	if userJson, err := service.UserDeleteByIDCard(idCard); err == nil {
+	tel := ctx.Params().GetString("tel")
+	if userJson, err := service.UserDeleteByTelephone(tel); err == nil {
 		ctx.StatusCode(iris.StatusOK)
 		_, _ = ctx.JSON(userJson)
 	} else {

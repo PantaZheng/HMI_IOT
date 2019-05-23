@@ -38,13 +38,13 @@ func newApp() (api *iris.Application) {
 	api.PartyFunc("/user", func(user router.Party) {
 		user.Post("/", controller.UserCreate)
 		user.Get("/id/{id:uint}", controller.UserFindByID)
-		user.Get("/id_card/{id_card:string}", controller.UserFindByIDCard)
+		user.Get("/telephone/{telephone:string}", controller.UserFindByTelephone)
 		user.Get("/openid/{openid:string}", controller.UserFindByOpenID)
 		user.Get("/level/{level:int}", controller.UsersFindByLevel)
 		user.Put("/update", controller.UserUpdates)
 		user.Put("/bind", controller.UserBind)
 		user.Delete("/id/{id:uint}", controller.UserDeleteByID)
-		user.Delete("/id_card/{id_card:string}", controller.UserDeleteByIDCard)
+		user.Delete("/telephone/{telephone:string}", controller.UserDeleteByTelephone)
 	})
 
 	api.PartyFunc("/gain", func(gain router.Party) {
