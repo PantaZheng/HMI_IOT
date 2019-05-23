@@ -6,7 +6,6 @@ import (
 	"log"
 	"strconv"
 	"strings"
-	"time"
 )
 
 const titleProject = "service.project."
@@ -58,19 +57,6 @@ type FramePaceJSON struct {
 	Leader    UserJSON          `json:"leader"`
 	Modules   []ModuleBriefJSON `json:"modules"` //仅拉取更新
 
-}
-
-func (module *Module) checkTime() (err error) {
-	if start, err := time.Parse("2006-01-02", module.StartTime); err == nil {
-		if end, err := time.Parse("2006-01-02", module.EndTime); err == nil {
-			if start.Sub(end) < 0 {
-				module.Tag = false
-			} else {
-				module.Tag = true
-			}
-		}
-	}
-	return
 }
 
 func projectTestData() {
