@@ -49,20 +49,23 @@ func newApp() (api *iris.Application) {
 
 	api.PartyFunc("/gain", func(gain router.Party) {
 		gain.Post("/", controller.GainCreate)
+		gain.Post("/file/{id:uint}", controller.GainUpFileByID)
 		gain.Get("/id/{id:uint}", controller.GainFindByID)
 		gain.Get("/owner/{id:uint}", controller.GainsFindByOwnerID)
 		gain.Get("/mission/{id:uint}", controller.GainsFindByMissionID)
-		gain.Get("/file/{id:uint}", controller.GetFile)
+		gain.Get("/file/{id:uint}", controller.GainDownFileByID)
 		gain.Put("/", controller.GainUpdate)
 		gain.Delete("/id/{id:uint}", controller.GainDeleteByID)
 	})
 
 	api.PartyFunc("/mission", func(mission router.Party) {
 		mission.Post("/", controller.MissionCreate)
+		mission.Post("/file/{id:uint}", controller.MissionUpFileByID)
 		mission.Get("/id/{id:uint}", controller.MissionFindByID)
 		mission.Get("/all", controller.MissionsFindAll)
 		mission.Get("/participant/{id:uint}", controller.MissionsFindByParticipantID)
 		mission.Get("/module/{id:uint}", controller.MissionsFindByModuleID)
+		mission.Get("/file/{id:uint}", controller.MissionDownFileByID)
 		mission.Put("/", controller.MissionUpdate)
 		mission.Delete("/id/{id:uint}", controller.MissionDeleteByID)
 	})

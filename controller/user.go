@@ -13,8 +13,8 @@ func UserCreate(ctx iris.Context) {
 	@Description:
 	@Date: 2019/5/13 23:48
 	*/
+	var err error
 	u := new(service.UserJSON)
-	err := *new(error)
 	if err = ctx.ReadJSON(u); err == nil {
 		if u.WechatName != "" || u.OpenID != "" {
 			err = errors.New("UserCreate接口不支持微信信息")
@@ -37,8 +37,8 @@ func UserBind(ctx iris.Context) {
 	@Description:
 	@Date: 2019/5/13 15:41
 	*/
+	var err error
 	u := new(service.UserJSON)
-	err := *new(error)
 	if err = ctx.ReadJSON(u); err == nil {
 		if err = u.Bind(); err == nil {
 			ctx.StatusCode(iris.StatusOK)
@@ -59,8 +59,8 @@ func UserFindByID(ctx iris.Context) {
 	@Description:
 	@Date: 2019/5/13 15:41
 	*/
-	err := *new(error)
-	if id, err1 := ctx.Params().GetUint("id"); err == nil {
+	var err error
+	if id, err1 := ctx.Params().GetUint("id"); err1 == nil {
 		if u, err2 := service.UserFindByID(id); err2 == nil {
 			ctx.StatusCode(iris.StatusOK)
 			_, _ = ctx.JSON(u)
@@ -120,7 +120,7 @@ func UsersFindByLevel(ctx iris.Context) {
 	@Description:
 	@Date: 2019/5/13 15:41
 	*/
-	err := *new(error)
+	var err error
 	if level, err1 := ctx.Params().GetInt("level"); err1 == nil {
 		if usersJson, err2 := service.UsersFindByLevel(level); err2 == nil {
 			ctx.StatusCode(iris.StatusOK)
@@ -145,7 +145,7 @@ func UserDeleteByID(ctx iris.Context) {
 	@Description:
 	@Date: 2019/5/13 15:41
 	*/
-	err := *new(error)
+	var err error
 	if id, err1 := ctx.Params().GetUint("id"); err1 == nil {
 		if userJson, err2 := service.UserDeleteByID(id); err2 == nil {
 			ctx.StatusCode(iris.StatusOK)
@@ -188,8 +188,8 @@ func UserUpdates(ctx iris.Context) {
 	@Description:
 	@Date: 2019/5/13 15:41
 	*/
+	var err error
 	u := new(service.UserJSON)
-	err := *new(error)
 	if err = ctx.ReadJSON(u); err == nil {
 		if err = u.Updates(); err == nil {
 			ctx.StatusCode(iris.StatusOK)
