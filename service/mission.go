@@ -152,7 +152,6 @@ func (missionJSON *MissionJSON) First() (err error) {
 	m := missionJSON.missionJSON2Mission()
 	if err = m.First(); err == nil {
 		*missionJSON = mission2MissionJSON(&m)
-		err = missionJSON.checkTime()
 	} else {
 		err = errors.New(titleMission + "First:\t" + err.Error())
 	}
