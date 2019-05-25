@@ -5,7 +5,6 @@ import (
 	"github.com/chanxuehong/wechat/mp/user"
 	"github.com/chanxuehong/wechat/oauth2"
 	"github.com/pantazheng/bci/models"
-	"log"
 )
 
 const titleUser = "service.user."

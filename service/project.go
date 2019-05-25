@@ -3,7 +3,6 @@ package service
 import (
 	"errors"
 	"github.com/pantazheng/bci/models"
-	"log"
 	"strconv"
 	"strings"
 )
