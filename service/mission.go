@@ -3,7 +3,6 @@ package service
 import (
 	"errors"
 	"github.com/pantazheng/bci/models"
-	"log"
 )
 
 const titleMission = "service.mission."
@@ -41,28 +40,28 @@ type MissionBriefJSON struct {
 	Participants []UserJSON `json:"participants"`
 }
 
-func missionTestData() {
-	log.Println("missionTestData")
-	u1 := UserJSON{ID: 2}
-	u2 := UserJSON{ID: 3}
-	u3 := UserJSON{ID: 4}
-	u4 := UserJSON{ID: 5}
-	u5 := UserJSON{ID: 6}
-	u6 := UserJSON{ID: 7}
-	u7 := UserJSON{ID: 8}
-	missions := make([]MissionJSON, 4)
-	missions[0] = MissionJSON{Name: "钢铁侠1", StartTime: "2008-1-1", EndTime: "2017-1-2", Content: "你不是世界上唯一的超级英雄。", File: "朝花夕拾", Participants: []UserJSON{u1, u3, u4, u5}, ModuleID: 1}
-	missions[1] = MissionJSON{Name: "无敌浩克", StartTime: "2008-3-1", EndTime: "2017-1-2", Content: "复仇者联盟", File: "", Participants: []UserJSON{u4, u5}, ModuleID: 1}
-	missions[2] = MissionJSON{Name: "海王1", StartTime: "2008-3-1", EndTime: "2017-1-2", Content: "你永远与我同在也永远是我的兄弟", File: "", Participants: []UserJSON{u2, u6}, ModuleID: 2}
-	missions[3] = MissionJSON{Name: "雷神1", StartTime: "2008-3-1", EndTime: "2017-1-2", Content: "那些你笑就跟着你笑的人，如果不是傻子，就是爱你的人。", File: "", Participants: []UserJSON{u5, u7}, ModuleID: 3}
-	for _, v := range missions {
-		if err := v.Create(); err != nil {
-			log.Println(err.Error())
-		} else {
-			log.Println(v)
-		}
-	}
-}
+//func missionTestData() {
+//	log.Println("missionTestData")
+//	u1 := UserJSON{ID: 2}
+//	u2 := UserJSON{ID: 3}
+//	u3 := UserJSON{ID: 4}
+//	u4 := UserJSON{ID: 5}
+//	u5 := UserJSON{ID: 6}
+//	u6 := UserJSON{ID: 7}
+//	u7 := UserJSON{ID: 8}
+//	missions := make([]MissionJSON, 4)
+//	missions[0] = MissionJSON{Name: "钢铁侠1", StartTime: "2008-1-1", EndTime: "2017-1-2", Content: "你不是世界上唯一的超级英雄。", File: "朝花夕拾", Participants: []UserJSON{u1, u3, u4, u5}, ModuleID: 1}
+//	missions[1] = MissionJSON{Name: "无敌浩克", StartTime: "2008-3-1", EndTime: "2017-1-2", Content: "复仇者联盟", File: "", Participants: []UserJSON{u4, u5}, ModuleID: 1}
+//	missions[2] = MissionJSON{Name: "海王1", StartTime: "2008-3-1", EndTime: "2017-1-2", Content: "你永远与我同在也永远是我的兄弟", File: "", Participants: []UserJSON{u2, u6}, ModuleID: 2}
+//	missions[3] = MissionJSON{Name: "雷神1", StartTime: "2008-3-1", EndTime: "2017-1-2", Content: "那些你笑就跟着你笑的人，如果不是傻子，就是爱你的人。", File: "", Participants: []UserJSON{u5, u7}, ModuleID: 3}
+//	for _, v := range missions {
+//		if err := v.Create(); err != nil {
+//			log.Println(err.Error())
+//		} else {
+//			log.Println(v)
+//		}
+//	}
+//}
 
 func mission2MissionJSON(mission *models.Mission) (missionJSON MissionJSON) {
 	/**

@@ -3,7 +3,6 @@ package service
 import (
 	"errors"
 	"github.com/pantazheng/bci/models"
-	"log"
 )
 
 const titleGain = "service.gain."
@@ -25,29 +24,29 @@ type GainJSON struct {
 	MissionID uint     `json:"missionID"`
 }
 
-func gainTestData() {
-	/**
-	@Author: PantaZheng
-	@Description:
-	@Date: 2019/5/13 2:39
-	*/
-	log.Println("gainTestData")
-	gains := make([]GainJSON, 7)
-	gains[0] = GainJSON{Name: "gain1", OwnerID: 2, MissionID: 1}
-	gains[1] = GainJSON{Name: "gain2", OwnerID: 4, MissionID: 1}
-	gains[2] = GainJSON{Name: "gain3", OwnerID: 5, MissionID: 2}
-	gains[3] = GainJSON{Name: "gain4", OwnerID: 6, MissionID: 2}
-	gains[4] = GainJSON{Name: "gain5", OwnerID: 7, MissionID: 3}
-	gains[5] = GainJSON{Name: "gain6", OwnerID: 3, MissionID: 3}
-	gains[6] = GainJSON{Name: "gain7", OwnerID: 6, MissionID: 4}
-	for _, v := range gains {
-		if err := v.Create(); err != nil {
-			log.Println(err.Error())
-		} else {
-			log.Println(v)
-		}
-	}
-}
+//func gainTestData() {
+//	/**
+//	@Author: PantaZheng
+//	@Description:
+//	@Date: 2019/5/13 2:39
+//	*/
+//	log.Println("gainTestData")
+//	gains := make([]GainJSON, 7)
+//	gains[0] = GainJSON{Name: "gain1", OwnerID: 2, MissionID: 1}
+//	gains[1] = GainJSON{Name: "gain2", OwnerID: 4, MissionID: 1}
+//	gains[2] = GainJSON{Name: "gain3", OwnerID: 5, MissionID: 2}
+//	gains[3] = GainJSON{Name: "gain4", OwnerID: 6, MissionID: 2}
+//	gains[4] = GainJSON{Name: "gain5", OwnerID: 7, MissionID: 3}
+//	gains[5] = GainJSON{Name: "gain6", OwnerID: 3, MissionID: 3}
+//	gains[6] = GainJSON{Name: "gain7", OwnerID: 6, MissionID: 4}
+//	for _, v := range gains {
+//		if err := v.Create(); err != nil {
+//			log.Println(err.Error())
+//		} else {
+//			log.Println(v)
+//		}
+//	}
+//}
 func gain2GainJSON(gain models.Gain) (gainJSON GainJSON) {
 	/**
 	@Author: PantaZheng

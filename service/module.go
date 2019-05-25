@@ -3,7 +3,6 @@ package service
 import (
 	"errors"
 	"github.com/pantazheng/bci/models"
-	"log"
 )
 
 const titleModule = "service.module."
@@ -44,22 +43,22 @@ type ModuleBriefJSON struct {
 	Missions  []MissionBriefJSON `json:"missions"`
 }
 
-func moduleTestData() {
-	log.Println("moduleTestData")
-	modules := make([]ModuleJSON, 5)
-	modules[0] = ModuleJSON{Name: "钢铁侠与浩克", CreatorID: 1, StartTime: "2001-1-1", EndTime: "11111-1-1", Content: "不得不说的秘密", LeaderID: 2, ProjectID: 1}
-	modules[1] = ModuleJSON{Name: "海王", CreatorID: 2, StartTime: "2001-1-1", EndTime: "11111-1-1", Content: "弟弟被绿", LeaderID: 5, ProjectID: 1}
-	modules[2] = ModuleJSON{Name: "雷神1", CreatorID: 2, StartTime: "2001-1-1", EndTime: "11111-1-1", Content: "徐", LeaderID: 7, ProjectID: 2}
-	modules[3] = ModuleJSON{Name: "雷神2", CreatorID: 2, StartTime: "2001-2-1", EndTime: "11111-1-1", Content: "锦", LeaderID: 7, ProjectID: 3}
-	modules[4] = ModuleJSON{Name: "雷神3", CreatorID: 2, StartTime: "2001-1-1", EndTime: "11111-1-1", Content: "江", LeaderID: 7, ProjectID: 4}
-	for _, v := range modules {
-		if err := v.Create(); err != nil {
-			log.Println(err.Error())
-		} else {
-			log.Println(v)
-		}
-	}
-}
+//func moduleTestData() {
+//	log.Println("moduleTestData")
+//	modules := make([]ModuleJSON, 5)
+//	modules[0] = ModuleJSON{Name: "钢铁侠与浩克", CreatorID: 1, StartTime: "2001-1-1", EndTime: "11111-1-1", Content: "不得不说的秘密", LeaderID: 2, ProjectID: 1}
+//	modules[1] = ModuleJSON{Name: "海王", CreatorID: 2, StartTime: "2001-1-1", EndTime: "11111-1-1", Content: "弟弟被绿", LeaderID: 5, ProjectID: 1}
+//	modules[2] = ModuleJSON{Name: "雷神1", CreatorID: 2, StartTime: "2001-1-1", EndTime: "11111-1-1", Content: "徐", LeaderID: 7, ProjectID: 2}
+//	modules[3] = ModuleJSON{Name: "雷神2", CreatorID: 2, StartTime: "2001-2-1", EndTime: "11111-1-1", Content: "锦", LeaderID: 7, ProjectID: 3}
+//	modules[4] = ModuleJSON{Name: "雷神3", CreatorID: 2, StartTime: "2001-1-1", EndTime: "11111-1-1", Content: "江", LeaderID: 7, ProjectID: 4}
+//	for _, v := range modules {
+//		if err := v.Create(); err != nil {
+//			log.Println(err.Error())
+//		} else {
+//			log.Println(v)
+//		}
+//	}
+//}
 
 func module2ModuleJson(module *models.Module) (moduleJSON ModuleJSON) {
 	moduleJSON.ID = module.ID
