@@ -1,0 +1,1747 @@
+nohup: ignoring input
+2019/05/27 12:38:16 建立数据库连接
+2019/05/27 12:38:16 建立默认菜单
+Now listening on: http://localhost:80
+Application started. Press CTRL+C to shut down.
+2019/05/27 12:38:24 收到事件:
+<xml><ToUserName><![CDATA[gh_75a34b17d256]]></ToUserName>
+<FromUserName><![CDATA[oSnZS5sXgKfB9eYywWnDkInsnVeo]]></FromUserName>
+<CreateTime>1558931904</CreateTime>
+<MsgType><![CDATA[event]]></MsgType>
+<Event><![CDATA[VIEW]]></Event>
+<EventKey><![CDATA[http://bci.renjiwulian.com/vue/index/#/newProject]]></EventKey>
+<MenuId>437917383</MenuId>
+</xml>
+[36m[INFO][0m 2019/05/27 12:38 200 388.133µs 140.207.54.78 POST /wechat
+[36m[INFO][0m 2019/05/27 12:38 200 145.21µs 61.151.178.172 GET /vue/index
+[36m[INFO][0m 2019/05/27 12:38 200 162.031µs 223.104.246.1 GET /static/js/manifest.6e135d116047bbd799ae.js
+[36m[INFO][0m 2019/05/27 12:38 200 1.519614076s 223.104.246.1 GET /static/css/app.556c4167239f66c4c53e822adbf426d8.css
+[36m[INFO][0m 2019/05/27 12:38 200 252.775µs 223.104.246.1 GET /static/js/1.11c5a59cc1d1eb4828d2.js
+[36m[INFO][0m 2019/05/27 12:38 200 59.808µs 223.104.246.1 GET /static/js/0.ca67e87d8c000a42e592.js
+2019/05/27 12:38:35 收到事件:
+<xml><ToUserName><![CDATA[gh_75a34b17d256]]></ToUserName>
+<FromUserName><![CDATA[oSnZS5sXgKfB9eYywWnDkInsnVeo]]></FromUserName>
+<CreateTime>1558931915</CreateTime>
+<MsgType><![CDATA[event]]></MsgType>
+<Event><![CDATA[VIEW]]></Event>
+<EventKey><![CDATA[http://bci.renjiwulian.com/vue/index/#/project]]></EventKey>
+<MenuId>437917383</MenuId>
+</xml>
+[36m[INFO][0m 2019/05/27 12:38 200 215.964µs 140.207.54.77 POST /wechat
+[36m[INFO][0m 2019/05/27 12:38 200 57.276µs 61.151.178.172 GET /vue/index
+[36m[INFO][0m 2019/05/27 12:38 304 95.768µs 223.104.246.1 GET /static/js/manifest.6e135d116047bbd799ae.js
+[36m[INFO][0m 2019/05/27 12:38 304 29.81µs 223.104.246.1 GET /static/css/app.556c4167239f66c4c53e822adbf426d8.css
+[36m[INFO][0m 2019/05/27 12:38 200 502.725µs 223.104.246.1 GET /static/js/4.deace02698e4a7e94fb8.js
+[36m[INFO][0m 2019/05/27 12:38 200 26.48377ms 223.104.246.1 GET /project/all
+[36m[INFO][0m 2019/05/27 12:38 200 300.429µs 223.104.246.1 GET /static/js/2.64af9f3b1f5dd3184951.js
+[36m[INFO][0m 2019/05/27 12:38 304 28.59µs 223.104.246.1 GET /static/js/0.ca67e87d8c000a42e592.js
+[36m[INFO][0m 2019/05/27 12:38 200 276.18µs 223.104.246.1 GET /static/fonts/element-icons.535877f.woff
+[36m[INFO][0m 2019/05/27 12:38 200 20.220735ms 223.104.246.1 GET /module/project/1
+[36m[INFO][0m 2019/05/27 12:38 200 33.495814ms 223.104.246.1 GET /project/id/1
+[36m[INFO][0m 2019/05/27 12:38 200 230.386µs 223.104.246.1 GET /static/js/3.cd8ec87a3eb67edc294d.js
+[36m[INFO][0m 2019/05/27 12:38 200 7.61448ms 223.104.246.1 GET /mission/module/1
+[36m[INFO][0m 2019/05/27 12:38 200 16.989563ms 223.104.246.1 GET /module/id/1
+[36m[INFO][0m 2019/05/27 12:43 200 204.651985ms 140.207.54.80 POST /wechat
+2019/05/27 12:43:51 收到事件:
+<xml><ToUserName><![CDATA[gh_75a34b17d256]]></ToUserName>
+<FromUserName><![CDATA[oSnZS5tQv-jBvQ3ihdvVMUcg1wNc]]></FromUserName>
+<CreateTime>1558932231</CreateTime>
+<MsgType><![CDATA[event]]></MsgType>
+<Event><![CDATA[VIEW]]></Event>
+<EventKey><![CDATA[https://open.weixin.qq.com/connect/oauth2/authorize?appid=wxe8f9250251763487&response_type=code&scope=snsapi_base&redirect_uri=http://bci.renjiwulian.com/vue/index/#/&state=12#wechat_redirect]]></EventKey>
+<MenuId>437917383</MenuId>
+</xml>
+[36m[INFO][0m 2019/05/27 12:43 200 238.879µs 140.207.54.79 POST /wechat
+[36m[INFO][0m 2019/05/27 12:43 200 43.341µs 61.129.7.217 GET /vue/index
+[36m[INFO][0m 2019/05/27 12:43 200 80.013µs 61.129.7.217 GET /static/js/manifest.6e135d116047bbd799ae.js
+[36m[INFO][0m 2019/05/27 12:43 200 4.409869ms 61.129.7.217 GET /static/js/app.d42ec257a105658cb7b1.js
+[36m[INFO][0m 2019/05/27 12:43 200 5.789435945s 112.17.236.173 GET /static/css/app.556c4167239f66c4c53e822adbf426d8.css
+[36m[INFO][0m 2019/05/27 12:44 200 10.482676649s 61.129.7.217 GET /static/js/vendor.8d7b051ea6412f65a038.js
+2019/05/27 12:44:09 收到事件:
+<xml><ToUserName><![CDATA[gh_75a34b17d256]]></ToUserName>
+<FromUserName><![CDATA[oSnZS5sXgKfB9eYywWnDkInsnVeo]]></FromUserName>
+<CreateTime>1558932249</CreateTime>
+<MsgType><![CDATA[event]]></MsgType>
+<Event><![CDATA[VIEW]]></Event>
+<EventKey><![CDATA[http://bci.renjiwulian.com/vue/index/#/newProject]]></EventKey>
+<MenuId>437917383</MenuId>
+</xml>
+[36m[INFO][0m 2019/05/27 12:44 200 224.369µs 140.207.54.77 POST /wechat
+[36m[INFO][0m 2019/05/27 12:44 200 78.807µs 61.151.178.172 GET /vue/index
+[36m[INFO][0m 2019/05/27 12:44 304 144.451µs 223.104.246.1 GET /static/css/app.556c4167239f66c4c53e822adbf426d8.css
+[36m[INFO][0m 2019/05/27 12:44 304 110.777µs 223.104.246.1 GET /static/js/manifest.6e135d116047bbd799ae.js
+[36m[INFO][0m 2019/05/27 12:44 304 113.799µs 223.104.246.1 GET /static/js/0.ca67e87d8c000a42e592.js
+[36m[INFO][0m 2019/05/27 12:44 304 87.538µs 223.104.246.1 GET /static/js/1.11c5a59cc1d1eb4828d2.js
+[36m[INFO][0m 2019/05/27 12:44 200 9.539975497s 112.17.236.173 GET /static/js/vendor.8d7b051ea6412f65a038.js
+[36m[INFO][0m 2019/05/27 12:44 200 162.62µs 61.129.7.217 GET /static/js/0.ca67e87d8c000a42e592.js
+[36m[INFO][0m 2019/05/27 12:44 200 118.196µs 61.129.7.217 GET /static/js/10.33a586164b874a720425.js
+[36m[INFO][0m 2019/05/27 12:44 200 123.047003ms 112.17.236.173 PUT /user/bind
+[36m[INFO][0m 2019/05/27 12:44 200 159.199µs 61.129.7.217 GET /static/js/4.deace02698e4a7e94fb8.js
+[36m[INFO][0m 2019/05/27 12:44 200 33.354393ms 61.129.7.217 GET /project/all
+2019/05/27 12:44:35 收到事件:
+<xml><ToUserName><![CDATA[gh_75a34b17d256]]></ToUserName>
+<FromUserName><![CDATA[oSnZS5tQv-jBvQ3ihdvVMUcg1wNc]]></FromUserName>
+<CreateTime>1558932275</CreateTime>
+<MsgType><![CDATA[event]]></MsgType>
+<Event><![CDATA[VIEW]]></Event>
+<EventKey><![CDATA[http://bci.renjiwulian.com/vue/index/#/newProject]]></EventKey>
+<MenuId>437917383</MenuId>
+</xml>
+[36m[INFO][0m 2019/05/27 12:44 200 233.723µs 140.207.54.80 POST /wechat
+[36m[INFO][0m 2019/05/27 12:44 200 56.135µs 61.129.7.217 GET /vue/index
+[36m[INFO][0m 2019/05/27 12:44 304 80.283µs 112.17.236.173 GET /static/css/app.556c4167239f66c4c53e822adbf426d8.css
+[36m[INFO][0m 2019/05/27 12:44 304 116.745µs 112.17.236.173 GET /static/js/manifest.6e135d116047bbd799ae.js
+[36m[INFO][0m 2019/05/27 12:44 304 72.318µs 112.17.236.173 GET /static/js/app.d42ec257a105658cb7b1.js
+[36m[INFO][0m 2019/05/27 12:44 200 203.902µs 112.17.236.173 GET /static/js/1.11c5a59cc1d1eb4828d2.js
+[36m[INFO][0m 2019/05/27 12:44 200 263.929µs 112.17.236.173 GET /static/fonts/element-icons.535877f.woff
+[36m[INFO][0m 2019/05/27 12:44 200 1.769018ms 112.17.236.173 GET /user/level/6
+[36m[INFO][0m 2019/05/27 12:44 200 1.952571ms 112.17.236.173 GET /user/level/4
+[36m[INFO][0m 2019/05/27 12:44 200 1.383009ms 112.17.236.173 GET /user/level/3
+2019/05/27 12:45:05 收到事件:
+<xml><ToUserName><![CDATA[gh_75a34b17d256]]></ToUserName>
+<FromUserName><![CDATA[oSnZS5sXgKfB9eYywWnDkInsnVeo]]></FromUserName>
+<CreateTime>1558932305</CreateTime>
+<MsgType><![CDATA[event]]></MsgType>
+<Event><![CDATA[VIEW]]></Event>
+<EventKey><![CDATA[http://bci.renjiwulian.com/vue/index/#/project]]></EventKey>
+<MenuId>437917383</MenuId>
+</xml>
+[36m[INFO][0m 2019/05/27 12:45 200 218.013µs 140.207.54.78 POST /wechat
+[36m[INFO][0m 2019/05/27 12:45 200 59.261µs 61.151.178.172 GET /vue/index
+[36m[INFO][0m 2019/05/27 12:45 304 84.18µs 223.104.246.1 GET /static/css/app.556c4167239f66c4c53e822adbf426d8.css
+[36m[INFO][0m 2019/05/27 12:45 304 29.243µs 223.104.246.1 GET /static/js/manifest.6e135d116047bbd799ae.js
+[36m[INFO][0m 2019/05/27 12:45 200 49.727539ms 223.104.246.1 GET /static/js/app.d42ec257a105658cb7b1.js
+[36m[INFO][0m 2019/05/27 12:45 200 5.449751971s 223.104.246.1 GET /static/js/vendor.8d7b051ea6412f65a038.js
+2019/05/27 12:45:17 收到事件:
+<xml><ToUserName><![CDATA[gh_75a34b17d256]]></ToUserName>
+<FromUserName><![CDATA[oSnZS5tQv-jBvQ3ihdvVMUcg1wNc]]></FromUserName>
+<CreateTime>1558932317</CreateTime>
+<MsgType><![CDATA[event]]></MsgType>
+<Event><![CDATA[VIEW]]></Event>
+<EventKey><![CDATA[http://bci.renjiwulian.com/vue/index/#/newProject]]></EventKey>
+<MenuId>437917383</MenuId>
+</xml>
+[36m[INFO][0m 2019/05/27 12:45 200 233.522µs 140.207.54.79 POST /wechat
+[36m[INFO][0m 2019/05/27 12:45 200 56.003µs 61.129.7.217 GET /vue/index
+[36m[INFO][0m 2019/05/27 12:45 304 146.268µs 112.17.236.173 GET /static/js/manifest.6e135d116047bbd799ae.js
+[36m[INFO][0m 2019/05/27 12:45 304 117.057µs 112.17.236.173 GET /static/js/vendor.8d7b051ea6412f65a038.js
+[36m[INFO][0m 2019/05/27 12:45 304 70.128µs 112.17.236.173 GET /static/js/app.d42ec257a105658cb7b1.js
+[36m[INFO][0m 2019/05/27 12:45 304 96.198µs 112.17.236.173 GET /static/js/0.ca67e87d8c000a42e592.js
+[36m[INFO][0m 2019/05/27 12:45 304 54.434µs 112.17.236.173 GET /static/js/1.11c5a59cc1d1eb4828d2.js
+[36m[INFO][0m 2019/05/27 12:45 304 63.226µs 223.104.246.1 GET /static/js/4.deace02698e4a7e94fb8.js
+[36m[INFO][0m 2019/05/27 12:45 200 30.026111ms 223.104.246.1 GET /project/all
+[36m[INFO][0m 2019/05/27 12:45 200 2.255597ms 112.17.236.173 GET /user/level/4
+[36m[INFO][0m 2019/05/27 12:45 200 1.613389ms 112.17.236.173 GET /user/level/6
+[36m[INFO][0m 2019/05/27 12:45 200 1.038736ms 112.17.236.173 GET /user/level/3
+2019/05/27 12:45:20 收到事件:
+<xml><ToUserName><![CDATA[gh_75a34b17d256]]></ToUserName>
+<FromUserName><![CDATA[oSnZS5tQv-jBvQ3ihdvVMUcg1wNc]]></FromUserName>
+<CreateTime>1558932320</CreateTime>
+<MsgType><![CDATA[event]]></MsgType>
+<Event><![CDATA[VIEW]]></Event>
+<EventKey><![CDATA[http://bci.renjiwulian.com/vue/index/#/project]]></EventKey>
+<MenuId>437917383</MenuId>
+</xml>
+[36m[INFO][0m 2019/05/27 12:45 200 215.23µs 140.207.54.79 POST /wechat
+[36m[INFO][0m 2019/05/27 12:45 200 43.767µs 61.129.7.217 GET /vue/index
+[36m[INFO][0m 2019/05/27 12:45 304 89.496µs 112.17.236.173 GET /static/css/app.556c4167239f66c4c53e822adbf426d8.css
+[36m[INFO][0m 2019/05/27 12:45 304 87.405µs 112.17.236.173 GET /static/js/4.deace02698e4a7e94fb8.js
+[36m[INFO][0m 2019/05/27 12:45 200 31.032477ms 112.17.236.173 GET /project/all
+[36m[INFO][0m 2019/05/27 12:45 200 226.395µs 112.17.236.173 GET /static/js/2.64af9f3b1f5dd3184951.js
+[36m[INFO][0m 2019/05/27 12:45 304 85.395µs 112.17.236.173 GET /static/fonts/element-icons.535877f.woff
+[36m[INFO][0m 2019/05/27 12:45 200 23.8184ms 112.17.236.173 GET /project/id/1
+[36m[INFO][0m 2019/05/27 12:45 200 24.35888ms 112.17.236.173 GET /module/project/1
+[36m[INFO][0m 2019/05/27 12:45 200 1.634421ms 112.17.236.173 GET /user/level/3
+2019/05/27 13:27:58 收到事件:
+<xml><ToUserName><![CDATA[gh_75a34b17d256]]></ToUserName>
+<FromUserName><![CDATA[oSnZS5sXgKfB9eYywWnDkInsnVeo]]></FromUserName>
+<CreateTime>1558934878</CreateTime>
+<MsgType><![CDATA[event]]></MsgType>
+<Event><![CDATA[VIEW]]></Event>
+<EventKey><![CDATA[http://bci.renjiwulian.com/vue/index/#/newProject]]></EventKey>
+<MenuId>437917383</MenuId>
+</xml>
+[36m[INFO][0m 2019/05/27 13:27 200 190.564µs 140.207.54.78 POST /wechat
+[36m[INFO][0m 2019/05/27 13:27 200 55.033µs 61.151.178.172 GET /vue/index
+[36m[INFO][0m 2019/05/27 13:27 304 150.554µs 223.104.246.1 GET /static/css/app.556c4167239f66c4c53e822adbf426d8.css
+[36m[INFO][0m 2019/05/27 13:27 304 117.313µs 223.104.246.1 GET /static/js/manifest.6e135d116047bbd799ae.js
+[36m[INFO][0m 2019/05/27 13:27 304 85.979µs 223.104.246.1 GET /static/js/vendor.8d7b051ea6412f65a038.js
+[36m[INFO][0m 2019/05/27 13:27 304 141.32µs 223.104.246.1 GET /static/js/app.d42ec257a105658cb7b1.js
+[36m[INFO][0m 2019/05/27 13:28 304 84.434µs 223.104.246.1 GET /static/js/0.ca67e87d8c000a42e592.js
+[36m[INFO][0m 2019/05/27 13:28 304 61.347µs 223.104.246.1 GET /static/js/1.11c5a59cc1d1eb4828d2.js
+2019/05/27 13:28:03 收到事件:
+<xml><ToUserName><![CDATA[gh_75a34b17d256]]></ToUserName>
+<FromUserName><![CDATA[oSnZS5sXgKfB9eYywWnDkInsnVeo]]></FromUserName>
+<CreateTime>1558934883</CreateTime>
+<MsgType><![CDATA[event]]></MsgType>
+<Event><![CDATA[VIEW]]></Event>
+<EventKey><![CDATA[http://bci.renjiwulian.com/vue/index/#/project]]></EventKey>
+<MenuId>437917383</MenuId>
+</xml>
+[36m[INFO][0m 2019/05/27 13:28 200 266.385µs 140.207.54.78 POST /wechat
+[36m[INFO][0m 2019/05/27 13:28 200 61.35µs 61.151.178.172 GET /vue/index
+[36m[INFO][0m 2019/05/27 13:28 304 119.367µs 223.104.246.1 GET /static/js/4.deace02698e4a7e94fb8.js
+[36m[INFO][0m 2019/05/27 13:28 200 34.043917ms 223.104.246.1 GET /project/all
+[36m[INFO][0m 2019/05/27 13:28 304 104.779µs 223.104.246.1 GET /static/js/2.64af9f3b1f5dd3184951.js
+[36m[INFO][0m 2019/05/27 13:28 304 81.979µs 223.104.246.1 GET /static/fonts/element-icons.535877f.woff
+[36m[INFO][0m 2019/05/27 13:28 200 5.602042ms 223.104.246.1 GET /project/id/4
+[36m[INFO][0m 2019/05/27 13:28 200 3.066377ms 223.104.246.1 GET /module/project/4
+[36m[INFO][0m 2019/05/27 13:28 200 32.51347ms 223.104.246.1 GET /project/all
+[36m[INFO][0m 2019/05/27 13:28 200 26.69325ms 223.104.246.1 GET /module/project/1
+[36m[INFO][0m 2019/05/27 13:28 200 28.8526ms 223.104.246.1 GET /project/id/1
+2019/05/27 14:37:49 收到事件:
+<xml><ToUserName><![CDATA[gh_75a34b17d256]]></ToUserName>
+<FromUserName><![CDATA[oSnZS5tQv-jBvQ3ihdvVMUcg1wNc]]></FromUserName>
+<CreateTime>1558939069</CreateTime>
+<MsgType><![CDATA[event]]></MsgType>
+<Event><![CDATA[VIEW]]></Event>
+<EventKey><![CDATA[http://bci.renjiwulian.com/vue/index/#/newProject]]></EventKey>
+<MenuId>437917383</MenuId>
+</xml>
+[36m[INFO][0m 2019/05/27 14:37 200 193.498µs 140.207.54.79 POST /wechat
+[36m[INFO][0m 2019/05/27 14:37 200 43.654µs 61.129.7.217 GET /vue/index
+[36m[INFO][0m 2019/05/27 14:37 304 145.333µs 112.17.236.173 GET /static/css/app.556c4167239f66c4c53e822adbf426d8.css
+[36m[INFO][0m 2019/05/27 14:37 304 116.016µs 112.17.236.173 GET /static/js/manifest.6e135d116047bbd799ae.js
+[36m[INFO][0m 2019/05/27 14:37 304 26.269µs 112.17.236.173 GET /static/js/vendor.8d7b051ea6412f65a038.js
+[36m[INFO][0m 2019/05/27 14:37 304 142.657µs 112.17.236.173 GET /static/js/app.d42ec257a105658cb7b1.js
+[36m[INFO][0m 2019/05/27 14:37 304 90.8µs 112.17.236.173 GET /static/js/0.ca67e87d8c000a42e592.js
+[36m[INFO][0m 2019/05/27 14:37 304 27.374µs 112.17.236.173 GET /static/js/1.11c5a59cc1d1eb4828d2.js
+[36m[INFO][0m 2019/05/27 14:37 304 83.542µs 112.17.236.173 GET /static/js/10.33a586164b874a720425.js
+2019/05/27 14:38:02 service.user.Bind:	service.user.exchangeOpenId:	openid和code不可同时为空
+[36m[INFO][0m 2019/05/27 14:38 202 90.839µs 112.17.236.173 PUT /user/bind
+2019/05/27 14:38:05 service.user.Bind:	service.user.exchangeOpenId:	openid和code不可同时为空
+[36m[INFO][0m 2019/05/27 14:38 202 91.565µs 112.17.236.173 PUT /user/bind
+2019/05/27 14:38:13 收到事件:
+<xml><ToUserName><![CDATA[gh_75a34b17d256]]></ToUserName>
+<FromUserName><![CDATA[oSnZS5tQv-jBvQ3ihdvVMUcg1wNc]]></FromUserName>
+<CreateTime>1558939093</CreateTime>
+<MsgType><![CDATA[event]]></MsgType>
+<Event><![CDATA[VIEW]]></Event>
+<EventKey><![CDATA[http://bci.renjiwulian.com/vue/index/#/newProject]]></EventKey>
+<MenuId>437917383</MenuId>
+</xml>
+[36m[INFO][0m 2019/05/27 14:38 200 206.198µs 140.207.54.80 POST /wechat
+[36m[INFO][0m 2019/05/27 14:38 200 66.715µs 61.129.7.217 GET /vue/index
+2019/05/27 14:38:21 收到事件:
+<xml><ToUserName><![CDATA[gh_75a34b17d256]]></ToUserName>
+<FromUserName><![CDATA[oSnZS5tQv-jBvQ3ihdvVMUcg1wNc]]></FromUserName>
+<CreateTime>1558939101</CreateTime>
+<MsgType><![CDATA[event]]></MsgType>
+<Event><![CDATA[VIEW]]></Event>
+<EventKey><![CDATA[http://bci.renjiwulian.com/vue/index/#/project]]></EventKey>
+<MenuId>437917383</MenuId>
+</xml>
+[36m[INFO][0m 2019/05/27 14:38 200 203.421µs 140.207.54.79 POST /wechat
+[36m[INFO][0m 2019/05/27 14:38 200 58.409µs 61.129.7.217 GET /vue/index
+[36m[INFO][0m 2019/05/27 14:38 304 78.503µs 112.17.236.173 GET /static/js/4.deace02698e4a7e94fb8.js
+2019/05/27 14:38:26 收到事件:
+<xml><ToUserName><![CDATA[gh_75a34b17d256]]></ToUserName>
+<FromUserName><![CDATA[oSnZS5tQv-jBvQ3ihdvVMUcg1wNc]]></FromUserName>
+<CreateTime>1558939106</CreateTime>
+<MsgType><![CDATA[event]]></MsgType>
+<Event><![CDATA[VIEW]]></Event>
+<EventKey><![CDATA[http://bci.renjiwulian.com/vue/index/#/pace]]></EventKey>
+<MenuId>437917383</MenuId>
+</xml>
+[36m[INFO][0m 2019/05/27 14:38 200 245.301µs 140.207.54.80 POST /wechat
+[36m[INFO][0m 2019/05/27 14:38 200 43.977µs 61.129.7.217 GET /vue/index
+[36m[INFO][0m 2019/05/27 14:38 200 146.077µs 112.17.236.173 GET /static/js/15.83b48c7c0d3eda033986.js
+[36m[INFO][0m 2019/05/27 14:38 200 30.132067ms 112.17.236.173 GET /project/all
+2019/05/27 14:38:31 收到事件:
+<xml><ToUserName><![CDATA[gh_75a34b17d256]]></ToUserName>
+<FromUserName><![CDATA[oSnZS5tQv-jBvQ3ihdvVMUcg1wNc]]></FromUserName>
+<CreateTime>1558939111</CreateTime>
+<MsgType><![CDATA[event]]></MsgType>
+<Event><![CDATA[VIEW]]></Event>
+<EventKey><![CDATA[https://open.weixin.qq.com/connect/oauth2/authorize?appid=wxe8f9250251763487&response_type=code&scope=snsapi_base&redirect_uri=http://bci.renjiwulian.com/vue/index/#/&state=12#wechat_redirect]]></EventKey>
+<MenuId>437917383</MenuId>
+</xml>
+[36m[INFO][0m 2019/05/27 14:38 200 232.175µs 140.207.54.79 POST /wechat
+[36m[INFO][0m 2019/05/27 14:38 200 56.809µs 58.247.212.69 GET /vue/index
+[36m[INFO][0m 2019/05/27 14:38 200 81.927498ms 112.17.236.173 PUT /user/bind
+[36m[INFO][0m 2019/05/27 14:38 200 36.388511ms 58.247.212.69 GET /project/all
+[36m[INFO][0m 2019/05/27 14:38 200 64.194µs 101.89.239.232 GET /vue/index
+[36m[INFO][0m 2019/05/27 14:38 200 104.567µs 101.89.239.232 GET /static/js/manifest.6e135d116047bbd799ae.js
+[36m[INFO][0m 2019/05/27 14:38 200 396.521986ms 101.89.239.232 GET /static/js/vendor.8d7b051ea6412f65a038.js
+[36m[INFO][0m 2019/05/27 14:38 200 8.324994ms 101.89.239.232 GET /static/js/app.d42ec257a105658cb7b1.js
+2019/05/27 14:38:51 收到事件:
+<xml><ToUserName><![CDATA[gh_75a34b17d256]]></ToUserName>
+<FromUserName><![CDATA[oSnZS5tQv-jBvQ3ihdvVMUcg1wNc]]></FromUserName>
+<CreateTime>1558939131</CreateTime>
+<MsgType><![CDATA[event]]></MsgType>
+<Event><![CDATA[VIEW]]></Event>
+<EventKey><![CDATA[http://bci.renjiwulian.com/vue/index/#/newProject]]></EventKey>
+<MenuId>437917383</MenuId>
+</xml>
+[36m[INFO][0m 2019/05/27 14:38 200 225.36µs 140.207.54.80 POST /wechat
+[36m[INFO][0m 2019/05/27 14:38 200 65.191µs 61.129.7.217 GET /vue/index
+[36m[INFO][0m 2019/05/27 14:38 304 76.009µs 112.17.236.173 GET /static/fonts/element-icons.535877f.woff
+[36m[INFO][0m 2019/05/27 14:38 200 1.916386ms 112.17.236.173 GET /user/level/4
+[36m[INFO][0m 2019/05/27 14:38 200 1.112473ms 112.17.236.173 GET /user/level/6
+[36m[INFO][0m 2019/05/27 14:38 200 1.085742ms 112.17.236.173 GET /user/level/3
+[36m[INFO][0m 2019/05/27 14:39 200 44.037µs 61.151.178.197 GET /vue/index
+[36m[INFO][0m 2019/05/27 14:39 200 102.662µs 61.151.178.197 GET /static/js/manifest.6e135d116047bbd799ae.js
+[36m[INFO][0m 2019/05/27 14:39 200 718.146589ms 61.151.178.197 GET /static/js/vendor.8d7b051ea6412f65a038.js
+[36m[INFO][0m 2019/05/27 14:39 200 9.355768ms 61.151.178.197 GET /static/js/app.d42ec257a105658cb7b1.js
+[36m[INFO][0m 2019/05/27 14:44 200 53.45µs 223.93.188.66 GET /vue/index
+[36m[INFO][0m 2019/05/27 14:44 200 150.938µs 223.93.188.66 GET /static/js/manifest.6e135d116047bbd799ae.js
+[36m[INFO][0m 2019/05/27 14:44 200 2.391465461s 223.93.188.66 GET /static/css/app.556c4167239f66c4c53e822adbf426d8.css
+[36m[INFO][0m 2019/05/27 14:44 200 2.347400037s 223.93.188.66 GET /static/js/app.d42ec257a105658cb7b1.js
+[36m[INFO][0m 2019/05/27 14:45 200 13.157028775s 223.93.188.66 GET /static/js/vendor.8d7b051ea6412f65a038.js
+[36m[INFO][0m 2019/05/27 14:45 200 197.228µs 223.93.188.66 GET /static/js/1.11c5a59cc1d1eb4828d2.js
+[36m[INFO][0m 2019/05/27 14:45 200 58.965µs 223.93.188.66 GET /static/js/0.ca67e87d8c000a42e592.js
+[36m[INFO][0m 2019/05/27 14:45 200 146.743µs 223.93.188.66 GET /static/js/10.33a586164b874a720425.js
+2019/05/27 14:45:31 service.user.Bind:	service.user.exchangeOpenId:	openid和code不可同时为空
+[36m[INFO][0m 2019/05/27 14:45 202 108.818µs 223.93.188.66 PUT /user/bind
+2019/05/27 14:45:34 service.user.Bind:	service.user.exchangeOpenId:	openid和code不可同时为空
+[36m[INFO][0m 2019/05/27 14:45 202 96.915µs 223.93.188.66 PUT /user/bind
+2019/05/27 15:05:12 service.user.Bind:	service.user.exchangeOpenId:	openid和code不可同时为空
+[36m[INFO][0m 2019/05/27 15:05 202 162.357µs 223.93.188.66 PUT /user/bind
+[36m[INFO][0m 2019/05/27 15:05 200 41.676µs 223.93.188.66 GET /vue/index
+[36m[INFO][0m 2019/05/27 15:05 304 86.793µs 223.93.188.66 GET /static/css/app.556c4167239f66c4c53e822adbf426d8.css
+[36m[INFO][0m 2019/05/27 15:05 304 89.176µs 223.93.188.66 GET /static/js/vendor.8d7b051ea6412f65a038.js
+[36m[INFO][0m 2019/05/27 15:05 304 66.517µs 223.93.188.66 GET /static/js/manifest.6e135d116047bbd799ae.js
+[36m[INFO][0m 2019/05/27 15:05 304 37.998µs 223.93.188.66 GET /static/js/app.d42ec257a105658cb7b1.js
+[36m[INFO][0m 2019/05/27 15:05 304 93.729µs 223.93.188.66 GET /static/js/0.ca67e87d8c000a42e592.js
+[36m[INFO][0m 2019/05/27 15:05 304 56.837µs 223.93.188.66 GET /static/js/10.33a586164b874a720425.js
+[36m[INFO][0m 2019/05/27 15:05 200 79.267764ms 223.93.188.66 PUT /user/bind
+[36m[INFO][0m 2019/05/27 15:05 200 176.937µs 223.93.188.66 GET /static/js/4.deace02698e4a7e94fb8.js
+[36m[INFO][0m 2019/05/27 15:05 200 31.385988ms 223.93.188.66 GET /project/all
+[36m[INFO][0m 2019/05/27 15:05 200 37.514µs 223.93.188.66 GET /vue/index
+[36m[INFO][0m 2019/05/27 15:05 304 79.904µs 223.93.188.66 GET /static/js/1.11c5a59cc1d1eb4828d2.js
+[36m[INFO][0m 2019/05/27 15:05 200 268.92µs 223.93.188.66 GET /static/fonts/element-icons.535877f.woff
+[36m[INFO][0m 2019/05/27 15:05 200 1.536875ms 223.93.188.66 GET /user/level/4
+[36m[INFO][0m 2019/05/27 15:05 200 1.006796ms 223.93.188.66 GET /user/level/3
+[36m[INFO][0m 2019/05/27 15:05 200 1.069688ms 223.93.188.66 GET /user/level/6
+2019/05/27 15:16:40 service.project.Create:	models.project.Create:	Error 1406: Data too long for column 'content' at row 1
+[36m[INFO][0m 2019/05/27 15:16 202 1.784025ms 223.93.188.66 POST /project
+
+[35m(/root/go/src/github.com/pantazheng/bci/models/project.go:40)[0m 
+[33m[2019-05-27 15:16:40][0m [31;1m Error 1406: Data too long for column 'content' at row 1 [0m
+
+[35m(/root/go/src/github.com/pantazheng/bci/models/project.go:40)[0m 
+[33m[2019-05-27 15:16:46][0m [31;1m Error 1406: Data too long for column 'content' at row 1 [0m
+2019/05/27 15:16:46 service.project.Create:	models.project.Create:	Error 1406: Data too long for column 'content' at row 1
+[36m[INFO][0m 2019/05/27 15:16 202 1.826152ms 223.93.188.66 POST /project
+2019/05/27 16:13:10 收到事件:
+<xml><ToUserName><![CDATA[gh_75a34b17d256]]></ToUserName>
+<FromUserName><![CDATA[oSnZS5tQv-jBvQ3ihdvVMUcg1wNc]]></FromUserName>
+<CreateTime>1558944790</CreateTime>
+<MsgType><![CDATA[event]]></MsgType>
+<Event><![CDATA[VIEW]]></Event>
+<EventKey><![CDATA[http://bci.renjiwulian.com/vue/index/#/newProject]]></EventKey>
+<MenuId>437917383</MenuId>
+</xml>
+[36m[INFO][0m 2019/05/27 16:13 200 175.536µs 140.207.54.79 POST /wechat
+[36m[INFO][0m 2019/05/27 16:13 200 43.27µs 61.129.7.217 GET /vue/index
+[36m[INFO][0m 2019/05/27 16:13 304 120.973µs 112.17.236.173 GET /static/css/app.556c4167239f66c4c53e822adbf426d8.css
+[36m[INFO][0m 2019/05/27 16:13 304 133.831µs 112.17.236.173 GET /static/js/vendor.8d7b051ea6412f65a038.js
+[36m[INFO][0m 2019/05/27 16:13 304 25.954µs 112.17.236.173 GET /static/js/manifest.6e135d116047bbd799ae.js
+[36m[INFO][0m 2019/05/27 16:13 304 78.108µs 112.17.236.173 GET /static/js/app.d42ec257a105658cb7b1.js
+[36m[INFO][0m 2019/05/27 16:13 304 89.975µs 112.17.236.173 GET /static/js/0.ca67e87d8c000a42e592.js
+[36m[INFO][0m 2019/05/27 16:13 304 56.638µs 112.17.236.173 GET /static/js/1.11c5a59cc1d1eb4828d2.js
+[36m[INFO][0m 2019/05/27 16:13 304 86.142µs 112.17.236.173 GET /static/js/10.33a586164b874a720425.js
+[36m[INFO][0m 2019/05/27 16:15 200 255.890633ms 140.207.54.80 POST /wechat
+2019/05/27 16:15:29 收到事件:
+<xml><ToUserName><![CDATA[gh_75a34b17d256]]></ToUserName>
+<FromUserName><![CDATA[oSnZS5uROidW5Um7c1MoX0VARaVw]]></FromUserName>
+<CreateTime>1558944929</CreateTime>
+<MsgType><![CDATA[event]]></MsgType>
+<Event><![CDATA[VIEW]]></Event>
+<EventKey><![CDATA[http://bci.renjiwulian.com/vue/index/#/pace]]></EventKey>
+<MenuId>437917383</MenuId>
+</xml>
+[36m[INFO][0m 2019/05/27 16:15 200 227.949µs 140.207.54.80 POST /wechat
+[36m[INFO][0m 2019/05/27 16:15 200 76.234µs 101.226.225.84 GET /vue/index
+[36m[INFO][0m 2019/05/27 16:15 200 70.962µs 36.23.76.0 GET /static/js/manifest.6e135d116047bbd799ae.js
+[36m[INFO][0m 2019/05/27 16:15 200 59.225787ms 36.23.76.0 GET /static/js/app.d42ec257a105658cb7b1.js
+[36m[INFO][0m 2019/05/27 16:15 200 3.388080128s 36.23.76.0 GET /static/css/app.556c4167239f66c4c53e822adbf426d8.css
+[36m[INFO][0m 2019/05/27 16:15 200 11.897817806s 36.23.76.0 GET /static/js/vendor.8d7b051ea6412f65a038.js
+2019/05/27 16:19:15 收到事件:
+<xml><ToUserName><![CDATA[gh_75a34b17d256]]></ToUserName>
+<FromUserName><![CDATA[oSnZS5uROidW5Um7c1MoX0VARaVw]]></FromUserName>
+<CreateTime>1558945155</CreateTime>
+<MsgType><![CDATA[event]]></MsgType>
+<Event><![CDATA[VIEW]]></Event>
+<EventKey><![CDATA[https://open.weixin.qq.com/connect/oauth2/authorize?appid=wxe8f9250251763487&response_type=code&scope=snsapi_base&redirect_uri=http://bci.renjiwulian.com/vue/index/#/&state=12#wechat_redirect]]></EventKey>
+<MenuId>437917383</MenuId>
+</xml>
+[36m[INFO][0m 2019/05/27 16:19 200 234.357µs 140.207.54.80 POST /wechat
+[36m[INFO][0m 2019/05/27 16:19 200 57.455µs 101.226.225.84 GET /vue/index
+[36m[INFO][0m 2019/05/27 16:19 200 125.794µs 101.226.225.84 GET /static/js/manifest.6e135d116047bbd799ae.js
+[36m[INFO][0m 2019/05/27 16:19 200 2.258461659s 101.226.225.84 GET /static/js/app.d42ec257a105658cb7b1.js
+[36m[INFO][0m 2019/05/27 16:19 200 7.533509054s 36.23.76.0 GET /static/css/app.556c4167239f66c4c53e822adbf426d8.css
+[36m[INFO][0m 2019/05/27 16:19 200 9.996156833s 101.226.225.84 GET /static/js/vendor.8d7b051ea6412f65a038.js
+[36m[INFO][0m 2019/05/27 16:19 200 8.671600337s 36.23.76.0 GET /static/js/vendor.8d7b051ea6412f65a038.js
+[36m[INFO][0m 2019/05/27 16:19 200 204.834µs 101.226.225.84 GET /static/js/0.ca67e87d8c000a42e592.js
+[36m[INFO][0m 2019/05/27 16:19 200 141.908µs 101.226.225.84 GET /static/js/10.33a586164b874a720425.js
+2019/05/27 16:19:59 收到事件:
+<xml><ToUserName><![CDATA[gh_75a34b17d256]]></ToUserName>
+<FromUserName><![CDATA[oSnZS5uROidW5Um7c1MoX0VARaVw]]></FromUserName>
+<CreateTime>1558945199</CreateTime>
+<MsgType><![CDATA[event]]></MsgType>
+<Event><![CDATA[VIEW]]></Event>
+<EventKey><![CDATA[https://open.weixin.qq.com/connect/oauth2/authorize?appid=wxe8f9250251763487&response_type=code&scope=snsapi_base&redirect_uri=http://bci.renjiwulian.com/vue/index/#/&state=12#wechat_redirect]]></EventKey>
+<MenuId>437917383</MenuId>
+</xml>
+[36m[INFO][0m 2019/05/27 16:19 200 181.788µs 140.207.54.79 POST /wechat
+[36m[INFO][0m 2019/05/27 16:19 200 42.076µs 101.226.225.84 GET /vue/index
+[36m[INFO][0m 2019/05/27 16:20 200 2.389073935s 36.23.76.0 GET /static/css/app.556c4167239f66c4c53e822adbf426d8.css
+2019/05/27 16:20:10 收到事件:
+<xml><ToUserName><![CDATA[gh_75a34b17d256]]></ToUserName>
+<FromUserName><![CDATA[oSnZS5uROidW5Um7c1MoX0VARaVw]]></FromUserName>
+<CreateTime>1558945210</CreateTime>
+<MsgType><![CDATA[event]]></MsgType>
+<Event><![CDATA[VIEW]]></Event>
+<EventKey><![CDATA[http://bci.renjiwulian.com/vue/index/#/frame]]></EventKey>
+<MenuId>437917383</MenuId>
+</xml>
+[36m[INFO][0m 2019/05/27 16:20 200 216.736µs 140.207.54.79 POST /wechat
+[36m[INFO][0m 2019/05/27 16:20 200 68.85µs 58.246.221.142 GET /vue/index
+[36m[INFO][0m 2019/05/27 16:20 200 169.234µs 36.23.76.0 GET /static/js/6.cc34007d57a847864e30.js
+[36m[INFO][0m 2019/05/27 16:20 200 32.352685ms 36.23.76.0 GET /project/all
+2019/05/27 16:20:20 收到事件:
+<xml><ToUserName><![CDATA[gh_75a34b17d256]]></ToUserName>
+<FromUserName><![CDATA[oSnZS5uROidW5Um7c1MoX0VARaVw]]></FromUserName>
+<CreateTime>1558945220</CreateTime>
+<MsgType><![CDATA[event]]></MsgType>
+<Event><![CDATA[VIEW]]></Event>
+<EventKey><![CDATA[http://bci.renjiwulian.com/vue/index/#/newProject]]></EventKey>
+<MenuId>437917383</MenuId>
+</xml>
+[36m[INFO][0m 2019/05/27 16:20 200 207.213µs 140.207.54.79 POST /wechat
+[36m[INFO][0m 2019/05/27 16:20 200 44.244µs 101.226.225.84 GET /vue/index
+[36m[INFO][0m 2019/05/27 16:20 200 201.251µs 36.23.76.0 GET /static/js/1.11c5a59cc1d1eb4828d2.js
+2019/05/27 16:20:25 收到事件:
+<xml><ToUserName><![CDATA[gh_75a34b17d256]]></ToUserName>
+<FromUserName><![CDATA[oSnZS5uROidW5Um7c1MoX0VARaVw]]></FromUserName>
+<CreateTime>1558945225</CreateTime>
+<MsgType><![CDATA[event]]></MsgType>
+<Event><![CDATA[VIEW]]></Event>
+<EventKey><![CDATA[http://bci.renjiwulian.com/vue/index/#/project]]></EventKey>
+<MenuId>437917383</MenuId>
+</xml>
+[36m[INFO][0m 2019/05/27 16:20 200 213.704µs 140.207.54.79 POST /wechat
+[36m[INFO][0m 2019/05/27 16:20 200 56.698µs 101.226.225.84 GET /vue/index
+[36m[INFO][0m 2019/05/27 16:20 200 119.709µs 36.23.76.0 GET /static/js/4.deace02698e4a7e94fb8.js
+2019/05/27 16:20:39 收到事件:
+<xml><ToUserName><![CDATA[gh_75a34b17d256]]></ToUserName>
+<FromUserName><![CDATA[oSnZS5uROidW5Um7c1MoX0VARaVw]]></FromUserName>
+<CreateTime>1558945239</CreateTime>
+<MsgType><![CDATA[event]]></MsgType>
+<Event><![CDATA[VIEW]]></Event>
+<EventKey><![CDATA[http://bci.renjiwulian.com/vue/index/#/mission]]></EventKey>
+<MenuId>437917383</MenuId>
+</xml>
+[36m[INFO][0m 2019/05/27 16:20 200 214.788µs 140.207.54.79 POST /wechat
+[36m[INFO][0m 2019/05/27 16:20 200 57.959µs 101.226.225.84 GET /vue/index
+[36m[INFO][0m 2019/05/27 16:20 200 157.391µs 36.23.76.0 GET /static/js/manifest.6e135d116047bbd799ae.js
+[36m[INFO][0m 2019/05/27 16:20 200 331.16µs 36.23.76.0 GET /static/js/app.d42ec257a105658cb7b1.js
+[36m[INFO][0m 2019/05/27 16:20 200 246.536µs 36.23.76.0 GET /static/js/7.4a8752bde963da2e870a.js
+[36m[INFO][0m 2019/05/27 16:20 200 6.499501ms 36.23.76.0 GET /mission/all
+2019/05/27 16:21:15 收到事件:
+<xml><ToUserName><![CDATA[gh_75a34b17d256]]></ToUserName>
+<FromUserName><![CDATA[oSnZS5uROidW5Um7c1MoX0VARaVw]]></FromUserName>
+<CreateTime>1558945275</CreateTime>
+<MsgType><![CDATA[event]]></MsgType>
+<Event><![CDATA[VIEW]]></Event>
+<EventKey><![CDATA[https://open.weixin.qq.com/connect/oauth2/authorize?appid=wxe8f9250251763487&response_type=code&scope=snsapi_base&redirect_uri=http://bci.renjiwulian.com/vue/index/#/&state=12#wechat_redirect]]></EventKey>
+<MenuId>437917383</MenuId>
+</xml>
+[36m[INFO][0m 2019/05/27 16:21 200 233.351µs 140.207.54.79 POST /wechat
+[36m[INFO][0m 2019/05/27 16:21 200 43.373µs 58.246.221.142 GET /vue/index
+2019/05/27 16:22:30 service.user.Bind:	绑定必须有同时电话和姓名信息	
+[36m[INFO][0m 2019/05/27 16:22 202 98.252335ms 36.23.76.0 PUT /user/bind
+2019/05/27 16:22:36 service.user.Bind:	service.user.exchangeOpenId:	ExchangeToken,未换取到OpenID,请检查用户Code
+[36m[INFO][0m 2019/05/27 16:22 202 28.427501ms 36.23.76.0 PUT /user/bind
+2019/05/27 16:22:44 service.user.Bind:	service.user.exchangeOpenId:	ExchangeToken,未换取到OpenID,请检查用户Code
+[36m[INFO][0m 2019/05/27 16:22 202 36.93689ms 36.23.76.0 PUT /user/bind
+2019/05/27 16:22:46 service.user.Bind:	service.user.exchangeOpenId:	ExchangeToken,未换取到OpenID,请检查用户Code
+[36m[INFO][0m 2019/05/27 16:22 202 33.041366ms 36.23.76.0 PUT /user/bind
+2019/05/27 16:22:55 收到事件:
+<xml><ToUserName><![CDATA[gh_75a34b17d256]]></ToUserName>
+<FromUserName><![CDATA[oSnZS5uROidW5Um7c1MoX0VARaVw]]></FromUserName>
+<CreateTime>1558945375</CreateTime>
+<MsgType><![CDATA[event]]></MsgType>
+<Event><![CDATA[VIEW]]></Event>
+<EventKey><![CDATA[http://bci.renjiwulian.com/vue/index/#/pace]]></EventKey>
+<MenuId>437917383</MenuId>
+</xml>
+[36m[INFO][0m 2019/05/27 16:22 200 267.502µs 140.207.54.80 POST /wechat
+[36m[INFO][0m 2019/05/27 16:22 200 44.673µs 101.226.225.84 GET /vue/index
+[36m[INFO][0m 2019/05/27 16:22 200 106.398µs 36.23.76.0 GET /static/js/15.83b48c7c0d3eda033986.js
+[36m[INFO][0m 2019/05/27 16:22 200 32.895039ms 36.23.76.0 GET /project/all
+2019/05/27 16:30:06 收到事件:
+<xml><ToUserName><![CDATA[gh_75a34b17d256]]></ToUserName>
+<FromUserName><![CDATA[oSnZS5tQv-jBvQ3ihdvVMUcg1wNc]]></FromUserName>
+<CreateTime>1558945806</CreateTime>
+<MsgType><![CDATA[event]]></MsgType>
+<Event><![CDATA[VIEW]]></Event>
+<EventKey><![CDATA[http://bci.renjiwulian.com/vue/index/#/newProject]]></EventKey>
+<MenuId>437917383</MenuId>
+</xml>
+[36m[INFO][0m 2019/05/27 16:30 200 234.155µs 140.207.54.80 POST /wechat
+[36m[INFO][0m 2019/05/27 16:30 200 55.091µs 61.129.7.217 GET /vue/index
+2019/05/27 16:31:00 收到事件:
+<xml><ToUserName><![CDATA[gh_75a34b17d256]]></ToUserName>
+<FromUserName><![CDATA[oSnZS5tQv-jBvQ3ihdvVMUcg1wNc]]></FromUserName>
+<CreateTime>1558945860</CreateTime>
+<MsgType><![CDATA[event]]></MsgType>
+<Event><![CDATA[VIEW]]></Event>
+<EventKey><![CDATA[https://open.weixin.qq.com/connect/oauth2/authorize?appid=wxe8f9250251763487&response_type=code&scope=snsapi_base&redirect_uri=http://bci.renjiwulian.com/vue/index/#/&state=12#wechat_redirect]]></EventKey>
+<MenuId>437917383</MenuId>
+</xml>
+[36m[INFO][0m 2019/05/27 16:31 200 220.683µs 140.207.54.79 POST /wechat
+[36m[INFO][0m 2019/05/27 16:31 200 58.476µs 61.129.7.217 GET /vue/index
+2019/05/27 16:31:10 收到事件:
+<xml><ToUserName><![CDATA[gh_75a34b17d256]]></ToUserName>
+<FromUserName><![CDATA[oSnZS5tQv-jBvQ3ihdvVMUcg1wNc]]></FromUserName>
+<CreateTime>1558945870</CreateTime>
+<MsgType><![CDATA[event]]></MsgType>
+<Event><![CDATA[unsubscribe]]></Event>
+<EventKey><![CDATA[]]></EventKey>
+</xml>
+[36m[INFO][0m 2019/05/27 16:31 200 191.915µs 140.207.54.79 POST /wechat
+[36m[INFO][0m 2019/05/27 16:31 200 201.250477ms 140.207.54.80 POST /wechat
+2019/05/27 16:31:17 收到事件:
+<xml><ToUserName><![CDATA[gh_75a34b17d256]]></ToUserName>
+<FromUserName><![CDATA[oSnZS5tQv-jBvQ3ihdvVMUcg1wNc]]></FromUserName>
+<CreateTime>1558945877</CreateTime>
+<MsgType><![CDATA[event]]></MsgType>
+<Event><![CDATA[VIEW]]></Event>
+<EventKey><![CDATA[https://open.weixin.qq.com/connect/oauth2/authorize?appid=wxe8f9250251763487&response_type=code&scope=snsapi_base&redirect_uri=http://bci.renjiwulian.com/vue/index/#/&state=12#wechat_redirect]]></EventKey>
+<MenuId>437917383</MenuId>
+</xml>
+[36m[INFO][0m 2019/05/27 16:31 200 215.869µs 140.207.54.80 POST /wechat
+[36m[INFO][0m 2019/05/27 16:31 200 43.785µs 61.129.7.217 GET /vue/index
+[36m[INFO][0m 2019/05/27 16:31 200 68.569877ms 112.17.236.173 PUT /user/bind
+[36m[INFO][0m 2019/05/27 16:31 304 92.25µs 61.129.7.217 GET /static/js/4.deace02698e4a7e94fb8.js
+[36m[INFO][0m 2019/05/27 16:31 200 33.423217ms 61.129.7.217 GET /project/all
+2019/05/27 16:31:35 收到事件:
+<xml><ToUserName><![CDATA[gh_75a34b17d256]]></ToUserName>
+<FromUserName><![CDATA[oSnZS5tQv-jBvQ3ihdvVMUcg1wNc]]></FromUserName>
+<CreateTime>1558945895</CreateTime>
+<MsgType><![CDATA[event]]></MsgType>
+<Event><![CDATA[VIEW]]></Event>
+<EventKey><![CDATA[http://bci.renjiwulian.com/vue/index/#/newProject]]></EventKey>
+<MenuId>437917383</MenuId>
+</xml>
+[36m[INFO][0m 2019/05/27 16:31 200 211.709µs 140.207.54.79 POST /wechat
+[36m[INFO][0m 2019/05/27 16:31 200 55.821µs 58.247.212.69 GET /vue/index
+[36m[INFO][0m 2019/05/27 16:31 304 81.019µs 112.17.236.173 GET /static/fonts/element-icons.535877f.woff
+[36m[INFO][0m 2019/05/27 16:31 200 1.895585ms 112.17.236.173 GET /user/level/4
+[36m[INFO][0m 2019/05/27 16:31 200 1.307892ms 112.17.236.173 GET /user/level/6
+[36m[INFO][0m 2019/05/27 16:31 200 1.063747ms 112.17.236.173 GET /user/level/3
+[36m[INFO][0m 2019/05/27 16:31 200 21.135963ms 112.17.236.173 POST /project
+[36m[INFO][0m 2019/05/27 16:31 200 35.674052ms 112.17.236.173 GET /project/all
+2019/05/27 16:32:19 收到事件:
+<xml><ToUserName><![CDATA[gh_75a34b17d256]]></ToUserName>
+<FromUserName><![CDATA[oSnZS5tQv-jBvQ3ihdvVMUcg1wNc]]></FromUserName>
+<CreateTime>1558945939</CreateTime>
+<MsgType><![CDATA[event]]></MsgType>
+<Event><![CDATA[VIEW]]></Event>
+<EventKey><![CDATA[http://bci.renjiwulian.com/vue/index/#/newProject]]></EventKey>
+<MenuId>437917383</MenuId>
+</xml>
+[36m[INFO][0m 2019/05/27 16:32 200 234.152µs 140.207.54.80 POST /wechat
+[36m[INFO][0m 2019/05/27 16:32 200 55.064µs 61.129.7.217 GET /vue/index
+[36m[INFO][0m 2019/05/27 16:32 200 2.278829ms 112.17.236.173 GET /user/level/4
+[36m[INFO][0m 2019/05/27 16:32 200 1.48556ms 112.17.236.173 GET /user/level/6
+[36m[INFO][0m 2019/05/27 16:32 200 1.383609ms 112.17.236.173 GET /user/level/3
+2019/05/27 16:32:34 收到事件:
+<xml><ToUserName><![CDATA[gh_75a34b17d256]]></ToUserName>
+<FromUserName><![CDATA[oSnZS5tQv-jBvQ3ihdvVMUcg1wNc]]></FromUserName>
+<CreateTime>1558945954</CreateTime>
+<MsgType><![CDATA[event]]></MsgType>
+<Event><![CDATA[VIEW]]></Event>
+<EventKey><![CDATA[http://bci.renjiwulian.com/vue/index/#/pace]]></EventKey>
+<MenuId>437917383</MenuId>
+</xml>
+[36m[INFO][0m 2019/05/27 16:32 200 236.934µs 140.207.54.80 POST /wechat
+[36m[INFO][0m 2019/05/27 16:32 200 58.239µs 61.129.7.217 GET /vue/index
+[36m[INFO][0m 2019/05/27 16:32 304 87.599µs 112.17.236.173 GET /static/js/15.83b48c7c0d3eda033986.js
+[36m[INFO][0m 2019/05/27 16:32 200 35.423441ms 112.17.236.173 GET /project/all
+[36m[INFO][0m 2019/05/27 16:32 200 199.732µs 112.17.236.173 GET /static/js/5.a423b29d8877a9b5c5b5.js
+[36m[INFO][0m 2019/05/27 16:32 200 58.368152ms 112.17.236.173 GET /project/frame/1
+2019/05/27 16:32:38 收到事件:
+<xml><ToUserName><![CDATA[gh_75a34b17d256]]></ToUserName>
+<FromUserName><![CDATA[oSnZS5tQv-jBvQ3ihdvVMUcg1wNc]]></FromUserName>
+<CreateTime>1558945958</CreateTime>
+<MsgType><![CDATA[event]]></MsgType>
+<Event><![CDATA[VIEW]]></Event>
+<EventKey><![CDATA[http://bci.renjiwulian.com/vue/index/#/newProject]]></EventKey>
+<MenuId>437917383</MenuId>
+</xml>
+[36m[INFO][0m 2019/05/27 16:32 200 214.183µs 140.207.54.80 POST /wechat
+[36m[INFO][0m 2019/05/27 16:32 200 56.878µs 61.129.7.217 GET /vue/index
+[36m[INFO][0m 2019/05/27 16:32 200 1.657566ms 112.17.236.173 GET /user/level/4
+[36m[INFO][0m 2019/05/27 16:32 200 1.650379ms 112.17.236.173 GET /user/level/6
+[36m[INFO][0m 2019/05/27 16:32 200 1.362512ms 112.17.236.173 GET /user/level/3
+2019/05/27 16:32:46 收到事件:
+<xml><ToUserName><![CDATA[gh_75a34b17d256]]></ToUserName>
+<FromUserName><![CDATA[oSnZS5tQv-jBvQ3ihdvVMUcg1wNc]]></FromUserName>
+<CreateTime>1558945966</CreateTime>
+<MsgType><![CDATA[event]]></MsgType>
+<Event><![CDATA[VIEW]]></Event>
+<EventKey><![CDATA[http://bci.renjiwulian.com/vue/index/#/newProject]]></EventKey>
+<MenuId>437917383</MenuId>
+</xml>
+[36m[INFO][0m 2019/05/27 16:32 200 230.368µs 140.207.54.79 POST /wechat
+[36m[INFO][0m 2019/05/27 16:32 200 55.082µs 61.129.7.217 GET /vue/index
+[36m[INFO][0m 2019/05/27 16:32 200 1.602535ms 112.17.236.173 GET /user/level/4
+[36m[INFO][0m 2019/05/27 16:32 200 1.291646ms 112.17.236.173 GET /user/level/3
+[36m[INFO][0m 2019/05/27 16:32 200 1.067829ms 112.17.236.173 GET /user/level/6
+[36m[INFO][0m 2019/05/27 16:33 200 33.864432ms 112.17.236.173 POST /project
+
+[35m(/root/go/src/github.com/pantazheng/bci/models/project.go:40)[0m 
+[33m[2019-05-27 16:33:12][0m [31;1m Error 1062: Duplicate entry '好' for key 'name' [0m
+2019/05/27 16:33:12 service.project.Create:	models.project.Create:	Error 1062: Duplicate entry '好' for key 'name'
+[36m[INFO][0m 2019/05/27 16:33 202 5.875184ms 112.17.236.173 POST /project
+[36m[INFO][0m 2019/05/27 16:33 200 45.460522ms 112.17.236.173 GET /project/all
+[36m[INFO][0m 2019/05/27 16:33 304 89.649µs 112.17.236.173 GET /static/js/2.64af9f3b1f5dd3184951.js
+[36m[INFO][0m 2019/05/27 16:33 200 4.742401ms 112.17.236.173 GET /module/project/6
+[36m[INFO][0m 2019/05/27 16:33 200 7.081035ms 112.17.236.173 GET /project/id/6
+[36m[INFO][0m 2019/05/27 16:33 200 40.708814ms 112.17.236.173 GET /project/all
+[36m[INFO][0m 2019/05/27 16:33 200 5.895923ms 112.17.236.173 GET /module/project/6
+[36m[INFO][0m 2019/05/27 16:33 200 7.664616ms 112.17.236.173 GET /project/id/6
+2019/05/27 16:37:09 收到事件:
+<xml><ToUserName><![CDATA[gh_75a34b17d256]]></ToUserName>
+<FromUserName><![CDATA[oSnZS5uROidW5Um7c1MoX0VARaVw]]></FromUserName>
+<CreateTime>1558946229</CreateTime>
+<MsgType><![CDATA[event]]></MsgType>
+<Event><![CDATA[VIEW]]></Event>
+<EventKey><![CDATA[https://open.weixin.qq.com/connect/oauth2/authorize?appid=wxe8f9250251763487&response_type=code&scope=snsapi_base&redirect_uri=http://bci.renjiwulian.com/vue/index/#/&state=12#wechat_redirect]]></EventKey>
+<MenuId>437917383</MenuId>
+</xml>
+[36m[INFO][0m 2019/05/27 16:37 200 272.469µs 140.207.54.80 POST /wechat
+[36m[INFO][0m 2019/05/27 16:37 200 57.057µs 101.226.225.84 GET /vue/index
+2019/05/27 16:37:32 收到事件:
+<xml><ToUserName><![CDATA[gh_75a34b17d256]]></ToUserName>
+<FromUserName><![CDATA[oSnZS5uROidW5Um7c1MoX0VARaVw]]></FromUserName>
+<CreateTime>1558946252</CreateTime>
+<MsgType><![CDATA[event]]></MsgType>
+<Event><![CDATA[VIEW]]></Event>
+<EventKey><![CDATA[https://open.weixin.qq.com/connect/oauth2/authorize?appid=wxe8f9250251763487&response_type=code&scope=snsapi_base&redirect_uri=http://bci.renjiwulian.com/vue/index/#/&state=12#wechat_redirect]]></EventKey>
+<MenuId>437917383</MenuId>
+</xml>
+[36m[INFO][0m 2019/05/27 16:37 200 200.776µs 140.207.54.79 POST /wechat
+[36m[INFO][0m 2019/05/27 16:37 200 43.529µs 101.226.225.84 GET /vue/index
+2019/05/27 16:37:56 收到事件:
+<xml><ToUserName><![CDATA[gh_75a34b17d256]]></ToUserName>
+<FromUserName><![CDATA[oSnZS5uROidW5Um7c1MoX0VARaVw]]></FromUserName>
+<CreateTime>1558946276</CreateTime>
+<MsgType><![CDATA[event]]></MsgType>
+<Event><![CDATA[VIEW]]></Event>
+<EventKey><![CDATA[http://bci.renjiwulian.com/vue/index/#/project]]></EventKey>
+<MenuId>437917383</MenuId>
+</xml>
+[36m[INFO][0m 2019/05/27 16:37 200 322.309µs 140.207.54.79 POST /wechat
+[36m[INFO][0m 2019/05/27 16:37 200 43.622µs 101.226.225.84 GET /vue/index
+2019/05/27 16:38:10 收到事件:
+<xml><ToUserName><![CDATA[gh_75a34b17d256]]></ToUserName>
+<FromUserName><![CDATA[oSnZS5tQv-jBvQ3ihdvVMUcg1wNc]]></FromUserName>
+<CreateTime>1558946290</CreateTime>
+<MsgType><![CDATA[event]]></MsgType>
+<Event><![CDATA[VIEW]]></Event>
+<EventKey><![CDATA[http://bci.renjiwulian.com/vue/index/#/project]]></EventKey>
+<MenuId>437917383</MenuId>
+</xml>
+[36m[INFO][0m 2019/05/27 16:38 200 222.213µs 140.207.54.80 POST /wechat
+[36m[INFO][0m 2019/05/27 16:38 200 55.301µs 61.129.7.217 GET /vue/index
+[36m[INFO][0m 2019/05/27 16:38 304 120.809µs 112.17.236.173 GET /static/css/app.556c4167239f66c4c53e822adbf426d8.css
+[36m[INFO][0m 2019/05/27 16:38 304 105.919µs 112.17.236.173 GET /static/js/manifest.6e135d116047bbd799ae.js
+[36m[INFO][0m 2019/05/27 16:38 304 72.288µs 112.17.236.173 GET /static/js/vendor.8d7b051ea6412f65a038.js
+[36m[INFO][0m 2019/05/27 16:38 304 77.925µs 112.17.236.173 GET /static/js/app.d42ec257a105658cb7b1.js
+[36m[INFO][0m 2019/05/27 16:38 200 39.519864ms 112.17.236.173 GET /project/all
+[36m[INFO][0m 2019/05/27 16:38 304 98.352µs 112.17.236.173 GET /static/js/0.ca67e87d8c000a42e592.js
+[36m[INFO][0m 2019/05/27 16:38 200 13.61155ms 112.17.236.173 GET /module/project/1
+[36m[INFO][0m 2019/05/27 16:38 200 32.501521ms 112.17.236.173 GET /project/id/1
+[36m[INFO][0m 2019/05/27 16:38 200 51.901912ms 112.17.236.173 GET /project/all
+[36m[INFO][0m 2019/05/27 16:38 200 3.101444ms 112.17.236.173 GET /module/project/2
+[36m[INFO][0m 2019/05/27 16:38 200 4.510273ms 112.17.236.173 GET /project/id/2
+[36m[INFO][0m 2019/05/27 16:38 200 46.237281ms 112.17.236.173 GET /project/all
+[36m[INFO][0m 2019/05/27 16:38 200 3.220619ms 112.17.236.173 GET /module/project/2
+[36m[INFO][0m 2019/05/27 16:38 200 4.739834ms 112.17.236.173 GET /project/id/2
+[36m[INFO][0m 2019/05/27 16:38 200 38.389074ms 112.17.236.173 GET /project/all
+[36m[INFO][0m 2019/05/27 16:38 200 3.054773ms 112.17.236.173 GET /module/project/2
+[36m[INFO][0m 2019/05/27 16:38 200 4.447496ms 112.17.236.173 GET /project/id/2
+[36m[INFO][0m 2019/05/27 16:38 200 39.41416ms 112.17.236.173 GET /project/all
+[36m[INFO][0m 2019/05/27 16:38 200 25.135553ms 112.17.236.173 GET /module/project/1
+[36m[INFO][0m 2019/05/27 16:38 200 29.967451ms 112.17.236.173 GET /project/id/1
+[36m[INFO][0m 2019/05/27 16:39 200 42.374978ms 112.17.236.173 GET /project/all
+[36m[INFO][0m 2019/05/27 16:39 200 25.101602ms 112.17.236.173 GET /module/project/1
+[36m[INFO][0m 2019/05/27 16:39 200 36.838608ms 112.17.236.173 GET /project/id/1
+2019/05/27 16:39:05 收到事件:
+<xml><ToUserName><![CDATA[gh_75a34b17d256]]></ToUserName>
+<FromUserName><![CDATA[oSnZS5uROidW5Um7c1MoX0VARaVw]]></FromUserName>
+<CreateTime>1558946345</CreateTime>
+<MsgType><![CDATA[event]]></MsgType>
+<Event><![CDATA[VIEW]]></Event>
+<EventKey><![CDATA[https://open.weixin.qq.com/connect/oauth2/authorize?appid=wxe8f9250251763487&response_type=code&scope=snsapi_base&redirect_uri=http://bci.renjiwulian.com/vue/index/#/&state=12#wechat_redirect]]></EventKey>
+<MenuId>437917383</MenuId>
+</xml>
+[36m[INFO][0m 2019/05/27 16:39 200 238.005µs 140.207.54.80 POST /wechat
+[36m[INFO][0m 2019/05/27 16:39 200 41.752µs 101.226.225.84 GET /vue/index
+[36m[INFO][0m 2019/05/27 16:39 200 58.287µs 101.89.239.120 GET /vue/index
+[36m[INFO][0m 2019/05/27 16:39 200 117.988µs 101.89.239.120 GET /static/js/manifest.6e135d116047bbd799ae.js
+[36m[INFO][0m 2019/05/27 16:39 200 3.206104971s 101.89.239.120 GET /static/js/vendor.8d7b051ea6412f65a038.js
+[36m[INFO][0m 2019/05/27 16:39 200 9.550615ms 101.89.239.120 GET /static/js/app.d42ec257a105658cb7b1.js
+2019/05/27 16:40:45 收到事件:
+<xml><ToUserName><![CDATA[gh_75a34b17d256]]></ToUserName>
+<FromUserName><![CDATA[oSnZS5uROidW5Um7c1MoX0VARaVw]]></FromUserName>
+<CreateTime>1558946445</CreateTime>
+<MsgType><![CDATA[event]]></MsgType>
+<Event><![CDATA[VIEW]]></Event>
+<EventKey><![CDATA[https://open.weixin.qq.com/connect/oauth2/authorize?appid=wxe8f9250251763487&response_type=code&scope=snsapi_base&redirect_uri=http://bci.renjiwulian.com/vue/index/#/&state=12#wechat_redirect]]></EventKey>
+<MenuId>437917383</MenuId>
+</xml>
+[36m[INFO][0m 2019/05/27 16:40 200 224.362µs 140.207.54.80 POST /wechat
+[36m[INFO][0m 2019/05/27 16:40 200 56.227µs 101.226.225.84 GET /vue/index
+2019/05/27 16:40:58 收到事件:
+<xml><ToUserName><![CDATA[gh_75a34b17d256]]></ToUserName>
+<FromUserName><![CDATA[oSnZS5uROidW5Um7c1MoX0VARaVw]]></FromUserName>
+<CreateTime>1558946458</CreateTime>
+<MsgType><![CDATA[event]]></MsgType>
+<Event><![CDATA[VIEW]]></Event>
+<EventKey><![CDATA[http://bci.renjiwulian.com/vue/index/#/newProject]]></EventKey>
+<MenuId>437917383</MenuId>
+</xml>
+[36m[INFO][0m 2019/05/27 16:40 200 214.244µs 140.207.54.80 POST /wechat
+[36m[INFO][0m 2019/05/27 16:40 200 55.919µs 101.226.225.84 GET /vue/index
+2019/05/27 16:41:07 收到事件:
+<xml><ToUserName><![CDATA[gh_75a34b17d256]]></ToUserName>
+<FromUserName><![CDATA[oSnZS5tQv-jBvQ3ihdvVMUcg1wNc]]></FromUserName>
+<CreateTime>1558946467</CreateTime>
+<MsgType><![CDATA[event]]></MsgType>
+<Event><![CDATA[VIEW]]></Event>
+<EventKey><![CDATA[http://bci.renjiwulian.com/vue/index/#/newProject]]></EventKey>
+<MenuId>437917383</MenuId>
+</xml>
+[36m[INFO][0m 2019/05/27 16:41 200 198.911µs 140.207.54.79 POST /wechat
+[36m[INFO][0m 2019/05/27 16:41 200 44.345µs 61.129.7.217 GET /vue/index
+[36m[INFO][0m 2019/05/27 16:41 304 84.046µs 112.17.236.173 GET /static/js/1.11c5a59cc1d1eb4828d2.js
+[36m[INFO][0m 2019/05/27 16:41 200 1.517472ms 112.17.236.173 GET /user/level/6
+[36m[INFO][0m 2019/05/27 16:41 200 1.121895ms 112.17.236.173 GET /user/level/4
+[36m[INFO][0m 2019/05/27 16:41 200 1.395577ms 112.17.236.173 GET /user/level/3
+2019/05/27 16:41:37 收到事件:
+<xml><ToUserName><![CDATA[gh_75a34b17d256]]></ToUserName>
+<FromUserName><![CDATA[oSnZS5uROidW5Um7c1MoX0VARaVw]]></FromUserName>
+<CreateTime>1558946497</CreateTime>
+<MsgType><![CDATA[event]]></MsgType>
+<Event><![CDATA[VIEW]]></Event>
+<EventKey><![CDATA[http://bci.renjiwulian.com/vue/index/#/frame]]></EventKey>
+<MenuId>437917383</MenuId>
+</xml>
+[36m[INFO][0m 2019/05/27 16:41 200 222.993µs 140.207.54.79 POST /wechat
+[36m[INFO][0m 2019/05/27 16:41 200 52.483µs 101.226.225.84 GET /vue/index
+[36m[INFO][0m 2019/05/27 16:41 304 126.065µs 36.23.76.0 GET /static/js/vendor.8d7b051ea6412f65a038.js
+[36m[INFO][0m 2019/05/27 16:41 200 40.896575ms 36.23.76.0 GET /project/all
+2019/05/27 16:41:41 收到事件:
+<xml><ToUserName><![CDATA[gh_75a34b17d256]]></ToUserName>
+<FromUserName><![CDATA[oSnZS5tQv-jBvQ3ihdvVMUcg1wNc]]></FromUserName>
+<CreateTime>1558946500</CreateTime>
+<MsgType><![CDATA[event]]></MsgType>
+<Event><![CDATA[VIEW]]></Event>
+<EventKey><![CDATA[http://bci.renjiwulian.com/vue/index/#/frame]]></EventKey>
+<MenuId>437917383</MenuId>
+</xml>
+[36m[INFO][0m 2019/05/27 16:41 200 219.057µs 140.207.54.79 POST /wechat
+[36m[INFO][0m 2019/05/27 16:41 200 54.088µs 61.129.7.217 GET /vue/index
+[36m[INFO][0m 2019/05/27 16:41 200 151.961µs 112.17.236.173 GET /static/js/6.cc34007d57a847864e30.js
+[36m[INFO][0m 2019/05/27 16:41 200 39.16478ms 112.17.236.173 GET /project/all
+[36m[INFO][0m 2019/05/27 16:41 200 132.517µs 112.17.236.173 GET /static/js/14.88fac3337f68812dcb58.js
+[36m[INFO][0m 2019/05/27 16:41 200 54.337991ms 112.17.236.173 GET /project/frame/1
+2019/05/27 16:44:38 收到事件:
+<xml><ToUserName><![CDATA[gh_75a34b17d256]]></ToUserName>
+<FromUserName><![CDATA[oSnZS5tQv-jBvQ3ihdvVMUcg1wNc]]></FromUserName>
+<CreateTime>1558946678</CreateTime>
+<MsgType><![CDATA[event]]></MsgType>
+<Event><![CDATA[VIEW]]></Event>
+<EventKey><![CDATA[http://bci.renjiwulian.com/vue/index/#/mission]]></EventKey>
+<MenuId>437917383</MenuId>
+</xml>
+[36m[INFO][0m 2019/05/27 16:44 200 237.302µs 140.207.54.80 POST /wechat
+[36m[INFO][0m 2019/05/27 16:44 200 60.834µs 61.129.7.217 GET /vue/index
+[36m[INFO][0m 2019/05/27 16:44 200 255.664µs 112.17.236.173 GET /static/js/7.4a8752bde963da2e870a.js
+[36m[INFO][0m 2019/05/27 16:44 200 1.554604ms 112.17.236.173 GET /mission/participant/8
+[36m[INFO][0m 2019/05/27 16:44 200 6.509983ms 112.17.236.173 GET /mission/all
+[36m[INFO][0m 2019/05/27 16:44 200 225.98µs 112.17.236.173 GET /static/js/8.f68e93fdf6e043a2c07c.js
+[36m[INFO][0m 2019/05/27 16:44 200 3.200947ms 112.17.236.173 GET /mission/id/1
+[36m[INFO][0m 2019/05/27 16:44 200 1.64922ms 112.17.236.173 GET /mission/participant/8
+[36m[INFO][0m 2019/05/27 16:44 200 5.870069ms 112.17.236.173 GET /mission/all
+[36m[INFO][0m 2019/05/27 16:44 200 3.206306ms 112.17.236.173 GET /mission/id/2
+[36m[INFO][0m 2019/05/27 16:44 200 1.983783ms 112.17.236.173 GET /mission/participant/8
+[36m[INFO][0m 2019/05/27 16:44 200 7.638194ms 112.17.236.173 GET /mission/all
+[36m[INFO][0m 2019/05/27 16:44 200 3.070308ms 112.17.236.173 GET /mission/id/1
+[36m[INFO][0m 2019/05/27 16:45 200 1.560709ms 112.17.236.173 GET /mission/participant/8
+[36m[INFO][0m 2019/05/27 16:45 200 5.812219ms 112.17.236.173 GET /mission/all
+2019/05/27 16:45:39 收到事件:
+<xml><ToUserName><![CDATA[gh_75a34b17d256]]></ToUserName>
+<FromUserName><![CDATA[oSnZS5tQv-jBvQ3ihdvVMUcg1wNc]]></FromUserName>
+<CreateTime>1558946739</CreateTime>
+<MsgType><![CDATA[event]]></MsgType>
+<Event><![CDATA[VIEW]]></Event>
+<EventKey><![CDATA[http://bci.renjiwulian.com/vue/index/#/frame]]></EventKey>
+<MenuId>437917383</MenuId>
+</xml>
+[36m[INFO][0m 2019/05/27 16:45 200 217.849µs 140.207.54.80 POST /wechat
+[36m[INFO][0m 2019/05/27 16:45 200 55.311µs 61.129.7.217 GET /vue/index
+[36m[INFO][0m 2019/05/27 16:45 200 41.28495ms 112.17.236.173 GET /project/all
+[36m[INFO][0m 2019/05/27 16:46 200 60.871µs 101.91.62.99 GET /vue/index
+[36m[INFO][0m 2019/05/27 16:46 200 112.98µs 101.91.62.99 GET /static/js/manifest.6e135d116047bbd799ae.js
+[36m[INFO][0m 2019/05/27 16:46 200 7.147525076s 101.91.62.99 GET /static/js/vendor.8d7b051ea6412f65a038.js
+[36m[INFO][0m 2019/05/27 16:46 200 4.769582ms 101.91.62.99 GET /static/js/app.d42ec257a105658cb7b1.js
+2019/05/27 16:47:49 收到事件:
+<xml><ToUserName><![CDATA[gh_75a34b17d256]]></ToUserName>
+<FromUserName><![CDATA[oSnZS5tQv-jBvQ3ihdvVMUcg1wNc]]></FromUserName>
+<CreateTime>1558946869</CreateTime>
+<MsgType><![CDATA[event]]></MsgType>
+<Event><![CDATA[VIEW]]></Event>
+<EventKey><![CDATA[http://bci.renjiwulian.com/vue/index/#/frame]]></EventKey>
+<MenuId>437917383</MenuId>
+</xml>
+[36m[INFO][0m 2019/05/27 16:47 200 228.534µs 140.207.54.80 POST /wechat
+[36m[INFO][0m 2019/05/27 16:47 200 58.046µs 61.129.7.217 GET /vue/index
+[36m[INFO][0m 2019/05/27 16:47 200 39.240106ms 112.17.236.173 GET /project/all
+2019/05/27 16:47:57 收到事件:
+<xml><ToUserName><![CDATA[gh_75a34b17d256]]></ToUserName>
+<FromUserName><![CDATA[oSnZS5tQv-jBvQ3ihdvVMUcg1wNc]]></FromUserName>
+<CreateTime>1558946876</CreateTime>
+<MsgType><![CDATA[event]]></MsgType>
+<Event><![CDATA[VIEW]]></Event>
+<EventKey><![CDATA[http://bci.renjiwulian.com/vue/index/#/mission]]></EventKey>
+<MenuId>437917383</MenuId>
+</xml>
+[36m[INFO][0m 2019/05/27 16:47 200 231.211µs 140.207.54.80 POST /wechat
+[36m[INFO][0m 2019/05/27 16:47 200 57.439µs 61.129.7.217 GET /vue/index
+[36m[INFO][0m 2019/05/27 16:47 200 1.320183ms 112.17.236.173 GET /mission/participant/8
+[36m[INFO][0m 2019/05/27 16:47 200 7.191828ms 112.17.236.173 GET /mission/all
+[36m[INFO][0m 2019/05/27 16:48 200 1.54537ms 112.17.236.173 GET /mission/participant/8
+[36m[INFO][0m 2019/05/27 16:48 200 5.818087ms 112.17.236.173 GET /mission/all
+[36m[INFO][0m 2019/05/27 16:48 200 1.657704ms 112.17.236.173 GET /mission/participant/8
+[36m[INFO][0m 2019/05/27 16:48 200 5.922599ms 112.17.236.173 GET /mission/all
+[36m[INFO][0m 2019/05/27 16:48 200 1.477624ms 112.17.236.173 GET /mission/participant/8
+[36m[INFO][0m 2019/05/27 16:48 200 6.01969ms 112.17.236.173 GET /mission/all
+2019/05/27 16:48:27 收到事件:
+<xml><ToUserName><![CDATA[gh_75a34b17d256]]></ToUserName>
+<FromUserName><![CDATA[oSnZS5tQv-jBvQ3ihdvVMUcg1wNc]]></FromUserName>
+<CreateTime>1558946907</CreateTime>
+<MsgType><![CDATA[event]]></MsgType>
+<Event><![CDATA[VIEW]]></Event>
+<EventKey><![CDATA[http://bci.renjiwulian.com/vue/index/#/pace]]></EventKey>
+<MenuId>437917383</MenuId>
+</xml>
+[36m[INFO][0m 2019/05/27 16:48 200 214.818µs 140.207.54.80 POST /wechat
+[36m[INFO][0m 2019/05/27 16:48 200 55.546µs 58.247.212.69 GET /vue/index
+[36m[INFO][0m 2019/05/27 16:48 200 44.239484ms 112.17.236.173 GET /project/all
+[36m[INFO][0m 2019/05/27 16:48 200 62.351824ms 112.17.236.173 GET /project/frame/1
+2019/05/27 16:49:01 收到事件:
+<xml><ToUserName><![CDATA[gh_75a34b17d256]]></ToUserName>
+<FromUserName><![CDATA[oSnZS5tQv-jBvQ3ihdvVMUcg1wNc]]></FromUserName>
+<CreateTime>1558946941</CreateTime>
+<MsgType><![CDATA[event]]></MsgType>
+<Event><![CDATA[VIEW]]></Event>
+<EventKey><![CDATA[https://open.weixin.qq.com/connect/oauth2/authorize?appid=wxe8f9250251763487&response_type=code&scope=snsapi_base&redirect_uri=http://bci.renjiwulian.com/vue/index/#/&state=12#wechat_redirect]]></EventKey>
+<MenuId>437917383</MenuId>
+</xml>
+[36m[INFO][0m 2019/05/27 16:49 200 370.124µs 140.207.54.80 POST /wechat
+[36m[INFO][0m 2019/05/27 16:49 200 63.669µs 58.247.212.69 GET /vue/index
+[36m[INFO][0m 2019/05/27 16:49 304 128.008µs 61.129.7.217 GET /static/js/10.33a586164b874a720425.js
+2019/05/27 16:51:03 收到事件:
+<xml><ToUserName><![CDATA[gh_75a34b17d256]]></ToUserName>
+<FromUserName><![CDATA[oSnZS5tQv-jBvQ3ihdvVMUcg1wNc]]></FromUserName>
+<CreateTime>1558947063</CreateTime>
+<MsgType><![CDATA[event]]></MsgType>
+<Event><![CDATA[VIEW]]></Event>
+<EventKey><![CDATA[https://open.weixin.qq.com/connect/oauth2/authorize?appid=wxe8f9250251763487&response_type=code&scope=snsapi_base&redirect_uri=http://bci.renjiwulian.com/vue/index/#/&state=12#wechat_redirect]]></EventKey>
+<MenuId>437917383</MenuId>
+</xml>
+[36m[INFO][0m 2019/05/27 16:51 200 203.105µs 140.207.54.79 POST /wechat
+[36m[INFO][0m 2019/05/27 16:51 200 55.3µs 61.129.7.217 GET /vue/index
+2019/05/27 16:53:56 收到事件:
+<xml><ToUserName><![CDATA[gh_75a34b17d256]]></ToUserName>
+<FromUserName><![CDATA[oSnZS5tQv-jBvQ3ihdvVMUcg1wNc]]></FromUserName>
+<CreateTime>1558947236</CreateTime>
+<MsgType><![CDATA[event]]></MsgType>
+<Event><![CDATA[VIEW]]></Event>
+<EventKey><![CDATA[http://bci.renjiwulian.com/vue/index/#/frame]]></EventKey>
+<MenuId>437917383</MenuId>
+</xml>
+[36m[INFO][0m 2019/05/27 16:53 200 216.524µs 140.207.54.79 POST /wechat
+[36m[INFO][0m 2019/05/27 16:53 200 74.422µs 61.129.7.217 GET /vue/index
+[36m[INFO][0m 2019/05/27 16:53 200 44.045824ms 112.17.236.173 GET /project/all
+2019/05/27 16:53:59 收到事件:
+<xml><ToUserName><![CDATA[gh_75a34b17d256]]></ToUserName>
+<FromUserName><![CDATA[oSnZS5tQv-jBvQ3ihdvVMUcg1wNc]]></FromUserName>
+<CreateTime>1558947239</CreateTime>
+<MsgType><![CDATA[event]]></MsgType>
+<Event><![CDATA[VIEW]]></Event>
+<EventKey><![CDATA[https://open.weixin.qq.com/connect/oauth2/authorize?appid=wxe8f9250251763487&response_type=code&scope=snsapi_base&redirect_uri=http://bci.renjiwulian.com/vue/index/#/&state=12#wechat_redirect]]></EventKey>
+<MenuId>437917383</MenuId>
+</xml>
+[36m[INFO][0m 2019/05/27 16:53 200 255.195µs 140.207.54.79 POST /wechat
+[36m[INFO][0m 2019/05/27 16:54 200 66.128µs 58.247.212.69 GET /vue/index
+[36m[INFO][0m 2019/05/27 16:56 200 76.037µs 61.129.7.217 GET /vue/index
+2019/05/27 16:56:17 收到事件:
+<xml><ToUserName><![CDATA[gh_75a34b17d256]]></ToUserName>
+<FromUserName><![CDATA[oSnZS5tQv-jBvQ3ihdvVMUcg1wNc]]></FromUserName>
+<CreateTime>1558947367</CreateTime>
+<MsgType><![CDATA[event]]></MsgType>
+<Event><![CDATA[VIEW]]></Event>
+<EventKey><![CDATA[https://open.weixin.qq.com/connect/oauth2/authorize?appid=wxe8f9250251763487&response_type=code&scope=snsapi_base&redirect_uri=http://bci.renjiwulian.com/vue/index/#/&state=12#wechat_redirect]]></EventKey>
+<MenuId>437917383</MenuId>
+</xml>
+[36m[INFO][0m 2019/05/27 16:56 200 220.252µs 140.207.54.80 POST /wechat
+[36m[INFO][0m 2019/05/27 16:56 200 57.538µs 61.129.7.217 GET /vue/index
+[36m[INFO][0m 2019/05/27 16:56 304 148.773µs 112.17.236.173 GET /static/fonts/element-icons.535877f.woff
+[36m[INFO][0m 2019/05/27 16:56 200 1.607407ms 112.17.236.173 GET /user/level/4
+[36m[INFO][0m 2019/05/27 16:56 200 1.450157ms 112.17.236.173 GET /user/level/6
+[36m[INFO][0m 2019/05/27 16:56 200 1.472302ms 112.17.236.173 GET /user/level/3
+2019/05/27 16:56:39 收到事件:
+<xml><ToUserName><![CDATA[gh_75a34b17d256]]></ToUserName>
+<FromUserName><![CDATA[oSnZS5tQv-jBvQ3ihdvVMUcg1wNc]]></FromUserName>
+<CreateTime>1558947389</CreateTime>
+<MsgType><![CDATA[event]]></MsgType>
+<Event><![CDATA[VIEW]]></Event>
+<EventKey><![CDATA[http://bci.renjiwulian.com/vue/index/#/newProject]]></EventKey>
+<MenuId>437917383</MenuId>
+</xml>
+[36m[INFO][0m 2019/05/27 16:56 200 222.197µs 140.207.54.79 POST /wechat
+2019/05/27 16:56:48 收到事件:
+<xml><ToUserName><![CDATA[gh_75a34b17d256]]></ToUserName>
+<FromUserName><![CDATA[oSnZS5tQv-jBvQ3ihdvVMUcg1wNc]]></FromUserName>
+<CreateTime>1558947408</CreateTime>
+<MsgType><![CDATA[event]]></MsgType>
+<Event><![CDATA[VIEW]]></Event>
+<EventKey><![CDATA[http://bci.renjiwulian.com/vue/index/#/pace]]></EventKey>
+<MenuId>437917383</MenuId>
+</xml>
+[36m[INFO][0m 2019/05/27 16:56 200 193.829µs 140.207.54.79 POST /wechat
+[36m[INFO][0m 2019/05/27 16:56 200 54.489µs 58.247.212.69 GET /vue/index
+[36m[INFO][0m 2019/05/27 16:56 304 118.767µs 112.17.236.173 GET /static/js/15.83b48c7c0d3eda033986.js
+[36m[INFO][0m 2019/05/27 16:56 200 41.229142ms 112.17.236.173 GET /project/all
+[36m[INFO][0m 2019/05/27 16:56 304 85.958µs 112.17.236.173 GET /static/js/5.a423b29d8877a9b5c5b5.js
+[36m[INFO][0m 2019/05/27 16:56 200 63.837583ms 112.17.236.173 GET /project/frame/1
+[36m[INFO][0m 2019/05/27 16:56 200 38.941755ms 112.17.236.173 GET /project/all
+[36m[INFO][0m 2019/05/27 16:56 200 7.132906ms 112.17.236.173 GET /project/frame/2
+[36m[INFO][0m 2019/05/27 16:56 200 39.200494ms 112.17.236.173 GET /project/all
+2019/05/27 16:57:22 收到事件:
+<xml><ToUserName><![CDATA[gh_75a34b17d256]]></ToUserName>
+<FromUserName><![CDATA[oSnZS5tQv-jBvQ3ihdvVMUcg1wNc]]></FromUserName>
+<CreateTime>1558947442</CreateTime>
+<MsgType><![CDATA[event]]></MsgType>
+<Event><![CDATA[VIEW]]></Event>
+<EventKey><![CDATA[http://bci.renjiwulian.com/vue/index/#/pace]]></EventKey>
+<MenuId>437917383</MenuId>
+</xml>
+[36m[INFO][0m 2019/05/27 16:57 200 1.546736ms 140.207.54.80 POST /wechat
+[36m[INFO][0m 2019/05/27 16:57 200 44.425µs 58.247.212.69 GET /vue/index
+[36m[INFO][0m 2019/05/27 16:57 200 43.078427ms 112.17.236.173 GET /project/all
+2019/05/27 16:57:51 收到事件:
+<xml><ToUserName><![CDATA[gh_75a34b17d256]]></ToUserName>
+<FromUserName><![CDATA[oSnZS5tQv-jBvQ3ihdvVMUcg1wNc]]></FromUserName>
+<CreateTime>1558947471</CreateTime>
+<MsgType><![CDATA[event]]></MsgType>
+<Event><![CDATA[VIEW]]></Event>
+<EventKey><![CDATA[http://bci.renjiwulian.com/vue/index/#/project]]></EventKey>
+<MenuId>437917383</MenuId>
+</xml>
+[36m[INFO][0m 2019/05/27 16:57 200 227.739µs 140.207.54.79 POST /wechat
+[36m[INFO][0m 2019/05/27 16:57 200 57.453µs 61.129.7.217 GET /vue/index
+[36m[INFO][0m 2019/05/27 16:57 304 92.932µs 112.17.236.173 GET /static/js/4.deace02698e4a7e94fb8.js
+[36m[INFO][0m 2019/05/27 16:57 200 38.944962ms 112.17.236.173 GET /project/all
+[36m[INFO][0m 2019/05/27 16:57 304 86.022µs 112.17.236.173 GET /static/js/2.64af9f3b1f5dd3184951.js
+[36m[INFO][0m 2019/05/27 16:57 200 21.222598ms 112.17.236.173 GET /project/id/1
+[36m[INFO][0m 2019/05/27 16:57 200 14.773732ms 112.17.236.173 GET /module/project/1
+2019/05/27 17:00:28 收到事件:
+<xml><ToUserName><![CDATA[gh_75a34b17d256]]></ToUserName>
+<FromUserName><![CDATA[oSnZS5tQv-jBvQ3ihdvVMUcg1wNc]]></FromUserName>
+<CreateTime>1558947628</CreateTime>
+<MsgType><![CDATA[event]]></MsgType>
+<Event><![CDATA[VIEW]]></Event>
+<EventKey><![CDATA[http://bci.renjiwulian.com/vue/index/#/project]]></EventKey>
+<MenuId>437917383</MenuId>
+</xml>
+[36m[INFO][0m 2019/05/27 17:00 200 226.645µs 140.207.54.80 POST /wechat
+[36m[INFO][0m 2019/05/27 17:00 200 59.124µs 61.129.7.217 GET /vue/index
+[36m[INFO][0m 2019/05/28 17:51 200 45.897µs 61.151.178.172 GET /vue/index
+[36m[INFO][0m 2019/05/28 17:51 200 83.212µs 112.17.247.102 GET /static/js/manifest.6e135d116047bbd799ae.js
+[36m[INFO][0m 2019/05/28 17:51 200 1.049624157s 112.17.247.102 GET /static/js/app.d42ec257a105658cb7b1.js
+[36m[INFO][0m 2019/05/28 17:51 200 1.629758883s 112.17.247.102 GET /static/css/app.556c4167239f66c4c53e822adbf426d8.css
+2019/05/28 17:51:41 收到事件:
+<xml><ToUserName><![CDATA[gh_75a34b17d256]]></ToUserName>
+<FromUserName><![CDATA[oSnZS5sXgKfB9eYywWnDkInsnVeo]]></FromUserName>
+<CreateTime>1559037091</CreateTime>
+<MsgType><![CDATA[event]]></MsgType>
+<Event><![CDATA[VIEW]]></Event>
+<EventKey><![CDATA[http://bci.renjiwulian.com/vue/index/#/newProject]]></EventKey>
+<MenuId>437917383</MenuId>
+</xml>
+[36m[INFO][0m 2019/05/28 17:51 200 219.615µs 140.207.54.77 POST /wechat
+[36m[INFO][0m 2019/05/28 17:51 200 12.329622177s 112.17.247.102 GET /static/js/vendor.8d7b051ea6412f65a038.js
+[36m[INFO][0m 2019/05/28 17:52 304 87.598µs 112.17.247.102 GET /static/js/0.ca67e87d8c000a42e592.js
+[36m[INFO][0m 2019/05/28 17:52 200 165.278µs 112.17.247.102 GET /static/js/1.11c5a59cc1d1eb4828d2.js
+[36m[INFO][0m 2019/05/28 17:52 200 74.779µs 61.129.6.147 GET /vue/index
+[36m[INFO][0m 2019/05/28 17:52 200 180.901µs 61.129.6.147 GET /static/js/manifest.6e135d116047bbd799ae.js
+[36m[INFO][0m 2019/05/28 17:52 200 1.084569569s 61.129.6.147 GET /static/js/vendor.8d7b051ea6412f65a038.js
+[36m[INFO][0m 2019/05/28 17:52 200 7.053151ms 61.129.6.147 GET /static/js/app.d42ec257a105658cb7b1.js
+[36m[INFO][0m 2019/05/29 08:54 200 43.739µs 61.129.7.217 GET /vue/index
+[36m[INFO][0m 2019/05/29 08:54 304 70.669µs 61.129.7.217 GET /static/js/app.d42ec257a105658cb7b1.js
+[36m[INFO][0m 2019/05/29 08:54 304 61.989µs 61.129.7.217 GET /static/js/manifest.6e135d116047bbd799ae.js
+[36m[INFO][0m 2019/05/29 08:54 200 2.930007548s 112.17.236.243 GET /static/css/app.556c4167239f66c4c53e822adbf426d8.css
+2019/05/29 08:54:04 收到事件:
+<xml><ToUserName><![CDATA[gh_75a34b17d256]]></ToUserName>
+<FromUserName><![CDATA[oSnZS5tQv-jBvQ3ihdvVMUcg1wNc]]></FromUserName>
+<CreateTime>1559091244</CreateTime>
+<MsgType><![CDATA[event]]></MsgType>
+<Event><![CDATA[VIEW]]></Event>
+<EventKey><![CDATA[http://bci.renjiwulian.com/vue/index/#/frame]]></EventKey>
+<MenuId>437917383</MenuId>
+</xml>
+[36m[INFO][0m 2019/05/29 08:54 200 220.086µs 140.207.54.79 POST /wechat
+[36m[INFO][0m 2019/05/29 08:54 200 55.21µs 61.129.7.217 GET /vue/index
+[36m[INFO][0m 2019/05/29 08:54 206 162.2µs 112.17.236.243 GET /static/css/app.556c4167239f66c4c53e822adbf426d8.css
+[36m[INFO][0m 2019/05/29 08:54 206 2.669701455s 112.17.236.243 GET /static/css/app.556c4167239f66c4c53e822adbf426d8.css
+2019/05/29 08:54:09 收到事件:
+<xml><ToUserName><![CDATA[gh_75a34b17d256]]></ToUserName>
+<FromUserName><![CDATA[oSnZS5tQv-jBvQ3ihdvVMUcg1wNc]]></FromUserName>
+<CreateTime>1559091239</CreateTime>
+<MsgType><![CDATA[event]]></MsgType>
+<Event><![CDATA[VIEW]]></Event>
+<EventKey><![CDATA[https://open.weixin.qq.com/connect/oauth2/authorize?appid=wxe8f9250251763487&response_type=code&scope=snsapi_base&redirect_uri=http://bci.renjiwulian.com/vue/index/#/&state=12#wechat_redirect]]></EventKey>
+<MenuId>437917383</MenuId>
+</xml>
+[36m[INFO][0m 2019/05/29 08:54 200 227.149µs 140.207.54.79 POST /wechat
+[36m[INFO][0m 2019/05/29 08:54 200 10.338572871s 61.129.7.217 GET /static/js/vendor.8d7b051ea6412f65a038.js
+[36m[INFO][0m 2019/05/29 08:54 200 12.669479199s 112.17.236.243 GET /static/js/vendor.8d7b051ea6412f65a038.js
+[36m[INFO][0m 2019/05/29 08:54 304 85.501µs 112.17.236.243 GET /static/js/6.cc34007d57a847864e30.js
+[36m[INFO][0m 2019/05/29 08:54 304 88.165µs 112.17.236.243 GET /static/js/10.33a586164b874a720425.js
+[36m[INFO][0m 2019/05/29 08:54 304 24.338µs 112.17.236.243 GET /static/js/0.ca67e87d8c000a42e592.js
+[mysql] 2019/05/29 08:54:20 packets.go:112: closing bad idle connection: EOF
+[mysql] 2019/05/29 08:54:20 packets.go:112: closing bad idle connection: EOF
+[36m[INFO][0m 2019/05/29 08:54 200 40.77998ms 112.17.236.243 GET /project/all
+2019/05/29 09:13:21 收到事件:
+<xml><ToUserName><![CDATA[gh_75a34b17d256]]></ToUserName>
+<FromUserName><![CDATA[oSnZS5tQv-jBvQ3ihdvVMUcg1wNc]]></FromUserName>
+<CreateTime>1559092401</CreateTime>
+<MsgType><![CDATA[event]]></MsgType>
+<Event><![CDATA[VIEW]]></Event>
+<EventKey><![CDATA[http://bci.renjiwulian.com/vue/index/#/newProject]]></EventKey>
+<MenuId>437917383</MenuId>
+</xml>
+[36m[INFO][0m 2019/05/29 09:13 200 229.443µs 140.207.54.79 POST /wechat
+[36m[INFO][0m 2019/05/29 09:13 200 41.344µs 61.129.7.217 GET /vue/index
+[36m[INFO][0m 2019/05/29 09:13 304 121.011µs 112.17.236.243 GET /static/js/1.11c5a59cc1d1eb4828d2.js
+2019/05/29 09:13:47 收到事件:
+<xml><ToUserName><![CDATA[gh_75a34b17d256]]></ToUserName>
+<FromUserName><![CDATA[oSnZS5tQv-jBvQ3ihdvVMUcg1wNc]]></FromUserName>
+<CreateTime>1559092427</CreateTime>
+<MsgType><![CDATA[event]]></MsgType>
+<Event><![CDATA[VIEW]]></Event>
+<EventKey><![CDATA[http://bci.renjiwulian.com/vue/index/#/project]]></EventKey>
+<MenuId>437917383</MenuId>
+</xml>
+[36m[INFO][0m 2019/05/29 09:13 200 224.506µs 140.207.54.79 POST /wechat
+[36m[INFO][0m 2019/05/29 09:13 200 42.1µs 61.129.7.217 GET /vue/index
+[36m[INFO][0m 2019/05/29 09:13 304 85.164µs 112.17.236.243 GET /static/js/4.deace02698e4a7e94fb8.js
+2019/05/29 09:13:54 收到事件:
+<xml><ToUserName><![CDATA[gh_75a34b17d256]]></ToUserName>
+<FromUserName><![CDATA[oSnZS5tQv-jBvQ3ihdvVMUcg1wNc]]></FromUserName>
+<CreateTime>1559092434</CreateTime>
+<MsgType><![CDATA[event]]></MsgType>
+<Event><![CDATA[VIEW]]></Event>
+<EventKey><![CDATA[http://bci.renjiwulian.com/vue/index/#/mission]]></EventKey>
+<MenuId>437917383</MenuId>
+</xml>
+[36m[INFO][0m 2019/05/29 09:13 200 230.237µs 140.207.54.79 POST /wechat
+[36m[INFO][0m 2019/05/29 09:13 200 59.623µs 61.129.7.217 GET /vue/index
+[36m[INFO][0m 2019/05/29 09:13 304 114.907µs 112.17.236.243 GET /static/js/7.4a8752bde963da2e870a.js
+[36m[INFO][0m 2019/05/29 09:13 200 6.002232ms 112.17.236.243 GET /mission/all
+[36m[INFO][0m 2019/05/29 09:14 200 43.301µs 180.97.118.223 GET /vue/index
+[36m[INFO][0m 2019/05/29 09:14 200 112.575µs 180.97.118.223 GET /static/js/manifest.6e135d116047bbd799ae.js
+[36m[INFO][0m 2019/05/29 09:14 200 2.098024154s 180.97.118.223 GET /static/js/vendor.8d7b051ea6412f65a038.js
+[36m[INFO][0m 2019/05/29 09:14 200 45.963474ms 180.97.118.223 GET /static/js/app.d42ec257a105658cb7b1.js
+2019/05/29 09:14:53 收到事件:
+<xml><ToUserName><![CDATA[gh_75a34b17d256]]></ToUserName>
+<FromUserName><![CDATA[oSnZS5tQv-jBvQ3ihdvVMUcg1wNc]]></FromUserName>
+<CreateTime>1559092493</CreateTime>
+<MsgType><![CDATA[event]]></MsgType>
+<Event><![CDATA[VIEW]]></Event>
+<EventKey><![CDATA[http://bci.renjiwulian.com/vue/index/#/newProject]]></EventKey>
+<MenuId>437917383</MenuId>
+</xml>
+[36m[INFO][0m 2019/05/29 09:14 200 242.197µs 140.207.54.80 POST /wechat
+[36m[INFO][0m 2019/05/29 09:14 200 55.665µs 61.129.7.217 GET /vue/index
+2019/05/29 09:19:11 收到事件:
+<xml><ToUserName><![CDATA[gh_75a34b17d256]]></ToUserName>
+<FromUserName><![CDATA[oSnZS5tQv-jBvQ3ihdvVMUcg1wNc]]></FromUserName>
+<CreateTime>1559092751</CreateTime>
+<MsgType><![CDATA[event]]></MsgType>
+<Event><![CDATA[VIEW]]></Event>
+<EventKey><![CDATA[http://bci.renjiwulian.com/vue/index/#/pace]]></EventKey>
+<MenuId>437917383</MenuId>
+</xml>
+[36m[INFO][0m 2019/05/29 09:19 200 194.745µs 140.207.54.79 POST /wechat
+[36m[INFO][0m 2019/05/29 09:19 200 42.902µs 61.129.7.217 GET /vue/index
+[36m[INFO][0m 2019/05/29 09:19 304 131.415µs 112.17.236.243 GET /static/js/15.83b48c7c0d3eda033986.js
+[36m[INFO][0m 2019/05/29 09:19 200 40.559945ms 112.17.236.243 GET /project/all
+[36m[INFO][0m 2019/05/29 09:20 200 43.508µs 61.151.178.164 GET /vue/index
+[36m[INFO][0m 2019/05/29 09:20 200 118.661µs 61.151.178.164 GET /static/js/manifest.6e135d116047bbd799ae.js
+[36m[INFO][0m 2019/05/29 09:20 200 1.212114005s 61.151.178.164 GET /static/js/vendor.8d7b051ea6412f65a038.js
+[36m[INFO][0m 2019/05/29 09:20 200 9.523311ms 61.151.178.164 GET /static/js/app.d42ec257a105658cb7b1.js
+2019/05/29 09:35:05 收到事件:
+<xml><ToUserName><![CDATA[gh_75a34b17d256]]></ToUserName>
+<FromUserName><![CDATA[oSnZS5tQv-jBvQ3ihdvVMUcg1wNc]]></FromUserName>
+<CreateTime>1559093705</CreateTime>
+<MsgType><![CDATA[event]]></MsgType>
+<Event><![CDATA[VIEW]]></Event>
+<EventKey><![CDATA[http://bci.renjiwulian.com/vue/index/#/pace]]></EventKey>
+<MenuId>437917383</MenuId>
+</xml>
+[36m[INFO][0m 2019/05/29 09:35 200 177.71µs 140.207.54.80 POST /wechat
+[36m[INFO][0m 2019/05/29 09:35 200 58.037µs 61.129.7.217 GET /vue/index
+[36m[INFO][0m 2019/05/29 09:35 200 40.263049ms 112.17.236.243 GET /project/all
+2019/05/29 09:37:42 收到事件:
+<xml><ToUserName><![CDATA[gh_75a34b17d256]]></ToUserName>
+<FromUserName><![CDATA[oSnZS5tQv-jBvQ3ihdvVMUcg1wNc]]></FromUserName>
+<CreateTime>1559093862</CreateTime>
+<MsgType><![CDATA[event]]></MsgType>
+<Event><![CDATA[VIEW]]></Event>
+<EventKey><![CDATA[http://bci.renjiwulian.com/vue/index/#/pace]]></EventKey>
+<MenuId>437917383</MenuId>
+</xml>
+[36m[INFO][0m 2019/05/29 09:37 200 218.072µs 140.207.54.80 POST /wechat
+[36m[INFO][0m 2019/05/29 09:37 200 65.699µs 61.129.7.217 GET /vue/index
+[36m[INFO][0m 2019/05/29 09:38 200 40.812076ms 112.17.236.243 GET /project/all
+2019/05/29 13:35:01 收到事件:
+<xml><ToUserName><![CDATA[gh_75a34b17d256]]></ToUserName>
+<FromUserName><![CDATA[oSnZS5tQv-jBvQ3ihdvVMUcg1wNc]]></FromUserName>
+<CreateTime>1559108101</CreateTime>
+<MsgType><![CDATA[event]]></MsgType>
+<Event><![CDATA[VIEW]]></Event>
+<EventKey><![CDATA[http://bci.renjiwulian.com/vue/index/#/pace]]></EventKey>
+<MenuId>437917383</MenuId>
+</xml>
+[36m[INFO][0m 2019/05/29 13:35 200 245.702µs 140.207.54.80 POST /wechat
+[36m[INFO][0m 2019/05/29 13:35 200 43.989µs 61.129.7.217 GET /vue/index
+[36m[INFO][0m 2019/05/29 13:35 304 117.901µs 112.17.236.243 GET /static/css/app.556c4167239f66c4c53e822adbf426d8.css
+[36m[INFO][0m 2019/05/29 13:35 304 104.249µs 112.17.236.243 GET /static/js/manifest.6e135d116047bbd799ae.js
+[36m[INFO][0m 2019/05/29 13:35 304 24.275µs 112.17.236.243 GET /static/js/vendor.8d7b051ea6412f65a038.js
+[36m[INFO][0m 2019/05/29 13:35 304 66.826µs 112.17.236.243 GET /static/js/app.d42ec257a105658cb7b1.js
+[36m[INFO][0m 2019/05/29 13:35 304 80.203µs 112.17.236.243 GET /static/js/10.33a586164b874a720425.js
+[36m[INFO][0m 2019/05/29 13:35 304 24.853µs 112.17.236.243 GET /static/js/0.ca67e87d8c000a42e592.js
+[36m[INFO][0m 2019/05/29 13:35 200 40.246492ms 112.17.236.243 GET /project/all
+2019/05/29 17:00:00 收到事件:
+<xml><ToUserName><![CDATA[gh_75a34b17d256]]></ToUserName>
+<FromUserName><![CDATA[oSnZS5tQv-jBvQ3ihdvVMUcg1wNc]]></FromUserName>
+<CreateTime>1559120400</CreateTime>
+<MsgType><![CDATA[event]]></MsgType>
+<Event><![CDATA[VIEW]]></Event>
+<EventKey><![CDATA[http://bci.renjiwulian.com/vue/index/#/pace]]></EventKey>
+<MenuId>437917383</MenuId>
+</xml>
+[36m[INFO][0m 2019/05/29 17:00 200 180.618µs 140.207.54.79 POST /wechat
+[36m[INFO][0m 2019/05/29 17:00 200 45.924µs 61.129.7.217 GET /vue/index
+[36m[INFO][0m 2019/05/29 17:00 200 1.199454245s 112.17.236.243 GET /static/js/vendor.8d7b051ea6412f65a038.js
+2019/05/29 17:01:37 收到事件:
+<xml><ToUserName><![CDATA[gh_75a34b17d256]]></ToUserName>
+<FromUserName><![CDATA[oSnZS5tQv-jBvQ3ihdvVMUcg1wNc]]></FromUserName>
+<CreateTime>1559120497</CreateTime>
+<MsgType><![CDATA[event]]></MsgType>
+<Event><![CDATA[VIEW]]></Event>
+<EventKey><![CDATA[http://bci.renjiwulian.com/vue/index/#/mission]]></EventKey>
+<MenuId>437917383</MenuId>
+</xml>
+[36m[INFO][0m 2019/05/29 17:01 200 202.524µs 140.207.54.80 POST /wechat
+[36m[INFO][0m 2019/05/29 17:01 200 44.876µs 61.129.7.217 GET /vue/index
+[36m[INFO][0m 2019/05/29 17:01 206 179.777µs 112.17.236.243 GET /static/js/vendor.8d7b051ea6412f65a038.js
+[36m[INFO][0m 2019/05/29 17:01 206 5.589871119s 112.17.236.243 GET /static/js/vendor.8d7b051ea6412f65a038.js
+[36m[INFO][0m 2019/05/29 17:01 304 85.654µs 112.17.236.243 GET /static/js/7.4a8752bde963da2e870a.js
+[36m[INFO][0m 2019/05/29 17:01 200 5.98629ms 112.17.236.243 GET /mission/all
+2019/05/29 18:00:59 收到事件:
+<xml><ToUserName><![CDATA[gh_75a34b17d256]]></ToUserName>
+<FromUserName><![CDATA[oSnZS5tQv-jBvQ3ihdvVMUcg1wNc]]></FromUserName>
+<CreateTime>1559124059</CreateTime>
+<MsgType><![CDATA[event]]></MsgType>
+<Event><![CDATA[VIEW]]></Event>
+<EventKey><![CDATA[https://open.weixin.qq.com/connect/oauth2/authorize?appid=wxe8f9250251763487&response_type=code&scope=snsapi_base&redirect_uri=http://bci.renjiwulian.com/vue/index/#/&state=12#wechat_redirect]]></EventKey>
+<MenuId>437917383</MenuId>
+</xml>
+[36m[INFO][0m 2019/05/29 18:00 200 205.14µs 140.207.54.79 POST /wechat
+[36m[INFO][0m 2019/05/29 18:01 200 61.997µs 61.129.7.217 GET /vue/index
+[36m[INFO][0m 2019/05/29 18:01 200 72.567746ms 112.17.236.243 PUT /user/bind
+[36m[INFO][0m 2019/05/29 18:01 304 96.446µs 61.129.7.217 GET /static/js/4.deace02698e4a7e94fb8.js
+[36m[INFO][0m 2019/05/29 18:01 200 42.211493ms 61.129.7.217 GET /project/all
+2019/05/29 18:01:19 收到事件:
+<xml><ToUserName><![CDATA[gh_75a34b17d256]]></ToUserName>
+<FromUserName><![CDATA[oSnZS5tQv-jBvQ3ihdvVMUcg1wNc]]></FromUserName>
+<CreateTime>1559124079</CreateTime>
+<MsgType><![CDATA[event]]></MsgType>
+<Event><![CDATA[VIEW]]></Event>
+<EventKey><![CDATA[http://bci.renjiwulian.com/vue/index/#/frame]]></EventKey>
+<MenuId>437917383</MenuId>
+</xml>
+[36m[INFO][0m 2019/05/29 18:01 200 253.285µs 140.207.54.79 POST /wechat
+[36m[INFO][0m 2019/05/29 18:01 200 59.181µs 61.129.7.217 GET /vue/index
+[36m[INFO][0m 2019/05/29 18:01 304 96.587µs 112.17.236.243 GET /static/js/6.cc34007d57a847864e30.js
+[36m[INFO][0m 2019/05/29 18:01 200 40.7655ms 112.17.236.243 GET /project/all
+[36m[INFO][0m 2019/05/29 18:01 304 120.117µs 112.17.236.243 GET /static/js/14.88fac3337f68812dcb58.js
+[36m[INFO][0m 2019/05/29 18:01 200 54.669282ms 112.17.236.243 GET /project/frame/1
+[36m[INFO][0m 2019/05/29 18:01 304 78.083µs 112.17.236.243 GET /static/fonts/element-icons.535877f.woff
+[36m[INFO][0m 2019/05/29 18:01 200 40.566622ms 112.17.236.243 GET /project/all
+[36m[INFO][0m 2019/05/29 18:01 200 7.489807ms 112.17.236.243 GET /project/frame/2
+[36m[INFO][0m 2019/05/29 18:01 200 44.324097ms 112.17.236.243 GET /project/all
+2019/05/29 18:01:43 收到事件:
+<xml><ToUserName><![CDATA[gh_75a34b17d256]]></ToUserName>
+<FromUserName><![CDATA[oSnZS5tQv-jBvQ3ihdvVMUcg1wNc]]></FromUserName>
+<CreateTime>1559124103</CreateTime>
+<MsgType><![CDATA[event]]></MsgType>
+<Event><![CDATA[VIEW]]></Event>
+<EventKey><![CDATA[http://bci.renjiwulian.com/vue/index/#/project]]></EventKey>
+<MenuId>437917383</MenuId>
+</xml>
+[36m[INFO][0m 2019/05/29 18:01 200 212.196µs 140.207.54.79 POST /wechat
+[36m[INFO][0m 2019/05/29 18:01 200 75.769µs 61.129.7.217 GET /vue/index
+[36m[INFO][0m 2019/05/29 18:01 200 41.313739ms 112.17.236.243 GET /project/all
+2019/05/29 18:02:01 收到事件:
+<xml><ToUserName><![CDATA[gh_75a34b17d256]]></ToUserName>
+<FromUserName><![CDATA[oSnZS5tQv-jBvQ3ihdvVMUcg1wNc]]></FromUserName>
+<CreateTime>1559124121</CreateTime>
+<MsgType><![CDATA[event]]></MsgType>
+<Event><![CDATA[VIEW]]></Event>
+<EventKey><![CDATA[http://bci.renjiwulian.com/vue/index/#/mission]]></EventKey>
+<MenuId>437917383</MenuId>
+</xml>
+[36m[INFO][0m 2019/05/29 18:02 200 220.05µs 140.207.54.80 POST /wechat
+[36m[INFO][0m 2019/05/29 18:02 200 54.857µs 61.129.7.217 GET /vue/index
+[36m[INFO][0m 2019/05/29 18:02 200 1.489354ms 112.17.236.243 GET /mission/participant/8
+[36m[INFO][0m 2019/05/29 18:02 200 5.348508ms 112.17.236.243 GET /mission/all
+[36m[INFO][0m 2019/05/29 18:02 200 1.492402ms 112.17.236.243 GET /mission/participant/8
+[36m[INFO][0m 2019/05/29 18:02 200 10.915954ms 112.17.236.243 GET /mission/all
+2019/05/29 18:02:21 收到事件:
+<xml><ToUserName><![CDATA[gh_75a34b17d256]]></ToUserName>
+<FromUserName><![CDATA[oSnZS5tQv-jBvQ3ihdvVMUcg1wNc]]></FromUserName>
+<CreateTime>1559124141</CreateTime>
+<MsgType><![CDATA[event]]></MsgType>
+<Event><![CDATA[VIEW]]></Event>
+<EventKey><![CDATA[http://bci.renjiwulian.com/vue/index/#/pace]]></EventKey>
+<MenuId>437917383</MenuId>
+</xml>
+[36m[INFO][0m 2019/05/29 18:02 200 225.326µs 140.207.54.80 POST /wechat
+[36m[INFO][0m 2019/05/29 18:02 200 59.323µs 61.129.7.217 GET /vue/index
+[36m[INFO][0m 2019/05/29 18:02 304 88.514µs 112.17.236.243 GET /static/js/15.83b48c7c0d3eda033986.js
+[36m[INFO][0m 2019/05/29 18:02 200 42.56747ms 112.17.236.243 GET /project/all
+[36m[INFO][0m 2019/06/01 23:00 200 61.975µs 61.151.178.172 GET /vue/index
+[36m[INFO][0m 2019/06/01 23:00 200 164.191µs 112.17.247.119 GET /static/js/manifest.6e135d116047bbd799ae.js
+[36m[INFO][0m 2019/06/01 23:00 200 2.049723506s 112.17.247.119 GET /static/js/app.d42ec257a105658cb7b1.js
+2019/06/01 23:00:43 收到事件:
+<xml><ToUserName><![CDATA[gh_75a34b17d256]]></ToUserName>
+<FromUserName><![CDATA[oSnZS5sXgKfB9eYywWnDkInsnVeo]]></FromUserName>
+<CreateTime>1559401232</CreateTime>
+<MsgType><![CDATA[event]]></MsgType>
+<Event><![CDATA[VIEW]]></Event>
+<EventKey><![CDATA[http://bci.renjiwulian.com/vue/index/#/pace]]></EventKey>
+<MenuId>437917383</MenuId>
+</xml>
+[36m[INFO][0m 2019/06/01 23:00 200 229.806µs 140.207.54.78 POST /wechat
+[36m[INFO][0m 2019/06/01 23:00 200 10.669637438s 112.17.247.119 GET /static/css/app.556c4167239f66c4c53e822adbf426d8.css
+[36m[INFO][0m 2019/06/01 23:00 200 10.969753116s 112.17.247.119 GET /static/js/vendor.8d7b051ea6412f65a038.js
+[36m[INFO][0m 2019/06/01 23:00 200 128.307µs 112.17.247.119 GET /static/js/15.83b48c7c0d3eda033986.js
+[mysql] 2019/06/01 23:00:49 packets.go:112: closing bad idle connection: EOF
+[36m[INFO][0m 2019/06/01 23:00 200 40.863067ms 112.17.247.119 GET /project/all
+[36m[INFO][0m 2019/06/01 23:00 200 181.65µs 112.17.247.119 GET /static/js/5.a423b29d8877a9b5c5b5.js
+[36m[INFO][0m 2019/06/01 23:00 200 61.103343ms 112.17.247.119 GET /project/frame/1
+[36m[INFO][0m 2019/06/01 23:00 200 38.07684ms 112.17.247.119 GET /project/all
+[36m[INFO][0m 2019/06/01 23:00 200 7.326406ms 112.17.247.119 GET /project/frame/3
+[36m[INFO][0m 2019/06/01 23:00 200 40.487562ms 112.17.247.119 GET /project/all
+[36m[INFO][0m 2019/06/01 23:01 200 65.627µs 58.247.206.140 GET /vue/index
+[36m[INFO][0m 2019/06/01 23:01 200 118.438µs 58.247.206.140 GET /static/js/manifest.6e135d116047bbd799ae.js
+[36m[INFO][0m 2019/06/01 23:01 200 2.561088326s 58.247.206.140 GET /static/js/vendor.8d7b051ea6412f65a038.js
+[36m[INFO][0m 2019/06/01 23:01 200 8.378531ms 58.247.206.145 GET /static/js/app.d42ec257a105658cb7b1.js
+[mysql] 2019/06/04 10:47:08 packets.go:112: closing bad idle connection: EOF
+[36m[INFO][0m 2019/06/04 10:47 200 229.261825ms 223.166.222.108 POST /wechat
+2019/06/04 10:52:42 收到事件:
+<xml><ToUserName><![CDATA[gh_75a34b17d256]]></ToUserName>
+<FromUserName><![CDATA[oSnZS5vGGgnilPGZnjGYXks5fGXU]]></FromUserName>
+<CreateTime>1559616762</CreateTime>
+<MsgType><![CDATA[event]]></MsgType>
+<Event><![CDATA[unsubscribe]]></Event>
+<EventKey><![CDATA[]]></EventKey>
+</xml>
+[36m[INFO][0m 2019/06/04 10:52 200 220.731µs 223.166.222.108 POST /wechat
+[mysql] 2019/06/05 15:41:30 packets.go:112: closing bad idle connection: EOF
+[36m[INFO][0m 2019/06/05 15:41 200 230.232334ms 223.166.222.108 POST /wechat
+2019/06/05 15:48:31 收到事件:
+<xml><ToUserName><![CDATA[gh_75a34b17d256]]></ToUserName>
+<FromUserName><![CDATA[oSnZS5uZwOZOAqh0dJtVztW1llCM]]></FromUserName>
+<CreateTime>1559720911</CreateTime>
+<MsgType><![CDATA[event]]></MsgType>
+<Event><![CDATA[unsubscribe]]></Event>
+<EventKey><![CDATA[]]></EventKey>
+</xml>
+[36m[INFO][0m 2019/06/05 15:48 200 187.482µs 223.166.222.108 POST /wechat
+[36m[INFO][0m 2019/06/07 20:01 200 53.387µs 49.94.8.127 GET /vue/index
+[36m[INFO][0m 2019/06/07 20:01 200 486.074µs 49.94.8.127 GET /static/js/manifest.6e135d116047bbd799ae.js
+[36m[INFO][0m 2019/06/07 20:01 200 2.297487645s 49.94.8.127 GET /static/js/app.d42ec257a105658cb7b1.js
+[36m[INFO][0m 2019/06/07 20:01 200 5.601494783s 49.94.8.127 GET /static/css/app.556c4167239f66c4c53e822adbf426d8.css
+[36m[INFO][0m 2019/06/07 20:01 200 8.55385926s 49.94.8.127 GET /static/js/vendor.8d7b051ea6412f65a038.js
+[36m[INFO][0m 2019/06/07 20:01 200 25.974µs 49.94.8.127 GET /vue/index
+[36m[INFO][0m 2019/06/07 20:01 206 113.399µs 49.94.8.127 GET /static/js/vendor.8d7b051ea6412f65a038.js
+[36m[INFO][0m 2019/06/07 20:01 206 3.822491251s 49.94.8.127 GET /static/js/vendor.8d7b051ea6412f65a038.js
+[36m[INFO][0m 2019/06/07 20:01 200 211.348µs 49.94.8.127 GET /static/js/6.cc34007d57a847864e30.js
+[36m[INFO][0m 2019/06/07 20:01 200 23.873µs 49.94.8.127 GET /vue/index
+[36m[INFO][0m 2019/06/07 20:01 200 256.382µs 49.94.8.127 GET /static/js/7.4a8752bde963da2e870a.js
+[36m[INFO][0m 2019/06/07 20:01 200 138.036µs 49.94.8.127 GET /static/js/0.ca67e87d8c000a42e592.js
+[36m[INFO][0m 2019/06/07 20:01 200 150.808µs 49.94.8.127 GET /static/js/10.33a586164b874a720425.js
+[mysql] 2019/06/07 20:01:57 packets.go:112: closing bad idle connection: EOF
+[36m[INFO][0m 2019/06/07 20:01 200 7.315135ms 49.94.8.127 GET /mission/all
+[36m[INFO][0m 2019/06/07 20:02 200 44.643µs 101.91.60.109 GET /vue/index
+[36m[INFO][0m 2019/06/07 20:02 200 143.629µs 101.91.60.109 GET /static/js/manifest.6e135d116047bbd799ae.js
+[36m[INFO][0m 2019/06/07 20:02 200 1.616480343s 101.91.60.109 GET /static/js/vendor.8d7b051ea6412f65a038.js
+[36m[INFO][0m 2019/06/07 20:02 200 12.220451ms 101.91.60.109 GET /static/js/app.d42ec257a105658cb7b1.js
+2019/06/10 11:20:12 收到事件:
+<xml><ToUserName><![CDATA[gh_75a34b17d256]]></ToUserName>
+<FromUserName><![CDATA[oSnZS5tQv-jBvQ3ihdvVMUcg1wNc]]></FromUserName>
+<CreateTime>1560136812</CreateTime>
+<MsgType><![CDATA[event]]></MsgType>
+<Event><![CDATA[VIEW]]></Event>
+<EventKey><![CDATA[https://open.weixin.qq.com/connect/oauth2/authorize?appid=wxe8f9250251763487&response_type=code&scope=snsapi_base&redirect_uri=http://bci.renjiwulian.com/vue/index/#/&state=12#wechat_redirect]]></EventKey>
+<MenuId>437917383</MenuId>
+</xml>
+[36m[INFO][0m 2019/06/10 11:20 200 225.565µs 223.166.222.109 POST /wechat
+[36m[INFO][0m 2019/06/10 11:20 200 43.345µs 101.226.225.86 GET /vue/index
+[36m[INFO][0m 2019/06/10 11:20 200 91.915µs 101.226.225.86 GET /static/js/manifest.6e135d116047bbd799ae.js
+[36m[INFO][0m 2019/06/10 11:20 200 4.791327ms 101.226.225.86 GET /static/js/app.d42ec257a105658cb7b1.js
+[36m[INFO][0m 2019/06/10 11:20 200 9.312797965s 101.226.225.86 GET /static/js/vendor.8d7b051ea6412f65a038.js
+[36m[INFO][0m 2019/06/10 11:20 200 7.569499228s 112.17.240.136 GET /static/css/app.556c4167239f66c4c53e822adbf426d8.css
+[36m[INFO][0m 2019/06/10 11:20 200 8.889775594s 112.17.240.136 GET /static/js/vendor.8d7b051ea6412f65a038.js
+[36m[INFO][0m 2019/06/10 11:20 200 202.883µs 101.226.225.86 GET /static/js/10.33a586164b874a720425.js
+[36m[INFO][0m 2019/06/10 11:20 304 127.084µs 101.226.225.86 GET /static/js/0.ca67e87d8c000a42e592.js
+2019/06/10 11:20:40 收到事件:
+<xml><ToUserName><![CDATA[gh_75a34b17d256]]></ToUserName>
+<FromUserName><![CDATA[oSnZS5tQv-jBvQ3ihdvVMUcg1wNc]]></FromUserName>
+<CreateTime>1560136840</CreateTime>
+<MsgType><![CDATA[event]]></MsgType>
+<Event><![CDATA[VIEW]]></Event>
+<EventKey><![CDATA[http://bci.renjiwulian.com/vue/index/#/frame]]></EventKey>
+<MenuId>437917383</MenuId>
+</xml>
+[36m[INFO][0m 2019/06/10 11:20 200 203.368µs 223.166.222.109 POST /wechat
+[36m[INFO][0m 2019/06/10 11:20 200 55.357µs 101.226.225.86 GET /vue/index
+[36m[INFO][0m 2019/06/10 11:20 200 241.831µs 112.17.240.136 GET /static/js/6.cc34007d57a847864e30.js
+[mysql] 2019/06/10 11:20:41 packets.go:112: closing bad idle connection: EOF
+[36m[INFO][0m 2019/06/10 11:20 200 40.977579ms 112.17.240.136 GET /project/all
+[36m[INFO][0m 2019/06/10 11:20 200 208.873µs 112.17.240.136 GET /static/js/14.88fac3337f68812dcb58.js
+[36m[INFO][0m 2019/06/10 11:20 200 59.601649ms 112.17.240.136 GET /project/frame/1
+[36m[INFO][0m 2019/06/10 11:20 200 243.58µs 112.17.240.136 GET /static/fonts/element-icons.535877f.woff
+[36m[INFO][0m 2019/06/10 11:20 200 38.658102ms 112.17.240.136 GET /project/all
+[36m[INFO][0m 2019/06/10 11:20 200 7.066574ms 112.17.240.136 GET /project/frame/2
+[36m[INFO][0m 2019/06/10 11:20 200 41.737929ms 112.17.240.136 GET /project/all
+2019/06/10 11:20:56 收到事件:
+<xml><ToUserName><![CDATA[gh_75a34b17d256]]></ToUserName>
+<FromUserName><![CDATA[oSnZS5tQv-jBvQ3ihdvVMUcg1wNc]]></FromUserName>
+<CreateTime>1560136856</CreateTime>
+<MsgType><![CDATA[event]]></MsgType>
+<Event><![CDATA[VIEW]]></Event>
+<EventKey><![CDATA[http://bci.renjiwulian.com/vue/index/#/newProject]]></EventKey>
+<MenuId>437917383</MenuId>
+</xml>
+[36m[INFO][0m 2019/06/10 11:20 200 208.248µs 223.166.222.109 POST /wechat
+[36m[INFO][0m 2019/06/10 11:20 200 71.449µs 101.226.225.86 GET /vue/index
+[36m[INFO][0m 2019/06/10 11:20 200 266.54µs 112.17.240.136 GET /static/js/1.11c5a59cc1d1eb4828d2.js
+[36m[INFO][0m 2019/06/10 11:20 200 1.730975ms 112.17.240.136 GET /user/level/4
+[36m[INFO][0m 2019/06/10 11:20 200 2.296041ms 112.17.240.136 GET /user/level/6
+[36m[INFO][0m 2019/06/10 11:20 200 1.486754ms 112.17.240.136 GET /user/level/3
+2019/06/10 11:21:29 收到事件:
+<xml><ToUserName><![CDATA[gh_75a34b17d256]]></ToUserName>
+<FromUserName><![CDATA[oSnZS5tQv-jBvQ3ihdvVMUcg1wNc]]></FromUserName>
+<CreateTime>1560136889</CreateTime>
+<MsgType><![CDATA[event]]></MsgType>
+<Event><![CDATA[VIEW]]></Event>
+<EventKey><![CDATA[http://bci.renjiwulian.com/vue/index/#/project]]></EventKey>
+<MenuId>437917383</MenuId>
+</xml>
+[36m[INFO][0m 2019/06/10 11:21 200 214.096µs 223.166.222.109 POST /wechat
+[36m[INFO][0m 2019/06/10 11:21 200 55.361µs 101.226.225.86 GET /vue/index
+[36m[INFO][0m 2019/06/10 11:21 200 200.076µs 112.17.240.136 GET /static/js/4.deace02698e4a7e94fb8.js
+[36m[INFO][0m 2019/06/10 11:21 200 41.445926ms 112.17.240.136 GET /project/all
+2019/06/10 11:21:35 收到事件:
+<xml><ToUserName><![CDATA[gh_75a34b17d256]]></ToUserName>
+<FromUserName><![CDATA[oSnZS5tQv-jBvQ3ihdvVMUcg1wNc]]></FromUserName>
+<CreateTime>1560136895</CreateTime>
+<MsgType><![CDATA[event]]></MsgType>
+<Event><![CDATA[VIEW]]></Event>
+<EventKey><![CDATA[http://bci.renjiwulian.com/vue/index/#/mission]]></EventKey>
+<MenuId>437917383</MenuId>
+</xml>
+[36m[INFO][0m 2019/06/10 11:21 200 197.821µs 223.166.222.109 POST /wechat
+[36m[INFO][0m 2019/06/10 11:21 200 57.408µs 101.226.225.86 GET /vue/index
+[36m[INFO][0m 2019/06/10 11:21 200 236.276µs 112.17.240.136 GET /static/js/7.4a8752bde963da2e870a.js
+[36m[INFO][0m 2019/06/10 11:21 200 1.542829ms 112.17.240.136 GET /mission/participant/8
+[36m[INFO][0m 2019/06/10 11:21 200 6.142402ms 112.17.240.136 GET /mission/all
+[36m[INFO][0m 2019/06/10 11:21 200 1.432752ms 112.17.240.136 GET /mission/participant/8
+2019/06/10 11:21:39 收到事件:
+<xml><ToUserName><![CDATA[gh_75a34b17d256]]></ToUserName>
+<FromUserName><![CDATA[oSnZS5tQv-jBvQ3ihdvVMUcg1wNc]]></FromUserName>
+<CreateTime>1560136899</CreateTime>
+<MsgType><![CDATA[event]]></MsgType>
+<Event><![CDATA[VIEW]]></Event>
+<EventKey><![CDATA[http://bci.renjiwulian.com/vue/index/#/pace]]></EventKey>
+<MenuId>437917383</MenuId>
+</xml>
+[36m[INFO][0m 2019/06/10 11:21 200 250µs 223.166.222.109 POST /wechat
+[36m[INFO][0m 2019/06/10 11:21 200 57.703µs 101.226.225.86 GET /vue/index
+[36m[INFO][0m 2019/06/10 11:21 200 171.47µs 112.17.240.136 GET /static/js/15.83b48c7c0d3eda033986.js
+[36m[INFO][0m 2019/06/10 11:21 200 42.721206ms 112.17.240.136 GET /project/all
+[36m[INFO][0m 2019/06/10 11:21 200 57.919µs 101.89.239.232 GET /vue/index
+[36m[INFO][0m 2019/06/10 11:21 200 187.162µs 112.17.240.136 GET /static/js/5.a423b29d8877a9b5c5b5.js
+[36m[INFO][0m 2019/06/10 11:21 200 7.533491ms 112.17.240.136 GET /project/frame/4
+[36m[INFO][0m 2019/06/10 11:21 200 40.43555ms 112.17.240.136 GET /project/all
+[36m[INFO][0m 2019/06/10 11:21 200 8.197833ms 112.17.240.136 GET /project/frame/6
+[36m[INFO][0m 2019/06/10 11:21 200 43.911308ms 112.17.240.136 GET /project/all
+[36m[INFO][0m 2019/06/10 11:21 200 60.164167ms 112.17.240.136 GET /project/frame/1
+[36m[INFO][0m 2019/06/10 11:21 200 109.391µs 101.89.239.232 GET /static/js/manifest.6e135d116047bbd799ae.js
+[36m[INFO][0m 2019/06/10 11:21 200 40.379513ms 112.17.240.136 GET /project/all
+[36m[INFO][0m 2019/06/10 11:22 200 15.158370117s 101.89.239.232 GET /static/js/vendor.8d7b051ea6412f65a038.js
+[36m[INFO][0m 2019/06/10 11:22 200 5.212638ms 101.89.239.232 GET /static/js/app.d42ec257a105658cb7b1.js
+2019/06/10 11:22:44 收到事件:
+<xml><ToUserName><![CDATA[gh_75a34b17d256]]></ToUserName>
+<FromUserName><![CDATA[oSnZS5tQv-jBvQ3ihdvVMUcg1wNc]]></FromUserName>
+<CreateTime>1560136964</CreateTime>
+<MsgType><![CDATA[event]]></MsgType>
+<Event><![CDATA[VIEW]]></Event>
+<EventKey><![CDATA[http://bci.renjiwulian.com/vue/index/#/pace]]></EventKey>
+<MenuId>437917383</MenuId>
+</xml>
+[36m[INFO][0m 2019/06/10 11:22 200 218.217µs 223.166.222.109 POST /wechat
+[36m[INFO][0m 2019/06/10 11:22 200 54.429µs 101.226.225.86 GET /vue/index
+[36m[INFO][0m 2019/06/10 11:22 200 41.485621ms 112.17.240.136 GET /project/all
+[36m[INFO][0m 2019/06/10 11:29 200 44.581µs 101.227.139.163 GET /vue/index
+[36m[INFO][0m 2019/06/10 11:29 200 104.643µs 101.227.139.163 GET /static/js/manifest.6e135d116047bbd799ae.js
+[36m[INFO][0m 2019/06/10 11:30 200 56.601877188s 101.227.139.163 GET /static/js/vendor.8d7b051ea6412f65a038.js
+[36m[INFO][0m 2019/06/10 11:31 200 15.50957ms 101.227.139.163 GET /static/js/app.d42ec257a105658cb7b1.js
+2019/06/10 13:20:25 收到事件:
+<xml><ToUserName><![CDATA[gh_75a34b17d256]]></ToUserName>
+<FromUserName><![CDATA[oSnZS5tQv-jBvQ3ihdvVMUcg1wNc]]></FromUserName>
+<CreateTime>1560144025</CreateTime>
+<MsgType><![CDATA[event]]></MsgType>
+<Event><![CDATA[VIEW]]></Event>
+<EventKey><![CDATA[http://bci.renjiwulian.com/vue/index/#/project]]></EventKey>
+<MenuId>437917383</MenuId>
+</xml>
+[36m[INFO][0m 2019/06/10 13:20 200 197.405µs 223.166.222.109 POST /wechat
+[36m[INFO][0m 2019/06/10 13:20 200 55.751µs 101.226.225.86 GET /vue/index
+2019/06/10 13:20:38 service.user.Bind:	service.user.exchangeOpenId:	openid和code不可同时为空
+[36m[INFO][0m 2019/06/10 13:20 202 139.64µs 112.17.240.136 PUT /user/bind
+2019/06/10 13:20:44 收到事件:
+<xml><ToUserName><![CDATA[gh_75a34b17d256]]></ToUserName>
+<FromUserName><![CDATA[oSnZS5tQv-jBvQ3ihdvVMUcg1wNc]]></FromUserName>
+<CreateTime>1560144044</CreateTime>
+<MsgType><![CDATA[event]]></MsgType>
+<Event><![CDATA[VIEW]]></Event>
+<EventKey><![CDATA[https://open.weixin.qq.com/connect/oauth2/authorize?appid=wxe8f9250251763487&response_type=code&scope=snsapi_base&redirect_uri=http://bci.renjiwulian.com/vue/index/#/&state=12#wechat_redirect]]></EventKey>
+<MenuId>437917383</MenuId>
+</xml>
+[36m[INFO][0m 2019/06/10 13:20 200 214.474µs 223.166.222.109 POST /wechat
+[36m[INFO][0m 2019/06/10 13:20 200 46.231µs 101.226.225.86 GET /vue/index
+[36m[INFO][0m 2019/06/10 13:20 200 92.737342ms 112.17.240.136 PUT /user/bind
+[36m[INFO][0m 2019/06/10 13:20 200 39.81121ms 101.226.225.86 GET /project/all
+2019/06/10 13:21:08 收到事件:
+<xml><ToUserName><![CDATA[gh_75a34b17d256]]></ToUserName>
+<FromUserName><![CDATA[oSnZS5tQv-jBvQ3ihdvVMUcg1wNc]]></FromUserName>
+<CreateTime>1560144068</CreateTime>
+<MsgType><![CDATA[event]]></MsgType>
+<Event><![CDATA[VIEW]]></Event>
+<EventKey><![CDATA[http://bci.renjiwulian.com/vue/index/#/frame]]></EventKey>
+<MenuId>437917383</MenuId>
+</xml>
+[36m[INFO][0m 2019/06/10 13:21 200 227.989µs 223.166.222.109 POST /wechat
+[36m[INFO][0m 2019/06/10 13:21 200 43.676µs 183.192.164.79 GET /vue/index
+[36m[INFO][0m 2019/06/10 13:21 200 37.799046ms 112.17.240.136 GET /project/all
+[36m[INFO][0m 2019/06/10 13:21 200 57.522952ms 112.17.240.136 GET /project/frame/1
+2019/06/10 13:21:16 收到事件:
+<xml><ToUserName><![CDATA[gh_75a34b17d256]]></ToUserName>
+<FromUserName><![CDATA[oSnZS5tQv-jBvQ3ihdvVMUcg1wNc]]></FromUserName>
+<CreateTime>1560144076</CreateTime>
+<MsgType><![CDATA[event]]></MsgType>
+<Event><![CDATA[VIEW]]></Event>
+<EventKey><![CDATA[http://bci.renjiwulian.com/vue/index/#/project]]></EventKey>
+<MenuId>437917383</MenuId>
+</xml>
+[36m[INFO][0m 2019/06/10 13:21 200 251.361µs 223.166.222.109 POST /wechat
+[36m[INFO][0m 2019/06/10 13:21 200 54.306µs 101.226.225.86 GET /vue/index
+[36m[INFO][0m 2019/06/10 13:21 200 38.96155ms 112.17.240.136 GET /project/all
+2019/06/10 13:21:25 收到事件:
+<xml><ToUserName><![CDATA[gh_75a34b17d256]]></ToUserName>
+<FromUserName><![CDATA[oSnZS5tQv-jBvQ3ihdvVMUcg1wNc]]></FromUserName>
+<CreateTime>1560144085</CreateTime>
+<MsgType><![CDATA[event]]></MsgType>
+<Event><![CDATA[VIEW]]></Event>
+<EventKey><![CDATA[http://bci.renjiwulian.com/vue/index/#/pace]]></EventKey>
+<MenuId>437917383</MenuId>
+</xml>
+[36m[INFO][0m 2019/06/10 13:21 200 216.576µs 223.166.222.109 POST /wechat
+[36m[INFO][0m 2019/06/10 13:21 200 56.453µs 101.226.225.86 GET /vue/index
+[36m[INFO][0m 2019/06/10 13:21 200 41.500831ms 112.17.240.136 GET /project/all
+[36m[INFO][0m 2019/06/11 19:43 200 48.19µs 61.129.7.254 GET /vue/index
+[36m[INFO][0m 2019/06/11 19:43 304 78.89µs 61.129.7.254 GET /static/js/manifest.6e135d116047bbd799ae.js
+[36m[INFO][0m 2019/06/11 19:43 200 5.435359ms 61.129.7.254 GET /static/js/app.d42ec257a105658cb7b1.js
+[36m[INFO][0m 2019/06/11 19:43 200 2.074427926s 223.104.246.62 GET /static/css/app.556c4167239f66c4c53e822adbf426d8.css
+2019/06/11 19:43:19 收到事件:
+<xml><ToUserName><![CDATA[gh_75a34b17d256]]></ToUserName>
+<FromUserName><![CDATA[oSnZS5sXgKfB9eYywWnDkInsnVeo]]></FromUserName>
+<CreateTime>1560253389</CreateTime>
+<MsgType><![CDATA[event]]></MsgType>
+<Event><![CDATA[VIEW]]></Event>
+<EventKey><![CDATA[https://open.weixin.qq.com/connect/oauth2/authorize?appid=wxe8f9250251763487&response_type=code&scope=snsapi_base&redirect_uri=http://bci.renjiwulian.com/vue/index/#/&state=12#wechat_redirect]]></EventKey>
+<MenuId>437917383</MenuId>
+</xml>
+[36m[INFO][0m 2019/06/11 19:43 200 234.757µs 140.207.54.77 POST /wechat
+[36m[INFO][0m 2019/06/11 19:43 200 10.168949039s 61.129.7.254 GET /static/js/vendor.8d7b051ea6412f65a038.js
+[36m[INFO][0m 2019/06/11 19:43 200 6.394550059s 223.104.246.62 GET /static/js/vendor.8d7b051ea6412f65a038.js
+[36m[INFO][0m 2019/06/11 19:43 304 112.105µs 61.129.7.254 GET /static/js/0.ca67e87d8c000a42e592.js
+[36m[INFO][0m 2019/06/11 19:43 200 123.799µs 61.129.7.254 GET /static/js/10.33a586164b874a720425.js
+2019/06/11 19:53:08 收到事件:
+<xml><ToUserName><![CDATA[gh_75a34b17d256]]></ToUserName>
+<FromUserName><![CDATA[oSnZS5sXgKfB9eYywWnDkInsnVeo]]></FromUserName>
+<CreateTime>1560253988</CreateTime>
+<MsgType><![CDATA[event]]></MsgType>
+<Event><![CDATA[VIEW]]></Event>
+<EventKey><![CDATA[http://bci.renjiwulian.com/vue/index/#/frame]]></EventKey>
+<MenuId>437917383</MenuId>
+</xml>
+[36m[INFO][0m 2019/06/11 19:53 200 188.502µs 140.207.54.78 POST /wechat
+[36m[INFO][0m 2019/06/11 19:53 200 57.38µs 61.129.7.254 GET /vue/index
+[36m[INFO][0m 2019/06/11 19:53 200 201.513µs 223.104.246.62 GET /static/js/6.cc34007d57a847864e30.js
+[mysql] 2019/06/11 19:53:09 packets.go:112: closing bad idle connection: EOF
+[36m[INFO][0m 2019/06/11 19:53 200 43.246116ms 223.104.246.62 GET /project/all
+[36m[INFO][0m 2019/06/11 19:53 200 196.387µs 223.104.246.62 GET /static/js/14.88fac3337f68812dcb58.js
+[36m[INFO][0m 2019/06/11 19:53 200 55.481615ms 223.104.246.62 GET /project/frame/1
+[36m[INFO][0m 2019/06/11 19:53 304 87.401µs 223.104.246.62 GET /static/fonts/element-icons.535877f.woff
+[36m[INFO][0m 2019/06/11 19:55 200 45.128879ms 223.104.246.62 GET /project/all
+2019/06/11 19:56:00 收到事件:
+<xml><ToUserName><![CDATA[gh_75a34b17d256]]></ToUserName>
+<FromUserName><![CDATA[oSnZS5sXgKfB9eYywWnDkInsnVeo]]></FromUserName>
+<CreateTime>1560254160</CreateTime>
+<MsgType><![CDATA[event]]></MsgType>
+<Event><![CDATA[VIEW]]></Event>
+<EventKey><![CDATA[http://bci.renjiwulian.com/vue/index/#/newProject]]></EventKey>
+<MenuId>437917383</MenuId>
+</xml>
+[36m[INFO][0m 2019/06/11 19:56 200 242.936µs 140.207.54.77 POST /wechat
+[36m[INFO][0m 2019/06/11 19:56 200 55.686µs 61.129.7.254 GET /vue/index
+[36m[INFO][0m 2019/06/11 19:56 200 227.593µs 223.104.246.62 GET /static/js/1.11c5a59cc1d1eb4828d2.js
+2019/06/11 19:57:25 收到事件:
+<xml><ToUserName><![CDATA[gh_75a34b17d256]]></ToUserName>
+<FromUserName><![CDATA[oSnZS5sXgKfB9eYywWnDkInsnVeo]]></FromUserName>
+<CreateTime>1560254245</CreateTime>
+<MsgType><![CDATA[event]]></MsgType>
+<Event><![CDATA[VIEW]]></Event>
+<EventKey><![CDATA[http://bci.renjiwulian.com/vue/index/#/newProject]]></EventKey>
+<MenuId>437917383</MenuId>
+</xml>
+[36m[INFO][0m 2019/06/11 19:57 200 224.841µs 140.207.54.77 POST /wechat
+[36m[INFO][0m 2019/06/11 19:57 200 76.35µs 61.129.7.254 GET /vue/index
+2019/06/11 19:57:28 收到事件:
+<xml><ToUserName><![CDATA[gh_75a34b17d256]]></ToUserName>
+<FromUserName><![CDATA[oSnZS5sXgKfB9eYywWnDkInsnVeo]]></FromUserName>
+<CreateTime>1560254248</CreateTime>
+<MsgType><![CDATA[event]]></MsgType>
+<Event><![CDATA[VIEW]]></Event>
+<EventKey><![CDATA[http://bci.renjiwulian.com/vue/index/#/project]]></EventKey>
+<MenuId>437917383</MenuId>
+</xml>
+[36m[INFO][0m 2019/06/11 19:57 200 222.51µs 140.207.54.77 POST /wechat
+[36m[INFO][0m 2019/06/11 19:57 200 67.2µs 61.129.7.254 GET /vue/index
+[36m[INFO][0m 2019/06/11 19:57 304 90.222µs 223.104.246.62 GET /static/js/4.deace02698e4a7e94fb8.js
+[36m[INFO][0m 2019/06/11 19:57 200 40.611424ms 223.104.246.62 GET /project/all
+[36m[INFO][0m 2019/06/11 19:57 200 253.712µs 223.104.246.62 GET /static/js/2.64af9f3b1f5dd3184951.js
+[36m[INFO][0m 2019/06/11 19:57 200 5.06597ms 223.104.246.62 GET /project/id/2
+[36m[INFO][0m 2019/06/11 19:57 200 8.303699ms 223.104.246.62 GET /module/project/2
+[36m[INFO][0m 2019/06/11 19:57 200 6.026704ms 223.104.246.62 GET /user/level/3
+[36m[INFO][0m 2019/06/11 19:57 200 3.235004ms 223.104.246.62 GET /module/project/2
+[36m[INFO][0m 2019/06/11 19:57 200 39.001863ms 223.104.246.62 GET /project/all
+[36m[INFO][0m 2019/06/11 19:57 200 22.10429ms 223.104.246.62 GET /module/project/1
+[36m[INFO][0m 2019/06/11 19:57 200 31.743735ms 223.104.246.62 GET /project/id/1
+[36m[INFO][0m 2019/06/11 19:58 200 1.462526ms 223.104.246.62 GET /user/level/3
+[36m[INFO][0m 2019/06/11 19:58 200 15.129557ms 223.104.246.62 GET /module/project/1
+[36m[INFO][0m 2019/06/11 20:00 200 1.622789ms 223.104.246.62 GET /user/level/3
+[36m[INFO][0m 2019/06/11 20:00 200 14.576846ms 223.104.246.62 GET /module/project/1
+[36m[INFO][0m 2019/06/11 20:00 200 46.04783ms 223.104.246.62 GET /project/all
+[36m[INFO][0m 2019/06/11 20:00 200 4.941965ms 223.104.246.62 GET /project/id/3
+[36m[INFO][0m 2019/06/11 20:00 200 3.00921ms 223.104.246.62 GET /module/project/3
+[36m[INFO][0m 2019/06/11 20:00 200 1.569457ms 223.104.246.62 GET /user/level/3
+[36m[INFO][0m 2019/06/11 20:00 200 2.943427ms 223.104.246.62 GET /module/project/3
+[36m[INFO][0m 2019/06/11 20:03 200 1.649781ms 223.104.246.62 GET /user/level/3
+[36m[INFO][0m 2019/06/11 20:03 200 3.416623ms 223.104.246.62 GET /module/project/3
+[36m[INFO][0m 2019/06/11 20:03 200 40.819063ms 223.104.246.62 GET /project/all
+2019/06/11 20:03:54 收到事件:
+<xml><ToUserName><![CDATA[gh_75a34b17d256]]></ToUserName>
+<FromUserName><![CDATA[oSnZS5sXgKfB9eYywWnDkInsnVeo]]></FromUserName>
+<CreateTime>1560254634</CreateTime>
+<MsgType><![CDATA[event]]></MsgType>
+<Event><![CDATA[VIEW]]></Event>
+<EventKey><![CDATA[http://bci.renjiwulian.com/vue/index/#/project]]></EventKey>
+<MenuId>437917383</MenuId>
+</xml>
+[36m[INFO][0m 2019/06/11 20:03 200 213.558µs 140.207.54.77 POST /wechat
+[36m[INFO][0m 2019/06/11 20:03 200 43.348µs 61.129.7.254 GET /vue/index
+[36m[INFO][0m 2019/06/11 20:03 200 40.96311ms 223.104.246.62 GET /project/all
+2019/06/11 20:03:58 收到事件:
+<xml><ToUserName><![CDATA[gh_75a34b17d256]]></ToUserName>
+<FromUserName><![CDATA[oSnZS5sXgKfB9eYywWnDkInsnVeo]]></FromUserName>
+<CreateTime>1560254638</CreateTime>
+<MsgType><![CDATA[event]]></MsgType>
+<Event><![CDATA[VIEW]]></Event>
+<EventKey><![CDATA[http://bci.renjiwulian.com/vue/index/#/mission]]></EventKey>
+<MenuId>437917383</MenuId>
+</xml>
+[36m[INFO][0m 2019/06/11 20:03 200 245.629µs 140.207.54.78 POST /wechat
+[36m[INFO][0m 2019/06/11 20:03 200 44.921µs 223.166.151.234 GET /vue/index
+[36m[INFO][0m 2019/06/11 20:03 200 196.959µs 223.104.246.62 GET /static/js/7.4a8752bde963da2e870a.js
+[36m[INFO][0m 2019/06/11 20:03 200 3.554779ms 223.104.246.62 GET /mission/participant/7
+[36m[INFO][0m 2019/06/11 20:03 200 8.840671ms 223.104.246.62 GET /mission/all
+[36m[INFO][0m 2019/06/11 20:04 200 1.625153ms 223.104.246.62 GET /mission/participant/7
+[36m[INFO][0m 2019/06/11 20:04 200 10.368509ms 223.104.246.62 GET /mission/all
+[36m[INFO][0m 2019/06/11 20:04 200 1.531985ms 223.104.246.62 GET /mission/participant/7
+2019/06/11 20:04:08 收到事件:
+<xml><ToUserName><![CDATA[gh_75a34b17d256]]></ToUserName>
+<FromUserName><![CDATA[oSnZS5sXgKfB9eYywWnDkInsnVeo]]></FromUserName>
+<CreateTime>1560254648</CreateTime>
+<MsgType><![CDATA[event]]></MsgType>
+<Event><![CDATA[VIEW]]></Event>
+<EventKey><![CDATA[http://bci.renjiwulian.com/vue/index/#/pace]]></EventKey>
+<MenuId>437917383</MenuId>
+</xml>
+[36m[INFO][0m 2019/06/11 20:04 200 205.743µs 140.207.54.78 POST /wechat
+[36m[INFO][0m 2019/06/11 20:04 200 58.169µs 61.129.7.254 GET /vue/index
+[36m[INFO][0m 2019/06/11 20:04 304 82.337µs 223.104.246.62 GET /static/js/15.83b48c7c0d3eda033986.js
+[36m[INFO][0m 2019/06/11 20:04 200 38.991387ms 223.104.246.62 GET /project/all
+[36m[INFO][0m 2019/06/11 20:04 200 202.575µs 223.104.246.62 GET /static/js/5.a423b29d8877a9b5c5b5.js
+[36m[INFO][0m 2019/06/11 20:04 200 13.160545ms 223.104.246.62 GET /project/frame/3
+[36m[INFO][0m 2019/06/11 20:04 200 39.148269ms 223.104.246.62 GET /project/all
+[36m[INFO][0m 2019/06/11 20:04 200 56.267828ms 223.104.246.62 GET /project/frame/1
+[36m[INFO][0m 2019/06/11 20:04 200 45.961µs 61.151.178.197 GET /vue/index
+[36m[INFO][0m 2019/06/11 20:04 200 155.133µs 61.151.178.197 GET /static/js/manifest.6e135d116047bbd799ae.js
+[36m[INFO][0m 2019/06/11 20:04 200 3.305531ms 61.151.178.197 GET /static/js/app.d42ec257a105658cb7b1.js
+[36m[INFO][0m 2019/06/11 20:04 200 562.86389ms 61.151.178.197 GET /static/js/vendor.8d7b051ea6412f65a038.js
+[36m[INFO][0m 2019/06/11 20:09 200 40.175994ms 223.104.246.62 GET /project/all
+[36m[INFO][0m 2019/06/11 20:09 200 7.774104ms 223.104.246.62 GET /project/frame/3
+[36m[INFO][0m 2019/06/11 20:09 200 38.130122ms 223.104.246.62 GET /project/all
+[36m[INFO][0m 2019/06/11 20:09 200 7.644171ms 223.104.246.62 GET /project/frame/5
+2019/06/11 20:09:29 收到事件:
+<xml><ToUserName><![CDATA[gh_75a34b17d256]]></ToUserName>
+<FromUserName><![CDATA[oSnZS5sXgKfB9eYywWnDkInsnVeo]]></FromUserName>
+<CreateTime>1560254969</CreateTime>
+<MsgType><![CDATA[event]]></MsgType>
+<Event><![CDATA[VIEW]]></Event>
+<EventKey><![CDATA[http://bci.renjiwulian.com/vue/index/#/mission]]></EventKey>
+<MenuId>437917383</MenuId>
+</xml>
+[36m[INFO][0m 2019/06/11 20:09 200 235.802µs 140.207.54.77 POST /wechat
+[36m[INFO][0m 2019/06/11 20:09 200 57.206µs 61.129.7.254 GET /vue/index
+[36m[INFO][0m 2019/06/11 20:09 200 1.497839ms 223.104.246.62 GET /mission/participant/7
+[36m[INFO][0m 2019/06/11 20:09 200 10.637246ms 223.104.246.62 GET /mission/all
+[36m[INFO][0m 2019/06/11 20:09 200 1.505911ms 223.104.246.62 GET /mission/participant/7
+[36m[INFO][0m 2019/06/11 20:09 200 6.070503ms 223.104.246.62 GET /mission/all
+[36m[INFO][0m 2019/06/11 20:09 200 222.279µs 223.104.246.62 GET /static/js/8.f68e93fdf6e043a2c07c.js
+[36m[INFO][0m 2019/06/11 20:09 200 3.259706ms 223.104.246.62 GET /mission/id/2
+[36m[INFO][0m 2019/06/11 20:09 200 25.520488ms 223.104.246.62 GET /static/js/11.dffb9bbf74c848e83e88.js
+[36m[INFO][0m 2019/06/11 20:09 200 3.374382ms 223.104.246.62 GET /mission/id/2
+2019/06/13 09:54:26 收到事件:
+<xml><ToUserName><![CDATA[gh_75a34b17d256]]></ToUserName>
+<FromUserName><![CDATA[oSnZS5sXgKfB9eYywWnDkInsnVeo]]></FromUserName>
+<CreateTime>1560390866</CreateTime>
+<MsgType><![CDATA[event]]></MsgType>
+<Event><![CDATA[VIEW]]></Event>
+<EventKey><![CDATA[https://open.weixin.qq.com/connect/oauth2/authorize?appid=wxe8f9250251763487&response_type=code&scope=snsapi_base&redirect_uri=http://bci.renjiwulian.com/vue/index/#/&state=12#wechat_redirect]]></EventKey>
+<MenuId>437917383</MenuId>
+</xml>
+[36m[INFO][0m 2019/06/13 09:54 200 242.954µs 140.207.54.77 POST /wechat
+[36m[INFO][0m 2019/06/13 09:54 200 58.403µs 61.129.7.254 GET /vue/index
+[36m[INFO][0m 2019/06/13 09:54 200 143.795µs 61.129.7.254 GET /static/js/manifest.6e135d116047bbd799ae.js
+[36m[INFO][0m 2019/06/13 09:54 200 2.317143537s 61.129.7.254 GET /static/js/app.d42ec257a105658cb7b1.js
+[36m[INFO][0m 2019/06/13 09:54 200 3.629621842s 223.104.246.43 GET /static/css/app.556c4167239f66c4c53e822adbf426d8.css
+[36m[INFO][0m 2019/06/13 09:54 200 10.041616315s 61.129.7.254 GET /static/js/vendor.8d7b051ea6412f65a038.js
+[36m[INFO][0m 2019/06/13 09:54 200 7.159337573s 223.104.246.43 GET /static/js/vendor.8d7b051ea6412f65a038.js
+[36m[INFO][0m 2019/06/13 09:54 200 8.296933ms 61.129.7.254 GET /static/js/0.ca67e87d8c000a42e592.js
+[36m[INFO][0m 2019/06/13 09:54 200 834.838µs 61.129.7.254 GET /static/js/10.33a586164b874a720425.js
+[36m[INFO][0m 2019/06/13 10:09 200 42.416µs 223.93.188.66 GET /vue/index
+[36m[INFO][0m 2019/06/13 10:09 200 130.06µs 223.93.188.66 GET /static/js/manifest.6e135d116047bbd799ae.js
+[36m[INFO][0m 2019/06/13 10:09 200 227.298µs 223.93.188.66 GET /static/js/app.d42ec257a105658cb7b1.js
+[36m[INFO][0m 2019/06/13 10:09 200 7.614726714s 223.93.188.66 GET /static/css/app.556c4167239f66c4c53e822adbf426d8.css
+[36m[INFO][0m 2019/06/13 10:09 200 13.653419833s 223.93.188.66 GET /static/js/vendor.8d7b051ea6412f65a038.js
+[36m[INFO][0m 2019/06/13 10:09 200 114.526µs 223.93.188.66 GET /static/js/0.ca67e87d8c000a42e592.js
+[36m[INFO][0m 2019/06/13 10:09 200 83.511µs 223.93.188.66 GET /static/js/10.33a586164b874a720425.js
+2019/06/13 10:15:06 收到事件:
+<xml><ToUserName><![CDATA[gh_75a34b17d256]]></ToUserName>
+<FromUserName><![CDATA[oSnZS5sXgKfB9eYywWnDkInsnVeo]]></FromUserName>
+<CreateTime>1560392106</CreateTime>
+<MsgType><![CDATA[event]]></MsgType>
+<Event><![CDATA[VIEW]]></Event>
+<EventKey><![CDATA[http://bci.renjiwulian.com/vue/index/#/project]]></EventKey>
+<MenuId>437917383</MenuId>
+</xml>
+[36m[INFO][0m 2019/06/13 10:15 200 212.334µs 140.207.54.78 POST /wechat
+[36m[INFO][0m 2019/06/13 10:15 200 57.52µs 61.129.7.254 GET /vue/index
+[36m[INFO][0m 2019/06/13 10:15 200 458.334µs 223.104.246.43 GET /static/js/4.deace02698e4a7e94fb8.js
+[mysql] 2019/06/13 10:15:07 packets.go:112: closing bad idle connection: EOF
+[mysql] 2019/06/13 10:15:07 packets.go:112: closing bad idle connection: EOF
+[36m[INFO][0m 2019/06/13 10:15 200 43.957348ms 223.104.246.43 GET /project/all
+[36m[INFO][0m 2019/06/13 10:15 200 650.194µs 223.104.246.43 GET /static/js/2.64af9f3b1f5dd3184951.js
+[36m[INFO][0m 2019/06/13 10:15 200 12.455747ms 223.104.246.43 GET /static/fonts/element-icons.535877f.woff
+[36m[INFO][0m 2019/06/13 10:15 200 5.361856ms 223.104.246.43 GET /project/id/3
+[36m[INFO][0m 2019/06/13 10:15 200 7.500022ms 223.104.246.43 GET /module/project/3
+[36m[INFO][0m 2019/06/13 10:15 200 1.469044ms 223.104.246.43 GET /user/level/3
+[36m[INFO][0m 2019/06/13 10:15 200 2.936047ms 223.104.246.43 GET /module/project/3
+[36m[INFO][0m 2019/06/13 10:15 200 1.484834ms 223.104.246.43 GET /user/level/3
+[36m[INFO][0m 2019/06/13 10:17 200 42.468995ms 223.104.246.43 GET /project/all
+[36m[INFO][0m 2019/06/13 10:19 200 5.089678ms 223.104.246.43 GET /project/id/2
+[36m[INFO][0m 2019/06/13 10:19 200 3.093699ms 223.104.246.43 GET /module/project/2
+[36m[INFO][0m 2019/06/13 10:19 200 1.46778ms 223.104.246.43 GET /user/level/3
+2019/06/13 10:20:08 收到事件:
+<xml><ToUserName><![CDATA[gh_75a34b17d256]]></ToUserName>
+<FromUserName><![CDATA[oSnZS5sXgKfB9eYywWnDkInsnVeo]]></FromUserName>
+<CreateTime>1560392408</CreateTime>
+<MsgType><![CDATA[event]]></MsgType>
+<Event><![CDATA[VIEW]]></Event>
+<EventKey><![CDATA[https://open.weixin.qq.com/connect/oauth2/authorize?appid=wxe8f9250251763487&response_type=code&scope=snsapi_base&redirect_uri=http://bci.renjiwulian.com/vue/index/#/&state=12#wechat_redirect]]></EventKey>
+<MenuId>437917383</MenuId>
+</xml>
+[36m[INFO][0m 2019/06/13 10:20 200 235.507µs 140.207.54.78 POST /wechat
+[36m[INFO][0m 2019/06/13 10:20 200 59.708µs 61.129.7.254 GET /vue/index
+[36m[INFO][0m 2019/06/13 10:25 200 44.417996ms 223.93.188.66 GET /project/all
+[36m[INFO][0m 2019/06/13 10:25 200 41.022769ms 223.93.188.66 GET /project/all
+[36m[INFO][0m 2019/06/13 11:09 200 65.135µs 223.93.188.66 GET /vue/index
+2019/06/13 12:09:50 收到事件:
+<xml><ToUserName><![CDATA[gh_75a34b17d256]]></ToUserName>
+<FromUserName><![CDATA[oSnZS5sXgKfB9eYywWnDkInsnVeo]]></FromUserName>
+<CreateTime>1560398990</CreateTime>
+<MsgType><![CDATA[event]]></MsgType>
+<Event><![CDATA[VIEW]]></Event>
+<EventKey><![CDATA[http://bci.renjiwulian.com/vue/index/#/newProject]]></EventKey>
+<MenuId>437917383</MenuId>
+</xml>
+[36m[INFO][0m 2019/06/13 12:09 200 182.101µs 140.207.54.77 POST /wechat
+[36m[INFO][0m 2019/06/13 12:09 200 57.812µs 61.129.7.254 GET /vue/index
+[36m[INFO][0m 2019/06/13 12:09 200 9.842356ms 223.104.246.43 GET /static/js/1.11c5a59cc1d1eb4828d2.js
+2019/06/13 12:09:54 收到事件:
+<xml><ToUserName><![CDATA[gh_75a34b17d256]]></ToUserName>
+<FromUserName><![CDATA[oSnZS5sXgKfB9eYywWnDkInsnVeo]]></FromUserName>
+<CreateTime>1560398994</CreateTime>
+<MsgType><![CDATA[event]]></MsgType>
+<Event><![CDATA[VIEW]]></Event>
+<EventKey><![CDATA[http://bci.renjiwulian.com/vue/index/#/project]]></EventKey>
+<MenuId>437917383</MenuId>
+</xml>
+[36m[INFO][0m 2019/06/13 12:09 200 210.994µs 140.207.54.77 POST /wechat
+[36m[INFO][0m 2019/06/13 12:09 200 84.809µs 61.129.7.254 GET /vue/index
+[36m[INFO][0m 2019/06/13 12:09 200 42.340941ms 223.104.246.43 GET /project/all
+[36m[INFO][0m 2019/06/13 12:09 200 22.961743ms 223.104.246.43 GET /module/project/1
+[36m[INFO][0m 2019/06/13 12:09 200 34.739054ms 223.104.246.43 GET /project/id/1
+[36m[INFO][0m 2019/06/13 12:09 200 1.461376ms 223.104.246.43 GET /user/level/3
+[36m[INFO][0m 2019/06/13 12:10 200 15.639138ms 223.104.246.43 GET /module/project/1
+[36m[INFO][0m 2019/06/13 12:10 200 592.798µs 223.104.246.43 GET /static/js/3.cd8ec87a3eb67edc294d.js
+[36m[INFO][0m 2019/06/13 12:10 200 12.776251ms 223.104.246.43 GET /mission/module/1
+[36m[INFO][0m 2019/06/13 12:10 200 20.430756ms 223.104.246.43 GET /module/id/1
+[31m[ERRO][0m 2019/06/13 14:49 http: Server closed
