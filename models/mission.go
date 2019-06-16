@@ -10,11 +10,6 @@ import (
 const titleMission = "models.mission."
 
 type Mission struct {
-	/**
-	@Author: PantaZheng
-	@Description:
-	@Date: 2019/5/13 15:43
-	*/
 	gorm.Model
 	Name         string
 	CreateTime   string
@@ -29,11 +24,6 @@ type Mission struct {
 }
 
 func (mission *Mission) checkForeignKey() (err error) {
-	/**
-	@Author: PantaZheng
-	@Description:
-	@Date: 2019/5/15 18:02
-	*/
 	m := &Module{}
 	m.ID = mission.ModuleID
 	err = m.First()
@@ -42,11 +32,6 @@ func (mission *Mission) checkForeignKey() (err error) {
 
 //Create 创建Mission, 不添加成员
 func (mission *Mission) Create() (err error) {
-	/**
-	@Author: PantaZheng
-	@Description:
-	@Date: 2019/5/13 3:48
-	*/
 	mission.ID = 0
 	if err = mission.checkForeignKey(); err == nil {
 		mission.CreateTime = time.Now().Format("2006-01-02")
@@ -69,11 +54,6 @@ func (mission *Mission) Create() (err error) {
 
 //First 根据id查找Mission.
 func (mission *Mission) First() (err error) {
-	/**
-	@Author: PantaZheng
-	@Description:
-	@Date: 2019/5/13 15:49
-	*/
 	if mission.ID > 0 {
 		m := &Mission{}
 		m.ID = mission.ID
@@ -106,11 +86,6 @@ func MissionsFindAll() (missions []Mission, err error) {
 }
 
 func MissionsFindByParticipantID(id uint) (missions []Mission, err error) {
-	/**
-	@Author: PantaZheng
-	@Description:
-	@Date: 2019/5/13 16:06
-	*/
 	participant := &User{}
 	participant.ID = id
 	if err = participant.First(); err == nil {
@@ -129,11 +104,6 @@ func MissionsFindByParticipantID(id uint) (missions []Mission, err error) {
 }
 
 func MissionsFindByModuleID(id uint) (missions []Mission, err error) {
-	/**
-	@Author: PantaZheng
-	@Description:
-	@Date: 2019/5/13 12:15
-	*/
 	module := &Module{}
 	module.ID = id
 	if err = module.First(); err == nil {
@@ -152,11 +122,6 @@ func MissionsFindByModuleID(id uint) (missions []Mission, err error) {
 }
 
 func (mission *Mission) Updates() (err error) {
-	/**
-	@Author: PantaZheng
-	@Description:
-	@Date: 2019/5/13 23:18
-	*/
 	if err = mission.checkForeignKey(); err == nil {
 		m := &Mission{}
 		m.ID = mission.ID

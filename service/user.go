@@ -27,11 +27,6 @@ var (
 
 //UserJSON 用户Json原型
 type UserJSON struct {
-	/**
-	@Author: PantaZheng
-	@Description:用户JSON
-	@Date: 2019/5/9 10:42
-	*/
 	ID         uint   `json:"id"`
 	OpenID     string `json:"openid"`
 	WechatName string `json:"wechatName"`
@@ -66,11 +61,6 @@ type UserJSON struct {
 
 //userJSON2User UserJSON转换到User.
 func (userJSON *UserJSON) userJSON2User() (user models.User) {
-	/**
-	@Author: PantaZheng
-	@Description: UserJSON转化为User
-	@Date: 2019/5/9 13:14
-	*/
 	user.ID = userJSON.ID
 	user.OpenID = userJSON.OpenID
 	user.WechatName = userJSON.WechatName
@@ -82,11 +72,6 @@ func (userJSON *UserJSON) userJSON2User() (user models.User) {
 
 //user2UserJSON User表单转换到UserJSON.
 func user2UserJSON(user models.User) (userJSON UserJSON) {
-	/**
-	  @Author: PantaZheng
-	  @Description:
-	  @Date: 2019/5/9 12:04
-	*/
 	userJSON.ID = user.ID
 	userJSON.OpenID = user.OpenID
 	userJSON.WechatName = user.WechatName
@@ -98,11 +83,6 @@ func user2UserJSON(user models.User) (userJSON UserJSON) {
 
 //user2UserBriefJSON 简化，仅保留：id、Name、Level.
 func userJSON2UserBriefJSON(userJSON1 UserJSON) (userJSON2 UserJSON) {
-	/**
-	@Author: PantaZheng
-	@Description:
-	@Date: 2019/5/13 2:57
-	*/
 	userJSON2 = UserJSON{}
 	userJSON2.ID = userJSON1.ID
 	userJSON2.Name = userJSON1.Name
@@ -111,11 +91,6 @@ func userJSON2UserBriefJSON(userJSON1 UserJSON) (userJSON2 UserJSON) {
 }
 
 func (userJSON *UserJSON) exchangeOpenID() (err error) {
-	/**
-	@Author: PantaZheng
-	@Description: 根据code换取openid
-	@Date: 2019/5/9 12:32
-	*/
 	if userJSON.OpenID == "" {
 		if userJSON.Code != "" {
 			token := &oauth2.Token{}
@@ -168,11 +143,6 @@ func (userJSON *UserJSON) checkLevel() (err error) {
 
 //UserInitByWechat 用户登录微信初始化微信.
 func UserInitByWechat(weChatInfo *user.UserInfo) string {
-	/**
-	@Author: PantaZheng
-	@Description: 用户登录微信初始化微信,默认level等级为Stranger
-	@Date: 2019/5/9 23:13
-	*/
 	message := ""
 	u := UserJSON{OpenID: weChatInfo.OpenId}
 	if err := u.FindOne(); err == nil {
@@ -196,11 +166,6 @@ func UserInitByWechat(weChatInfo *user.UserInfo) string {
 
 //Create 创建User.
 func (userJSON *UserJSON) Create() (err error) {
-	/**
-	@Author: PantaZheng
-	@Description: Service层 User创建
-	@Date: 2019/5/9 23:11
-	*/
 	if err = userJSON.checkLevel(); err == nil {
 		u := userJSON.userJSON2User()
 		if err = u.Create(); err == nil {
@@ -215,11 +180,6 @@ func (userJSON *UserJSON) Create() (err error) {
 
 //Bind 用户绑定.
 func (userJSON *UserJSON) Bind() (err error) {
-	/**
-	@Author: PantaZheng
-	@Description:
-	@Date: 2019/5/10 2:31
-	*/
 	//检查openid和code
 	if err = userJSON.exchangeOpenID(); err == nil {
 		if userJSON.Telephone == "" || userJSON.Name == "" {
@@ -248,16 +208,14 @@ func (userJSON *UserJSON) Bind() (err error) {
 					if presortedUser.Name != userJSON.Name {
 						err = errors.New("用户名:" + userJSON.Name + "和电话:" + userJSON.Telephone + "不匹配,请检查输入信息")
 					} else if err = wechatUser.DeleteSoft(); err == nil {
-						presortedUser.Level = userJSON.Level
-					}
-					if err = presortedUser.Updates(); err == nil {
-						*userJSON = user2UserJSON(presortedUser)
+						if err = presortedUser.Updates(); err == nil {
+							*userJSON = user2UserJSON(presortedUser)
+						}
 					}
 				} else {
 					//无预存信息,修改微信初始化的User，添加姓名和身份证号
 					wechatUser.Name = userJSON.Name
 					wechatUser.Telephone = userJSON.Telephone
-					wechatUser.Level = userJSON.Level
 					if err = wechatUser.Updates(); err == nil {
 						*userJSON = user2UserJSON(wechatUser)
 					}
@@ -295,11 +253,6 @@ func (userJSON *UserJSON) FindOne() (err error) {
 
 //UserFindByID 通过数据库ID查找单用户.
 func UserFindByID(id uint) (userJSON UserJSON, err error) {
-	/**
-	@Author: PantaZheng
-	@Description:
-	@Date: 2019/5/10 1:52
-	*/
 	userJSON = UserJSON{ID: id}
 	err = userJSON.First()
 	return
@@ -307,11 +260,6 @@ func UserFindByID(id uint) (userJSON UserJSON, err error) {
 
 //UserFindByOpenID 通过微信OpenID查找单用户.
 func UserFindByOpenID(openid string) (userJSON UserJSON, err error) {
-	/**
-	@Author: PantaZheng
-	@Description:
-	@Date: 2019/5/10 1:52
-	*/
 	userJSON = UserJSON{OpenID: openid}
 	err = userJSON.FindOne()
 	return
@@ -319,11 +267,6 @@ func UserFindByOpenID(openid string) (userJSON UserJSON, err error) {
 
 //UserFindByTelephone 通过电话查找单用户.
 func UserFindByTelephone(telephone string) (userJSON UserJSON, err error) {
-	/**
-	@Author: PantaZheng
-	@Description:
-	@Date: 2019/5/10 1:52
-	*/
 	userJSON = UserJSON{Telephone: telephone}
 	err = userJSON.FindOne()
 	return
@@ -331,11 +274,6 @@ func UserFindByTelephone(telephone string) (userJSON UserJSON, err error) {
 
 //Find 多用户查找的原子方法.
 func (userJSON *UserJSON) Find() (usersJSON []UserJSON, err error) {
-	/**
-	@Author: PantaZheng
-	@Description:
-	@Date: 2019/5/10 13:49
-	*/
 	u := userJSON.userJSON2User()
 	if users, err := u.Find(); err == nil {
 		usersJSON = users2BriefUsersJSON(users)
@@ -347,11 +285,6 @@ func (userJSON *UserJSON) Find() (usersJSON []UserJSON, err error) {
 
 //UsersFindByLevel 通过权限等级查找用户表.
 func UsersFindByLevel(level int) (usersJSON []UserJSON, err error) {
-	/**
-	@Author: PantaZheng
-	@Description:
-	@Date: 2019/5/10 14:01
-	*/
 	userJSON := UserJSON{Level: level}
 	if err = userJSON.checkLevel(); err == nil {
 		usersJSON, err = userJSON.Find()
@@ -364,11 +297,6 @@ func UsersFindByLevel(level int) (usersJSON []UserJSON, err error) {
 
 //UsersList 返回全部用户列表
 func UsersList() (usersJSON []UserJSON, err error) {
-	/**
-	@Author: PantaZheng
-	@Description:
-	@Date: 2019/5/10 14:01
-	*/
 	userJSON := UserJSON{}
 	usersJSON, err = userJSON.Find()
 	if err != nil {
@@ -379,11 +307,6 @@ func UsersList() (usersJSON []UserJSON, err error) {
 
 //Updates 更新用户数据，id定位用户记录.
 func (userJSON *UserJSON) Updates() (err error) {
-	/**
-	@Author: PantaZheng
-	@Description:
-	@Date: 2019/5/10 14:09
-	*/
 	if err = userJSON.checkLevel(); err == nil {
 		u := userJSON.userJSON2User()
 		if err = u.Updates(); err == nil {
@@ -398,11 +321,6 @@ func (userJSON *UserJSON) Updates() (err error) {
 
 //DeleteSoft 用户删除的原子方法.
 func (userJSON *UserJSON) Delete() (err error) {
-	/**
-	@Author: PantaZheng
-	@Description:
-	@Date: 2019/5/10 14:16
-	*/
 	u := userJSON.userJSON2User()
 	if err = u.DeleteSoft(); err == nil {
 		*userJSON = user2UserJSON(u)

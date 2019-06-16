@@ -8,11 +8,6 @@ import (
 const titleGain = "service.gain."
 
 type GainJSON struct {
-	/**
-	@Author: PantaZheng
-	@Description:
-	@Date: 2019/5/13 1:17
-	*/
 	ID        uint     `json:"id"`
 	Name      string   `json:"name"`
 	Type      string   `json:"type"`
@@ -48,11 +43,6 @@ type GainJSON struct {
 //	}
 //}
 func gain2GainJSON(gain models.Gain) (gainJSON GainJSON) {
-	/**
-	@Author: PantaZheng
-	@Description:
-	@Date: 2019/5/13 2:05
-	*/
 	gainJSON.ID = gain.ID
 	gainJSON.Name = gain.Name
 	gainJSON.Type = gain.Type
@@ -67,11 +57,6 @@ func gain2GainJSON(gain models.Gain) (gainJSON GainJSON) {
 }
 
 func gainJSON2GainBriefJSON(gainJSON1 *GainJSON) (gainJSON2 GainJSON) {
-	/**
-	@Author: PantaZheng
-	@Description:
-	@Date: 2019/5/13 3:14
-	*/
 	gainJSON2.ID = gainJSON1.ID
 	gainJSON2.Name = gainJSON1.Name
 	gainJSON2.UpTime = gainJSON1.UpTime
@@ -92,11 +77,6 @@ func gains2BriefGainsJSON(gains []models.Gain) (gainsJSON []GainJSON) {
 
 //gainJSON2Gain GainJSON转换到Gain.
 func (gainJSON *GainJSON) gainJSON2Gain() (gain models.Gain) {
-	/**
-	@Author: PantaZheng
-	@Description:
-	@Date: 2019/5/13 2:39
-	*/
 	gain.ID = gainJSON.ID
 	gain.Name = gainJSON.Name
 	gain.Type = gainJSON.Type
@@ -109,11 +89,6 @@ func (gainJSON *GainJSON) gainJSON2Gain() (gain models.Gain) {
 }
 
 func (gainJSON *GainJSON) Create() (err error) {
-	/**
-	@Author: PantaZheng
-	@Description:
-	@Date: 2019/5/13 2:39
-	*/
 	g := gainJSON.gainJSON2Gain()
 	if err = g.Create(); err == nil {
 		*gainJSON = gain2GainJSON(g)
@@ -126,11 +101,6 @@ func (gainJSON *GainJSON) Create() (err error) {
 
 //First 单Gain查找的原子方法.
 func (gainJSON *GainJSON) First() (err error) {
-	/**
-	@Author: PantaZheng
-	@Description:
-	@Date: 2019/5/13 2:39
-	*/
 	g := gainJSON.gainJSON2Gain()
 	if err = g.First(); err == nil {
 		*gainJSON = gain2GainJSON(g)
@@ -149,11 +119,6 @@ func GainFindByID(id uint) (gainJSON GainJSON, err error) {
 
 //owner单一确定
 func GainsFindByOwnerID(id uint) (gainsJSON []GainJSON, err error) {
-	/**
-	@Author: PantaZheng
-	@Description:
-	@Date: 2019/5/13 2:44
-	*/
 	if gains, err1 := models.GainsFindByOwnerID(id); err1 == nil {
 		gainsJSON = gains2BriefGainsJSON(gains)
 	} else {
@@ -164,11 +129,6 @@ func GainsFindByOwnerID(id uint) (gainsJSON []GainJSON, err error) {
 
 //mission单一确定
 func GainsFindByMissionID(id uint) (gainsJson []GainJSON, err error) {
-	/**
-	@Author: PantaZheng
-	@Description:
-	@Date: 2019/5/13 12:25
-	*/
 	if gains, err1 := models.GainsFindByMissionID(id); err1 == nil {
 		gainsJson = gains2BriefGainsJSON(gains)
 	} else {
@@ -179,11 +139,6 @@ func GainsFindByMissionID(id uint) (gainsJson []GainJSON, err error) {
 
 //Updates 更新成果数据，id定位成果记录.
 func (gainJSON *GainJSON) Updates() (err error) {
-	/**
-	@Author: PantaZheng
-	@Description:
-	@Date: 2019/5/13 3:25
-	*/
 	g := gainJSON.gainJSON2Gain()
 	if err = g.Updates(); err == nil {
 		*gainJSON = gain2GainJSON(g)
@@ -194,11 +149,6 @@ func (gainJSON *GainJSON) Updates() (err error) {
 }
 
 func (gainJSON *GainJSON) Delete() (err error) {
-	/**
-	@Author: PantaZheng
-	@Description:
-	@Date: 2019/5/13 3:30
-	*/
 	g := gainJSON.gainJSON2Gain()
 	if err = g.Delete(); err == nil {
 		*gainJSON = gain2GainJSON(g)

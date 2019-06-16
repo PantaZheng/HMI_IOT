@@ -27,11 +27,6 @@ type Module struct {
 }
 
 func (module *Module) checkForeignKey() (err error) {
-	/**
-	@Author: PantaZheng
-	@Description:
-	@Date: 2019/5/15 18:02
-	*/
 	p := &Project{}
 	p.ID = module.ProjectID
 	err = p.First()
@@ -39,11 +34,6 @@ func (module *Module) checkForeignKey() (err error) {
 }
 
 func (module *Module) Create() (err error) {
-	/**
-	@Author: PantaZheng
-	@Description:
-	@Date: 2019/5/15 16:34
-	*/
 	module.ID = 0
 	if err = module.checkForeignKey(); err == nil {
 		module.CreateTime = time.Now().Format("2006-01-02")
@@ -58,11 +48,6 @@ func (module *Module) Create() (err error) {
 }
 
 func (module *Module) First() (err error) {
-	/**
-	@Author: PantaZheng
-	@Description:
-	@Date: 2019/5/15 16:49
-	*/
 	if module.ID > 0 {
 		m := &Module{}
 		m.ID = module.ID
@@ -84,11 +69,6 @@ func (module *Module) First() (err error) {
 }
 
 func ModulesFindByCreatorID(id uint) (modules []Module, err error) {
-	/**
-	@Author: PantaZheng
-	@Description:
-	@Date: 2019/5/15 17:47
-	*/
 	creator := &User{}
 	creator.ID = id
 	if err = creator.First(); err == nil {
