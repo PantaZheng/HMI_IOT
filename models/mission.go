@@ -186,7 +186,7 @@ func (mission *Mission) Delete() (err error) {
 		}
 	}
 	if err != nil {
-		err = errors.New(titleMission + "Delete\t" + err.Error())
+		err = errors.New(titleMission + "DeleteSoft\t" + err.Error())
 	}
 	return
 }

@@ -2,9 +2,10 @@ package models
 
 import (
 	"errors"
+	"strconv"
+
 	"github.com/jinzhu/gorm"
 	"github.com/pantazheng/bci/database"
-	"strconv"
 )
 
 const titleUser = "models.user."
@@ -117,7 +118,7 @@ func (user *User) Find() (users []User, err error) {
 	@Description:
 	@Date: 2019/5/9 14:08
 	*/
-	database.DB.Find(&users)
+	users = make([]User, 0)
 	if err = database.DB.Find(&users, &user).Error; err == nil {
 		if len(users) == 0 {
 			err = errors.New("record not found")
@@ -144,8 +145,8 @@ func (user *User) Updates() (err error) {
 	return
 }
 
-//Delete 先将openid和idCard置为id，再软删除.
-func (user *User) Delete() (err error) {
+//DeleteSoft 先将openid和idCard置为id，再软删除.
+func (user *User) DeleteSoft() (err error) {
 	/**
 	@Author: PantaZheng
 	@Description:
@@ -158,7 +159,7 @@ func (user *User) Delete() (err error) {
 			err = database.DB.Delete(&user).Error
 		}
 		if err != nil {
-			err = errors.New(titleUser + "Delete:\t" + err.Error())
+			err = errors.New(titleUser + "DeleteSoft:\t" + err.Error())
 		}
 	}
 	return

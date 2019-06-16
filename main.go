@@ -41,6 +41,7 @@ func newApp() (api *iris.Application) {
 		user.Get("/telephone/{telephone:string}", controller.UserFindByTelephone)
 		user.Get("/openid/{openid:string}", controller.UserFindByOpenID)
 		user.Get("/level/{level:int}", controller.UsersFindByLevel)
+		user.Get("/list", controller.UsersList)
 		user.Put("/update", controller.UserUpdates)
 		user.Put("/bind", controller.UserBind)
 		user.Delete("/id/{id:uint}", controller.UserDeleteByID)

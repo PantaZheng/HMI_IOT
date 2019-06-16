@@ -203,7 +203,7 @@ func (gainJSON *GainJSON) Delete() (err error) {
 	if err = g.Delete(); err == nil {
 		*gainJSON = gain2GainJSON(g)
 	} else {
-		err = errors.New(titleGain + "Delete:\t" + err.Error())
+		err = errors.New(titleGain + "DeleteSoft:\t" + err.Error())
 	}
 	return
 }

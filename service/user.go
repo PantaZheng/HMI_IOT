@@ -14,16 +14,14 @@ var (
 	LevelMap = map[string]int{
 		//Stranger 未绑定
 		"Stranger": 1,
-		//Emeritus Professor emeritus 专家教授，只能查看项目简要信息
-		"Emeritus": 2,
 		//Student 学生，查看项目的简要信息、参与模块详细信息、参与任务详细信息
-		"Student": 3,
+		"Student": 2,
 		//Senior Senior lecturer 高级讲师，只能查看自己项目下的所有信息
-		"Senior": 4,
+		"Senior": 3,
 		//Assistant 助理,全部权限
-		"Assistant": 5,
+		"Assistant": 4,
 		//Full Full professor 全职教授，全部权限
-		"Full": 6,
+		"Full": 5,
 	}
 )
 
@@ -226,8 +224,6 @@ func (userJSON *UserJSON) Bind() (err error) {
 	if err = userJSON.exchangeOpenID(); err == nil {
 		if userJSON.Telephone == "" || userJSON.Name == "" {
 			err = errors.New("绑定必须有同时电话和姓名信息\t")
-		} else if userJSON.Level == LevelMap["Stranger"] {
-			err = errors.New("绑定权限不能设置为1级\t")
 		} else if err = userJSON.checkLevel(); err == nil {
 			wechatUser := models.User{OpenID: userJSON.OpenID}
 			//查找微信关联信息
@@ -251,7 +247,7 @@ func (userJSON *UserJSON) Bind() (err error) {
 					//有预存信息，比对姓名
 					if presortedUser.Name != userJSON.Name {
 						err = errors.New("用户名:" + userJSON.Name + "和电话:" + userJSON.Telephone + "不匹配,请检查输入信息")
-					} else if err = wechatUser.Delete(); err == nil {
+					} else if err = wechatUser.DeleteSoft(); err == nil {
 						presortedUser.Level = userJSON.Level
 					}
 					if err = presortedUser.Updates(); err == nil {
@@ -366,6 +362,21 @@ func UsersFindByLevel(level int) (usersJSON []UserJSON, err error) {
 	return
 }
 
+//UsersList 返回全部用户列表
+func UsersList() (usersJSON []UserJSON, err error) {
+	/**
+	@Author: PantaZheng
+	@Description:
+	@Date: 2019/5/10 14:01
+	*/
+	userJSON := UserJSON{}
+	usersJSON, err = userJSON.Find()
+	if err != nil {
+		err = errors.New(titleUser + "UsersList\t:" + err.Error())
+	}
+	return
+}
+
 //Updates 更新用户数据，id定位用户记录.
 func (userJSON *UserJSON) Updates() (err error) {
 	/**
@@ -385,7 +396,7 @@ func (userJSON *UserJSON) Updates() (err error) {
 	return
 }
 
-//Delete 用户删除的原子方法.
+//DeleteSoft 用户删除的原子方法.
 func (userJSON *UserJSON) Delete() (err error) {
 	/**
 	@Author: PantaZheng
@@ -393,11 +404,11 @@ func (userJSON *UserJSON) Delete() (err error) {
 	@Date: 2019/5/10 14:16
 	*/
 	u := userJSON.userJSON2User()
-	if err = u.Delete(); err == nil {
+	if err = u.DeleteSoft(); err == nil {
 		*userJSON = user2UserJSON(u)
 	}
 	if err != nil {
-		err = errors.New(titleUser + "Delete:\t" + err.Error())
+		err = errors.New(titleUser + "DeleteSoft:\t" + err.Error())
 	}
 	return
 }

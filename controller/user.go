@@ -139,6 +139,27 @@ func UsersFindByLevel(ctx iris.Context) {
 	}
 }
 
+func UsersList(ctx iris.Context) {
+	/**
+	@Author: PantaZheng
+	@Description:
+	@Date: 2019/5/13 15:41
+	*/
+	var err error
+	if usersJson, err1 := service.UsersList(); err1 == nil {
+		ctx.StatusCode(iris.StatusOK)
+		_, _ = ctx.JSON(usersJson)
+	} else {
+		err = err1
+	}
+	if err != nil {
+		ctx.StatusCode(iris.StatusAccepted)
+		info := err.Error()
+		_, _ = ctx.Text(info)
+		log.Println(info)
+	}
+}
+
 func UserDeleteByID(ctx iris.Context) {
 	/**
 	@Author: PantaZheng

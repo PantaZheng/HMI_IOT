@@ -8,4 +8,5 @@ main
 /config/config.toml
 controller/test/
 /view/node_modules/
-*.txt
+files/
+vendor/

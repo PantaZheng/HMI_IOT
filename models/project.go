@@ -195,7 +195,7 @@ func (project *Project) Delete() (err error) {
 		err = database.DB.Delete(&p).Error
 	}
 	if err != nil {
-		err = errors.New(titleProject + "Delete\t" + err.Error())
+		err = errors.New(titleProject + "DeleteSoft\t" + err.Error())
 	}
 	return
 }

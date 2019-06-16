@@ -181,7 +181,7 @@ func (module *Module) Delete() (err error) {
 		err = database.DB.Delete(&m).Error
 	}
 	if err != nil {
-		err = errors.New(titleModule + "Delete\t" + err.Error())
+		err = errors.New(titleModule + "DeleteSoft\t" + err.Error())
 	}
 	return
 }

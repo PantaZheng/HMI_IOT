@@ -161,7 +161,7 @@ func (gain *Gain) Delete() (err error) {
 		err = database.DB.Delete(&g).Error
 	}
 	if err != nil {
-		err = errors.New(titleGain + "Delete:\t" + err.Error())
+		err = errors.New(titleGain + "DeleteSoft:\t" + err.Error())
 	}
 	return
 }
