@@ -8,11 +8,6 @@ import (
 const titleMission = "service.mission."
 
 type MissionJSON struct {
-	/**
-	@Author: PantaZheng
-	@Description:
-	@Date: 2019/5/13 23:50
-	*/
 	ID           uint       `json:"id"`
 	Name         string     `json:"name"`
 	CreateTime   string     `json:"createTime"`
@@ -28,11 +23,6 @@ type MissionJSON struct {
 }
 
 type MissionBriefJSON struct {
-	/**
-	@Author: PantaZheng
-	@Description:
-	@Date: 2019/5/24 0:44
-	*/
 	ID           uint       `json:"id"`
 	Name         string     `json:"name"`
 	StartTime    string     `json:"startTime"`
@@ -64,11 +54,6 @@ type MissionBriefJSON struct {
 //}
 
 func mission2MissionJSON(mission *models.Mission) (missionJSON MissionJSON) {
-	/**
-	@Author: PantaZheng
-	@Description:
-	@Date: 2019/5/14 9:59
-	*/
 	missionJSON.ID = mission.ID
 	missionJSON.Name = mission.Name
 	missionJSON.CreateTime = mission.CreateTime
@@ -84,11 +69,6 @@ func mission2MissionJSON(mission *models.Mission) (missionJSON MissionJSON) {
 }
 
 func missionJSON2MissionBriefJSON(missionJSON1 *MissionJSON) (missionJSON2 MissionJSON) {
-	/**
-	@Author: PantaZheng
-	@Description:
-	@Date: 2019/5/14 9:59
-	*/
 	missionJSON2.ID = missionJSON1.ID
 	missionJSON2.Name = missionJSON1.Name
 	missionJSON2.CreateTime = missionJSON1.CreateTime
@@ -99,11 +79,6 @@ func missionJSON2MissionBriefJSON(missionJSON1 *MissionJSON) (missionJSON2 Missi
 }
 
 func missions2MissionsBriefJSON(missions []models.Mission) (missionsJSON []MissionJSON) {
-	/**
-	@Author: PantaZheng
-	@Description:
-	@Date: 2019/5/14 10:00
-	*/
 	missionsJSON = make([]MissionJSON, len(missions))
 	for i, v := range missions {
 		m := mission2MissionJSON(&v)
@@ -113,11 +88,6 @@ func missions2MissionsBriefJSON(missions []models.Mission) (missionsJSON []Missi
 }
 
 func (missionJSON *MissionJSON) missionJSON2Mission() (mission models.Mission) {
-	/**
-	@Author: PantaZheng
-	@Description:
-	@Date: 2019/5/14 10:17
-	*/
 	mission.ID = missionJSON.ID
 	mission.Name = missionJSON.Name
 	mission.CreateTime = missionJSON.CreateTime
@@ -143,11 +113,6 @@ func (missionJSON *MissionJSON) Create() (err error) {
 }
 
 func (missionJSON *MissionJSON) First() (err error) {
-	/**
-	@Author: PantaZheng
-	@Description:
-	@Date: 2019/5/15 18:42
-	*/
 	m := missionJSON.missionJSON2Mission()
 	if err = m.First(); err == nil {
 		*missionJSON = mission2MissionJSON(&m)
@@ -158,11 +123,6 @@ func (missionJSON *MissionJSON) First() (err error) {
 }
 
 func MissionsFindAll() (missionsJSON []MissionJSON, err error) {
-	/**
-	@Author: PantaZheng
-	@Description:
-	@Date: 2019/5/21 12:32
-	*/
 	if missions, err1 := models.MissionsFindAll(); err1 == nil {
 		missionsJSON = missions2MissionsBriefJSON(missions)
 	} else {
@@ -197,11 +157,6 @@ func MissionsFindByModuleID(id uint) (missionsJSON []MissionJSON, err error) {
 }
 
 func (missionJSON *MissionJSON) Updates() (err error) {
-	/**
-	@Author: PantaZheng
-	@Description:
-	@Date: 2019/5/15 18:53
-	*/
 	m := missionJSON.missionJSON2Mission()
 	if err = m.Updates(); err == nil {
 		*missionJSON = mission2MissionJSON(&m)
@@ -212,11 +167,6 @@ func (missionJSON *MissionJSON) Updates() (err error) {
 }
 
 func (missionJSON *MissionJSON) Delete() (err error) {
-	/**
-	@Author: PantaZheng
-	@Description:
-	@Date: 2019/5/15 18:53
-	*/
 	m := missionJSON.missionJSON2Mission()
 	if err = m.Delete(); err == nil {
 		*missionJSON = mission2MissionJSON(&m)

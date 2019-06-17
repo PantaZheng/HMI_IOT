@@ -23,11 +23,6 @@ type Gain struct {
 }
 
 func (gain *Gain) checkForeignKey() (err error) {
-	/**
-	@Author: PantaZheng
-	@Description:
-	@Date: 2019/5/14 23:56
-	*/
 	m := &Mission{}
 	m.ID = gain.MissionID
 	if err = m.First(); err == nil {
@@ -45,11 +40,6 @@ func (gain *Gain) checkForeignKey() (err error) {
 
 //Create Create()
 func (gain *Gain) Create() (err error) {
-	/**
-	@Author: PantaZheng
-	@Description:
-	@Date: 2019/5/13 0:00
-	*/
 	gain.ID = 0
 	if err = gain.checkForeignKey(); err == nil {
 		gain.UpTime = time.Now().Format("2006-01-02")
@@ -65,12 +55,6 @@ func (gain *Gain) Create() (err error) {
 
 //First 根据id查找Gain.
 func (gain *Gain) First() (err error) {
-	/**
-	@Author: PantaZheng
-	@Description:
-	@Date: 2019/5/13 0:57
-	*/
-
 	if gain.ID > 0 {
 		g := Gain{}
 		g.ID = gain.ID
@@ -90,11 +74,6 @@ func (gain *Gain) First() (err error) {
 
 //GainsFindByOwnerID 通过OwnerID来查找成果.
 func GainsFindByOwnerID(id uint) (gains []Gain, err error) {
-	/**
-	@Author: PantaZheng
-	@Description:
-	@Date: 2019/5/13 0:29
-	*/
 	owner := User{}
 	owner.ID = id
 	if err = owner.First(); err == nil {
@@ -112,11 +91,6 @@ func GainsFindByOwnerID(id uint) (gains []Gain, err error) {
 
 //FindByMissionID 通过OwnerID来查找任务下的成果.
 func GainsFindByMissionID(id uint) (gains []Gain, err error) {
-	/**
-	@Author: PantaZheng
-	@Description:
-	@Date: 2019/5/13 12:15
-	*/
 	mission := &Mission{}
 	mission.ID = id
 	if err = mission.First(); err == nil {
@@ -135,11 +109,6 @@ func GainsFindByMissionID(id uint) (gains []Gain, err error) {
 }
 
 func (gain *Gain) Updates() (err error) {
-	/**
-	@Author: PantaZheng
-	@Description:
-	@Date: 2019/5/13 1:09
-	*/
 	if err = gain.checkForeignKey(); err == nil {
 		g := Gain{}
 		g.ID = gain.ID
@@ -161,7 +130,7 @@ func (gain *Gain) Delete() (err error) {
 		err = database.DB.Delete(&g).Error
 	}
 	if err != nil {
-		err = errors.New(titleGain + "DeleteSoft:\t" + err.Error())
+		err = errors.New(titleGain + "Delete:\t" + err.Error())
 	}
 	return
 }

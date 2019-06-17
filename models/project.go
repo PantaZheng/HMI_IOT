@@ -28,11 +28,6 @@ type Project struct {
 }
 
 func (project *Project) Create() (err error) {
-	/**
-	@Author: PantaZheng
-	@Description:
-	@Date: 2019/5/15 21:34
-	*/
 	project.ID = 0
 	project.CreateTime = time.Now().Format("2006-01-02")
 	participants := project.Participants
@@ -52,11 +47,6 @@ func (project *Project) Create() (err error) {
 }
 
 func (project *Project) First() (err error) {
-	/**
-	@Author: PantaZheng
-	@Description:
-	@Date: 2019/5/15 21:34
-	*/
 	if project.ID > 0 {
 		p := &Project{}
 		p.ID = project.ID
@@ -95,11 +85,6 @@ func ProjectsFindAll() (projects []Project, err error) {
 }
 
 func ProjectsFindByCreatorID(id uint) (projects []Project, err error) {
-	/**
-	@Author: PantaZheng
-	@Description:
-	@Date: 2019/5/15 21:52
-	*/
 	creator := &User{}
 	creator.ID = id
 	if err = creator.First(); err == nil {
@@ -118,11 +103,6 @@ func ProjectsFindByCreatorID(id uint) (projects []Project, err error) {
 }
 
 func ProjectsFindByLeaderID(id uint) (projects []Project, err error) {
-	/**
-	@Author: PantaZheng
-	@Description:
-	@Date: 2019/5/15 21:52
-	*/
 	leader := &User{}
 	leader.ID = id
 	if err = leader.First(); err == nil {
@@ -141,11 +121,6 @@ func ProjectsFindByLeaderID(id uint) (projects []Project, err error) {
 }
 
 func ProjectsFindByParticipantID(id uint) (projects []Project, err error) {
-	/**
-	@Author: PantaZheng
-	@Description:
-	@Date: 2019/5/15 21:52
-	*/
 	participant := &User{}
 	participant.ID = id
 	if err = participant.First(); err == nil {
@@ -164,12 +139,6 @@ func ProjectsFindByParticipantID(id uint) (projects []Project, err error) {
 }
 
 func (project *Project) Updates() (err error) {
-	/**
-	@Author: PantaZheng
-	@Description:
-	@Date: 2019/5/15 21:34
-	*/
-
 	p := &Project{}
 	p.ID = project.ID
 	participants := project.Participants
@@ -195,7 +164,7 @@ func (project *Project) Delete() (err error) {
 		err = database.DB.Delete(&p).Error
 	}
 	if err != nil {
-		err = errors.New(titleProject + "DeleteSoft\t" + err.Error())
+		err = errors.New(titleProject + "Delete\t" + err.Error())
 	}
 	return
 }

@@ -8,11 +8,6 @@ import (
 const titleModule = "service.module."
 
 type ModuleJSON struct {
-	/**
-	@Author: PantaZheng
-	@Description:
-	@Date: 2019/5/16 15:53
-	*/
 	ID         uint          `json:"id"`
 	Name       string        `json:"name"`
 	CreatorID  uint          `json:"creatorID"`
@@ -30,11 +25,6 @@ type ModuleJSON struct {
 }
 
 type ModuleBriefJSON struct {
-	/**
-	@Author: PantaZheng
-	@Description:
-	@Date: 2019/5/24 0:41
-	*/
 	ID        uint               `json:"id"`
 	Name      string             `json:"name"`
 	StartTime string             `json:"startTime"`
@@ -42,23 +32,6 @@ type ModuleBriefJSON struct {
 	Leader    UserJSON           `json:"leader"`
 	Missions  []MissionBriefJSON `json:"missions"`
 }
-
-//func moduleTestData() {
-//	log.Println("moduleTestData")
-//	modules := make([]ModuleJSON, 5)
-//	modules[0] = ModuleJSON{Name: "钢铁侠与浩克", CreatorID: 1, StartTime: "2001-1-1", EndTime: "11111-1-1", Content: "不得不说的秘密", LeaderID: 2, ProjectID: 1}
-//	modules[1] = ModuleJSON{Name: "海王", CreatorID: 2, StartTime: "2001-1-1", EndTime: "11111-1-1", Content: "弟弟被绿", LeaderID: 5, ProjectID: 1}
-//	modules[2] = ModuleJSON{Name: "雷神1", CreatorID: 2, StartTime: "2001-1-1", EndTime: "11111-1-1", Content: "徐", LeaderID: 7, ProjectID: 2}
-//	modules[3] = ModuleJSON{Name: "雷神2", CreatorID: 2, StartTime: "2001-2-1", EndTime: "11111-1-1", Content: "锦", LeaderID: 7, ProjectID: 3}
-//	modules[4] = ModuleJSON{Name: "雷神3", CreatorID: 2, StartTime: "2001-1-1", EndTime: "11111-1-1", Content: "江", LeaderID: 7, ProjectID: 4}
-//	for _, v := range modules {
-//		if err := v.Create(); err != nil {
-//			log.Println(err.Error())
-//		} else {
-//			log.Println(v)
-//		}
-//	}
-//}
 
 func module2ModuleJson(module *models.Module) (moduleJSON ModuleJSON) {
 	moduleJSON.ID = module.ID
@@ -81,11 +54,6 @@ func module2ModuleJson(module *models.Module) (moduleJSON ModuleJSON) {
 }
 
 func moduleJSON2ModuleBriefJson(moduleJSON1 *ModuleJSON) (moduleJSON2 ModuleJSON) {
-	/**
-	@Author: PantaZheng
-	@Description:
-	@Date: 2019/5/15 19:29
-	*/
 	moduleJSON2.ID = moduleJSON1.ID
 	moduleJSON2.Name = moduleJSON1.Name
 	moduleJSON2.CreateTime = moduleJSON1.CreateTime
@@ -97,11 +65,6 @@ func moduleJSON2ModuleBriefJson(moduleJSON1 *ModuleJSON) (moduleJSON2 ModuleJSON
 }
 
 func modules2ModulesBriefJSON(modules []models.Module) (modulesJSON []ModuleJSON) {
-	/**
-	@Author: PantaZheng
-	@Description:
-	@Date: 2019/5/15 19:34
-	*/
 	modulesJSON = make([]ModuleJSON, len(modules))
 	for i, v := range modules {
 		m := module2ModuleJson(&v)
@@ -126,11 +89,6 @@ func (moduleJSON *ModuleJSON) moduleJSON2Module() (module models.Module) {
 }
 
 func (moduleJSON *ModuleJSON) Create() (err error) {
-	/**
-	@Author: PantaZheng
-	@Description:
-	@Date: 2019/5/15 22:15
-	*/
 	creator := UserJSON{ID: moduleJSON.CreatorID}
 	if err = creator.First(); err == nil {
 		m := moduleJSON.moduleJSON2Module()
@@ -145,11 +103,6 @@ func (moduleJSON *ModuleJSON) Create() (err error) {
 }
 
 func (moduleJSON *ModuleJSON) First() (err error) {
-	/**
-	@Author: PantaZheng
-	@Description:
-	@Date: 2019/5/15 19:41
-	*/
 	m := moduleJSON.moduleJSON2Module()
 	if err = m.First(); err == nil {
 		*moduleJSON = module2ModuleJson(&m)
@@ -160,11 +113,6 @@ func (moduleJSON *ModuleJSON) First() (err error) {
 }
 
 func ModuleFindByID(id uint) (moduleJSON ModuleJSON, err error) {
-	/**
-	@Author: PantaZheng
-	@Description:
-	@Date: 2019/5/15 22:15
-	*/
 	moduleJSON = ModuleJSON{ID: id}
 	err = moduleJSON.First()
 	return
