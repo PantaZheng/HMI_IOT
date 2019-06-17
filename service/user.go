@@ -184,7 +184,7 @@ func (userJSON *UserJSON) Bind() (err error) {
 	if err = userJSON.exchangeOpenID(); err == nil {
 		if userJSON.Telephone == "" || userJSON.Name == "" {
 			err = errors.New("绑定必须有同时电话和姓名信息\t")
-		} else if err = userJSON.checkLevel(); err == nil {
+		} else {
 			wechatUser := models.User{OpenID: userJSON.OpenID}
 			//查找微信关联信息
 			if err = wechatUser.FindOne(); err != nil {
