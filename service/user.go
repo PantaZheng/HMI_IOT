@@ -197,6 +197,7 @@ func (userJSON *UserJSON) Bind() (err error) {
 					//无预存信息,修改微信初始化的User，添加姓名和身份证号
 					wechatUser.Name = userJSON.Name
 					wechatUser.Telephone = userJSON.Telephone
+					wechatUser.Level = LevelMap["Stranger"]
 					if err = wechatUser.Create(); err == nil {
 						*userJSON = user2UserJSON(wechatUser)
 					}
