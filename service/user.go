@@ -148,15 +148,7 @@ func UserInitByWechat(weChatInfo *user.UserInfo) string {
 	if err := u.FindOne(); err == nil {
 		u.WechatName = weChatInfo.Nickname
 		if err := u.Updates(); err == nil {
-			message = "欢迎老用户" + u.WechatName + "重新关注"
-		} else {
-			message = titleUser + "UserInitByWechat:\t" + err.Error()
-		}
-	} else {
-		u.WechatName = weChatInfo.Nickname
-		u.Level = LevelMap["Stranger"]
-		if err = u.Create(); err == nil {
-			message = "欢迎新用户" + u.WechatName + ",请进行绑定操作"
+			message = "欢迎用户" + u.WechatName + "关注"
 		} else {
 			message = titleUser + "UserInitByWechat:\t" + err.Error()
 		}
@@ -186,18 +178,9 @@ func (userJSON *UserJSON) Bind() (err error) {
 			err = errors.New("绑定必须有同时电话和姓名信息\t")
 		} else {
 			wechatUser := models.User{OpenID: userJSON.OpenID}
-			//查找微信关联信息
-			if err = wechatUser.FindOne(); err != nil {
-				err = errors.New("数据库查找关联OpenID用户出错:\t" + err.Error())
-			} else if wechatUser.Telephone != "" {
-				//已绑定用户
-				wechatUser.Name = userJSON.Name
-				wechatUser.Telephone = userJSON.Telephone
-				wechatUser.Level = userJSON.Level
-				if err = wechatUser.Updates(); err == nil {
-					*userJSON = user2UserJSON(wechatUser)
-				}
-			} else {
+			wechatInfo := &user.UserInfo{}
+			if wechatInfo, err = GetUserInfo(userJSON.OpenID); err == nil {
+				wechatUser.WechatName = wechatInfo.Nickname
 				presortedUser := models.User{Telephone: userJSON.Telephone}
 				_ = presortedUser.FindOne()
 				//检查是否有预存信息
@@ -207,10 +190,8 @@ func (userJSON *UserJSON) Bind() (err error) {
 					//有预存信息，比对姓名
 					if presortedUser.Name != userJSON.Name {
 						err = errors.New("用户名:" + userJSON.Name + "和电话:" + userJSON.Telephone + "不匹配,请检查输入信息")
-					} else if err = wechatUser.Delete(); err == nil {
-						if err = presortedUser.Updates(); err == nil {
-							*userJSON = user2UserJSON(presortedUser)
-						}
+					} else if err = presortedUser.Updates(); err == nil {
+						*userJSON = user2UserJSON(presortedUser)
 					}
 				} else {
 					//无预存信息,修改微信初始化的User，添加姓名和身份证号
@@ -220,6 +201,8 @@ func (userJSON *UserJSON) Bind() (err error) {
 						*userJSON = user2UserJSON(wechatUser)
 					}
 				}
+			} else {
+				err = errors.New("换取用户信息出错")
 			}
 		}
 	}

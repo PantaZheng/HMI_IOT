@@ -72,3 +72,9 @@ func ExchangeToken(token *oa2.Token, code string) (err error) {
 	token, _ = exchangeClient.ExchangeToken(code)
 	return
 }
+
+func GetUserInfo(openId string) (info *user.UserInfo, err error) {
+	clt := wechatClient()
+	info, err = user.Get(clt, openId, "")
+	return
+}
