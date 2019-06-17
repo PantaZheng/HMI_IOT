@@ -207,7 +207,7 @@ func (userJSON *UserJSON) Bind() (err error) {
 					//有预存信息，比对姓名
 					if presortedUser.Name != userJSON.Name {
 						err = errors.New("用户名:" + userJSON.Name + "和电话:" + userJSON.Telephone + "不匹配,请检查输入信息")
-					} else if err = wechatUser.DeleteSoft(); err == nil {
+					} else if err = wechatUser.Delete(); err == nil {
 						if err = presortedUser.Updates(); err == nil {
 							*userJSON = user2UserJSON(presortedUser)
 						}
@@ -319,14 +319,14 @@ func (userJSON *UserJSON) Updates() (err error) {
 	return
 }
 
-//DeleteSoft 用户删除的原子方法.
+//Delete 用户删除的原子方法.
 func (userJSON *UserJSON) Delete() (err error) {
 	u := userJSON.userJSON2User()
-	if err = u.DeleteSoft(); err == nil {
+	if err = u.Delete(); err == nil {
 		*userJSON = user2UserJSON(u)
 	}
 	if err != nil {
-		err = errors.New(titleUser + "DeleteSoft:\t" + err.Error())
+		err = errors.New(titleUser + "Delete:\t" + err.Error())
 	}
 	return
 }

@@ -145,22 +145,26 @@ func (user *User) Updates() (err error) {
 	return
 }
 
-//DeleteSoft 先将openid和idCard置为id，再软删除.
-func (user *User) DeleteSoft() (err error) {
+//Delete 先将openid和idCard置为id，再软删除.
+func (user *User) Delete() (err error) {
 	/**
 	@Author: PantaZheng
 	@Description:
 	@Date: 2019/5/9 14:36
 	*/
 	if err = user.FindOne(); err == nil {
-		user.OpenID = strconv.Itoa(int(user.ID))
-		user.Telephone = strconv.Itoa(int(user.ID))
-		if err = user.Updates(); err == nil {
-			err = database.DB.Delete(&user).Error
+		if user.Level > 1 {
+			user.OpenID = strconv.Itoa(int(user.ID))
+			user.Telephone = strconv.Itoa(int(user.ID))
+			if err = user.Updates(); err == nil {
+				err = database.DB.Delete(&user).Error
+			}
+		} else {
+			err = database.DB.Delete(&user).Unscoped().Error
 		}
-		if err != nil {
-			err = errors.New(titleUser + "DeleteSoft:\t" + err.Error())
-		}
+	}
+	if err != nil {
+		err = errors.New(titleUser + "Delete:\t" + err.Error())
 	}
 	return
 }
