@@ -16,11 +16,12 @@ type Config struct {
 }
 
 type MySqlConfig struct {
-	DBDriver string
-	DBName   string
-	UserName string
-	Password string
-	Charset  string
+	DBDriver  string
+	DBName    string
+	UserName  string
+	Password  string
+	Charset   string
+	Collation string
 }
 
 type WechatConfig struct {

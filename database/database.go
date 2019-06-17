@@ -19,7 +19,7 @@ var (
 
 func New() *gorm.DB {
 	mysqlConfig := config.Conf.MySql
-	connect := mysqlConfig.UserName + ":" + mysqlConfig.Password + "@/" + mysqlConfig.DBName + "?charset" + mysqlConfig.Charset + "&parseTime=True&loc=Local"
+	connect := mysqlConfig.UserName + ":" + mysqlConfig.Password + "@/" + mysqlConfig.DBName + "?charset" + mysqlConfig.Charset + "&collate=" + mysqlConfig.Collation + "&parseTime=True&loc=Local"
 	DB, err := gorm.Open(mysqlConfig.DBDriver, connect)
 	if err != nil {
 		panic(fmt.Sprintf("No error should happen when connecting to  database, but got err=%+v", err))
