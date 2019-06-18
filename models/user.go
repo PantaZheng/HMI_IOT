@@ -155,10 +155,7 @@ func (user *User) Delete() (err error) {
 	if err = user.FindOne(); err == nil {
 		if user.Level > 1 {
 			user.OpenID = strconv.Itoa(int(user.ID))
-			user.Telephone = strconv.Itoa(int(user.ID))
-			if err = user.Updates(); err == nil {
-				err = database.DB.Delete(&user).Error
-			}
+			err = user.Updates()
 		} else {
 			err = database.DB.Delete(&user).Unscoped().Error
 		}
