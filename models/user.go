@@ -157,7 +157,7 @@ func (user *User) Delete() (err error) {
 			user.OpenID = strconv.Itoa(int(user.ID))
 			err = user.Updates()
 		} else {
-			err = database.DB.Delete(&user).Unscoped().Error
+			err = database.DB.Unscoped().Delete(&user).Error
 		}
 	}
 	if err != nil {
