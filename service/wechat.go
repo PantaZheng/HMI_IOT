@@ -50,6 +50,7 @@ func SubscribeEventHandler(ctx *core.Context) {
 func UnsubscribeEventHandler(ctx *core.Context) {
 	event := request.GetUnsubscribeEvent(ctx.MixedMsg)
 	UserDeleteByOpenID(event.FromUserName)
+	_ = ctx.NoneResponse()
 }
 
 func DefaultEventHandler(ctx *core.Context) {
