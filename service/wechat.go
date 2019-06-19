@@ -47,6 +47,11 @@ func SubscribeEventHandler(ctx *core.Context) {
 	}
 }
 
+func UnsubscribeEventHandler(ctx *core.Context) {
+	event := request.GetUnsubscribeEvent(ctx.MixedMsg)
+	UserDeleteByOpenID(event.FromUserName)
+}
+
 func DefaultEventHandler(ctx *core.Context) {
 	log.Printf("收到事件:\n%s\n", ctx.MsgPlaintext)
 	_ = ctx.NoneResponse()

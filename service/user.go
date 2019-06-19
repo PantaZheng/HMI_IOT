@@ -5,6 +5,7 @@ import (
 	"github.com/chanxuehong/wechat/mp/user"
 	"github.com/chanxuehong/wechat/oauth2"
 	"github.com/pantazheng/bci/models"
+	"log"
 )
 
 const titleUser = "service.user."
@@ -337,4 +338,11 @@ func UserDeleteByTelephone(telephone string) (userJSON UserJSON, err error) {
 	userJSON = UserJSON{Telephone: telephone}
 	err = userJSON.Delete()
 	return
+}
+
+func UserDeleteByOpenID(openid string) {
+	userJSON := UserJSON{OpenID: openid}
+	if err := userJSON.Delete(); err != nil {
+		log.Println("UserDeleteByOpenID:\t" + err.Error())
+	}
 }

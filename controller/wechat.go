@@ -24,6 +24,7 @@ func WeChat(ctx iris.Context) {
 	mux.MsgHandleFunc(request.MsgTypeText, service.TextMsgHandler)
 	mux.EventHandleFunc(menu.EventTypeClick, service.MenuClickEventHandler)
 	mux.EventHandleFunc(request.EventTypeSubscribe, service.SubscribeEventHandler)
+	mux.EventHandleFunc(request.EventTypeUnsubscribe, service.UnsubscribeEventHandler)
 	msgHandler := mux
 
 	msgServer := core.NewServer(wechatConfig.OriID, wechatConfig.AppID, wechatConfig.Token, wechatConfig.EncodedAESKEY, msgHandler, nil)
