@@ -7,107 +7,82 @@ import (
 
 const titleMission = "service.mission."
 
+type MissionCore struct {
+	ID        uint   `json:"id"`
+	CreatedAt string `json:"createdAt"`
+	UpdatedAt string `json:"updatedAt"`
+	Name      string `json:"name"`
+	StartTime string `json:"startTime"`
+	EndTime   string `json:"endTime"`
+	Content   string `json:"content"`
+	Target    string `json:"target"`
+	File      string `json:"file"`
+	State     string `json:"state"`
+	//foreign
+	OwnerID   uint   `json:"ownerID"`
+	OwnerName string `json:"ownerName"`
+}
+
 type MissionJSON struct {
-	ID           uint       `json:"id"`
-	Name         string     `json:"name"`
-	CreateTime   string     `json:"createTime"`
-	StartTime    string     `json:"startTime"`
-	EndTime      string     `json:"endTime"`
-	Content      string     `json:"content"`
-	Target       string     `json:"target"`
-	File         string     `json:"file"`
-	Tag          bool       `json:"tag"` //tag由module负责人决定
-	Gains        []GainJSON `json:"gains"`
-	Participants []UserJSON `json:"participants"`
-	ModuleID     uint       `json:"moduleID"`
+	MissionCore
+	//const inherit foreign
+	ModuleID    uint   `json:"moduleID"`
+	ModuleName  string `json:"moduleName"`
+	LeaderID    uint   `json:"leaderID"`
+	LeaderName  string `json:"leaderName"`
+	ProjectName string `json:"projectName"`
 }
 
-type MissionBriefJSON struct {
-	ID           uint       `json:"id"`
-	Name         string     `json:"name"`
-	StartTime    string     `json:"startTime"`
-	EndTime      string     `json:"endTime"`
-	Participants []UserJSON `json:"participants"`
-}
-
-//func missionTestData() {
-//	log.Println("missionTestData")
-//	u1 := UserJSON{ID: 2}
-//	u2 := UserJSON{ID: 3}
-//	u3 := UserJSON{ID: 4}
-//	u4 := UserJSON{ID: 5}
-//	u5 := UserJSON{ID: 6}
-//	u6 := UserJSON{ID: 7}
-//	u7 := UserJSON{ID: 8}
-//	missions := make([]MissionJSON, 4)
-//	missions[0] = MissionJSON{Name: "钢铁侠1", StartTime: "2008-1-1", EndTime: "2017-1-2", Content: "你不是世界上唯一的超级英雄。", File: "朝花夕拾", Participants: []UserJSON{u1, u3, u4, u5}, ModuleID: 1}
-//	missions[1] = MissionJSON{Name: "无敌浩克", StartTime: "2008-3-1", EndTime: "2017-1-2", Content: "复仇者联盟", File: "", Participants: []UserJSON{u4, u5}, ModuleID: 1}
-//	missions[2] = MissionJSON{Name: "海王1", StartTime: "2008-3-1", EndTime: "2017-1-2", Content: "你永远与我同在也永远是我的兄弟", File: "", Participants: []UserJSON{u2, u6}, ModuleID: 2}
-//	missions[3] = MissionJSON{Name: "雷神1", StartTime: "2008-3-1", EndTime: "2017-1-2", Content: "那些你笑就跟着你笑的人，如果不是傻子，就是爱你的人。", File: "", Participants: []UserJSON{u5, u7}, ModuleID: 3}
-//	for _, v := range missions {
-//		if err := v.Create(); err != nil {
-//			log.Println(err.Error())
-//		} else {
-//			log.Println(v)
-//		}
-//	}
-//}
-
-func mission2MissionJSON(mission *models.Mission) (missionJSON MissionJSON) {
+func (missionJSON *MissionJSON) mission2MissionJSON(mission models.Mission) {
 	missionJSON.ID = mission.ID
+	missionJSON.CreatedAt = mission.CreatedAt.Format("2006-01-02")
+	missionJSON.UpdatedAt = mission.UpdatedAt.Format("2006-01-02")
 	missionJSON.Name = mission.Name
-	missionJSON.CreateTime = mission.CreateTime
 	missionJSON.StartTime = mission.StartTime
 	missionJSON.EndTime = mission.EndTime
 	missionJSON.Content = mission.Content
 	missionJSON.Target = mission.Target
 	missionJSON.File = mission.File
+	missionJSON.LeaderID = mission.LeaderID
+	missionJSON.OwnerID = mission.OwnerID
+	owner := UserJSON{ID: missionJSON.OwnerID}
+	_ = owner.First()
+	missionJSON.OwnerName = owner.Name
+
 	missionJSON.ModuleID = mission.ModuleID
-	missionJSON.Participants = users2BriefUsersJSON(mission.Participants)
-	missionJSON.Gains, _ = GainsFindByMissionID(mission.ID)
-	return
-}
+	module := ModuleJSON{}
+	_ = module.First()
+	missionJSON.LeaderName = module.LeaderName
+	missionJSON.ModuleName = module.Name
+	missionJSON.ProjectName = module.ProjectName
 
-func missionJSON2MissionBriefJSON(missionJSON1 *MissionJSON) (missionJSON2 MissionJSON) {
-	missionJSON2.ID = missionJSON1.ID
-	missionJSON2.Name = missionJSON1.Name
-	missionJSON2.CreateTime = missionJSON1.CreateTime
-	missionJSON2.Content = missionJSON1.Content
-	missionJSON2.Tag = missionJSON1.Tag
-	missionJSON2.ModuleID = missionJSON1.ModuleID
-	return
-}
-
-func missions2MissionsBriefJSON(missions []models.Mission) (missionsJSON []MissionJSON) {
-	missionsJSON = make([]MissionJSON, len(missions))
-	for i, v := range missions {
-		m := mission2MissionJSON(&v)
-		missionsJSON[i] = missionJSON2MissionBriefJSON(&m)
-	}
 	return
 }
 
 func (missionJSON *MissionJSON) missionJSON2Mission() (mission models.Mission) {
 	mission.ID = missionJSON.ID
 	mission.Name = missionJSON.Name
-	mission.CreateTime = missionJSON.CreateTime
 	mission.StartTime = missionJSON.StartTime
 	mission.EndTime = missionJSON.EndTime
 	mission.Content = missionJSON.Content
 	mission.Target = missionJSON.Target
 	mission.File = missionJSON.File
-	mission.Participants = usersJSON2Users(missionJSON.Participants)
 	mission.ModuleID = missionJSON.ModuleID
+
+	mission.LeaderID = missionJSON.LeaderID
+	mission.OwnerID = missionJSON.OwnerID
+	mission.ModuleID = missionJSON.ModuleID
+
 	return
 }
 
 func (missionJSON *MissionJSON) Create() (err error) {
 	m := missionJSON.missionJSON2Mission()
-	if err = m.Create(); err == nil {
-		*missionJSON = mission2MissionJSON(&m)
+	if err = m.Insert(); err == nil {
+		mission.miss
 	}
 	if err != nil {
-		err = errors.New(titleMission + "Create:\t" + err.Error())
+		err = errors.New(titleMission + "Insert:\t" + err.Error())
 	}
 	return
 }
@@ -158,10 +133,10 @@ func MissionsFindByModuleID(id uint) (missionsJSON []MissionJSON, err error) {
 
 func (missionJSON *MissionJSON) Updates() (err error) {
 	m := missionJSON.missionJSON2Mission()
-	if err = m.Updates(); err == nil {
+	if err = m.Update(); err == nil {
 		*missionJSON = mission2MissionJSON(&m)
 	} else {
-		err = errors.New(titleMission + "Updates:\t" + err.Error())
+		err = errors.New(titleMission + "Update:\t" + err.Error())
 	}
 	return
 }
@@ -171,7 +146,7 @@ func (missionJSON *MissionJSON) Delete() (err error) {
 	if err = m.Delete(); err == nil {
 		*missionJSON = mission2MissionJSON(&m)
 	} else {
-		err = errors.New(titleMission + "Updates:\t" + err.Error())
+		err = errors.New(titleMission + "Update:\t" + err.Error())
 	}
 	return
 }

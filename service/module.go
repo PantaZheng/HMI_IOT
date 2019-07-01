@@ -8,20 +8,21 @@ import (
 const titleModule = "service.module."
 
 type ModuleJSON struct {
-	ID         uint          `json:"id"`
-	Name       string        `json:"name"`
-	CreatorID  uint          `json:"creatorID"`
-	Creator    UserJSON      `json:"creator"`
-	CreateTime string        `json:"createTime"` //创建时间
-	StartTime  string        `json:"startTime"`  //开始时间
-	EndTime    string        `json:"endTime"`    //结束时间
-	Content    string        `json:"content"`
-	Target     string        `json:"target"`
-	Tag        bool          `json:"tag"`
-	LeaderID   uint          `json:"leaderID"`
-	Leader     UserJSON      `json:"leader"`
-	Missions   []MissionJSON `json:"missions"` //创建或更新不会修改该字段，仅拉取使用
-	ProjectID  uint          `json:"projectID"`
+	ID          uint          `json:"id"`
+	Name        string        `json:"name"`
+	CreatorID   uint          `json:"creatorID"`
+	Creator     UserJSON      `json:"creator"`
+	CreateTime  string        `json:"createTime"` //创建时间
+	StartTime   string        `json:"startTime"`  //开始时间
+	EndTime     string        `json:"endTime"`    //结束时间
+	Content     string        `json:"content"`
+	Target      string        `json:"target"`
+	Tag         bool          `json:"tag"`
+	LeaderID    uint          `json:"leaderID"`
+	LeaderName  string        `json:"leaderName"`
+	Leader      UserJSON      `json:"leader"`
+	Missions    []MissionJSON `json:"missions"` //创建或更新不会修改该字段，仅拉取使用
+	ProjectName string        `json:"projectName"`
 }
 
 type ModuleBriefJSON struct {
@@ -97,7 +98,7 @@ func (moduleJSON *ModuleJSON) Create() (err error) {
 		}
 	}
 	if err != nil {
-		err = errors.New(titleModule + "Create:\t" + err.Error())
+		err = errors.New(titleModule + "Insert:\t" + err.Error())
 	}
 	return
 }
@@ -185,7 +186,7 @@ func (moduleJSON *ModuleJSON) Updates() (err error) {
 	if err = m.Updates(); err == nil {
 		*moduleJSON = module2ModuleJson(&m)
 	} else {
-		err = errors.New(titleMission + "Updates:\t" + err.Error())
+		err = errors.New(titleMission + "Update:\t" + err.Error())
 	}
 	return
 }
@@ -200,7 +201,7 @@ func (moduleJSON *ModuleJSON) Delete() (err error) {
 	if err = m.Delete(); err == nil {
 		*moduleJSON = module2ModuleJson(&m)
 	} else {
-		err = errors.New(titleMission + "Updates:\t" + err.Error())
+		err = errors.New(titleMission + "Update:\t" + err.Error())
 	}
 	return
 }

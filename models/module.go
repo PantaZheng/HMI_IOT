@@ -42,7 +42,7 @@ func (module *Module) Create() (err error) {
 		}
 	}
 	if err != nil {
-		err = errors.New(titleModule + "Create:\t" + err.Error())
+		err = errors.New(titleModule + "Insert:\t" + err.Error())
 	}
 	return
 }
@@ -149,7 +149,7 @@ func (module *Module) Updates() (err error) {
 		}
 	}
 	if err != nil {
-		err = errors.New(titleModule + "Updates\t" + err.Error())
+		err = errors.New(titleModule + "Update\t" + err.Error())
 	}
 	return
 }

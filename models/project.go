@@ -41,7 +41,7 @@ func (project *Project) Create() (err error) {
 		}
 	}
 	if err != nil {
-		err = errors.New(titleProject + "Create:\t" + err.Error())
+		err = errors.New(titleProject + "Insert:\t" + err.Error())
 	}
 	return
 }
@@ -152,7 +152,7 @@ func (project *Project) Updates() (err error) {
 		}
 	}
 	if err != nil {
-		err = errors.New(titleProject + "Updates\t" + err.Error())
+		err = errors.New(titleProject + "Update\t" + err.Error())
 	}
 	return
 }

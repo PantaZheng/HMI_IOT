@@ -68,70 +68,73 @@ UserDeleteByTelephone|delete|`/telephone/{telephone:string}`|-|`UserJson`
 入口: `/gain`
 
 ```go
-type GainJson struct {
-	/**
-	@Author: PantaZheng
-	@Description:
-	@Date: 2019/5/13 1:17
-	*/
-	ID        uint     `json:"id"`
-	Name      string   `json:"name"`
-	Type      string   `json:"type"`
-	File      string   `json:"file"`
-	UpTime    string   `json:"upTime"`
-	Remark    string   `json:"remark"`
-	Owner     UserJSON `json:"owner"`
-	MissionID uint     `json:"missionID"`
+type GainCore struct {
+	ID        uint   `json:"id"`
+	CreatedAt string `json:"createdAt"`
+	UpdatedAt string `json:"updatedAt"`
+	Name      string `json:"type"`
+	Type      string `json:"type"`
+	File      string `json:"file"`
+	Remark    string `json:"remark"`
+	State     uint   `json:"state"`
+}
+
+type GainJSON struct {
+	GainCore
+	//const inherit foreign
+	MissionID   uint   `json:"missionID"`
+	MissionName string `json:"missionName"`
+	OwnerID     uint   `json:"ownerID"`
+	OwnerName   string `json:"ownerName"`
+	LeaderID    uint   `json:"leaderID"`
+	LeaderName  string `json:"leaderName"`
+	ModuleName  string `json:"moduleName"`
+	ProjectName string `json:"projectName"`
 }
 ```
 
-名称|method|path|传入body参数|接收body参数
--|-|-|-|-
-GainCreate|post|`/`|`GainJson`|`GainJson`
+名称|method|path|传入body参数|接收body参数|备注
+-|-|-|-|-|-
+GainCreate|post|`/`|`GainJSON`|`GainJSON`|state,upTime自动初始化
 GainUpFileByID|post|`/file/{id:uint}`|file|-
-GainFindByID|get|`/id/{id:uint}`|-|`GainJson`
-GainsFindByOwnerID|get|`/owner/{id:uint}`|-|`[]GainJson`
-GainsFindByMissionID|get|`/mission/{id:uint}`|-|`[]GainJson`
+GainFindByID|get|`/id/{id:uint}`|-|`GainJSON`
+GainsFindByLeaderID|`/leader/{id:uint}`|-|`[]GainJSON`
+GainsFindByOwnerID|get|`/owner/{id:uint}`|-|`[]GainJSON`
+GainsFindByMissionID|get|`/mission/{id:uint}`|-|`[]GainJSON`
+GainsFindAll|get|`all`|-|`[]GainJSON`
 GainDownFileByID|get|`/file/{id:uint}`|-|file
-GainUpdate|put|`/`|`GainJson`|`GainJson`
-GainDeleteByID|delete|`/{id:uint}`|-|`GainJson`
+GainUpdate|put|`/`|`GainJSON`|`GainJSON`
+GainDeleteByID|delete|`/{id:uint}`|-|`GainJSON`
 
 ### Mission
 
 入口: `/mission`
 
 ```go
-type MissionJSON struct {
-	/**
-	@Author: PantaZheng
-	@Description:
-	@Date: 2019/5/13 23:50
-	*/
-	ID           uint       `json:"id"`
-	Name         string     `json:"name"`
-	CreateTime   string     `json:"createTime"`
-	StartTime    string     `json:"startTime"`
-	EndTime      string     `json:"endTime"`
-	Content      string     `json:"content"`
-	Target       string     `json:"target"`
-	File         string     `json:"file"`
-	Tag          bool       `json:"tag"` //tag由module负责人决定
-	Gains        []GainJSON `json:"gains"`
-	Participants []UserJSON `json:"participants"`
-	ModuleID     uint       `json:"moduleID"`
+type MissionCore struct {
+	ID        uint   `json:"id"`
+	CreatedAt string `json:"createdAt"`
+	UpdatedAt string `json:"updatedAt"`
+	Name      string `json:"name"`
+	StartTime string `json:"startTime"`
+	EndTime   string `json:"endTime"`
+	Content   string `json:"content"`
+	Target    string `json:"target"`
+	File      string `json:"file"`
+	State     string `json:"state"`
+	//foreign
+	OwnerID   uint   `json:"ownerID"`
+	OwnerName string `json:"ownerName"`
 }
 
-type MissionBriefJSON struct {
-	/**
-	@Author: PantaZheng
-	@Description:
-	@Date: 2019/5/24 0:32
-	*/
-	ID           uint       `json:"id"`
-	Name         string     `json:"name"`
-	StartTime    string     `json:"startTime"`
-	EndTime      string     `json:"endTime"`
-	Participants []UserJSON `json:"participants"`
+type MissionJSON struct {
+	MissionCore
+	//const inherit foreign
+	ModuleID    uint   `json:"moduleID"`
+	ModuleName  string `json:"moduleName"`
+	LeaderID    uint   `json:"leaderID"`
+	LeaderName  string `json:"leaderName"`
+	ProjectName string `json:"projectName"`
 }
 ```
 

@@ -58,29 +58,6 @@ type FramePaceJSON struct {
 
 }
 
-//func projectTestData() {
-//	log.Println("projectTestData")
-//	u1 := UserJSON{ID: 2}
-//	u2 := UserJSON{ID: 3}
-//	u3 := UserJSON{ID: 4}
-//	u4 := UserJSON{ID: 5}
-//	u5 := UserJSON{ID: 6}
-//	u6 := UserJSON{ID: 7}
-//	u7 := UserJSON{ID: 8}
-//	projects := make([]ProjectJSON, 4)
-//	projects[0] = ProjectJSON{Name: "复仇者联盟", CreatorID: 1, Target: "tag1,tag2", LeaderID: 4, Participants: []UserJSON{u1, u2, u3, u4, u5, u6, u7}}
-//	projects[1] = ProjectJSON{Name: "复仇者联盟2：奥创纪元", CreatorID: 1, Target: "tag1,tag3", LeaderID: 5, Participants: []UserJSON{u2, u3, u4, u5, u6, u7}}
-//	projects[2] = ProjectJSON{Name: "复仇者联盟3：无限战争", CreatorID: 1, Target: "tag3,tag4", LeaderID: 6, Participants: []UserJSON{u1, u2, u3, u4, u5, u6, u7}}
-//	projects[3] = ProjectJSON{Name: "复仇者联盟4：终局之战", CreatorID: 2, Target: "tag8,tag9", LeaderID: 7, Participants: []UserJSON{u1, u2, u3, u4, u5, u6, u7}}
-//	for _, v := range projects {
-//		if err := v.Create(); err != nil {
-//			log.Println(err.Error())
-//		} else {
-//			log.Println(v)
-//		}
-//	}
-//}
-
 func tagSet2TagsJson(tagSet string) (tags []TagJson) {
 	temp := strings.Split(tagSet, ",")
 	for _, v := range temp {
@@ -215,7 +192,7 @@ func (projectJSON *ProjectJSON) Create() (err error) {
 		}
 	}
 	if err != nil {
-		err = errors.New(titleProject + "Create:\t" + err.Error())
+		err = errors.New(titleProject + "Insert:\t" + err.Error())
 	}
 	return
 }
@@ -293,11 +270,6 @@ func ProjectFramePaceByID(id uint) (framePaceJSON FramePaceJSON, err error) {
 }
 
 func ProjectsFindAll() (projectsJSON []ProjectJSON, err error) {
-	/**
-	@Author: PantaZheng
-	@Description:
-	@Date: 2019/5/15 23:49
-	*/
 	if projects, err1 := models.ProjectsFindAll(); err1 == nil {
 		projectsJSON = projects2ProjectsBriefJSON(projects)
 	} else {
@@ -308,11 +280,6 @@ func ProjectsFindAll() (projectsJSON []ProjectJSON, err error) {
 
 func ProjectsFindByCreatorID(id uint) (
 	projectsJSON []ProjectJSON, err error) {
-	/**
-	@Author: PantaZheng
-	@Description:
-	@Date: 2019/5/15 23:07
-	*/
 	if projects, err1 := models.ProjectsFindByCreatorID(id); err1 == nil {
 		projectsJSON = projects2ProjectsBriefJSON(projects)
 	} else {
@@ -323,11 +290,6 @@ func ProjectsFindByCreatorID(id uint) (
 
 func ProjectsFindByLeaderID(id uint) (
 	projectsJSON []ProjectJSON, err error) {
-	/**
-	@Author: PantaZheng
-	@Description:
-	@Date: 2019/5/15 23:07
-	*/
 	if projects, err1 := models.ProjectsFindByLeaderID(id); err1 == nil {
 		projectsJSON = projects2ProjectsBriefJSON(projects)
 	} else {
@@ -338,11 +300,6 @@ func ProjectsFindByLeaderID(id uint) (
 
 func ProjectsFindByParticipantID(id uint) (
 	projectsJSON []ProjectJSON, err error) {
-	/**
-	@Author: PantaZheng
-	@Description:
-	@Date: 2019/5/15 23:07
-	*/
 	if projects, err1 := models.ProjectsFindByParticipantID(id); err1 == nil {
 		projectsJSON = projects2ProjectsBriefJSON(projects)
 	} else {
@@ -352,11 +309,6 @@ func ProjectsFindByParticipantID(id uint) (
 }
 
 func (projectJSON *ProjectJSON) Updates() (err error) {
-	/**
-	@Author: PantaZheng
-	@Description:
-	@Date: 2019/5/15 23:15
-	*/
 	p := projectJSON.projectJSON2Project()
 	l := len(projectJSON.TagSet)
 	if l > 1 {
@@ -382,22 +334,17 @@ func (projectJSON *ProjectJSON) Updates() (err error) {
 		err = p.Updates()
 	}
 	if err != nil {
-		err = errors.New(titleProject + "Updates\t" + err.Error())
+		err = errors.New(titleProject + "Update\t" + err.Error())
 	}
 	return
 }
 
 func (projectJSON *ProjectJSON) Delete() (err error) {
-	/**
-	@Author: PantaZheng
-	@Description:
-	@Date: 2019/5/15 23:16
-	*/
 	p := projectJSON.projectJSON2Project()
 	if err = p.Delete(); err == nil {
 		*projectJSON = project2ProjectJson(&p)
 	} else {
-		err = errors.New(titleProject + "Updates:\t" + err.Error())
+		err = errors.New(titleProject + "Update:\t" + err.Error())
 	}
 	return
 }
