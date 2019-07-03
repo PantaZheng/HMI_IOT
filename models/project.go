@@ -30,7 +30,7 @@ func (project *Project) Insert() (err error) {
 	if err = database.DB.Create(&project).Error; err != nil {
 		return
 	}
-	if project.Participants != nil {
+	if len(project.Participants) != 0 {
 		err = project.Update()
 	} else {
 		err = project.First()

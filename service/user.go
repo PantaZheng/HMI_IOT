@@ -42,10 +42,10 @@ func userTestData() {
 	users := make([]UserJSON, 11)
 	users[0] = UserJSON{OpenID: "Stranger1", WechatName: "小蜘蛛", Code: "Spider-Man", Name: "Peter Benjamin Parker", Level: 1, Telephone: "110"}
 	users[1] = UserJSON{OpenID: "Emeritus1", WechatName: "万磁王", Code: "002", Name: "Max Eisenhardt", Level: 2}
-	users[2] = UserJSON{WechatName: "金刚狼", Name: "Logan Howlett", Level: 3, Telephone: "111"}
-	users[3] = UserJSON{OpenID: "Assistant1", WechatName: "小辣椒", Name: "Pepper Potts", Level: 4}
-	users[4] = UserJSON{WechatName: "钢铁侠", Name: "Tony Stark", Level: 5, Telephone: "112"}
-	users[5] = UserJSON{OpenID: "Full1", WechatName: "灭霸", Name: "Thanos", Level: 6}
+	users[2] = UserJSON{WechatName: "金刚狼", Name: "Logan Howlett", Level: 2, Telephone: "111"}
+	users[3] = UserJSON{OpenID: "Assistant1", WechatName: "小辣椒", Name: "Pepper Potts", Level: 3}
+	users[4] = UserJSON{WechatName: "钢铁侠", Name: "Tony Stark", Level: 4, Telephone: "112"}
+	users[5] = UserJSON{OpenID: "Full1", WechatName: "灭霸", Name: "Thanos", Level: 5}
 	users[6] = UserJSON{Name: "韩新亚", Level: 3, Telephone: "18955537316"}
 	users[7] = UserJSON{Name: "曾虹", Level: 3, Telephone: "13867188664"}
 	users[8] = UserJSON{Name: "戴国骏", Level: 5, Telephone: "13906524548"}
