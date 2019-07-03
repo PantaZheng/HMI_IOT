@@ -42,7 +42,7 @@ func (project *Project) First() (err error) {
 	if err = database.DB.Where("id = ?", project.ID).First(&project).Error; err != nil {
 		return
 	}
-	err = database.DB.Model(&project).Association("Participants").Find(&project.Participants).Error
+	database.DB.Model(&project).Association("Participants").Find(&project.Participants)
 	return
 }
 
