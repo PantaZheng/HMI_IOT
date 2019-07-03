@@ -41,7 +41,7 @@ func gainTestData() {
 	l := 64
 	gains := make([]GainJSON, l)
 
-	for i := 1; i <= l; i++ {
+	for i := 0; i < l; i++ {
 		gains[i].Name = "gain" + strconv.Itoa(i)
 		gains[i].OwnerID = uint(i / 4)
 		gains[i].MissionID = uint(i / 2)

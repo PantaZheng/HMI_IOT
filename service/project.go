@@ -37,7 +37,7 @@ func projectTestData() {
 	l := 8
 	projects := make([]ProjectJSON, l)
 
-	for i := 1; i <= l; i++ {
+	for i := 0; i < l; i++ {
 		projects[i].Name = "Project" + strconv.Itoa(i)
 		projects[i].LeaderID = uint(i / 2)
 	}
