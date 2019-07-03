@@ -31,7 +31,7 @@ type ModuleCore struct {
 type ModuleJSON struct {
 	ModuleCore
 
-	Missions    []MissionJSON `json:"missions"`
+	Missions    []MissionCore `json:"missions"`
 	ProjectID   uint          `json:"projectID"`
 	ProjectName string        `json:"projectName"`
 }
