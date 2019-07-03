@@ -40,9 +40,9 @@ func missionTestData() {
 	l := 32
 	missions := make([]MissionJSON, l)
 	for i := 0; i < l; i++ {
-		missions[0].Name = "mission" + strconv.Itoa(i)
-		missions[0].OwnerID = uint(i/2 + 1)
-		missions[0].ModuleID = uint(i/4 + 1)
+		missions[i].Name = "mission" + strconv.Itoa(i)
+		missions[i].OwnerID = uint(i/2 + 1)
+		missions[i].ModuleID = uint(i/4 + 1)
 	}
 
 	for _, v := range missions {

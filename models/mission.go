@@ -49,7 +49,6 @@ func (mission *Mission) Insert() (err error) {
 //First 根据id查找Mission.
 func (mission *Mission) First() (err error) {
 	err = database.DB.Where("id = ? ", mission.ID).First(&mission).Error
-	log.Println()
 	return
 }
 
