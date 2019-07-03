@@ -45,30 +45,32 @@ func MissionFindByID(ctx iris.Context) {
 
 func missionsFind(field string, ctx iris.Context) {
 	m := &service.MissionJSON{}
-	if id, err := ctx.Params().GetUint("id"); err != nil {
-		ErrorProcess(err, ctx)
-		return
-	} else {
-		if field == "leader_id" {
-			m.LeaderID = id
-		} else if field == "owner_id" {
-			m.OwnerID = id
-		} else if field == "module_id" {
-			m.ModuleID = id
-		} else if field == "all" {
-		} else {
-			err = errors.New("no this field")
+	if field != "all" {
+		if id, err := ctx.Params().GetUint("id"); err != nil {
 			ErrorProcess(err, ctx)
 			return
+		} else {
+			if field == "leader_id" {
+				m.LeaderID = id
+			} else if field == "owner_id" {
+				m.OwnerID = id
+			} else if field == "module_id" {
+				m.ModuleID = id
+			} else if field == "all" {
+			} else {
+				err = errors.New("no this field")
+				ErrorProcess(err, ctx)
+				return
+			}
 		}
+		if missionsJSON, err := m.Find(field); err == nil {
+			ctx.StatusCode(iris.StatusOK)
+			_, _ = ctx.JSON(missionsJSON)
+		} else {
+			ErrorProcess(err, ctx)
+		}
+		return
 	}
-	if missionsJSON, err := m.Find(field); err == nil {
-		ctx.StatusCode(iris.StatusOK)
-		_, _ = ctx.JSON(missionsJSON)
-	} else {
-		ErrorProcess(err, ctx)
-	}
-	return
 }
 
 func MissionsFindByLeaderID(ctx iris.Context) {
