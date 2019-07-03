@@ -42,7 +42,7 @@ func missionTestData() {
 	for i := 0; i < l; i++ {
 		missions[i].Name = "mission" + strconv.Itoa(i)
 		missions[i].OwnerID = uint(i/2 + 1)
-		missions[i].ModuleID = uint(i/4 + 1)
+		missions[i].ModuleID = uint(i/2 + 1)
 	}
 
 	for _, v := range missions {
