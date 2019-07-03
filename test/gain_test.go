@@ -8,7 +8,7 @@ import (
 )
 
 func TestGain(t *testing.T) {
-	gain := new(models.GainJson)
+	gain := new(models.Gain)
 	gain.ID = 1
 	g := &models.Gain{}
 	g.ID = 1
@@ -45,7 +45,6 @@ func TestGain(t *testing.T) {
 	} else {
 		log.Println(gainJson)
 	}
-	gain.ID = 4
 	gain.Name = "gainTest" + strconv.Itoa(int(gain.ID))
 	gain.Type = gain.Name + ".type"
 	gain.File = gain.Name + ".file"

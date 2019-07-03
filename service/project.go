@@ -3,6 +3,8 @@ package service
 import (
 	"errors"
 	"github.com/pantazheng/bci/models"
+	"log"
+	"strconv"
 )
 
 const titleProject = "service.project."
@@ -28,6 +30,25 @@ type ProjectJSON struct {
 	CreatorName  string       `json:"creatorName"`
 	Participants []UserJSON   `json:"participants"`
 	Modules      []ModuleJSON `json:"modules"` //仅拉取更新
+}
+
+func projectTestData() {
+	log.Println("projectTestData")
+	l := 8
+	projects := make([]ProjectJSON, l)
+
+	for i := 0; i < l; i++ {
+		projects[i].Name = "Project" + strconv.Itoa(i)
+		projects[i].LeaderID = uint(i / 2)
+	}
+
+	for _, v := range projects {
+		if err := v.Insert(); err != nil {
+			log.Println(err.Error())
+		} else {
+			log.Println(v)
+		}
+	}
 }
 
 func (projectJSON *ProjectJSON) project2ProjectJson(project models.Project) {

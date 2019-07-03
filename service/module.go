@@ -3,6 +3,8 @@ package service
 import (
 	"errors"
 	"github.com/pantazheng/bci/models"
+	"log"
+	"strconv"
 )
 
 const titleModule = "service.module."
@@ -32,6 +34,25 @@ type ModuleJSON struct {
 	Missions    []MissionJSON `json:"missions"`
 	ProjectID   uint          `json:"projectID"`
 	ProjectName string        `json:"projectName"`
+}
+
+func moduleTestData() {
+	log.Println("moduleTestData")
+	l := 16
+	modules := make([]ModuleJSON, l)
+	for i := 0; i < l; i++ {
+		modules[i].Name = "module" + strconv.Itoa(i)
+		modules[i].LeaderID = uint(i / 2)
+		modules[i].ProjectID = uint(i / 4)
+	}
+
+	for _, v := range modules {
+		if err := v.Insert(); err != nil {
+			log.Println(err.Error())
+		} else {
+			log.Println(v)
+		}
+	}
 }
 
 func (moduleJSON *ModuleJSON) module2ModuleJson(module models.Module) {

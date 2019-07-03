@@ -3,6 +3,8 @@ package service
 import (
 	"errors"
 	"github.com/pantazheng/bci/models"
+	"log"
+	"strconv"
 )
 
 const titleMission = "service.mission."
@@ -31,6 +33,25 @@ type MissionJSON struct {
 	LeaderID    uint   `json:"leaderID"`
 	LeaderName  string `json:"leaderName"`
 	ProjectName string `json:"projectName"`
+}
+
+func missionTestData() {
+	log.Println("missionTestData")
+	l := 32
+	missions := make([]MissionJSON, l)
+	for i := 0; i < l; i++ {
+		missions[0].Name = "mission" + strconv.Itoa(i)
+		missions[0].OwnerID = uint(i / 2)
+		missions[0].ModuleID = uint(i / 4)
+	}
+
+	for _, v := range missions {
+		if err := v.Insert(); err != nil {
+			log.Println(err.Error())
+		} else {
+			log.Println(v)
+		}
+	}
 }
 
 func (missionJSON *MissionJSON) mission2MissionJSON(mission models.Mission) {

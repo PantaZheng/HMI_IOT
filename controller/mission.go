@@ -11,7 +11,7 @@ import (
 
 //MissionInsert
 func MissionInsert(ctx iris.Context) {
-	m := service.MissionJSON{}
+	m := &service.MissionJSON{}
 	if err := ctx.ReadJSON(m); err != nil {
 		ErrorProcess(err, ctx)
 		return
@@ -27,7 +27,7 @@ func MissionInsert(ctx iris.Context) {
 
 //MissionFindByID
 func MissionFindByID(ctx iris.Context) {
-	m := service.MissionJSON{}
+	m := &service.MissionJSON{}
 	if id, err := ctx.Params().GetUint("id"); err != nil {
 		ErrorProcess(err, ctx)
 		return
@@ -44,7 +44,7 @@ func MissionFindByID(ctx iris.Context) {
 }
 
 func missionsFind(field string, ctx iris.Context) {
-	m := service.MissionJSON{}
+	m := &service.MissionJSON{}
 	if id, err := ctx.Params().GetUint("id"); err != nil {
 		ErrorProcess(err, ctx)
 		return
@@ -88,7 +88,7 @@ func MissionsFindAll(ctx iris.Context) {
 }
 
 func MissionUpdate(ctx iris.Context) {
-	m := service.MissionJSON{}
+	m := &service.MissionJSON{}
 	if err := ctx.ReadJSON(m); err != nil {
 		ErrorProcess(err, ctx)
 		return
@@ -103,7 +103,7 @@ func MissionUpdate(ctx iris.Context) {
 }
 
 func MissionDeleteByID(ctx iris.Context) {
-	m := service.MissionJSON{}
+	m := &service.MissionJSON{}
 	if id, err := ctx.Params().GetUint("id"); err == nil {
 		ErrorProcess(err, ctx)
 		return
@@ -120,7 +120,7 @@ func MissionDeleteByID(ctx iris.Context) {
 }
 
 func MissionUpFileByID(ctx iris.Context) {
-	m := service.MissionJSON{}
+	m := &service.MissionJSON{}
 	if id, err := ctx.Params().GetUint("id"); err != nil {
 		ErrorProcess(err, ctx)
 		return
@@ -154,7 +154,7 @@ func MissionUpFileByID(ctx iris.Context) {
 }
 
 func MissionDownFileByID(ctx iris.Context) {
-	m := service.MissionJSON{}
+	m := &service.MissionJSON{}
 	if id, err := ctx.Params().GetUint("id"); err != nil {
 		ErrorProcess(err, ctx)
 		return
