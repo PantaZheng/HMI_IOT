@@ -1,4 +1,4 @@
-package controller
+﻿package controller
 
 import (
 	"github.com/chanxuehong/wechat/mp/core"
@@ -38,15 +38,21 @@ func Menu() {
 	btnFrame.SetAsViewButton("架构", vueAddress+"/index/#/frame")
 	btnPerson := menu.Button{}
 	btnPerson.SetAsSubMenuButton("人员", []menu.Button{btnBinding, btnFrame})
-	btnNew := menu.Button{}
-	btnNew.SetAsViewButton("新建", vueAddress+"/index/#/newProject")
+
 	btnProject := menu.Button{}
 	btnProject.SetAsViewButton("项目", vueAddress+"/index/#/project")
-	btnMission := menu.Button{}
-	btnMission.SetAsViewButton("任务", vueAddress+"/index/#/mission")
-	btnContent := menu.Button{}
-	btnContent.SetAsSubMenuButton("内容", []menu.Button{btnNew, btnProject, btnMission})
+	btnTask := menu.Button{}
+	btnTask.SetAsViewButton("课题", vueAddress+"/index/#/taskList")
+	btnArrange := menu.Button{}
+	btnArrange.SetAsSubMenuButton("安排", []menu.Button{btnProject,btnTask})
+
+	btnCheck := menu.Button{}
+	btnCheck.SetAsViewButton("审核", vueAddress+"/index/#/check")
 	btnPace := menu.Button{}
 	btnPace.SetAsViewButton("进度", vueAddress+"/index/#/pace")
-	service.DefaultMenu(&menu.Menu{Buttons: []menu.Button{btnPerson, btnContent, btnPace}})
+	btnMission := menu.Button{}
+	btnMission.SetAsViewButton("任务", vueAddress+"/index/#/mission")
+	btnView := menu.Button{}
+	btnView.SetAsSubMenuButton("查看", []menu.Button{btnCheck,btnPace,btnMission})
+	service.DefaultMenu(&menu.Menu{Buttons: []menu.Button{btnPerson, btnArrange, btnView}})
 }
