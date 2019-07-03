@@ -155,6 +155,7 @@ func (missionJSON *MissionJSON) Updates() (err error) {
 
 func (missionJSON *MissionJSON) Delete() (err error) {
 	m := models.Mission{}
+	m.ID = missionJSON.ID
 	if err = m.Delete(); err == nil {
 		missionJSON.mission2MissionJSON(m)
 	} else {
