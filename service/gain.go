@@ -138,7 +138,6 @@ func (gainJSON *GainJSON) Updates() (err error) {
 	}
 	if gainsJSON, err := gainJSON.Find("mission_id"); err != nil {
 		err = errors.New(titleGain + "Updates:\t" + err.Error())
-		return
 	} else {
 		count := len(gainsJSON) - 1
 		tag := 0
