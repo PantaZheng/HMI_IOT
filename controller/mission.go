@@ -1,211 +1,172 @@
 package controller
 
 import (
+	"errors"
 	"github.com/kataras/iris"
 	"github.com/pantazheng/bci/service"
 	"io"
-	"log"
 	"os"
 	"strconv"
 )
 
-func MissionCreate(ctx iris.Context) {
-	var err error
-	m := new(service.MissionJSON)
-	if err = ctx.ReadJSON(m); err == nil {
-		if err = m.Create(); err == nil {
-			ctx.StatusCode(iris.StatusOK)
-			_, _ = ctx.JSON(m)
-		}
+//MissionInsert
+func MissionInsert(ctx iris.Context) {
+	m := service.MissionJSON{}
+	if err := ctx.ReadJSON(m); err != nil {
+		ErrorProcess(err, ctx)
+		return
 	}
-	if err != nil {
-		ctx.StatusCode(iris.StatusAccepted)
-		info := err.Error()
-		_, _ = ctx.Text(info)
-		log.Println(info)
-	}
-}
-
-func MissionFindByID(ctx iris.Context) {
-	var err error
-	if id, err1 := ctx.Params().GetUint("id"); err1 == nil {
-		if g, err2 := service.MissionFindByID(id); err2 == nil {
-			ctx.StatusCode(iris.StatusOK)
-			_, _ = ctx.JSON(g)
-		} else {
-			err = err2
-		}
+	if err := m.Insert(); err == nil {
+		ctx.StatusCode(iris.StatusOK)
+		_, _ = ctx.JSON(m)
 	} else {
-		err = err1
+		ErrorProcess(err, ctx)
 	}
-	if err != nil {
-		ctx.StatusCode(iris.StatusAccepted)
-		info := err.Error()
-		_, _ = ctx.Text(info)
-		log.Println(info)
-	}
+	return
 }
 
-func MissionsFindAll(ctx iris.Context) {
-	/**
-	@Author: PantaZheng
-	@Description:
-	@Date: 2019/5/21 12:34
-	*/
-	if missionsJSON, err := service.MissionsFindAll(); err == nil {
+//MissionFindByID
+func MissionFindByID(ctx iris.Context) {
+	m := service.MissionJSON{}
+	if id, err := ctx.Params().GetUint("id"); err != nil {
+		ErrorProcess(err, ctx)
+		return
+	} else {
+		m.ID = id
+	}
+	if err := m.First(); err != nil {
+		ErrorProcess(err, ctx)
+	} else {
+		ctx.StatusCode(iris.StatusOK)
+		_, _ = ctx.JSON(m)
+	}
+	return
+}
+
+func missionsFind(field string, ctx iris.Context) {
+	m := service.MissionJSON{}
+	if id, err := ctx.Params().GetUint("id"); err != nil {
+		ErrorProcess(err, ctx)
+		return
+	} else {
+		if field == "leader_id" {
+			m.LeaderID = id
+		} else if field == "owner_id" {
+			m.OwnerID = id
+		} else if field == "module_id" {
+			m.ModuleID = id
+		} else if field == "all" {
+		} else {
+			err = errors.New("no this field")
+			ErrorProcess(err, ctx)
+			return
+		}
+	}
+	if missionsJSON, err := m.Find(field); err == nil {
 		ctx.StatusCode(iris.StatusOK)
 		_, _ = ctx.JSON(missionsJSON)
 	} else {
-		ctx.StatusCode(iris.StatusAccepted)
-		info := err.Error()
-		_, _ = ctx.Text(info)
-		log.Println(info)
+		ErrorProcess(err, ctx)
 	}
+	return
 }
 
-func MissionsFindByParticipantID(ctx iris.Context) {
-	err := *new(error)
-	if id, err1 := ctx.Params().GetUint("id"); err1 == nil {
-		if gainsJson, err2 := service.MissionsFindByParticipantID(id); err2 == nil {
-			ctx.StatusCode(iris.StatusOK)
-			_, _ = ctx.JSON(gainsJson)
-		} else {
-			err = err2
-		}
-	} else {
-		err = err1
-	}
-	if err != nil {
-		ctx.StatusCode(iris.StatusAccepted)
-		info := err.Error()
-		_, _ = ctx.Text(info)
-		log.Println(info)
-	}
+func MissionsFindByLeaderID(ctx iris.Context) {
+	missionsFind("leader_id", ctx)
+}
+
+func MissionsFindByOwnerID(ctx iris.Context) {
+	missionsFind("owner_id", ctx)
 }
 
 func MissionsFindByModuleID(ctx iris.Context) {
-	var err error
-	if id, err1 := ctx.Params().GetUint("id"); err1 == nil {
-		if gainsJson, err2 := service.MissionsFindByModuleID(id); err2 == nil {
-			ctx.StatusCode(iris.StatusOK)
-			_, _ = ctx.JSON(gainsJson)
-		} else {
-			err = err2
-		}
-	} else {
-		err = err1
-	}
-	if err != nil {
-		ctx.StatusCode(iris.StatusAccepted)
-		info := err.Error()
-		_, _ = ctx.Text(info)
-		log.Println(info)
-	}
+	missionsFind("module_id", ctx)
+}
+
+func MissionsFindAll(ctx iris.Context) {
+	missionsFind("all", ctx)
 }
 
 func MissionUpdate(ctx iris.Context) {
-	m := new(service.MissionJSON)
-	var err error
-	if err = ctx.ReadJSON(m); err == nil {
-		if err = m.Updates(); err == nil {
-			ctx.StatusCode(iris.StatusOK)
-			_, _ = ctx.JSON(m)
-		}
+	m := service.MissionJSON{}
+	if err := ctx.ReadJSON(m); err != nil {
+		ErrorProcess(err, ctx)
+		return
 	}
-	if err != nil {
-		ctx.StatusCode(iris.StatusAccepted)
-		info := err.Error()
-		_, _ = ctx.Text(info)
-		log.Println(info)
+	if err := m.Update(); err == nil {
+		ctx.StatusCode(iris.StatusOK)
+		_, _ = ctx.JSON(m)
+	} else {
+		ErrorProcess(err, ctx)
 	}
+	return
 }
 
 func MissionDeleteByID(ctx iris.Context) {
-	var err error
-	if id, err1 := ctx.Params().GetUint("id"); err1 == nil {
-		if missionJSON, err2 := service.MissionDeleteByID(id); err2 == nil {
-			ctx.StatusCode(iris.StatusOK)
-			_, _ = ctx.JSON(missionJSON)
-		} else {
-			err = err2
-		}
+	m := service.MissionJSON{}
+	if id, err := ctx.Params().GetUint("id"); err == nil {
+		ErrorProcess(err, ctx)
+		return
 	} else {
-		err = err1
+		m.ID = id
 	}
-	if err != nil {
-		ctx.StatusCode(iris.StatusAccepted)
-		info := err.Error()
-		_, _ = ctx.Text(info)
-		log.Println(info)
+	if err := m.Delete(); err != nil {
+		ErrorProcess(err, ctx)
+	} else {
+		ctx.StatusCode(iris.StatusOK)
+		_, _ = ctx.JSON(m)
 	}
+	return
 }
 
 func MissionUpFileByID(ctx iris.Context) {
-	/**
-	@Author: PantaZheng
-	@Description:
-	@Date: 2019/5/23 10:00
-	*/
-	var err error
-	if id, err1 := ctx.Params().GetUint("id"); err1 == nil {
-		if m, err2 := service.MissionFindByID(id); err2 == nil {
-			fileName := m.File
-			file, _, err3 := ctx.FormFile(fileName)
-			if err3 == nil {
-				out, err4 := os.OpenFile("./files/mission"+strconv.Itoa(int(m.ID))+"_"+fileName,
-					os.O_WRONLY|os.O_CREATE, 0666)
-				if err4 == nil {
-					_, err = io.Copy(out, file)
-				} else {
-					err = err2
-				}
-				defer func() {
-					err = out.Close()
-				}()
-			} else {
-				err = err3
-			}
-			defer func() {
-				err = file.Close()
-			}()
-			ctx.StatusCode(iris.StatusOK)
-			_, _ = ctx.Text("文件传输完成")
-		} else {
-			err = err2
-		}
+	m := service.MissionJSON{}
+	if id, err := ctx.Params().GetUint("id"); err != nil {
+		ErrorProcess(err, ctx)
+		return
 	} else {
-		err = err1
+		m.ID = id
 	}
-	if err != nil {
-		ctx.StatusCode(iris.StatusAccepted)
-		info := err.Error()
-		_, _ = ctx.Text(info)
-		log.Println(info)
+	if err := m.First(); err != nil {
+		ErrorProcess(err, ctx)
+		return
 	}
+	fileName := m.File
+	if file, _, err := ctx.FormFile(fileName); err != nil {
+		ErrorProcess(err, ctx)
+		return
+	} else {
+		out, err := os.OpenFile("./files/mission"+strconv.Itoa(int(m.ID))+"_"+fileName,
+			os.O_WRONLY|os.O_CREATE, 0666)
+		if err != nil {
+			ErrorProcess(err, ctx)
+			return
+		}
+		if _, err := io.Copy(out, file); err != nil {
+			ErrorProcess(err, ctx)
+			return
+		}
+		defer out.Close()
+		ctx.StatusCode(iris.StatusOK)
+		_, _ = ctx.Text("文件传输完成")
+	}
+	return
 }
 
 func MissionDownFileByID(ctx iris.Context) {
-	/**
-	@Author: PantaZheng
-	@Description:
-	@Date: 2019/5/20 11:17
-	*/
-	var err error
-	if id, err1 := ctx.Params().GetUint("id"); err1 == nil {
-		if m, err2 := service.MissionFindByID(id); err2 == nil {
-			fileName := m.File
-			ctx.StatusCode(iris.StatusOK)
-			_ = ctx.SendFile("./files/mission"+strconv.Itoa(int(m.ID))+"_"+fileName, fileName)
-		} else {
-			err = err2
-		}
+	m := service.MissionJSON{}
+	if id, err := ctx.Params().GetUint("id"); err != nil {
+		ErrorProcess(err, ctx)
+		return
 	} else {
-		err = err1
+		m.ID = id
 	}
-	if err != nil {
-		ctx.StatusCode(iris.StatusAccepted)
-		info := err.Error()
-		_, _ = ctx.Text(info)
-		log.Println(info)
+	if err := m.First(); err == nil {
+		ErrorProcess(err, ctx)
+		return
 	}
+	fileName := m.File
+	ctx.StatusCode(iris.StatusOK)
+	_ = ctx.SendFile("./files/mission"+strconv.Itoa(int(m.ID))+"_"+fileName, fileName)
+	return
 }

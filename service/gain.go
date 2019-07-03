@@ -9,22 +9,25 @@ const titleGain = "service.gain."
 
 type GainCore struct {
 	ID        uint   `json:"id"`
-	CreatedAt string `json:"createdAt"`
-	UpdatedAt string `json:"updatedAt"`
-	Name      string `json:"type"`
-	Type      string `json:"type"`
-	File      string `json:"file"`
-	Remark    string `json:"remark"`
+	Name      string `json:"name"`
+	OwnerName string `json:"ownerName"`
 	State     uint   `json:"state"`
 }
 
 type GainJSON struct {
 	GainCore
+
+	CreatedAt string `json:"createdAt"`
+	UpdatedAt string `json:"updatedAt"`
+	Type      string `json:"type"`
+	File      string `json:"file"`
+	Remark    string `json:"remark"`
+
 	//const inherit foreign
 	MissionID   uint   `json:"missionID"`
 	MissionName string `json:"missionName"`
 	OwnerID     uint   `json:"ownerID"`
-	OwnerName   string `json:"ownerName"`
+
 	LeaderID    uint   `json:"leaderID"`
 	LeaderName  string `json:"leaderName"`
 	ModuleName  string `json:"moduleName"`
@@ -46,6 +49,7 @@ func (gainJSON *GainJSON) gain2GainJSON(gain models.Gain) {
 
 	gainJSON.MissionID = gain.MissionID
 	mission := MissionJSON{}
+	mission.ID = gainJSON.MissionID
 	_ = mission.First()
 	gainJSON.MissionName = mission.Name
 	gainJSON.OwnerName = mission.OwnerName
@@ -96,37 +100,60 @@ func (gainJSON *GainJSON) First() (err error) {
 //Find
 func (gainJSON *GainJSON) Find(field string) (gainsJSON []GainCore, err error) {
 	g := gainJSON.gainJSON2Gain()
-	if gains, err1 := g.Find(field); err1 == nil {
-		gainsJSON = make([]GainCore, len(gains))
-		gTemp := GainCore{}
-		for i, v := range gains {
-			gTemp = gainsJSON[i]
-			gTemp.ID = v.ID
-			gTemp.Name = v.Name
-			gTemp.Type = v.Type
-			gTemp.File = v.File
-			gTemp.CreatedAt = v.CreatedAt.Format("2006-01-02")
-			gTemp.UpdatedAt = v.UpdatedAt.Format("2006-01-02")
-			gTemp.Remark = v.Remark
-			gTemp.State = v.State
-		}
+	if gains, err := g.Find(field); err != nil {
+		err = errors.New(titleGain + "Find:\t" + err.Error())
 	} else {
-		err = errors.New(titleGain + "GainsFind:\t" + err1.Error())
+		gainsJSON = make([]GainCore, len(gains))
+		for i, v := range gains {
+			gainsJSON[i].ID = v.ID
+			gainsJSON[i].Name = v.Name
+			owner := UserJSON{ID: v.OwnerID}
+			_ = owner.First()
+			gainsJSON[i].OwnerName = owner.Name
+			gainsJSON[i].State = v.State
+		}
 	}
 	return
 }
 
-//Update 必须包含ID
-func (gainJSON *GainJSON) Update() (err error) {
+//Updates 必须包含ID
+func (gainJSON *GainJSON) Updates() (err error) {
 	if gainJSON.ID == 0 {
-		err = errors.New(titleGain + "Update:\t id 不可缺")
+		err = errors.New(titleGain + "Updates:\t id 不可缺")
 		return
 	}
+	checkTag := false
+	if gainJSON.State > 0 {
+		checkTag = true
+	}
 	g := gainJSON.gainJSON2Gain()
-	if err = g.Update(); err == nil {
+	if err = g.Updates(); err == nil {
 		gainJSON.gain2GainJSON(g)
 	} else {
-		err = errors.New(titleGain + "Update:\t" + err.Error())
+		err = errors.New(titleGain + "Updates:\t" + err.Error())
+		return
+	}
+	if !checkTag {
+		return
+	}
+	if gainsJSON, err := gainJSON.Find("mission_id"); err != nil {
+		err = errors.New(titleGain + "Updates:\t" + err.Error())
+		return
+	} else {
+		count := len(gainsJSON) - 1
+		tag := 0
+		for i, v := range gainsJSON {
+			if v.State != 2 {
+				tag = i
+				break
+			}
+		}
+		if tag == count {
+			mission := MissionJSON{}
+			mission.ID = gainJSON.MissionID
+			mission.State = 2
+			err = mission.Update()
+		}
 	}
 	return
 }

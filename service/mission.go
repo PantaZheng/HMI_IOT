@@ -17,7 +17,7 @@ type MissionCore struct {
 	Content   string `json:"content"`
 	Target    string `json:"target"`
 	File      string `json:"file"`
-	State     string `json:"state"`
+	State     uint   `json:"state"`
 	//foreign
 	OwnerID   uint   `json:"ownerID"`
 	OwnerName string `json:"ownerName"`
@@ -43,6 +43,7 @@ func (missionJSON *MissionJSON) mission2MissionJSON(mission models.Mission) {
 	missionJSON.Content = mission.Content
 	missionJSON.Target = mission.Target
 	missionJSON.File = mission.File
+	missionJSON.State = mission.State
 	missionJSON.LeaderID = mission.LeaderID
 	missionJSON.OwnerID = mission.OwnerID
 	owner := UserJSON{ID: missionJSON.OwnerID}
@@ -51,6 +52,7 @@ func (missionJSON *MissionJSON) mission2MissionJSON(mission models.Mission) {
 
 	missionJSON.ModuleID = mission.ModuleID
 	module := ModuleJSON{}
+	module.ID = mission.ModuleID
 	_ = module.First()
 	missionJSON.LeaderName = module.LeaderName
 	missionJSON.ModuleName = module.Name
@@ -67,92 +69,70 @@ func (missionJSON *MissionJSON) missionJSON2Mission() (mission models.Mission) {
 	mission.Content = missionJSON.Content
 	mission.Target = missionJSON.Target
 	mission.File = missionJSON.File
-	mission.ModuleID = missionJSON.ModuleID
+	mission.State = missionJSON.State
 
 	mission.LeaderID = missionJSON.LeaderID
 	mission.OwnerID = missionJSON.OwnerID
 	mission.ModuleID = missionJSON.ModuleID
-
 	return
 }
 
-func (missionJSON *MissionJSON) Create() (err error) {
+//Insert
+func (missionJSON *MissionJSON) Insert() (err error) {
 	m := missionJSON.missionJSON2Mission()
 	if err = m.Insert(); err == nil {
-		mission.miss
-	}
-	if err != nil {
+		missionJSON.mission2MissionJSON(m)
+	} else {
 		err = errors.New(titleMission + "Insert:\t" + err.Error())
 	}
 	return
 }
 
+//First
 func (missionJSON *MissionJSON) First() (err error) {
 	m := missionJSON.missionJSON2Mission()
 	if err = m.First(); err == nil {
-		*missionJSON = mission2MissionJSON(&m)
+		missionJSON.mission2MissionJSON(m)
 	} else {
 		err = errors.New(titleMission + "First:\t" + err.Error())
 	}
 	return
 }
 
-func MissionsFindAll() (missionsJSON []MissionJSON, err error) {
-	if missions, err1 := models.MissionsFindAll(); err1 == nil {
-		missionsJSON = missions2MissionsBriefJSON(missions)
+//Find
+func (missionJSON *MissionJSON) Find(field string) (missionsJSON []MissionJSON, err error) {
+	m := missionJSON.missionJSON2Mission()
+	if missions, err := m.Find(field); err != nil {
+		err = errors.New(titleMission + "Find:\t" + err.Error())
 	} else {
-		err = errors.New(titleMission + "MissionsFindAll:\t" + err1.Error())
+		missionsJSON = make([]MissionJSON, len(missions))
+		for i, v := range missions {
+			missionsJSON[i].mission2MissionJSON(v)
+		}
 	}
 	return
 }
 
-//MissionFindByID 通过数据库ID查找单Mission.
-func MissionFindByID(id uint) (missionJSON MissionJSON, err error) {
-	missionJSON = MissionJSON{ID: id}
-	err = missionJSON.First()
-	return
-}
-
-func MissionsFindByParticipantID(id uint) (missionsJSON []MissionJSON, err error) {
-	if missions, err1 := models.MissionsFindByParticipantID(id); err1 == nil {
-		missionsJSON = missions2MissionsBriefJSON(missions)
-	} else {
-		err = errors.New(titleMission + "MissionsFindByParticipantID:\t" + err1.Error())
+func (missionJSON *MissionJSON) Update() (err error) {
+	if missionJSON.ID == 0 {
+		err = errors.New(titleMission + "Updates:\t id 不可缺")
+		return
 	}
-	return
-}
-
-func MissionsFindByModuleID(id uint) (missionsJSON []MissionJSON, err error) {
-	if missions, err1 := models.MissionsFindByModuleID(id); err1 == nil {
-		missionsJSON = missions2MissionsBriefJSON(missions)
-	} else {
-		err = errors.New(titleMission + "MissionsFindByModuleID:\t" + err1.Error())
-	}
-	return
-}
-
-func (missionJSON *MissionJSON) Updates() (err error) {
 	m := missionJSON.missionJSON2Mission()
 	if err = m.Update(); err == nil {
-		*missionJSON = mission2MissionJSON(&m)
+		missionJSON.mission2MissionJSON(m)
 	} else {
-		err = errors.New(titleMission + "Update:\t" + err.Error())
+		err = errors.New(titleMission + "Updates:\t" + err.Error())
 	}
 	return
 }
 
 func (missionJSON *MissionJSON) Delete() (err error) {
-	m := missionJSON.missionJSON2Mission()
+	m := models.Mission{}
 	if err = m.Delete(); err == nil {
-		*missionJSON = mission2MissionJSON(&m)
+		missionJSON.mission2MissionJSON(m)
 	} else {
-		err = errors.New(titleMission + "Update:\t" + err.Error())
+		err = errors.New(titleMission + "Delete:\t" + err.Error())
 	}
-	return
-}
-
-func MissionDeleteByID(id uint) (missionJSON MissionJSON, err error) {
-	missionJSON = MissionJSON{ID: id}
-	err = missionJSON.Delete()
 	return
 }

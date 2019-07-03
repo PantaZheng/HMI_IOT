@@ -7,207 +7,139 @@ import (
 
 const titleModule = "service.module."
 
+type ModuleCore struct {
+	ID        uint   `json:"id"`
+	CreatedAt string `json:"createdAt"`
+	UpdatedAt string `json:"updatedAt"`
+	Name      string `json:"name"`
+	StartTime string `json:"startTime"`
+	EndTime   string `json:"endTime"`
+	Content   string `json:"content"`
+	Target    string `json:"target"`
+	File      string `json:"file"`
+	State     uint   `json:"state"`
+
+	LeaderID   uint   `json:"leaderID"`
+	LeaderName string `json:"leaderName"`
+
+	CreatorID   uint   `json:"creatorID"`
+	CreatorName string `json:"creatorName"`
+}
+
 type ModuleJSON struct {
-	ID          uint          `json:"id"`
-	Name        string        `json:"name"`
-	CreatorID   uint          `json:"creatorID"`
-	Creator     UserJSON      `json:"creator"`
-	CreateTime  string        `json:"createTime"` //创建时间
-	StartTime   string        `json:"startTime"`  //开始时间
-	EndTime     string        `json:"endTime"`    //结束时间
-	Content     string        `json:"content"`
-	Target      string        `json:"target"`
-	Tag         bool          `json:"tag"`
-	LeaderID    uint          `json:"leaderID"`
-	LeaderName  string        `json:"leaderName"`
-	Leader      UserJSON      `json:"leader"`
-	Missions    []MissionJSON `json:"missions"` //创建或更新不会修改该字段，仅拉取使用
+	ModuleCore
+
+	Missions    []MissionJSON `json:"missions"`
+	ProjectID   uint          `json:"projectID"`
 	ProjectName string        `json:"projectName"`
 }
 
-type ModuleBriefJSON struct {
-	ID        uint               `json:"id"`
-	Name      string             `json:"name"`
-	StartTime string             `json:"startTime"`
-	EndTime   string             `json:"endTime"`
-	Leader    UserJSON           `json:"leader"`
-	Missions  []MissionBriefJSON `json:"missions"`
-}
-
-func module2ModuleJson(module *models.Module) (moduleJSON ModuleJSON) {
+func (moduleJSON *ModuleJSON) module2ModuleJson(module models.Module) {
 	moduleJSON.ID = module.ID
+	moduleJSON.CreatedAt = module.CreatedAt.Format("2006-01-02")
+	moduleJSON.UpdatedAt = module.UpdatedAt.Format("2006-01-02")
 	moduleJSON.Name = module.Name
-	moduleJSON.CreatorID = module.CreatorID
-	creator := user2UserJSON(module.Creator)
-	moduleJSON.Creator = userJSON2UserBriefJSON(creator)
-	moduleJSON.CreateTime = module.CreateTime
 	moduleJSON.StartTime = module.StartTime
 	moduleJSON.EndTime = module.EndTime
 	moduleJSON.Content = module.Content
 	moduleJSON.Target = module.Target
-	moduleJSON.Tag = module.Tag
+	moduleJSON.File = module.File
+	moduleJSON.State = module.State
+
 	moduleJSON.LeaderID = module.LeaderID
-	leader := user2UserJSON(module.Leader)
-	moduleJSON.Leader = userJSON2UserBriefJSON(leader)
-	moduleJSON.Missions, _ = MissionsFindByModuleID(module.ID)
+	leader := UserJSON{ID: moduleJSON.LeaderID}
+	_ = leader.First()
+	moduleJSON.LeaderName = leader.Name
+
+	moduleJSON.CreatorID = module.CreatorID
+	creator := UserJSON{ID: moduleJSON.CreatorID}
+	_ = creator.First()
+	moduleJSON.CreatorName = creator.Name
+
+	mission := MissionJSON{}
+	moduleJSON.Missions, _ = mission.Find("module_id")
+
 	moduleJSON.ProjectID = module.ProjectID
-	return
-}
+	project := ProjectJSON{}
+	project.ID = moduleJSON.ID
+	_ = project.First()
+	moduleJSON.ProjectName = project.Name
 
-func moduleJSON2ModuleBriefJson(moduleJSON1 *ModuleJSON) (moduleJSON2 ModuleJSON) {
-	moduleJSON2.ID = moduleJSON1.ID
-	moduleJSON2.Name = moduleJSON1.Name
-	moduleJSON2.CreateTime = moduleJSON1.CreateTime
-	moduleJSON2.Content = moduleJSON1.Content
-	moduleJSON2.Tag = moduleJSON1.Tag
-	moduleJSON2.Leader = moduleJSON1.Leader
-	moduleJSON2.ProjectID = moduleJSON1.ProjectID
-	return
-}
-
-func modules2ModulesBriefJSON(modules []models.Module) (modulesJSON []ModuleJSON) {
-	modulesJSON = make([]ModuleJSON, len(modules))
-	for i, v := range modules {
-		m := module2ModuleJson(&v)
-		modulesJSON[i] = moduleJSON2ModuleBriefJson(&m)
-	}
 	return
 }
 
 func (moduleJSON *ModuleJSON) moduleJSON2Module() (module models.Module) {
 	module.ID = moduleJSON.ID
 	module.Name = moduleJSON.Name
-	module.CreatorID = moduleJSON.CreatorID
-	module.CreateTime = moduleJSON.CreateTime
 	module.StartTime = moduleJSON.StartTime
 	module.EndTime = moduleJSON.EndTime
 	module.Content = moduleJSON.Content
 	module.Target = moduleJSON.Target
-	module.Tag = moduleJSON.Tag
+	module.File = moduleJSON.File
+	module.State = moduleJSON.State
+
+	module.CreatorID = moduleJSON.CreatorID
 	module.LeaderID = moduleJSON.LeaderID
 	module.ProjectID = moduleJSON.ProjectID
 	return
 }
 
-func (moduleJSON *ModuleJSON) Create() (err error) {
-	creator := UserJSON{ID: moduleJSON.CreatorID}
-	if err = creator.First(); err == nil {
-		m := moduleJSON.moduleJSON2Module()
-		if err = m.Create(); err == nil {
-			*moduleJSON = module2ModuleJson(&m)
-		}
-	}
-	if err != nil {
+//Insert
+func (moduleJSON *ModuleJSON) Insert() (err error) {
+	m := moduleJSON.moduleJSON2Module()
+	if err = m.Insert(); err == nil {
+		moduleJSON.module2ModuleJson(m)
+	} else {
 		err = errors.New(titleModule + "Insert:\t" + err.Error())
 	}
 	return
 }
 
+//First
 func (moduleJSON *ModuleJSON) First() (err error) {
 	m := moduleJSON.moduleJSON2Module()
 	if err = m.First(); err == nil {
-		*moduleJSON = module2ModuleJson(&m)
+		moduleJSON.module2ModuleJson(m)
 	} else {
 		err = errors.New(titleModule + "First:\t" + err.Error())
 	}
 	return
 }
 
-func ModuleFindByID(id uint) (moduleJSON ModuleJSON, err error) {
-	moduleJSON = ModuleJSON{ID: id}
-	err = moduleJSON.First()
-	return
-}
-
-func ModulesFindByCreatorID(id uint) (modulesJSON []ModuleJSON, err error) {
-	/**
-	@Author: PantaZheng
-	@Description:
-	@Date: 2019/5/15 22:15
-	*/
-	if modules, err1 := models.ModulesFindByCreatorID(id); err1 == nil {
-		modulesJSON = modules2ModulesBriefJSON(modules)
-	} else {
-		err = errors.New(titleModule + "MissionsFindByCreatorID:\t" + err1.Error())
-	}
-	return
-}
-
-func ModulesFindByLeaderID(id uint) (
-	modulesJSON []ModuleJSON, err error) {
-	/**
-	@Author: PantaZheng
-	@Description:
-	@Date: 2019/5/15 22:15
-	*/
-	if modules, err1 := models.ModulesFindByLeaderID(id); err1 == nil {
-		modulesJSON = modules2ModulesBriefJSON(modules)
-	} else {
-		err = errors.New(titleModule + "ModulesFindByLeaderID:\t" + err1.Error())
-	}
-	return
-}
-
-func ModulesFindByParticipantID(id uint) (modulesJSON []ModuleJSON, err error) {
-	/**
-	@Author: PantaZheng
-	@Description:
-	@Date: 2019/5/15 22:14
-	*/
-	if modules, err1 := models.ModulesFindByParticipantID(id); err1 == nil {
-		modulesJSON = modules2ModulesBriefJSON(modules)
-	} else {
-		err = errors.New(titleModule + "ModulesFindByLeaderID:\t" + err1.Error())
-	}
-	return
-}
-
-func ModulesFindByProjectID(id uint) (modulesJSON []ModuleJSON, err error) {
-	/**
-	@Author: PantaZheng
-	@Description:
-	@Date: 2019/5/15 22:14
-	*/
-	if modules, err1 := models.ModulesFindByProjectID(id); err1 == nil {
-		modulesJSON = modules2ModulesBriefJSON(modules)
-	} else {
-		err = errors.New(titleModule + "ModulesFindByLeaderID:\t" + err1.Error())
-	}
-	return
-}
-
-func (moduleJSON *ModuleJSON) Updates() (err error) {
-	/**
-	@Author: PantaZheng
-	@Description:
-	@Date: 2019/5/15 22:16
-	*/
+//Find
+func (moduleJSON *ModuleJSON) Find(field string) (modulesJSON []ModuleJSON, err error) {
 	m := moduleJSON.moduleJSON2Module()
-	if err = m.Updates(); err == nil {
-		*moduleJSON = module2ModuleJson(&m)
+	if modules, err := m.Find(field); err != nil {
+		err = errors.New(titleModule + "Find:\t" + err.Error())
 	} else {
-		err = errors.New(titleMission + "Update:\t" + err.Error())
+		modulesJSON = make([]ModuleJSON, len(modules))
+		for i, v := range modules {
+			modulesJSON[i].module2ModuleJson(v)
+		}
+	}
+	return
+}
+
+func (moduleJSON *ModuleJSON) Update() (err error) {
+	if moduleJSON.ID == 0 {
+		err = errors.New(titleModule + "Updates:\t id 不可缺")
+		return
+	}
+	m := moduleJSON.moduleJSON2Module()
+	if err = m.Update(); err == nil {
+		moduleJSON.module2ModuleJson(m)
+	} else {
+		err = errors.New(titleMission + "Updates:\t" + err.Error())
 	}
 	return
 }
 
 func (moduleJSON *ModuleJSON) Delete() (err error) {
-	/**
-	@Author: PantaZheng
-	@Description:
-	@Date: 2019/5/15 22:18
-	*/
-	m := moduleJSON.moduleJSON2Module()
+	m := models.Module{}
 	if err = m.Delete(); err == nil {
-		*moduleJSON = module2ModuleJson(&m)
+		moduleJSON.module2ModuleJson(m)
 	} else {
-		err = errors.New(titleMission + "Update:\t" + err.Error())
+		err = errors.New(titleMission + "Delete:\t" + err.Error())
 	}
-	return
-}
-
-func ModuleDeleteByID(id uint) (moduleJSON ModuleJSON, err error) {
-	moduleJSON = ModuleJSON{ID: id}
-	err = moduleJSON.Delete()
 	return
 }

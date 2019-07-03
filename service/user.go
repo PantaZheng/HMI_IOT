@@ -267,7 +267,7 @@ func UsersList() (usersJSON []UserJSON, err error) {
 	return
 }
 
-//Update 更新用户数据，id定位用户记录.
+//Updates 更新用户数据，id定位用户记录.
 func (userJSON *UserJSON) Updates() (err error) {
 	if err = userJSON.checkLevel(); err == nil {
 		u := userJSON.userJSON2User()
@@ -276,7 +276,7 @@ func (userJSON *UserJSON) Updates() (err error) {
 		}
 	}
 	if err != nil {
-		err = errors.New(titleUser + "Update:\t" + err.Error())
+		err = errors.New(titleUser + "Updates:\t" + err.Error())
 	}
 	return
 }

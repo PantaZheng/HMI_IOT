@@ -6,17 +6,13 @@ import (
 	"github.com/pantazheng/bci/database"
 )
 
-type GainCore struct {
+type Gain struct {
 	gorm.Model
 	Name   string
 	Type   string
 	File   string
 	Remark string
 	State  uint
-}
-
-type Gain struct {
-	GainCore
 	//foreign const
 	MissionID uint
 	LeaderID  uint
@@ -64,8 +60,8 @@ func (gain *Gain) Find(field string) (gains []Gain, err error) {
 	return
 }
 
-//Update 通用更新接口，ID必须，Uptime自动更新。
-func (gain *Gain) Update() (err error) {
+//Updates 通用更新接口，ID必须，Uptime自动更新。
+func (gain *Gain) Updates() (err error) {
 	if err = database.DB.Where("id=?", gain.ID).Updates(&gain).Error; err != nil {
 		return
 	}
@@ -79,6 +75,6 @@ func (gain *Gain) Delete() (err error) {
 		return
 	}
 	//硬删除
-	err = database.DB.Unscoped().Model(Gain{}).Where("id=?", gain.ID).Delete(&gain).Error
+	err = database.DB.Model(Gain{}).Where("id=?", gain.ID).Delete(&gain).Error
 	return
 }

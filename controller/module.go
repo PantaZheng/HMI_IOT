@@ -1,166 +1,118 @@
 package controller
 
 import (
+	"errors"
 	"github.com/kataras/iris"
 	"github.com/pantazheng/bci/service"
-	"log"
 )
 
-func ModuleCreate(ctx iris.Context) {
-	m := new(service.ModuleJSON)
-	err := *new(error)
-	if err = ctx.ReadJSON(m); err == nil {
-		if err = m.Create(); err == nil {
-			ctx.StatusCode(iris.StatusOK)
-			_, _ = ctx.JSON(m)
-		}
+//ModuleInsert
+func ModuleInsert(ctx iris.Context) {
+	m := service.ModuleJSON{}
+	if err := ctx.ReadJSON(m); err != nil {
+		ErrorProcess(err, ctx)
+		return
 	}
-	if err != nil {
-		ctx.StatusCode(iris.StatusAccepted)
-		info := err.Error()
-		_, _ = ctx.Text(info)
-		log.Println(info)
+	if err := m.Insert(); err == nil {
+		ctx.StatusCode(iris.StatusOK)
+		_, _ = ctx.JSON(m)
+	} else {
+		ErrorProcess(err, ctx)
 	}
+	return
 }
 
+//ModuleFindByID
 func ModuleFindByID(ctx iris.Context) {
-	err := *new(error)
-	if id, err1 := ctx.Params().GetUint("id"); err1 == nil {
-		if m, err2 := service.ModuleFindByID(id); err2 == nil {
-			ctx.StatusCode(iris.StatusOK)
-			_, _ = ctx.JSON(m)
-		} else {
-			err = err2
-		}
+	m := service.ModuleJSON{}
+	if id, err := ctx.Params().GetUint("id"); err != nil {
+		ErrorProcess(err, ctx)
+		return
 	} else {
-		err = err1
+		m.ID = id
 	}
-	if err != nil {
-		ctx.StatusCode(iris.StatusAccepted)
-		info := err.Error()
-		_, _ = ctx.Text(info)
-		log.Println(info)
+	if err := m.First(); err != nil {
+		ErrorProcess(err, ctx)
+	} else {
+		ctx.StatusCode(iris.StatusOK)
+		_, _ = ctx.JSON(m)
 	}
+	return
 }
 
-func ModulesFindByCreatorID(ctx iris.Context) {
-	/**
-	@Author: PantaZheng
-	@Description:
-	@Date: 2019/5/15 22:21
-	*/
-	err := *new(error)
-	if id, err1 := ctx.Params().GetUint("id"); err1 == nil {
-		if modules, err2 := service.ModulesFindByCreatorID(id); err2 == nil {
-			ctx.StatusCode(iris.StatusOK)
-			_, _ = ctx.JSON(modules)
-		} else {
-			err = err2
-		}
+func modulesFind(field string, ctx iris.Context) {
+	m := service.ModuleJSON{}
+	if id, err := ctx.Params().GetUint("id"); err != nil {
+		ErrorProcess(err, ctx)
+		return
 	} else {
-		err = err1
+		if field == "leader_id" {
+			m.LeaderID = id
+		} else if field == "creator_id" {
+			m.CreatorID = id
+		} else if field == "project_id" {
+			m.ProjectID = id
+		} else if field == "all" {
+		} else {
+			err = errors.New("no this field")
+			ErrorProcess(err, ctx)
+			return
+		}
 	}
-	if err != nil {
-		ctx.StatusCode(iris.StatusAccepted)
-		info := err.Error()
-		_, _ = ctx.Text(info)
-		log.Println(info)
+	if modulesJSON, err := m.Find(field); err == nil {
+		ctx.StatusCode(iris.StatusOK)
+		_, _ = ctx.JSON(modulesJSON)
+	} else {
+		ErrorProcess(err, ctx)
 	}
+	return
 }
 
 func ModulesFindByLeaderID(ctx iris.Context) {
-	err := *new(error)
-	if id, err1 := ctx.Params().GetUint("id"); err1 == nil {
-		if modules, err2 := service.ModulesFindByLeaderID(id); err2 == nil {
-			ctx.StatusCode(iris.StatusOK)
-			_, _ = ctx.JSON(modules)
-		} else {
-			err = err2
-		}
-	} else {
-		err = err1
-	}
-	if err != nil {
-		ctx.StatusCode(iris.StatusAccepted)
-		info := err.Error()
-		_, _ = ctx.Text(info)
-		log.Println(info)
-	}
+	modulesFind("leader_id", ctx)
 }
 
-func ModulesFindByParticipantID(ctx iris.Context) {
-	err := *new(error)
-	if id, err1 := ctx.Params().GetUint("id"); err1 == nil {
-		if modules, err2 := service.ModulesFindByParticipantID(id); err2 == nil {
-			ctx.StatusCode(iris.StatusOK)
-			_, _ = ctx.JSON(modules)
-		} else {
-			err = err2
-		}
-	} else {
-		err = err1
-	}
-	if err != nil {
-		ctx.StatusCode(iris.StatusAccepted)
-		info := err.Error()
-		_, _ = ctx.Text(info)
-		log.Println(info)
-	}
+func ModulesFindByCreatorID(ctx iris.Context) {
+	modulesFind("creator_id", ctx)
 }
 
 func ModulesFindByProjectID(ctx iris.Context) {
-	err := *new(error)
-	if id, err1 := ctx.Params().GetUint("id"); err1 == nil {
-		if modules, err2 := service.ModulesFindByProjectID(id); err2 == nil {
-			ctx.StatusCode(iris.StatusOK)
-			_, _ = ctx.JSON(modules)
-		} else {
-			err = err2
-		}
-	} else {
-		err = err1
-	}
-	if err != nil {
-		ctx.StatusCode(iris.StatusAccepted)
-		info := err.Error()
-		_, _ = ctx.Text(info)
-		log.Println(info)
-	}
+	modulesFind("project_id", ctx)
+}
+
+func ModulesFindAll(ctx iris.Context) {
+	modulesFind("all", ctx)
 }
 
 func ModuleUpdate(ctx iris.Context) {
-	m := new(service.ModuleJSON)
-	err := *new(error)
-	if err = ctx.ReadJSON(m); err == nil {
-		if err = m.Updates(); err == nil {
-			ctx.StatusCode(iris.StatusOK)
-			_, _ = ctx.JSON(m)
-		}
+	m := service.ModuleJSON{}
+	if err := ctx.ReadJSON(m); err != nil {
+		ErrorProcess(err, ctx)
+		return
 	}
-	if err != nil {
-		ctx.StatusCode(iris.StatusAccepted)
-		info := err.Error()
-		_, _ = ctx.Text(info)
-		log.Println(info)
+	if err := m.Update(); err == nil {
+		ctx.StatusCode(iris.StatusOK)
+		_, _ = ctx.JSON(m)
+	} else {
+		ErrorProcess(err, ctx)
 	}
+	return
+
 }
 
 func ModuleDeleteByID(ctx iris.Context) {
-	err := *new(error)
-	if id, err1 := ctx.Params().GetUint("id"); err1 == nil {
-		if missionJSON, err2 := service.ModuleDeleteByID(id); err2 == nil {
-			ctx.StatusCode(iris.StatusOK)
-			_, _ = ctx.JSON(missionJSON)
-		} else {
-			err = err2
-		}
+	m := service.ModuleJSON{}
+	if id, err := ctx.Params().GetUint("id"); err != nil {
+		ErrorProcess(err, ctx)
+		return
 	} else {
-		err = err1
+		m.ID = id
 	}
-	if err != nil {
-		ctx.StatusCode(iris.StatusAccepted)
-		info := err.Error()
-		_, _ = ctx.Text(info)
-		log.Println(info)
+	if err := m.Delete(); err == nil {
+		ctx.StatusCode(iris.StatusOK)
+		_, _ = ctx.JSON(m)
+	} else {
+		ErrorProcess(err, ctx)
 	}
+	return
 }

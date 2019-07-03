@@ -70,22 +70,25 @@ UserDeleteByTelephone|delete|`/telephone/{telephone:string}`|-|`UserJson`
 ```go
 type GainCore struct {
 	ID        uint   `json:"id"`
-	CreatedAt string `json:"createdAt"`
-	UpdatedAt string `json:"updatedAt"`
-	Name      string `json:"type"`
-	Type      string `json:"type"`
-	File      string `json:"file"`
-	Remark    string `json:"remark"`
+	Name      string `json:"name"`
+	OwnerName string `json:"ownerName"`
 	State     uint   `json:"state"`
 }
 
 type GainJSON struct {
 	GainCore
+
+	CreatedAt string `json:"createdAt"`
+	UpdatedAt string `json:"updatedAt"`
+	Type      string `json:"type"`
+	File      string `json:"file"`
+	Remark    string `json:"remark"`
+
 	//const inherit foreign
 	MissionID   uint   `json:"missionID"`
 	MissionName string `json:"missionName"`
 	OwnerID     uint   `json:"ownerID"`
-	OwnerName   string `json:"ownerName"`
+
 	LeaderID    uint   `json:"leaderID"`
 	LeaderName  string `json:"leaderName"`
 	ModuleName  string `json:"moduleName"`
@@ -98,12 +101,12 @@ type GainJSON struct {
 GainCreate|post|`/`|`GainJSON`|`GainJSON`|state,upTime自动初始化
 GainUpFileByID|post|`/file/{id:uint}`|file|-
 GainFindByID|get|`/id/{id:uint}`|-|`GainJSON`
-GainsFindByLeaderID|`/leader/{id:uint}`|-|`[]GainJSON`
-GainsFindByOwnerID|get|`/owner/{id:uint}`|-|`[]GainJSON`
-GainsFindByMissionID|get|`/mission/{id:uint}`|-|`[]GainJSON`
-GainsFindAll|get|`all`|-|`[]GainJSON`
+GainsFindByLeaderID|get|`/leader/{id:uint}`|-|`[]GainCore`
+GainsFindByOwnerID|get|`/owner/{id:uint}`|-|`[]GainCore`
+GainsFindByMissionID|get|`/mission/{id:uint}`|-|`[]GainCore`
+GainsFindAll|get|`all`|-|`[]GainCore`
 GainDownFileByID|get|`/file/{id:uint}`|-|file
-GainUpdate|put|`/`|`GainJSON`|`GainJSON`
+GainUpdates|put|`/`|`GainJSON`|`GainJSON`
 GainDeleteByID|delete|`/{id:uint}`|-|`GainJSON`
 
 ### Mission
@@ -140,15 +143,16 @@ type MissionJSON struct {
 
 名称|method|path|传入body参数|接收body参数
 -|-|-|-|-
-MissionCreate|post|`/`|`MissionJson`|`MissionJson`
+MissionCreate|post|`/`|`MissionJSON`|`MissionJSON`
 MissionUpFileByID|post|`/file/{id:uint}`|file|-
-MissionFindByID|get|`/id/{id:uint}`|-|`MissionJson`
+MissionFindByID|get|`/id/{id:uint}`|-|`MissionJSON`
+MissionsFindByLeaderID|get|`/leader/{id:uint}`|-|`[]MissionJSON`
+MissionsFindByOwnerID|get|`/owner/{id:uint}`|-|`[]MissionJSON`
+MissionsFindByModuleID|get|`/module/{id:uint}`|-|`[]MissionJSON`
 MissionsFindALL|get|`/all`|-|`[]MissionJSON`
-MissionsFindByParticipantID||`/participant/{id:uint}`|-|`[]MissionJSON`
-MissionsFindByModuleID|get|`/module/{id:uint}`|-|`[]MissionJson`
 MissionDownFileByID|get|`/file/{id:uint}`|-|file
-MissionUpdate|put|`/`|`MissionJson`|`MissionJson`
-MissionDeleteByID|delete|`/id/{id:uint}`|-|`MissionJson`
+MissionUpdate|put|`/`|`MissionJSON`|`MissionJSON`
+MissionDeleteByID|delete|`/id/{id:uint}`|-|`MissionJSON`
 
 ### Module
 

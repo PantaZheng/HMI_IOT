@@ -45,9 +45,7 @@ func (mission *Mission) Insert() (err error) {
 
 //First 根据id查找Mission.
 func (mission *Mission) First() (err error) {
-	if err = database.DB.Where("id = ? ", mission.ID).First(&mission).Error; err != nil {
-		return
-	}
+	err = database.DB.Where("id = ? ", mission.ID).First(&mission).Error
 	return
 }
 
@@ -67,7 +65,7 @@ func (mission *Mission) Find(field string) (missions []Mission, err error) {
 	return
 }
 
-//Update ID必须，Uptime自动更新
+//Updates ID必须，Uptime自动更新
 func (mission *Mission) Update() (err error) {
 	if err = database.DB.Where("id=?", mission.ID).Updates(&mission).Error; err != nil {
 		return
@@ -81,6 +79,6 @@ func (mission *Mission) Delete() (err error) {
 		return
 	}
 	//硬删除
-	err = database.DB.Unscoped().Model(Mission{}).Where("id=?", mission.ID).Delete(&mission).Error
+	err = database.DB.Model(Mission{}).Where("id=?", mission.ID).Delete(&mission).Error
 	return
 }

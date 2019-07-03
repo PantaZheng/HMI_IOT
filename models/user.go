@@ -129,7 +129,7 @@ func (user *User) Find() (users []User, err error) {
 	return
 }
 
-//Update 非覆盖式更新,零值不更新,根据ID定位用户.
+//Updates 非覆盖式更新,零值不更新,根据ID定位用户.
 func (user *User) Updates() (err error) {
 	/**
 	@Author: PantaZheng
@@ -139,7 +139,7 @@ func (user *User) Updates() (err error) {
 	u := new(User)
 	u.ID = user.ID
 	if err = database.DB.Model(&u).Updates(&user).Error; err != nil {
-		err = errors.New(titleUser + "Update:\t" + err.Error())
+		err = errors.New(titleUser + "Updates:\t" + err.Error())
 	}
 	return
 }
