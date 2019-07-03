@@ -41,7 +41,7 @@ func (module *Module) Insert() (err error) {
 }
 
 func (module *Module) First() (err error) {
-	err = database.DB.Where("id = ?", module.ID).First(&module).Error
+	err = database.DB.Model(Module{}).Where("id = ?", module.ID).First(&module).Error
 	return
 }
 

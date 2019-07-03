@@ -70,7 +70,7 @@ func (mission *Mission) Find(field string) (missions []Mission, err error) {
 
 //Updates ID必须，Uptime自动更新
 func (mission *Mission) Update() (err error) {
-	if err = database.DB.Where("id=?", mission.ID).Updates(&mission).Error; err != nil {
+	if err = database.DB.Model(Mission{}).Where("id=?", mission.ID).Updates(&mission).Error; err != nil {
 		return
 	}
 	err = mission.First()

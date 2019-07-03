@@ -39,7 +39,7 @@ func (project *Project) Insert() (err error) {
 }
 
 func (project *Project) First() (err error) {
-	if err = database.DB.Where("id = ?", project.ID).First(&project).Error; err != nil {
+	if err = database.DB.Model(Project{}).Where("id = ?", project.ID).First(&project).Error; err != nil {
 		return
 	}
 	database.DB.Model(&project).Association("Participants").Find(&project.Participants)
