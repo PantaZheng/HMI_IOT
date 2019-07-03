@@ -93,7 +93,7 @@ func MissionUpdate(ctx iris.Context) {
 		ErrorProcess(err, ctx)
 		return
 	}
-	if err := m.Update(); err == nil {
+	if err := m.Updates(); err == nil {
 		ctx.StatusCode(iris.StatusOK)
 		_, _ = ctx.JSON(m)
 	} else {

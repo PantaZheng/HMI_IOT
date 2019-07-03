@@ -54,24 +54,6 @@ func gainTestData() {
 			log.Println(v)
 		}
 	}
-
-	for i := 0; i < l/2; i++ {
-		i++
-		gains[i].ID = uint(i + 1)
-		gains[i].State = 2
-		if err := gains[i].Updates(); err != nil {
-			log.Println(err.Error())
-		} else {
-			log.Println(gains[i])
-		}
-	}
-
-	mission := MissionJSON{}
-	if missionsJSON, err := mission.Find("all"); err != nil {
-		log.Println(err)
-	} else {
-		log.Println(missionsJSON)
-	}
 }
 
 //gain2GainJSON
@@ -162,37 +144,13 @@ func (gainJSON *GainJSON) Updates() (err error) {
 		err = errors.New(titleGain + "Updates:\t id 不可缺")
 		return
 	}
-	checkTag := false
-	if gainJSON.State > 0 {
-		checkTag = true
-	}
+
 	g := gainJSON.gainJSON2Gain()
 	if err = g.Updates(); err == nil {
 		gainJSON.gain2GainJSON(g)
 	} else {
 		err = errors.New(titleGain + "Updates:\t" + err.Error())
 		return
-	}
-	if !checkTag {
-		return
-	}
-	if gainsJSON, err := gainJSON.Find("mission_id"); err != nil {
-		err = errors.New(titleGain + "Updates:\t" + err.Error())
-	} else {
-		count := len(gainsJSON) - 1
-		tag := 0
-		for i, v := range gainsJSON {
-			if v.State != 2 {
-				tag = i
-				break
-			}
-		}
-		if tag == count {
-			mission := MissionJSON{}
-			mission.ID = gainJSON.MissionID
-			mission.State = 2
-			err = mission.Update()
-		}
 	}
 	return
 }

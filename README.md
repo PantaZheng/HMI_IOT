@@ -116,22 +116,23 @@ GainDeleteByID|delete|`/{id:uint}`|-|`GainJSON`
 ```go
 type MissionCore struct {
 	ID        uint   `json:"id"`
+	Name      string `json:"name"`
+	OwnerName string `json:"ownerName"`
+	State     uint   `json:"state"`
+}
+
+type MissionJSON struct {
+	MissionCore
 	CreatedAt string `json:"createdAt"`
 	UpdatedAt string `json:"updatedAt"`
-	Name      string `json:"name"`
 	StartTime string `json:"startTime"`
 	EndTime   string `json:"endTime"`
 	Content   string `json:"content"`
 	Target    string `json:"target"`
 	File      string `json:"file"`
-	State     string `json:"state"`
-	//foreign
-	OwnerID   uint   `json:"ownerID"`
-	OwnerName string `json:"ownerName"`
-}
 
-type MissionJSON struct {
-	MissionCore
+	//foreign
+	OwnerID uint `json:"ownerID"`
 	//const inherit foreign
 	ModuleID    uint   `json:"moduleID"`
 	ModuleName  string `json:"moduleName"`
@@ -146,10 +147,10 @@ type MissionJSON struct {
 MissionCreate|post|`/`|`MissionJSON`|`MissionJSON`
 MissionUpFileByID|post|`/file/{id:uint}`|file|-
 MissionFindByID|get|`/id/{id:uint}`|-|`MissionJSON`
-MissionsFindByLeaderID|get|`/leader/{id:uint}`|-|`[]MissionJSON`
-MissionsFindByOwnerID|get|`/owner/{id:uint}`|-|`[]MissionJSON`
-MissionsFindByModuleID|get|`/module/{id:uint}`|-|`[]MissionJSON`
-MissionsFindALL|get|`/all`|-|`[]MissionJSON`
+MissionsFindByLeaderID|get|`/leader/{id:uint}`|-|`[]MissionCore`
+MissionsFindByOwnerID|get|`/owner/{id:uint}`|-|`[]MissionCore`
+MissionsFindByModuleID|get|`/module/{id:uint}`|-|`[]MissionCore`
+MissionsFindALL|get|`/all`|-|`[]MissionCore`
 MissionDownFileByID|get|`/file/{id:uint}`|-|file
 MissionUpdate|put|`/`|`MissionJSON`|`MissionJSON`
 MissionDeleteByID|delete|`/id/{id:uint}`|-|`MissionJSON`

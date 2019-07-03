@@ -30,14 +30,20 @@ type Mission struct {
 
 //Insert 创建Mission
 func (mission *Mission) Insert() (err error) {
-	mission.State = 1
 	module := Module{}
 	module.ID = mission.ModuleID
 	if err = module.First(); err != nil {
-		log.Println("module.First()" + err.Error())
 		return
 	}
 	mission.LeaderID = module.LeaderID
+
+	project := Project{}
+	project.ID = module.ProjectID
+	if err = project.First(); err != nil {
+		return
+	}
+	mission.State = project.State
+
 	if err = database.DB.Create(&mission).Error; err != nil {
 		log.Println("database.DB.Create(&mission)" + err.Error())
 		return
@@ -69,7 +75,7 @@ func (mission *Mission) Find(field string) (missions []Mission, err error) {
 }
 
 //Updates ID必须，Uptime自动更新
-func (mission *Mission) Update() (err error) {
+func (mission *Mission) Updates() (err error) {
 	if err = database.DB.Model(Mission{}).Where("id=?", mission.ID).Updates(&mission).Error; err != nil {
 		return
 	}

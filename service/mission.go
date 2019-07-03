@@ -11,22 +11,23 @@ const titleMission = "service.mission."
 
 type MissionCore struct {
 	ID        uint   `json:"id"`
+	Name      string `json:"name"`
+	OwnerName string `json:"ownerName"`
+	State     uint   `json:"state"`
+}
+
+type MissionJSON struct {
+	MissionCore
 	CreatedAt string `json:"createdAt"`
 	UpdatedAt string `json:"updatedAt"`
-	Name      string `json:"name"`
 	StartTime string `json:"startTime"`
 	EndTime   string `json:"endTime"`
 	Content   string `json:"content"`
 	Target    string `json:"target"`
 	File      string `json:"file"`
-	State     uint   `json:"state"`
-	//foreign
-	OwnerID   uint   `json:"ownerID"`
-	OwnerName string `json:"ownerName"`
-}
 
-type MissionJSON struct {
-	MissionCore
+	//foreign
+	OwnerID uint `json:"ownerID"`
 	//const inherit foreign
 	ModuleID    uint   `json:"moduleID"`
 	ModuleName  string `json:"moduleName"`
@@ -44,7 +45,6 @@ func missionTestData() {
 		missions[i].OwnerID = uint(i/2 + 1)
 		missions[i].ModuleID = uint(i/2 + 1)
 	}
-
 	for _, v := range missions {
 		if err := v.Insert(); err != nil {
 			log.Println(err.Error())
@@ -121,26 +121,31 @@ func (missionJSON *MissionJSON) First() (err error) {
 }
 
 //Find
-func (missionJSON *MissionJSON) Find(field string) (missionsJSON []MissionJSON, err error) {
+func (missionJSON *MissionJSON) Find(field string) (missionsJSON []MissionCore, err error) {
 	m := missionJSON.missionJSON2Mission()
 	if missions, err := m.Find(field); err != nil {
 		err = errors.New(titleMission + "Find:\t" + err.Error())
 	} else {
-		missionsJSON = make([]MissionJSON, len(missions))
+		missionsJSON = make([]MissionCore, len(missions))
 		for i, v := range missions {
-			missionsJSON[i].mission2MissionJSON(v)
+			missionsJSON[i].ID = v.ID
+			missionsJSON[i].Name = v.Name
+			owner := UserJSON{ID: v.OwnerID}
+			_ = owner.First()
+			missionsJSON[i].OwnerName = owner.Name
+			missionsJSON[i].State = v.State
 		}
 	}
 	return
 }
 
-func (missionJSON *MissionJSON) Update() (err error) {
+func (missionJSON *MissionJSON) Updates() (err error) {
 	if missionJSON.ID == 0 {
 		err = errors.New(titleMission + "Updates:\t id 不可缺")
 		return
 	}
 	m := missionJSON.missionJSON2Mission()
-	if err = m.Update(); err == nil {
+	if err = m.Updates(); err == nil {
 		missionJSON.mission2MissionJSON(m)
 	} else {
 		err = errors.New(titleMission + "Updates:\t" + err.Error())
