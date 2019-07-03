@@ -63,14 +63,14 @@ func missionsFind(field string, ctx iris.Context) {
 				return
 			}
 		}
-		if missionsJSON, err := m.Find(field); err == nil {
-			ctx.StatusCode(iris.StatusOK)
-			_, _ = ctx.JSON(missionsJSON)
-		} else {
-			ErrorProcess(err, ctx)
-		}
-		return
 	}
+	if missionsJSON, err := m.Find(field); err == nil {
+		ctx.StatusCode(iris.StatusOK)
+		_, _ = ctx.JSON(missionsJSON)
+	} else {
+		ErrorProcess(err, ctx)
+	}
+	return
 }
 
 func MissionsFindByLeaderID(ctx iris.Context) {
