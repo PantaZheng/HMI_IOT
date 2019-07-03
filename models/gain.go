@@ -62,7 +62,7 @@ func (gain *Gain) Find(field string) (gains []Gain, err error) {
 
 //Updates 通用更新接口，ID必须，Uptime自动更新。
 func (gain *Gain) Updates() (err error) {
-	if err = database.DB.Where("id=?", gain.ID).Updates(&gain).Error; err != nil {
+	if err = database.DB.Model(Gain{}).Where("id=?", gain.ID).Updates(&gain).Error; err != nil {
 		return
 	}
 	err = gain.First()
