@@ -106,7 +106,7 @@ func MissionUpdate(ctx iris.Context) {
 
 func MissionDeleteByID(ctx iris.Context) {
 	m := &service.MissionJSON{}
-	if id, err := ctx.Params().GetUint("id"); err == nil {
+	if id, err := ctx.Params().GetUint("id"); err != nil {
 		ErrorProcess(err, ctx)
 		return
 	} else {
