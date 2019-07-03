@@ -39,7 +39,7 @@ func projectTestData() {
 
 	for i := 0; i < l; i++ {
 		projects[i].Name = "Project" + strconv.Itoa(i)
-		projects[i].LeaderID = uint(i / 2)
+		projects[i].LeaderID = uint(i/2 + 1)
 	}
 
 	for _, v := range projects {
