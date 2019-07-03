@@ -4,6 +4,7 @@ import (
 	"errors"
 	"github.com/jinzhu/gorm"
 	"github.com/pantazheng/bci/database"
+	"log"
 )
 
 type ProjectCore struct {
@@ -40,6 +41,7 @@ func (project *Project) Insert() (err error) {
 
 func (project *Project) First() (err error) {
 	if err = database.DB.Where("id = ?", project.ID).First(&project).Error; err != nil {
+		log.Println(err)
 		return
 	}
 	database.DB.Model(&project).Association("Participants").Find(&project.Participants)
