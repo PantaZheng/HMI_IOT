@@ -55,14 +55,16 @@ func gainTestData() {
 		}
 	}
 
-	for _, v := range gains {
-		v.State = 2
-		if err := v.Updates(); err != nil {
+	for i := 0; i < l; i++ {
+		gains[i].ID = 1
+		gains[i].State = 2
+		if err := gains[i].Updates(); err != nil {
 			log.Println(err.Error())
 		} else {
-			log.Println(v)
+			log.Println(gains[i])
 		}
 	}
+
 	mission := MissionJSON{}
 	if missionsJSON, err := mission.Find("all"); err != nil {
 		log.Println(err)
