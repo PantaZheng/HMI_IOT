@@ -96,9 +96,9 @@ type GainJSON struct {
 }
 ```
 
-名称|method|path|传入body参数|接收body参数|备注
--|-|-|-|-|-
-GainCreate|post|`/`|`GainJSON`|`GainJSON`|state,upTime自动初始化
+名称|method|path|传入body参数|接收body参数
+-|-|-|-|-
+GainCreate|post|`/`|`GainJSON`|`GainJSON`
 GainUpFileByID|post|`/file/{id:uint}`|file|-
 GainFindByID|get|`/id/{id:uint}`|-|`GainJSON`
 GainsFindByLeaderID|get|`/leader/{id:uint}`|-|`[]GainCore`

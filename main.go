@@ -52,7 +52,7 @@ func newApp() (api *iris.Application) {
 		gain.Post("/", controller.GainInsert)
 		gain.Post("/file/{id:uint}", controller.GainUpFileByID)
 		gain.Get("/id/{id:uint}", controller.GainFindByID)
-		gain.Get("leader/{id:uint}", controller.GainsFindByLeaderID)
+		gain.Get("/leader/{id:uint}", controller.GainsFindByLeaderID)
 		gain.Get("/owner/{id:uint}", controller.GainsFindByOwnerID)
 		gain.Get("/mission/{id:uint}", controller.GainsFindByMissionID)
 		gain.Get("/all",
