@@ -44,21 +44,23 @@ func GainFindByID(ctx iris.Context) {
 
 func gainsFind(field string, ctx iris.Context) {
 	g := service.GainJSON{}
-	if id, err := ctx.Params().GetUint("id"); err != nil {
-		ErrorProcess(err, ctx)
-		return
-	} else {
-		if field == "leader_id" {
-			g.LeaderID = id
-		} else if field == "owner_id" {
-			g.OwnerID = id
-		} else if field == "mission_id" {
-			g.MissionID = id
-		} else if field == "all" {
-		} else {
-			err = errors.New("no this field")
+	if field != "all" {
+		if id, err := ctx.Params().GetUint("id"); err != nil {
 			ErrorProcess(err, ctx)
 			return
+		} else {
+			if field == "leader_id" {
+				g.LeaderID = id
+			} else if field == "owner_id" {
+				g.OwnerID = id
+			} else if field == "mission_id" {
+				g.MissionID = id
+			} else if field == "all" {
+			} else {
+				err = errors.New("no this field")
+				ErrorProcess(err, ctx)
+				return
+			}
 		}
 	}
 	if gainsJSON, err := g.Find(field); err == nil {
