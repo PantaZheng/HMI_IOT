@@ -11,7 +11,7 @@ import (
 
 //GainInsert
 func GainInsert(ctx iris.Context) {
-	g := service.GainJSON{}
+	g := &service.GainJSON{}
 	if err := ctx.ReadJSON(g); err != nil {
 		ErrorProcess(err, ctx)
 		return
@@ -26,7 +26,7 @@ func GainInsert(ctx iris.Context) {
 }
 
 func GainFindByID(ctx iris.Context) {
-	g := service.GainJSON{}
+	g := &service.GainJSON{}
 	if id, err := ctx.Params().GetUint("id"); err != nil {
 		ErrorProcess(err, ctx)
 		return
@@ -43,7 +43,7 @@ func GainFindByID(ctx iris.Context) {
 }
 
 func gainsFind(field string, ctx iris.Context) {
-	g := service.GainJSON{}
+	g := &service.GainJSON{}
 	if field != "all" {
 		if id, err := ctx.Params().GetUint("id"); err != nil {
 			ErrorProcess(err, ctx)
@@ -89,7 +89,7 @@ func GainsFindAll(ctx iris.Context) {
 }
 
 func GainUpdates(ctx iris.Context) {
-	g := service.GainJSON{}
+	g := &service.GainJSON{}
 	if err := ctx.ReadJSON(g); err != nil {
 		ErrorProcess(err, ctx)
 		return
@@ -104,7 +104,7 @@ func GainUpdates(ctx iris.Context) {
 }
 
 func GainDeleteByID(ctx iris.Context) {
-	g := service.GainJSON{}
+	g := &service.GainJSON{}
 	if id, err := ctx.Params().GetUint("id"); err != nil {
 		ErrorProcess(err, ctx)
 		return
@@ -121,7 +121,7 @@ func GainDeleteByID(ctx iris.Context) {
 }
 
 func GainUpFileByID(ctx iris.Context) {
-	g := service.GainJSON{}
+	g := &service.GainJSON{}
 	if id, err := ctx.Params().GetUint("id"); err != nil {
 		ErrorProcess(err, ctx)
 		return
@@ -155,7 +155,7 @@ func GainUpFileByID(ctx iris.Context) {
 }
 
 func GainDownFileByID(ctx iris.Context) {
-	g := service.GainJSON{}
+	g := &service.GainJSON{}
 	if id, err := ctx.Params().GetUint("id"); err != nil {
 		ErrorProcess(err, ctx)
 		return
