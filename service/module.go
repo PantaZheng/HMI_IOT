@@ -40,7 +40,7 @@ func moduleTestData() {
 	log.Println("moduleTestData")
 	l := 16
 	modules := make([]ModuleJSON, l)
-	for i := 0; i < l; i++ {
+	for i := 1; i <= l; i++ {
 		modules[i].Name = "module" + strconv.Itoa(i)
 		modules[i].LeaderID = uint(i / 2)
 		modules[i].ProjectID = uint(i / 4)
