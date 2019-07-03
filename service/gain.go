@@ -55,7 +55,7 @@ func gainTestData() {
 		}
 	}
 
-	for i := 0; i < l; i++ {
+	for i := 0; i < l-1; i++ {
 		gains[i].ID = uint(i + 1)
 		gains[i].State = 2
 		if err := gains[i].Updates(); err != nil {
