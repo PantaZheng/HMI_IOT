@@ -4,6 +4,7 @@ import (
 	"errors"
 	"github.com/jinzhu/gorm"
 	"github.com/pantazheng/bci/database"
+	"log"
 )
 
 type MissionCore struct {
@@ -37,6 +38,7 @@ func (mission *Mission) Insert() (err error) {
 	}
 	mission.LeaderID = module.LeaderID
 	if err = database.DB.Create(&mission).Error; err != nil {
+		log.Println(err)
 		return
 	}
 	err = mission.First()
