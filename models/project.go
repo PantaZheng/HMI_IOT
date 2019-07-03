@@ -41,7 +41,7 @@ func (project *Project) Insert() (err error) {
 
 func (project *Project) First() (err error) {
 	if err = database.DB.Where("id = ?", project.ID).First(&project).Error; err != nil {
-		log.Println("查找出错")
+		log.Println(err)
 		return
 	}
 	database.DB.Model(&project).Association("Participants").Find(&project.Participants)
