@@ -26,7 +26,6 @@ type User struct {
 	PModules   []Module  `gorm:"many2many:user_modules"`
 	CMissions  []Mission `gorm:"foreignkey:CreatorID"`
 	PMissions  []Mission `gorm:"many2many:user_missions"`
-	OGains     []Gain    `gorm:"foreignkey:OwnerID"`
 }
 
 //检查是否有OpenID和IDCard，零值设置为ID,并更新字段信息
@@ -43,7 +42,7 @@ func (user *User) makeOpenIDTelephoneNotEmpty() (tag bool) {
 	return
 }
 
-//Create Create()
+//Insert Insert()
 func (user *User) Create() (err error) {
 	/**
 	@Author: PantaZheng
@@ -61,7 +60,7 @@ func (user *User) Create() (err error) {
 		}
 	}
 	if err != nil {
-		err = errors.New(titleUser + "Create:\t" + err.Error())
+		err = errors.New(titleUser + "Insert:\t" + err.Error())
 	}
 	return
 }

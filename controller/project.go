@@ -1,188 +1,117 @@
 package controller
 
 import (
+	"errors"
 	"github.com/kataras/iris"
 	"github.com/pantazheng/bci/service"
-	"log"
 )
 
-func ProjectCreate(ctx iris.Context) {
-	p := new(service.ProjectJSON)
-	err := *new(error)
-	if err = ctx.ReadJSON(p); err == nil {
-		if err = p.Create(); err == nil {
-			ctx.StatusCode(iris.StatusOK)
-			_, _ = ctx.JSON(p)
-		}
+func ProjectInsert(ctx iris.Context) {
+	p := service.ProjectJSON{}
+	if err := ctx.ReadJSON(p); err == nil {
+		ErrorProcess(err, ctx)
+		return
 	}
-	if err != nil {
-		ctx.StatusCode(iris.StatusAccepted)
-		info := err.Error()
-		_, _ = ctx.Text(info)
-		log.Println(info)
+	if err := p.Insert(); err == nil {
+		ctx.StatusCode(iris.StatusOK)
+		_, _ = ctx.JSON(p)
+	} else {
+		ErrorProcess(err, ctx)
 	}
+	return
 }
 
 func ProjectFindByID(ctx iris.Context) {
-	err := *new(error)
-	if id, err1 := ctx.Params().GetUint("id"); err1 == nil {
-		if p, err2 := service.ProjectFindByID(id); err2 == nil {
-			ctx.StatusCode(iris.StatusOK)
-			_, _ = ctx.JSON(p)
-		} else {
-			err = err2
-		}
+	p := service.ProjectJSON{}
+	if id, err := ctx.Params().GetUint("id"); err != nil {
+		ErrorProcess(err, ctx)
+		return
 	} else {
-		err = err1
+		p.ID = id
 	}
-	if err != nil {
-		ctx.StatusCode(iris.StatusAccepted)
-		info := err.Error()
-		_, _ = ctx.Text(info)
-		log.Println(info)
+	if err := p.First(); err != nil {
+		ErrorProcess(err, ctx)
+	} else {
+		ctx.StatusCode(iris.StatusOK)
+		_, _ = ctx.JSON(p)
 	}
+	return
 }
 
-func ProjectFramPaceByID(ctx iris.Context) {
-	err := *new(error)
-	if id, err1 := ctx.Params().GetUint("id"); err1 == nil {
-		if p, err2 := service.ProjectFramePaceByID(id); err2 == nil {
-			ctx.StatusCode(iris.StatusOK)
-			_, _ = ctx.JSON(p)
-		} else {
-			err = err2
-		}
+func projectsFind(field string, ctx iris.Context) {
+	p := service.ProjectJSON{}
+	if id, err := ctx.Params().GetUint("id"); err != nil {
+		ErrorProcess(err, ctx)
+		return
 	} else {
-		err = err1
+		if field == "leader_id" || field == "participant_id" || field == "member_id" {
+			p.LeaderID = id
+		} else if field == "creator_id" {
+			p.CreatorID = id
+		} else if field == "all" {
+		} else {
+			err = errors.New("no this field")
+			ErrorProcess(err, ctx)
+			return
+		}
 	}
-	if err != nil {
-		ctx.StatusCode(iris.StatusAccepted)
-		info := err.Error()
-		_, _ = ctx.Text(info)
-		log.Println(info)
-	}
-}
-
-func ProjectsFindAll(ctx iris.Context) {
-	/**
-	@Author: PantaZheng
-	@Description:
-	@Date: 2019/5/15 23:52
-	*/
-	if projectsJSON, err := service.ProjectsFindAll(); err == nil {
+	if projectsJSON, err := p.Find(field); err == nil {
 		ctx.StatusCode(iris.StatusOK)
 		_, _ = ctx.JSON(projectsJSON)
 	} else {
-		ctx.StatusCode(iris.StatusAccepted)
-		info := err.Error()
-		_, _ = ctx.Text(info)
-		log.Println(info)
+		ErrorProcess(err, ctx)
 	}
-}
-
-func ProjectsFindByCreatorID(ctx iris.Context) {
-	/**
-	@Author: PantaZheng
-	@Description:
-	@Date: 2019/5/15 22:21
-	*/
-	err := *new(error)
-	if id, err1 := ctx.Params().GetUint("id"); err1 == nil {
-		if projects, err2 := service.ProjectsFindByCreatorID(id); err2 == nil {
-			ctx.StatusCode(iris.StatusOK)
-			_, _ = ctx.JSON(projects)
-		} else {
-			err = err2
-		}
-	} else {
-		err = err1
-	}
-	if err != nil {
-		ctx.StatusCode(iris.StatusAccepted)
-		info := err.Error()
-		_, _ = ctx.Text(info)
-		log.Println(info)
-	}
+	return
 }
 
 func ProjectsFindByLeaderID(ctx iris.Context) {
-	/**
-	@Author: PantaZheng
-	@Description:
-	@Date: 2019/5/15 23:55
-	*/
-	err := *new(error)
-	if id, err1 := ctx.Params().GetUint("id"); err1 == nil {
-		if projectsJSON, err2 := service.ProjectsFindByLeaderID(id); err2 == nil {
-			ctx.StatusCode(iris.StatusOK)
-			_, _ = ctx.JSON(projectsJSON)
-		} else {
-			err = err2
-		}
-	} else {
-		err = err1
-	}
-	if err != nil {
-		ctx.StatusCode(iris.StatusAccepted)
-		info := err.Error()
-		_, _ = ctx.Text(info)
-		log.Println(info)
-	}
+	projectsFind("leader_id", ctx)
+}
+
+func ProjectsFindByCreatorID(ctx iris.Context) {
+	projectsFind("creator_id", ctx)
 }
 
 func ProjectsFindByParticipantID(ctx iris.Context) {
-	err := *new(error)
-	if id, err1 := ctx.Params().GetUint("id"); err1 == nil {
-		if projectsJSON, err2 := service.ProjectsFindByParticipantID(id); err2 == nil {
-			ctx.StatusCode(iris.StatusOK)
-			_, _ = ctx.JSON(projectsJSON)
-		} else {
-			err = err2
-		}
-	} else {
-		err = err1
-	}
-	if err != nil {
-		ctx.StatusCode(iris.StatusAccepted)
-		info := err.Error()
-		_, _ = ctx.Text(info)
-		log.Println(info)
-	}
+	projectsFind("participant_id", ctx)
+}
+
+func ProjectsFindByMemberID(ctx iris.Context) {
+	projectsFind("member_id", ctx)
+}
+
+func ProjectsFindAll(ctx iris.Context) {
+	projectsFind("all", ctx)
 }
 
 func ProjectUpdate(ctx iris.Context) {
-	p := new(service.ProjectJSON)
-	err := *new(error)
-	if err = ctx.ReadJSON(p); err == nil {
-		if err = p.Updates(); err == nil {
-			ctx.StatusCode(iris.StatusOK)
-			_, _ = ctx.JSON(p)
-		}
+	p := service.ProjectJSON{}
+	if err := ctx.ReadJSON(p); err == nil {
+		ErrorProcess(err, ctx)
+		return
 	}
-	if err != nil {
-		ctx.StatusCode(iris.StatusAccepted)
-		info := err.Error()
-		_, _ = ctx.Text(info)
-		log.Println(info)
+	if err := p.Update(); err == nil {
+		ctx.StatusCode(iris.StatusOK)
+		_, _ = ctx.JSON(p)
+	} else {
+		ErrorProcess(err, ctx)
 	}
+	return
 }
 
 func ProjectDeleteByID(ctx iris.Context) {
-	err := *new(error)
-	if id, err1 := ctx.Params().GetUint("id"); err1 == nil {
-		if p, err2 := service.ProjectDeleteByID(id); err2 == nil {
-			ctx.StatusCode(iris.StatusOK)
-			_, _ = ctx.JSON(p)
-		} else {
-			err = err2
-		}
+	p := service.ProjectJSON{}
+	if id, err := ctx.Params().GetUint("id"); err == nil {
+		ErrorProcess(err, ctx)
+		return
 	} else {
-		err = err1
+		p.ID = id
 	}
-	if err != nil {
-		ctx.StatusCode(iris.StatusAccepted)
-		info := err.Error()
-		_, _ = ctx.Text(info)
-		log.Println(info)
+	if err := p.Delete(); err == nil {
+		ctx.StatusCode(iris.StatusOK)
+		_, _ = ctx.JSON(p)
+	} else {
+		ErrorProcess(err, ctx)
 	}
+	return
 }

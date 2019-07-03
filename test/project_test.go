@@ -8,7 +8,7 @@ import (
 
 func TestProject(t *testing.T) {
 	project := projectCreate()
-	project.Name += "Update"
+	project.Name += "Updates"
 	projectUpdate(&project)
 	projectFind()
 	projectsFindByLeader()

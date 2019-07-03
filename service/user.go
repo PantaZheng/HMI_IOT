@@ -37,29 +37,6 @@ type UserJSON struct {
 	Telephone  string `json:"telephone"`
 }
 
-//func userTestData() {
-//	log.Println("userTestData")
-//	users := make([]UserJSON, 11)
-//	users[0] = UserJSON{OpenID: "Stranger1", WechatName: "小蜘蛛", Code: "Spider-Man", Name: "Peter Benjamin Parker", Level: 1, Telephone: "110"}
-//	users[1] = UserJSON{OpenID: "Emeritus1", WechatName: "万磁王", Code: "002", Name: "Max Eisenhardt", Level: 2}
-//	users[2] = UserJSON{WechatName: "金刚狼", Name: "Logan Howlett", Level: 3, Telephone: "111"}
-//	users[3] = UserJSON{OpenID: "Assistant1", WechatName: "小辣椒", Name: "Pepper Potts", Level: 4}
-//	users[4] = UserJSON{WechatName: "钢铁侠", Name: "Tony Stark", Level: 5, Telephone: "112"}
-//	users[5] = UserJSON{OpenID: "Full1", WechatName: "灭霸", Name: "Thanos", Level: 6}
-//	users[6] = UserJSON{Name: "韩新亚", Level: 4, Telephone: "18955537316"}
-//	users[7] = UserJSON{Name: "曾虹", Level: 4, Telephone: "13867188664"}
-//	users[8] = UserJSON{Name: "戴国骏", Level: 6, Telephone: "13906524548"}
-//	users[9] = UserJSON{Name: "周文晖", Level: 4, Telephone: "13336096310"}
-//	users[10] = UserJSON{Name: "张桦", Level: 4, Telephone: "13777840698"}
-//	for _, v := range users {
-//		if err := v.Create(); err != nil {
-//			log.Println(err.Error())
-//		} else {
-//			log.Println(v)
-//		}
-//	}
-//}
-
 //userJSON2User UserJSON转换到User.
 func (userJSON *UserJSON) userJSON2User() (user models.User) {
 	user.ID = userJSON.ID
@@ -157,7 +134,7 @@ func UserInitByWechat(weChatInfo *user.UserInfo) string {
 	return message
 }
 
-//Create 创建User.
+//Insert 创建User.
 func (userJSON *UserJSON) Create() (err error) {
 	if err = userJSON.checkLevel(); err == nil {
 		u := userJSON.userJSON2User()
@@ -166,7 +143,7 @@ func (userJSON *UserJSON) Create() (err error) {
 		}
 	}
 	if err != nil {
-		err = errors.New(titleUser + "Create:\t" + err.Error())
+		err = errors.New(titleUser + "Insert:\t" + err.Error())
 	}
 	return
 }
@@ -318,11 +295,6 @@ func (userJSON *UserJSON) Delete() (err error) {
 
 //UserDeleteByID 通过数据库ID删除用户.
 func UserDeleteByID(id uint) (userJSON UserJSON, err error) {
-	/**
-	@Author: PantaZheng
-	@Description:
-	@Date: 2019/5/10 14:28
-	*/
 	userJSON = UserJSON{ID: id}
 	err = userJSON.Delete()
 	return
@@ -330,11 +302,6 @@ func UserDeleteByID(id uint) (userJSON UserJSON, err error) {
 
 //UserDeleteByTelephone 通过电话删除用户.
 func UserDeleteByTelephone(telephone string) (userJSON UserJSON, err error) {
-	/**
-	@Author: PantaZheng
-	@Description:
-	@Date: 2019/5/10 14:30
-	*/
 	userJSON = UserJSON{Telephone: telephone}
 	err = userJSON.Delete()
 	return

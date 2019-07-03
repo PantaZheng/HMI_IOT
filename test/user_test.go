@@ -37,7 +37,7 @@ var LevelMap = map[string]int{
 //	@Description:
 //	@Date: 2019/5/9 13:29
 //	*/
-//	if err = database.DB.Create(&user).Error; err != nil {
+//	if err = database.DB.Insert(&user).Error; err != nil {
 //		return
 //	}
 //	if err = database.DB.first(&user).Error; err != nil {

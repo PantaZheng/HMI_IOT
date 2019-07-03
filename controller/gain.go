@@ -1,224 +1,171 @@
 package controller
 
 import (
+	"errors"
 	"github.com/kataras/iris"
 	"github.com/pantazheng/bci/service"
 	"io"
-	"log"
 	"os"
 	"strconv"
 )
 
-func GainCreate(ctx iris.Context) {
-	/**
-	@Author: PantaZheng
-	@Description:
-	@Date: 2019/5/13 15:40
-	*/
-	var err error
-	g := new(service.GainJSON)
-	if err = ctx.ReadJSON(g); err == nil {
-		if err = g.Create(); err == nil {
-			ctx.StatusCode(iris.StatusOK)
-			_, _ = ctx.JSON(g)
-		}
+//GainInsert
+func GainInsert(ctx iris.Context) {
+	g := service.GainJSON{}
+	if err := ctx.ReadJSON(g); err != nil {
+		ErrorProcess(err, ctx)
+		return
 	}
-	if err != nil {
-		ctx.StatusCode(iris.StatusAccepted)
-		info := err.Error()
-		_, _ = ctx.Text(info)
-		log.Println(info)
+	if err := g.Insert(); err == nil {
+		ctx.StatusCode(iris.StatusOK)
+		_, _ = ctx.JSON(g)
+	} else {
+		ErrorProcess(err, ctx)
 	}
+	return
 }
 
 func GainFindByID(ctx iris.Context) {
-	/**
-	@Author: PantaZheng
-	@Description:
-	@Date: 2019/5/13 15:40
-	*/
-	err := *new(error)
-	if id, err1 := ctx.Params().GetUint("id"); err1 == nil {
-		if g, err2 := service.GainFindByID(id); err2 == nil {
-			ctx.StatusCode(iris.StatusOK)
-			_, _ = ctx.JSON(g)
-		} else {
-			err = err2
-		}
+	g := service.GainJSON{}
+	if id, err := ctx.Params().GetUint("id"); err != nil {
+		ErrorProcess(err, ctx)
+		return
 	} else {
-		err = err1
+		g.ID = id
 	}
-	if err != nil {
-		ctx.StatusCode(iris.StatusAccepted)
-		info := err.Error()
-		_, _ = ctx.Text(info)
-		log.Println(info)
+	if err := g.First(); err == nil {
+		ctx.StatusCode(iris.StatusOK)
+		_, _ = ctx.JSON(g)
+	} else {
+		ErrorProcess(err, ctx)
 	}
+	return
+}
+
+func gainsFind(field string, ctx iris.Context) {
+	g := service.GainJSON{}
+	if id, err := ctx.Params().GetUint("id"); err != nil {
+		ErrorProcess(err, ctx)
+		return
+	} else {
+		if field == "leader_id" {
+			g.LeaderID = id
+		} else if field == "owner_id" {
+			g.OwnerID = id
+		} else if field == "mission_id" {
+			g.MissionID = id
+		} else if field == "all" {
+		} else {
+			err = errors.New("no this field")
+			ErrorProcess(err, ctx)
+			return
+		}
+	}
+	if gainsJSON, err := g.Find(field); err == nil {
+		ctx.StatusCode(iris.StatusOK)
+		_, _ = ctx.JSON(gainsJSON)
+	} else {
+		ErrorProcess(err, ctx)
+	}
+	return
+}
+
+func GainsFindByLeaderID(ctx iris.Context) {
+	gainsFind("leader_id", ctx)
 }
 
 func GainsFindByOwnerID(ctx iris.Context) {
-	/**
-	@Author: PantaZheng
-	@Description:
-	@Date: 2019/5/13 15:40
-	*/
-	err := *new(error)
-	if id, err1 := ctx.Params().GetUint("id"); err1 == nil {
-		if gainsJson, err2 := service.GainsFindByOwnerID(id); err2 == nil {
-			ctx.StatusCode(iris.StatusOK)
-			_, _ = ctx.JSON(gainsJson)
-		} else {
-			err = err2
-		}
-	} else {
-		err = err1
-	}
-	if err != nil {
-		ctx.StatusCode(iris.StatusAccepted)
-		info := err.Error()
-		_, _ = ctx.Text(info)
-		log.Println(info)
-	}
+	gainsFind("owner_id", ctx)
 }
 
 func GainsFindByMissionID(ctx iris.Context) {
-	/**
-	@Author: PantaZheng
-	@Description:
-	@Date: 2019/5/13 15:40
-	*/
-	err := *new(error)
-	if id, err1 := ctx.Params().GetUint("id"); err1 == nil {
-		if gainsJson, err2 := service.GainsFindByMissionID(id); err2 == nil {
-			ctx.StatusCode(iris.StatusOK)
-			_, _ = ctx.JSON(gainsJson)
-		} else {
-			err = err2
-		}
-	} else {
-		err = err1
-	}
-	if err != nil {
-		ctx.StatusCode(iris.StatusAccepted)
-		info := err.Error()
-		_, _ = ctx.Text(info)
-		log.Println(info)
-	}
+	gainsFind("mission_id", ctx)
 }
 
-func GainUpdate(ctx iris.Context) {
-	/**
-	@Author: PantaZheng
-	@Description:
-	@Date: 2019/5/13 15:40
-	*/
-	g := new(service.GainJSON)
-	err := *new(error)
-	if err = ctx.ReadJSON(g); err == nil {
-		if err = g.Updates(); err == nil {
-			ctx.StatusCode(iris.StatusOK)
-			_, _ = ctx.JSON(g)
-		}
+func GainsFindAll(ctx iris.Context) {
+	gainsFind("all", ctx)
+}
+
+func GainUpdates(ctx iris.Context) {
+	g := service.GainJSON{}
+	if err := ctx.ReadJSON(g); err != nil {
+		ErrorProcess(err, ctx)
+		return
 	}
-	if err != nil {
-		ctx.StatusCode(iris.StatusAccepted)
-		info := err.Error()
-		_, _ = ctx.Text(info)
-		log.Println(info)
+	if err := g.Updates(); err == nil {
+		ctx.StatusCode(iris.StatusOK)
+		_, _ = ctx.JSON(g)
+	} else {
+		ErrorProcess(err, ctx)
 	}
+	return
 }
 
 func GainDeleteByID(ctx iris.Context) {
-	/**
-	@Author: PantaZheng
-	@Description:
-	@Date: 2019/5/13 15:43
-	*/
-	err := *new(error)
-	if id, err1 := ctx.Params().GetUint("id"); err1 == nil {
-		if gainJson, err2 := service.GainDeleteByID(id); err2 == nil {
-			ctx.StatusCode(iris.StatusOK)
-			_, _ = ctx.JSON(gainJson)
-		} else {
-			err = err2
-		}
+	g := service.GainJSON{}
+	if id, err := ctx.Params().GetUint("id"); err != nil {
+		ErrorProcess(err, ctx)
+		return
 	} else {
-		err = err1
+		g.ID = id
 	}
-	if err != nil {
-		ctx.StatusCode(iris.StatusAccepted)
-		info := err.Error()
-		_, _ = ctx.Text(info)
-		log.Println(info)
+	if err := g.Delete(); err == nil {
+		ctx.StatusCode(iris.StatusOK)
+		_, _ = ctx.JSON(g)
+	} else {
+		ErrorProcess(err, ctx)
 	}
+	return
 }
 
 func GainUpFileByID(ctx iris.Context) {
-	/**
-	@Author: PantaZheng
-	@Description:
-	@Date: 2019/5/23 10:00
-	*/
-	var err error
-	if id, err1 := ctx.Params().GetUint("id"); err1 == nil {
-		if g, err2 := service.GainDeleteByID(id); err2 == nil {
-			fileName := g.File
-			file, _, err3 := ctx.FormFile(fileName)
-			if err3 == nil {
-				out, err4 := os.OpenFile("./files/gain"+strconv.Itoa(int(g.ID))+"_"+fileName,
-					os.O_WRONLY|os.O_CREATE, 0666)
-				if err4 == nil {
-					_, err = io.Copy(out, file)
-				} else {
-					err = err2
-				}
-				defer func() {
-					err = out.Close()
-				}()
-			} else {
-				err = err3
-			}
-			defer func() {
-				err = file.Close()
-			}()
-			ctx.StatusCode(iris.StatusOK)
-			_, _ = ctx.Text("文件传输完成")
-		} else {
-			err = err2
-		}
+	g := service.GainJSON{}
+	if id, err := ctx.Params().GetUint("id"); err != nil {
+		ErrorProcess(err, ctx)
+		return
 	} else {
-		err = err1
+		g.ID = id
 	}
-	if err != nil {
-		ctx.StatusCode(iris.StatusAccepted)
-		info := err.Error()
-		_, _ = ctx.Text(info)
-		log.Println(info)
+	if err := g.First(); err != nil {
+		ErrorProcess(err, ctx)
+		return
 	}
+	fileName := g.File
+	if file, _, err := ctx.FormFile(fileName); err != nil {
+		ErrorProcess(err, ctx)
+		return
+	} else {
+		out, err := os.OpenFile("./files/gain"+strconv.Itoa(int(g.ID))+"_"+fileName,
+			os.O_WRONLY|os.O_CREATE, 0666)
+		if err != nil {
+			ErrorProcess(err, ctx)
+			return
+		}
+		if _, err := io.Copy(out, file); err != nil {
+			ErrorProcess(err, ctx)
+			return
+		}
+		defer out.Close()
+		ctx.StatusCode(iris.StatusOK)
+		_, _ = ctx.Text("文件传输完成")
+	}
+	return
 }
 
 func GainDownFileByID(ctx iris.Context) {
-	/**
-	@Author: PantaZheng
-	@Description:
-	@Date: 2019/5/20 11:17
-	*/
-	var err error
-	if id, err1 := ctx.Params().GetUint("id"); err1 == nil {
-		if g, err2 := service.GainFindByID(id); err2 == nil {
-			fileName := g.File
-			ctx.StatusCode(iris.StatusOK)
-			_ = ctx.SendFile("./files/gain"+strconv.Itoa(int(g.ID))+"_"+fileName, fileName)
-		} else {
-			err = err2
-		}
+	g := service.GainJSON{}
+	if id, err := ctx.Params().GetUint("id"); err != nil {
+		ErrorProcess(err, ctx)
+		return
 	} else {
-		err = err1
+		g.ID = id
 	}
-	if err != nil {
-		ctx.StatusCode(iris.StatusAccepted)
-		info := err.Error()
-		_, _ = ctx.Text(info)
-		log.Println(info)
+	if err := g.First(); err != nil {
+		ErrorProcess(err, ctx)
+		return
 	}
+	fileName := g.File
+	ctx.StatusCode(iris.StatusOK)
+	_ = ctx.SendFile("./files/gain"+strconv.Itoa(int(g.ID))+"_"+fileName, fileName)
+	return
 }
