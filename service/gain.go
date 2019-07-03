@@ -54,6 +54,21 @@ func gainTestData() {
 			log.Println(v)
 		}
 	}
+
+	for _, v := range gains {
+		v.State = 2
+		if err := v.Updates(); err != nil {
+			log.Println(err.Error())
+		} else {
+			log.Println(v)
+		}
+	}
+	mission := MissionJSON{}
+	if missionsJSON, err := mission.Find("all"); err != nil {
+		log.Println(err)
+	} else {
+		log.Println(missionsJSON)
+	}
 }
 
 //gain2GainJSON
