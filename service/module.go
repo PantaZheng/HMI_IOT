@@ -82,7 +82,7 @@ func (moduleJSON *ModuleJSON) module2ModuleJson(module models.Module) {
 
 	moduleJSON.ProjectID = module.ProjectID
 	project := ProjectJSON{}
-	project.ID = moduleJSON.ID
+	project.ID = moduleJSON.ProjectID
 	_ = project.First()
 	moduleJSON.ProjectName = project.Name
 
