@@ -34,12 +34,12 @@ func (mission *Mission) Insert() (err error) {
 	module := Module{}
 	module.ID = mission.ModuleID
 	if err = module.First(); err != nil {
-		log.Println(err)
+		log.Println("module.First()" + err.Error())
 		return
 	}
 	mission.LeaderID = module.LeaderID
 	if err = database.DB.Create(&mission).Error; err != nil {
-		log.Println(err)
+		log.Println("database.DB.Create(&mission)" + err.Error())
 		return
 	}
 	err = mission.First()
