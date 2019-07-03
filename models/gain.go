@@ -38,9 +38,7 @@ func (gain *Gain) Insert() (err error) {
 
 //First 根据id查找Gain.
 func (gain *Gain) First() (err error) {
-	if err = database.DB.Where("id = ? ", gain.ID).First(&gain).Error; err != nil {
-		return
-	}
+	err = database.DB.Where("id = ? ", gain.ID).First(&gain).Error
 	return
 }
 
