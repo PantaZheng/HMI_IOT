@@ -4,6 +4,7 @@ import (
 	"errors"
 	"github.com/jinzhu/gorm"
 	"github.com/pantazheng/bci/database"
+	"strconv"
 )
 
 type ProjectCore struct {
@@ -39,7 +40,7 @@ func (project *Project) Insert() (err error) {
 }
 
 func (project *Project) First() (err error) {
-	if err = database.DB.Where("id?=", project.ID).First(&project).Error; err != nil {
+	if err = database.DB.Where("id?=", strconv.Itoa(int(project.ID))).First(&project).Error; err != nil {
 		return
 	}
 	err = database.DB.Model(&project).Association("Participants").Find(&project.Participants).Error
@@ -48,15 +49,15 @@ func (project *Project) First() (err error) {
 
 func (project *Project) Find(field string) (projects []Project, err error) {
 	if field == "creator_id" {
-		err = database.DB.Where("creator_id=?", project.CreatorID).Find(&projects).Error
+		err = database.DB.Where("creator_id=?", strconv.Itoa(int(project.CreatorID))).Find(&projects).Error
 	} else if field == "leader_id" {
-		err = database.DB.Where("leader_id=?", project.LeaderID).Find(&projects).Error
+		err = database.DB.Where("leader_id=?", strconv.Itoa(int(project.LeaderID))).Find(&projects).Error
 	} else if field == "participant_id" {
-		err = database.DB.Model(User{}).Where("id?=", project.LeaderID).Related(&projects, "PProjects").Error
+		err = database.DB.Model(User{}).Where("id?=", strconv.Itoa(int(project.LeaderID))).Related(&projects, "PProjects").Error
 	} else if field == "member_id" {
-		err = database.DB.Model(User{}).Where("id?=", project.LeaderID).Related(&projects, "PProjects").Error
+		err = database.DB.Model(User{}).Where("id?=", strconv.Itoa(int(project.LeaderID))).Related(&projects, "PProjects").Error
 		projectsTemp := make([]Project, 0)
-		err = database.DB.Where("leader_id=?", project.LeaderID).Find(projectsTemp).Error
+		err = database.DB.Where("leader_id=?", strconv.Itoa(int(project.LeaderID))).Find(projectsTemp).Error
 		for i := 0; i < len(projectsTemp); i++ {
 			notExist := true
 			for j := 0; j < len(projects); j++ {
@@ -86,7 +87,7 @@ func (project *Project) Find(field string) (projects []Project, err error) {
 
 func (project *Project) Update() (err error) {
 	participants := project.Participants
-	if err = database.DB.Where("id=?", project.ID).Updates(&project).Error; err != nil {
+	if err = database.DB.Where("id=?", strconv.Itoa(int(project.ID))).Updates(&project).Error; err != nil {
 		return
 	}
 	if participants != nil {
@@ -102,6 +103,6 @@ func (project *Project) Delete() (err error) {
 	if err = project.First(); err != nil {
 		return
 	}
-	err = database.DB.Model(Module{}).Where("id=?", project.ID).Delete(&project).Error
+	err = database.DB.Model(Module{}).Where("id=?", strconv.Itoa(int(project.ID))).Delete(&project).Error
 	return
 }

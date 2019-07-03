@@ -4,6 +4,7 @@ import (
 	"errors"
 	"github.com/jinzhu/gorm"
 	"github.com/pantazheng/bci/database"
+	"strconv"
 )
 
 type ModuleCore struct {
@@ -41,7 +42,7 @@ func (module *Module) Insert() (err error) {
 }
 
 func (module *Module) First() (err error) {
-	err = database.DB.Where("id=?", module.ID).First(&module).Error
+	err = database.DB.Where("id=?", strconv.Itoa(int(module.ID))).First(&module).Error
 	return
 }
 
