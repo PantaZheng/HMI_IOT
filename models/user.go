@@ -68,7 +68,7 @@ func (user *User) First() (err error) {
 func (userCore *UserCore) First() (err error) {
 	u := User{}
 	u.ID = userCore.ID
-	if err := u.First(); err != nil {
+	if err = u.First(); err != nil {
 		return
 	} else {
 		*userCore = u.UserCore

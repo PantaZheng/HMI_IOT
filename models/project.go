@@ -84,7 +84,8 @@ func (project *Project) Find(field string, id uint) (projects []Project, err err
 		projectAmount++
 		projectCount := make([]uint, projectAmount)
 		//owner
-		if missions, err := mission.Find("owner", id); err != nil {
+		if missions, e := mission.Find("owner", id); e != nil {
+			err = e
 			return
 		} else {
 			for _, v := range missions {
@@ -92,7 +93,8 @@ func (project *Project) Find(field string, id uint) (projects []Project, err err
 			}
 		}
 		//manager
-		if leaderProjects, err := project.Find("manager", id); err != nil {
+		if leaderProjects, e := project.Find("manager", id); e != nil {
+			err = e
 			return
 		} else {
 			for _, v := range leaderProjects {

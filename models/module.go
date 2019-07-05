@@ -105,7 +105,8 @@ func (module *Module) Find(field string, id uint) (modules []Module, err error) 
 		moduleAmount++
 		moduleCount := make([]uint, moduleAmount)
 		//owner
-		if missions, err := mission.Find("owner", id); err != nil {
+		if missions, e := mission.Find("owner", id); e != nil {
+			err = e
 			return
 		} else {
 			for _, v := range missions {
@@ -113,7 +114,8 @@ func (module *Module) Find(field string, id uint) (modules []Module, err error) 
 			}
 		}
 		//leader
-		if leaderModules, err := module.Find("leader", id); err != nil {
+		if leaderModules, e := module.Find("leader", id); e != nil {
+			err = e
 			return
 		} else {
 			for _, v := range leaderModules {
