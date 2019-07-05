@@ -115,9 +115,9 @@ func (gain *Gain) FindBrief(field string, id uint) (gainsCore []GainCore, err er
 	} else {
 		l := len(gains)
 		gainsCore := make([]GainCore, l)
-		for i, v := range gains {
-			gainsCore[i] = v.GainCore
-			owner := UserCore{ID: v.OwnerID}
+		for i := 0; i < l; i++ {
+			gainsCore[i] = gains[i].GainCore
+			owner := UserCore{ID: gains[i].OwnerID}
 			if err = owner.First(); err != nil {
 				break
 			}
