@@ -92,7 +92,7 @@ func (module *Module) First() (err error) {
 //Find
 func (module *Module) Find(field string, id uint) (modules []Module, err error) {
 	if field == "all" {
-		err = database.DB.Model(Mission{}).Find(&module).Error
+		err = database.DB.Model(Mission{}).Find(&modules).Error
 		return
 	}
 	if field == "member" {
