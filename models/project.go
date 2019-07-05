@@ -120,7 +120,7 @@ func (project *Project) FindBrief(field string, id uint) (projectsCore []Project
 		return
 	} else {
 		l := len(projects)
-		projectsCore := make([]ProjectCore, l)
+		projectsCore = make([]ProjectCore, l)
 		for i, v := range projects {
 			projectsCore[i] = v.ProjectCore
 			manager := UserCore{ID: v.ManagerID}

@@ -114,7 +114,7 @@ func (gain *Gain) FindBrief(field string, id uint) (gainsCore []GainCore, err er
 		return
 	} else {
 		l := len(gains)
-		gainsCore := make([]GainCore, l)
+		gainsCore = make([]GainCore, l)
 		for i := 0; i < l; i++ {
 			gainsCore[i] = gains[i].GainCore
 			owner := UserCore{ID: gains[i].OwnerID}
@@ -123,8 +123,8 @@ func (gain *Gain) FindBrief(field string, id uint) (gainsCore []GainCore, err er
 			}
 			gainsCore[i].OwnerName = owner.Name
 		}
-		return
 	}
+	return
 }
 
 //Updates 通用更新接口，ID必须，Uptime自动更新。

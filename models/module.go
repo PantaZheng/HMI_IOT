@@ -136,13 +136,13 @@ func (module *Module) Find(field string, id uint) (modules []Module, err error) 
 	return
 }
 
-func (module *Module) FindBrief(field string, id uint) (modulesCore []MissionCore, err error) {
+func (module *Module) FindBrief(field string, id uint) (modulesCore []ModuleCore, err error) {
 	if modules, e := module.Find(field, id); e != nil {
 		err = e
 		return
 	} else {
 		l := len(modules)
-		modulesCore := make([]ModuleCore, l)
+		modulesCore = make([]ModuleCore, l)
 		for i, v := range modules {
 			modulesCore[i] = v.ModuleCore
 			leader := UserCore{ID: v.LeaderID}

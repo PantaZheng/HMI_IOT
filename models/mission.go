@@ -120,7 +120,7 @@ func (mission *Mission) FindBrief(field string, id uint) (missionsCore []Mission
 		return
 	} else {
 		l := len(missions)
-		missionsCore := make([]MissionCore, l)
+		missionsCore = make([]MissionCore, l)
 		for i, v := range missions {
 			missionsCore[i] = v.MissionCore
 			owner := UserCore{ID: v.OwnerID}
