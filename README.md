@@ -247,6 +247,6 @@ ProjectFindByID|get|`/id/{id:uint}`|-|`Project`
 ProjectFrameByID|get|`/frame/{id:uint}`|-|`ProjectFrame`
 ProjectsFindByManagerID|get|`/manager/{id:uint}`|-|`[]ProjectCore`
 ProjectsFindByMemberID|get|`/member/{id:uint}`|-|`[]ProjectCore`
-ProjectsFindALl|get|`/all`|-|`[]Project`
+ProjectsFindALl|get|`/all`|-|`[]ProjectCore`
 ProjectUpdate|put|`/`|`Project`|`Project`
 ProjectDeleteByID|delete|`/id/{id:uint}`|-|`Project`
