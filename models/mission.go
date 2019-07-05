@@ -2,8 +2,6 @@ package models
 
 import (
 	"github.com/pantazheng/bci/database"
-	"log"
-	"strconv"
 	"time"
 )
 
@@ -37,23 +35,23 @@ type Mission struct {
 	ManagerName string `gorm:"-" json:"managerName"`
 }
 
-func missionTestData() {
-	log.Println("missionTestData")
-	l := 16
-	missions := make([]Mission, l)
-	for i := 0; i < l; i++ {
-		missions[i].Name = "mission" + strconv.Itoa(i)
-		missions[i].OwnerID = uint(i/2 + 1)
-		missions[i].ModuleID = uint(i/2 + 1)
-	}
-	for _, v := range missions {
-		if err := v.Insert(); err != nil {
-			log.Println(err.Error())
-		} else {
-			log.Println(v)
-		}
-	}
-}
+//func missionTestData() {
+//	log.Println("missionTestData")
+//	l := 16
+//	missions := make([]Mission, l)
+//	for i := 0; i < l; i++ {
+//		missions[i].Name = "mission" + strconv.Itoa(i)
+//		missions[i].OwnerID = uint(i/2 + 1)
+//		missions[i].ModuleID = uint(i/2 + 1)
+//	}
+//	for _, v := range missions {
+//		if err := v.Insert(); err != nil {
+//			log.Println(err.Error())
+//		} else {
+//			log.Println(v)
+//		}
+//	}
+//}
 
 //Insert 创建Mission
 func (mission *Mission) Insert() (err error) {

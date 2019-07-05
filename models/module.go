@@ -2,8 +2,6 @@ package models
 
 import (
 	"github.com/pantazheng/bci/database"
-	"log"
-	"strconv"
 	"time"
 )
 
@@ -33,24 +31,24 @@ type Module struct {
 	ManagerName string `gorm:"-" json:"managerName"`
 }
 
-func moduleTestData() {
-	log.Println("moduleTestData")
-	l := 8
-	modules := make([]Module, l)
-	for i := 0; i < l; i++ {
-		modules[i].Name = "module" + strconv.Itoa(i)
-		modules[i].LeaderID = uint(i/2 + 1)
-		modules[i].ProjectID = uint(i/2 + 1)
-	}
-
-	for _, v := range modules {
-		if err := v.Insert(); err != nil {
-			log.Println(err.Error())
-		} else {
-			log.Println(v)
-		}
-	}
-}
+//func moduleTestData() {
+//	log.Println("moduleTestData")
+//	l := 8
+//	modules := make([]Module, l)
+//	for i := 0; i < l; i++ {
+//		modules[i].Name = "module" + strconv.Itoa(i)
+//		modules[i].LeaderID = uint(i/2 + 1)
+//		modules[i].ProjectID = uint(i/2 + 1)
+//	}
+//
+//	for _, v := range modules {
+//		if err := v.Insert(); err != nil {
+//			log.Println(err.Error())
+//		} else {
+//			log.Println(v)
+//		}
+//	}
+//}
 
 //Insert
 func (module *Module) Insert() (err error) {

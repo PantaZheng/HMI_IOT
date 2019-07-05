@@ -2,8 +2,6 @@ package models
 
 import (
 	"github.com/pantazheng/bci/database"
-	"log"
-	"strconv"
 	"time"
 )
 
@@ -39,24 +37,24 @@ type ProjectFrame struct {
 	Modules []ModuleFrame `json:"modules"`
 }
 
-func projectTestData() {
-	log.Println("projectTestData")
-	l := 4
-	projects := make([]Project, l)
-
-	for i := 0; i < l; i++ {
-		projects[i].Name = "Project" + strconv.Itoa(i)
-		projects[i].ManagerID = uint(i/2 + 1)
-	}
-
-	for _, v := range projects {
-		if err := v.Insert(); err != nil {
-			log.Println(err.Error())
-		} else {
-			log.Println(v)
-		}
-	}
-}
+//func projectTestData() {
+//	log.Println("projectTestData")
+//	l := 4
+//	projects := make([]Project, l)
+//
+//	for i := 0; i < l; i++ {
+//		projects[i].Name = "Project" + strconv.Itoa(i)
+//		projects[i].ManagerID = uint(i/2 + 1)
+//	}
+//
+//	for _, v := range projects {
+//		if err := v.Insert(); err != nil {
+//			log.Println(err.Error())
+//		} else {
+//			log.Println(v)
+//		}
+//	}
+//}
 
 func (project *Project) Insert() (err error) {
 	project.State = 1

@@ -2,8 +2,6 @@ package models
 
 import (
 	"github.com/pantazheng/bci/database"
-	"log"
-	"strconv"
 	"time"
 )
 
@@ -37,23 +35,23 @@ type Gain struct {
 	ManagerName string `json:"managerName" gorm:"-"`
 }
 
-func gainTestData() {
-	log.Println("gainTestData")
-	l := 32
-	gains := make([]Gain, l)
-	for i := 0; i < l; i++ {
-		gains[i].Name = "gain" + strconv.Itoa(i)
-		gains[i].MissionID = uint(i/2 + 1)
-	}
-
-	for _, v := range gains {
-		if err := v.Insert(); err != nil {
-			log.Println(err.Error())
-		} else {
-			log.Println(v)
-		}
-	}
-}
+//func gainTestData() {
+//	log.Println("gainTestData")
+//	l := 32
+//	gains := make([]Gain, l)
+//	for i := 0; i < l; i++ {
+//		gains[i].Name = "gain" + strconv.Itoa(i)
+//		gains[i].MissionID = uint(i/2 + 1)
+//	}
+//
+//	for _, v := range gains {
+//		if err := v.Insert(); err != nil {
+//			log.Println(err.Error())
+//		} else {
+//			log.Println(v)
+//		}
+//	}
+//}
 
 //Insert 必须包含MissionID
 func (gain *Gain) Insert() (err error) {

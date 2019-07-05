@@ -33,18 +33,18 @@ type User struct {
 func userTestData() {
 	log.Println("userTestData")
 	users := make([]User, 11)
-	users[0] = User{OpenID: "Stranger1", WechatName: "小蜘蛛", Level: 1, Telephone: "110"}
-	users[0].Name = "Peter Benjamin Parker"
-	users[1] = User{OpenID: "Emeritus1", WechatName: "万磁王", Level: 2}
-	users[1].Name = "Max Eisenhardt"
-	users[2] = User{WechatName: "金刚狼", Level: 2, Telephone: "111"}
-	users[2].Name = "Logan Howlett"
-	users[3] = User{OpenID: "Assistant1", WechatName: "小辣椒", Level: 3}
-	users[3].Name = "Pepper Potts"
-	users[4] = User{WechatName: "钢铁侠", Level: 4, Telephone: "112"}
-	users[4].Name = "Tony Stark"
-	users[5] = User{OpenID: "Full1", WechatName: "灭霸", Level: 5}
-	users[5].Name = "Thanos"
+	//users[0] = User{OpenID: "Stranger1", WechatName: "小蜘蛛", Level: 1, Telephone: "110"}
+	//users[0].Name = "Peter Benjamin Parker"
+	//users[1] = User{OpenID: "Emeritus1", WechatName: "万磁王", Level: 2}
+	//users[1].Name = "Max Eisenhardt"
+	//users[2] = User{WechatName: "金刚狼", Level: 2, Telephone: "111"}
+	//users[2].Name = "Logan Howlett"
+	//users[3] = User{OpenID: "Assistant1", WechatName: "小辣椒", Level: 3}
+	//users[3].Name = "Pepper Potts"
+	//users[4] = User{WechatName: "钢铁侠", Level: 4, Telephone: "112"}
+	//users[4].Name = "Tony Stark"
+	//users[5] = User{OpenID: "Full1", WechatName: "灭霸", Level: 5}
+	//users[5].Name = "Thanos"
 	users[6] = User{Level: 3, Telephone: "18955537316"}
 	users[6].Name = "韩新亚"
 	users[7] = User{Level: 3, Telephone: "13867188664"}
