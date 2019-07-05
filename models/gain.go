@@ -8,33 +8,33 @@ import (
 )
 
 type GainCore struct {
-	ID        uint   `gorm:"primary_key",json:"id"`
+	ID        uint   `gorm:"primary_key";json:"id"`
 	Name      string `json:"name"`
 	State     uint   `json:"state"`
-	OwnerName string `gorm:"-",json:"ownerName"`
+	OwnerName string `gorm:"-";json:"ownerName"`
 }
 
 type Gain struct {
 	GainCore
 	CreatedAt  time.Time  `json:"-"`
-	CreateTime string     `gorm:"-",json:"createTime"`
+	CreateTime string     `gorm:"-";json:"createTime"`
 	UpdatedAt  time.Time  `json:"-"`
-	UpdateTime string     `gorm:"-",json:"updateTime"`
-	DeletedAt  *time.Time `sql:"index",json:"-"`
+	UpdateTime string     `gorm:"-";json:"updateTime"`
+	DeletedAt  *time.Time `sql:"index";json:"-"`
 	File       string     `json:"file"`
 	Remark     string     `json:"remark"`
 
 	MissionID   uint   `json:"missionID"`
-	MissionName string `gorm:"-",json:"missionName"`
+	MissionName string `gorm:"-";json:"missionName"`
 	OwnerID     uint   `json:"ownerID"`
 	ModuleID    uint   `json:"moduleID"`
-	ModuleName  string `gorm:"-",json:"moduleName"`
+	ModuleName  string `gorm:"-";json:"moduleName"`
 	LeaderID    uint   `json:"leaderID"`
-	LeaderName  string `gorm:"-",json:"leaderName"`
+	LeaderName  string `gorm:"-";json:"leaderName"`
 	ProjectID   uint   `json:"projectID"`
-	ProjectName string `gorm:"-",json:"projectName"`
+	ProjectName string `gorm:"-";json:"projectName"`
 	ManagerID   uint   `json:"managerID"`
-	ManagerName string `gorm:"-",json:"managerName"`
+	ManagerName string `gorm:"-";json:"managerName"`
 }
 
 func gainTestData() {
