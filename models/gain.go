@@ -39,13 +39,11 @@ type Gain struct {
 
 func gainTestData() {
 	log.Println("gainTestData")
-	l := 64
+	l := 32
 	gains := make([]Gain, l)
 
 	for i := 0; i < l; i++ {
 		gains[i].Name = "gain" + strconv.Itoa(i)
-		gains[i].OwnerID = uint(i/4 + 1)
-		gains[i].MissionID = uint(i/2 + 1)
 	}
 
 	for _, v := range gains {

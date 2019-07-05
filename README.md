@@ -101,12 +101,15 @@ type Gain struct {
 
 名称|method|path|传入body参数|接收body参数
 -|-|-|-|-
-GainCreate|post|`/`|`GainJSON`|`GainJSON`
+GainInsert|post|`/`|`GainJSON`|`GainJSON`
 GainUpFileByID|post|`/file/{id:uint}`|file|-
 GainFindByID|get|`/id/{id:uint}`|-|`GainJSON`
-GainsFindByLeaderID|get|`/leader/{id:uint}`|-|`[]GainCore`
-GainsFindByOwnerID|get|`/owner/{id:uint}`|-|`[]GainCore`
 GainsFindByMissionID|get|`/mission/{id:uint}`|-|`[]GainCore`
+GainsFindByOwnerID|get|`/owner/{id:uint}`|-|`[]GainCore`
+GainsFindByModuleID|get|`/module/{id:uint}`|-|`[]GainCore`
+GainsFindByLeaderID|get|`/leader/{id:uint}`|-|`[]GainCore`
+GainsFindByProjectID|get|`/project/{id:uint}`|-|`[]GainCore`
+GainsFindByManagerID|get|`/manager/{id:uint}`|-|`[]GainCore`
 GainsFindAll|get|`/all`|-|`[]GainCore`
 GainDownFileByID|get|`/file/{id:uint}`|-|file
 GainUpdates|put|`/`|`GainJSON`|`GainJSON`
@@ -150,14 +153,14 @@ type Mission struct {
 
 名称|method|path|传入body参数|接收body参数
 -|-|-|-|-
-MissionCreate|post|`/`|`MissionJSON`|`MissionJSON`
-MissionUpFileByID|post|`/file/{id:uint}`|file|-
+MissionInsert|post|`/`|`MissionJSON`|`MissionJSON`
 MissionFindByID|get|`/id/{id:uint}`|-|`MissionJSON`
-MissionsFindByLeaderID|get|`/leader/{id:uint}`|-|`[]MissionCore`
 MissionsFindByOwnerID|get|`/owner/{id:uint}`|-|`[]MissionCore`
 MissionsFindByModuleID|get|`/module/{id:uint}`|-|`[]MissionCore`
+MissionsFindByLeaderID|get|`/leader/{id:uint}`|-|`[]MissionCore`
+MissionsFindByProjectID|get|`/project/{id:uint}`|-|`[]MissionCore`
+MissionsFindByManagerID|get|`/manager/{id:uint}`|-|`[]MissionCore`
 MissionsFindALL|get|`/all`|-|`[]MissionCore`
-MissionDownFileByID|get|`/file/{id:uint}`|-|file
 MissionUpdate|put|`/`|`MissionJSON`|`MissionJSON`
 MissionDeleteByID|delete|`/id/{id:uint}`|-|`MissionJSON`
 

@@ -31,7 +31,7 @@ type Project struct {
 
 func projectTestData() {
 	log.Println("projectTestData")
-	l := 8
+	l := 4
 	projects := make([]Project, l)
 
 	for i := 0; i < l; i++ {
