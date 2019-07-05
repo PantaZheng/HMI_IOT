@@ -8,7 +8,7 @@ import (
 )
 
 type GainCore struct {
-	ID        uint   `json:"id",gorm:"primary_key"`
+	ID        uint   `json:"id" gorm:"primary_key"`
 	Name      string `json:"name"`
 	State     uint   `json:"state"`
 	OwnerName string `json:"ownerName" gorm:"-"`

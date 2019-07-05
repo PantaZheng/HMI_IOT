@@ -69,33 +69,33 @@ UserDeleteByTelephone|delete|`/telephone/{telephone:string}`|-|`UserJson`
 
 ```go
 type GainCore struct {
-	ID        uint   `gorm:"primary_key",json:"id"`
+	ID        uint   `json:"id" gorm:"primary_key"`
 	Name      string `json:"name"`
 	State     uint   `json:"state"`
-	OwnerName string `gorm:"-",json:"ownerName"`
+	OwnerName string `json:"ownerName" gorm:"-"`
 }
 
 type Gain struct {
 	GainCore
 	CreatedAt  time.Time  `json:"-"`
-	CreateTime string     `gorm:"-",json:"createTime"`
+	CreateTime string     `json:"createTime" gorm:"-"`
 	UpdatedAt  time.Time  `json:"-"`
-	UpdateTime string     `gorm:"-",json:"updateTime"`
-	DeletedAt  *time.Time `sql:"index",json:"-"`
+	UpdateTime string     `json:"updateTime" gorm:"-"`
+	DeletedAt  *time.Time `sql:"index" json:"-"`
 	File       string     `json:"file"`
 	Remark     string     `json:"remark"`
 
 	MissionID   uint   `json:"missionID"`
-	MissionName string `gorm:"-",json:"missionName"`
+	MissionName string `json:"missionName" gorm:"-"`
 	OwnerID     uint   `json:"ownerID"`
 	ModuleID    uint   `json:"moduleID"`
-	ModuleName  string `gorm:"-",json:"moduleName"`
+	ModuleName  string `json:"moduleName" gorm:"-"`
 	LeaderID    uint   `json:"leaderID"`
-	LeaderName  string `gorm:"-",json:"leaderName"`
+	LeaderName  string `json:"leaderName "gorm:"-"`
 	ProjectID   uint   `json:"projectID"`
-	ProjectName string `gorm:"-",json:"projectName"`
+	ProjectName string `json:"projectName" gorm:"-"`
 	ManagerID   uint   `json:"managerID"`
-	ManagerName string `gorm:"-",json:"managerName"`
+	ManagerName string `json:"managerName" gorm:"-"`
 }
 ```
 
@@ -120,20 +120,13 @@ GainDeleteByID|delete|`/{id:uint}`|-|`GainJSON`
 入口: `/mission`
 
 ```go
-type MissionCore struct {
-	ID        uint   `gorm:"primary_key",json:"id"`
-	Name      string `json:"name"`
-	State     uint   `json:"state"`
-	OwnerName string `gorm:"-",json:"ownerName"`
-}
-
 type Mission struct {
 	MissionCore
 	CreatedAt  time.Time  `json:"-"`
-	CreateTime string     `gorm:"-",json:"createTime"`
+	CreateTime string     `json:"createTime" gorm:"-"`
 	UpdatedAt  time.Time  `json:"-"`
-	UpdateTime string     `gorm:"-",json:"updateTime"`
-	DeletedAt  *time.Time `sql:"index",json:"-"`
+	UpdateTime string     `gorm:"-" json:"updateTime"`
+	DeletedAt  *time.Time `sql:"index" json:"-"`
 	StartTime  string     `json:"startTime"`
 	EndTime    string     `json:"endTime"`
 	Content    string     `json:"content"`
@@ -141,13 +134,13 @@ type Mission struct {
 
 	OwnerID     uint   `json:"ownerID"`
 	ModuleID    uint   `json:"moduleID"`
-	ModuleName  string `gorm:"-",json:"moduleName"`
+	ModuleName  string `gorm:"-" json:"moduleName"`
 	LeaderID    uint   `json:"leaderID"`
-	LeaderName  string `gorm:"-",json:"leaderName"`
+	LeaderName  string `gorm:"-" json:"leaderName"`
 	ProjectID   uint   `json:"projectID"`
-	ProjectName string `gorm:"-",json:"projectName"`
+	ProjectName string `gorm:"-" json:"projectName"`
 	ManagerID   uint   `json:"managerID"`
-	ManagerName string `gorm:"-",json:"managerName"`
+	ManagerName string `gorm:"-" json:"managerName"`
 }
 ```
 
@@ -173,16 +166,16 @@ type ModuleCore struct {
 	ID         uint   `gorm:"primary_key"`
 	Name       string `json:"name"`
 	State      uint   `json:"state"`
-	LeaderName string `gorm:"-",json:"ownerName"`
+	LeaderName string `gorm:"-" json:"leaderName"`
 }
 
 type Module struct {
 	ModuleCore
 	CreatedAt  time.Time  `json:"-"`
-	CreateTime string     `gorm:"-",json:"createTime"`
+	CreateTime string     `gorm:"-" json:"createTime"`
 	UpdatedAt  time.Time  `json:"-"`
-	UpdateTime string     `gorm:"-",json:"updateTime"`
-	DeletedAt  *time.Time `sql:"index",json:"-"`
+	UpdateTime string     `gorm:"-" json:"updateTime"`
+	DeletedAt  *time.Time `sql:"index" json:"-"`
 	StartTime  string     `json:"startTime"`
 	EndTime    string     `json:"endTime"`
 	Content    string     `json:"content"`
@@ -190,9 +183,9 @@ type Module struct {
 
 	LeaderID    uint   `json:"leaderID"`
 	ProjectID   uint   `json:"projectID"`
-	ProjectName string `gorm:"-",json:"projectName"`
+	ProjectName string `gorm:"-" json:"projectName"`
 	ManagerID   uint   `json:"managerID"`
-	ManagerName string `gorm:"-",json:"managerName"`
+	ManagerName string `gorm:"-" json:"managerName"`
 }
 ```
 
@@ -213,19 +206,19 @@ ModuleDeleteByID|delete|`/id/{id:uint}`|-|`ModuleJson`
 
 ```go
 type ProjectCore struct {
-	ID          uint   `gorm:"primary_key",json:"id"`
+	ID          uint   `gorm:"primary_key" json:"id"`
 	Name        string `json:"name"`
 	State       uint   `json:"state"`
-	ManagerName string `gorm:"-",json:"managerName"`
+	ManagerName string `gorm:"-" json:"managerName"`
 }
 
 type Project struct {
 	ProjectCore
 	CreatedAt  time.Time  `json:"-"`
-	CreateTime string     `gorm:"-",json:"createTime"`
+	CreateTime string     `gorm:"-" json:"createTime"`
 	UpdatedAt  time.Time  `json:"-"`
-	UpdateTime string     `gorm:"-",json:"updateTime"`
-	DeletedAt  *time.Time `sql:"index",json:"-"`
+	UpdateTime string     `gorm:"-" json:"updateTime"`
+	DeletedAt  *time.Time `sql:"index" json:"-"`
 	StartTime  string     `json:"startTime"`
 	EndTime    string     `json:"endTime"`
 	Content    string     `json:"content"`
@@ -233,6 +226,7 @@ type Project struct {
 
 	ManagerID uint `json:"managerID"`
 }
+
 ```
 
 名称|method|path|传入body参数|接收body参数

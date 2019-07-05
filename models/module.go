@@ -11,16 +11,16 @@ type ModuleCore struct {
 	ID         uint   `gorm:"primary_key"`
 	Name       string `json:"name"`
 	State      uint   `json:"state"`
-	LeaderName string `gorm:"-",json:"leaderName"`
+	LeaderName string `gorm:"-" json:"leaderName"`
 }
 
 type Module struct {
 	ModuleCore
 	CreatedAt  time.Time  `json:"-"`
-	CreateTime string     `gorm:"-",json:"createTime"`
+	CreateTime string     `gorm:"-" json:"createTime"`
 	UpdatedAt  time.Time  `json:"-"`
-	UpdateTime string     `gorm:"-",json:"updateTime"`
-	DeletedAt  *time.Time `sql:"index",json:"-"`
+	UpdateTime string     `gorm:"-" json:"updateTime"`
+	DeletedAt  *time.Time `sql:"index" json:"-"`
 	StartTime  string     `json:"startTime"`
 	EndTime    string     `json:"endTime"`
 	Content    string     `json:"content"`
@@ -28,9 +28,9 @@ type Module struct {
 
 	LeaderID    uint   `json:"leaderID"`
 	ProjectID   uint   `json:"projectID"`
-	ProjectName string `gorm:"-",json:"projectName"`
+	ProjectName string `gorm:"-" json:"projectName"`
 	ManagerID   uint   `json:"managerID"`
-	ManagerName string `gorm:"-",json:"managerName"`
+	ManagerName string `gorm:"-" json:"managerName"`
 }
 
 func moduleTestData() {

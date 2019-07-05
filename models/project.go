@@ -8,19 +8,19 @@ import (
 )
 
 type ProjectCore struct {
-	ID          uint   `gorm:"primary_key",json:"id"`
+	ID          uint   `gorm:"primary_key" json:"id"`
 	Name        string `json:"name"`
 	State       uint   `json:"state"`
-	ManagerName string `gorm:"-",json:"managerName"`
+	ManagerName string `gorm:"-" json:"managerName"`
 }
 
 type Project struct {
 	ProjectCore
 	CreatedAt  time.Time  `json:"-"`
-	CreateTime string     `gorm:"-",json:"createTime"`
+	CreateTime string     `gorm:"-" json:"createTime"`
 	UpdatedAt  time.Time  `json:"-"`
-	UpdateTime string     `gorm:"-",json:"updateTime"`
-	DeletedAt  *time.Time `sql:"index",json:"-"`
+	UpdateTime string     `gorm:"-" json:"updateTime"`
+	DeletedAt  *time.Time `sql:"index" json:"-"`
 	StartTime  string     `json:"startTime"`
 	EndTime    string     `json:"endTime"`
 	Content    string     `json:"content"`
