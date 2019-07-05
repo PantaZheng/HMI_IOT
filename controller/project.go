@@ -73,7 +73,7 @@ func ProjectsFindAll(ctx iris.Context) {
 
 func ProjectUpdate(ctx iris.Context) {
 	p := &models.Project{}
-	if err := ctx.ReadJSON(p); err == nil {
+	if err := ctx.ReadJSON(p); err != nil {
 		ErrorProcess(err, ctx)
 		return
 	}
@@ -88,7 +88,7 @@ func ProjectUpdate(ctx iris.Context) {
 
 func ProjectDeleteByID(ctx iris.Context) {
 	p := &models.Project{}
-	if id, err := ctx.Params().GetUint("id"); err == nil {
+	if id, err := ctx.Params().GetUint("id"); err != nil {
 		ErrorProcess(err, ctx)
 		return
 	} else {
