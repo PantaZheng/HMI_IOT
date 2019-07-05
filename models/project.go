@@ -109,6 +109,7 @@ func (project *Project) Find(field string, id uint) (projects []Project, err err
 				projects = append(projects, *project)
 			}
 		}
+		return
 	}
 	err = database.DB.Where(field+"_id=?", id).Find(&projects).Error
 	return

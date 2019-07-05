@@ -130,6 +130,7 @@ func (module *Module) Find(field string, id uint) (modules []Module, err error) 
 				modules = append(modules, *module)
 			}
 		}
+		return
 		//leader
 	}
 	err = database.DB.Where(field+"_id=?", id).Find(&modules).Error
