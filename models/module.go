@@ -8,7 +8,7 @@ import (
 )
 
 type ModuleCore struct {
-	ID         uint   `gorm:"primary_key"`
+	ID         uint   `gorm:"primary_key" json:"id"`
 	Name       string `json:"name"`
 	State      uint   `json:"state"`
 	LeaderName string `gorm:"-" json:"leaderName"`
