@@ -29,6 +29,16 @@ type Project struct {
 	ManagerID uint `json:"managerID"`
 }
 
+type ModuleFrame struct {
+	ModuleCore
+	Missions []MissionCore `json:"missions"`
+}
+
+type ProjectFrame struct {
+	ProjectCore
+	Modules []ModuleFrame `json:"modules"`
+}
+
 func projectTestData() {
 	log.Println("projectTestData")
 	l := 4
@@ -129,6 +139,29 @@ func (project *Project) FindBrief(field string, id uint) (projectsCore []Project
 				break
 			}
 			projectsCore[i].ManagerName = manager.Name
+		}
+	}
+	return
+}
+
+func (project *Project) FindFrame() (projectFrame ProjectFrame, err error) {
+	if err = project.First(); err != nil {
+		return
+	}
+	projectFrame.ProjectCore = project.ProjectCore
+	module := Module{}
+	modules, e := module.FindBrief("project", project.ID)
+	if e != nil {
+		err = e
+		return
+	}
+	modulesLength := len(modules)
+	projectFrame.Modules = make([]ModuleFrame, modulesLength)
+	mission := Mission{}
+	for i := 0; i < len(modules); i++ {
+		projectFrame.Modules[i].Missions, err = mission.FindBrief("module", projectFrame.Modules[i].ID)
+		if err != nil {
+			return
 		}
 	}
 	return

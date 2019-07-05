@@ -101,9 +101,9 @@ type Gain struct {
 
 名称|method|path|传入body参数|接收body参数
 -|-|-|-|-
-GainInsert|post|`/`|`GainJSON`|`GainJSON`
+GainInsert|post|`/`|`Gain`|`Gain`
 GainUpFileByID|post|`/file/{id:uint}`|file|-
-GainFindByID|get|`/id/{id:uint}`|-|`GainJSON`
+GainFindByID|get|`/id/{id:uint}`|-|`Gain`
 GainsFindByMissionID|get|`/mission/{id:uint}`|-|`[]GainCore`
 GainsFindByOwnerID|get|`/owner/{id:uint}`|-|`[]GainCore`
 GainsFindByModuleID|get|`/module/{id:uint}`|-|`[]GainCore`
@@ -112,8 +112,8 @@ GainsFindByProjectID|get|`/project/{id:uint}`|-|`[]GainCore`
 GainsFindByManagerID|get|`/manager/{id:uint}`|-|`[]GainCore`
 GainsFindAll|get|`/all`|-|`[]GainCore`
 GainDownFileByID|get|`/file/{id:uint}`|-|file
-GainUpdates|put|`/`|`GainJSON`|`GainJSON`
-GainDeleteByID|delete|`/{id:uint}`|-|`GainJSON`
+GainUpdates|put|`/`|`Gain`|`Gain`
+GainDeleteByID|delete|`/{id:uint}`|-|`Gain`
 
 ### Mission
 
@@ -146,16 +146,16 @@ type Mission struct {
 
 名称|method|path|传入body参数|接收body参数
 -|-|-|-|-
-MissionInsert|post|`/`|`MissionJSON`|`MissionJSON`
-MissionFindByID|get|`/id/{id:uint}`|-|`MissionJSON`
+MissionInsert|post|`/`|`Mission`|`Mission`
+MissionFindByID|get|`/id/{id:uint}`|-|`Mission`
 MissionsFindByOwnerID|get|`/owner/{id:uint}`|-|`[]MissionCore`
 MissionsFindByModuleID|get|`/module/{id:uint}`|-|`[]MissionCore`
 MissionsFindByLeaderID|get|`/leader/{id:uint}`|-|`[]MissionCore`
 MissionsFindByProjectID|get|`/project/{id:uint}`|-|`[]MissionCore`
 MissionsFindByManagerID|get|`/manager/{id:uint}`|-|`[]MissionCore`
 MissionsFindALL|get|`/all`|-|`[]MissionCore`
-MissionUpdate|put|`/`|`MissionJSON`|`MissionJSON`
-MissionDeleteByID|delete|`/id/{id:uint}`|-|`MissionJSON`
+MissionUpdate|put|`/`|`Mission`|`Mission`
+MissionDeleteByID|delete|`/id/{id:uint}`|-|`Mission`
 
 ### Module
 
@@ -191,14 +191,15 @@ type Module struct {
 
 名称|method|path|传入body参数|接收body参数
 -|-|-|-|-
-ModuleCreate|post|`/`|`ModuleJson`|`ModuleJson`
-ModuleFindByID|get|`/id/{id:uint}`|-|`ModuleJson`
-ModulesFindByCreatorID|get|`/id/{id:uint}`|-|`[]ModuleJson`
-ModulesFindByLeaderID|get|`/leader/{id:uint}`|-|`[]ModuleJson`
-ModulesFindByParticipantID|get|`/participant/{id:uint}`|-|`[]ModuleJson`
-ModulesFindByProjectID|get|`/project/{id:uint}`|-|`[]ModuleJson`
-ModuleUpdate|put|`/`|`ModuleJson`|`ModuleJson`
-ModuleDeleteByID|delete|`/id/{id:uint}`|-|`ModuleJson`
+ModuleInsert|post|`/`|`Module`|`Module`
+ModuleFindByID|get|`/id/{id:uint}`|-|`Module`
+ModulesFindByLeaderID|get|`/leader/{id:uint}`|-|`[]ModuleCore`
+ModulesFindByProjectID|get|`/project/{id:uint}`|-|`[]ModuleCore`
+ModulesFindByManagerID|get|`/manager/{id:uint}`|-|`[]ModuleCore`
+ModulesFindByMemberID|get|`/member/{id:uint}`|-|`[]ModuleCore`
+ModulesFindAll|get|`/all`|-|`[]ModuleCore`
+ModuleUpdate|put|`/`|`Module`|`Module`
+ModuleDeleteByID|delete|`/id/{id:uint}`|-|`Module`
 
 ### Project
 
@@ -227,17 +228,25 @@ type Project struct {
 	ManagerID uint `json:"managerID"`
 }
 
+type ModuleFrame struct {
+	ModuleCore
+	Missions []MissionCore `json:"missions"`
+}
+
+type ProjectFrame struct {
+	ProjectCore
+	Modules []ModuleFrame `json:"modules"`
+}
+
 ```
 
 名称|method|path|传入body参数|接收body参数
 -|-|-|-|-
-ProjectCreate|post|`/`|`ProjectJson`|`ProjectJson`
-ProjectFindByID|get|`/id/{id:uint}`|-|`ProjectJson`
-ProjectFramPaceByID|get|`frame/{id:uint}`|-|`FramePaceJSON`
-ProjectsFindALl|get|`/all`|-|`[]ProjectJSON`
-ProjectsFindByCreatorID|get|`/creator/{id:uint}`|-|`[]ProjectBriefJson`
-ProjectsFindByLeaderID|get|`/leader/{id:uint}`|-|`[]ProjectBriefJson`
-ProjectssFindByParticipantID|get|`/participant/{id:uint}`|-|`[]ProjectBriefJson`
-ProjectUpdate|put|`/`|`projectJson`|`ProjectJson`
-ProjectDeleteByID|delete|`/id/{id:uint}`|-|`ProjectJson`
----
+ProjectCreate|post|`/`|`Project`|`Project`
+ProjectFindByID|get|`/id/{id:uint}`|-|`Project`
+ProjectFrameByID|get|`frame/{id:uint}`|-|`ProjectFrame`
+ProjectsFindByManagerID|get|`/manager/{id:uint}`|-|`[]ProjectCore`
+ProjectsFindByMemberID|get|`/member/{id:uint}`|-|`[]ProjectCore`
+ProjectsFindALl|get|`/all`|-|`[]Project`
+ProjectUpdate|put|`/`|`Project`|`Project`
+ProjectDeleteByID|delete|`/id/{id:uint}`|-|`Project`
