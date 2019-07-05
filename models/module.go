@@ -135,7 +135,8 @@ func (module *Module) Find(field string, id uint) (modules []Module, err error) 
 }
 
 func (module *Module) FindBrief(field string, id uint) (modulesCore []MissionCore, err error) {
-	if modules, err := module.Find(field, id); err != nil {
+	if modules, e := module.Find(field, id); e != nil {
+		err = e
 		return
 	} else {
 		l := len(modules)

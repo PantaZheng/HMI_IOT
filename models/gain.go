@@ -109,7 +109,8 @@ func (gain *Gain) Find(field string, id uint) (gains []Gain, err error) {
 }
 
 func (gain *Gain) FindBrief(field string, id uint) (gainsCore []GainCore, err error) {
-	if gains, err := gain.Find(field, id); err != nil {
+	if gains, e := gain.Find(field, id); e != nil {
+		err = e
 		return
 	} else {
 		l := len(gains)

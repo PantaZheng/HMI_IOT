@@ -113,7 +113,8 @@ func (project *Project) Find(field string, id uint) (projects []Project, err err
 }
 
 func (project *Project) FindBrief(field string, id uint) (projectsCore []ProjectCore, err error) {
-	if projects, err := project.Find(field, id); err != nil {
+	if projects, e := project.Find(field, id); e != nil {
+		err = e
 		return
 	} else {
 		l := len(projects)

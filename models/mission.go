@@ -115,7 +115,8 @@ func (mission *Mission) Find(field string, id uint) (missions []Mission, err err
 }
 
 func (mission *Mission) FindBrief(field string, id uint) (missionsCore []MissionCore, err error) {
-	if missions, err := mission.Find(field, id); err != nil {
+	if missions, e := mission.Find(field, id); e != nil {
+		err = e
 		return
 	} else {
 		l := len(missions)
