@@ -17,9 +17,9 @@ type GainCore struct {
 type Gain struct {
 	GainCore
 	CreatedAt  time.Time  `json:"-"`
-	CreateTime string     `json:"createTime",gorm:"-"`
+	CreateTime string     `json:"createTime";gorm:"-"`
 	UpdatedAt  time.Time  `json:"-"`
-	UpdateTime string     `json:"updateTime",gorm:"-"`
+	UpdateTime string     `json:"updateTime";gorm:"-"`
 	DeletedAt  *time.Time `sql:"index",json:"-"`
 	File       string     `json:"file"`
 	Remark     string     `json:"remark"`

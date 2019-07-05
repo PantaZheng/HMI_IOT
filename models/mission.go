@@ -17,7 +17,7 @@ type MissionCore struct {
 type Mission struct {
 	MissionCore
 	CreatedAt  time.Time  `json:"-"`
-	CreateTime string     `gorm:"-";json:"createTime"`
+	CreateTime string     `json:"createTime",gorm:"-"`
 	UpdatedAt  time.Time  `json:"-"`
 	UpdateTime string     `gorm:"-";json:"updateTime"`
 	DeletedAt  *time.Time `sql:"index";json:"-"`
