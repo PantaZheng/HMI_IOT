@@ -7,7 +7,7 @@ import (
 
 func ProjectInsert(ctx iris.Context) {
 	p := &models.Project{}
-	if err := ctx.ReadJSON(p); err == nil {
+	if err := ctx.ReadJSON(p); err != nil {
 		ErrorProcess(err, ctx)
 		return
 	}
