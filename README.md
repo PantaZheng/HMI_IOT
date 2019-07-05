@@ -244,7 +244,7 @@ type ProjectFrame struct {
 -|-|-|-|-
 ProjectCreate|post|`/`|`Project`|`Project`
 ProjectFindByID|get|`/id/{id:uint}`|-|`Project`
-ProjectFrameByID|get|`frame/{id:uint}`|-|`ProjectFrame`
+ProjectFrameByID|get|`/frame/{id:uint}`|-|`ProjectFrame`
 ProjectsFindByManagerID|get|`/manager/{id:uint}`|-|`[]ProjectCore`
 ProjectsFindByMemberID|get|`/member/{id:uint}`|-|`[]ProjectCore`
 ProjectsFindALl|get|`/all`|-|`[]Project`

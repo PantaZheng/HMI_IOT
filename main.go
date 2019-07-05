@@ -93,6 +93,7 @@ func newApp() (api *iris.Application) {
 	api.PartyFunc("/project", func(project router.Party) {
 		project.Post("/", controller.ProjectInsert)
 		project.Get("/id/{id:uint}", controller.ProjectFindByID)
+		project.Get("/frame/", controller.ProjectFindFrame)
 		project.Get("/manager/{id:uint}", controller.ProjectsFindByManagerID)
 		project.Get("/member/{id:uint}", controller.ProjectsFindByMemberID)
 		project.Get("/all", controller.ProjectsFindAll)

@@ -37,6 +37,23 @@ func ProjectFindByID(ctx iris.Context) {
 	return
 }
 
+func ProjectFindFrame(ctx iris.Context) {
+	p := &models.Project{}
+	if id, err := ctx.Params().GetUint("id"); err != nil {
+		ErrorProcess(err, ctx)
+		return
+	} else {
+		p.ID = id
+	}
+	if frame, err := p.FindFrame(); err != nil {
+		ErrorProcess(err, ctx)
+	} else {
+		ctx.StatusCode(iris.StatusOK)
+		_, _ = ctx.JSON(frame)
+	}
+	return
+}
+
 func projectsFind(field string, ctx iris.Context) {
 	p := &models.Project{}
 	id, err := ctx.Params().GetUint("id")
