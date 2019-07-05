@@ -48,7 +48,7 @@ func gainsFind(field string, ctx iris.Context) {
 		ErrorProcess(err, ctx)
 		return
 	}
-	if gains, err := g.Find(field, id); err == nil {
+	if gains, err := g.FindBrief(field, id); err == nil {
 		ctx.StatusCode(iris.StatusOK)
 		_, _ = ctx.JSON(gains)
 	} else {
@@ -83,7 +83,7 @@ func GainsFindByManagerID(ctx iris.Context) {
 
 func GainsFindAll(ctx iris.Context) {
 	g := &models.Gain{}
-	if gains, err := g.Find("all", 0); err == nil {
+	if gains, err := g.FindBrief("all", 0); err == nil {
 		ctx.StatusCode(iris.StatusOK)
 		_, _ = ctx.JSON(gains)
 	} else {
