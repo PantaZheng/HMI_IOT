@@ -138,6 +138,14 @@ func (project *Project) Updates() (err error) {
 	if err = database.DB.Model(Project{}).Where("id=?", project.ID).Updates(&project).Error; err != nil {
 		return
 	}
+	if project.State != 0 {
+		mission := Mission{}
+		missions, _ := mission.Find("project", project.ID)
+		for _, v := range missions {
+			v.State = project.State
+			_ = v.Updates()
+		}
+	}
 	err = project.First()
 	return
 }
