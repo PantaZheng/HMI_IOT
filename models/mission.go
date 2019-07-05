@@ -43,7 +43,7 @@ func missionTestData() {
 	missions := make([]Mission, l)
 	for i := 0; i < l; i++ {
 		missions[i].Name = "mission" + strconv.Itoa(i)
-		missions[i].OwnerID = uint(i/8 + 1)
+		missions[i].OwnerID = uint(i/2 + 1)
 		missions[i].ModuleID = uint(i/2 + 1)
 	}
 	for _, v := range missions {

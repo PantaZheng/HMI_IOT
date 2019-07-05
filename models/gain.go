@@ -41,7 +41,6 @@ func gainTestData() {
 	log.Println("gainTestData")
 	l := 32
 	gains := make([]Gain, l)
-
 	for i := 0; i < l; i++ {
 		gains[i].Name = "gain" + strconv.Itoa(i)
 	}

@@ -39,7 +39,7 @@ func moduleTestData() {
 	modules := make([]Module, l)
 	for i := 0; i < l; i++ {
 		modules[i].Name = "module" + strconv.Itoa(i)
-		modules[i].LeaderID = uint(i/4 + 1)
+		modules[i].LeaderID = uint(i/2 + 1)
 		modules[i].ProjectID = uint(i/2 + 1)
 	}
 
