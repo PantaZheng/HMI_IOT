@@ -37,40 +37,6 @@ type UserJSON struct {
 	Telephone  string `json:"telephone"`
 }
 
-func userTestData() {
-	log.Println("userTestData")
-	users := make([]UserJSON, 11)
-	users[0] = UserJSON{OpenID: "Stranger1", WechatName: "小蜘蛛", Code: "Spider-Man", Level: 1, Telephone: "110"}
-	users[0].Name = "Peter Benjamin Parker"
-	users[1] = UserJSON{OpenID: "Emeritus1", WechatName: "万磁王", Code: "002", Level: 2}
-	users[1].Name = "Max Eisenhardt"
-	users[2] = UserJSON{WechatName: "金刚狼", Level: 2, Telephone: "111"}
-	users[2].Name = "Logan Howlett"
-	users[3] = UserJSON{OpenID: "Assistant1", WechatName: "小辣椒", Level: 3}
-	users[3].Name = "Pepper Potts"
-	users[4] = UserJSON{WechatName: "钢铁侠", Level: 4, Telephone: "112"}
-	users[4].Name = "Tony Stark"
-	users[5] = UserJSON{OpenID: "Full1", WechatName: "灭霸", Level: 5}
-	users[5].Name = "Thanos"
-	users[6] = UserJSON{Level: 3, Telephone: "18955537316"}
-	users[6].Name = "韩新亚"
-	users[7] = UserJSON{Level: 3, Telephone: "13867188664"}
-	users[7].Name = "曾虹"
-	users[8] = UserJSON{Level: 5, Telephone: "13906524548"}
-	users[8].Name = "戴国骏"
-	users[9] = UserJSON{Level: 3, Telephone: "13336096310"}
-	users[9].Name = "周文晖"
-	users[10] = UserJSON{Level: 3, Telephone: "13777840698"}
-	users[10].Name = "张桦"
-	for _, v := range users {
-		if err := v.Create(); err != nil {
-			log.Println(err.Error())
-		} else {
-			log.Println(v)
-		}
-	}
-}
-
 //userJSON2User UserJSON转换到User.
 func (userJSON *UserJSON) userJSON2User() (user models.User) {
 	user.ID = userJSON.ID
