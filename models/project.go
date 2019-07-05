@@ -71,7 +71,7 @@ func (project *Project) First() (err error) {
 
 func (project *Project) Find(field string, id uint) (projects []Project, err error) {
 	if field == "all" {
-		err = database.DB.Model(Project{}).Find(&project).Error
+		err = database.DB.Model(Project{}).Find(&projects).Error
 		return
 	}
 	if field == "member" {

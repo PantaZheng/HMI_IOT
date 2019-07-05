@@ -46,7 +46,7 @@ func modulesFind(field string, ctx iris.Context) {
 		ErrorProcess(err, ctx)
 		return
 	}
-	if modules, err := m.Find(field, id); err == nil {
+	if modules, err := m.FindBrief(field, id); err == nil {
 		ctx.StatusCode(iris.StatusOK)
 		_, _ = ctx.JSON(modules)
 	} else {
@@ -73,7 +73,7 @@ func ModulesFindByMemberID(ctx iris.Context) {
 
 func ModulesFindAll(ctx iris.Context) {
 	m := &models.Module{}
-	if modules, err := m.Find("all", 0); err == nil {
+	if modules, err := m.FindBrief("all", 0); err == nil {
 		ctx.StatusCode(iris.StatusOK)
 		_, _ = ctx.JSON(modules)
 	} else {

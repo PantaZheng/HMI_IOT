@@ -44,7 +44,7 @@ func projectsFind(field string, ctx iris.Context) {
 		ErrorProcess(err, ctx)
 		return
 	}
-	if projects, err := p.Find(field, id); err == nil {
+	if projects, err := p.FindBrief(field, id); err == nil {
 		ctx.StatusCode(iris.StatusOK)
 		_, _ = ctx.JSON(projects)
 	} else {
@@ -63,7 +63,7 @@ func ProjectsFindByMemberID(ctx iris.Context) {
 
 func ProjectsFindAll(ctx iris.Context) {
 	p := &models.Project{}
-	if projects, err := p.Find("all", 0); err == nil {
+	if projects, err := p.FindBrief("all", 0); err == nil {
 		ctx.StatusCode(iris.StatusOK)
 		_, _ = ctx.JSON(projects)
 	} else {

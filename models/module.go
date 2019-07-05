@@ -132,7 +132,7 @@ func (module *Module) Find(field string, id uint) (modules []Module, err error) 
 		}
 		//leader
 	}
-	err = database.DB.Where(field+"_id=?", id).Find(&module).Error
+	err = database.DB.Where(field+"_id=?", id).Find(&modules).Error
 	return
 }
 
