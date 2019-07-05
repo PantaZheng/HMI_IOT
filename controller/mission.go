@@ -46,7 +46,7 @@ func missionsFind(field string, ctx iris.Context) {
 		ErrorProcess(err, ctx)
 		return
 	}
-	if missions, err := m.Find(field, id); err == nil {
+	if missions, err := m.FindBrief(field, id); err == nil {
 		ctx.StatusCode(iris.StatusOK)
 		_, _ = ctx.JSON(missions)
 	} else {
@@ -77,7 +77,7 @@ func MissionsFindByManagerID(ctx iris.Context) {
 
 func MissionsFindAll(ctx iris.Context) {
 	m := &models.Mission{}
-	if missions, err := m.Find("all", 0); err == nil {
+	if missions, err := m.FindBrief("all", 0); err == nil {
 		ctx.StatusCode(iris.StatusOK)
 		_, _ = ctx.JSON(missions)
 	} else {
