@@ -1,13 +1,12 @@
 package controller
 
 import (
-	"errors"
 	"github.com/kataras/iris"
-	"github.com/pantazheng/bci/service"
+	"github.com/pantazheng/bci/models"
 )
 
 func ProjectInsert(ctx iris.Context) {
-	p := service.ProjectJSON{}
+	p := &models.Project{}
 	if err := ctx.ReadJSON(p); err == nil {
 		ErrorProcess(err, ctx)
 		return
@@ -22,7 +21,7 @@ func ProjectInsert(ctx iris.Context) {
 }
 
 func ProjectFindByID(ctx iris.Context) {
-	p := service.ProjectJSON{}
+	p := &models.Project{}
 	if id, err := ctx.Params().GetUint("id"); err != nil {
 		ErrorProcess(err, ctx)
 		return
@@ -39,58 +38,46 @@ func ProjectFindByID(ctx iris.Context) {
 }
 
 func projectsFind(field string, ctx iris.Context) {
-	p := service.ProjectJSON{}
-	if id, err := ctx.Params().GetUint("id"); err != nil {
+	p := &models.Project{}
+	id, err := ctx.Params().GetUint("id")
+	if err != nil {
 		ErrorProcess(err, ctx)
 		return
-	} else {
-		if field == "leader_id" || field == "participant_id" || field == "member_id" {
-			p.ManagerID = id
-		} else if field == "creator_id" {
-			p.CreatorID = id
-		} else if field == "all" {
-		} else {
-			err = errors.New("no this field")
-			ErrorProcess(err, ctx)
-			return
-		}
 	}
-	if projectsJSON, err := p.Find(field); err == nil {
+	if projects, err := p.Find(field, id); err == nil {
 		ctx.StatusCode(iris.StatusOK)
-		_, _ = ctx.JSON(projectsJSON)
+		_, _ = ctx.JSON(projects)
 	} else {
 		ErrorProcess(err, ctx)
 	}
 	return
 }
 
-func ProjectsFindByLeaderID(ctx iris.Context) {
-	projectsFind("leader_id", ctx)
-}
-
-func ProjectsFindByCreatorID(ctx iris.Context) {
-	projectsFind("creator_id", ctx)
-}
-
-func ProjectsFindByParticipantID(ctx iris.Context) {
-	projectsFind("participant_id", ctx)
+func ProjectsFindByManagerID(ctx iris.Context) {
+	projectsFind("manager", ctx)
 }
 
 func ProjectsFindByMemberID(ctx iris.Context) {
-	projectsFind("member_id", ctx)
+	projectsFind("member", ctx)
 }
 
 func ProjectsFindAll(ctx iris.Context) {
-	projectsFind("all", ctx)
+	p := &models.Project{}
+	if projects, err := p.Find("all", 0); err == nil {
+		ctx.StatusCode(iris.StatusOK)
+		_, _ = ctx.JSON(projects)
+	} else {
+		ErrorProcess(err, ctx)
+	}
 }
 
 func ProjectUpdate(ctx iris.Context) {
-	p := service.ProjectJSON{}
+	p := &models.Project{}
 	if err := ctx.ReadJSON(p); err == nil {
 		ErrorProcess(err, ctx)
 		return
 	}
-	if err := p.Update(); err == nil {
+	if err := p.Updates(); err == nil {
 		ctx.StatusCode(iris.StatusOK)
 		_, _ = ctx.JSON(p)
 	} else {
@@ -100,7 +87,7 @@ func ProjectUpdate(ctx iris.Context) {
 }
 
 func ProjectDeleteByID(ctx iris.Context) {
-	p := service.ProjectJSON{}
+	p := &models.Project{}
 	if id, err := ctx.Params().GetUint("id"); err == nil {
 		ErrorProcess(err, ctx)
 		return

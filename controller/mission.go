@@ -1,17 +1,13 @@
 package controller
 
 import (
-	"errors"
 	"github.com/kataras/iris"
-	"github.com/pantazheng/bci/service"
-	"io"
-	"os"
-	"strconv"
+	"github.com/pantazheng/bci/models"
 )
 
 //MissionInsert
 func MissionInsert(ctx iris.Context) {
-	m := &service.MissionJSON{}
+	m := &models.Mission{}
 	if err := ctx.ReadJSON(m); err != nil {
 		ErrorProcess(err, ctx)
 		return
@@ -27,7 +23,7 @@ func MissionInsert(ctx iris.Context) {
 
 //MissionFindByID
 func MissionFindByID(ctx iris.Context) {
-	m := &service.MissionJSON{}
+	m := &models.Mission{}
 	if id, err := ctx.Params().GetUint("id"); err != nil {
 		ErrorProcess(err, ctx)
 		return
@@ -44,53 +40,54 @@ func MissionFindByID(ctx iris.Context) {
 }
 
 func missionsFind(field string, ctx iris.Context) {
-	m := &service.MissionJSON{}
-	if field != "all" {
-		if id, err := ctx.Params().GetUint("id"); err != nil {
-			ErrorProcess(err, ctx)
-			return
-		} else {
-			if field == "leader_id" {
-				m.LeaderID = id
-			} else if field == "owner_id" {
-				m.OwnerID = id
-			} else if field == "module_id" {
-				m.ModuleID = id
-			} else if field == "all" {
-			} else {
-				err = errors.New("no this field")
-				ErrorProcess(err, ctx)
-				return
-			}
-		}
+	m := &models.Mission{}
+	id, err := ctx.Params().GetUint("id")
+	if err != nil {
+		ErrorProcess(err, ctx)
+		return
 	}
-	if missionsJSON, err := m.Find(field); err == nil {
+	if missions, err := m.Find(field, id); err == nil {
 		ctx.StatusCode(iris.StatusOK)
-		_, _ = ctx.JSON(missionsJSON)
+		_, _ = ctx.JSON(missions)
 	} else {
 		ErrorProcess(err, ctx)
 	}
 	return
 }
 
-func MissionsFindByLeaderID(ctx iris.Context) {
-	missionsFind("leader_id", ctx)
-}
-
 func MissionsFindByOwnerID(ctx iris.Context) {
-	missionsFind("owner_id", ctx)
+	missionsFind("owner", ctx)
 }
 
 func MissionsFindByModuleID(ctx iris.Context) {
-	missionsFind("module_id", ctx)
+	missionsFind("module", ctx)
+}
+
+func MissionsFindByLeaderID(ctx iris.Context) {
+	missionsFind("leader", ctx)
+}
+
+func MissionsFindByProjectID(ctx iris.Context) {
+	missionsFind("project", ctx)
+}
+
+func MissionsFindByManagerID(ctx iris.Context) {
+	missionsFind("manager", ctx)
 }
 
 func MissionsFindAll(ctx iris.Context) {
-	missionsFind("all", ctx)
+	m := &models.Mission{}
+	if missions, err := m.Find("all", 0); err == nil {
+		ctx.StatusCode(iris.StatusOK)
+		_, _ = ctx.JSON(missions)
+	} else {
+		ErrorProcess(err, ctx)
+	}
+	return
 }
 
 func MissionUpdate(ctx iris.Context) {
-	m := &service.MissionJSON{}
+	m := &models.Mission{}
 	if err := ctx.ReadJSON(m); err != nil {
 		ErrorProcess(err, ctx)
 		return
@@ -105,7 +102,7 @@ func MissionUpdate(ctx iris.Context) {
 }
 
 func MissionDeleteByID(ctx iris.Context) {
-	m := &service.MissionJSON{}
+	m := &models.Mission{}
 	if id, err := ctx.Params().GetUint("id"); err != nil {
 		ErrorProcess(err, ctx)
 		return

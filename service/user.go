@@ -134,14 +134,6 @@ func users2BriefUsersJSON(users []models.User) (usersJSON []UserJSON) {
 	return
 }
 
-func usersJSON2Users(usersJSON []UserJSON) (users []models.User) {
-	users = make([]models.User, len(usersJSON))
-	for i, v := range usersJSON {
-		users[i] = v.userJSON2User()
-	}
-	return
-}
-
 func (userJSON *UserJSON) checkLevel() (err error) {
 	err = errors.New(titleUser + "checkLevel:\t" + "权限等级不在列表中")
 	for _, v := range LevelMap {

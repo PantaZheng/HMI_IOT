@@ -1,14 +1,13 @@
 package controller
 
 import (
-	"errors"
 	"github.com/kataras/iris"
-	"github.com/pantazheng/bci/service"
+	"github.com/pantazheng/bci/models"
 )
 
 //ModuleInsert
 func ModuleInsert(ctx iris.Context) {
-	m := service.ModuleJSON{}
+	m := &models.Module{}
 	if err := ctx.ReadJSON(m); err != nil {
 		ErrorProcess(err, ctx)
 		return
@@ -24,7 +23,7 @@ func ModuleInsert(ctx iris.Context) {
 
 //ModuleFindByID
 func ModuleFindByID(ctx iris.Context) {
-	m := service.ModuleJSON{}
+	m := &models.Module{}
 	if id, err := ctx.Params().GetUint("id"); err != nil {
 		ErrorProcess(err, ctx)
 		return
@@ -41,27 +40,15 @@ func ModuleFindByID(ctx iris.Context) {
 }
 
 func modulesFind(field string, ctx iris.Context) {
-	m := service.ModuleJSON{}
-	if id, err := ctx.Params().GetUint("id"); err != nil {
+	m := &models.Module{}
+	id, err := ctx.Params().GetUint("id")
+	if err != nil {
 		ErrorProcess(err, ctx)
 		return
-	} else {
-		if field == "leader_id" {
-			m.LeaderID = id
-		} else if field == "creator_id" {
-			m.CreatorID = id
-		} else if field == "project_id" {
-			m.ProjectID = id
-		} else if field == "all" {
-		} else {
-			err = errors.New("no this field")
-			ErrorProcess(err, ctx)
-			return
-		}
 	}
-	if modulesJSON, err := m.Find(field); err == nil {
+	if modules, err := m.Find(field, id); err == nil {
 		ctx.StatusCode(iris.StatusOK)
-		_, _ = ctx.JSON(modulesJSON)
+		_, _ = ctx.JSON(modules)
 	} else {
 		ErrorProcess(err, ctx)
 	}
@@ -69,28 +56,39 @@ func modulesFind(field string, ctx iris.Context) {
 }
 
 func ModulesFindByLeaderID(ctx iris.Context) {
-	modulesFind("leader_id", ctx)
-}
-
-func ModulesFindByCreatorID(ctx iris.Context) {
-	modulesFind("creator_id", ctx)
+	modulesFind("leader", ctx)
 }
 
 func ModulesFindByProjectID(ctx iris.Context) {
-	modulesFind("project_id", ctx)
+	modulesFind("project", ctx)
+}
+
+func ModulesFindByManagerID(ctx iris.Context) {
+	modulesFind("manager", ctx)
+}
+
+func ModulesFindByMemberID(ctx iris.Context) {
+	modulesFind("member", ctx)
 }
 
 func ModulesFindAll(ctx iris.Context) {
-	modulesFind("all", ctx)
+	m := &models.Module{}
+	if modules, err := m.Find("all", 0); err == nil {
+		ctx.StatusCode(iris.StatusOK)
+		_, _ = ctx.JSON(modules)
+	} else {
+		ErrorProcess(err, ctx)
+	}
+	return
 }
 
 func ModuleUpdate(ctx iris.Context) {
-	m := service.ModuleJSON{}
+	m := &models.Module{}
 	if err := ctx.ReadJSON(m); err != nil {
 		ErrorProcess(err, ctx)
 		return
 	}
-	if err := m.Update(); err == nil {
+	if err := m.Updates(); err == nil {
 		ctx.StatusCode(iris.StatusOK)
 		_, _ = ctx.JSON(m)
 	} else {
@@ -101,7 +99,7 @@ func ModuleUpdate(ctx iris.Context) {
 }
 
 func ModuleDeleteByID(ctx iris.Context) {
-	m := service.ModuleJSON{}
+	m := &models.Module{}
 	if id, err := ctx.Params().GetUint("id"); err != nil {
 		ErrorProcess(err, ctx)
 		return

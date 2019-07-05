@@ -107,7 +107,7 @@ GainFindByID|get|`/id/{id:uint}`|-|`GainJSON`
 GainsFindByLeaderID|get|`/leader/{id:uint}`|-|`[]GainCore`
 GainsFindByOwnerID|get|`/owner/{id:uint}`|-|`[]GainCore`
 GainsFindByMissionID|get|`/mission/{id:uint}`|-|`[]GainCore`
-GainsFindAll|get|`all`|-|`[]GainCore`
+GainsFindAll|get|`/all`|-|`[]GainCore`
 GainDownFileByID|get|`/file/{id:uint}`|-|file
 GainUpdates|put|`/`|`GainJSON`|`GainJSON`
 GainDeleteByID|delete|`/{id:uint}`|-|`GainJSON`
@@ -209,53 +209,26 @@ ModuleDeleteByID|delete|`/id/{id:uint}`|-|`ModuleJson`
 入口: `/project`
 
 ```go
-type ProjectJSON struct {
-	/**
-	@Author: PantaZheng
-	@Description:
-	@Date: 2019/5/16 15:07
-	*/
-	ID           uint         `json:"id"`
-	Name         string       `json:"name"`
-	Type         string       `json:"type"`
-	CreatorID    uint         `json:"creatorID"`
-	Creator      UserJSON     `json:"creator"`
-	CreateTime   string       `json:"createTime"`
-	StartTime    string       `json:"startTime"`
-	EndTime      string       `json:"endTime"`
-	Content      string       `json:"content"`
-	Target       string       `json:"target"`
-	LeaderID     uint         `json:"leaderID"`
-	Leader       UserJSON     `json:"leader"`
-	Participants []UserJSON   `json:"participants"`
-	Tag          bool         `json:"tag"` //create、update
-	TagSet       []TagJson    `json:"tagSet"`
-	Modules      []ModuleJSON `json:"modules"` //仅拉取更新
+type ProjectCore struct {
+	ID          uint   `gorm:"primary_key",json:"id"`
+	Name        string `json:"name"`
+	State       uint   `json:"state"`
+	ManagerName string `gorm:"-",json:"managerName"`
 }
 
-type TagJson struct {
-	/**
-	@Author: PantaZheng
-	@Description:
-	@Date: 2019/5/16 15:53
-	*/
-	ID  uint `json:"id"`
-	Tag bool `json:"tag"`
-}
+type Project struct {
+	ProjectCore
+	CreatedAt  time.Time  `json:"-"`
+	CreateTime string     `gorm:"-",json:"createTime"`
+	UpdatedAt  time.Time  `json:"-"`
+	UpdateTime string     `gorm:"-",json:"updateTime"`
+	DeletedAt  *time.Time `sql:"index",json:"-"`
+	StartTime  string     `json:"startTime"`
+	EndTime    string     `json:"endTime"`
+	Content    string     `json:"content"`
+	Target     string     `json:"target"`
 
-type FramePaceJSON struct {
-	/**
-	@Author: PantaZheng
-	@Description:
-	@Date: 2019/5/24 0:32
-	*/
-	ID        uint              `json:"id"`
-	Name      string            `json:"name"`
-	StartTime string            `json:"startTime"`
-	EndTime   string            `json:"endTime"`
-	Leader    UserJSON          `json:"leader"`
-	Modules   []ModuleBriefJSON `json:"modules"` //仅拉取更新
-
+	ManagerID uint `json:"managerID"`
 }
 ```
 

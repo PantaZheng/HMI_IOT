@@ -1,10 +1,8 @@
 package controller
 
 import (
-	"errors"
 	"github.com/kataras/iris"
 	"github.com/pantazheng/bci/models"
-	"github.com/pantazheng/bci/service"
 	"io"
 	"os"
 	"strconv"
@@ -50,32 +48,44 @@ func gainsFind(field string, ctx iris.Context) {
 		ErrorProcess(err, ctx)
 		return
 	}
-	if gainsJSON, err := g.Find(field, id); err == nil {
+	if gains, err := g.Find(field, id); err == nil {
 		ctx.StatusCode(iris.StatusOK)
-		_, _ = ctx.JSON(gainsJSON)
+		_, _ = ctx.JSON(gains)
 	} else {
 		ErrorProcess(err, ctx)
 	}
 	return
 }
 
+func GainsFindByMissionID(ctx iris.Context) {
+	gainsFind("mission", ctx)
+}
+
 func GainsFindByOwnerID(ctx iris.Context) {
 	gainsFind("owner", ctx)
+}
+
+func GainsFindByModuleID(ctx iris.Context) {
+	gainsFind("module", ctx)
 }
 
 func GainsFindByLeaderID(ctx iris.Context) {
 	gainsFind("leader", ctx)
 }
 
-func GainsFindByMissionID(ctx iris.Context) {
-	gainsFind("mission", ctx)
+func GainsFindByProjectID(ctx iris.Context) {
+	gainsFind("project", ctx)
+}
+
+func GainsFindByManagerID(ctx iris.Context) {
+	gainsFind("manager", ctx)
 }
 
 func GainsFindAll(ctx iris.Context) {
 	g := &models.Gain{}
-	if gainsJSON, err := g.Find("field", 0); err == nil {
+	if gains, err := g.Find("all", 0); err == nil {
 		ctx.StatusCode(iris.StatusOK)
-		_, _ = ctx.JSON(gainsJSON)
+		_, _ = ctx.JSON(gains)
 	} else {
 		ErrorProcess(err, ctx)
 	}
@@ -83,7 +93,7 @@ func GainsFindAll(ctx iris.Context) {
 }
 
 func GainUpdates(ctx iris.Context) {
-	g := &service.GainJSON{}
+	g := &models.Gain{}
 	if err := ctx.ReadJSON(g); err != nil {
 		ErrorProcess(err, ctx)
 		return
@@ -98,7 +108,7 @@ func GainUpdates(ctx iris.Context) {
 }
 
 func GainDeleteByID(ctx iris.Context) {
-	g := &service.GainJSON{}
+	g := &models.Gain{}
 	if id, err := ctx.Params().GetUint("id"); err != nil {
 		ErrorProcess(err, ctx)
 		return
@@ -115,7 +125,7 @@ func GainDeleteByID(ctx iris.Context) {
 }
 
 func GainUpFileByID(ctx iris.Context) {
-	g := &service.GainJSON{}
+	g := &models.Gain{}
 	if id, err := ctx.Params().GetUint("id"); err != nil {
 		ErrorProcess(err, ctx)
 		return
@@ -149,7 +159,7 @@ func GainUpFileByID(ctx iris.Context) {
 }
 
 func GainDownFileByID(ctx iris.Context) {
-	g := &service.GainJSON{}
+	g := &models.Gain{}
 	if id, err := ctx.Params().GetUint("id"); err != nil {
 		ErrorProcess(err, ctx)
 		return

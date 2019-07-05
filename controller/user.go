@@ -8,11 +8,6 @@ import (
 )
 
 func UserCreate(ctx iris.Context) {
-	/**
-	@Author: PantaZheng
-	@Description:
-	@Date: 2019/5/13 23:48
-	*/
 	var err error
 	u := new(service.UserJSON)
 	if err = ctx.ReadJSON(u); err == nil {
@@ -79,11 +74,6 @@ func UserFindByID(ctx iris.Context) {
 }
 
 func UserFindByTelephone(ctx iris.Context) {
-	/**
-	@Author: PantaZheng
-	@Description:
-	@Date: 2019/5/13 15:41
-	*/
 	tel := ctx.Params().GetString("telephone")
 	if u, err := service.UserFindByTelephone(tel); err == nil {
 		ctx.StatusCode(iris.StatusOK)
@@ -97,11 +87,6 @@ func UserFindByTelephone(ctx iris.Context) {
 }
 
 func UserFindByOpenID(ctx iris.Context) {
-	/**
-	@Author: PantaZheng
-	@Description:
-	@Date: 2019/5/13 15:41
-	*/
 	openid := ctx.Params().GetString("openid")
 	if u, err := service.UserFindByOpenID(openid); err == nil {
 		ctx.StatusCode(iris.StatusOK)
@@ -115,11 +100,6 @@ func UserFindByOpenID(ctx iris.Context) {
 }
 
 func UsersFindByLevel(ctx iris.Context) {
-	/**
-	@Author: PantaZheng
-	@Description:
-	@Date: 2019/5/13 15:41
-	*/
 	var err error
 	if level, err1 := ctx.Params().GetInt("level"); err1 == nil {
 		if usersJson, err2 := service.UsersFindByLevel(level); err2 == nil {
@@ -140,11 +120,6 @@ func UsersFindByLevel(ctx iris.Context) {
 }
 
 func UsersList(ctx iris.Context) {
-	/**
-	@Author: PantaZheng
-	@Description:
-	@Date: 2019/5/13 15:41
-	*/
 	var err error
 	if usersJson, err1 := service.UsersList(); err1 == nil {
 		ctx.StatusCode(iris.StatusOK)
@@ -161,11 +136,6 @@ func UsersList(ctx iris.Context) {
 }
 
 func UserDeleteByID(ctx iris.Context) {
-	/**
-	@Author: PantaZheng
-	@Description:
-	@Date: 2019/5/13 15:41
-	*/
 	var err error
 	if id, err1 := ctx.Params().GetUint("id"); err1 == nil {
 		if userJson, err2 := service.UserDeleteByID(id); err2 == nil {
@@ -186,11 +156,6 @@ func UserDeleteByID(ctx iris.Context) {
 }
 
 func UserDeleteByTelephone(ctx iris.Context) {
-	/**
-	@Author: PantaZheng
-	@Description:
-	@Date: 2019/5/13 15:41
-	*/
 	tel := ctx.Params().GetString("telephone")
 	if userJson, err := service.UserDeleteByTelephone(tel); err == nil {
 		ctx.StatusCode(iris.StatusOK)
@@ -204,11 +169,6 @@ func UserDeleteByTelephone(ctx iris.Context) {
 }
 
 func UserUpdates(ctx iris.Context) {
-	/**
-	@Author: PantaZheng
-	@Description:
-	@Date: 2019/5/13 15:41
-	*/
 	var err error
 	u := new(service.UserJSON)
 	if err = ctx.ReadJSON(u); err == nil {
