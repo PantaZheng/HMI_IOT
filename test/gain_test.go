@@ -49,7 +49,7 @@ func TestGain(t *testing.T) {
 	gain.Type = gain.Name + ".type"
 	gain.File = gain.Name + ".file"
 	gain.Remark = gain.Name + ".remark"
-	gain.OwnerID = 1
+	gain.MissionOwnerID = 1
 	gain.MissionID = 2
 	if gainJson, err := models.GainUpdate(gain); err != nil {
 		log.Println(err.Error())

@@ -3,6 +3,7 @@ package controller
 import (
 	"errors"
 	"github.com/kataras/iris"
+	"github.com/pantazheng/bci/models"
 	"github.com/pantazheng/bci/service"
 	"io"
 	"os"
@@ -11,7 +12,7 @@ import (
 
 //GainInsert
 func GainInsert(ctx iris.Context) {
-	g := &service.GainJSON{}
+	g := &models.Gain{}
 	if err := ctx.ReadJSON(g); err != nil {
 		ErrorProcess(err, ctx)
 		return
@@ -26,7 +27,7 @@ func GainInsert(ctx iris.Context) {
 }
 
 func GainFindByID(ctx iris.Context) {
-	g := &service.GainJSON{}
+	g := &models.Gain{}
 	if id, err := ctx.Params().GetUint("id"); err != nil {
 		ErrorProcess(err, ctx)
 		return
@@ -43,27 +44,13 @@ func GainFindByID(ctx iris.Context) {
 }
 
 func gainsFind(field string, ctx iris.Context) {
-	g := &service.GainJSON{}
-	if field != "all" {
-		if id, err := ctx.Params().GetUint("id"); err != nil {
-			ErrorProcess(err, ctx)
-			return
-		} else {
-			if field == "leader_id" {
-				g.LeaderID = id
-			} else if field == "owner_id" {
-				g.OwnerID = id
-			} else if field == "mission_id" {
-				g.MissionID = id
-			} else if field == "all" {
-			} else {
-				err = errors.New("no this field")
-				ErrorProcess(err, ctx)
-				return
-			}
-		}
+	g := &models.Gain{}
+	id, err := ctx.Params().GetUint("id")
+	if err != nil {
+		ErrorProcess(err, ctx)
+		return
 	}
-	if gainsJSON, err := g.Find(field); err == nil {
+	if gainsJSON, err := g.Find(field, id); err == nil {
 		ctx.StatusCode(iris.StatusOK)
 		_, _ = ctx.JSON(gainsJSON)
 	} else {
@@ -72,20 +59,27 @@ func gainsFind(field string, ctx iris.Context) {
 	return
 }
 
-func GainsFindByLeaderID(ctx iris.Context) {
-	gainsFind("leader_id", ctx)
+func GainsFindByOwnerID(ctx iris.Context) {
+	gainsFind("owner", ctx)
 }
 
-func GainsFindByOwnerID(ctx iris.Context) {
-	gainsFind("owner_id", ctx)
+func GainsFindByLeaderID(ctx iris.Context) {
+	gainsFind("leader", ctx)
 }
 
 func GainsFindByMissionID(ctx iris.Context) {
-	gainsFind("mission_id", ctx)
+	gainsFind("mission", ctx)
 }
 
 func GainsFindAll(ctx iris.Context) {
-	gainsFind("all", ctx)
+	g := &models.Gain{}
+	if gainsJSON, err := g.Find("field", 0); err == nil {
+		ctx.StatusCode(iris.StatusOK)
+		_, _ = ctx.JSON(gainsJSON)
+	} else {
+		ErrorProcess(err, ctx)
+	}
+	return
 }
 
 func GainUpdates(ctx iris.Context) {

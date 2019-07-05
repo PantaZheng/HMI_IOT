@@ -1,31 +1,58 @@
 package models
 
 import (
-	"errors"
-	"github.com/jinzhu/gorm"
 	"github.com/pantazheng/bci/database"
 	"log"
+	"strconv"
+	"time"
 )
 
 type MissionCore struct {
-	gorm.Model
-	Name      string
-	StartTime string
-	EndTime   string
-	Content   string
-	Target    string
-	File      string
-	State     uint
-
-	//foreign
-	OwnerID uint
+	ID        uint   `gorm:"primary_key",json:"id"`
+	Name      string `json:"name"`
+	State     uint   `json:"state"`
+	OwnerName string `gorm:"-",json:"ownerName"`
 }
 
 type Mission struct {
 	MissionCore
-	//foreign const
-	ModuleID uint
-	LeaderID uint
+	CreatedAt  time.Time  `json:"-"`
+	CreateTime string     `gorm:"-",json:"createTime"`
+	UpdatedAt  time.Time  `json:"-"`
+	UpdateTime string     `gorm:"-",json:"updateTime"`
+	DeletedAt  *time.Time `sql:"index",json:"-"`
+	StartTime  string     `json:"startTime"`
+	EndTime    string     `json:"endTime"`
+	Content    string     `json:"content"`
+	Target     string     `json:"target"`
+
+	OwnerID     uint   `json:"ownerID"`
+	ModuleID    uint   `json:"moduleID"`
+	ModuleName  string `gorm:"-",json:"moduleName"`
+	LeaderID    uint   `json:"leaderID"`
+	LeaderName  string `gorm:"-",json:"leaderName"`
+	ProjectID   uint   `json:"projectID"`
+	ProjectName string `gorm:"-",json:"projectName"`
+	ManagerID   uint   `json:"managerID"`
+	ManagerName string `gorm:"-",json:"managerName"`
+}
+
+func missionTestData() {
+	log.Println("missionTestData")
+	l := 32
+	missions := make([]Mission, l)
+	for i := 0; i < l; i++ {
+		missions[i].Name = "mission" + strconv.Itoa(i)
+		missions[i].OwnerID = uint(i/2 + 1)
+		missions[i].ModuleID = uint(i/2 + 1)
+	}
+	for _, v := range missions {
+		if err := v.Insert(); err != nil {
+			log.Println(err.Error())
+		} else {
+			log.Println(v)
+		}
+	}
 }
 
 //Insert 创建Mission
@@ -36,6 +63,8 @@ func (mission *Mission) Insert() (err error) {
 		return
 	}
 	mission.LeaderID = module.LeaderID
+	mission.ProjectID = module.ProjectID
+	mission.ManagerID = module.ManagerID
 
 	project := Project{}
 	project.ID = module.ProjectID
@@ -45,7 +74,6 @@ func (mission *Mission) Insert() (err error) {
 	mission.State = project.State
 
 	if err = database.DB.Create(&mission).Error; err != nil {
-		log.Println("database.DB.Create(&mission)" + err.Error())
 		return
 	}
 	err = mission.First()
@@ -54,22 +82,52 @@ func (mission *Mission) Insert() (err error) {
 
 //First 根据id查找Mission.
 func (mission *Mission) First() (err error) {
-	err = database.DB.Where("id = ? ", mission.ID).First(&mission).Error
+	if err = database.DB.Where("id = ? ", mission.ID).First(&mission).Error; err != nil {
+		return
+	}
+	module := Module{}
+	module.ID = mission.ModuleID
+	if err = module.First(); err != nil {
+		return
+	}
+	owner := UserCore{ID: mission.OwnerID}
+	if err = owner.First(); err != nil {
+		return
+	}
+	mission.CreateTime = mission.CreatedAt.Format("2006-01-02")
+	mission.UpdateTime = mission.UpdatedAt.Format("2006-01-02")
+	mission.OwnerName = owner.Name
+	mission.ModuleName = module.Name
+	mission.LeaderName = module.LeaderName
+	mission.ProjectName = module.ProjectName
+	mission.ManagerName = module.ManagerName
 	return
 }
 
 //FindMissions
-func (mission *Mission) Find(field string) (missions []Mission, err error) {
-	if field == "leader_id" {
-		err = database.DB.Where("leader_id = ?", mission.LeaderID).Find(&missions).Error
-	} else if field == "owner_id" {
-		err = database.DB.Where("owner_id = ?", mission.OwnerID).Find(&missions).Error
-	} else if field == "module_id" {
-		err = database.DB.Where("module_id = ?", mission.ModuleID).Find(&missions).Error
-	} else if field == "all" {
+func (mission *Mission) Find(field string, id uint) (missions []Mission, err error) {
+	if field == "all" {
 		err = database.DB.Model(Mission{}).Find(&missions).Error
 	} else {
-		err = errors.New("no this field")
+		err = database.DB.Where(field+"_id=?", id).Find(&missions).Error
+	}
+	return
+}
+
+func (mission *Mission) FindBrief(field string, id uint) (missionsCore []MissionCore, err error) {
+	if missions, err := mission.Find(field, id); err != nil {
+		return
+	} else {
+		l := len(missions)
+		missionsCore := make([]MissionCore, l)
+		for i, v := range missions {
+			missionsCore[i] = v.MissionCore
+			owner := UserCore{ID: v.OwnerID}
+			if err = owner.First(); err != nil {
+				break
+			}
+			missionsCore[i].OwnerName = owner.Name
+		}
 	}
 	return
 }

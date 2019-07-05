@@ -69,30 +69,33 @@ UserDeleteByTelephone|delete|`/telephone/{telephone:string}`|-|`UserJson`
 
 ```go
 type GainCore struct {
-	ID        uint   `json:"id"`
+	ID        uint   `gorm:"primary_key",json:"id"`
 	Name      string `json:"name"`
-	OwnerName string `json:"ownerName"`
 	State     uint   `json:"state"`
+	OwnerName string `gorm:"-",json:"ownerName"`
 }
 
-type GainJSON struct {
+type Gain struct {
 	GainCore
+	CreatedAt  time.Time  `json:"-"`
+	CreateTime string     `gorm:"-",json:"createTime"`
+	UpdatedAt  time.Time  `json:"-"`
+	UpdateTime string     `gorm:"-",json:"updateTime"`
+	DeletedAt  *time.Time `sql:"index",json:"-"`
+	File       string     `json:"file"`
+	Remark     string     `json:"remark"`
 
-	CreatedAt string `json:"createdAt"`
-	UpdatedAt string `json:"updatedAt"`
-	Type      string `json:"type"`
-	File      string `json:"file"`
-	Remark    string `json:"remark"`
-
-	//const inherit foreign
 	MissionID   uint   `json:"missionID"`
-	MissionName string `json:"missionName"`
+	MissionName string `gorm:"-",json:"missionName"`
 	OwnerID     uint   `json:"ownerID"`
-
+	ModuleID    uint   `json:"moduleID"`
+	ModuleName  string `gorm:"-",json:"moduleName"`
 	LeaderID    uint   `json:"leaderID"`
-	LeaderName  string `json:"leaderName"`
-	ModuleName  string `json:"moduleName"`
-	ProjectName string `json:"projectName"`
+	LeaderName  string `gorm:"-",json:"leaderName"`
+	ProjectID   uint   `json:"projectID"`
+	ProjectName string `gorm:"-",json:"projectName"`
+	ManagerID   uint   `json:"managerID"`
+	ManagerName string `gorm:"-",json:"managerName"`
 }
 ```
 
@@ -115,30 +118,33 @@ GainDeleteByID|delete|`/{id:uint}`|-|`GainJSON`
 
 ```go
 type MissionCore struct {
-	ID        uint   `json:"id"`
+	ID        uint   `gorm:"primary_key",json:"id"`
 	Name      string `json:"name"`
-	OwnerName string `json:"ownerName"`
 	State     uint   `json:"state"`
+	OwnerName string `gorm:"-",json:"ownerName"`
 }
 
-type MissionJSON struct {
+type Mission struct {
 	MissionCore
-	CreatedAt string `json:"createdAt"`
-	UpdatedAt string `json:"updatedAt"`
-	StartTime string `json:"startTime"`
-	EndTime   string `json:"endTime"`
-	Content   string `json:"content"`
-	Target    string `json:"target"`
-	File      string `json:"file"`
+	CreatedAt  time.Time  `json:"-"`
+	CreateTime string     `gorm:"-",json:"createTime"`
+	UpdatedAt  time.Time  `json:"-"`
+	UpdateTime string     `gorm:"-",json:"updateTime"`
+	DeletedAt  *time.Time `sql:"index",json:"-"`
+	StartTime  string     `json:"startTime"`
+	EndTime    string     `json:"endTime"`
+	Content    string     `json:"content"`
+	Target     string     `json:"target"`
 
-	//foreign
-	OwnerID uint `json:"ownerID"`
-	//const inherit foreign
+	OwnerID     uint   `json:"ownerID"`
 	ModuleID    uint   `json:"moduleID"`
-	ModuleName  string `json:"moduleName"`
+	ModuleName  string `gorm:"-",json:"moduleName"`
 	LeaderID    uint   `json:"leaderID"`
-	LeaderName  string `json:"leaderName"`
-	ProjectName string `json:"projectName"`
+	LeaderName  string `gorm:"-",json:"leaderName"`
+	ProjectID   uint   `json:"projectID"`
+	ProjectName string `gorm:"-",json:"projectName"`
+	ManagerID   uint   `json:"managerID"`
+	ManagerName string `gorm:"-",json:"managerName"`
 }
 ```
 
@@ -160,40 +166,30 @@ MissionDeleteByID|delete|`/id/{id:uint}`|-|`MissionJSON`
 入口: `/module`
 
 ```go
-type ModuleJSON struct {
-	/**
-	@Author: PantaZheng
-	@Description:
-	@Date: 2019/5/16 15:53
-	*/
-	ID         uint          `json:"id"`
-	Name       string        `json:"name"`
-	CreatorID  uint          `json:"creatorID"`
-	Creator    UserJSON      `json:"creator"`
-	CreateTime string        `json:"createTime"` //创建时间
-	StartTime  string        `json:"startTime"`  //开始时间
-	EndTime    string        `json:"endTime"`    //结束时间
-	Content    string        `json:"content"`
-	Target     string        `json:"target"`
-	Tag        bool          `json:"tag"`
-	LeaderID   uint          `json:"leaderID"`
-	Leader     UserJSON      `json:"leader"`
-	Missions   []MissionJSON `json:"missions"` //创建或更新不会修改该字段，仅拉取使用
-	ProjectID  uint          `json:"projectID"`
+type ModuleCore struct {
+	ID         uint   `gorm:"primary_key"`
+	Name       string `json:"name"`
+	State      uint   `json:"state"`
+	LeaderName string `gorm:"-",json:"ownerName"`
 }
 
-type ModuleBriefJSON struct {
-	/**
-	@Author: PantaZheng
-	@Description:
-	@Date: 2019/5/24 0:32
-	*/
-	ID        uint               `json:"id"`
-	Name      string             `json:"name"`
-	StartTime string             `json:"startTime"`
-	EndTime   string             `json:"endTime"`
-	Leader    UserJSON           `json:"leader"`
-	Missions  []MissionBriefJSON `json:"missions"`
+type Module struct {
+	ModuleCore
+	CreatedAt  time.Time  `json:"-"`
+	CreateTime string     `gorm:"-",json:"createTime"`
+	UpdatedAt  time.Time  `json:"-"`
+	UpdateTime string     `gorm:"-",json:"updateTime"`
+	DeletedAt  *time.Time `sql:"index",json:"-"`
+	StartTime  string     `json:"startTime"`
+	EndTime    string     `json:"endTime"`
+	Content    string     `json:"content"`
+	Target     string     `json:"target"`
+
+	LeaderID    uint   `json:"leaderID"`
+	ProjectID   uint   `json:"projectID"`
+	ProjectName string `gorm:"-",json:"projectName"`
+	ManagerID   uint   `json:"managerID"`
+	ManagerName string `gorm:"-",json:"managerName"`
 }
 ```
 

@@ -29,10 +29,10 @@ var (
 //UserJSON 用户Json原型
 type UserJSON struct {
 	ID         uint   `json:"id"`
+	Name       string `json:"name"`
 	OpenID     string `json:"openid"`
 	WechatName string `json:"wechatName"`
 	Code       string `json:"code"`
-	Name       string `json:"name"`
 	Level      int    `json:"level"`
 	Telephone  string `json:"telephone"`
 }
@@ -40,17 +40,28 @@ type UserJSON struct {
 func userTestData() {
 	log.Println("userTestData")
 	users := make([]UserJSON, 11)
-	users[0] = UserJSON{OpenID: "Stranger1", WechatName: "小蜘蛛", Code: "Spider-Man", Name: "Peter Benjamin Parker", Level: 1, Telephone: "110"}
-	users[1] = UserJSON{OpenID: "Emeritus1", WechatName: "万磁王", Code: "002", Name: "Max Eisenhardt", Level: 2}
-	users[2] = UserJSON{WechatName: "金刚狼", Name: "Logan Howlett", Level: 2, Telephone: "111"}
-	users[3] = UserJSON{OpenID: "Assistant1", WechatName: "小辣椒", Name: "Pepper Potts", Level: 3}
-	users[4] = UserJSON{WechatName: "钢铁侠", Name: "Tony Stark", Level: 4, Telephone: "112"}
-	users[5] = UserJSON{OpenID: "Full1", WechatName: "灭霸", Name: "Thanos", Level: 5}
-	users[6] = UserJSON{Name: "韩新亚", Level: 3, Telephone: "18955537316"}
-	users[7] = UserJSON{Name: "曾虹", Level: 3, Telephone: "13867188664"}
-	users[8] = UserJSON{Name: "戴国骏", Level: 5, Telephone: "13906524548"}
-	users[9] = UserJSON{Name: "周文晖", Level: 3, Telephone: "13336096310"}
-	users[10] = UserJSON{Name: "张桦", Level: 3, Telephone: "13777840698"}
+	users[0] = UserJSON{OpenID: "Stranger1", WechatName: "小蜘蛛", Code: "Spider-Man", Level: 1, Telephone: "110"}
+	users[0].Name = "Peter Benjamin Parker"
+	users[1] = UserJSON{OpenID: "Emeritus1", WechatName: "万磁王", Code: "002", Level: 2}
+	users[1].Name = "Max Eisenhardt"
+	users[2] = UserJSON{WechatName: "金刚狼", Level: 2, Telephone: "111"}
+	users[2].Name = "Logan Howlett"
+	users[3] = UserJSON{OpenID: "Assistant1", WechatName: "小辣椒", Level: 3}
+	users[3].Name = "Pepper Potts"
+	users[4] = UserJSON{WechatName: "钢铁侠", Level: 4, Telephone: "112"}
+	users[4].Name = "Tony Stark"
+	users[5] = UserJSON{OpenID: "Full1", WechatName: "灭霸", Level: 5}
+	users[5].Name = "Thanos"
+	users[6] = UserJSON{Level: 3, Telephone: "18955537316"}
+	users[6].Name = "韩新亚"
+	users[7] = UserJSON{Level: 3, Telephone: "13867188664"}
+	users[7].Name = "曾虹"
+	users[8] = UserJSON{Level: 5, Telephone: "13906524548"}
+	users[8].Name = "戴国骏"
+	users[9] = UserJSON{Level: 3, Telephone: "13336096310"}
+	users[9].Name = "周文晖"
+	users[10] = UserJSON{Level: 3, Telephone: "13777840698"}
+	users[10].Name = "张桦"
 	for _, v := range users {
 		if err := v.Create(); err != nil {
 			log.Println(err.Error())
@@ -161,7 +172,7 @@ func UserInitByWechat(weChatInfo *user.UserInfo) string {
 func (userJSON *UserJSON) Create() (err error) {
 	if err = userJSON.checkLevel(); err == nil {
 		u := userJSON.userJSON2User()
-		if err = u.Create(); err == nil {
+		if err = u.Insert(); err == nil {
 			*userJSON = user2UserJSON(u)
 		}
 	}
@@ -199,7 +210,7 @@ func (userJSON *UserJSON) Bind() (err error) {
 					wechatUser.Name = userJSON.Name
 					wechatUser.Telephone = userJSON.Telephone
 					wechatUser.Level = LevelMap["Stranger"]
-					if err = wechatUser.Create(); err == nil {
+					if err = wechatUser.Insert(); err == nil {
 						*userJSON = user2UserJSON(wechatUser)
 					}
 				}
@@ -238,7 +249,8 @@ func (userJSON *UserJSON) FindOne() (err error) {
 
 //UserFindByID 通过数据库ID查找单用户.
 func UserFindByID(id uint) (userJSON UserJSON, err error) {
-	userJSON = UserJSON{ID: id}
+	userJSON = UserJSON{}
+	userJSON.ID = id
 	err = userJSON.First()
 	return
 }
@@ -318,7 +330,8 @@ func (userJSON *UserJSON) Delete() (err error) {
 
 //UserDeleteByID 通过数据库ID删除用户.
 func UserDeleteByID(id uint) (userJSON UserJSON, err error) {
-	userJSON = UserJSON{ID: id}
+	userJSON = UserJSON{}
+	userJSON.ID = id
 	err = userJSON.Delete()
 	return
 }

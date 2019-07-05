@@ -45,7 +45,7 @@ func projectsFind(field string, ctx iris.Context) {
 		return
 	} else {
 		if field == "leader_id" || field == "participant_id" || field == "member_id" {
-			p.LeaderID = id
+			p.ManagerID = id
 		} else if field == "creator_id" {
 			p.CreatorID = id
 		} else if field == "all" {

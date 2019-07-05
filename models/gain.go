@@ -1,22 +1,60 @@
 package models
 
 import (
-	"errors"
-	"github.com/jinzhu/gorm"
 	"github.com/pantazheng/bci/database"
+	"log"
+	"strconv"
+	"time"
 )
 
+type GainCore struct {
+	ID        uint   `gorm:"primary_key",json:"id"`
+	Name      string `json:"name"`
+	State     uint   `json:"state"`
+	OwnerName string `gorm:"-",json:"ownerName"`
+}
+
 type Gain struct {
-	gorm.Model
-	Name   string
-	Type   string
-	File   string
-	Remark string
-	State  uint
-	//foreign const
-	MissionID uint
-	LeaderID  uint
-	OwnerID   uint
+	GainCore
+	CreatedAt  time.Time  `json:"-"`
+	CreateTime string     `gorm:"-",json:"createTime"`
+	UpdatedAt  time.Time  `json:"-"`
+	UpdateTime string     `gorm:"-",json:"updateTime"`
+	DeletedAt  *time.Time `sql:"index",json:"-"`
+	File       string     `json:"file"`
+	Remark     string     `json:"remark"`
+
+	MissionID   uint   `json:"missionID"`
+	MissionName string `gorm:"-",json:"missionName"`
+	OwnerID     uint   `json:"ownerID"`
+	ModuleID    uint   `json:"moduleID"`
+	ModuleName  string `gorm:"-",json:"moduleName"`
+	LeaderID    uint   `json:"leaderID"`
+	LeaderName  string `gorm:"-",json:"leaderName"`
+	ProjectID   uint   `json:"projectID"`
+	ProjectName string `gorm:"-",json:"projectName"`
+	ManagerID   uint   `json:"managerID"`
+	ManagerName string `gorm:"-",json:"managerName"`
+}
+
+func gainTestData() {
+	log.Println("gainTestData")
+	l := 64
+	gains := make([]Gain, l)
+
+	for i := 0; i < l; i++ {
+		gains[i].Name = "gain" + strconv.Itoa(i)
+		gains[i].OwnerID = uint(i/4 + 1)
+		gains[i].MissionID = uint(i/2 + 1)
+	}
+
+	for _, v := range gains {
+		if err := v.Insert(); err != nil {
+			log.Println(err.Error())
+		} else {
+			log.Println(v)
+		}
+	}
 }
 
 //Insert 必须包含MissionID
@@ -27,8 +65,11 @@ func (gain *Gain) Insert() (err error) {
 	if err = mission.First(); err != nil {
 		return
 	}
-	gain.LeaderID = mission.LeaderID
 	gain.OwnerID = mission.OwnerID
+	gain.ModuleID = mission.ModuleID
+	gain.LeaderID = mission.LeaderID
+	gain.ProjectID = mission.ProjectID
+	gain.ManagerID = mission.ManagerID
 	if err = database.DB.Create(&gain).Error; err != nil {
 		return
 	}
@@ -38,22 +79,49 @@ func (gain *Gain) Insert() (err error) {
 
 //First 根据id查找Gain.
 func (gain *Gain) First() (err error) {
-	err = database.DB.Where("id = ? ", gain.ID).First(&gain).Error
+	if err = database.DB.Where("id = ? ", gain.ID).First(&gain).Error; err != nil {
+		return
+	}
+	mission := Mission{}
+	mission.ID = gain.MissionID
+	if err = mission.First(); err != nil {
+		return
+	}
+	gain.CreateTime = gain.CreatedAt.Format("2006-01-02")
+	gain.UpdateTime = gain.UpdatedAt.Format("2006-01-02")
+	gain.MissionName = mission.Name
+	gain.OwnerName = mission.OwnerName
+	gain.ModuleName = mission.ModuleName
+	gain.LeaderName = mission.LeaderName
+	gain.ProjectName = mission.ProjectName
+	gain.ManagerName = mission.ManagerName
 	return
 }
 
 //FindGains
-func (gain *Gain) Find(field string) (gains []Gain, err error) {
-	if field == "leader_id" {
-		err = database.DB.Where("leader_id = ?", gain.LeaderID).Find(&gains).Error
-	} else if field == "owner_id" {
-		err = database.DB.Where("owner_id = ?", gain.OwnerID).Find(&gains).Error
-	} else if field == "mission_id" {
-		err = database.DB.Where("mission_id = ?", gain.MissionID).Find(&gains).Error
-	} else if field == "all" {
+func (gain *Gain) Find(field string, id uint) (gains []Gain, err error) {
+	if field == "all" {
 		err = database.DB.Model(Gain{}).Find(&gains).Error
 	} else {
-		err = errors.New("no this field")
+		err = database.DB.Where(field+"_id = ?", id).Find(&gains).Error
+	}
+	return
+}
+
+func (gain *Gain) FindBrief(field string, id uint) (gainsCore []GainCore, err error) {
+	if gains, err := gain.Find(field, id); err != nil {
+		return
+	} else {
+		l := len(gains)
+		gainsCore := make([]GainCore, l)
+		for i, v := range gains {
+			gainsCore[i] = v.GainCore
+			owner := UserCore{ID: v.OwnerID}
+			if err = owner.First(); err != nil {
+				break
+			}
+			gainsCore[i].OwnerName = owner.Name
+		}
 	}
 	return
 }
