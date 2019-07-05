@@ -159,6 +159,7 @@ func (project *Project) FindFrame() (projectFrame ProjectFrame, err error) {
 	projectFrame.Modules = make([]ModuleFrame, modulesLength)
 	mission := Mission{}
 	for i := 0; i < len(modules); i++ {
+		projectFrame.Modules[i].ModuleCore = modules[i]
 		projectFrame.Modules[i].Missions, err = mission.FindBrief("module", projectFrame.Modules[i].ID)
 		if err != nil {
 			return
