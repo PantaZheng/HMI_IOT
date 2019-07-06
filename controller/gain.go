@@ -15,12 +15,31 @@ func GainInsert(ctx iris.Context) {
 		ErrorProcess(err, ctx)
 		return
 	}
-	if err := g.Insert(); err == nil {
-		ctx.StatusCode(iris.StatusOK)
-		_, _ = ctx.JSON(g)
-	} else {
+	if err := g.Insert(); err != nil {
 		ErrorProcess(err, ctx)
+		return
 	}
+	fileName := g.File
+	if fileName != "" {
+		if file, _, err := ctx.FormFile(fileName); err != nil {
+			ErrorProcess(err, ctx)
+			return
+		} else {
+			out, err := os.OpenFile("./files/gain"+strconv.Itoa(int(g.ID))+"_"+fileName,
+				os.O_WRONLY|os.O_CREATE, 0666)
+			if err != nil {
+				ErrorProcess(err, ctx)
+				return
+			}
+			if _, err := io.Copy(out, file); err != nil {
+				ErrorProcess(err, ctx)
+				return
+			}
+			defer out.Close()
+		}
+	}
+	ctx.StatusCode(iris.StatusOK)
+	_, _ = ctx.JSON(g)
 	return
 }
 
@@ -120,40 +139,6 @@ func GainDeleteByID(ctx iris.Context) {
 		_, _ = ctx.JSON(g)
 	} else {
 		ErrorProcess(err, ctx)
-	}
-	return
-}
-
-func GainUpFileByID(ctx iris.Context) {
-	g := &models.Gain{}
-	if id, err := ctx.Params().GetUint("id"); err != nil {
-		ErrorProcess(err, ctx)
-		return
-	} else {
-		g.ID = id
-	}
-	if err := g.First(); err != nil {
-		ErrorProcess(err, ctx)
-		return
-	}
-	fileName := g.File
-	if file, _, err := ctx.FormFile(fileName); err != nil {
-		ErrorProcess(err, ctx)
-		return
-	} else {
-		out, err := os.OpenFile("./files/gain"+strconv.Itoa(int(g.ID))+"_"+fileName,
-			os.O_WRONLY|os.O_CREATE, 0666)
-		if err != nil {
-			ErrorProcess(err, ctx)
-			return
-		}
-		if _, err := io.Copy(out, file); err != nil {
-			ErrorProcess(err, ctx)
-			return
-		}
-		defer out.Close()
-		ctx.StatusCode(iris.StatusOK)
-		_, _ = ctx.Text("文件传输完成")
 	}
 	return
 }
