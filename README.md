@@ -101,8 +101,7 @@ type Gain struct {
 
 名称|method|path|传入body参数|接收body参数
 -|-|-|-|-
-GainInsert|post|`/`|`Gain`|`Gain`
-GainUpFileByID|post|`/file/{id:uint}`|file|-
+GainInsert|post|`/`|`Gain`+file|`Gain`
 GainFindByID|get|`/id/{id:uint}`|-|`Gain`
 GainsFindByMissionID|get|`/mission/{id:uint}`|-|`[]GainCore`
 GainsFindByOwnerID|get|`/owner/{id:uint}`|-|`[]GainCore`
