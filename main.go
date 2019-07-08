@@ -50,7 +50,6 @@ func newApp() (api *iris.Application) {
 
 	api.PartyFunc("/gain", func(gain router.Party) {
 		gain.Post("/", controller.GainInsert)
-		gain.Post("/file/{id:uint}", controller.GainUpFileByID)
 		gain.Get("/id/{id:uint}", controller.GainFindByID)
 		gain.Get("/mission/{id:uint}", controller.GainsFindByMissionID)
 		gain.Get("/owner/{id:uint}", controller.GainsFindByOwnerID)
