@@ -178,6 +178,9 @@ func (module *Module) Updates() (err error) {
 			project := Project{}
 			project.ID = module.ProjectID
 			project.State = keyState
+			if err = project.Updates(); err != nil {
+				return
+			}
 		}
 	}
 	return
