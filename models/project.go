@@ -167,16 +167,37 @@ func (project *Project) FindFrame() (projectFrame ProjectFrame, err error) {
 }
 
 func (project *Project) Updates() (err error) {
+	nullState := uint(0)
+	moduleKeyState := uint(3)
 	if err = database.DB.Model(Project{}).Where("id=?", project.ID).Updates(&project).Error; err != nil {
 		return
 	}
-	if project.State != 0 {
+	if project.State != nullState {
 		mission := Mission{}
 		missions, _ := mission.Find("project", project.ID)
 		for _, v := range missions {
 			v.State = project.State
 			_ = v.Updates()
 		}
+	}
+	if project.State == moduleKeyState {
+		module := Module{}
+		modules, e := module.Find("all", project.ID)
+		if e != nil {
+			err = e
+			return
+		}
+		for _, v := range modules {
+			if v.State != moduleKeyState {
+				v.State = moduleKeyState
+				if err = v.Updates(); err != nil {
+					break
+				}
+			}
+		}
+	}
+	if err != nil {
+		return
 	}
 	err = project.First()
 	return

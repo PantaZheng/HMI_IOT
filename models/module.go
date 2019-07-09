@@ -156,10 +156,30 @@ func (module *Module) FindBrief(field string, id uint) (modulesCore []ModuleCore
 
 //Updates
 func (module *Module) Updates() (err error) {
+	keyState := uint(2)
 	if err = database.DB.Model(Module{}).Where("id=?", module.ID).Updates(&module).Error; err != nil {
 		return
 	}
 	err = module.First()
+	if module.State == keyState {
+		modules, e := module.Find("all", module.ProjectID)
+		if e != nil {
+			err = e
+			return
+		}
+		i := 0
+		l := len(modules)
+		for ; i < l; i++ {
+			if modules[i].State != keyState {
+				break
+			}
+		}
+		if i == l {
+			project := Project{}
+			project.ID = module.ProjectID
+			project.State = keyState
+		}
+	}
 	return
 }
 
