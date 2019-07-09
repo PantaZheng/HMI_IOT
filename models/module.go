@@ -171,13 +171,12 @@ func (module *Module) Updates() (err error) {
 		i := 0
 		l := len(modules)
 		for ; i < l; i++ {
+			log.Println("i")
 			if modules[i].State != keyState {
 				break
 			}
 		}
-		log.Println("正常")
 		if i == l {
-			log.Println("caozuo")
 			project := Project{}
 			project.ID = module.ProjectID
 			project.State = keyState
