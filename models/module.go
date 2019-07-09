@@ -2,6 +2,7 @@ package models
 
 import (
 	"github.com/pantazheng/bci/database"
+	"log"
 	"time"
 )
 
@@ -174,7 +175,9 @@ func (module *Module) Updates() (err error) {
 				break
 			}
 		}
+		log.Println("正常")
 		if i == l {
+			log.Println("caozuo")
 			project := Project{}
 			project.ID = module.ProjectID
 			project.State = keyState
