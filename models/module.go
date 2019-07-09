@@ -163,7 +163,7 @@ func (module *Module) Updates() (err error) {
 	}
 	err = module.First()
 	if module.State == keyState {
-		modules, e := module.Find("all", module.ProjectID)
+		modules, e := module.Find("project", module.ProjectID)
 		if e != nil {
 			err = e
 			return
