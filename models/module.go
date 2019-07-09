@@ -175,8 +175,8 @@ func (module *Module) Updates() (err error) {
 				break
 			}
 		}
+		log.Println(i)
 		if i == l-1 {
-			log.Println("i")
 			project := Project{}
 			project.ID = module.ProjectID
 			project.State = keyState
