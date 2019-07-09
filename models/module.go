@@ -174,7 +174,7 @@ func (module *Module) Updates() (err error) {
 				break
 			}
 		}
-		if i == l-1 {
+		if i == l {
 			project := Project{}
 			project.ID = module.ProjectID
 			project.State = keyState
