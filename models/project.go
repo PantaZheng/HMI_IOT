@@ -88,7 +88,7 @@ func (project *Project) Find(field string, id uint) (projects []Project, err err
 		//p
 		mission := Mission{}
 		p := Project{}
-		if err = database.DB.Model(Project{}).Last(p).Error; err != nil {
+		if err = database.DB.Model(Project{}).Last(&p).Error; err != nil {
 			return
 		}
 		projectAmount := int(p.ID)
