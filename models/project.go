@@ -2,6 +2,7 @@ package models
 
 import (
 	"github.com/pantazheng/bci/database"
+	"log"
 	"time"
 )
 
@@ -96,6 +97,8 @@ func (project *Project) Find(field string, id uint) (projects []Project, err err
 			err = e
 			return
 		} else {
+			log.Println(projectAmount)
+			log.Println(len(missions))
 			for _, v := range missions {
 				projectCount[v.ProjectID]++
 			}
