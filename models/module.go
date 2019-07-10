@@ -10,6 +10,8 @@ type ModuleCore struct {
 	Name       string `json:"name"`
 	State      uint   `json:"state"`
 	LeaderName string `gorm:"-" json:"leaderName"`
+	StartTime  string `json:"startTime"`
+	EndTime    string `json:"endTime"`
 }
 
 type Module struct {
@@ -19,10 +21,9 @@ type Module struct {
 	UpdatedAt  time.Time  `json:"-"`
 	UpdateTime string     `gorm:"-" json:"updateTime"`
 	DeletedAt  *time.Time `sql:"index" json:"-"`
-	StartTime  string     `json:"startTime"`
-	EndTime    string     `json:"endTime"`
-	Content    string     `json:"content"`
-	Target     string     `json:"target"`
+
+	Content string `json:"content"`
+	Target  string `json:"target"`
 
 	LeaderID    uint   `json:"leaderID"`
 	ProjectID   uint   `json:"projectID"`

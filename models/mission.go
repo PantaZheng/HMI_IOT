@@ -10,6 +10,8 @@ type MissionCore struct {
 	Name      string `json:"name"`
 	State     uint   `json:"state"`
 	OwnerName string `gorm:"-" json:"ownerName"`
+	StartTime string `json:"startTime"`
+	EndTime   string `json:"endTime"`
 }
 
 type Mission struct {
@@ -19,10 +21,9 @@ type Mission struct {
 	UpdatedAt  time.Time  `json:"-"`
 	UpdateTime string     `gorm:"-" json:"updateTime"`
 	DeletedAt  *time.Time `sql:"index" json:"-"`
-	StartTime  string     `json:"startTime"`
-	EndTime    string     `json:"endTime"`
-	Content    string     `json:"content"`
-	Target     string     `json:"target"`
+
+	Content string `json:"content"`
+	Target  string `json:"target"`
 
 	OwnerID     uint   `json:"ownerID"`
 	ModuleID    uint   `json:"moduleID"`

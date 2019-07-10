@@ -11,6 +11,8 @@ type ProjectCore struct {
 	Name        string `json:"name"`
 	State       uint   `json:"state"`
 	ManagerName string `gorm:"-" json:"managerName"`
+	StartTime   string `json:"startTime"`
+	EndTime     string `json:"endTime"`
 }
 
 type Project struct {
@@ -20,10 +22,9 @@ type Project struct {
 	UpdatedAt  time.Time  `json:"-"`
 	UpdateTime string     `gorm:"-" json:"updateTime"`
 	DeletedAt  *time.Time `sql:"index" json:"-"`
-	StartTime  string     `json:"startTime"`
-	EndTime    string     `json:"endTime"`
-	Content    string     `json:"content"`
-	Target     string     `json:"target"`
+
+	Content string `json:"content"`
+	Target  string `json:"target"`
 
 	ManagerID uint `json:"managerID"`
 }
@@ -84,39 +85,40 @@ func (project *Project) Find(field string, id uint) (projects []Project, err err
 		return
 	}
 	if field == "member" {
-		//project
+		//p
 		mission := Mission{}
-		projectAmount := 0
-		if err = database.DB.Model(Project{}).Count(&projectAmount).Error; err != nil {
+		p := Project{}
+		if err = database.DB.Model(Project{}).Last(p).Error; err != nil {
 			return
 		}
-		projectAmount++
+		projectAmount := int(p.ID)
 		projectCount := make([]uint, projectAmount)
 		//owner
-		if missions, e := mission.Find("owner", id); e != nil {
+		missions, e := mission.Find("owner", id)
+		if e != nil {
 			err = e
 			return
-		} else {
-			for _, v := range missions {
-				projectCount[v.ProjectID]++
-			}
 		}
+		for _, v := range missions {
+			projectCount[v.ProjectID]++
+		}
+
 		//manager
-		if leaderProjects, e := project.Find("manager", id); e != nil {
+		if leaderProjects, e := p.Find("manager", id); e != nil {
 			err = e
 			return
 		} else {
-			log.Println(len(leaderProjects))
 			for _, v := range leaderProjects {
+				log.Println(v.ID)
 				projectCount[v.ID]++
 			}
 		}
 		//merge
 		for i := 0; i < projectAmount; i++ {
 			if projectCount[i] > 0 {
-				project.ID = uint(i)
-				_ = project.First()
-				projects = append(projects, *project)
+				p.ID = uint(i)
+				_ = p.First()
+				projects = append(projects, p)
 			}
 		}
 		return
