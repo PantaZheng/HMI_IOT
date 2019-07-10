@@ -92,6 +92,7 @@ func (project *Project) Find(field string, id uint) (projects []Project, err err
 			return
 		}
 		projectAmount := int(p.ID)
+		log.Println(projectAmount)
 		projectCount := make([]uint, projectAmount)
 		//owner
 		missions, e := mission.Find("owner", id)
