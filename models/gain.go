@@ -141,3 +141,8 @@ func (gain *Gain) Delete() (err error) {
 	err = database.DB.Model(Gain{}).Where("id=?", gain.ID).Delete(&gain).Error
 	return
 }
+
+func (gain *Gain) DeleteByField(field string, id uint) (gains []Gain, err error) {
+	err = database.DB.Model(Mission{}).Where(field+"_id=?", id).Delete(&gains).Error
+	return
+}

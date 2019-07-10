@@ -145,6 +145,15 @@ func (mission *Mission) Delete() (err error) {
 		return
 	}
 	//硬删除
-	err = database.DB.Model(Mission{}).Where("id=?", mission.ID).Delete(&mission).Error
+	if err = database.DB.Model(Mission{}).Where("id=?", mission.ID).Delete(&mission).Error; err != nil {
+		return
+	}
+	gain := Gain{}
+	_, err = gain.DeleteByField("mission", mission.ID)
+	return
+}
+
+func (mission *Mission) DeleteByField(field string, id uint) (missions []Mission, err error) {
+	err = database.DB.Model(Mission{}).Where(field+"_id=?", id).Delete(&missions).Error
 	return
 }

@@ -128,7 +128,7 @@ func (user *User) FindOne() (err error) {
 	return
 }
 
-//Find 查找多个用户.
+//FindByField 查找多个用户.
 func (user *User) Find() (users []User, err error) {
 	users = make([]User, 0)
 	if err = database.DB.Find(&users, &user).Error; err == nil {
@@ -137,7 +137,7 @@ func (user *User) Find() (users []User, err error) {
 		}
 	}
 	if err != nil {
-		err = errors.New(titleUser + "Find:\t" + err.Error())
+		err = errors.New(titleUser + "FindByField:\t" + err.Error())
 	}
 	return
 }

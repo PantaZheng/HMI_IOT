@@ -182,7 +182,7 @@ func (project *Project) Updates() (err error) {
 	}
 	if project.State == moduleKeyState {
 		module := Module{}
-		modules, e := module.Find("all", project.ID)
+		modules, e := module.FindByField("all", project.ID)
 		if e != nil {
 			err = e
 			return
@@ -207,6 +207,18 @@ func (project *Project) Delete() (err error) {
 	if err = project.First(); err != nil {
 		return
 	}
-	err = database.DB.Model(Module{}).Where("id=?", project.ID).Delete(&project).Error
+	if err = database.DB.Model(Module{}).Where("id=?", project.ID).Delete(&project).Error; err != nil {
+		return
+	}
+	module := Module{}
+	if _, err = module.DeleteByField("project", project.ID); err != nil {
+		return
+	}
+	mission := Mission{}
+	if _, err = mission.DeleteByField("project", project.ID); err != nil {
+		return
+	}
+	gain := Gain{}
+	_, err = gain.DeleteByField("project", project.ID)
 	return
 }

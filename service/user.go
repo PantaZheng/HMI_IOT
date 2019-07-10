@@ -227,13 +227,13 @@ func UserFindByTelephone(telephone string) (userJSON UserJSON, err error) {
 	return
 }
 
-//Find 多用户查找的原子方法.
+//FindByField 多用户查找的原子方法.
 func (userJSON *UserJSON) Find() (usersJSON []UserJSON, err error) {
 	u := userJSON.userJSON2User()
 	if users, err := u.Find(); err == nil {
 		usersJSON = users2BriefUsersJSON(users)
 	} else {
-		err = errors.New(titleUser + "Find:\t" + err.Error())
+		err = errors.New(titleUser + "FindByField:\t" + err.Error())
 	}
 	return
 }

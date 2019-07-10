@@ -87,8 +87,8 @@ func (module *Module) First() (err error) {
 	return
 }
 
-//Find
-func (module *Module) Find(field string, id uint) (modules []Module, err error) {
+//FindByField
+func (module *Module) FindByField(field string, id uint) (modules []Module, err error) {
 	if field == "all" {
 		err = database.DB.Model(Mission{}).Find(&modules).Error
 		return
@@ -112,7 +112,7 @@ func (module *Module) Find(field string, id uint) (modules []Module, err error) 
 			}
 		}
 		//leader
-		if leaderModules, e := module.Find("leader", id); e != nil {
+		if leaderModules, e := module.FindByField("leader", id); e != nil {
 			err = e
 			return
 		} else {
@@ -136,7 +136,7 @@ func (module *Module) Find(field string, id uint) (modules []Module, err error) 
 }
 
 func (module *Module) FindBrief(field string, id uint) (modulesCore []ModuleCore, err error) {
-	if modules, e := module.Find(field, id); e != nil {
+	if modules, e := module.FindByField(field, id); e != nil {
 		err = e
 		return
 	} else {
@@ -162,7 +162,7 @@ func (module *Module) Updates() (err error) {
 	}
 	err = module.First()
 	if module.State == keyState {
-		modules, e := module.Find("project", module.ProjectID)
+		modules, e := module.FindByField("project", module.ProjectID)
 		if e != nil {
 			err = e
 			return
@@ -191,6 +191,19 @@ func (module *Module) Delete() (err error) {
 	if err = module.First(); err != nil {
 		return
 	}
-	err = database.DB.Model(Module{}).Where("id=?", module.ID).Delete(&module).Error
+	if err = database.DB.Model(Module{}).Where("id=?", module.ID).Delete(&module).Error; err != nil {
+		return
+	}
+	mission := Mission{}
+	if _, err = mission.DeleteByField("module", module.ID); err != nil {
+		return
+	}
+	gain := Gain{}
+	_, err = gain.DeleteByField("module", module.ID)
+	return
+}
+
+func (module *Module) DeleteByField(field string, id uint) (modules []Module, err error) {
+	err = database.DB.Model(Module{}).Where(field+"_id=?", id).Delete(&modules).Error
 	return
 }
