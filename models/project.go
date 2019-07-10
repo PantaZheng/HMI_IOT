@@ -97,8 +97,6 @@ func (project *Project) Find(field string, id uint) (projects []Project, err err
 			err = e
 			return
 		} else {
-			log.Println(projectAmount)
-			log.Println(len(missions))
 			for _, v := range missions {
 				projectCount[v.ProjectID]++
 			}
@@ -108,6 +106,7 @@ func (project *Project) Find(field string, id uint) (projects []Project, err err
 			err = e
 			return
 		} else {
+			log.Println(len(leaderProjects))
 			for _, v := range leaderProjects {
 				projectCount[v.ID]++
 			}
