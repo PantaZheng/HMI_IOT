@@ -9,7 +9,7 @@ import (
 //GainInsert
 func GainInsert(ctx iris.Context) {
 	g := models.Gain{}
-	if err := ctx.ReadJSON(g); err != nil {
+	if err := ctx.ReadForm(g); err != nil {
 		ErrorProcess(err, ctx)
 		return
 	}
