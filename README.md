@@ -82,7 +82,7 @@ type Gain struct {
 	UpdatedAt  time.Time  `json:"-"`
 	UpdateTime string     `json:"updateTime" gorm:"-"`
 	DeletedAt  *time.Time `sql:"index" json:"-"`
-	File       string     `json:"file"`
+	FileName   string     `json:"fileName"`
 	Remark     string     `json:"remark"`
 
 	MissionID   uint   `json:"missionID"`

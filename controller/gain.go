@@ -15,13 +15,11 @@ func GainInsert(ctx iris.Context) {
 		ErrorProcess(err, ctx)
 		return
 	}
-
 	file, info, err := ctx.FormFile("file")
 	if err != nil {
 		ErrorProcess(err, ctx)
 		return
 	}
-
 	out, err := os.OpenFile("./files/"+info.Filename,
 		os.O_WRONLY|os.O_CREATE, 0666)
 	if err != nil {
@@ -33,13 +31,11 @@ func GainInsert(ctx iris.Context) {
 		return
 	}
 	defer out.Close()
-
 	g.FileName = info.Filename
 	if err := g.Insert(); err != nil {
 		ErrorProcess(err, ctx)
 		return
 	}
-
 	ctx.StatusCode(iris.StatusOK)
 	_, _ = ctx.JSON(g)
 	log.Println(g)
@@ -160,6 +156,6 @@ func GainDownFileByID(ctx iris.Context) {
 	}
 	fileName := g.FileName
 	ctx.StatusCode(iris.StatusOK)
-	_ = ctx.SendFile("./files/"+fileName, fileName)
+	_ = ctx.ServeFile("./files/"+fileName, false)
 	return
 }
