@@ -36,7 +36,7 @@ func TestGain(t *testing.T) {
 	}
 	gain.Name = "gainTest" + strconv.Itoa(int(gain.ID))
 	gain.Type = gain.Name + ".type"
-	gain.File = gain.Name + ".file"
+	gain.FileName = gain.Name + ".file"
 	gain.Remark = gain.Name + ".remark"
 	gain.Owner.ID = 1
 	gain.MissionID = 2
@@ -47,7 +47,7 @@ func TestGain(t *testing.T) {
 	}
 	gain.Name = "gainTest" + strconv.Itoa(int(gain.ID))
 	gain.Type = gain.Name + ".type"
-	gain.File = gain.Name + ".file"
+	gain.FileName = gain.Name + ".file"
 	gain.Remark = gain.Name + ".remark"
 	gain.MissionOwnerID = 1
 	gain.MissionID = 2

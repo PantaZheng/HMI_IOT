@@ -20,7 +20,7 @@ func GainInsert(ctx iris.Context) {
 		ErrorProcess(err, ctx)
 		return
 	}
-	fileName := g.File
+	fileName := g.FileName
 	if fileName != "" {
 		if file, _, err := ctx.FormFile(fileName); err != nil {
 			ErrorProcess(err, ctx)
@@ -158,7 +158,7 @@ func GainDownFileByID(ctx iris.Context) {
 		ErrorProcess(err, ctx)
 		return
 	}
-	fileName := g.File
+	fileName := g.FileName
 	ctx.StatusCode(iris.StatusOK)
 	_ = ctx.SendFile("./files/gain"+strconv.Itoa(int(g.ID))+"_"+fileName, fileName)
 	return
