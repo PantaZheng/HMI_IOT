@@ -8,17 +8,19 @@ import (
 
 //GainInsert
 func GainInsert(ctx iris.Context) {
+	g := models.Gain{}
+	if err := ctx.ReadJSON(g); err != nil {
+		ErrorProcess(err, ctx)
+		return
+	}
+
 	_, info, err := ctx.FormFile("file")
 	if err != nil {
 		ErrorProcess(err, ctx)
 		return
 	}
 	log.Println(info.Filename)
-	//if err := ctx.ReadJSON(g); err != nil {
-	//	ErrorProcess(err, ctx)
-	//	return
-	//}
-	//
+
 	//file, info, err := ctx.FormFile("file")
 	//if err != nil {
 	//	ErrorProcess(err, ctx)
