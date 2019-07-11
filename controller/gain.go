@@ -17,7 +17,7 @@ func GainInsert(ctx iris.Context) {
 
 	form := &multipart.Form{}
 	form.Value = m
-
+	log.Println(form)
 	if err := ctx.ReadForm(form); err != nil {
 		ErrorProcess(err, ctx)
 		return
