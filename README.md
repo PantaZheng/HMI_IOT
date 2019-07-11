@@ -119,6 +119,15 @@ GainDeleteByID|delete|`/{id:uint}`|-|`Gain`
 入口: `/mission`
 
 ```go
+type MissionCore struct {
+	ID        uint   `gorm:"primary_key" json:"id"`
+	Name      string `json:"name"`
+	State     uint   `json:"state"`
+	OwnerName string `gorm:"-" json:"ownerName"`
+	StartTime string `json:"startTime"`
+	EndTime   string `json:"endTime"`
+}
+
 type Mission struct {
 	MissionCore
 	CreatedAt  time.Time  `json:"-"`
@@ -126,10 +135,9 @@ type Mission struct {
 	UpdatedAt  time.Time  `json:"-"`
 	UpdateTime string     `gorm:"-" json:"updateTime"`
 	DeletedAt  *time.Time `sql:"index" json:"-"`
-	StartTime  string     `json:"startTime"`
-	EndTime    string     `json:"endTime"`
-	Content    string     `json:"content"`
-	Target     string     `json:"target"`
+
+	Content string `json:"content"`
+	Target  string `json:"target"`
 
 	OwnerID     uint   `json:"ownerID"`
 	ModuleID    uint   `json:"moduleID"`
@@ -162,10 +170,12 @@ MissionDeleteByID|delete|`/id/{id:uint}`|-|`Mission`
 
 ```go
 type ModuleCore struct {
-	ID         uint   `gorm:"primary_key"`
+	ID         uint   `gorm:"primary_key" json:"id"`
 	Name       string `json:"name"`
 	State      uint   `json:"state"`
 	LeaderName string `gorm:"-" json:"leaderName"`
+	StartTime  string `json:"startTime"`
+	EndTime    string `json:"endTime"`
 }
 
 type Module struct {
@@ -175,10 +185,9 @@ type Module struct {
 	UpdatedAt  time.Time  `json:"-"`
 	UpdateTime string     `gorm:"-" json:"updateTime"`
 	DeletedAt  *time.Time `sql:"index" json:"-"`
-	StartTime  string     `json:"startTime"`
-	EndTime    string     `json:"endTime"`
-	Content    string     `json:"content"`
-	Target     string     `json:"target"`
+
+	Content string `json:"content"`
+	Target  string `json:"target"`
 
 	LeaderID    uint   `json:"leaderID"`
 	ProjectID   uint   `json:"projectID"`
@@ -210,6 +219,8 @@ type ProjectCore struct {
 	Name        string `json:"name"`
 	State       uint   `json:"state"`
 	ManagerName string `gorm:"-" json:"managerName"`
+	StartTime   string `json:"startTime"`
+	EndTime     string `json:"endTime"`
 }
 
 type Project struct {
@@ -219,10 +230,9 @@ type Project struct {
 	UpdatedAt  time.Time  `json:"-"`
 	UpdateTime string     `gorm:"-" json:"updateTime"`
 	DeletedAt  *time.Time `sql:"index" json:"-"`
-	StartTime  string     `json:"startTime"`
-	EndTime    string     `json:"endTime"`
-	Content    string     `json:"content"`
-	Target     string     `json:"target"`
+
+	Content string `json:"content"`
+	Target  string `json:"target"`
 
 	ManagerID uint `json:"managerID"`
 }
@@ -236,7 +246,6 @@ type ProjectFrame struct {
 	ProjectCore
 	Modules []ModuleFrame `json:"modules"`
 }
-
 ```
 
 名称|method|path|传入body参数|接收body参数

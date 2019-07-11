@@ -4,6 +4,7 @@ import (
 	"github.com/kataras/iris"
 	"github.com/pantazheng/bci/models"
 	"io"
+	"log"
 	"os"
 	"strconv"
 )
@@ -25,6 +26,7 @@ func GainInsert(ctx iris.Context) {
 			ErrorProcess(err, ctx)
 			return
 		} else {
+			log.Println("testing")
 			out, err := os.OpenFile("./files/gain"+strconv.Itoa(int(g.ID))+"_"+fileName,
 				os.O_WRONLY|os.O_CREATE, 0666)
 			if err != nil {
@@ -40,6 +42,7 @@ func GainInsert(ctx iris.Context) {
 	}
 	ctx.StatusCode(iris.StatusOK)
 	_, _ = ctx.JSON(g)
+	log.Println(g)
 	return
 }
 
