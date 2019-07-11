@@ -22,7 +22,7 @@ func GainInsert(ctx iris.Context) {
 		return
 	}
 
-	out, err := os.OpenFile("./files/gain/"+info.Filename,
+	out, err := os.OpenFile("./files/"+info.Filename,
 		os.O_WRONLY|os.O_CREATE, 0666)
 	if err != nil {
 		ErrorProcess(err, ctx)
@@ -160,6 +160,6 @@ func GainDownFileByID(ctx iris.Context) {
 	}
 	fileName := g.FileName
 	ctx.StatusCode(iris.StatusOK)
-	_ = ctx.SendFile("./files/gain"+fileName, fileName)
+	_ = ctx.SendFile("./files/"+fileName, fileName)
 	return
 }
