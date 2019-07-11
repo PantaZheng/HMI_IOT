@@ -6,17 +6,12 @@ import (
 	"io"
 	"log"
 	"os"
-	"strconv"
 )
 
 //GainInsert
 func GainInsert(ctx iris.Context) {
 	g := &models.Gain{}
 	if err := ctx.ReadJSON(g); err != nil {
-		ErrorProcess(err, ctx)
-		return
-	}
-	if err := g.Insert(); err != nil {
 		ErrorProcess(err, ctx)
 		return
 	}
@@ -38,6 +33,12 @@ func GainInsert(ctx iris.Context) {
 		return
 	}
 	defer out.Close()
+
+	g.FileName = info.Filename
+	if err := g.Insert(); err != nil {
+		ErrorProcess(err, ctx)
+		return
+	}
 
 	ctx.StatusCode(iris.StatusOK)
 	_, _ = ctx.JSON(g)
@@ -159,6 +160,6 @@ func GainDownFileByID(ctx iris.Context) {
 	}
 	fileName := g.FileName
 	ctx.StatusCode(iris.StatusOK)
-	_ = ctx.SendFile("./files/gain"+strconv.Itoa(int(g.ID))+"_"+fileName, fileName)
+	_ = ctx.SendFile("./files/gain"+fileName, fileName)
 	return
 }
