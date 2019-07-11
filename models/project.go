@@ -90,7 +90,7 @@ func (project *Project) Find(field string, id uint) (projects []Project, err err
 		if err = database.DB.Model(Project{}).Last(&p).Error; err != nil {
 			return
 		}
-		projectAmount := int(p.ID)
+		projectAmount := int(p.ID + 1)
 		projectCount := make([]uint, projectAmount)
 
 		//owner
@@ -101,8 +101,7 @@ func (project *Project) Find(field string, id uint) (projects []Project, err err
 			return
 		}
 		log.Println("missions")
-		for i, v := range missions {
-			log.Println(i)
+		for _, v := range missions {
 			projectCount[v.ProjectID]++
 		}
 
@@ -114,7 +113,7 @@ func (project *Project) Find(field string, id uint) (projects []Project, err err
 			return
 		}
 		log.Println("modules")
-		for i, v := range modules {
+		for _, v := range modules {
 			log.Println(i)
 			projectCount[v.ProjectID]++
 		}
@@ -126,8 +125,7 @@ func (project *Project) Find(field string, id uint) (projects []Project, err err
 			return
 		}
 		log.Println("projects")
-		for i, v := range managerProjects {
-			log.Println(i)
+		for _, v := range managerProjects {
 			projectCount[v.ID]++
 		}
 
