@@ -1,29 +1,25 @@
 package controller
 
 import (
-	"encoding/json"
 	"github.com/kataras/iris"
 	"github.com/pantazheng/bci/models"
 	"log"
-	"mime/multipart"
+	"net/http"
 )
+
+type Data struct {
+	models.Gain
+	http.File
+}
 
 //GainInsert
 func GainInsert(ctx iris.Context) {
-	var m map[string][]string
-	g := models.Gain{}
-	temp, _ := json.Marshal(g)
-	_ = json.Unmarshal(temp, &m)
-
-	form := &multipart.Form{}
-	form.Value = m
-	log.Println(form)
-	log.Println("111")
-	if err := ctx.ReadForm(form); err != nil {
+	data := Data{}
+	if err := ctx.ReadForm(&data); err != nil {
 		ErrorProcess(err, ctx)
 		return
 	}
-	log.Println(form)
+	log.Println(data)
 
 	//if err := ctx.ReadJSON(g); err != nil {
 	//	ErrorProcess(err, ctx)
