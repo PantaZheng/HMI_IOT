@@ -11,7 +11,7 @@ import (
 //GainInsert
 func GainInsert(ctx iris.Context) {
 	var m map[string][]string
-	g := &models.Gain{}
+	g := models.Gain{}
 	temp, _ := json.Marshal(g)
 	_ = json.Unmarshal(temp, &m)
 
