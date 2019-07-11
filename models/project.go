@@ -85,15 +85,12 @@ func (project *Project) Find(field string, id uint) (projects []Project, err err
 		return
 	}
 	if field == "member" {
-		//TODO: module的leader和mission的owner相关的项目
-		//p
-
+		//project空间
 		p := Project{}
 		if err = database.DB.Model(Project{}).Last(&p).Error; err != nil {
 			return
 		}
 		projectAmount := int(p.ID)
-		log.Println(projectAmount)
 		projectCount := make([]uint, projectAmount)
 
 		//owner
@@ -103,7 +100,9 @@ func (project *Project) Find(field string, id uint) (projects []Project, err err
 			err = e
 			return
 		}
-		for _, v := range missions {
+		log.Println("missions")
+		for i, v := range missions {
+			log.Println(i)
 			projectCount[v.ProjectID]++
 		}
 
@@ -114,7 +113,9 @@ func (project *Project) Find(field string, id uint) (projects []Project, err err
 			err = e
 			return
 		}
-		for _, v := range modules {
+		log.Println("modules")
+		for i, v := range modules {
+			log.Println(i)
 			projectCount[v.ProjectID]++
 		}
 
@@ -124,7 +125,9 @@ func (project *Project) Find(field string, id uint) (projects []Project, err err
 			err = e
 			return
 		}
-		for _, v := range managerProjects {
+		log.Println("projects")
+		for i, v := range managerProjects {
+			log.Println(i)
 			projectCount[v.ID]++
 		}
 
