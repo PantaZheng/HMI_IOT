@@ -156,6 +156,6 @@ func GainDownFileByID(ctx iris.Context) {
 	}
 	fileName := g.FileName
 	ctx.StatusCode(iris.StatusOK)
-	_ = ctx.ServeFile("./files/"+fileName, false)
+	_ = ctx.ServeFile("./files/"+fileName, true)
 	return
 }
