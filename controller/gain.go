@@ -13,7 +13,7 @@ func GainInsert(ctx iris.Context) {
 		ErrorProcess(err, ctx)
 		return
 	}
-	log.Println(info)
+	log.Println(info.Filename)
 	//if err := ctx.ReadJSON(g); err != nil {
 	//	ErrorProcess(err, ctx)
 	//	return
