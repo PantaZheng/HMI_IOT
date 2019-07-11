@@ -95,42 +95,44 @@ func (module *Module) FindByField(field string, id uint) (modules []Module, err 
 		return
 	}
 	if field == "member" {
-		//participant
-		mission := Mission{}
-		moduleAmount := 0
-		if err = database.DB.Model(Module{}).Count(&moduleAmount).Error; err != nil {
+		//mission空间
+		m := Module{}
+		if err = database.DB.Model(Module{}).Last(&m).Error; err != nil {
 			return
 		}
-		moduleAmount++
+		moduleAmount := int(m.ID + 1)
 		moduleCount := make([]uint, moduleAmount)
+
 		//owner
-		if missions, e := mission.Find("owner", id); e != nil {
+		mission := Mission{}
+		missions, e := mission.Find("owner", id)
+		if e != nil {
 			err = e
 			return
-		} else {
-			for _, v := range missions {
-				moduleCount[v.ModuleID]++
-			}
 		}
+		for _, v := range missions {
+			moduleCount[v.ModuleID]++
+		}
+
 		//leader
-		if leaderModules, e := module.FindByField("leader", id); e != nil {
+		leaderModules, e := m.FindByField("leader", id)
+		if e != nil {
 			err = e
 			return
-		} else {
-			for _, v := range leaderModules {
-				moduleCount[v.ID]++
-			}
 		}
+		for _, v := range leaderModules {
+			moduleCount[v.ID]++
+		}
+
 		//merge
 		for i := 0; i < moduleAmount; i++ {
 			if moduleCount[i] > 0 {
-				module.ID = uint(i)
-				_ = module.First()
-				modules = append(modules, *module)
+				m.ID = uint(i)
+				_ = m.First()
+				modules = append(modules, m)
 			}
 		}
 		return
-		//leader
 	}
 	err = database.DB.Where(field+"_id=?", id).Find(&modules).Error
 	return

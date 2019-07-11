@@ -2,7 +2,6 @@ package models
 
 import (
 	"github.com/pantazheng/bci/database"
-	"log"
 	"time"
 )
 
@@ -79,7 +78,7 @@ func (project *Project) First() (err error) {
 	return
 }
 
-func (project *Project) Find(field string, id uint) (projects []Project, err error) {
+func (project *Project) FindByField(field string, id uint) (projects []Project, err error) {
 	if field == "all" {
 		err = database.DB.Model(Project{}).Find(&projects).Error
 		return
@@ -100,7 +99,6 @@ func (project *Project) Find(field string, id uint) (projects []Project, err err
 			err = e
 			return
 		}
-		log.Println("missions")
 		for _, v := range missions {
 			projectCount[v.ProjectID]++
 		}
@@ -112,18 +110,16 @@ func (project *Project) Find(field string, id uint) (projects []Project, err err
 			err = e
 			return
 		}
-		log.Println("modules")
 		for _, v := range modules {
 			projectCount[v.ProjectID]++
 		}
 
 		//manager
-		managerProjects, e := p.Find("manager", id)
+		managerProjects, e := p.FindByField("manager", id)
 		if e != nil {
 			err = e
 			return
 		}
-		log.Println("projects")
 		for _, v := range managerProjects {
 			projectCount[v.ID]++
 		}
@@ -143,7 +139,7 @@ func (project *Project) Find(field string, id uint) (projects []Project, err err
 }
 
 func (project *Project) FindBrief(field string, id uint) (projectsCore []ProjectCore, err error) {
-	if projects, e := project.Find(field, id); e != nil {
+	if projects, e := project.FindByField(field, id); e != nil {
 		err = e
 		return
 	} else {
