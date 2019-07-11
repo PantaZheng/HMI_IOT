@@ -4,23 +4,16 @@ import (
 	"github.com/kataras/iris"
 	"github.com/pantazheng/bci/models"
 	"log"
-	"mime/multipart"
 )
-
-type Data struct {
-	models.Gain
-	multipart.File
-}
 
 //GainInsert
 func GainInsert(ctx iris.Context) {
-	data := Data{}
-	if err := ctx.ReadForm(&data); err != nil {
+	_, info, err := ctx.FormFile("file")
+	if err != nil {
 		ErrorProcess(err, ctx)
 		return
 	}
-	log.Println(data)
-
+	log.Println(info)
 	//if err := ctx.ReadJSON(g); err != nil {
 	//	ErrorProcess(err, ctx)
 	//	return
