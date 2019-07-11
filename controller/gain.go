@@ -21,8 +21,8 @@ func GainInsert(ctx iris.Context) {
 		ErrorProcess(err, ctx)
 		return
 	}
-	log.Println("testing")
-	out, err := os.OpenFile("./files/gain"+info.Filename,
+
+	out, err := os.OpenFile("./files/gain/"+info.Filename,
 		os.O_WRONLY|os.O_CREATE, 0666)
 	if err != nil {
 		ErrorProcess(err, ctx)
