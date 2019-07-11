@@ -9,7 +9,7 @@ import (
 
 //GainInsert
 func GainInsert(ctx iris.Context) {
-	form := multipart.Form{}
+	form := &multipart.Form{}
 	if err := ctx.ReadForm(form); err != nil {
 		ErrorProcess(err, ctx)
 		return
