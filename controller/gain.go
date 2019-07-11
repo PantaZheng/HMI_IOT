@@ -3,7 +3,9 @@ package controller
 import (
 	"github.com/kataras/iris"
 	"github.com/pantazheng/bci/models"
+	"io"
 	"log"
+	"os"
 )
 
 //GainInsert
@@ -14,40 +16,33 @@ func GainInsert(ctx iris.Context) {
 		return
 	}
 
-	_, info, err := ctx.FormFile("file")
+	file, info, err := ctx.FormFile("file")
 	if err != nil {
 		ErrorProcess(err, ctx)
 		return
 	}
-	log.Println(info.Filename)
+	log.Println("testing")
+	out, err := os.OpenFile("./files/gain"+info.Filename,
+		os.O_WRONLY|os.O_CREATE, 0666)
+	if err != nil {
+		ErrorProcess(err, ctx)
+		return
+	}
+	if _, err := io.Copy(out, file); err != nil {
+		ErrorProcess(err, ctx)
+		return
+	}
+	defer out.Close()
 
-	//file, info, err := ctx.FormFile("file")
-	//if err != nil {
-	//	ErrorProcess(err, ctx)
-	//	return
-	//}
-	//log.Println("testing")
-	//out, err := os.OpenFile("./files/gain"+info.Filename,
-	//	os.O_WRONLY|os.O_CREATE, 0666)
-	//if err != nil {
-	//	ErrorProcess(err, ctx)
-	//	return
-	//}
-	//if _, err := io.Copy(out, file); err != nil {
-	//	ErrorProcess(err, ctx)
-	//	return
-	//}
-	//defer out.Close()
-	//
-	//g.FileName = info.Filename
-	//if err := g.Insert(); err != nil {
-	//	ErrorProcess(err, ctx)
-	//	return
-	//}
-	//
-	//ctx.StatusCode(iris.StatusOK)
-	//_, _ = ctx.JSON(g)
-	//log.Println(g)
+	g.FileName = info.Filename
+	if err := g.Insert(); err != nil {
+		ErrorProcess(err, ctx)
+		return
+	}
+
+	ctx.StatusCode(iris.StatusOK)
+	_, _ = ctx.JSON(g)
+	log.Println(g)
 	return
 }
 
