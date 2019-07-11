@@ -114,7 +114,6 @@ func (project *Project) Find(field string, id uint) (projects []Project, err err
 		}
 		log.Println("modules")
 		for _, v := range modules {
-			log.Println(i)
 			projectCount[v.ProjectID]++
 		}
 
