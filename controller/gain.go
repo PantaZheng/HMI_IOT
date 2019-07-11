@@ -1,6 +1,7 @@
 package controller
 
 import (
+	"encoding/json"
 	"github.com/kataras/iris"
 	"github.com/pantazheng/bci/models"
 	"log"
@@ -9,14 +10,20 @@ import (
 
 //GainInsert
 func GainInsert(ctx iris.Context) {
+	var m map[string][]string
+	g := &models.Gain{}
+	temp, _ := json.Marshal(g)
+	_ = json.Unmarshal(temp, &m)
+
 	form := &multipart.Form{}
+	form.Value = m
+
 	if err := ctx.ReadForm(form); err != nil {
 		ErrorProcess(err, ctx)
 		return
 	}
 	log.Println(form)
 
-	//g := &models.Gain{}
 	//if err := ctx.ReadJSON(g); err != nil {
 	//	ErrorProcess(err, ctx)
 	//	return
