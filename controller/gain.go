@@ -4,12 +4,12 @@ import (
 	"github.com/kataras/iris"
 	"github.com/pantazheng/bci/models"
 	"log"
-	"net/http"
+	"mime/multipart"
 )
 
 type Data struct {
 	models.Gain
-	http.File
+	multipart.File
 }
 
 //GainInsert
