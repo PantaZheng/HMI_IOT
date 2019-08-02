@@ -197,7 +197,7 @@ func (project *Project) Updates() (err error) {
 	}
 	if project.State == moduleKeyState {
 		module := Module{}
-		modules, e := module.FindByField("all", project.ID)
+		modules, e := module.FindByField("project", project.ID)
 		if e != nil {
 			err = e
 			return
