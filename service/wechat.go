@@ -30,11 +30,7 @@ func TextMsgHandler(ctx *core.Context) {
 
 func MenuClickEventHandler(ctx *core.Context) {
 	log.Printf("收到按钮点击消息:\n%s\n", ctx.MsgPlaintext)
-	event := menu.GetClickEvent(ctx.MixedMsg)
-	resp := response.NewText(event.FromUserName, event.ToUserName, event.CreateTime, "请先登记个人信息")
-	if err := ctx.RawResponse(resp); err != nil {
-		log.Printf(err.Error())
-	}
+	_ = ctx.NoneResponse()
 }
 
 func SubscribeEventHandler(ctx *core.Context) {
