@@ -24,7 +24,7 @@ func TextMsgHandler(ctx *core.Context) {
 	resp := response.NewText(msg.FromUserName, msg.ToUserName, msg.CreateTime, msg.Content)
 	log.Printf("收到文本消息:\n%s\n", ctx.MsgPlaintext)
 	if err := ctx.RawResponse(resp); err != nil {
-		err.Error()
+		log.Printf(err.Error())
 	}
 }
 
@@ -33,7 +33,7 @@ func MenuClickEventHandler(ctx *core.Context) {
 	event := menu.GetClickEvent(ctx.MixedMsg)
 	resp := response.NewText(event.FromUserName, event.ToUserName, event.CreateTime, "请先登记个人信息")
 	if err := ctx.RawResponse(resp); err != nil {
-		err.Error()
+		log.Printf(err.Error())
 	}
 }
 
@@ -43,7 +43,7 @@ func SubscribeEventHandler(ctx *core.Context) {
 	info, _ := user.Get(clt, event.FromUserName, "")
 	resp := response.NewText(event.FromUserName, event.ToUserName, event.CreateTime, UserInitByWechat(info))
 	if err := ctx.RawResponse(resp); err != nil {
-		err.Error()
+		log.Printf(err.Error())
 	}
 }
 
@@ -66,7 +66,7 @@ func wechatClient() *core.Client {
 func DefaultMenu(defaultMenu *menu.Menu) {
 	err := menu.Create(defaultClt, defaultMenu)
 	if err != nil {
-		err.Error()
+		log.Printf(err.Error())
 	}
 	log.Printf("建立默认菜单\n")
 }
