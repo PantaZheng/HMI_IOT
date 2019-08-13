@@ -19,18 +19,19 @@ var (
 )
 
 func TextMsgHandler(ctx *core.Context) {
-	log.Printf("进入文本消息处理")
 	msg := request.GetText(ctx.MixedMsg)
 	resp := response.NewText(msg.FromUserName, msg.ToUserName, msg.CreateTime, msg.Content)
 	log.Printf("收到文本消息:\n%s\n", ctx.MsgPlaintext)
 	if err := ctx.RawResponse(resp); err != nil {
-		log.Printf(err.Error())
+		log.Println(err.Error())
 	}
 }
 
 func MenuClickEventHandler(ctx *core.Context) {
 	log.Printf("收到按钮点击消息:\n%s\n", ctx.MsgPlaintext)
-	_ = ctx.NoneResponse()
+	if err := ctx.NoneResponse(); err != nil {
+		log.Println(err.Error())
+	}
 }
 
 func SubscribeEventHandler(ctx *core.Context) {
@@ -46,12 +47,16 @@ func SubscribeEventHandler(ctx *core.Context) {
 func UnsubscribeEventHandler(ctx *core.Context) {
 	event := request.GetUnsubscribeEvent(ctx.MixedMsg)
 	UserDeleteByOpenID(event.FromUserName)
-	_ = ctx.NoneResponse()
+	if err := ctx.NoneResponse(); err != nil {
+		log.Println(err.Error())
+	}
 }
 
 func DefaultEventHandler(ctx *core.Context) {
 	log.Printf("收到事件:\n%s\n", ctx.MsgPlaintext)
-	_ = ctx.NoneResponse()
+	if err := ctx.NoneResponse(); err != nil {
+		log.Println(err.Error())
+	}
 }
 
 func wechatClient() *core.Client {
@@ -60,8 +65,7 @@ func wechatClient() *core.Client {
 }
 
 func DefaultMenu(defaultMenu *menu.Menu) {
-	err := menu.Create(defaultClt, defaultMenu)
-	if err != nil {
+	if err := menu.Create(defaultClt, defaultMenu); err != nil {
 		log.Printf(err.Error())
 	}
 	log.Printf("建立默认菜单\n")
