@@ -104,5 +104,5 @@ func newApp() (api *iris.Application) {
 
 func main() {
 	app := newApp()
-	_ = app.Run(iris.AutoTLS("renjiwulian.com:"+strconv.Itoa(config.Conf.APP.Port), "renjiwulian.com bci.renjiwulian.com", "pantazheng@vip.qq.com"))
+	_ = app.Run(iris.AutoTLS(":"+strconv.Itoa(config.Conf.APP.Port), "bci.renjiwulian.com", "pantazheng@vip.qq.com"))
 }
