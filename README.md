@@ -138,6 +138,7 @@ type Mission struct {
 
 	Content string `json:"content"`
 	Target  string `json:"target"`
+	Progress string `json:"progress"`
 
 	OwnerID     uint   `json:"ownerID"`
 	ModuleID    uint   `json:"moduleID"`

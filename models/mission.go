@@ -22,8 +22,9 @@ type Mission struct {
 	UpdateTime string     `gorm:"-" json:"updateTime"`
 	DeletedAt  *time.Time `sql:"index" json:"-"`
 
-	Content string `json:"content"`
-	Target  string `json:"target"`
+	Content  string `json:"content"`
+	Target   string `json:"target"`
+	Progress string `json:"progress"`
 
 	OwnerID     uint   `json:"ownerID"`
 	ModuleID    uint   `json:"moduleID"`
