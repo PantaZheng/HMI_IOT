@@ -37,22 +37,22 @@ func Menu() {
 	btnFrame := menu.Button{}
 	btnFrame.SetAsViewButton("架构", vueAddress+"/index/#/frame")
 	btnPerson := menu.Button{}
-	btnPerson.SetAsSubMenuButton("人员", []menu.Button{btnBinding, btnFrame})
+	btnPerson.SetAsSubMenuButton("成员", []menu.Button{btnBinding, btnFrame})
+
+	btnArrangeProject := menu.Button{}
+	btnArrangeProject .SetAsViewButton("项目", vueAddress+"/index/#/checkProject")
+	btnArrangeTask := menu.Button{}
+	btnArrangeTask.SetAsViewButton("课题", vueAddress+"/index/#/checkTask")
+	btnArrange := menu.Button{}
+	btnArrange.SetAsSubMenuButton("安排", []menu.Button{btnArrangeProject,btnArrangeTask})
 
 	btnProject := menu.Button{}
 	btnProject.SetAsViewButton("项目", vueAddress+"/index/#/project")
 	btnTask := menu.Button{}
 	btnTask.SetAsViewButton("课题", vueAddress+"/index/#/taskList")
-	btnArrange := menu.Button{}
-	btnArrange.SetAsSubMenuButton("安排", []menu.Button{btnProject,btnTask})
-
-	btnCheck := menu.Button{}
-	btnCheck.SetAsViewButton("审核", vueAddress+"/index/#/check")
-	btnPace := menu.Button{}
-	btnPace.SetAsViewButton("进度", vueAddress+"/index/#/pace")
 	btnMission := menu.Button{}
 	btnMission.SetAsViewButton("任务", vueAddress+"/index/#/mission")
 	btnView := menu.Button{}
-	btnView.SetAsSubMenuButton("查看", []menu.Button{btnCheck,btnPace,btnMission})
+	btnView.SetAsSubMenuButton("查看", []menu.Button{btnProject,btnTask,btnMission})
 	service.DefaultMenu(&menu.Menu{Buttons: []menu.Button{btnPerson, btnArrange, btnView}})
 }

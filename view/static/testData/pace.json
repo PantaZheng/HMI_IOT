@@ -1,0 +1,26 @@
+[
+  {
+    "id": 1,
+    "name": "脑机协同之项目管理",
+    "state": 3,
+    "managerName": "Dell",
+    "startTime": "2019-06-07",
+    "endTime": "2020-03-12"
+  },
+  {
+    "id": 2,
+    "name": "脑机协同之项目管理",
+    "state": 3,
+    "managerName": "Dellllllllll",
+    "startTime": "2019-06-07",
+    "endTime": "2020-03-12"
+  },
+  {
+    "id": 3,
+    "name": "脑机协同之项目管理",
+    "state": 2,
+    "managerName": "Dell",
+    "startTime": "2019-06-07",
+    "endTime": "2020-03-12"
+  }
+]
